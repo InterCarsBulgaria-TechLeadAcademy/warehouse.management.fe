@@ -3,7 +3,7 @@
 ### Running the project
 
 ```
-npm install
+npm ci
 npm run dev
 ```
 
