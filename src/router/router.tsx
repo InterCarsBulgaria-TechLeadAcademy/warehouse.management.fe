@@ -4,13 +4,13 @@ import { LOGIN_PATH, PROJECTS_PATH_EXAMPLE } from '@/router/routerPaths.ts'
 
 const Home = lazy(() => import('@/pages/Home.tsx'))
 const Projects = lazy(() => import('@/pages/Projects.tsx'))
-const Login = lazy(()=> import('@/pages/Login.tsx'))
+const Login = lazy(() => import('@/pages/Login.tsx'))
 
 export default function Router() {
   return useRoutes([
     {
       path: '/',
-      element: <Home/>
+      element: <Home />
     },
     {
       path: PROJECTS_PATH_EXAMPLE,
@@ -18,7 +18,7 @@ export default function Router() {
     },
     {
       path: LOGIN_PATH,
-      element: <Login/>
+      element: <Login />
     }
   ])
 }

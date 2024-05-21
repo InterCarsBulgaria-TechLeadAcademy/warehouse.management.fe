@@ -7,7 +7,8 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import login_image from '../assets/login_image'
+import login_image from '../assets/login-image.webp'
+import intercars_logo from '../assets/ic_new_logo.jpg'
 
 const theme = createTheme({
     palette: {
@@ -24,7 +25,7 @@ const theme = createTheme({
     },
 });
 
-export function Login() {
+export default function Login() {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -92,7 +93,7 @@ export function Login() {
                         <Box component="div" sx={{ width: "228px", height: "84px" }}>
                             <Box
                                 component="img"
-                                src="https://bg.intercars.eu/assets/application/img/common/ic_new_logo.jpg"
+                                src={intercars_logo}
                                 alt="intercars-logo"
                                 sx={{
                                     display: 'block',
