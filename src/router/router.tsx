@@ -1,19 +1,24 @@
 import { useRoutes } from 'react-router-dom'
 import { lazy } from 'react'
-import { PROJECTS_PATH_EXAMPLE } from '@/router/routerPaths.ts'
+import { LOGIN_PATH, PROJECTS_PATH_EXAMPLE } from '@/router/routerPaths.ts'
 
 const Home = lazy(() => import('@/pages/Home.tsx'))
 const Projects = lazy(() => import('@/pages/Projects.tsx'))
+const Login = lazy(()=> import('@/pages/Login.tsx'))
 
 export default function Router() {
   return useRoutes([
     {
       path: '/',
-      element: <Home />
+      element: <Home/>
     },
     {
       path: PROJECTS_PATH_EXAMPLE,
       element: <Projects />
+    },
+    {
+      path: LOGIN_PATH,
+      element: <Login/>
     }
   ])
 }
