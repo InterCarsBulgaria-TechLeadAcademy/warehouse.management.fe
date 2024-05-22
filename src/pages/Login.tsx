@@ -15,9 +15,21 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-type FormInputs = {
-    email: string,
-    password: string
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+
+const schema = yup
+    .object({
+        email: yup.string().required('Полето за имейл e задължително').email('Невалиден имейл адрес'),
+        password: yup.string().required('Полето за парола e задължително').min(4, 'Паролата трябва да e поне 4 символа').max(10, 'Паролата трябва до 10 символа')
+            .matches(/[0-9]/, 'Паролата трябва да съдържа поне една цифра')
+            .matches(/[!@#$%^&*]/, 'Паролата трябва да съдържа поне един специален знак')
+    })
+    .required()
+
+interface LoginSchema extends yup.InferType<typeof schema> {
+    email: string;
+    password: string;
 }
 
 const theme = createTheme({
@@ -37,9 +49,11 @@ const theme = createTheme({
 
 export default function Login() {
     const [showPassword, setShowPassword] = React.useState(false);
-    const { control, handleSubmit, formState: { errors } } = useForm<FormInputs>()
+    const { control, handleSubmit, formState: { errors } } = useForm<LoginSchema>({
+        resolver: yupResolver(schema),
+    })
 
-    const onSubmit: SubmitHandler<FormInputs> = (data) => console.log(data)
+    const onSubmit: SubmitHandler<LoginSchema> = (data) => console.log(data)
 
     const handleClickShowPassword = () => setShowPassword((show) => !show)
 
@@ -138,13 +152,6 @@ export default function Login() {
                                 name="email"
                                 control={control}
                                 defaultValue=""
-                                rules={{
-                                    required: "Полето за имейл е задължително",
-                                    pattern: {
-                                        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                                        message: "Невалиден имейл адрес"
-                                    }
-                                }}
                                 render={({ field }) => (
                                     <TextField
                                         {...field}
@@ -168,21 +175,6 @@ export default function Login() {
                                 name="password"
                                 control={control}
                                 defaultValue=""
-                                rules={{
-                                    required: "Полето за парола e задължително",
-                                    minLength: {
-                                        value: 4,
-                                        message: "Паролата трябва да e поне 4 символа"
-                                    },
-                                    maxLength: {
-                                        value: 10,
-                                        message: "Паролата трябва до 10 символа"
-                                    },
-                                    validate: {
-                                        hasNumber: value => /\d/.test(value) || "Паролата трябва да съдържа поне една цифра",
-                                        hasSpecialChar: value => /[!@#$%^&*]/.test(value) || "Паролата трябва да съдържа поне един специален знак"
-                                    }
-                                }}
                                 render={({ field }) => (
                                     <TextField
                                         {...field}
