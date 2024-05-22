@@ -1,13 +1,13 @@
 import { Box } from "@mui/material";
-import { MainMenu } from "../../components/MainMenu";
-import { ProfileMenu } from "../../components/ProfileMenu";
+import MainMenu from "@/components/features/MainMenu";
+import ProfileMenu from "@/components/features/ProfileMenu";
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { SmallMainMenu } from "../../components/SmallMainMenu";
+import SmallMainMenu from "@/components/features/SmallMainMenu";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useState } from "react";
+import Flag from "@/components/features/Flag";
 // import { Route, Routes } from "react-router-dom";
-import { Flag } from "../../components/Flag";
 // import { Vendors } from "../Vendors/Vendors";
 
 export default function Main() {

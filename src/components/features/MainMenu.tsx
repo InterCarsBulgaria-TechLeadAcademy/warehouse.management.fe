@@ -6,7 +6,7 @@ import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import DifferenceOutlinedIcon from '@mui/icons-material/DifferenceOutlined';
-import { MainMenuListItem } from './MainMenuListItem';
+import MainMenuListItem from './MainMenuListItem';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -15,6 +15,7 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import logo_bg from '../assets/logo_bg.png';
 import '@fontsource/roboto/500.css';
+
 
 export default function MainMenu() {
     return (
