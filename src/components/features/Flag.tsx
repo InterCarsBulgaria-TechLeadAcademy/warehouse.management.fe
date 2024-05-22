@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import bulgarian_flag from '../assets/bulgaria-flag-icon.png'
+import bulgarian_flag from '../../assets/bulgaria-flag-icon.png'
 import { Box } from '@mui/material'
 
 
