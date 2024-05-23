@@ -1,5 +1,34 @@
 import { createTheme } from '@mui/material'
 
+export interface CustomTheme {
+  palette: {
+    primary: {
+      main: string;
+      900: string;
+      800: string;
+      700: string;
+      600: string;
+      500: string;
+      400: string;
+      300: string;
+      200: string;
+      100: string;
+    };
+    secondary: {
+      main: string;
+      900: string;
+      800: string;
+      700: string;
+      600: string;
+      500: string;
+      400: string;
+      300: string;
+      200: string;
+      100: string;
+    };
+  };
+}
+
 const theme = createTheme({
   palette: {
     primary: {

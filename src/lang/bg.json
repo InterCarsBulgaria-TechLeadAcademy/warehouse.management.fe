@@ -2,5 +2,18 @@
   "welcome": "Добре дошли.",
   "projects": {
     "title": "Проекти"
+  },
+  "login": {
+    "The email field is required": "Полето за имейл e задължително",
+    "Invalid email": "Невалиден имейл адрес",
+    "The password field is required": "Полето за парола e задължително",
+    "The password must be at least 4 characters long": "Паролата трябва да e поне 4 символа",
+    "The password must be up to 10 characters long": "Паролата трябва до 10 символа",
+    "Password must contain at least one digit": "Паролата трябва да съдържа поне една цифра",
+    "Password must contain at least one special character": "Паролата трябва да съдържа поне един специален знак",
+    "Internal delivery management system": "Вътрешна система за менажиране на доставки",
+    "Login": "Вход",
+    "Email": "Имейл",
+    "Password": "Парола"
   }
 }

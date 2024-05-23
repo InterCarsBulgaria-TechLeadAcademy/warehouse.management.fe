@@ -6,7 +6,6 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import login_image from '../assets/login-image.webp'
 import intercars_logo from '../assets/ic_new_logo.jpg'
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
@@ -14,16 +13,20 @@ import { IconButton } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
+import { useTranslation } from 'react-i18next';
 
+
+export default function Login() {
+
+    const { t: translate } = useTranslation()
 const schema = yup
     .object({
-        email: yup.string().required('Полето за имейл e задължително').email('Невалиден имейл адрес'),
-        password: yup.string().required('Полето за парола e задължително').min(4, 'Паролата трябва да e поне 4 символа').max(10, 'Паролата трябва до 10 символа')
-            .matches(/[0-9]/, 'Паролата трябва да съдържа поне една цифра')
-            .matches(/[!@#$%^&*]/, 'Паролата трябва да съдържа поне един специален знак')
+        email: yup.string().required(translate('login.The email field is required')).email(translate('login.Invalid email')),
+        password: yup.string().required(translate('login.The password field is required')).min(4, translate('login.The password must be at least 4 characters long')).max(10, translate('The password must be up to 10 characters long'))
+            .matches(/[0-9]/, translate('login.Password must contain at least one digit'))
+            .matches(/[!@#$%^&*]/, translate('login.Password must contain at least one special character'))
     })
     .required()
 
@@ -32,22 +35,6 @@ interface LoginSchema extends yup.InferType<typeof schema> {
     password: string;
 }
 
-const theme = createTheme({
-    palette: {
-        primary: {
-            // червено
-            main: '#C9022D',
-            light: '#C9022D80',
-            dark: '#88151b',
-        },
-        // черно
-        secondary: {
-            main: '#000000'
-        },
-    },
-});
-
-export default function Login() {
     const [showPassword, setShowPassword] = React.useState(false);
     const { control, handleSubmit, formState: { errors } } = useForm<LoginSchema>({
         resolver: yupResolver(schema),
@@ -62,7 +49,6 @@ export default function Login() {
     }
 
     return (
-        <ThemeProvider theme={theme}>
             <Grid container component="main" sx={{ height: '100vh' }}>
                 <CssBaseline />
 
@@ -73,20 +59,19 @@ export default function Login() {
                     md={7}
                     sx={{
                         backgroundImage: `url(${login_image})`, backgroundRepeat: 'no-repeat',
-                        backgroundColor: (t) =>
-                            t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         position: 'relative'
                     }}>
 
                     <Box component="div" sx={{
-                        background: theme.palette.primary.light,
+                        backgroundColor: 'primary.main',
                         position: 'absolute',
                         top: 0,
                         bottom: 0,
                         left: 0,
-                        right: 0
+                        right: 0,
+                        opacity: 0.4
                     }}>
                     </Box>
 
@@ -136,7 +121,7 @@ export default function Login() {
                             textAlign: 'center',
                             margin: '2em 0',
                         }}>
-                            Вътрешна система за менажиране на доставки
+                            {translate('login.Internal delivery management system')}
                         </Box>
 
 
@@ -145,7 +130,7 @@ export default function Login() {
                             fontWeight: 800,
 
                         }} >
-                            Вход
+                            {translate('login.Login')}
                         </Typography>
                         <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 1 }}>
                             <Controller
@@ -155,7 +140,7 @@ export default function Login() {
                                 render={({ field }) => (
                                     <TextField
                                         {...field}
-                                        label="Имейл"
+                                        label={translate('login.Email')}
                                         id="email"
                                         name="email"
                                         variant="outlined"
@@ -178,7 +163,7 @@ export default function Login() {
                                 render={({ field }) => (
                                     <TextField
                                         {...field}
-                                        label="Парола"
+                                        label={translate('login.Password')}
                                         id="password"
                                         name="password"
                                         margin="normal"
@@ -213,13 +198,12 @@ export default function Login() {
                                 sx={{ mt: 3, mb: 2 }}
                                 disabled={Object.keys(errors).length > 0}
                             >
-                                Вход
+                                {translate('login.Login')}
                             </Button>
                         </Box>
                     </Box>
                 </Grid>
             </Grid>
 
-        </ThemeProvider>
     );
 }
