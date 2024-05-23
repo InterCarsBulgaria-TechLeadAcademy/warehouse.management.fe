@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -9,46 +9,52 @@ import Typography from '@mui/material/Typography';
 import login_image from '../assets/login-image.webp'
 import intercars_logo from '../assets/ic_new_logo.jpg'
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
-import { IconButton } from '@mui/material';
-import InputAdornment from '@mui/material/InputAdornment';
+// import { IconButton } from '@mui/material';
+// import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { useTranslation } from 'react-i18next';
+import ShowHideFunctionality from '@/components/shared/ShowHideFunctionality';
 
 
 export default function Login() {
 
+
+  
+
+
     const { t: translate } = useTranslation()
     const schema = yup
         .object({
-            email: yup.string().required(translate('login.The email field is required')).email(translate('login.Invalid email')),
-            password: yup.string().required(translate('login.The password field is required')).min(4, translate('login.The password must be at least 4 characters long')).max(10, translate('The password must be up to 10 characters long'))
-                .matches(/[0-9]/, translate('login.Password must contain at least one digit'))
-                .matches(/[!@#$%^&*]/, translate('login.Password must contain at least one special character'))
+            email: yup.string().required(translate('errors.email.required')).email(translate('errors.email.invalid')),
+            password: yup.string().required(translate('errors.password.required')).min(4, translate('errors.password.short')).max(10, translate('errors.password.long'))
+                .matches(/[0-9]/, translate('errors.password.digit'))
+                .matches(/[!@#$%^&*]/, translate('errors.password.specialCharacter'))
         })
         .required()
+
 
     interface LoginSchema extends yup.InferType<typeof schema> {
         email: string;
         password: string;
     }
 
-    const [showPassword, setShowPassword] = React.useState(false);
+    // const [showPassword, setShowPassword] = React.useState(false);
     const { control, handleSubmit, formState: { errors } } = useForm<LoginSchema>({
         resolver: yupResolver(schema),
     })
 
     const onSubmit: SubmitHandler<LoginSchema> = (data) => console.log(data)
 
-    const handleClickShowPassword = () => setShowPassword((show) => !show)
+    // const handleClickShowPassword = () => setShowPassword((show) => !show)
 
-    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault()
-    }
+    // const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    //     event.preventDefault()
+    // }
 
-    const formHasErrors = () =>{
+    const formHasErrors = () => {
         return Object.keys(errors).length > 0
     }
 
@@ -124,13 +130,13 @@ export default function Login() {
                         textAlign: 'center',
                         margin: '2em 0',
                     }}>
-                        {translate('login.Internal delivery management system')}
+                        {translate('description')}
                     </Typography>
 
-                    <Typography  variant="h4" sx={{ 
-                        fontWeight: 'bold' 
-                        }} >
-                        {translate('login.Login')}
+                    <Typography variant="h4" sx={{
+                        fontWeight: 'bold'
+                    }} >
+                        {translate('title')}
                     </Typography>
 
                     <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 1 }}>
@@ -141,7 +147,7 @@ export default function Login() {
                             render={({ field }) => (
                                 <TextField
                                     {...field}
-                                    label={translate('login.Email')}
+                                    label={translate('email')}
                                     id="email"
                                     name="email"
                                     variant="outlined"
@@ -162,32 +168,16 @@ export default function Login() {
                             control={control}
                             defaultValue=""
                             render={({ field }) => (
-                                <TextField
-                                    {...field}
-                                    label={translate('login.Password')}
+                                <ShowHideFunctionality
+                                    field={field}
+                                    label={translate('password')}
                                     id="password"
                                     name="password"
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    type={showPassword ? 'text' : 'password'}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                                <IconButton
-                                                    aria-label="toggle password visibility"
-                                                    onClick={handleClickShowPassword}
-                                                    onMouseDown={handleMouseDownPassword}
-                                                >
-                                                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                                                </IconButton>
-                                            </InputAdornment>
-                                        ),
-                                    }}
-                                    autoComplete="current-password"
+                                    required={true}
+                                    VisibilityOff={VisibilityOff}
+                                    Visibility={Visibility}
                                     color="secondary"
-                                    error={!!errors.password}
-                                    helperText={errors.password ? errors.password.message : ''}
+                                    errors={errors}
                                 />
                             )}
                         />
@@ -199,7 +189,7 @@ export default function Login() {
                             sx={{ mt: 3, mb: 2 }}
                             disabled={formHasErrors()}
                         >
-                            {translate('login.Login')}
+                            {translate('title')}
                         </Button>
                     </Box>
                 </Box>
