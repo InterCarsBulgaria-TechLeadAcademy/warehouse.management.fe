@@ -48,6 +48,11 @@ export default function Login() {
         event.preventDefault()
     }
 
+    const formHasErrors = () =>{
+        return Object.keys(errors).length > 0
+    }
+
+
     return (
         <Grid container component="main" sx={{ height: '100vh' }}>
             <CssBaseline />
@@ -192,7 +197,7 @@ export default function Login() {
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
-                            disabled={Object.keys(errors).length > 0}
+                            disabled={formHasErrors()}
                         >
                             {translate('login.Login')}
                         </Button>
