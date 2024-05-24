@@ -120,7 +120,7 @@ export default function Login() {
               textAlign: 'center',
               margin: '2em 0'
             }}>
-            {translate('description')}
+            {translate('login.description')}
           </Typography>
 
           <Typography
@@ -128,7 +128,7 @@ export default function Login() {
             sx={{
               fontWeight: 'bold'
             }}>
-            {translate('title')}
+            {translate('login.title')}
           </Typography>
 
           <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 1 }}>
@@ -139,7 +139,7 @@ export default function Login() {
               render={({ field }) => (
                 <TextField
                   {...field}
-                  label={translate('email')}
+                  label={translate('label.email')}
                   id="email"
                   name="email"
                   variant="outlined"
@@ -162,7 +162,7 @@ export default function Login() {
               render={({ field }) => (
                 <ShowHideFunctionality
                   field={field}
-                  label={translate('password')}
+                  label={translate('label.password')}
                   id="password"
                   name="password"
                   required={true}
@@ -182,7 +182,7 @@ export default function Login() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               disabled={formHasErrors(errors)}>
-              {translate('title')}
+              {translate('login.title')}
             </Button>
           </Box>
         </Box>

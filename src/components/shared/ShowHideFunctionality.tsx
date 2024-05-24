@@ -40,7 +40,6 @@ export default function ShowHideFunctionality({
     event.preventDefault()
   }
 
-  console.log(color)
   return (
     <TextField
       {...field}
