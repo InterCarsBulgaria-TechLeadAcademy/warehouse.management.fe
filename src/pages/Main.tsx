@@ -5,8 +5,8 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import SmallMainMenu from '@/components/features/SmallMainMenu'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import { useState } from 'react'
 import LanguageSwitcher from '@/components/features/LanguageSwitcher'
+import { useState } from 'react'
 
 // import { Route, Routes } from "react-router-dom";
 // import { Vendors } from "../Vendors/Vendors";
