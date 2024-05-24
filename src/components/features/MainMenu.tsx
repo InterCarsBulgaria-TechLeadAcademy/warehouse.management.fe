@@ -60,15 +60,6 @@ export default function MainMenu() {
         </ListItem>
       </List>
 
-      {/* <Box
-        component="div"
-        sx={{
-          backgroundColor: 'primary.100',
-          fontWeight: 'bold'
-        }}>
-        PROBAAAA
-      </Box> */}
-
       <MenuList>
         <MainMenuListItem
           title={translate('mainMenu.users')}
