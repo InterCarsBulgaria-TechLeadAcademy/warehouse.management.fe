@@ -2,3 +2,4 @@
 // objects also work to encapsulate them better but use Object.freeze so it cant mutate the object
 
 export const PROJECTS_PATH_EXAMPLE = '/projects'
+export const LOGIN_PATH = '/login'
