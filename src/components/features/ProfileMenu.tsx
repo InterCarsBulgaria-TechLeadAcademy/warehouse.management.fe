@@ -9,8 +9,10 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
+import { useTranslation } from 'react-i18next'
 
 export default function ProfileMenu() {
+  const { t: translate } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const menuOpen = Boolean(anchorEl)
   const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -38,7 +40,7 @@ export default function ProfileMenu() {
         sx={{
           fontSize: '1.2em'
         }}>
-        Христо Бояджиев
+        {translate('profileMenu.name')}
       </Box>
 
       <Button
@@ -64,7 +66,7 @@ export default function ProfileMenu() {
               textDecoration: 'none',
               color: 'black'
             }}>
-            Изход
+            {translate('profileMenu.labels.exit')}
           </Box>
         </MenuItem>
       </Menu>
@@ -74,17 +76,15 @@ export default function ProfileMenu() {
         onClose={handleDialogClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description">
-        <DialogTitle id="alert-dialog-title">{'Изход от профила'}</DialogTitle>
+        <DialogTitle id="alert-dialog-title"> {translate('profileMenu.title')}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Сигурни ли сте, че искате да излезете от профила си?
+            {translate('profileMenu.message')}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleDialogClose}>Откажи</Button>
-          <Button onClick={handleDialogClose} autoFocus>
-            Потвърди
-          </Button>
+          <Button onClick={handleDialogClose}> {translate('profileMenu.labels.discard')}</Button>
+          <Button onClick={handleDialogClose}>{translate('profileMenu.labels.confirm')}</Button>
         </DialogActions>
       </Dialog>
     </>

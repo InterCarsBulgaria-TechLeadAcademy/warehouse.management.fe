@@ -13,9 +13,11 @@ import ListItemText from '@mui/material/ListItemText'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
 import Avatar from '@mui/material/Avatar'
 import Typography from '@mui/material/Typography'
+import { useTranslation } from 'react-i18next'
 import logo_bg from '../../assets/logo_bg.png'
 
 export default function MainMenu() {
+  const { t: translate } = useTranslation()
   return (
     <Paper
       sx={{
@@ -49,13 +51,38 @@ export default function MainMenu() {
       </List>
 
       <MenuList>
-        <MainMenuListItem title="Потребители" Icon={PeopleAltOutlinedIcon} link="users" />
-        <MainMenuListItem title="Зони" Icon={AccountTreeOutlinedIcon} link="zones" />
-        <MainMenuListItem title="Доставчици" Icon={LocalShippingOutlinedIcon} link="vendors" />
-        <MainMenuListItem title="Роли" Icon={ManageAccountsOutlinedIcon} link="roles" />
-        <MainMenuListItem title="Видове Стока" Icon={Inventory2OutlinedIcon} link="typesGoods" />
         <MainMenuListItem
-          title="Тип Разлика"
+          title={translate('mainMenu.users')}
+          Icon={PeopleAltOutlinedIcon}
+          link="users"
+        />
+
+        <MainMenuListItem
+          title={translate('mainMenu.zones')}
+          Icon={AccountTreeOutlinedIcon}
+          link="zones"
+        />
+
+        <MainMenuListItem
+          title={translate('mainMenu.vendors')}
+          Icon={LocalShippingOutlinedIcon}
+          link="vendors"
+        />
+
+        <MainMenuListItem
+          title={translate('mainMenu.roles')}
+          Icon={ManageAccountsOutlinedIcon}
+          link="roles"
+        />
+
+        <MainMenuListItem
+          title={translate('mainMenu.typesGoods')}
+          Icon={Inventory2OutlinedIcon}
+          link="typesGoods"
+        />
+
+        <MainMenuListItem
+          title={translate('mainMenu.typesDifference')}
           Icon={DifferenceOutlinedIcon}
           link="typesDifference"
         />
