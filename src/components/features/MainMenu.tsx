@@ -15,6 +15,7 @@ import Avatar from '@mui/material/Avatar'
 import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
 import logo_bg from '../../assets/logo_bg.png'
+
 import {
   TYPESDIFFERENCE_PATH,
   ROLES_PATH,
@@ -26,6 +27,7 @@ import {
 
 export default function MainMenu() {
   const { t: translate } = useTranslation()
+
   return (
     <Paper
       sx={{
@@ -57,6 +59,15 @@ export default function MainMenu() {
           />
         </ListItem>
       </List>
+
+      {/* <Box
+        component="div"
+        sx={{
+          backgroundColor: 'primary.100',
+          fontWeight: 'bold'
+        }}>
+        PROBAAAA
+      </Box> */}
 
       <MenuList>
         <MainMenuListItem
