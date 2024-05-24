@@ -1,71 +1,68 @@
-import { IconButton, TextField } from '@mui/material';
-import InputAdornment from '@mui/material/InputAdornment';
+import { IconButton, TextField } from '@mui/material'
+import InputAdornment from '@mui/material/InputAdornment'
 
-import React from 'react';
-import {  FieldErrors } from 'react-hook-form';
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 interface ShowHideFunctionalityProps {
-    field:  any;
-    label: string;
-    id: string;
-    name: string;
-    required: boolean;
-    VisibilityOff: React.ElementType;
-    Visibility: React.ElementType;
-    color?: string
-    errors: FieldErrors<any>
+  field: any
+  label: string
+  id: string
+  name: string
+  required?: boolean
+  fullWidth?: boolean
+  VisibilityOff: React.ElementType
+  Visibility: React.ElementType
+  color?: string
+  error?: boolean
+  helperText?: string | undefined
 }
 
+export default function ShowHideFunctionality({
+  field,
+  label,
+  id,
+  name,
+  required,
+  fullWidth,
+  VisibilityOff,
+  Visibility,
+  color,
+  error,
+  helperText
+}: ShowHideFunctionalityProps) {
+  const { t: translate } = useTranslation()
+  const [show, setShow] = React.useState(false)
 
-export default function ShowHideFunctionality(
-    {
-        field,
-        label,
-        id,
-        name,
-        required,
-        VisibilityOff,
-        Visibility,
-        color,
-        errors
-    }: ShowHideFunctionalityProps
+  const handleClickShow = () => setShow((show) => !show)
 
-) {
-    const [showPassword, setShowPassword] = React.useState(false);
+  const handleMouseDown = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+  }
 
-    const handleClickShowPassword = () => setShowPassword((show) => !show)
-
-    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault()
-    }
-
-    return (
-        <TextField
-            {...field}
-            label={label}
-            id={id}
-            name={name}
-            margin="normal"
-            required={required}
-            fullWidth
-            type={showPassword ? 'text' : 'password'}
-            InputProps={{
-                endAdornment: (
-                    <InputAdornment position="end">
-                        <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                        >
-                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                    </InputAdornment>
-                ),
-            }}
-            autoComplete="current-password"
-            color={color}
-            error={!!errors.password}
-            helperText={errors.password ? errors.password.message : ''}
-        />
-    )
+  console.log(color)
+  return (
+    <TextField
+      {...field}
+      label={label}
+      id={id}
+      name={name}
+      margin="normal"
+      required={required}
+      fullWidth={fullWidth}
+      type={show ? 'text' : 'password'}
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton onClick={handleClickShow} onMouseDown={handleMouseDown}>
+              {show ? <VisibilityOff /> : <Visibility />}
+            </IconButton>
+          </InputAdornment>
+        )
+      }}
+      color={color}
+      error={error}
+      helperText={error ? translate(helperText || '') : ''}
+    />
+  )
 }
