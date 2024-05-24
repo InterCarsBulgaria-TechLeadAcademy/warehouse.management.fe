@@ -48,11 +48,6 @@ export default function Login() {
 
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>
-      {/* // <Box
-    //   sx={{
-    //     display: 'flex',
-    //     height: '100vh'
-    //   }}> */}
       <Grid
         item
         xs={false}
@@ -187,7 +182,6 @@ export default function Login() {
           </Box>
         </Box>
       </Grid>
-      {/* </Box> */}
     </Grid>
   )
 }
