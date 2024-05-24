@@ -165,7 +165,7 @@ export default function Login() {
                   VisibilityOff={VisibilityOff}
                   Visibility={Visibility}
                   color="secondary"
-                  error={true}
+                  error={!!errors.password}
                   helperText={errors.password?.message}
                 />
               )}
