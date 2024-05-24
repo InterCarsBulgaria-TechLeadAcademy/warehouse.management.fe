@@ -126,7 +126,7 @@ export default function Login() {
             {translate('login.title')}
           </Typography>
 
-          <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 1, maxWidth: '30em' }}>
             <Controller
               name="email"
               control={control}
