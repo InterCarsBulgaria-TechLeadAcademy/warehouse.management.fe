@@ -13,6 +13,14 @@ import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined'
 import DifferenceOutlinedIcon from '@mui/icons-material/DifferenceOutlined'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import {
+  TYPESDIFFERENCE_PATH,
+  ROLES_PATH,
+  TYPESGOODS_PATH,
+  USERS_PATH,
+  VENDORS_PATH,
+  ZONES_PATH
+} from '@/router/routerPaths'
 
 export default function SmallMainMenu() {
   const { t: translate } = useTranslation()
@@ -50,7 +58,7 @@ export default function SmallMainMenu() {
           }}>
           <Box
             component={Link}
-            to="users"
+            to={USERS_PATH}
             sx={{
               display: 'flex',
               width: '100%',
@@ -71,7 +79,7 @@ export default function SmallMainMenu() {
           }}>
           <Box
             component={Link}
-            to="zones"
+            to={ZONES_PATH}
             sx={{
               display: 'flex',
               width: '100%',
@@ -92,7 +100,7 @@ export default function SmallMainMenu() {
           }}>
           <Box
             component={Link}
-            to="vendors"
+            to={VENDORS_PATH}
             sx={{
               display: 'flex',
               width: '100%',
@@ -113,7 +121,7 @@ export default function SmallMainMenu() {
           }}>
           <Box
             component={Link}
-            to="roles"
+            to={ROLES_PATH}
             sx={{
               display: 'flex',
               width: '100%',
@@ -134,7 +142,7 @@ export default function SmallMainMenu() {
           }}>
           <Box
             component={Link}
-            to="typesGoods"
+            to={TYPESGOODS_PATH}
             sx={{
               display: 'flex',
               width: '100%',
@@ -155,7 +163,7 @@ export default function SmallMainMenu() {
           }}>
           <Box
             component={Link}
-            to="typesDifference"
+            to={TYPESDIFFERENCE_PATH}
             sx={{
               display: 'flex',
               width: '100%',

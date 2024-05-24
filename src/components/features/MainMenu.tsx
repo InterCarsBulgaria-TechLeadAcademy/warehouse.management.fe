@@ -15,6 +15,14 @@ import Avatar from '@mui/material/Avatar'
 import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
 import logo_bg from '../../assets/logo_bg.png'
+import {
+  TYPESDIFFERENCE_PATH,
+  ROLES_PATH,
+  TYPESGOODS_PATH,
+  USERS_PATH,
+  VENDORS_PATH,
+  ZONES_PATH
+} from '@/router/routerPaths'
 
 export default function MainMenu() {
   const { t: translate } = useTranslation()
@@ -54,37 +62,37 @@ export default function MainMenu() {
         <MainMenuListItem
           title={translate('mainMenu.users')}
           Icon={PeopleAltOutlinedIcon}
-          link="users"
+          link={USERS_PATH}
         />
 
         <MainMenuListItem
           title={translate('mainMenu.zones')}
           Icon={AccountTreeOutlinedIcon}
-          link="zones"
+          link={ZONES_PATH}
         />
 
         <MainMenuListItem
           title={translate('mainMenu.vendors')}
           Icon={LocalShippingOutlinedIcon}
-          link="vendors"
+          link={VENDORS_PATH}
         />
 
         <MainMenuListItem
           title={translate('mainMenu.roles')}
           Icon={ManageAccountsOutlinedIcon}
-          link="roles"
+          link={ROLES_PATH}
         />
 
         <MainMenuListItem
           title={translate('mainMenu.typesGoods')}
           Icon={Inventory2OutlinedIcon}
-          link="typesGoods"
+          link={TYPESGOODS_PATH}
         />
 
         <MainMenuListItem
           title={translate('mainMenu.typesDifference')}
           Icon={DifferenceOutlinedIcon}
-          link="typesDifference"
+          link={TYPESDIFFERENCE_PATH}
         />
       </MenuList>
     </Paper>
