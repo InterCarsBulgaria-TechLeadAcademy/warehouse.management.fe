@@ -25,8 +25,47 @@ import {
   ZONES_PATH
 } from '@/router/routerPaths'
 
+interface MainMenuItem {
+  title: string
+  icon: React.ElementType
+  link: string
+}
+
 export default function MainMenu() {
   const { t: translate } = useTranslation()
+
+  const mainMenuItems: MainMenuItem[] = [
+    {
+      title: translate('mainMenu.users'),
+      icon: PeopleAltOutlinedIcon,
+      link: USERS_PATH
+    },
+    {
+      title: translate('mainMenu.zones'),
+      icon: AccountTreeOutlinedIcon,
+      link: ZONES_PATH
+    },
+    {
+      title: translate('mainMenu.vendors'),
+      icon: LocalShippingOutlinedIcon,
+      link: VENDORS_PATH
+    },
+    {
+      title: translate('mainMenu.roles'),
+      icon: ManageAccountsOutlinedIcon,
+      link: ROLES_PATH
+    },
+    {
+      title: translate('mainMenu.typesGoods'),
+      icon: Inventory2OutlinedIcon,
+      link: TYPESGOODS_PATH
+    },
+    {
+      title: translate('mainMenu.typesDifference'),
+      icon: DifferenceOutlinedIcon,
+      link: TYPESDIFFERENCE_PATH
+    }
+  ]
 
   return (
     <Paper
@@ -61,41 +100,14 @@ export default function MainMenu() {
       </List>
 
       <MenuList>
-        <MainMenuListItem
-          title={translate('mainMenu.users')}
-          Icon={PeopleAltOutlinedIcon}
-          link={USERS_PATH}
-        />
-
-        <MainMenuListItem
-          title={translate('mainMenu.zones')}
-          Icon={AccountTreeOutlinedIcon}
-          link={ZONES_PATH}
-        />
-
-        <MainMenuListItem
-          title={translate('mainMenu.vendors')}
-          Icon={LocalShippingOutlinedIcon}
-          link={VENDORS_PATH}
-        />
-
-        <MainMenuListItem
-          title={translate('mainMenu.roles')}
-          Icon={ManageAccountsOutlinedIcon}
-          link={ROLES_PATH}
-        />
-
-        <MainMenuListItem
-          title={translate('mainMenu.typesGoods')}
-          Icon={Inventory2OutlinedIcon}
-          link={TYPESGOODS_PATH}
-        />
-
-        <MainMenuListItem
-          title={translate('mainMenu.typesDifference')}
-          Icon={DifferenceOutlinedIcon}
-          link={TYPESDIFFERENCE_PATH}
-        />
+        {mainMenuItems.map((mainMenuItem, index) => (
+          <MainMenuListItem
+            key={index}
+            title={mainMenuItem.title}
+            Icon={mainMenuItem.icon}
+            link={mainMenuItem.link}
+          />
+        ))}
       </MenuList>
     </Paper>
   )

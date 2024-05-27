@@ -21,7 +21,6 @@ export default function SmallMainMenuItem({ title, Icon, link }: SmallMainMenuIt
         sx={{
           display: 'flex',
           width: '100%',
-          //   color: 'black',
           textDecoration: 'none'
         }}>
         <ListItemIcon sx={{ color: 'secondary.main' }}>

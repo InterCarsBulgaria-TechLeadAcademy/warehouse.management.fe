@@ -19,6 +19,12 @@ import {
 } from '@/router/routerPaths'
 import SmallMainMenuItem from './SmallMainMenuItem'
 
+interface SmallMainMenuItem {
+  title: string
+  icon: React.ElementType
+  link: string
+}
+
 export default function SmallMainMenu() {
   const { t: translate } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -29,6 +35,39 @@ export default function SmallMainMenu() {
   const handleClose = () => {
     setAnchorEl(null)
   }
+
+  const smallMainMenuItems: SmallMainMenuItem[] = [
+    {
+      title: translate('mainMenu.users'),
+      icon: PeopleAltOutlinedIcon,
+      link: USERS_PATH
+    },
+    {
+      title: translate('mainMenu.zones'),
+      icon: AccountTreeOutlinedIcon,
+      link: ZONES_PATH
+    },
+    {
+      title: translate('mainMenu.vendors'),
+      icon: LocalShippingOutlinedIcon,
+      link: VENDORS_PATH
+    },
+    {
+      title: translate('mainMenu.roles'),
+      icon: ManageAccountsOutlinedIcon,
+      link: ROLES_PATH
+    },
+    {
+      title: translate('mainMenu.typesGoods'),
+      icon: Inventory2OutlinedIcon,
+      link: TYPESGOODS_PATH
+    },
+    {
+      title: translate('mainMenu.typesDifference'),
+      icon: DifferenceOutlinedIcon,
+      link: TYPESDIFFERENCE_PATH
+    }
+  ]
 
   return (
     <div>
@@ -48,39 +87,14 @@ export default function SmallMainMenu() {
         MenuListProps={{
           'aria-labelledby': 'basic-button'
         }}>
-        <SmallMainMenuItem
-          title={translate('mainMenu.users')}
-          Icon={PeopleAltOutlinedIcon}
-          link={USERS_PATH}
-        />
-
-        <SmallMainMenuItem
-          title={translate('mainMenu.zones')}
-          Icon={AccountTreeOutlinedIcon}
-          link={ZONES_PATH}
-        />
-
-        <SmallMainMenuItem
-          title={translate('mainMenu.vendors')}
-          Icon={LocalShippingOutlinedIcon}
-          link={VENDORS_PATH}
-        />
-
-        <SmallMainMenuItem
-          title={translate('mainMenu.roles')}
-          Icon={ManageAccountsOutlinedIcon}
-          link={ROLES_PATH}
-        />
-        <SmallMainMenuItem
-          title={translate('mainMenu.typesGoods')}
-          Icon={Inventory2OutlinedIcon}
-          link={TYPESGOODS_PATH}
-        />
-        <SmallMainMenuItem
-          title={translate('mainMenu.typesDifference')}
-          Icon={DifferenceOutlinedIcon}
-          link={TYPESDIFFERENCE_PATH}
-        />
+        {smallMainMenuItems.map((smallMainMenuItem, index) => (
+          <SmallMainMenuItem
+            key={index}
+            title={smallMainMenuItem.title}
+            Icon={smallMainMenuItem.icon}
+            link={smallMainMenuItem.link}
+          />
+        ))}
       </Menu>
     </div>
   )
