@@ -32,12 +32,12 @@ export default function WarningActionDialog({
       onClose={onCloseDialog}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description">
-      <DialogTitle id="alert-dialog-title"> {title}</DialogTitle>
+      <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">{content}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onDiscardClick}> {discardText}</Button>
+        <Button onClick={onDiscardClick}>{discardText}</Button>
         <Button onClick={onConfirmClick}>{confirmText}</Button>
       </DialogActions>
     </Dialog>

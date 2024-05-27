@@ -13,40 +13,34 @@ export default function ProfileMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const menuOpen = Boolean(anchorEl)
 
-  const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const onMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
-    setDialogOpen(true)
   }
 
-  const handleMenuClose = () => {
+  const onCloseMenu = () => {
     setAnchorEl(null)
     setDialogOpen(false)
   }
 
-  const handleDialogOpen = () => {
+  const onOpenDialog = () => {
     setDialogOpen(true)
   }
 
   const onCloseDialog = () => {
-    setDialogOpen(false)
-    handleMenuClose()
+    onCloseMenu()
   }
 
   const onDiscardClick = () => {
-    setDialogOpen(false)
+    onCloseMenu()
   }
 
   const onConfirmClick = () => {
-    setDialogOpen(false)
+    onCloseMenu()
   }
 
   return (
     <>
-      <Typography
-        component="div"
-        sx={{
-          fontSize: '1.2em'
-        }}>
+      <Typography component="p" variant="body1">
         {translate('profileMenu.name')}
       </Typography>
 
@@ -55,19 +49,19 @@ export default function ProfileMenu() {
         aria-controls={menuOpen ? 'basic-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={menuOpen ? 'true' : undefined}
-        onClick={handleMenuClick}>
-        <KeyboardArrowDownIcon sx={{ color: 'black' }} />
+        onClick={onMenuClick}>
+        <KeyboardArrowDownIcon sx={{ color: 'secondary.main' }} />
       </Button>
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
         open={menuOpen}
-        onClose={handleMenuClose}
+        onClose={onCloseMenu}
         MenuListProps={{
           'aria-labelledby': 'basic-button'
         }}>
-        <MenuItem onClick={handleDialogOpen}>
-          <Typography component="div">{translate('profileMenu.labels.exit')}</Typography>
+        <MenuItem onClick={onOpenDialog}>
+          <Typography component="p">{translate('profileMenu.labels.exit')}</Typography>
         </MenuItem>
       </Menu>
 
