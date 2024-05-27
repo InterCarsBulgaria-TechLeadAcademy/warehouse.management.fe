@@ -12,7 +12,7 @@ interface ChildrenComponent {
   children: ReactNode
 }
 
-export default function Main({ children }: ChildrenComponent) {
+export default function DefaultLayout({ children }: ChildrenComponent) {
   const isSmallScreen = useMediaQuery('(max-width: 800px)')
   const [isHideMenu, setIsHideMenu] = useState(false)
 

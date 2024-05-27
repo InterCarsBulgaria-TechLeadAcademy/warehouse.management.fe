@@ -3,7 +3,7 @@
 
 export const PROJECTS_PATH_EXAMPLE = '/projects'
 export const LOGIN_PATH = '/login'
-export const MAIN_PATH = '/main'
+export const DEFAULTLAYOUT_PATH = '/defaultLayout'
 export const USERS_PATH = '/users'
 export const ZONES_PATH = '/zones'
 export const VENDORS_PATH = '/vendors'
