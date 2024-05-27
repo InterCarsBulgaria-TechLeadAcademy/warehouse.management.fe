@@ -10,7 +10,6 @@ interface SmallMainMenuItemProps {
 export default function SmallMainMenuItem({ title, Icon, link }: SmallMainMenuItemProps) {
   return (
     <MenuItem
-      // onClick={handleClose}
       sx={{
         display: 'flex'
       }}>
