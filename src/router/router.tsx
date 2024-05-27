@@ -23,7 +23,11 @@ export default function Router() {
     },
     {
       path: DEFAULTLAYOUT_PATH,
-      element: <DefaultLayout children={<h1>Proba</h1>} />
+      element: (
+        <DefaultLayout>
+          <h1>Hello world</h1>
+        </DefaultLayout>
+      )
     }
   ])
 }
