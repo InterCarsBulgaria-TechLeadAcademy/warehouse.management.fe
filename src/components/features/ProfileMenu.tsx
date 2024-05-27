@@ -3,45 +3,52 @@ import Button from '@mui/material/Button'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
-import { Box } from '@mui/material'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
-import DialogTitle from '@mui/material/DialogTitle'
+import { Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
+import WarningActionDialog from '../shared/WarningActionDialog'
 
 export default function ProfileMenu() {
   const { t: translate } = useTranslation()
+  const [dialogOpen, setDialogOpen] = React.useState(false)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const menuOpen = Boolean(anchorEl)
+
   const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
-  }
-  const handleMenuClose = () => {
-    setAnchorEl(null)
+    setDialogOpen(true)
   }
 
-  const [dialogOpen, setDialogOpen] = React.useState(false)
+  const handleMenuClose = () => {
+    setAnchorEl(null)
+    setDialogOpen(false)
+  }
 
   const handleDialogOpen = () => {
     setDialogOpen(true)
   }
 
-  const handleDialogClose = () => {
+  const onCloseDialog = () => {
     setDialogOpen(false)
     handleMenuClose()
   }
 
+  const onDiscardClick = () => {
+    setDialogOpen(false)
+  }
+
+  const onConfirmClick = () => {
+    setDialogOpen(false)
+  }
+
   return (
     <>
-      <Box
+      <Typography
         component="div"
         sx={{
           fontSize: '1.2em'
         }}>
         {translate('profileMenu.name')}
-      </Box>
+      </Typography>
 
       <Button
         id="basic-button"
@@ -60,33 +67,20 @@ export default function ProfileMenu() {
           'aria-labelledby': 'basic-button'
         }}>
         <MenuItem onClick={handleDialogOpen}>
-          <Box
-            component="div"
-            sx={{
-              textDecoration: 'none',
-              color: 'black'
-            }}>
-            {translate('profileMenu.labels.exit')}
-          </Box>
+          <Typography component="div">{translate('profileMenu.labels.exit')}</Typography>
         </MenuItem>
       </Menu>
 
-      <Dialog
+      <WarningActionDialog
         open={dialogOpen}
-        onClose={handleDialogClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description">
-        <DialogTitle id="alert-dialog-title"> {translate('profileMenu.title')}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            {translate('profileMenu.message')}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleDialogClose}> {translate('profileMenu.labels.discard')}</Button>
-          <Button onClick={handleDialogClose}>{translate('profileMenu.labels.confirm')}</Button>
-        </DialogActions>
-      </Dialog>
+        title={translate('profileMenu.title')}
+        content={translate('profileMenu.message')}
+        discardText={translate('profileMenu.labels.discard')}
+        confirmText={translate('profileMenu.labels.confirm')}
+        onCloseDialog={onCloseDialog}
+        onDiscardClick={onDiscardClick}
+        onConfirmClick={onConfirmClick}
+      />
     </>
   )
 }
