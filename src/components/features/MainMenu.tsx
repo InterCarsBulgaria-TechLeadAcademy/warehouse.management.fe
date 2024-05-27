@@ -6,7 +6,7 @@ import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined'
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined'
 import DifferenceOutlinedIcon from '@mui/icons-material/DifferenceOutlined'
-import MainMenuListItem from './MainMenuListItem'
+import MainMenuListItem from './MainMenuItem'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'

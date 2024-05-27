@@ -1,13 +1,13 @@
 import { Box, ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 
-interface MainMenuListItemProps {
+interface MainMenuItemProps {
   title: string
   Icon: React.ElementType
   link: string
 }
 
-export default function MainMenuListItem({ title, Icon, link }: MainMenuListItemProps) {
+export default function MainListItem({ title, Icon, link }: MainMenuItemProps) {
   return (
     <MenuItem
       sx={{
