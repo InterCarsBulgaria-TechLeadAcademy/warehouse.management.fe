@@ -6,12 +6,13 @@ import SmallMainMenu from '@/components/features/SmallMainMenu'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import LanguageSwitcher from '@/components/features/LanguageSwitcher'
-import { useState } from 'react'
+import { ReactNode, useState } from 'react'
 
-// import { Route, Routes } from "react-router-dom";
-// import { Vendors } from "../Vendors/Vendors";
+interface ChildrenComponent {
+  children: ReactNode
+}
 
-export default function Main() {
+export default function Main({ children }: ChildrenComponent) {
   const isSmallScreen = useMediaQuery('(max-width: 800px)')
   const [isHideMenu, setIsHideMenu] = useState(false)
 
@@ -99,9 +100,7 @@ export default function Main() {
               height: isSmallScreen ? '100vh' : 'auto',
               background: '#e6e6e6'
             }}>
-            {/* <Routes>
-                            <Route path="vendors" element={<Vendors />} />
-                        </Routes> */}
+            {children}
           </Box>
         </Box>
       </Box>
