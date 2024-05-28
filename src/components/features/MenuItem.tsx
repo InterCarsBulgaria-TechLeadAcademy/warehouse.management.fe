@@ -1,13 +1,15 @@
+import { isSmallScreenUtils } from '@/utils/isSmallScreenUtils'
 import { Box, ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 
-interface MainMenuItemProps {
+interface MenuItemProps {
   title: string
   Icon: React.ElementType
   link: string
 }
 
-export default function MainListItem({ title, Icon, link }: MainMenuItemProps) {
+export default function ListItem({ title, Icon, link }: MenuItemProps) {
+  const isSmallScreen: boolean = isSmallScreenUtils()
   return (
     <MenuItem
       sx={{
@@ -29,7 +31,7 @@ export default function MainListItem({ title, Icon, link }: MainMenuItemProps) {
         sx={{
           display: 'flex',
           width: '100%',
-          padding: '0.7em 0 0.7em 1.5em',
+          padding: isSmallScreen ? '0em 0.7em' : '0.7em 0 0.7em 1.5em',
           gap: '1em',
           color: 'secondary.main',
           textDecoration: 'none'

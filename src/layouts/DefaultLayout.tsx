@@ -1,20 +1,20 @@
 import { Box } from '@mui/material'
-import useMediaQuery from '@mui/material/useMediaQuery'
 import { ReactNode } from 'react'
 import MenuDrawer from '@/components/features/MenuDrawer'
 import Toolbar from '@/components/features/Toolbar'
+import { isSmallScreenUtils } from '@/utils/isSmallScreenUtils'
 
 interface ChildrenComponent {
   children: ReactNode
 }
 
 export default function DefaultLayout({ children }: ChildrenComponent) {
-  const isSmallScreen = useMediaQuery('(max-width: 800px)')
+  const isSmallScreen: boolean = isSmallScreenUtils()
 
   return (
     <>
       <Box component="section" sx={{ display: 'flex' }}>
-        <MenuDrawer isSmallScreen={isSmallScreen} />
+        <MenuDrawer />
         <Box
           component="article"
           sx={{
@@ -22,7 +22,7 @@ export default function DefaultLayout({ children }: ChildrenComponent) {
             display: 'flex',
             flexDirection: 'column'
           }}>
-          <Toolbar isSmallScreen={isSmallScreen} />
+          <Toolbar />
           <Box
             component="div"
             sx={{
