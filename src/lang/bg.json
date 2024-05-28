@@ -24,7 +24,7 @@
     "email": "Имейл",
     "password": "Парола"
   },
-  "mainMenu": {
+  "menuItems": {
     "users": "Потребители",
     "zones": "Зони",
     "vendors": "Доставчици",
@@ -40,6 +40,13 @@
       "exit": "Изход",
       "discard": "Откажи",
       "confirm": "Потвърди"
+    }
+  },
+  "vendors": {
+    "title": "Доставчици",
+    "description": "Управление на доставчици",
+    "labels": {
+      "newVendor": "нов доставчик"
     }
   }
 }

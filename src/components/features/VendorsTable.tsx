@@ -8,6 +8,12 @@ import TableHead from '@mui/material/TableHead'
 import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
 import ActionsMenu from './ActionsMenu'
+import { Box } from '@mui/material'
+import { styled, alpha } from '@mui/material/styles'
+import InputBase from '@mui/material/InputBase'
+import SearchIcon from '@mui/icons-material/Search'
+import TextField from '@mui/material/TextField'
+import Autocomplete from '@mui/material/Autocomplete'
 
 interface Column {
   id: 'name' | 'vendorNumber' | 'markers' | 'actions'
@@ -75,9 +81,69 @@ export default function VendorsTable() {
     setPage(0)
   }
 
+  const Search = styled('div')(({ theme }) => ({
+    position: 'relative',
+    borderRadius: '0.2em',
+    backgroundColor: '#e6e6e6',
+    '&:hover': {
+      backgroundColor: alpha(theme.palette.common.white, 0.25)
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(3),
+      width: 'auto'
+    }
+  }))
+
+  const SearchIconWrapper = styled('div')(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }))
+
+  const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    color: 'inherit',
+    '& .MuiInputBase-input': {
+      padding: theme.spacing(1, 1, 1, 0),
+      // vertical padding + font size from searchIcon
+      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+      transition: theme.transitions.create('width'),
+      width: '100%',
+      [theme.breakpoints.up('md')]: {
+        width: '20ch'
+      }
+    }
+  }))
+
+  const roles = [{ label: 'Proba1' }, { label: 'Proba2' }]
+
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+    <Paper sx={{ width: '100%', overflow: 'hidden', padding: '0.5em' }}>
+      <Box component="div" sx={{ display: 'flex', gap: '2em', padding: '0.5em 0' }}>
+        <Search>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
+        </Search>
+
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          options={roles}
+          size="small"
+          sx={{ width: '235px' }}
+          renderInput={(params) => <TextField {...params} label="Роля" />}
+        />
+      </Box>
+
+      <TableContainer sx={{ maxHeight: '75vh' }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>

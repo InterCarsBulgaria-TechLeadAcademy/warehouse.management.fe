@@ -23,7 +23,7 @@ export default function SkeletonPage({
         display: 'flex',
         flexDirection: 'column',
         gap: '1em',
-        padding: '1em'
+        margin: '1em'
       }}>
       <HeaderSkeletonPage
         header={header}
@@ -32,7 +32,7 @@ export default function SkeletonPage({
         buttonClickHandler={buttonClickHandler}
       />
 
-      <Box component="article" sx={{ background: 'white' }}>
+      <Box component="article">
         <VendorsTable />
       </Box>
     </Box>
