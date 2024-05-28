@@ -7,11 +7,7 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
-
-import IconButton from '@mui/material/IconButton'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
+import ActionsMenu from './ActionsMenu'
 
 interface Column {
   id: 'name' | 'vendorNumber' | 'markers' | 'actions'
@@ -22,29 +18,14 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
-  {
-    id: 'name',
-    label: 'Име'
-    // minWidth: 170,
-  },
+  { id: 'name', label: 'Име' },
   {
     id: 'vendorNumber',
     label: 'Доставчик №',
-    // minWidth: 100,
     format: (value: number) => value.toLocaleString('en-US')
   },
-  {
-    id: 'markers',
-    label: 'Маркери'
-    // minWidth: 170,
-    // align: "right",
-  },
-  {
-    id: 'actions',
-    label: 'Действия'
-    // minWidth: 500,
-    // align: "right",
-  }
+  { id: 'markers', label: 'Маркери' },
+  { id: 'actions', label: 'Действия', minWidth: 50, align: 'right' }
 ]
 
 interface Data {
@@ -63,63 +44,22 @@ function createData(
   return { name, vendorNumber, markers, actions }
 }
 
-const options = ['Редактирай', 'Изтрий']
-
-function ActionMenu() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-  const open = Boolean(anchorEl)
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget)
-  }
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
-
-  return (
-    <div>
-      <IconButton
-        aria-label="more"
-        id="long-button"
-        aria-controls={open ? 'long-menu' : undefined}
-        aria-expanded={open ? 'true' : undefined}
-        aria-haspopup="true"
-        onClick={handleClick}>
-        <MoreHorizIcon />
-      </IconButton>
-      <Menu
-        id="long-menu"
-        MenuListProps={{
-          'aria-labelledby': 'long-button'
-        }}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}>
-        {options.map((option) => (
-          <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
-            {option}
-          </MenuItem>
-        ))}
-      </Menu>
-    </div>
-  )
-}
-
 const rows = [
-  createData('Bosch', 1, 'Масло', <ActionMenu />),
-  createData('Valeo', 2, 'Масло', <ActionMenu />),
-  createData('ACDelco', 3, 'Масло', <ActionMenu />),
-  createData('Febi Bilstein', 4, 'Масло', <ActionMenu />),
-  createData('Delphi', 5, 'Масло', <ActionMenu />),
-  createData('Castrol', 6, 'Масло', <ActionMenu />),
-  createData('Monroe', 7, 'Масло', <ActionMenu />),
-  createData('Continental', 8, 'Масло', <ActionMenu />),
-  createData('BREMBO', 9, 'Масло', <ActionMenu />),
-  createData('ZF Group', 10, 'Масло', <ActionMenu />),
-  createData('Proba', 11, 'Масло', <ActionMenu />),
-  createData('Proba', 12, 'Масло', <ActionMenu />),
-  createData('Proba', 13, 'Масло', <ActionMenu />),
-  createData('Proba', 14, 'Масло', <ActionMenu />),
-  createData('Proba', 15, 'Масло', <ActionMenu />)
+  createData('Bosch', 1, 'Масло', <ActionsMenu />),
+  createData('Valeo', 2, 'Масло', <ActionsMenu />),
+  createData('ACDelco', 3, 'Масло', <ActionsMenu />),
+  createData('Febi Bilstein', 4, 'Масло', <ActionsMenu />),
+  createData('Delphi', 5, 'Масло', <ActionsMenu />),
+  createData('Castrol', 6, 'Масло', <ActionsMenu />),
+  createData('Monroe', 7, 'Масло', <ActionsMenu />),
+  createData('Continental', 8, 'Масло', <ActionsMenu />),
+  createData('BREMBO', 9, 'Масло', <ActionsMenu />),
+  createData('ZF Group', 10, 'Масло', <ActionsMenu />),
+  createData('Proba', 11, 'Масло', <ActionsMenu />),
+  createData('Proba', 12, 'Масло', <ActionsMenu />),
+  createData('Proba', 13, 'Масло', <ActionsMenu />),
+  createData('Proba', 14, 'Масло', <ActionsMenu />),
+  createData('Proba', 15, 'Масло', <ActionsMenu />)
 ]
 
 export default function VendorsTable() {
@@ -142,10 +82,7 @@ export default function VendorsTable() {
           <TableHead>
             <TableRow>
               {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}>
+                <TableCell key={column.id} align={column.align} sx={{ minWidth: column.minWidth }}>
                   {column.label}
                 </TableCell>
               ))}
@@ -158,7 +95,10 @@ export default function VendorsTable() {
                   {columns.map((column) => {
                     const value = row[column.id]
                     return (
-                      <TableCell key={column.id} align={column.align}>
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        sx={column.id === 'actions' ? { width: 50, paddingRight: '2em' } : {}}>
                         {column.format && typeof value === 'number' ? column.format(value) : value}
                       </TableCell>
                     )
