@@ -148,7 +148,7 @@ export default function VendorsTable() {
           />
         </Box>
 
-        <TableContainer sx={{ maxHeight: '55vh' }}>
+        <TableContainer sx={{ maxHeight: '60vh' }}>
           <Table stickyHeader aria-label="sticky table" size={dense ? 'small' : 'medium'}>
             <TableHead>
               <TableRow>

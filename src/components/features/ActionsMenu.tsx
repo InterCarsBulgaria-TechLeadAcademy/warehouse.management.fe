@@ -3,12 +3,17 @@ import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import React from 'react'
+import WarningActionDialog from '../shared/WarningActionDialog'
+import { useTranslation } from 'react-i18next'
 
 const options = ['Редактирай', 'Изтрий']
 
 export default function ActionsMenu() {
+  const { t: translate } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
+  const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
   }
@@ -16,9 +21,16 @@ export default function ActionsMenu() {
     setAnchorEl(null)
   }
 
-  const actionHandler = () => {
-    console.log('clicked')
+  const onDiscardClick = () => {
     handleClose()
+  }
+
+  const onConfirmClick = () => {
+    handleClose()
+  }
+
+  const actionHandler = (option: string) => {
+    setSelectedOption(option)
   }
 
   return (
@@ -41,11 +53,24 @@ export default function ActionsMenu() {
         open={open}
         onClose={handleClose}>
         {options.map((option) => (
-          <MenuItem key={option} onClick={actionHandler}>
+          <MenuItem key={option} onClick={() => actionHandler(option)}>
             {option}
           </MenuItem>
         ))}
       </Menu>
+
+      {selectedOption === 'Изтрий' && (
+        <WarningActionDialog
+          open={open}
+          title={translate('deleteAction.title')}
+          content={translate('deleteAction.message')}
+          discardText={translate('deleteAction.labels.discard')}
+          confirmText={translate('deleteAction.labels.confirm')}
+          onCloseDialog={handleClose}
+          onDiscardClick={onDiscardClick}
+          onConfirmClick={onConfirmClick}
+        />
+      )}
     </div>
   )
 }
