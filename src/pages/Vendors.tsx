@@ -1,60 +1,51 @@
-import { Box, Button, ThemeProvider, createTheme } from "@mui/material";
-import '@fontsource/roboto/500.css'
-import VendorsTable from "@/components/features/VendorsTable";
-
-const theme = createTheme({
-    palette: {
-        primary: {
-            // червено
-            main: '#C9022D',
-            dark: '#88151b',
-        }
-    },
-});
+import SkeletonPage from '@/components/features/SkeletonPage'
 
 export default function Vendors() {
-    return (
-        <ThemeProvider theme={theme}>
-            <Box component="section" sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '1em',
-                padding: '1em',
-                fontFamily: 'roboto'
+  //   const [open, setOpen] = React.useState(false);
 
-            }}>
+  const handleClickOpen = () => {
+    // setOpen(true);
+    console.log('clicked')
+  }
 
-                <Box component="article" sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                }}>
-                    <Box component="div" sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                    }}>
-                        <Box component="h2" sx={{
-                            margin: 0
-                        }}>
-                            Доставчици
-                        </Box>
-                        <Box component="p" sx={{
-                            margin: '0.5em 0 0 0'
-                        }}>
-                            Управление на доставчици
-                        </Box>
+  //   const handleClose = () => {
+  //     setOpen(false);
+  //   };
 
-                    </Box>
+  return (
+    <>
+      <SkeletonPage
+        header={'Доставчици'}
+        description={'Управление на доставчици'}
+        buttonText={'+ нов доставчик'}
+        buttonClickHandler={handleClickOpen}
+      />
 
-                    <Button variant="contained">+ нов доставчик</Button>
+      {/* <React.Fragment>
+                <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">
+                        {"Use Google's location service?"}
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            Let Google help apps determine location. This means sending anonymous
+                            location data to Google, even when no apps are running.
+                        </DialogContentText>
 
-                </Box>
-
-                <Box component="article">
-                    <VendorsTable />
-
-                </Box>
-            </Box>
-        </ThemeProvider>
-    )
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose}>Disagree</Button>
+                        <Button onClick={handleClose} autoFocus>
+                            Agree
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </React.Fragment> */}
+    </>
+  )
 }
