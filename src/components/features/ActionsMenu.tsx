@@ -18,6 +18,7 @@ export default function ActionsMenu() {
     setAnchorEl(event.currentTarget)
   }
   const handleClose = () => {
+    setSelectedOption(null)
     setAnchorEl(null)
   }
 
