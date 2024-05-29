@@ -37,7 +37,8 @@ export default function NewVendor({ open, onCloseHandler }: NewZoneProps) {
   const {
     control,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
+    reset
   } = useForm<NewZoneSchema>({
     resolver: yupResolver(schema)
   })
@@ -48,17 +49,23 @@ export default function NewVendor({ open, onCloseHandler }: NewZoneProps) {
       isFinal
     }
     console.log(formData)
+    onCloseHandler()
   }
 
   const handleChangeIsFinal = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsFinal(event.target.checked)
   }
 
+  const handleClose = () => {
+    reset()
+    onCloseHandler()
+  }
+
   return (
     <React.Fragment>
       <Dialog
         open={open}
-        onClose={onCloseHandler}
+        onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description">
         <DialogTitle id="alert-dialog-title" sx={{ textAlign: 'center' }}>
@@ -132,11 +139,7 @@ export default function NewVendor({ open, onCloseHandler }: NewZoneProps) {
               Създай
             </Button>
 
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={onCloseHandler}>
+            <Button variant="contained" sx={{ mt: 3, mb: 2 }} onClick={handleClose}>
               Изход
             </Button>
           </Box>
