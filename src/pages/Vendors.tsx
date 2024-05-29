@@ -1,27 +1,43 @@
+import ActionsMenu from '@/components/features/ActionsMenu'
 import SkeletonPage from '@/components/features/SkeletonPage'
+import DataTable from '@/components/shared/DataTable'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-// import {
-//   Button,
-//   Dialog,
-//   DialogActions,
-//   DialogContent,
-//   DialogContentText,
-//   DialogTitle
-// } from '@mui/material'
-// import React from 'react'
+import NewVendor from './NewVendor'
 
 export default function Vendors() {
   const { t: translate } = useTranslation()
-  // const [open, setOpen] = React.useState(false)
+  const [openNewVendor, setOpenNewVendor] = useState(false)
 
   const handleClickOpen = () => {
-    // setOpen(true)
     console.log('clicked')
+    setOpenNewVendor(true)
   }
 
-  // const handleClose = () => {
-  //   setOpen(false)
-  // }
+  const onCloseHandler = () => {
+    setOpenNewVendor(false)
+  }
+
+  const table = () => {
+    return (
+      <DataTable
+        searchInput={true}
+        isSortTextField={true}
+        sortLabel={'Роля'}
+        sortOptionsData={['Proba1', 'Proba2']}
+        columnsData={[
+          { id: 'name', label: 'Име' },
+          { id: 'vendorNumber', label: 'Доставчик №' },
+          { id: 'markers', label: 'Маркери' },
+          { id: 'actions', label: 'Действия', minWidth: 50, align: 'right' }
+        ]}
+        rowData={[
+          { name: 'Bosch', vendorNumber: 1, markers: 'Масло', actions: <ActionsMenu /> },
+          { name: 'Valeo', vendorNumber: 2, markers: 'Чистачки', actions: <ActionsMenu /> }
+        ]}
+      />
+    )
+  }
 
   return (
     <>
@@ -30,29 +46,10 @@ export default function Vendors() {
         description={translate('vendors.description')}
         buttonText={translate('vendors.labels.newVendor')}
         buttonClickHandler={handleClickOpen}
+        table={table()}
       />
 
-      {/* <React.Fragment>
-        <Dialog
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description">
-          <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              Let Google help apps determine location. This means sending anonymous location data to
-              Google, even when no apps are running.
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Disagree</Button>
-            <Button onClick={handleClose} autoFocus>
-              Agree
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </React.Fragment> */}
+      <NewVendor open={openNewVendor} onCloseHandler={onCloseHandler} />
     </>
   )
 }
