@@ -1,7 +1,8 @@
 import React from 'react'
 import { Box } from '@mui/material'
 import HeaderSkeletonPage from './HeaderSkeletonPage'
-import VendorsTable from './VendorsTable'
+import DataTable from '../shared/DataTable'
+import ActionsMenu from './ActionsMenu'
 
 interface SkeletonPageProps {
   header: string
@@ -33,7 +34,22 @@ export default function SkeletonPage({
       />
 
       <Box component="article">
-        <VendorsTable />
+        <DataTable
+          searchInput={true}
+          isSortTextField={true}
+          sortLabel={'Роля'}
+          sortOptionsData={['Proba1', 'Proba2']}
+          columnsData={[
+            { id: 'name', label: 'Име' },
+            { id: 'vendorNumber', label: 'Доставчик №' },
+            { id: 'markers', label: 'Маркери' },
+            { id: 'actions', label: 'Действия', minWidth: 50, align: 'right' }
+          ]}
+          rowData={[
+            { name: 'Bosch', vendorNumber: 1, markers: 'Масло', actions: <ActionsMenu /> },
+            { name: 'Valeo', vendorNumber: 2, markers: 'Чистачки', actions: <ActionsMenu /> }
+          ]}
+        />
       </Box>
     </Box>
   )
