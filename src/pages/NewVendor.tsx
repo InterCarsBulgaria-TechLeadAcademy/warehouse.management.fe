@@ -26,12 +26,12 @@ interface NewZoneSchema extends yup.InferType<typeof schema> {
   zoneName: string
 }
 
-interface NewZoneProps {
+interface NewVendorProps {
   open: boolean
   onCloseHandler: () => void
 }
 
-export default function NewVendor({ open, onCloseHandler }: NewZoneProps) {
+export default function NewVendor({ open, onCloseHandler }: NewVendorProps) {
   const [isFinal, setIsFinal] = React.useState<boolean>(false)
 
   const {
