@@ -32,48 +32,50 @@ export default function Vendors() {
     onCloseDialog()
   }
 
-  const renderForm = ({ control, formState: { errors } }: UseFormReturn<VendorFormData>) => (
-    <>
-      <Controller
-        name="vendorName"
-        control={control}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            label="Име"
-            id="vendorName"
-            name="vendorName"
-            required
-            fullWidth
-            autoFocus
-            error={!!errors.vendorName}
-            helperText={errors.vendorName ? errors.vendorName.message : ''}
-          />
-        )}
-      />
-      <Controller
-        name="vendorNumber"
-        control={control}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            label="Доставчик №"
-            id="vendorNumber"
-            name="vendorNumber"
-            required
-            fullWidth
-            autoFocus
-            error={!!errors.vendorNumber}
-            helperText={errors.vendorNumber ? errors.vendorNumber.message : ''}
-          />
-        )}
-      />
-      <FormControlLabel
-        control={<Checkbox checked={isFinal} onChange={() => setIsFinal(!isFinal)} />}
-        label="isFinal"
-      />
-    </>
-  )
+  function renderForm({ control, formState: { errors } }: UseFormReturn<VendorFormData>) {
+    return (
+      <>
+        <Controller
+          name="vendorName"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Име"
+              id="vendorName"
+              name="vendorName"
+              required
+              fullWidth
+              autoFocus
+              error={!!errors.vendorName}
+              helperText={errors.vendorName ? errors.vendorName.message : ''}
+            />
+          )}
+        />
+        <Controller
+          name="vendorNumber"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Доставчик №"
+              id="vendorNumber"
+              name="vendorNumber"
+              required
+              fullWidth
+              autoFocus
+              error={!!errors.vendorNumber}
+              helperText={errors.vendorNumber ? errors.vendorNumber.message : ''}
+            />
+          )}
+        />
+        <FormControlLabel
+          control={<Checkbox checked={isFinal} onChange={() => setIsFinal(!isFinal)} />}
+          label="isFinal"
+        />
+      </>
+    )
+  }
 
   const table = () => {
     return (
