@@ -15,21 +15,15 @@ export default function HeaderSkeletonPage({
 }: HeaderSkeletonPageProps) {
   return (
     <Box
-      component="article"
       sx={{
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center'
       }}>
-      <Box
-        component="div"
-        sx={{
-          display: 'flex',
-          flexDirection: 'column'
-        }}>
+      <Box component="div">
         <Typography variant="h4">{header}</Typography>
 
-        <Typography component="p">{description}</Typography>
+        <Typography>{description}</Typography>
       </Box>
 
       {buttonText && buttonClickHandler ? (

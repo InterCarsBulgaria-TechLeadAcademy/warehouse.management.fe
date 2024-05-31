@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TextField, Checkbox, FormControlLabel } from '@mui/material'
 import { Controller, UseFormReturn, SubmitHandler } from 'react-hook-form'
-
 import { VendorFormData, vendorSchema } from '@/schemas/vendorSchema'
 import VendorsTable from '@/tables/VendorsTable'
 
