@@ -141,7 +141,7 @@ export default function DataTable({
       <Box sx={{ mt: 2 }}>
         <FormControlLabel
           control={<Switch checked={dense} onChange={handleChangeDense} />}
-          label="Dense padding"
+          label={translate('table.densePadding')}
         />
       </Box>
     </Box>
