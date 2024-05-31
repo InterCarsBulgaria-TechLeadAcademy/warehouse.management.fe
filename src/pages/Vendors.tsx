@@ -30,7 +30,7 @@ export default function Vendors() {
     onCloseDialog()
   }
 
-  function renderForm({ control, formState: { errors } }: UseFormReturn<VendorFormData>) {
+  function CreateVendorForm({ control, formState: { errors } }: UseFormReturn<VendorFormData>) {
     return (
       <>
         <Controller
@@ -95,7 +95,7 @@ export default function Vendors() {
         onCloseDialog={onCloseDialog}
         schema={vendorSchema}
         onSubmit={handleSubmit}
-        renderForm={renderForm}
+        renderForm={CreateVendorForm}
       />
     </>
   )
