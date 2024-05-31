@@ -1,6 +1,4 @@
-import ActionsMenu from '@/components/features/ActionsMenu'
 import SkeletonPage from '@/components/features/SkeletonPage'
-import DataTable from '@/components/shared/DataTable'
 import FormDialog from '@/components/shared/FormDialog'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -8,6 +6,7 @@ import { TextField, Checkbox, FormControlLabel } from '@mui/material'
 import { Controller, UseFormReturn, SubmitHandler } from 'react-hook-form'
 
 import { VendorFormData, vendorSchema } from '@/schemas/vendorSchema'
+import VendorsTable from '@/tables/VendorsTable'
 
 export default function Vendors() {
   const { t: translate } = useTranslation()
@@ -40,7 +39,7 @@ export default function Vendors() {
           render={({ field }) => (
             <TextField
               {...field}
-              label="Име"
+              label={translate('newVendor.labels.name')}
               id="vendorName"
               name="vendorName"
               required
@@ -57,7 +56,7 @@ export default function Vendors() {
           render={({ field }) => (
             <TextField
               {...field}
-              label="Доставчик №"
+              label={translate('newVendor.labels.vendorNumber')}
               id="vendorNumber"
               name="vendorNumber"
               required
@@ -72,30 +71,9 @@ export default function Vendors() {
         />
         <FormControlLabel
           control={<Checkbox checked={isFinal} onChange={() => setIsFinal(!isFinal)} />}
-          label="isFinal"
+          label={translate('newVendor.labels.isFinal')}
         />
       </>
-    )
-  }
-
-  const table = () => {
-    return (
-      <DataTable
-        searchInput={true}
-        isSortTextField={true}
-        sortLabel={'Роля'}
-        sortOptionsData={['Proba1', 'Proba2']}
-        columnsData={[
-          { id: 'name', label: 'Име' },
-          { id: 'vendorNumber', label: 'Доставчик №' },
-          { id: 'markers', label: 'Маркери' },
-          { id: 'actions', label: 'Действия', minWidth: 50, align: 'right' }
-        ]}
-        rowData={[
-          { name: 'Bosch', vendorNumber: 1, markers: 'Масло', actions: <ActionsMenu /> },
-          { name: 'Valeo', vendorNumber: 2, markers: 'Чистачки', actions: <ActionsMenu /> }
-        ]}
-      />
     )
   }
 
@@ -106,14 +84,14 @@ export default function Vendors() {
         description={translate('vendors.description')}
         buttonText={translate('vendors.labels.newVendor')}
         buttonClickHandler={handleClickOpen}
-        table={table()}
+        table={<VendorsTable />}
       />
 
       <FormDialog<VendorFormData>
         open={openDialog}
-        title={'Създаване на нов доставчик'}
-        discardText={'Изход'}
-        confirmText={'Създай'}
+        title={translate('newVendor.title')}
+        discardText={translate('newVendor.labels.exit')}
+        confirmText={translate('newVendor.labels.create')}
         onCloseDialog={onCloseDialog}
         schema={vendorSchema}
         onSubmit={handleSubmit}

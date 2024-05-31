@@ -12,6 +12,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import { Search, SearchIconWrapper, StyledInputBase } from '@/utils/searchInputStyles'
+import { useTranslation } from 'react-i18next'
 
 interface DataTableProps {
   searchInput: boolean
@@ -38,6 +39,7 @@ export default function DataTable({
   columnsData,
   rowData
 }: DataTableProps) {
+  const { t: translate } = useTranslation()
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const [dense, setDense] = React.useState(false)
@@ -72,7 +74,10 @@ export default function DataTable({
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
-              <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
+              <StyledInputBase
+                placeholder={translate('vendors.labels.search')}
+                inputProps={{ 'aria-label': 'search' }}
+              />
             </Search>
           )}
 
