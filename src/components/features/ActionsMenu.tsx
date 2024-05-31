@@ -6,8 +6,6 @@ import React from 'react'
 import WarningActionDialog from '../shared/WarningActionDialog'
 import { useTranslation } from 'react-i18next'
 
-const options = ['Редактирай', 'Изтрий']
-
 export default function ActionsMenu() {
   const { t: translate } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -33,6 +31,8 @@ export default function ActionsMenu() {
   const actionHandler = (option: string) => {
     setSelectedOption(option)
   }
+
+  const options = [translate('actionsMenu.options.edit'), translate('actionsMenu.options.delete')]
 
   return (
     <div>
