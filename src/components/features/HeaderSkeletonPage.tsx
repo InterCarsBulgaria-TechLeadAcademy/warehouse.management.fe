@@ -32,7 +32,7 @@ export default function HeaderSkeletonPage({
         <Typography component="p">{description}</Typography>
       </Box>
 
-      {buttonText ? (
+      {buttonText && buttonClickHandler ? (
         <Button variant="contained" onClick={buttonClickHandler}>
           {buttonText}
         </Button>
