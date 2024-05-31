@@ -33,6 +33,7 @@ export default function Vendors() {
   }
 
   function renderForm({ control, formState: { errors } }: UseFormReturn<VendorFormData>) {
+    console.log(errors)
     return (
       <>
         <Controller
@@ -48,7 +49,7 @@ export default function Vendors() {
               fullWidth
               autoFocus
               error={!!errors.vendorName}
-              helperText={errors.vendorName ? errors.vendorName.message : ''}
+              helperText={errors.vendorName?.message ? translate(errors.vendorName.message) : ''}
             />
           )}
         />
@@ -65,7 +66,9 @@ export default function Vendors() {
               fullWidth
               autoFocus
               error={!!errors.vendorNumber}
-              helperText={errors.vendorNumber ? errors.vendorNumber.message : ''}
+              helperText={
+                errors.vendorNumber?.message ? translate(errors.vendorNumber.message) : ''
+              }
             />
           )}
         />

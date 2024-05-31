@@ -4,12 +4,12 @@ export const vendorSchema = yup
   .object({
     vendorName: yup
       .string()
-      .required('Полето за име e задължително')
-      .max(50, 'Името трябва да e до 50 символа'),
+      .required('newVendor.errors.name.required')
+      .max(50, 'newVendor.errors.name.max'),
     vendorNumber: yup
       .string()
-      .required('Полето за доставчик № e задължително')
-      .max(25, 'Доставчик № трябва да e до 25 символа')
+      .required('newVendor.errors.vendorNumber.required')
+      .max(25, 'newVendor.errors.vendorNumber.max')
   })
   .required()
 
