@@ -7,12 +7,9 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
-import { Box, FormControlLabel, Switch } from '@mui/material'
-import SearchIcon from '@mui/icons-material/Search'
-import TextField from '@mui/material/TextField'
-import Autocomplete from '@mui/material/Autocomplete'
-import { Search, SearchIconWrapper, StyledInputBase } from '@/utils/searchInputStyles'
+import { Box, FormControlLabel, Switch, TextField, Autocomplete } from '@mui/material'
 import { useTranslation } from 'react-i18next'
+import SearchInput from '../features/SearchInput'
 
 interface DataTableProps {
   searchInput: boolean
@@ -28,7 +25,6 @@ interface Column {
   label: string
   minWidth?: number
   align?: 'right' | 'left' | 'center' | 'inherit' | 'justify'
-  //   format?: (value: number) => string
 }
 
 export default function DataTable({
@@ -43,6 +39,7 @@ export default function DataTable({
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const [dense, setDense] = React.useState(false)
+  const [searchTerm, setSearchTerm] = React.useState('')
 
   const columns: readonly Column[] = columnsData
   const rows = rowData
@@ -65,20 +62,26 @@ export default function DataTable({
     setDense(event.target.checked)
   }
 
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value)
+  }
+
+  const filteredRows = rows.filter((row: any) => {
+    return columns.some((column) => {
+      return row[column.id]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
+    })
+  })
+
   return (
     <Box>
       <Paper sx={{ width: '100%', overflow: 'hidden', padding: '0.5em' }}>
         <Box component="div" sx={{ display: 'flex', gap: '2em', padding: '0.5em 0' }}>
           {searchInput && (
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder={translate('vendors.labels.search')}
-                inputProps={{ 'aria-label': 'search' }}
-              />
-            </Search>
+            <SearchInput
+              value={searchTerm}
+              onChange={handleSearchChange}
+              placeholder={translate('vendors.labels.search')}
+            />
           )}
 
           {isSortTextField && (
@@ -108,30 +111,32 @@ export default function DataTable({
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row: any) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.vendorNumber}>
-                    {columns.map((column) => {
-                      const value = row[column.id]
-                      return (
-                        <TableCell
-                          key={column.id}
-                          align={column.align}
-                          sx={column.id === 'actions' ? { width: 50, paddingRight: '2em' } : {}}>
-                          {value}
-                        </TableCell>
-                      )
-                    })}
-                  </TableRow>
-                )
-              })}
+              {filteredRows
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row: any) => {
+                  return (
+                    <TableRow hover role="checkbox" tabIndex={-1} key={row.vendorNumber}>
+                      {columns.map((column) => {
+                        const value = row[column.id]
+                        return (
+                          <TableCell
+                            key={column.id}
+                            align={column.align}
+                            sx={column.id === 'actions' ? { width: 50, paddingRight: '2em' } : {}}>
+                            {value}
+                          </TableCell>
+                        )
+                      })}
+                    </TableRow>
+                  )
+                })}
             </TableBody>
           </Table>
         </TableContainer>
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={rows.length}
+          count={filteredRows.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
