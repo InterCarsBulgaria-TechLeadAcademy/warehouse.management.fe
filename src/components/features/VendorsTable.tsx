@@ -11,10 +11,10 @@ export default function VendorsTable() {
       sortLabel={translate('vendors.labels.role')}
       sortOptionsData={['Proba1', 'Proba2']}
       columnsData={[
-        { id: 'name', label: translate('vendors.table.name') },
-        { id: 'vendorNumber', label: translate('vendors.table.vendorNumber') },
-        { id: 'markers', label: translate('vendors.table.markers') },
-        { id: 'actions', label: translate('vendors.table.actions'), minWidth: 50, align: 'right' }
+        { key: 'name', title: translate('vendors.table.name') },
+        { key: 'vendorNumber', title: translate('vendors.table.vendorNumber') },
+        { key: 'markers', title: translate('vendors.table.markers') },
+        { key: 'actions', title: translate('vendors.table.actions'), minWidth: 50, align: 'right' }
       ]}
       rowData={[
         { name: 'Bosch', vendorNumber: 1, markers: 'Масло', actions: <ActionsMenu /> },
