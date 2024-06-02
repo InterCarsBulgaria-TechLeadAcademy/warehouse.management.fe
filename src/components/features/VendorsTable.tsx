@@ -6,7 +6,7 @@ export default function VendorsTable() {
   const { t: translate } = useTranslation()
   return (
     <DataTable
-      searchInput={true}
+      hasSearchInput={true}
       isSortTextField={true}
       sortLabel={translate('vendors.labels.role')}
       sortOptionsData={['Proba1', 'Proba2']}

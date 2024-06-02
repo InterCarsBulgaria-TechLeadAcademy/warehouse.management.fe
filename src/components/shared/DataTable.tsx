@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next'
 import SearchInput from '../features/SearchInput'
 
 interface DataTableProps {
-  searchInput: boolean
+  hasSearchInput: boolean
   isSortTextField: boolean
   sortLabel?: string
   sortOptionsData?: string[]
@@ -28,7 +28,7 @@ interface Column {
 }
 
 export default function DataTable({
-  searchInput,
+  hasSearchInput,
   isSortTextField,
   sortLabel,
   sortOptionsData,
@@ -76,7 +76,7 @@ export default function DataTable({
     <Box>
       <Paper sx={{ width: '100%', overflow: 'hidden', padding: '0.5em' }}>
         <Box component="div" sx={{ display: 'flex', gap: '2em', padding: '0.5em 0' }}>
-          {searchInput && (
+          {hasSearchInput && (
             <SearchInput
               value={searchTerm}
               onChange={handleSearchChange}
