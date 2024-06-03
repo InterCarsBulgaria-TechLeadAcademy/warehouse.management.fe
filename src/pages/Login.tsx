@@ -10,28 +10,10 @@ import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
 import { useTranslation } from 'react-i18next'
 import ShowHideFunctionality from '@/components/shared/ShowHideFunctionality'
 import { formHasErrors } from '@/utils/formUtils'
-
-interface LoginSchema extends yup.InferType<typeof schema> {
-  email: string
-  password: string
-}
-
-const schema = yup
-  .object({
-    email: yup.string().required('errors.email.required').email('errors.email.invalid'),
-    password: yup
-      .string()
-      .required('errors.password.required')
-      .min(4, 'errors.password.short')
-      .max(10, 'errors.password.long')
-      .matches(/[0-9]/, 'errors.password.digit')
-      .matches(/[!@#$%^&*]/, 'errors.password.specialCharacter')
-  })
-  .required()
+import { LoginFormData, loginSchema } from '@/schemas/loginSchema'
 
 export default function Login() {
   const { t: translate } = useTranslation()
@@ -40,11 +22,11 @@ export default function Login() {
     control,
     handleSubmit,
     formState: { errors }
-  } = useForm<LoginSchema>({
-    resolver: yupResolver(schema)
+  } = useForm<LoginFormData>({
+    resolver: yupResolver(loginSchema)
   })
 
-  const onSubmit: SubmitHandler<LoginSchema> = (data) => console.log(data)
+  const onSubmit: SubmitHandler<LoginFormData> = (data) => console.log(data)
 
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>
