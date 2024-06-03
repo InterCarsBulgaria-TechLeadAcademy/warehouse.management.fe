@@ -1,7 +1,12 @@
 import { Box } from '@mui/material'
 import MenuDrawer from '@/components/features/MenuDrawer'
 import Toolbar from '@/components/features/Toolbar'
-import { ChildrenComponent } from '@/interfaces/defaultLayout'
+import { Outlet } from 'react-router-dom'
+import { ReactNode } from 'react'
+
+export interface ChildrenComponent {
+  children?: ReactNode
+}
 
 export default function DefaultLayout({ children }: ChildrenComponent) {
   return (
@@ -23,6 +28,7 @@ export default function DefaultLayout({ children }: ChildrenComponent) {
               backgroundColor: '#e6e6e6'
             }}>
             {children}
+            <Outlet />
           </Box>
         </Box>
       </Box>
