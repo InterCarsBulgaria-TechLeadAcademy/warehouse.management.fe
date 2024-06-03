@@ -1,12 +1,11 @@
 import SkeletonPage from '@/components/features/SkeletonPage'
-import FormDialog from '@/components/shared/FormDialog'
+// import FormDialog from '@/components/shared/FormDialog'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TextField, Checkbox, FormControlLabel } from '@mui/material'
 import { Controller, UseFormReturn, SubmitHandler } from 'react-hook-form'
-import VendorsTable from '@/components/features/VendorsTable'
-import { NewVendorFormData } from '@/interfaces/newVendorSchema'
-import { newVendorSchema } from '@/schemas/newVendorSchema'
+import { NewVendorFormData, newVendorSchema } from '@/schemas/newVendorSchema'
+import ZonesTable from '@/components/features/ZonesTable'
 
 export default function Zones() {
   const { t: translate } = useTranslation()
@@ -80,23 +79,23 @@ export default function Zones() {
   return (
     <>
       <SkeletonPage
-        header={translate('vendors.title')}
-        description={translate('vendors.description')}
-        buttonText={translate('vendors.labels.newVendor')}
+        header={translate('zones.title')}
+        description={translate('zones.description')}
+        buttonText={translate('zones.labels.newZone')}
         buttonClickHandler={handleClickOpen}
-        table={<VendorsTable />}
+        table={<ZonesTable />}
       />
 
-      <FormDialog<NewVendorFormData>
+      {/* <FormDialog<NewVendorFormData>
         open={openDialog}
-        title={translate('newVendor.title')}
+        title={translate('newZone.title')}
         discardText={translate('newVendor.labels.exit')}
         confirmText={translate('newVendor.labels.create')}
         onCloseDialog={onCloseDialog}
         schema={newVendorSchema}
         onSubmit={handleSubmit}
         renderForm={CreateVendorForm}
-      />
+      /> */}
     </>
   )
 }
