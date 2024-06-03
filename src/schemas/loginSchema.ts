@@ -12,3 +12,8 @@ export const loginSchema = yup
       .matches(/[!@#$%^&*]/, 'errors.password.specialCharacter')
   })
   .required()
+
+export interface LoginFormData extends yup.InferType<typeof loginSchema> {
+  email: string
+  password: string
+}
