@@ -1,8 +1,21 @@
-import { ShowHideFunctionalityProps } from '@/interfaces/showHideFunctionality'
 import { IconButton, TextField } from '@mui/material'
 import InputAdornment from '@mui/material/InputAdornment'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+
+interface ShowHideFunctionalityProps {
+  field: any
+  label: string
+  id: string
+  name: string
+  required?: boolean
+  fullWidth?: boolean
+  VisibilityOff: React.ElementType
+  Visibility: React.ElementType
+  color?: string
+  error?: boolean
+  helperText?: string | undefined
+}
 
 export default function ShowHideFunctionality({
   field,

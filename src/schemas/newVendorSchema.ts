@@ -11,3 +11,8 @@ export const newVendorSchema = yup.object({
     .max(25, 'newVendor.errors.vendorNumber.max'),
   isFinal: yup.boolean()
 })
+
+export interface NewVendorFormData extends yup.InferType<typeof newVendorSchema> {
+  vendorName: string
+  vendorNumber: string
+}
