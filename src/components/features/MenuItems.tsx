@@ -6,6 +6,7 @@ import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined'
 import DifferenceOutlinedIcon from '@mui/icons-material/DifferenceOutlined'
 import MenuListItem from './MenuItem'
 import { useTranslation } from 'react-i18next'
+import { MenuItem } from '@/interfaces/menuItems'
 import {
   TYPESDIFFERENCE_PATH,
   ROLES_PATH,
@@ -14,12 +15,6 @@ import {
   VENDORS_PATH,
   ZONES_PATH
 } from '@/router/routerPaths'
-
-interface MenuItem {
-  title: string
-  icon: React.ElementType
-  link: string
-}
 
 export default function MenuItems() {
   const { t: translate } = useTranslation()

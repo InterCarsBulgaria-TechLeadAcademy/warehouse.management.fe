@@ -1,12 +1,7 @@
+import { MenuItemProps } from '@/interfaces/menuItem'
 import { isSmallScreenUtils } from '@/utils/isSmallScreenUtils'
 import { Box, ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 import { NavLink } from 'react-router-dom'
-
-interface MenuItemProps {
-  title: string
-  Icon: React.ElementType
-  link: string
-}
 
 export default function ListItem({ title, Icon, link }: MenuItemProps) {
   const isSmallScreen: boolean = isSmallScreenUtils()

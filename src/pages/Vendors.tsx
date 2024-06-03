@@ -4,8 +4,9 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TextField, Checkbox, FormControlLabel } from '@mui/material'
 import { Controller, UseFormReturn, SubmitHandler } from 'react-hook-form'
-import { VendorFormData, vendorSchema } from '@/schemas/vendorSchema'
 import VendorsTable from '@/components/features/VendorsTable'
+import { NewVendorFormData } from '@/interfaces/newVendorSchema'
+import { newVendorSchema } from '@/schemas/newVendorSchema'
 
 export default function Vendors() {
   const { t: translate } = useTranslation()
@@ -20,7 +21,7 @@ export default function Vendors() {
     setOpenDialog(false)
   }
 
-  const handleSubmit: SubmitHandler<VendorFormData> = (data) => {
+  const handleSubmit: SubmitHandler<NewVendorFormData> = (data) => {
     const formData = {
       ...data,
       isFinal
@@ -29,7 +30,7 @@ export default function Vendors() {
     onCloseDialog()
   }
 
-  function CreateVendorForm({ control, formState: { errors } }: UseFormReturn<VendorFormData>) {
+  function CreateVendorForm({ control, formState: { errors } }: UseFormReturn<NewVendorFormData>) {
     return (
       <>
         <Controller
@@ -86,13 +87,13 @@ export default function Vendors() {
         table={<VendorsTable />}
       />
 
-      <FormDialog<VendorFormData>
+      <FormDialog<NewVendorFormData>
         open={openDialog}
         title={translate('newVendor.title')}
         discardText={translate('newVendor.labels.exit')}
         confirmText={translate('newVendor.labels.create')}
         onCloseDialog={onCloseDialog}
-        schema={vendorSchema}
+        schema={newVendorSchema}
         onSubmit={handleSubmit}
         renderForm={CreateVendorForm}
       />

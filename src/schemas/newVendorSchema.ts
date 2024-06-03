@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-export const vendorSchema = yup.object({
+export const newVendorSchema = yup.object({
   vendorName: yup
     .string()
     .required('newVendor.errors.name.required')
@@ -11,5 +11,3 @@ export const vendorSchema = yup.object({
     .max(25, 'newVendor.errors.vendorNumber.max'),
   isFinal: yup.boolean()
 })
-
-export type VendorFormData = yup.InferType<typeof vendorSchema>

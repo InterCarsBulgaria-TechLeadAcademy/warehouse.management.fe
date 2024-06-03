@@ -1,11 +1,7 @@
 import { Box } from '@mui/material'
-import { ReactNode } from 'react'
 import MenuDrawer from '@/components/features/MenuDrawer'
 import Toolbar from '@/components/features/Toolbar'
-
-interface ChildrenComponent {
-  children: ReactNode
-}
+import { ChildrenComponent } from '@/interfaces/defaultLayout'
 
 export default function DefaultLayout({ children }: ChildrenComponent) {
   return (
