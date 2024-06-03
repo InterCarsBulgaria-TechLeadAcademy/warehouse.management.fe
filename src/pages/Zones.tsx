@@ -1,16 +1,30 @@
 import SkeletonPage from '@/components/features/SkeletonPage'
-// import FormDialog from '@/components/shared/FormDialog'
-import { useState } from 'react'
+import FormDialog from '@/components/shared/FormDialog'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { TextField, Checkbox, FormControlLabel } from '@mui/material'
+import {
+  TextField,
+  Checkbox,
+  FormControlLabel,
+  FormControl,
+  InputLabel,
+  Select,
+  SelectChangeEvent,
+  MenuItem,
+  ListItemText,
+  OutlinedInput
+} from '@mui/material'
 import { Controller, UseFormReturn, SubmitHandler } from 'react-hook-form'
-import { NewVendorFormData, newVendorSchema } from '@/schemas/newVendorSchema'
 import ZonesTable from '@/components/features/ZonesTable'
+import { NewZoneFormData, newZoneSchema } from '@/schemas/newZoneSchema'
+
+const markers = ['Масло', 'Гуми', 'Чистачки']
 
 export default function Zones() {
   const { t: translate } = useTranslation()
   const [openDialog, setOpenDialog] = useState(false)
   const [isFinal, setIsFinal] = useState(false)
+  const [markerName, setMarkerName] = React.useState<string[]>([])
 
   const handleClickOpen = () => {
     setOpenDialog(true)
@@ -20,57 +34,66 @@ export default function Zones() {
     setOpenDialog(false)
   }
 
-  const handleSubmit: SubmitHandler<NewVendorFormData> = (data) => {
+  const handleSubmit: SubmitHandler<NewZoneFormData> = (data) => {
     const formData = {
       ...data,
+      markerName,
       isFinal
     }
     console.log(formData)
     onCloseDialog()
   }
 
-  function CreateZoneForm({ control, formState: { errors } }: UseFormReturn<NewVendorFormData>) {
+  const handleChange = (event: SelectChangeEvent<typeof markerName>) => {
+    const {
+      target: { value }
+    } = event
+    setMarkerName(typeof value === 'string' ? value.split(',') : value)
+  }
+
+  function CreateZoneForm({ control, formState: { errors } }: UseFormReturn<NewZoneFormData>) {
     return (
       <>
         <Controller
-          name="vendorName"
+          name="zoneName"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              label={translate('newVendor.labels.name')}
-              id="vendorName"
-              name="vendorName"
+              label={translate('newZone.labels.name')}
+              id="zoneName"
+              name="zoneName"
               required
               fullWidth
               autoFocus
-              error={!!errors.vendorName}
-              helperText={errors.vendorName?.message ? translate(errors.vendorName.message) : ''}
+              error={!!errors.zoneName}
+              helperText={errors.zoneName?.message ? translate(errors.zoneName.message) : ''}
             />
           )}
         />
-        <Controller
-          name="vendorNumber"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label={translate('newVendor.labels.vendorNumber')}
-              id="vendorNumber"
-              name="vendorNumber"
-              required
-              fullWidth
-              autoFocus
-              error={!!errors.vendorNumber}
-              helperText={
-                errors.vendorNumber?.message ? translate(errors.vendorNumber.message) : ''
-              }
-            />
-          )}
-        />
+        <FormControl>
+          <InputLabel id="demo-multiple-checkbox-label">
+            {translate('newZone.labels.markers')}
+          </InputLabel>
+          <Select
+            labelId="demo-multiple-checkbox-label"
+            id="demo-multiple-checkbox"
+            multiple
+            value={markerName}
+            onChange={handleChange}
+            input={<OutlinedInput label={translate('newZone.labels.markers')} />}
+            renderValue={(selected) => selected.join(', ')}>
+            {markers.map((marker) => (
+              <MenuItem key={marker} value={marker}>
+                <Checkbox checked={markerName.indexOf(marker) > -1} />
+                <ListItemText primary={marker} />
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
         <FormControlLabel
           control={<Checkbox checked={isFinal} onChange={() => setIsFinal(!isFinal)} />}
-          label={translate('newVendor.labels.isFinal')}
+          label={translate('newZone.labels.isFinal')}
         />
       </>
     )
@@ -86,16 +109,16 @@ export default function Zones() {
         table={<ZonesTable />}
       />
 
-      {/* <FormDialog<NewVendorFormData>
+      <FormDialog<NewZoneFormData>
         open={openDialog}
         title={translate('newZone.title')}
-        discardText={translate('newVendor.labels.exit')}
-        confirmText={translate('newVendor.labels.create')}
+        discardText={translate('newZone.labels.exit')}
+        confirmText={translate('newZone.labels.create')}
         onCloseDialog={onCloseDialog}
-        schema={newVendorSchema}
+        schema={newZoneSchema}
         onSubmit={handleSubmit}
-        renderForm={CreateVendorForm}
-      /> */}
+        renderForm={CreateZoneForm}
+      />
     </>
   )
 }

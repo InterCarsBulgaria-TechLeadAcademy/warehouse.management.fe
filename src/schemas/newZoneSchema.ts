@@ -1,18 +1,14 @@
 import * as yup from 'yup'
 
 export const newZoneSchema = yup.object({
-  vendorName: yup
+  zoneName: yup
     .string()
-    .required('newVendor.errors.name.required')
-    .max(50, 'newVendor.errors.name.max'),
-  vendorNumber: yup
-    .string()
-    .required('newVendor.errors.vendorNumber.required')
-    .max(25, 'newVendor.errors.vendorNumber.max'),
+    .required('newZone.errors.name.required')
+    .max(25, 'newZone.errors.name.max'),
+  markers: yup.string(),
   isFinal: yup.boolean()
 })
 
 export interface NewZoneFormData extends yup.InferType<typeof newZoneSchema> {
-  vendorName: string
-  vendorNumber: string
+  zoneName: string
 }
