@@ -1,6 +1,6 @@
 import SkeletonPage from '@/components/features/SkeletonPage'
 import FormDialog from '@/components/shared/FormDialog'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   TextField,
@@ -9,7 +9,6 @@ import {
   FormControl,
   InputLabel,
   Select,
-  SelectChangeEvent,
   MenuItem,
   ListItemText,
   OutlinedInput
@@ -23,8 +22,6 @@ const markers = ['Масло', 'Гуми', 'Чистачки']
 export default function Zones() {
   const { t: translate } = useTranslation()
   const [openDialog, setOpenDialog] = useState(false)
-  const [isFinal, setIsFinal] = useState(false)
-  const [markerName, setMarkerName] = React.useState<string[]>([])
 
   const handleClickOpen = () => {
     setOpenDialog(true)
@@ -35,20 +32,8 @@ export default function Zones() {
   }
 
   const handleSubmit: SubmitHandler<NewZoneFormData> = (data) => {
-    const formData = {
-      ...data,
-      markerName,
-      isFinal
-    }
-    console.log(formData)
+    console.log(data)
     onCloseDialog()
-  }
-
-  const handleChange = (event: SelectChangeEvent<typeof markerName>) => {
-    const {
-      target: { value }
-    } = event
-    setMarkerName(typeof value === 'string' ? value.split(',') : value)
   }
 
   function CreateZoneForm({ control, formState: { errors } }: UseFormReturn<NewZoneFormData>) {
@@ -71,29 +56,44 @@ export default function Zones() {
             />
           )}
         />
-        <FormControl>
-          <InputLabel id="demo-multiple-checkbox-label">
-            {translate('newZone.labels.markers')}
-          </InputLabel>
-          <Select
-            labelId="demo-multiple-checkbox-label"
-            id="demo-multiple-checkbox"
-            multiple
-            value={markerName}
-            onChange={handleChange}
-            input={<OutlinedInput label={translate('newZone.labels.markers')} />}
-            renderValue={(selected) => selected.join(', ')}>
-            {markers.map((marker) => (
-              <MenuItem key={marker} value={marker}>
-                <Checkbox checked={markerName.indexOf(marker) > -1} />
-                <ListItemText primary={marker} />
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControlLabel
-          control={<Checkbox checked={isFinal} onChange={() => setIsFinal(!isFinal)} />}
-          label={translate('newZone.labels.isFinal')}
+
+        <Controller
+          name="markers"
+          control={control}
+          render={({ field }) => (
+            <FormControl fullWidth>
+              <InputLabel id="demo-multiple-checkbox-label">
+                {translate('newZone.labels.markers')}
+              </InputLabel>
+              <Select
+                {...field}
+                labelId="demo-multiple-checkbox-label"
+                id="demo-multiple-checkbox"
+                multiple
+                value={field.value || []}
+                onChange={(e) => field.onChange(e.target.value)}
+                input={<OutlinedInput />}
+                renderValue={(selected) => (selected as string[]).join(', ')}>
+                {markers.map((marker) => (
+                  <MenuItem key={marker} value={marker}>
+                    <Checkbox checked={field.value?.includes(marker)} />{' '}
+                    <ListItemText primary={marker} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
+        />
+
+        <Controller
+          name="isFinal"
+          control={control}
+          render={({ field }) => (
+            <FormControlLabel
+              control={<Checkbox {...field} checked={field.value} />}
+              label={translate('newZone.labels.isFinal')}
+            />
+          )}
         />
       </>
     )

@@ -5,7 +5,7 @@ export const newZoneSchema = yup.object({
     .string()
     .required('newZone.errors.name.required')
     .max(25, 'newZone.errors.name.max'),
-  markers: yup.string(),
+  markers: yup.array().of(yup.string()),
   isFinal: yup.boolean()
 })
 
