@@ -1,10 +1,20 @@
-import { WarningActionDialogProps } from '@/interfaces/warningActionDialog'
 import { Button } from '@mui/material'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
+
+interface WarningActionDialogProps {
+  open: boolean
+  title: string
+  content?: string
+  discardText: string
+  confirmText?: string
+  onCloseDialog: () => void
+  onDiscardClick: () => void
+  onConfirmClick?: () => void
+}
 
 export default function WarningActionDialog({
   open,

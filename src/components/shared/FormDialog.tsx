@@ -2,9 +2,21 @@ import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
 import Box from '@mui/material/Box'
-import { useForm, UseFormReturn, FieldValues } from 'react-hook-form'
+import { useForm, SubmitHandler, UseFormReturn, FieldValues } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { FormDialogProps } from '@/interfaces/formDialog'
+import * as React from 'react'
+import * as yup from 'yup'
+
+interface FormDialogProps<T extends FieldValues> {
+  open: boolean
+  title: string
+  discardText: string
+  confirmText: string
+  onCloseDialog: () => void
+  schema: yup.ObjectSchema<T>
+  onSubmit: SubmitHandler<T>
+  renderForm: (methods: UseFormReturn<T>) => React.ReactNode
+}
 
 export default function FormDialog<T extends FieldValues>({
   open,

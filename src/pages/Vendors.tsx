@@ -5,8 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { TextField, Checkbox, FormControlLabel } from '@mui/material'
 import { Controller, UseFormReturn, SubmitHandler } from 'react-hook-form'
 import VendorsTable from '@/components/features/VendorsTable'
-import { NewVendorFormData } from '@/interfaces/newVendorSchema'
-import { newVendorSchema } from '@/schemas/newVendorSchema'
+import { NewVendorFormData, newVendorSchema } from '@/schemas/newVendorSchema'
 
 export default function Vendors() {
   const { t: translate } = useTranslation()

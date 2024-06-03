@@ -1,6 +1,13 @@
 import { Box } from '@mui/material'
 import HeaderSkeletonPage from './HeaderSkeletonPage'
-import { SkeletonPageProps } from '@/interfaces/skeletonPage'
+
+interface SkeletonPageProps {
+  header: string
+  description: string
+  buttonText?: string
+  buttonClickHandler?: React.MouseEventHandler<HTMLButtonElement>
+  table: React.ReactNode
+}
 
 export default function SkeletonPage({
   header,
