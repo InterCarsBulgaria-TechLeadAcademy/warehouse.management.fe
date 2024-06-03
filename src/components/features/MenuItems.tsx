@@ -26,32 +26,32 @@ export default function MenuItems() {
 
   const MenuItems: MenuItem[] = [
     {
-      title: translate('mainMenu.users'),
+      title: translate('menuItems.users'),
       icon: PeopleAltOutlinedIcon,
       link: USERS_PATH
     },
     {
-      title: translate('mainMenu.zones'),
+      title: translate('menuItems.zones'),
       icon: AccountTreeOutlinedIcon,
       link: ZONES_PATH
     },
     {
-      title: translate('mainMenu.vendors'),
+      title: translate('menuItems.vendors'),
       icon: LocalShippingOutlinedIcon,
       link: VENDORS_PATH
     },
     {
-      title: translate('mainMenu.roles'),
+      title: translate('menuItems.roles'),
       icon: ManageAccountsOutlinedIcon,
       link: ROLES_PATH
     },
     {
-      title: translate('mainMenu.typesGoods'),
+      title: translate('menuItems.typesGoods'),
       icon: Inventory2OutlinedIcon,
       link: TYPESGOODS_PATH
     },
     {
-      title: translate('mainMenu.typesDifference'),
+      title: translate('menuItems.typesDifference'),
       icon: DifferenceOutlinedIcon,
       link: TYPESDIFFERENCE_PATH
     }

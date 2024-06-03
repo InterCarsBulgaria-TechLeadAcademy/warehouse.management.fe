@@ -24,7 +24,7 @@
     "email": "Имейл",
     "password": "Парола"
   },
-  "mainMenu": {
+  "menuItems": {
     "users": "Потребители",
     "zones": "Зони",
     "vendors": "Доставчици",
@@ -40,6 +40,59 @@
       "exit": "Изход",
       "discard": "Откажи",
       "confirm": "Потвърди"
+    }
+  },
+  "vendors": {
+    "title": "Доставчици",
+    "description": "Управление на доставчици",
+    "labels": {
+      "newVendor": "нов доставчик",
+      "search": "Търсене",
+      "role": "Роля"
+    },
+    "table": {
+    "name": "Име",
+    "vendorNumber": "Доставчик №",
+    "markers": "Маркери",
+    "actions": "Действия"
+    }
+  },
+  "newVendor": {
+    "title": "Създаване на нов доставчик",
+    "errors": {
+      "name": {
+        "required": "Полето за име e задължително",
+        "max": "Името трябва да e до 50 символа"
+      },
+      "vendorNumber": {
+        "required": "Полето за доставчик № e задължително",
+        "max": "Доставчик № трябва да e до 25 символа"
+      }
+    },
+    "labels": {
+      "name": "Име",
+      "vendorNumber": "Доставчик №",
+      "isFinal": "Финализирано",
+      "create":"Създай",
+      "exit":"Изход"
+    }
+  },
+  "table": {
+    "densePadding": "Свий редовете"
+  },
+  "deleteAction": {
+    "title": "Изтриване на доставчик",
+    "message": "Сигурни ли сте, че искате да изтриете този доставчик?",
+    "labels": {
+      "discard": "Откажи",
+      "confirm": "Потвърди"
+    }
+  },
+  "actionsMenu": {
+    "options": {
+      "edit": "Редактирай",
+      "delete": "Изтрий"
+
     }
   }
 }
