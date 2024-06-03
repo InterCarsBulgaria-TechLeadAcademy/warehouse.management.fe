@@ -1,6 +1,5 @@
 import * as yup from 'yup'
 
-// export const schema = yup
 export const loginSchema = yup
   .object({
     email: yup.string().required('errors.email.required').email('errors.email.invalid'),
@@ -13,9 +12,3 @@ export const loginSchema = yup
       .matches(/[!@#$%^&*]/, 'errors.password.specialCharacter')
   })
   .required()
-
-// export interface LoginSchema extends yup.InferType<typeof schema> {
-export interface LoginFormData extends yup.InferType<typeof loginSchema> {
-  email: string
-  password: string
-}
