@@ -10,7 +10,16 @@ import TableRow from '@mui/material/TableRow'
 import { Box, FormControlLabel, Switch, TextField, Autocomplete } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import SearchInput from '../features/SearchInput'
-import { Column, DataTableProps } from '@/interfaces/dataTable'
+import { Column } from '@/interfaces/dataTable'
+
+interface DataTableProps {
+  hasSearchInput: boolean
+  isSortTextField: boolean
+  sortLabel?: string
+  sortOptionsData?: string[]
+  columnsData: Column[]
+  rowData: any
+}
 
 export default function DataTable({
   hasSearchInput,
