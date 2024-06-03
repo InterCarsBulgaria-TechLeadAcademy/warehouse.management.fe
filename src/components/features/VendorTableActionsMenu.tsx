@@ -63,10 +63,10 @@ export default function VendorTableActionsMenu() {
       {selectedOption === 'Изтрий' && (
         <WarningActionDialog
           open={open}
-          title={translate('deleteAction.title')}
-          content={translate('deleteAction.message')}
-          discardText={translate('deleteAction.labels.discard')}
-          confirmText={translate('deleteAction.labels.confirm')}
+          title={translate('deleteAction.vendors.title')}
+          content={translate('deleteAction.vendors.message')}
+          discardText={translate('deleteAction.vendors.labels.discard')}
+          confirmText={translate('deleteAction.vendors.labels.confirm')}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
           onConfirmClick={onConfirmClick}

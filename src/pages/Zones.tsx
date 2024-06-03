@@ -29,7 +29,7 @@ export default function Zones() {
     onCloseDialog()
   }
 
-  function CreateVendorForm({ control, formState: { errors } }: UseFormReturn<NewVendorFormData>) {
+  function CreateZoneForm({ control, formState: { errors } }: UseFormReturn<NewVendorFormData>) {
     return (
       <>
         <Controller

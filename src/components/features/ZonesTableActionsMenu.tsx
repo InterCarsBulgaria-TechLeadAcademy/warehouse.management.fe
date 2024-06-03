@@ -63,10 +63,10 @@ export default function ZonesTableActionsMenu() {
       {selectedOption === 'Изтрий' && (
         <WarningActionDialog
           open={open}
-          title={translate('deleteAction.title')}
-          content={translate('deleteAction.message')}
-          discardText={translate('deleteAction.labels.discard')}
-          confirmText={translate('deleteAction.labels.confirm')}
+          title={translate('deleteAction.zones.title')}
+          content={translate('deleteAction.zones.message')}
+          discardText={translate('deleteAction.zones.labels.discard')}
+          confirmText={translate('deleteAction.zones.labels.confirm')}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
           onConfirmClick={onConfirmClick}
