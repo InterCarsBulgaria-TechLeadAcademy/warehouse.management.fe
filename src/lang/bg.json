@@ -30,7 +30,8 @@
     "vendors": "Доставчици",
     "roles": "Роли",
     "typesGoods": "Видове Стока",
-    "typesDifference": "Типове Разлика"
+    "typesDifference": "Типове Разлика",
+    "markers": "Маркери"
   },
   "profileMenu": {
     "name": "Христо Бояджиев",
@@ -42,6 +43,26 @@
       "confirm": "Потвърди"
     }
   },
+  "markers": {
+    "title": "Маркери",
+    "description": "Управление на маркери",
+    "labels": {
+      "newMarker": "нов маркер",
+      "search": "Търсене"
+    },
+    "table": {
+      "name": "Име",
+      "actions": "Действия"
+    },
+    "deleteAction": {
+      "title": "Изтриване на маркер",
+      "message": "Сигурни ли сте, че искате да изтриете този маркер?",
+      "labels": {
+        "discard": "Откажи",
+        "confirm": "Потвърди"
+      }
+    }
+  },
   "vendors": {
     "title": "Доставчици",
     "description": "Управление на доставчици",
@@ -51,10 +72,10 @@
       "role": "Роля"
     },
     "table": {
-    "name": "Име",
-    "vendorNumber": "Доставчик №",
-    "markers": "Маркери",
-    "actions": "Действия"
+      "name": "Име",
+      "vendorNumber": "Доставчик №",
+      "markers": "Маркери",
+      "actions": "Действия"
     }
   },
   "newVendor": {
@@ -73,8 +94,8 @@
       "name": "Име",
       "vendorNumber": "Доставчик №",
       "isFinal": "Финализирано",
-      "create":"Създай",
-      "exit":"Изход"
+      "create": "Създай",
+      "exit": "Изход"
     }
   },
   "table": {
@@ -91,8 +112,8 @@
   "actionsMenu": {
     "options": {
       "edit": "Редактирай",
-      "delete": "Изтрий"
-
+      "delete": "Изтрий",
+      "update": "Актуализирай"
     }
   }
 }
