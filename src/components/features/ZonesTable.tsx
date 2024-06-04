@@ -1,6 +1,7 @@
 import DataTable from '@/components/shared/DataTable'
 import { useTranslation } from 'react-i18next'
 import ZonesTableActionsMenu from './ZonesTableActionsMenu'
+import Markers from './Markers'
 
 export default function ZonesTable() {
   const { t: translate } = useTranslation()
@@ -20,13 +21,13 @@ export default function ZonesTable() {
       rowData={[
         {
           name: 'Зона 1',
-          markers: 'Гуми',
+          markers: <Markers markers={['Гуми', 'Масло', 'Чистачки', 'Филтри', 'Брони']} />,
           isFinalZone: 'Да',
           actions: <ZonesTableActionsMenu />
         },
         {
           name: 'Зона 2',
-          markers: 'Масло',
+          markers: <Markers markers={['Чистачки', 'Брони']} />,
           isFinalZone: 'Не',
           actions: <ZonesTableActionsMenu />
         }

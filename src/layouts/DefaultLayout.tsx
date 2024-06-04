@@ -4,7 +4,7 @@ import Toolbar from '@/components/features/Toolbar'
 import { Outlet } from 'react-router-dom'
 import { ReactNode } from 'react'
 
-export interface ChildrenComponent {
+interface ChildrenComponent {
   children?: ReactNode
 }
 
