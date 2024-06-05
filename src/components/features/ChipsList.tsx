@@ -1,4 +1,4 @@
-import { isSmallScreenUtils } from '@/utils/isSmallScreenUtils'
+import { useIsSmallScreen } from '@/hooks/useIsSmallScreen'
 import { Box, Chip, ClickAwayListener, Grid, Typography } from '@mui/material'
 import Tooltip from '@mui/material/Tooltip'
 import * as React from 'react'
@@ -8,7 +8,7 @@ interface MarkersProps {
 }
 
 export default function ChipsList({ items }: MarkersProps) {
-  const isSmallScreen: boolean = isSmallScreenUtils()
+  const isSmallScreen = useIsSmallScreen()
 
   const [open, setOpen] = React.useState(false)
 

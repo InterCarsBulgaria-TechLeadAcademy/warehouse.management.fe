@@ -2,10 +2,10 @@ import { Box } from '@mui/material'
 import ProfileMenu from '@/components/features/ProfileMenu'
 import SmallMainMenu from '@/components/features/SmallMainMenu'
 import LanguageSwitcher from '@/components/features/LanguageSwitcher'
-import { isSmallScreenUtils } from '@/utils/isSmallScreenUtils'
+import { useIsSmallScreen } from '@/hooks/useIsSmallScreen'
 
 export default function Toolbar() {
-  const isSmallScreen: boolean = isSmallScreenUtils()
+  const isSmallScreen: boolean = useIsSmallScreen()
   return (
     <Box
       component="nav"
