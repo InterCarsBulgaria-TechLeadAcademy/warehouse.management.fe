@@ -6,6 +6,14 @@ interface Children {
   children: React.ReactNode
 }
 
+// interface ColorModeContextValue {
+//   mode: 'light' | 'dark'
+//   colorMode: {
+//     toggleColorMode: () => void
+//   }
+//   theme: Theme
+// }
+
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} })
 
 export default function ToggleColorMode({ children }: Children) {
@@ -22,8 +30,10 @@ export default function ToggleColorMode({ children }: Children) {
   const theme = React.useMemo(() => (mode === 'light' ? light : dark), [mode])
 
   const value: any = {
+    // const value: ColorModeContextValue = {
     mode,
-    colorMode
+    colorMode,
+    theme
   }
 
   return (
@@ -33,7 +43,8 @@ export default function ToggleColorMode({ children }: Children) {
   )
 }
 
-export const useThemeContext = () => {
+// Please help me to type here
+export const useThemeContext = (): any => {
   const context = React.useContext(ColorModeContext)
   return context
 }

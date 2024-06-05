@@ -1,3 +1,4 @@
+import { useThemeContext } from '@/contexts/Theme'
 import { isSmallScreenUtils } from '@/utils/isSmallScreenUtils'
 import { Box, ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 import { NavLink } from 'react-router-dom'
@@ -10,6 +11,8 @@ interface MenuItemProps {
 
 export default function MenuListItem({ title, Icon, link }: MenuItemProps) {
   const isSmallScreen: boolean = isSmallScreenUtils()
+  const { theme } = useThemeContext()
+
   return (
     <MenuItem
       sx={{
@@ -24,8 +27,8 @@ export default function MenuListItem({ title, Icon, link }: MenuItemProps) {
         to={link}
         style={({ isActive }) => {
           return {
-            backgroundColor: isActive ? 'primary.100' : 'none',
-            color: 'inherit'
+            backgroundColor: isActive ? theme.palette.primary['100'] : 'none',
+            color: isActive ? theme.palette.primary.main : 'inherit'
           }
         }}
         sx={{
