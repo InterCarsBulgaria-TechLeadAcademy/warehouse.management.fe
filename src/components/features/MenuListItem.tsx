@@ -8,7 +8,7 @@ interface MenuItemProps {
   link: string
 }
 
-export default function ListItem({ title, Icon, link }: MenuItemProps) {
+export default function MenuListItem({ title, Icon, link }: MenuItemProps) {
   const isSmallScreen: boolean = isSmallScreenUtils()
   return (
     <MenuItem
