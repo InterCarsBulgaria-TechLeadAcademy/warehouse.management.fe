@@ -2,12 +2,14 @@ import { Box } from '@mui/material'
 import MenuDrawer from '@/components/features/MenuDrawer'
 import Toolbar from '@/components/features/Toolbar'
 import { ReactNode } from 'react'
+import { useThemeContext } from '@/contexts/Theme'
 
 interface ChildrenComponent {
   children: ReactNode
 }
 
 export default function DefaultLayout({ children }: ChildrenComponent) {
+  const { mode }: any = useThemeContext()
   return (
     <>
       <Box component="section" sx={{ display: 'flex' }}>
@@ -24,7 +26,7 @@ export default function DefaultLayout({ children }: ChildrenComponent) {
             component="div"
             sx={{
               flexGrow: 1,
-              backgroundColor: '#e6e6e6'
+              backgroundColor: mode === 'light' ? '#e6e6e6' : '#606060'
             }}>
             {children}
           </Box>
