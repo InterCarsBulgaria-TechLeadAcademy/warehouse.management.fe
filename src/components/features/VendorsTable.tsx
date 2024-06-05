@@ -1,7 +1,7 @@
 import VendorTableActionsMenu from '@/components/features/VendorTableActionsMenu'
 import DataTable from '@/components/shared/DataTable'
 import { useTranslation } from 'react-i18next'
-import Markers from './Markers'
+import ChipsList from './ChipsList'
 
 export default function VendorsTable() {
   const { t: translate } = useTranslation()
@@ -22,13 +22,13 @@ export default function VendorsTable() {
         {
           name: 'Bosch',
           vendorNumber: 1,
-          markers: <Markers markers={['Гуми', 'Масло', 'Чистачки', 'Филтри', 'Брони']} />,
+          markers: <ChipsList items={['Гуми', 'Масло', 'Чистачки', 'Филтри', 'Брони']} />,
           actions: <VendorTableActionsMenu />
         },
         {
           name: 'Valeo',
           vendorNumber: 2,
-          markers: <Markers markers={['Чистачки', 'Брони']} />,
+          markers: <ChipsList items={['Чистачки', 'Брони']} />,
           actions: <VendorTableActionsMenu />
         }
       ]}

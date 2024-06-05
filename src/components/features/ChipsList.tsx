@@ -4,10 +4,10 @@ import Tooltip from '@mui/material/Tooltip'
 import * as React from 'react'
 
 interface MarkersProps {
-  markers: string[]
+  items: string[]
 }
 
-export default function Markers({ markers }: MarkersProps) {
+export default function ChipsList({ items }: MarkersProps) {
   const isSmallScreen: boolean = isSmallScreenUtils()
 
   const [open, setOpen] = React.useState(false)
@@ -20,25 +20,23 @@ export default function Markers({ markers }: MarkersProps) {
     setOpen(true)
   }
 
-  const chipLabel = `+ ${markers.slice(2).length}`
+  const chipLabel = `+ ${items.slice(2).length}`
   return (
     <Box sx={{ display: 'flex', gap: '0.5em' }}>
-      {markers.length <= 2 &&
-        markers.map((marker, index) => <Chip key={index} label={marker} color="primary" />)}
+      {items.length <= 2 &&
+        items.map((item, index) => <Chip key={index} label={item} color="primary" />)}
 
-      {markers.length > 2 &&
-        markers
-          .slice(0, 2)
-          .map((marker, index) => <Chip key={index} label={marker} color="primary" />)}
+      {items.length > 2 &&
+        items.slice(0, 2).map((item, index) => <Chip key={index} label={item} color="primary" />)}
 
-      {markers.length > 2 && !isSmallScreen && (
+      {items.length > 2 && !isSmallScreen && (
         <>
           <Tooltip
             title={
               <Box>
-                {markers.slice(2).map((marker, index) => (
+                {items.slice(2).map((item, index) => (
                   <Typography key={index} variant="body1">
-                    {marker}
+                    {item}
                   </Typography>
                 ))}
               </Box>
@@ -49,7 +47,7 @@ export default function Markers({ markers }: MarkersProps) {
         </>
       )}
 
-      {markers.length > 2 && isSmallScreen && (
+      {items.length > 2 && isSmallScreen && (
         <Grid item>
           <ClickAwayListener onClickAway={handleTooltipClose}>
             <div>
@@ -64,9 +62,9 @@ export default function Markers({ markers }: MarkersProps) {
                 disableTouchListener
                 title={
                   <Box>
-                    {markers.slice(2).map((marker, index) => (
+                    {items.slice(2).map((item, index) => (
                       <Typography key={index} variant="body1">
-                        {marker}
+                        {item}
                       </Typography>
                     ))}
                   </Box>
