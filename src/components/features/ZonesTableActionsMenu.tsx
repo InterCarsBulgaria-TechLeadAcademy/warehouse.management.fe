@@ -6,7 +6,7 @@ import React from 'react'
 import WarningActionDialog from '../shared/WarningActionDialog'
 import { useTranslation } from 'react-i18next'
 
-export default function VendorTableActionsMenu() {
+export default function ZonesTableActionsMenu() {
   const { t: translate } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
@@ -63,10 +63,10 @@ export default function VendorTableActionsMenu() {
       {selectedOption === 'Изтрий' && (
         <WarningActionDialog
           open={open}
-          title={translate('deleteAction.vendors.title')}
-          content={translate('deleteAction.vendors.message')}
-          discardText={translate('deleteAction.vendors.labels.discard')}
-          confirmText={translate('deleteAction.vendors.labels.confirm')}
+          title={translate('deleteAction.zones.title')}
+          content={translate('deleteAction.zones.message')}
+          discardText={translate('deleteAction.zones.labels.discard')}
+          confirmText={translate('deleteAction.zones.labels.confirm')}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
           onConfirmClick={onConfirmClick}
