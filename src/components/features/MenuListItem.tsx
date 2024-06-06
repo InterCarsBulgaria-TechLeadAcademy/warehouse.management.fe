@@ -26,7 +26,7 @@ export default function MenuListItem({ title, Icon, link }: MenuItemProps) {
         to={link}
         style={({ isActive }) => {
           return {
-            backgroundColor: isActive ? theme.palette.primary['100'] : 'none',
+            backgroundColor: isActive ? theme.palette.primary['100'] : 'inherit',
             color: isActive ? theme.palette.primary.main : 'inherit'
           }
         }}
