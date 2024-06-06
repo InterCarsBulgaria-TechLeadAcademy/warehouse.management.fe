@@ -104,6 +104,7 @@ export default function DataTable({
               <TableRow>
                 {columns.map((column) => (
                   <TableCell
+                    //must set a unique key, maybe id from database
                     key={column.key}
                     align={column.align}
                     sx={{ minWidth: column.minWidth }}>

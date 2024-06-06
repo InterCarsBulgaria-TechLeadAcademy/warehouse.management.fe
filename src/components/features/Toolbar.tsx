@@ -2,14 +2,14 @@ import { Box, IconButton } from '@mui/material'
 import ProfileMenu from '@/components/features/ProfileMenu'
 import SmallMainMenu from '@/components/features/SmallMainMenu'
 import LanguageSwitcher from '@/components/features/LanguageSwitcher'
-import { isSmallScreenUtils } from '@/utils/isSmallScreenUtils'
 import { useThemeContext } from '@/contexts/Theme'
 import { useTheme } from '@mui/material/styles'
 import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
+import { useIsSmallScreen } from '@/hooks/useIsSmallScreen'
 
 export default function Toolbar() {
-  const isSmallScreen: boolean = isSmallScreenUtils()
+  const isSmallScreen: boolean = useIsSmallScreen()
   const theme = useTheme()
   const { colorMode }: any = useThemeContext()
   return (
