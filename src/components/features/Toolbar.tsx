@@ -11,7 +11,8 @@ import { useIsSmallScreen } from '@/hooks/useIsSmallScreen'
 export default function Toolbar() {
   const isSmallScreen: boolean = useIsSmallScreen()
   const theme = useTheme()
-  const { colorMode }: any = useThemeContext()
+  const { toggleColorMode } = useThemeContext()
+
   return (
     <Box
       component="nav"
@@ -37,7 +38,7 @@ export default function Toolbar() {
         }}>
         <Box>
           {theme.palette.mode} mode
-          <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
+          <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color="inherit">
             {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
           </IconButton>
         </Box>

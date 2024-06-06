@@ -1,4 +1,34 @@
-import { createTheme } from '@mui/material'
+import { PaletteColor, createTheme } from '@mui/material/styles'
+
+export interface ExtendedTheme extends PaletteColor {
+  palette: {
+    mode?: string
+    primary: {
+      main: string
+      900: string
+      800: string
+      700: string
+      600: string
+      500: string
+      400: string
+      300: string
+      200: string
+      100: string
+    }
+    secondary: {
+      main: string
+      900: string
+      800: string
+      700: string
+      600: string
+      500: string
+      400: string
+      300: string
+      200: string
+      100: string
+    }
+  }
+}
 
 export const light = createTheme({
   palette: {
@@ -60,8 +90,7 @@ export const dark = createTheme({
       default: 'black'
     },
     text: {
-      primary: '#fff', // White text
-      secondary: '#ccc' // Light gray text
+      primary: '#fff' // White text
     }
   }
 })

@@ -1,7 +1,8 @@
-import { useThemeContext } from '@/contexts/Theme'
 import { useIsSmallScreen } from '@/hooks/useIsSmallScreen'
 import { Box, ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 import { NavLink } from 'react-router-dom'
+import { useTheme } from '@mui/material/styles'
+import { ExtendedTheme } from '@/plugins/muiTheme'
 
 interface MenuItemProps {
   title: string
@@ -11,7 +12,7 @@ interface MenuItemProps {
 
 export default function MenuListItem({ title, Icon, link }: MenuItemProps) {
   const isSmallScreen: boolean = useIsSmallScreen()
-  const { theme } = useThemeContext()
+  const theme: ExtendedTheme = useTheme()
   return (
     <MenuItem
       sx={{

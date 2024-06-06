@@ -3,14 +3,14 @@ import MenuDrawer from '@/components/features/MenuDrawer'
 import Toolbar from '@/components/features/Toolbar'
 import { Outlet } from 'react-router-dom'
 import { ReactNode } from 'react'
-import { useThemeContext } from '@/contexts/Theme'
+import { useTheme } from '@mui/material/styles'
 
 interface ChildrenComponent {
   children?: ReactNode
 }
 
 export default function DefaultLayout({ children }: ChildrenComponent) {
-  const { mode }: any = useThemeContext()
+  const theme = useTheme()
   return (
     <>
       <Box component="section" sx={{ display: 'flex' }}>
@@ -27,7 +27,10 @@ export default function DefaultLayout({ children }: ChildrenComponent) {
             component="div"
             sx={{
               flexGrow: 1,
-              backgroundColor: mode === 'light' ? '#e6e6e6' : '#606060'
+              backgroundColor:
+                theme.palette.mode === 'light'
+                  ? theme.palette.grey['300']
+                  : theme.palette.grey['800']
             }}>
             {children}
             <Outlet />
