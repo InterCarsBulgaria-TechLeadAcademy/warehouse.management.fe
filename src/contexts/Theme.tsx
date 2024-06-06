@@ -1,16 +1,13 @@
 import * as React from 'react'
 import { ThemeProvider } from '@mui/material/styles'
 import { dark, light } from '@/plugins/muiTheme'
+import { ColorModeContextValue } from '@/interfaces/colorModeContextValue'
 
 interface Children {
   children: React.ReactNode
 }
 
-interface ColorModeContextValue {
-  toggleColorMode: () => void
-}
-
-const ColorModeContext = React.createContext<ColorModeContextValue>({
+export const ColorModeContext = React.createContext<ColorModeContextValue>({
   toggleColorMode: () => {}
 })
 
@@ -36,12 +33,4 @@ export default function ToggleColorMode({ children }: Children) {
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </ColorModeContext.Provider>
   )
-}
-
-export const useThemeContext = (): ColorModeContextValue => {
-  const context = React.useContext(ColorModeContext)
-
-  return {
-    toggleColorMode: context.toggleColorMode
-  }
 }

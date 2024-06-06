@@ -11,7 +11,7 @@ import { Box, FormControlLabel, Switch, TextField, Autocomplete } from '@mui/mat
 import { useTranslation } from 'react-i18next'
 import SearchInput from '../features/SearchInput'
 import { Column } from '@/interfaces/dataTable'
-import { useThemeContext } from '@/contexts/Theme'
+import { useTheme } from '@mui/material/styles'
 
 interface DataTableProps {
   hasSearchInput: boolean
@@ -35,7 +35,7 @@ export default function DataTable({
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const [dense, setDense] = React.useState(false)
   const [searchTerm, setSearchTerm] = React.useState('')
-  const { mode }: any = useThemeContext()
+  const theme = useTheme()
 
   const columns: readonly Column[] = columnsData
   const rows = rowData
@@ -75,7 +75,7 @@ export default function DataTable({
           width: '100%',
           overflow: 'hidden',
           padding: '0.5em',
-          backgroundColor: mode === 'dark' ? 'background.default' : 'none'
+          backGroundColor: theme.palette.mode === 'dark' ? 'background.default' : 'none'
         }}>
         <Box component="div" sx={{ display: 'flex', gap: '2em', padding: '0.5em 0' }}>
           {hasSearchInput && (
