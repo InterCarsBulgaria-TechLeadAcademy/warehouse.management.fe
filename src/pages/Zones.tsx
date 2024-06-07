@@ -1,4 +1,5 @@
 import SkeletonPage from '@/components/features/SkeletonPage'
+import ZonesTable from '@/components/features/ZonesTable'
 import { useTranslation } from 'react-i18next'
 
 export default function Zones() {
@@ -8,9 +9,9 @@ export default function Zones() {
   return (
     <>
       <SkeletonPage
-        header={translate('markers.title')}
-        description={translate('markers.description')}
-        buttonText={translate('markers.labels.newMarker')}
+        header={translate('zones.title')}
+        description={translate('zones.description')}
+        table={<ZonesTable />}
       />
     </>
   )
