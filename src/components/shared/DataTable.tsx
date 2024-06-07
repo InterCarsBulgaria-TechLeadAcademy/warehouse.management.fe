@@ -92,7 +92,7 @@ export default function DataTable({
               renderInput={(params) => <TextField {...params} label={sortLabel} />}
             />
           )}
-          {isToggle && (
+          {isToggle && toggleLabel && (
             <FormControlLabel
               value="start"
               control={<Switch color="primary" />}
