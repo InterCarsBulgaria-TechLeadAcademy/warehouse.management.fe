@@ -9,6 +9,7 @@ export default function VendorsTable() {
     <DataTable
       hasSearchInput={true}
       isSortTextField={true}
+      isToggle={false}
       sortLabel={translate('vendors.labels.role')}
       sortOptionsData={['Proba1', 'Proba2']}
       columnsData={[
