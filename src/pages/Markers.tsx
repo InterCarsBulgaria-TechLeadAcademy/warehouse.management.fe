@@ -30,7 +30,7 @@ export default function Markers() {
     onCloseDialog()
   }
 
-  function CreateVendorForm({ control, formState: { errors } }: UseFormReturn<NewMarkerFormData>) {
+  function CreateMarkerForm({ control, formState: { errors } }: UseFormReturn<NewMarkerFormData>) {
     return (
       <>
         <Controller
@@ -40,8 +40,8 @@ export default function Markers() {
             <TextField
               {...field}
               label={translate('newMarker.labels.name')}
-              id="vendorName"
-              name="vendorName"
+              id="markerName"
+              name="markerName"
               required
               fullWidth
               autoFocus
@@ -76,7 +76,7 @@ export default function Markers() {
         onCloseDialog={onCloseDialog}
         schema={newMarkerSchema}
         onSubmit={handleSubmit}
-        renderForm={CreateVendorForm}
+        renderForm={CreateMarkerForm}
       />
     </>
   )
