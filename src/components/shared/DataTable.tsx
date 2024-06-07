@@ -47,7 +47,7 @@ export default function DataTable({
     options = sortOptionsData.map((option) => ({ label: option }))
   }
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage)
   }
 
