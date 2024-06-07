@@ -9,6 +9,7 @@ export default function MarkersTable() {
     <DataTable
       hasSearchInput={true}
       isSortTextField={false}
+      isToggle={false}
       columnsData={[
         { key: 'name', title: translate('markers.table.name') },
         { key: 'actions', title: translate('markers.table.actions'), minWidth: 50, align: 'right' }
