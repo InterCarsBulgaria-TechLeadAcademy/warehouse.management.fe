@@ -17,6 +17,8 @@ interface DataTableProps {
   isSortTextField: boolean
   sortLabel?: string
   sortOptionsData?: string[]
+  isToggle: boolean
+  toggleLabel?: string
   columnsData: Column[]
   rowData: any
 }
@@ -26,6 +28,8 @@ export default function DataTable({
   isSortTextField,
   sortLabel,
   sortOptionsData,
+  isToggle,
+  toggleLabel,
   columnsData,
   rowData
 }: DataTableProps) {
@@ -86,6 +90,14 @@ export default function DataTable({
               size="small"
               sx={{ width: '235px' }}
               renderInput={(params) => <TextField {...params} label={sortLabel} />}
+            />
+          )}
+          {isToggle && (
+            <FormControlLabel
+              value="start"
+              control={<Switch color="primary" />}
+              label={toggleLabel}
+              labelPlacement="start"
             />
           )}
         </Box>
