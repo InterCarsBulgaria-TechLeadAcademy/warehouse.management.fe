@@ -58,6 +58,7 @@ export default function MenuItems() {
     },
     {
       title: translate('menuItems.markers'),
+      // TODO: Change icon for Markers.
       icon: DifferenceOutlinedIcon,
       link: MARKERS_PATH
     }
