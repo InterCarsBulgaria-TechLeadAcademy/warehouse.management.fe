@@ -38,6 +38,8 @@ export default function DataTable({
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const [dense, setDense] = React.useState(false)
   const [searchTerm, setSearchTerm] = React.useState('')
+  const [toggleOn, setToggleOn] = React.useState(false)
+
 
   const columns: readonly Column[] = columnsData
   const rows = rowData
@@ -64,10 +66,21 @@ export default function DataTable({
     setSearchTerm(event.target.value)
   }
 
+  const handleToggleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setToggleOn(event.target.checked);
+  }
+
   const filteredRows = rows.filter((row: any) => {
-    return columns.some((column) => {
-      return row[column.key]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
-    })
+    if (toggleOn) {
+      return columns.some((column) => {
+        return row[column.key]?.toString().toLowerCase().includes('finished')
+      })
+
+    } else {
+      return columns.some((column) => {
+        return row[column.key]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
+      })
+    }
   })
 
   return (
@@ -95,7 +108,7 @@ export default function DataTable({
           {isToggle && toggleLabel && (
             <FormControlLabel
               value="start"
-              control={<Switch color="primary" />}
+              control={<Switch color="primary" onChange={handleToggleChange} />}
               label={toggleLabel}
               labelPlacement="start"
             />
