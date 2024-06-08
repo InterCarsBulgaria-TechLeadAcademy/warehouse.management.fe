@@ -9,40 +9,32 @@ import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
 import { Box, FormControlLabel, Switch, TextField, Autocomplete } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import SearchInput from '../features/SearchInput'
 import { Column } from '@/interfaces/dataTable'
 
 interface DataTableProps {
-  hasSearchInput: boolean
   isSortTextField: boolean
   sortLabel?: string
   sortOptionsData?: string[]
-  isToggle: boolean
-  toggleLabel?: string
   columnsData: Column[]
   rowData: any
+  children: React.ReactNode
 }
 
 export default function DataTable({
-  hasSearchInput,
   isSortTextField,
   sortLabel,
   sortOptionsData,
-  isToggle,
-  toggleLabel,
   columnsData,
-  rowData
+  rowData,
+  children
 }: DataTableProps) {
   const { t: translate } = useTranslation()
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const [dense, setDense] = React.useState(false)
-  const [searchTerm, setSearchTerm] = React.useState('')
-  const [toggleOn, setToggleOn] = React.useState(false)
 
 
   const columns: readonly Column[] = columnsData
-  const rows = rowData
 
   let options: any[] = []
   if (isSortTextField && sortOptionsData) {
@@ -62,38 +54,11 @@ export default function DataTable({
     setDense(event.target.checked)
   }
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value)
-  }
-
-  const handleToggleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setToggleOn(event.target.checked);
-  }
-
-  const filteredRows = rows.filter((row: any) => {
-    if (toggleOn) {
-      return columns.some((column) => {
-        return row[column.key]?.toString().toLowerCase().includes('finished')
-      })
-
-    } else {
-      return columns.some((column) => {
-        return row[column.key]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
-      })
-    }
-  })
-
   return (
     <Box>
       <Paper sx={{ width: '100%', overflow: 'hidden', padding: '0.5em' }}>
         <Box component="div" sx={{ display: 'flex', gap: '2em', padding: '0.5em 0' }}>
-          {hasSearchInput && (
-            <SearchInput
-              value={searchTerm}
-              onChange={handleSearchChange}
-              placeholder={translate('vendors.labels.search')}
-            />
-          )}
+          {children}
 
           {isSortTextField && (
             <Autocomplete
@@ -103,14 +68,6 @@ export default function DataTable({
               size="small"
               sx={{ width: '235px' }}
               renderInput={(params) => <TextField {...params} label={sortLabel} />}
-            />
-          )}
-          {isToggle && toggleLabel && (
-            <FormControlLabel
-              value="start"
-              control={<Switch color="primary" onChange={handleToggleChange} />}
-              label={toggleLabel}
-              labelPlacement="start"
             />
           )}
         </Box>
@@ -130,7 +87,7 @@ export default function DataTable({
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredRows
+              {rowData
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row: any) => {
                   return (
@@ -155,7 +112,7 @@ export default function DataTable({
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={filteredRows.length}
+          count={rowData.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
