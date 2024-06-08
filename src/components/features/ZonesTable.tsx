@@ -40,7 +40,7 @@ export default function ZonesTable() {
     {
       entryNumber: 2,
       vendorName: 'truck',
-      receptionNumbers: 12,
+      receptionNumbers: 11,
       numberOfGoods: 52,
       status: 'processing',
       markers: 'Накладки',
@@ -63,7 +63,6 @@ export default function ZonesTable() {
 
   return (
     <DataTable
-      isSortTextField={false}
       columnsData={columnsData}
       rowData={filteredRows}
     >
