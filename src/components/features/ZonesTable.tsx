@@ -26,7 +26,7 @@ export default function ZonesTable() {
           receptionNumbers: 12,
           numberOfGoods: 33,
           status: 'finished',
-          actions: <TableActionsMenu itemProps={['MoveToNewZone', 'StartProcessing', 'FinishProcessing', 'DeliveryDetails']} page='markers' />
+          actions: <TableActionsMenu itemProps={['MoveToNewZone', 'StartProcessing', 'FinishProcessing', 'DeliveryDetails']} page='zones' />
         },
         {
           entryNumber: 2,
@@ -35,7 +35,7 @@ export default function ZonesTable() {
           numberOfGoods: 52,
           status: 'processing',
           markers: 'Накладки',
-          actions: <TableActionsMenu itemProps={['update', 'delete']} page='markers' />
+          actions: <TableActionsMenu itemProps={['MoveToNewZone', 'StartProcessing', 'FinishProcessing', 'DeliveryDetails']} page='zones' />
         }
       ]}
     />
