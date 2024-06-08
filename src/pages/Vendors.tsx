@@ -10,7 +10,6 @@ import { NewVendorFormData, newVendorSchema } from '@/schemas/newVendorSchema'
 export default function Vendors() {
   const { t: translate } = useTranslation()
   const [openDialog, setOpenDialog] = useState(false)
-  const [isFinal, setIsFinal] = useState(false)
 
   const handleClickOpen = () => {
     setOpenDialog(true)
@@ -21,11 +20,7 @@ export default function Vendors() {
   }
 
   const handleSubmit: SubmitHandler<NewVendorFormData> = (data) => {
-    const formData = {
-      ...data,
-      isFinal
-    }
-    console.log(formData)
+    console.log(data)
     onCloseDialog()
   }
 
@@ -68,9 +63,16 @@ export default function Vendors() {
             />
           )}
         />
-        <FormControlLabel
-          control={<Checkbox checked={isFinal} onChange={() => setIsFinal(!isFinal)} />}
-          label={translate('newVendor.labels.isFinal')}
+
+        <Controller
+          name="isFinal"
+          control={control}
+          render={({ field }) => (
+            <FormControlLabel
+              control={<Checkbox {...field} checked={field.value} />}
+              label={translate('newVendor.labels.isFinal')}
+            />
+          )}
         />
       </>
     )

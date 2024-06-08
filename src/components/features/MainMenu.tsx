@@ -18,23 +18,15 @@ export default function MainMenu() {
         height: '100vh',
         borderRadius: 0
       }}>
-      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-        <ListItem
-          sx={{
-            display: 'flex'
-          }}>
+      <List sx={{ width: '100%', maxWidth: 360 }}>
+        <ListItem sx={{ display: 'flex' }}>
           <ListItemAvatar>
             <Avatar alt="intercars-logo-bg" src={logo_bg} />
           </ListItemAvatar>
 
           <ListItemText
             primary={
-              <Typography
-                component="h2"
-                sx={{
-                  fontSize: '1.5em',
-                  fontWeight: 'bold'
-                }}>
+              <Typography component="h2" sx={{ fontSize: '1.5em', fontWeight: 'bold' }}>
                 Intercars Bulgaria
               </Typography>
             }
