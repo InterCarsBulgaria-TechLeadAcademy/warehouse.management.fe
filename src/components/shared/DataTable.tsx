@@ -27,7 +27,6 @@ export default function DataTable({
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const [dense, setDense] = React.useState(false)
 
-
   const columns: readonly Column[] = columnsData
 
   const handleChangePage = (_event: unknown, newPage: number) => {
