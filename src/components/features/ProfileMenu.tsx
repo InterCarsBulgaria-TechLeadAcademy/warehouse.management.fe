@@ -50,7 +50,7 @@ export default function ProfileMenu() {
         aria-haspopup="true"
         aria-expanded={menuOpen ? 'true' : undefined}
         onClick={onMenuClick}>
-        <KeyboardArrowDownIcon sx={{ color: 'secondary.main' }} />
+        <KeyboardArrowDownIcon />
       </Button>
       <Menu
         id="basic-menu"

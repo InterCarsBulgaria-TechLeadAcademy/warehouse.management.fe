@@ -1,6 +1,8 @@
 import { useIsSmallScreen } from '@/hooks/useIsSmallScreen'
 import { Box, ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 import { NavLink } from 'react-router-dom'
+import { useTheme } from '@mui/material/styles'
+import { ExtendedTheme } from '@/plugins/muiTheme'
 
 interface MenuItemProps {
   title: string
@@ -10,6 +12,7 @@ interface MenuItemProps {
 
 export default function MenuListItem({ title, Icon, link }: MenuItemProps) {
   const isSmallScreen: boolean = useIsSmallScreen()
+  const theme: ExtendedTheme = useTheme()
   return (
     <MenuItem
       sx={{
@@ -24,8 +27,8 @@ export default function MenuListItem({ title, Icon, link }: MenuItemProps) {
         to={link}
         style={({ isActive }) => {
           return {
-            backgroundColor: isActive ? 'primary.100' : 'none',
-            color: 'inherit'
+            backgroundColor: isActive ? theme.palette.primary['100'] : 'inherit',
+            color: isActive ? theme.palette.primary.main : 'inherit'
           }
         }}
         sx={{
