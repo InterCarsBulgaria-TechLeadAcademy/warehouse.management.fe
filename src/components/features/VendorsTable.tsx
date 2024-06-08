@@ -40,10 +40,16 @@ export default function VendorsTable() {
     }
   ]
 
+  const filteredRows = rowData.filter((row: any) => {
+    return columnsData.some((column) => {
+      return row[column.key]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
+    })
+  })
+
   return (
     <DataTable
       columnsData={columnsData}
-      rowData={rowData}
+      rowData={filteredRows}
     >
       <SearchInput
         value={searchTerm}
