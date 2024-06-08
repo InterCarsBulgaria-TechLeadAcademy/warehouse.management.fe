@@ -7,23 +7,17 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
-import { Box, FormControlLabel, Switch, TextField, Autocomplete } from '@mui/material'
+import { Box, FormControlLabel, Switch } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { Column } from '@/interfaces/dataTable'
 
 interface DataTableProps {
-  isSortTextField: boolean
-  sortLabel?: string
-  sortOptionsData?: string[]
   columnsData: Column[]
   rowData: any
   children: React.ReactNode
 }
 
 export default function DataTable({
-  isSortTextField,
-  sortLabel,
-  sortOptionsData,
   columnsData,
   rowData,
   children
@@ -35,11 +29,6 @@ export default function DataTable({
 
 
   const columns: readonly Column[] = columnsData
-
-  let options: any[] = []
-  if (isSortTextField && sortOptionsData) {
-    options = sortOptionsData.map((option) => ({ label: option }))
-  }
 
   const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage)
@@ -59,17 +48,6 @@ export default function DataTable({
       <Paper sx={{ width: '100%', overflow: 'hidden', padding: '0.5em' }}>
         <Box component="div" sx={{ display: 'flex', gap: '2em', padding: '0.5em 0' }}>
           {children}
-
-          {isSortTextField && (
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={options}
-              size="small"
-              sx={{ width: '235px' }}
-              renderInput={(params) => <TextField {...params} label={sortLabel} />}
-            />
-          )}
         </Box>
 
         <TableContainer sx={{ maxHeight: '60vh' }}>
