@@ -7,45 +7,29 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
-import { Box, FormControlLabel, Switch, TextField, Autocomplete } from '@mui/material'
+import { Box, FormControlLabel, Switch } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import SearchInput from '../features/SearchInput'
 import { Column } from '@/interfaces/dataTable'
-import { useTheme } from '@mui/material/styles'
 
 interface DataTableProps {
-  hasSearchInput: boolean
-  isSortTextField: boolean
-  sortLabel?: string
-  sortOptionsData?: string[]
   columnsData: Column[]
   rowData: any
+  children: React.ReactNode
 }
 
 export default function DataTable({
-  hasSearchInput,
-  isSortTextField,
-  sortLabel,
-  sortOptionsData,
   columnsData,
-  rowData
+  rowData,
+  children
 }: DataTableProps) {
   const { t: translate } = useTranslation()
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const [dense, setDense] = React.useState(false)
-  const [searchTerm, setSearchTerm] = React.useState('')
-  const theme = useTheme()
 
   const columns: readonly Column[] = columnsData
-  const rows = rowData
 
-  let options: any[] = []
-  if (isSortTextField && sortOptionsData) {
-    options = sortOptionsData.map((option) => ({ label: option }))
-  }
-
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage)
   }
 
@@ -58,44 +42,11 @@ export default function DataTable({
     setDense(event.target.checked)
   }
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value)
-  }
-
-  const filteredRows = rows.filter((row: any) => {
-    return columns.some((column) => {
-      return row[column.key]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
-    })
-  })
-
   return (
     <Box>
-      <Paper
-        sx={{
-          width: '100%',
-          overflow: 'hidden',
-          padding: '0.5em',
-          backGroundColor: theme.palette.mode === 'dark' ? 'background.default' : 'none'
-        }}>
+      <Paper sx={{ width: '100%', overflow: 'hidden', padding: '0.5em' }}>
         <Box component="div" sx={{ display: 'flex', gap: '2em', padding: '0.5em 0' }}>
-          {hasSearchInput && (
-            <SearchInput
-              value={searchTerm}
-              onChange={handleSearchChange}
-              placeholder={translate('vendors.labels.search')}
-            />
-          )}
-
-          {isSortTextField && (
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={options}
-              size="small"
-              sx={{ width: '235px' }}
-              renderInput={(params) => <TextField {...params} label={sortLabel} />}
-            />
-          )}
+          {children}
         </Box>
 
         <TableContainer sx={{ maxHeight: '60vh' }}>
@@ -104,7 +55,6 @@ export default function DataTable({
               <TableRow>
                 {columns.map((column) => (
                   <TableCell
-                    //must set a unique key, maybe id from database
                     key={column.key}
                     align={column.align}
                     sx={{ minWidth: column.minWidth }}>
@@ -114,7 +64,7 @@ export default function DataTable({
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredRows
+              {rowData
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row: any) => {
                   return (
@@ -139,7 +89,7 @@ export default function DataTable({
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={filteredRows.length}
+          count={rowData.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
