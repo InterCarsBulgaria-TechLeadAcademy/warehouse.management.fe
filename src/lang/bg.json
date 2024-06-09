@@ -140,7 +140,7 @@
       "confirm": "Потвърди"
     }
   },
-    "zones": {
+    "deleteZones": {
       "title": "Изтриване на зона",
       "message": "Сигурни ли сте, че искате да изтриете тази зона?",
       "labels": {
@@ -160,7 +160,7 @@
       "DeliveryDetails": "Детайли"
     }
   },
-  "zones": {
+  "newZones": {
     "title": "Зони",
     "description": "Управление на зони",
     "labels": {
