@@ -8,6 +8,7 @@ export const newVendorSchema = yup.object({
   vendorNumber: yup
     .string()
     .required('newVendor.errors.vendorNumber.required')
+    .matches(/^[0-9]+$/, 'newVendor.errors.vendorNumber.typeError')
     .max(25, 'newVendor.errors.vendorNumber.max'),
   isFinal: yup.boolean()
 })
