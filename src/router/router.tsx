@@ -20,7 +20,7 @@ const DefaultLayout = lazy(() => import('@/layouts/DefaultLayout.tsx'))
 const Vendors = lazy(() => import('@/pages/Vendors.tsx'))
 const Zones = lazy(() => import('@/pages/Zones.tsx'))
 const Markers = lazy(() => import('@/pages/Markers.tsx'))
-const Deliveries = lazy(() => import('@/pages/Deliveries.tsx'))
+const Deliveries = lazy(() => import('@/pages/main/Deliveries'))
 const ZonesContent = lazy(() => import('@/pages/main/ZonesContent'))
 
 export default function Router() {
@@ -56,10 +56,6 @@ export default function Router() {
         {
           path: MARKERS_PATH,
           element: <Markers />
-        },
-        {
-          path: DELIVERIES_PATH,
-          element: <Deliveries />
         }
       ]
     },
@@ -70,6 +66,10 @@ export default function Router() {
         {
           path: ZONES_CONTENT_PATH,
           element: <ZonesContent />
+        },
+        {
+          path: DELIVERIES_PATH,
+          element: <Deliveries />
         }
       ]
     }

@@ -73,7 +73,7 @@ export default function MenuItems() {
     {
       title: translate('menuItems.deliveries'),
       icon: LocalShippingOutlinedIcon,
-      link: `/admin/${DELIVERIES_PATH}`
+      link: `/main/${DELIVERIES_PATH}`
     }
   ]
   return MenuItems.map((menuItem, index) => (
