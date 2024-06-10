@@ -31,7 +31,9 @@
     "roles": "Роли",
     "typesGoods": "Видове Стока",
     "typesDifference": "Типове Разлика",
-    "markers": "Маркери"
+    "markers": "Маркери",
+    "deliveries": "Доставки"
+    
   },
   "profileMenu": {
     "name": "Христо Бояджиев",
@@ -61,36 +63,6 @@
         "discard": "Откажи",
         "confirm": "Потвърди"
       }
-    }
-  },
-  "newMarker": {
-    "title": "Създаване на нов маркер",
-    "errors": {
-      "name": {
-        "required": "Полето за име e задължително",
-        "max": "Името трябва да e до 25 символа"
-      }
-    },
-    "labels": {
-      "name": "Име",
-      "isFinal": "Финализирано",
-      "create": "Създай",
-      "exit": "Изход"
-    }
-  },
-  "zones": {
-    "title": "Зони",
-    "description": "Управление на зони",
-    "labels": {
-      "search": "Търсене",
-      "toggle": "Покажи готовите записи"
-    },
-    "table": {
-      "entryNumber": "Запис №",
-      "vendorName": "Доставчик",
-      "receptionNumbers": "Рецепция №",
-      "numberOfGoods": "Стока №",
-      "status": "Статус"
     }
   },
   "vendors": {
@@ -140,7 +112,7 @@
       "confirm": "Потвърди"
     }
   },
-    "deleteZones": {
+    "zones": {
       "title": "Изтриване на зона",
       "message": "Сигурни ли сте, че искате да изтриете тази зона?",
       "labels": {
@@ -153,14 +125,10 @@
     "options": {
       "edit": "Редактирай",
       "delete": "Изтрий",
-      "update": "Актуализирай",
-      "MoveToNewZone": "Премести в нова зона",
-      "StartProcessing": "Започни обработка",
-      "FinishProcessing": "Завърши обработка",
-      "DeliveryDetails": "Детайли"
+      "update": "Актуализирай"
     }
   },
-  "newZones": {
+  "zones": {
     "title": "Зони",
     "description": "Управление на зони",
     "labels": {

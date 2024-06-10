@@ -6,7 +6,8 @@ import {
   PROJECTS_PATH_EXAMPLE,
   VENDORS_PATH,
   ZONES_PATH,
-  MARKERS_PATH
+  MARKERS_PATH,
+  DELIVERIES_PATH
 } from '@/router/routerPaths.ts'
 
 const Home = lazy(() => import('@/pages/Home.tsx'))
@@ -16,6 +17,7 @@ const DefaultLayout = lazy(() => import('@/layouts/DefaultLayout.tsx'))
 const Vendors = lazy(() => import('@/pages/Vendors.tsx'))
 const Zones = lazy(() => import('@/pages/Zones.tsx'))
 const Markers = lazy(() => import('@/pages/Markers.tsx'))
+const Deliveries = lazy(() => import('@/pages/Deliveries.tsx'))
 
 export default function Router() {
   return useRoutes([
@@ -46,6 +48,10 @@ export default function Router() {
         {
           path: MARKERS_PATH,
           element: <Markers />
+        },
+        {
+          path: DELIVERIES_PATH,
+          element: <Deliveries />
         }
       ]
     }
