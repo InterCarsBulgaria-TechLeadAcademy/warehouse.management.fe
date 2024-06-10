@@ -13,13 +13,13 @@ import {
   MAIN_PATH
 } from '@/router/routerPaths.ts'
 
-const Home = lazy(() => import('@/pages/Home.tsx'))
-const Projects = lazy(() => import('@/pages/Projects.tsx'))
-const Login = lazy(() => import('@/pages/Login.tsx'))
+const Home = lazy(() => import('@/pages/main/Home.tsx'))
+const Projects = lazy(() => import('@/pages/main/Projects.tsx'))
+const Login = lazy(() => import('@/pages/main/Login.tsx'))
 const DefaultLayout = lazy(() => import('@/layouts/DefaultLayout.tsx'))
-const Vendors = lazy(() => import('@/pages/Vendors.tsx'))
-const Zones = lazy(() => import('@/pages/Zones.tsx'))
-const Markers = lazy(() => import('@/pages/Markers.tsx'))
+const Vendors = lazy(() => import('@/pages/admin/Vendors.tsx'))
+const Zones = lazy(() => import('@/pages/admin/Zones.tsx'))
+const Markers = lazy(() => import('@/pages/admin/Markers.tsx'))
 const Deliveries = lazy(() => import('@/pages/main/Deliveries'))
 const ZonesContent = lazy(() => import('@/pages/main/ZonesContent'))
 
