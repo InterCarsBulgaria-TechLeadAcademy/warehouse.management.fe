@@ -14,8 +14,8 @@ import {
   OutlinedInput
 } from '@mui/material'
 import { Controller, UseFormReturn, SubmitHandler } from 'react-hook-form'
-import ZonesTable from '@/components/features/admin/ZonesTable'
 import { NewZoneFormData, newZoneSchema } from '@/schemas/newZoneSchema'
+import ZonesTable from '@/components/features/admin/ZonesTable'
 
 const markers = ['Масло', 'Гуми', 'Чистачки']
 

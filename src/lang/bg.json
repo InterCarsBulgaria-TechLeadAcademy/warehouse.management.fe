@@ -135,7 +135,8 @@
     "labels": {
       "newZone": "нова зона",
       "search": "Търсене",
-      "markers": "Маркери"
+      "markers": "Маркери",
+      "role": "Роля"
     },
     "table": {
     "name": "Име",
