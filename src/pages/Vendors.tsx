@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TextField, Checkbox, FormControlLabel } from '@mui/material'
 import { Controller, UseFormReturn, SubmitHandler } from 'react-hook-form'
-import VendorsTable from '@/components/features/VendorsTable'
+import VendorsTable from '@/components/features/admin/VendorsTable'
 import { NewVendorFormData, newVendorSchema } from '@/schemas/newVendorSchema'
 
 export default function Vendors() {

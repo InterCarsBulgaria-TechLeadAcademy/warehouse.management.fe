@@ -3,7 +3,7 @@ import { Controller, SubmitHandler, UseFormReturn } from 'react-hook-form'
 
 import SkeletonPage from '@/components/features/SkeletonPage'
 import { useTranslation } from 'react-i18next'
-import MarkersTable from '@/components/features/MarkersTable'
+import MarkersTable from '@/components/features/admin/MarkersTable'
 import { NewMarkerFormData, newMarkerSchema } from '@/schemas/newMarkerSchema'
 import { Checkbox, FormControlLabel, TextField } from '@mui/material'
 import FormDialog from '@/components/shared/FormDialog'

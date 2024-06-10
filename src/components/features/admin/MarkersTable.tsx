@@ -2,8 +2,8 @@ import React from 'react'
 
 import DataTable from '@/components/shared/DataTable'
 import { useTranslation } from 'react-i18next'
-import TableActionsMenu from '../shared/TableActionsMenu'
-import SearchInput from './SearchInput'
+import TableActionsMenu from '../../shared/TableActionsMenu'
+import SearchInput from '../SearchInput'
 import { Column } from '@/interfaces/dataTable'
 
 export default function MarkersTable() {

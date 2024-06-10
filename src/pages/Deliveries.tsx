@@ -12,7 +12,7 @@ import {
   Checkbox
 } from '@mui/material'
 import { Controller, UseFormReturn, SubmitHandler } from 'react-hook-form'
-import VendorsTable from '@/components/features/VendorsTable'
+import VendorsTable from '@/components/features/admin/VendorsTable'
 import FormDialog from '@/components/shared/FormDialog'
 import { NewdDeliveryFormData, newDeliverySchema } from '@/schemas/newDelivery'
 
