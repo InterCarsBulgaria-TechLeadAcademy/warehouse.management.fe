@@ -102,9 +102,9 @@ export default function ZonesContent() {
   return (
     <>
       <SkeletonPage
-        header={translate('zones.title')}
-        description={translate('zones.description')}
-        buttonText={translate('newZones.labels.newZone')}
+        header={translate('zonesContent.title')}
+        description={translate('zonesContent.description')}
+        buttonText={translate('zonesContent.labels.newZone')}
         buttonClickHandler={handleClickOpen}
         table={<ZonesContentsTable />}
       />

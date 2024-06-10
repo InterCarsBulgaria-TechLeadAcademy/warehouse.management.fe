@@ -15,7 +15,8 @@ import {
   VENDORS_PATH,
   ZONES_PATH,
   MARKERS_PATH,
-  DELIVERIES_PATH
+  DELIVERIES_PATH,
+  ZONES_CONTENT_PATH
 } from '@/router/routerPaths'
 
 interface MenuItem {
@@ -38,6 +39,11 @@ export default function MenuItems() {
       title: translate('menuItems.zones'),
       icon: AccountTreeOutlinedIcon,
       link: `/admin/${ZONES_PATH}`
+    },
+    {
+      title: translate('menuItems.zonesContent'),
+      icon: AccountTreeOutlinedIcon,
+      link: `/main/${ZONES_CONTENT_PATH}`
     },
     {
       title: translate('menuItems.vendors'),

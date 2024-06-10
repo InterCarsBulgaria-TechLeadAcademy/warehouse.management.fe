@@ -27,6 +27,7 @@
   "menuItems": {
     "users": "Потребители",
     "zones": "Зони",
+    "zonesContent": "Съдържание на зони",
     "vendors": "Доставчици",
     "roles": "Роли",
     "typesGoods": "Видове Стока",
@@ -197,6 +198,23 @@
       "markers": "Маркери",
       "create": "Създай",
       "exit": "Изход"
+    }
+  },
+  "zonesContent": {
+    "title": "Зони ",
+    "description": "Съдържание на зони",
+    "labels": {
+      "newZone": "нова зона",
+      "search": "Търсене",
+      "toggle": "Покажи готовите записи"
+    },
+    "table": {
+      "entryNumber": "Запис №",
+      "vendorName": "Доставчик",
+      "receptionNumbers": "Рецепция №",
+      "numberOfGoods": "Стока №",
+      "status": "Статус",
+      "actions": "Действия"
     }
   }
 }

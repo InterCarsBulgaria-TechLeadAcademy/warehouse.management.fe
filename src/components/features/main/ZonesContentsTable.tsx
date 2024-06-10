@@ -19,12 +19,12 @@ export default function ZonesContentsTable() {
   }
 
   const columnsData: Column[] = [
-    { key: 'entryNumber', title: translate('zones.table.entryNumber') },
-    { key: 'vendorName', title: translate('zones.table.vendorName') },
-    { key: 'receptionNumbers', title: translate('zones.table.receptionNumbers') },
-    { key: 'numberOfGoods', title: translate('zones.table.numberOfGoods') },
-    { key: 'status', title: translate('zones.table.status') },
-    { key: 'actions', title: translate('markers.table.actions'), minWidth: 50, align: 'right' }
+    { key: 'entryNumber', title: translate('zonesContent.table.entryNumber') },
+    { key: 'vendorName', title: translate('zonesContent.table.vendorName') },
+    { key: 'receptionNumbers', title: translate('zonesContent.table.receptionNumbers') },
+    { key: 'numberOfGoods', title: translate('zonesContent.table.numberOfGoods') },
+    { key: 'status', title: translate('zonesContent.table.status') },
+    { key: 'actions', title: translate('zonesContent.table.actions'), minWidth: 50, align: 'right' }
   ]
 
   const rowData = [
