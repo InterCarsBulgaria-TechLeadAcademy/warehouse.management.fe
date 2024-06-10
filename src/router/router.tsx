@@ -7,7 +7,9 @@ import {
   VENDORS_PATH,
   ZONES_PATH,
   MARKERS_PATH,
-  DELIVERIES_PATH
+  DELIVERIES_PATH,
+  ADMIN_PATH
+  // ZONES_CONTENT_PATH
 } from '@/router/routerPaths.ts'
 
 const Home = lazy(() => import('@/pages/Home.tsx'))
@@ -18,6 +20,7 @@ const Vendors = lazy(() => import('@/pages/Vendors.tsx'))
 const Zones = lazy(() => import('@/pages/Zones.tsx'))
 const Markers = lazy(() => import('@/pages/Markers.tsx'))
 const Deliveries = lazy(() => import('@/pages/Deliveries.tsx'))
+// const ZonesContent = lazy(() => import('@/pages/main/ZonesContent'))
 
 export default function Router() {
   return useRoutes([
@@ -35,6 +38,10 @@ export default function Router() {
     },
     {
       path: DEFAULTLAYOUT_PATH,
+      element: <DefaultLayout />
+    },
+    {
+      path: ADMIN_PATH,
       element: <DefaultLayout />,
       children: [
         {
@@ -55,5 +62,32 @@ export default function Router() {
         }
       ]
     }
+
+    // {
+    //   path: DEFAULTLAYOUT_PATH,
+    //   element: <DefaultLayout />,
+    //   children: [
+    //     {
+    //       path: VENDORS_PATH,
+    //       element: <Vendors />
+    //     },
+    //     {
+    //       path: ZONES_PATH,
+    //       element: <Zones />
+    //     },
+    //     {
+    //       path: ZONES_CONTENT_PATH,
+    //       element: <ZonesContent />
+    //     },
+    //     {
+    //       path: MARKERS_PATH,
+    //       element: <Markers />
+    //     },
+    //     {
+    //       path: DELIVERIES_PATH,
+    //       element: <Deliveries />
+    //     }
+    //   ]
+    // }
   ])
 }

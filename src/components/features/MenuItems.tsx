@@ -27,46 +27,47 @@ interface MenuItem {
 export default function MenuItems() {
   const { t: translate } = useTranslation()
 
+  // Edit paths who is a main to /main
   const MenuItems: MenuItem[] = [
     {
       title: translate('menuItems.users'),
       icon: PeopleAltOutlinedIcon,
-      link: USERS_PATH
+      link: `/admin/${USERS_PATH}`
     },
     {
       title: translate('menuItems.zones'),
       icon: AccountTreeOutlinedIcon,
-      link: ZONES_PATH
+      link: `/admin/${ZONES_PATH}`
     },
     {
       title: translate('menuItems.vendors'),
       icon: LocalShippingOutlinedIcon,
-      link: VENDORS_PATH
+      link: `/admin/${VENDORS_PATH}`
     },
     {
       title: translate('menuItems.roles'),
       icon: ManageAccountsOutlinedIcon,
-      link: ROLES_PATH
+      link: `/admin/${ROLES_PATH}`
     },
     {
       title: translate('menuItems.typesGoods'),
       icon: Inventory2OutlinedIcon,
-      link: TYPESGOODS_PATH
+      link: `/admin/${TYPESGOODS_PATH}`
     },
     {
       title: translate('menuItems.typesDifference'),
       icon: DifferenceOutlinedIcon,
-      link: TYPESDIFFERENCE_PATH
+      link: `/admin/${TYPESDIFFERENCE_PATH}`
     },
     {
       title: translate('menuItems.markers'),
       icon: AlignHorizontalRightIcon,
-      link: MARKERS_PATH
+      link: `/admin/${MARKERS_PATH}`
     },
     {
       title: translate('menuItems.deliveries'),
       icon: LocalShippingOutlinedIcon,
-      link: DELIVERIES_PATH
+      link: `/admin/${DELIVERIES_PATH}`
     }
   ]
   return MenuItems.map((menuItem, index) => (
