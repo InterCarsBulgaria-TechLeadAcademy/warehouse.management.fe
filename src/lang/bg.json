@@ -198,7 +198,13 @@
       "markers": "Маркери",
       "create": "Създай",
       "exit": "Изход"
-    }
+    },
+    "steps": {
+      "deliveryDetails":"Детайли за доставка",
+      "truckDetails": "Детайли за камион",
+      "goodDetails": "Детайли за стока",
+      "goodRelocate": "Местене на стока"
+      }
   },
   "zonesContent": {
     "title": "Зони ",

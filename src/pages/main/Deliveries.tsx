@@ -22,8 +22,12 @@ export default function Deliveries() {
   const { t: translate } = useTranslation()
   const [openDialog, setOpenDialog] = useState(false)
 
-  //use Translate
-  const steps = ['Детайли за доставка', 'Детайли за камион', 'Детайли за стока', 'Местене на стока']
+  const steps = [
+    translate('newDelivery.steps.deliveryDetails'),
+    translate('newDelivery.steps.truckDetails'),
+    translate('newDelivery.steps.goodDetails'),
+    translate('newDelivery.steps.goodRelocate')
+  ]
 
   const handleClickOpen = () => {
     setOpenDialog(true)
