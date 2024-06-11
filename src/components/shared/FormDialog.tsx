@@ -8,6 +8,7 @@ import * as React from 'react'
 import * as yup from 'yup'
 import HorizontalStepper from '../features/Stepper'
 import { useIsSmallScreen } from '@/hooks/useIsSmallScreen'
+import { useTranslation } from 'react-i18next'
 
 interface FormDialogProps<T extends FieldValues> {
   open: boolean
@@ -17,7 +18,7 @@ interface FormDialogProps<T extends FieldValues> {
   discardText: string
   confirmText: string
   onCloseDialog: () => void
-  schema: yup.ObjectSchema<T>
+  schema: yup.ObjectSchema<any> | undefined
   onSubmit: SubmitHandler<T>
   renderForm: (methods: UseFormReturn<T>) => React.ReactNode
 }
@@ -35,14 +36,17 @@ export default function FormDialog<T extends FieldValues>({
   renderForm
 }: FormDialogProps<T>) {
   const isSmallScreen = useIsSmallScreen()
+  const { t: translate } = useTranslation()
   const { control, handleSubmit, formState, reset } = useForm<T>({
-    resolver: yupResolver(schema)
+    resolver: schema ? yupResolver(schema) : undefined
   })
 
   const handleClose = () => {
     reset()
     onCloseDialog()
   }
+
+  console.log(Object.keys(formState.errors))
 
   return (
     <Dialog
@@ -72,16 +76,16 @@ export default function FormDialog<T extends FieldValues>({
           {renderForm({ control, handleSubmit, formState, reset } as UseFormReturn<T>)}
 
           <Box sx={{ display: 'flex', justifyContent: 'center', gap: '1em' }}>
+            <Button variant="contained" sx={{ mt: 3, mb: 2 }} onClick={handleClose}>
+              {activeStep === 0 ? translate('newDelivery.labels.exit') : discardText}
+            </Button>
+
             <Button
               type="submit"
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               disabled={Object.keys(formState.errors).length > 0}>
               {confirmText}
-            </Button>
-
-            <Button variant="contained" sx={{ mt: 3, mb: 2 }} onClick={handleClose}>
-              {discardText}
             </Button>
           </Box>
         </Box>
