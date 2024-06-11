@@ -22,6 +22,9 @@ export default function Deliveries() {
   const { t: translate } = useTranslation()
   const [openDialog, setOpenDialog] = useState(false)
 
+  //use Translate
+  const steps = ['Детайли за доставка', 'Детайли за камион', 'Детайли за стока', 'Местене на стока']
+
   const handleClickOpen = () => {
     setOpenDialog(true)
   }
@@ -143,6 +146,7 @@ export default function Deliveries() {
       <FormDialog<NewdDeliveryFormData>
         open={openDialog}
         title={translate('newDelivery.title')}
+        steps={steps}
         discardText={translate('newDelivery.labels.exit')}
         confirmText={translate('newDelivery.labels.create')}
         onCloseDialog={onCloseDialog}

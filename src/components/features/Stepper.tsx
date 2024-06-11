@@ -3,10 +3,11 @@ import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
 import StepLabel from '@mui/material/StepLabel'
 
-//use Translate
-const steps = ['Детайли за доставка', 'Детайли за камион', 'Детайли за стока', 'Местене на стока']
+interface HorizontalStepperProps {
+  steps: string[]
+}
 
-export default function HorizontalStepper() {
+export default function HorizontalStepper({ steps }: HorizontalStepperProps) {
   return (
     <Box sx={{ width: '100%' }}>
       <Stepper activeStep={1} alternativeLabel>

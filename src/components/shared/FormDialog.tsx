@@ -11,7 +11,7 @@ import HorizontalStepper from '../features/Stepper'
 interface FormDialogProps<T extends FieldValues> {
   open: boolean
   title: string
-  // hasStepper: boolean
+  steps?: string[]
   discardText: string
   confirmText: string
   onCloseDialog: () => void
@@ -23,7 +23,7 @@ interface FormDialogProps<T extends FieldValues> {
 export default function FormDialog<T extends FieldValues>({
   open,
   title,
-  // hasStepper,
+  steps,
   discardText,
   confirmText,
   onCloseDialog,
@@ -51,9 +51,7 @@ export default function FormDialog<T extends FieldValues>({
       </DialogTitle>
 
       <Box sx={{ padding: '2em' }}>
-        {/* {hasStepper &&  */}
-        <HorizontalStepper />
-        {/* } */}
+        {steps && <HorizontalStepper steps={steps} />}
         <Box
           component="form"
           onSubmit={handleSubmit(onSubmit)}
