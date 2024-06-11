@@ -7,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as React from 'react'
 import * as yup from 'yup'
 import HorizontalStepper from '../features/Stepper'
+import { useIsSmallScreen } from '@/hooks/useIsSmallScreen'
 
 interface FormDialogProps<T extends FieldValues> {
   open: boolean
@@ -31,6 +32,7 @@ export default function FormDialog<T extends FieldValues>({
   onSubmit,
   renderForm
 }: FormDialogProps<T>) {
+  const isSmallScreen = useIsSmallScreen()
   const { control, handleSubmit, formState, reset } = useForm<T>({
     resolver: yupResolver(schema)
   })
@@ -50,7 +52,7 @@ export default function FormDialog<T extends FieldValues>({
         {title}
       </DialogTitle>
 
-      <Box sx={{ padding: '2em' }}>
+      <Box sx={{ margin: '2em' }}>
         {steps && <HorizontalStepper steps={steps} />}
         <Box
           component="form"
@@ -59,8 +61,11 @@ export default function FormDialog<T extends FieldValues>({
             display: 'flex',
             flexDirection: 'column',
             gap: '2em',
-            // padding: '2em',
-            '& .MuiTextField-root': { width: '450px' }
+            ...(isSmallScreen
+              ? {}
+              : {
+                  '& .MuiTextField-root': { minWidth: '450px' }
+                })
           }}>
           {renderForm({ control, handleSubmit, formState, reset } as UseFormReturn<T>)}
 
