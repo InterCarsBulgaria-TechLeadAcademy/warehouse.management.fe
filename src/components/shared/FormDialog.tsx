@@ -13,6 +13,7 @@ interface FormDialogProps<T extends FieldValues> {
   open: boolean
   title: string
   steps?: string[]
+  activeStep?: number
   discardText: string
   confirmText: string
   onCloseDialog: () => void
@@ -25,6 +26,7 @@ export default function FormDialog<T extends FieldValues>({
   open,
   title,
   steps,
+  activeStep = 0,
   discardText,
   confirmText,
   onCloseDialog,
@@ -53,7 +55,7 @@ export default function FormDialog<T extends FieldValues>({
       </DialogTitle>
 
       <Box sx={{ margin: '2em' }}>
-        {steps && <HorizontalStepper steps={steps} />}
+        {steps && <HorizontalStepper steps={steps} activeStep={activeStep} />}
         <Box
           component="form"
           onSubmit={handleSubmit(onSubmit)}

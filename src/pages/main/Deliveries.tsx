@@ -151,6 +151,7 @@ export default function Deliveries() {
         open={openDialog}
         title={translate('newDelivery.title')}
         steps={steps}
+        activeStep={0}
         discardText={translate('newDelivery.labels.exit')}
         confirmText={translate('newDelivery.labels.create')}
         onCloseDialog={onCloseDialog}
