@@ -22,7 +22,7 @@ import { useTranslation } from 'react-i18next'
 
 const vendorName = ['Bosch', 'Valeo']
 
-export default function Step2Form({
+export default function NewDeliveryStep2Form({
   control,
   formState: { errors }
 }: UseFormReturn<NewDeliveryStep2FormData>) {

@@ -7,8 +7,8 @@ import FormDialog from '@/components/shared/FormDialog'
 import { NewDeliveryStep1FormData, newDeliveryStep1Schema } from '@/schemas/newDeliveryStep1'
 import { NewDeliveryStep2FormData, newDeliveryStep2Schema } from '@/schemas/newDeliveryStep2'
 import { ObjectSchema } from 'yup'
-import Step1Form from '@/components/features/forms/Step1Form'
-import Step2Form from '@/components/features/forms/Step2Form'
+import NewDeliveryStep1Form from '@/components/features/forms/NewDeliveryStep1Form'
+import NewDeliveryStep2Form from '@/components/features/forms/NewDeliveryStep2Form'
 
 export default function Deliveries() {
   const { t: translate } = useTranslation()
@@ -49,9 +49,9 @@ export default function Deliveries() {
   function newDeliveryRenderForm(methods: UseFormReturn<any>) {
     switch (currentStep) {
       case 0:
-        return <Step1Form {...methods} />
+        return <NewDeliveryStep1Form {...methods} />
       case 1:
-        return <Step2Form {...methods} />
+        return <NewDeliveryStep2Form {...methods} />
       // case 2:
       //   return
       //   case 3:

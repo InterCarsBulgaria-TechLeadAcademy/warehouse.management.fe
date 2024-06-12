@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next'
 
 const markers = ['Масло', 'Гуми', 'Чистачки']
 
-export default function Step1Form({
+export default function NewDeliveryStep1Form({
   control,
   formState: { errors }
 }: UseFormReturn<NewDeliveryStep1FormData>) {
