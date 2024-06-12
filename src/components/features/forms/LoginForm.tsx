@@ -7,9 +7,10 @@ import { LoginFormData } from '@/schemas/loginSchema'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
-interface LoginFormProps extends UseFormReturn<LoginFormData> {}
-
-export default function LoginForm({ control, formState: { errors } }: LoginFormProps) {
+export default function LoginForm({
+  control,
+  formState: { errors }
+}: UseFormReturn<LoginFormData>) {
   const { t: translate } = useTranslation()
 
   return (

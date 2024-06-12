@@ -1,14 +1,13 @@
 import SkeletonPage from '@/components/features/SkeletonPage'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { UseFormReturn, SubmitHandler } from 'react-hook-form'
+import { SubmitHandler } from 'react-hook-form'
 import VendorsTable from '@/components/features/admin/VendorsTable'
 import FormDialog from '@/components/shared/FormDialog'
 import { NewDeliveryStep1FormData, newDeliveryStep1Schema } from '@/schemas/newDeliveryStep1'
 import { NewDeliveryStep2FormData, newDeliveryStep2Schema } from '@/schemas/newDeliveryStep2'
-import { ObjectSchema } from 'yup'
-import NewDeliveryStep1Form from '@/components/features/forms/NewDeliveryStep1Form'
-import NewDeliveryStep2Form from '@/components/features/forms/NewDeliveryStep2Form'
+import { ObjectSchema } from 'yup''
+import NewDeliveryRenderForm from '@/components/features/forms/NewDeliveryRenderForm'
 
 export default function Deliveries() {
   const { t: translate } = useTranslation()
@@ -43,21 +42,6 @@ export default function Deliveries() {
     } else {
       console.log(data)
       setCurrentStep((prev) => prev + 1)
-    }
-  }
-
-  function newDeliveryRenderForm(methods: UseFormReturn<any>) {
-    switch (currentStep) {
-      case 0:
-        return <NewDeliveryStep1Form {...methods} />
-      case 1:
-        return <NewDeliveryStep2Form {...methods} />
-      // case 2:
-      //   return
-      //   case 3:
-      //   return
-      default:
-        return null
     }
   }
 
@@ -97,7 +81,7 @@ export default function Deliveries() {
         onCloseDialog={onCloseDialog}
         schema={schemaForUse()}
         onSubmit={handleSubmit}
-        renderForm={newDeliveryRenderForm}
+        renderForm={(methods) => <NewDeliveryRenderForm currentStep={currentStep} {...methods} />}
       />
     </>
   )
