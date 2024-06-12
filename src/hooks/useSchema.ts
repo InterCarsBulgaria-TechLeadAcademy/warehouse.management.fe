@@ -1,5 +1,6 @@
 import { newDeliveryStep1Schema } from '@/schemas/newDeliveryStep1'
 import { newDeliveryStep2Schema } from '@/schemas/newDeliveryStep2'
+import { newDeliveryStep3Schema } from '@/schemas/newDeliveryStep3'
 import { ObjectSchema } from 'yup'
 
 export default function useSchema(currentStep: number): ObjectSchema<any> | undefined {
@@ -8,8 +9,8 @@ export default function useSchema(currentStep: number): ObjectSchema<any> | unde
       return newDeliveryStep1Schema
     case 1:
       return newDeliveryStep2Schema
-    // case 2:
-    //   return
+    case 2:
+      return newDeliveryStep3Schema
     //   case 3:
     //   return
     default:

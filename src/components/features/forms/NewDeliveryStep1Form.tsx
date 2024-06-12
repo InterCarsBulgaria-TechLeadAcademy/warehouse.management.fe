@@ -31,7 +31,6 @@ export default function NewDeliveryStep1Form({
             id="deliveryNumber"
             name="deliveryNumber"
             required
-            fullWidth
             error={!!errors.deliveryNumber}
             helperText={
               errors.deliveryNumber?.message ? translate(errors.deliveryNumber.message) : ''
@@ -49,7 +48,6 @@ export default function NewDeliveryStep1Form({
             id="receptionNumber"
             name="receptionNumber"
             required
-            fullWidth
             error={!!errors.receptionNumber}
             helperText={
               errors.receptionNumber?.message ? translate(errors.receptionNumber.message) : ''
@@ -68,7 +66,6 @@ export default function NewDeliveryStep1Form({
             id="cmrNumber"
             name="cmrNumber"
             required
-            fullWidth
             error={!!errors.cmrNumber}
             helperText={errors.cmrNumber?.message ? translate(errors.cmrNumber.message) : ''}
           />
@@ -79,7 +76,7 @@ export default function NewDeliveryStep1Form({
         name="markers"
         control={control}
         render={({ field }) => (
-          <FormControl fullWidth>
+          <FormControl>
             <InputLabel id="demo-multiple-checkbox-label">
               {translate('newDelivery.labels.step1.markers')}
             </InputLabel>
