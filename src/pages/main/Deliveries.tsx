@@ -4,22 +4,18 @@ import { useTranslation } from 'react-i18next'
 import { SubmitHandler } from 'react-hook-form'
 import VendorsTable from '@/components/features/admin/VendorsTable'
 import FormDialog from '@/components/shared/FormDialog'
-import { NewDeliveryStep1FormData, newDeliveryStep1Schema } from '@/schemas/newDeliveryStep1'
-import { NewDeliveryStep2FormData, newDeliveryStep2Schema } from '@/schemas/newDeliveryStep2'
-import { ObjectSchema } from 'yup''
+import { NewDeliveryStep1FormData } from '@/schemas/newDeliveryStep1'
+import { NewDeliveryStep2FormData } from '@/schemas/newDeliveryStep2'
 import NewDeliveryRenderForm from '@/components/features/forms/NewDeliveryRenderForm'
+import useSchema from '@/hooks/useSchema'
+import useNewDeliverySteps from '@/hooks/useNewDeliverySteps'
 
 export default function Deliveries() {
   const { t: translate } = useTranslation()
   const [openDialog, setOpenDialog] = useState(false)
   const [currentStep, setCurrentStep] = useState(0)
-
-  const steps = [
-    translate('newDelivery.steps.deliveryDetails'),
-    translate('newDelivery.steps.truckDetails'),
-    translate('newDelivery.steps.goodDetails'),
-    translate('newDelivery.steps.goodRelocate')
-  ]
+  const steps = useNewDeliverySteps()
+  const schema = useSchema(currentStep)
 
   const handleClickOpen = () => {
     setOpenDialog(true)
@@ -45,21 +41,6 @@ export default function Deliveries() {
     }
   }
 
-  function schemaForUse(): ObjectSchema<any> | undefined {
-    switch (currentStep) {
-      case 0:
-        return newDeliveryStep1Schema
-      case 1:
-        return newDeliveryStep2Schema
-      // case 2:
-      //   return
-      //   case 3:
-      //   return
-      default:
-        return undefined
-    }
-  }
-
   return (
     <>
       <SkeletonPage
@@ -79,7 +60,7 @@ export default function Deliveries() {
         confirmText={translate('newDelivery.labels.forward')}
         discardText={translate('newDelivery.labels.back')}
         onCloseDialog={onCloseDialog}
-        schema={schemaForUse()}
+        schema={schema}
         onSubmit={handleSubmit}
         renderForm={(methods) => <NewDeliveryRenderForm currentStep={currentStep} {...methods} />}
       />
