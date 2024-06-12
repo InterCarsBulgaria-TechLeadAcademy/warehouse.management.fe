@@ -2,10 +2,10 @@ import SkeletonPage from '@/components/features/SkeletonPage'
 import FormDialog from '@/components/shared/FormDialog'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { TextField, Checkbox, FormControlLabel } from '@mui/material'
-import { Controller, UseFormReturn, SubmitHandler } from 'react-hook-form'
+import { SubmitHandler } from 'react-hook-form'
 import VendorsTable from '@/components/features/admin/VendorsTable'
 import { NewVendorFormData, newVendorSchema } from '@/schemas/newVendorSchema'
+import NewVendorForm from '@/components/features/forms/NewVendorForm'
 
 export default function Vendors() {
   const { t: translate } = useTranslation()
@@ -22,60 +22,6 @@ export default function Vendors() {
   const handleSubmit: SubmitHandler<NewVendorFormData> = (data) => {
     console.log(data)
     onCloseDialog()
-  }
-
-  function CreateVendorForm({ control, formState: { errors } }: UseFormReturn<NewVendorFormData>) {
-    return (
-      <>
-        <Controller
-          name="vendorName"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label={translate('newVendor.labels.name')}
-              id="vendorName"
-              name="vendorName"
-              required
-              fullWidth
-              autoFocus
-              error={!!errors.vendorName}
-              helperText={errors.vendorName?.message ? translate(errors.vendorName.message) : ''}
-            />
-          )}
-        />
-        <Controller
-          name="vendorNumber"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label={translate('newVendor.labels.vendorNumber')}
-              id="vendorNumber"
-              name="vendorNumber"
-              required
-              fullWidth
-              autoFocus
-              error={!!errors.vendorNumber}
-              helperText={
-                errors.vendorNumber?.message ? translate(errors.vendorNumber.message) : ''
-              }
-            />
-          )}
-        />
-
-        <Controller
-          name="isFinal"
-          control={control}
-          render={({ field }) => (
-            <FormControlLabel
-              control={<Checkbox {...field} checked={field.value} />}
-              label={translate('newVendor.labels.isFinal')}
-            />
-          )}
-        />
-      </>
-    )
   }
 
   return (
@@ -96,7 +42,7 @@ export default function Vendors() {
         onCloseDialog={onCloseDialog}
         schema={newVendorSchema}
         onSubmit={handleSubmit}
-        renderForm={CreateVendorForm}
+        renderForm={(methods) => <NewVendorForm {...methods} />}
       />
     </>
   )
