@@ -1,15 +1,6 @@
 import { NewDeliveryStep2FormData } from '@/schemas/newDeliveryStep2'
-import {
-  Checkbox,
-  FormControl,
-  FormHelperText,
-  InputLabel,
-  ListItemText,
-  MenuItem,
-  OutlinedInput,
-  Select,
-  TextField
-} from '@mui/material'
+import { Autocomplete, TextField } from '@mui/material'
+import React from 'react'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
@@ -27,39 +18,42 @@ export default function NewDeliveryStep2Form({
   formState: { errors }
 }: UseFormReturn<NewDeliveryStep2FormData>) {
   const { t: translate } = useTranslation()
+
+  const [value, setValue] = React.useState<string | null>(null)
+  const [inputValue, setInputValue] = React.useState('')
+
+  console.log(errors)
+
   return (
     <>
       <Controller
         name="vendorName"
         control={control}
         render={({ field }) => (
-          <FormControl fullWidth>
-            <InputLabel id="demo-multiple-checkbox-label" required>
-              {translate('newDelivery.labels.step2.vendorName')}
-            </InputLabel>
-            <Select
-              {...field}
-              labelId="demo-multiple-checkbox-label"
-              id="demo-multiple-checkbox"
-              required
-              multiple
-              value={field.value || []}
-              onChange={(e) => field.onChange(e.target.value)}
-              input={<OutlinedInput />}
-              renderValue={(selected) => (selected as string[]).join(', ')}>
-              {vendorName.map((currentVendorName) => (
-                <MenuItem key={currentVendorName} value={currentVendorName}>
-                  <Checkbox checked={field.value?.includes(currentVendorName)} />{' '}
-                  <ListItemText primary={currentVendorName} />
-                </MenuItem>
-              ))}
-            </Select>
-            {errors.vendorName && (
-              <FormHelperText>
-                {errors.vendorName?.message ? translate(errors.vendorName.message) : ''}
-              </FormHelperText>
+          <Autocomplete
+            {...field}
+            value={value}
+            onChange={(event: any, newValue: string | null) => {
+              setValue(newValue)
+              field.onChange(newValue)
+            }}
+            inputValue={inputValue}
+            onInputChange={(event, newInputValue) => {
+              setInputValue(newInputValue)
+            }}
+            id="controllable-states-demo"
+            options={vendorName}
+            sx={{ flex: 1 }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                required
+                label={translate('newDelivery.labels.step2.vendorName')}
+                error={!!errors.vendorName}
+                helperText={errors.vendorName?.message ? translate(errors.vendorName.message) : ''}
+              />
             )}
-          </FormControl>
+          />
         )}
       />
       <Controller
@@ -73,7 +67,6 @@ export default function NewDeliveryStep2Form({
             name="vendorId"
             // readOnly
             required
-            fullWidth
             error={!!errors.vendorId}
             helperText={errors.vendorId?.message ? translate(errors.vendorId.message) : ''}
           />
@@ -89,7 +82,6 @@ export default function NewDeliveryStep2Form({
             id="truckNumber"
             name="truckNumber"
             required
-            fullWidth
             error={!!errors.truckNumber}
             helperText={errors.truckNumber?.message ? translate(errors.truckNumber.message) : ''}
           />

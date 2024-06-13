@@ -48,8 +48,6 @@ export default function FormDialog<T extends FieldValues>({
     onCloseDialog()
   }
 
-  console.log(Object.keys(formState.errors))
-
   return (
     <Dialog
       open={open}
