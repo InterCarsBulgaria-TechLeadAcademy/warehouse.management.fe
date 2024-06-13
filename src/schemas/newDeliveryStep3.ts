@@ -4,14 +4,13 @@ export const newDeliveryStep3Schema = yup
   .object({
     goodType: yup.array().of(yup.string()).required('newDelivery.errors.step3.goodType.required'),
     goodQuantity: yup
-      .string()
-      .required('newDelivery.errors.step3.goodQuantity.required')
-      .matches(/^[0-9]+$/, 'newDelivery.errors.step3.goodQuantity.typeError')
+      .number()
+      .typeError('newDelivery.errors.step3.goodQuantity.typeError')
       .min(1, 'newDelivery.errors.step3.goodQuantity.min')
   })
   .required()
 
 export interface NewDeliveryStep3FormData extends yup.InferType<typeof newDeliveryStep3Schema> {
   goodType: string[]
-  goodQuantity: string
+  goodQuantity: number
 }

@@ -6,16 +6,8 @@ export const newDeliveryStep2Schema = yup
       .array()
       .of(yup.string())
       .required('newDelivery.errors.step2.vendorName.required'),
-    vendorId: yup
-      .string()
-      .required('newDelivery.errors.step2.vendorId.required')
-      .matches(/^[0-9]+$/, 'newDelivery.errors.step2.vendorId.typeError')
-      .min(1, 'newDelivery.errors.step1.vendorId.min'),
-    truckNumber: yup
-      .string()
-      .required('newDelivery.errors.step2.truckNumber.required')
-      .matches(/^[0-9]+$/, 'newDelivery.errors.step2.truckNumber.typeError')
-      .min(1, 'newDelivery.errors.step1.truckNumber.min')
+    vendorId: yup.number().typeError('newDelivery.errors.step2.vendorId.typeError'),
+    truckNumber: yup.number().typeError('newDelivery.errors.step2.truckNumber.typeError')
 
     // deliveryTime: yup
     //   .date()
@@ -26,7 +18,7 @@ export const newDeliveryStep2Schema = yup
 
 export interface NewDeliveryStep2FormData extends yup.InferType<typeof newDeliveryStep2Schema> {
   vendorName: string[]
-  vendorId: string
-  truckNumber: string
+  vendorId: number
+  truckNumber: number
   deliveryTime: Date
 }

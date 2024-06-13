@@ -40,7 +40,7 @@ export default function NewDeliveryStep3Form({
   return (
     // Идея: да изнеса полетата в отделен компонент и при confirm да ги рендя пак, но ще им подавам
     // филтрираните goodType
-    <Box component="form" sx={{ display: 'flex', gap: '1em', alignItems: 'center' }}>
+    <Box sx={{ display: 'flex', gap: '1em', alignItems: 'center' }}>
       <Controller
         name="goodType"
         control={control}
