@@ -3,58 +3,34 @@ import { useTranslation } from 'react-i18next'
 import GoodDetailsForm from './GoodDetailsForm'
 import { UseFormReturn } from 'react-hook-form'
 import { NewDeliveryStep3FormData } from '@/schemas/newDeliveryStep3'
-import React, { useState } from 'react'
 
 export default function NewDeliveryStep3Form({
   control,
   formState: { errors }
 }: UseFormReturn<NewDeliveryStep3FormData>) {
   const { t: translate } = useTranslation()
-
-  const initialForms = [
-    {
-      id: 1,
-      goodType: '',
-      goodQuantity: ''
-    }
-  ]
-
-  const [forms, setForms] = useState(initialForms)
-
   const goodType = [
     translate('newDelivery.goodType.pallets'),
     translate('newDelivery.goodType.packages'),
     translate('newDelivery.goodType.pieces')
   ]
 
-  function deleteHandler(index) {
-    console.log('clicked form at index:', index)
-    const updatedForms = forms.filter((_, idx) => idx !== index)
-    setForms(updatedForms)
+  function deleteHandler() {
+    console.log('deleted')
   }
 
   function addGoodHandler() {
-    const newForm = {
-      id: forms.length + 1,
-      goodType: '',
-      goodQuantity: ''
-    }
-    setForms([...forms, newForm])
+    console.log('added')
   }
 
   return (
     <>
-      {forms.map((form, index) => (
-        <div key={form.id}>
-          <GoodDetailsForm
-            key={form.id}
-            control={control}
-            errors={errors}
-            goodType={goodType}
-            deleteHandler={() => deleteHandler(index)}
-          />
-        </div>
-      ))}
+      <GoodDetailsForm
+        control={control}
+        errors={errors}
+        goodType={goodType}
+        deleteHandler={deleteHandler}
+      />
 
       <Button variant="contained" sx={{ alignSelf: 'flex-start' }} onClick={addGoodHandler}>
         {translate('newDelivery.labels.step3.addGood')}
