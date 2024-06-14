@@ -15,6 +15,7 @@ interface GoodDetailsFormProps {
   deleteHandler: () => void
   index: number
   formsCount: number
+  onGoodTypeChange: (value: string | null) => void // Добавяне на функция за актуализиране на избраните goodType
 }
 
 export default function GoodDetailsForm({
@@ -23,14 +24,13 @@ export default function GoodDetailsForm({
   goodType,
   deleteHandler,
   index,
-  formsCount
+  formsCount,
+  onGoodTypeChange
 }: GoodDetailsFormProps) {
   const { t: translate } = useTranslation()
 
   const [value, setValue] = React.useState<string | null>(null)
   const [inputValue, setInputValue] = React.useState('')
-
-  console.log(formsCount)
 
   return (
     <Box sx={{ display: 'flex', gap: '1em', alignItems: 'center' }}>
@@ -44,6 +44,7 @@ export default function GoodDetailsForm({
             onChange={(event: any, newValue: string | null) => {
               setValue(newValue)
               field.onChange(newValue)
+              onGoodTypeChange(newValue) // Актуализиране на избраните goodType
             }}
             inputValue={inputValue}
             onInputChange={(event, newInputValue) => {
@@ -60,7 +61,7 @@ export default function GoodDetailsForm({
                 error={!!errors?.goods?.[index]?.goodType}
                 helperText={
                   errors?.goods?.[index]?.goodType?.message
-                    ? translate(errors.goods[index].goodType.message) //не мога да го оправя
+                    ? translate(errors.goods[index].goodType.message!)
                     : ''
                 }
               />
@@ -82,7 +83,7 @@ export default function GoodDetailsForm({
             error={!!errors?.goods?.[index]?.goodQuantity}
             helperText={
               errors?.goods?.[index]?.goodQuantity?.message
-                ? translate(errors.goods[index].goodQuantity.message)
+                ? translate(errors.goods[index].goodQuantity.message!)
                 : ''
             }
           />

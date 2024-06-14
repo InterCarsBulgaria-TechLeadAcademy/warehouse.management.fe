@@ -1,4 +1,4 @@
-import { Button } from '@mui/material'
+import { Button, Box } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import GoodDetailsForm from './GoodDetailsForm'
 import { UseFormReturn } from 'react-hook-form'
@@ -17,17 +17,32 @@ export default function NewDeliveryStep3Form({
     translate('newDelivery.goodType.pieces')
   ]
 
-  //Списък с индексите на формите
-  const [goodDetailsForms, setGoodDetailsForms] = useState<number[]>([0])
+  const [goodDetailsForms, setGoodDetailsForms] = useState<number[]>([0]) //Списък с индексите на формите
+  const [selectedGoodTypes, setSelectedGoodTypes] = useState<(string | null)[]>([null])
 
   function deleteHandler(index: number) {
     const updatedForms = goodDetailsForms.filter((_, id) => id !== index)
+    const updatedSelectedGoodTypes = selectedGoodTypes.filter((_, id) => id !== index)
     setGoodDetailsForms(updatedForms)
+    setSelectedGoodTypes(updatedSelectedGoodTypes)
   }
 
   function addGoodHandler() {
     const newIndex = goodDetailsForms.length // Нов индекс за новата форма
     setGoodDetailsForms([...goodDetailsForms, newIndex])
+    setSelectedGoodTypes([...selectedGoodTypes, null])
+  }
+
+  function handleGoodTypeChange(index: number, value: string | null) {
+    const updatedSelectedGoodTypes = [...selectedGoodTypes]
+    updatedSelectedGoodTypes[index] = value
+    setSelectedGoodTypes(updatedSelectedGoodTypes)
+  }
+
+  function availableGoodTypes(index: number) {
+    return goodType.filter(
+      (type) => !selectedGoodTypes.includes(type) || selectedGoodTypes[index] === type
+    )
   }
 
   return (
@@ -37,11 +52,11 @@ export default function NewDeliveryStep3Form({
           key={index}
           control={control}
           errors={errors}
-          goodType={goodType}
+          goodType={availableGoodTypes(index)}
           deleteHandler={() => deleteHandler(index)}
           index={index} // Предаване на индекса като проп
           formsCount={goodDetailsForms.length} //Предаване на броя на формите, за да контролиране
-          // показването на delete button
+          onGoodTypeChange={(value) => handleGoodTypeChange(index, value)} // Предаване на функция за актуализиране на избраните goodType
         />
       ))}
       <Button variant="contained" sx={{ alignSelf: 'flex-start' }} onClick={addGoodHandler}>
