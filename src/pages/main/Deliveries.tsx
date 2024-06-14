@@ -4,8 +4,6 @@ import { useTranslation } from 'react-i18next'
 import { SubmitHandler } from 'react-hook-form'
 import VendorsTable from '@/components/features/admin/VendorsTable'
 import FormDialog from '@/components/shared/FormDialog'
-import { NewDeliveryStep1FormData } from '@/schemas/newDeliveryStep1'
-import { NewDeliveryStep2FormData } from '@/schemas/newDeliveryStep2'
 import NewDeliveryRenderForm from '@/components/features/forms/NewDeliveryRenderForm'
 import useSchema from '@/hooks/useSchema'
 import useNewDeliverySteps from '@/hooks/useNewDeliverySteps'
@@ -14,6 +12,7 @@ export default function Deliveries() {
   const { t: translate } = useTranslation()
   const [openDialog, setOpenDialog] = useState(false)
   const [currentStep, setCurrentStep] = useState(0)
+  const [formsData, setFormsData] = useState<any>({})
   const steps = useNewDeliverySteps()
   const schema = useSchema(currentStep)
 
@@ -32,14 +31,14 @@ export default function Deliveries() {
     }
   }
 
-  const handleSubmit: SubmitHandler<NewDeliveryStep1FormData | NewDeliveryStep2FormData> = (
-    data
-  ) => {
+  const handleSubmit: SubmitHandler<any> = (data) => {
     if (currentStep === steps.length - 1) {
       // Final data
       console.log('Final submission:', data)
+      setFormsData(data)
     } else {
       console.log(data)
+      setFormsData(data)
       setCurrentStep((prev) => prev + 1)
     }
   }
@@ -66,7 +65,9 @@ export default function Deliveries() {
         handleBack={handleBack}
         schema={schema}
         onSubmit={handleSubmit}
-        renderForm={(methods) => <NewDeliveryRenderForm currentStep={currentStep} {...methods} />}
+        renderForm={(methods) => (
+          <NewDeliveryRenderForm currentStep={currentStep} formsData={formsData} {...methods} />
+        )}
       />
     </>
   )

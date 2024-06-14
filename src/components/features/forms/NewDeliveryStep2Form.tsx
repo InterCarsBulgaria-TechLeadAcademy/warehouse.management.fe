@@ -22,8 +22,6 @@ export default function NewDeliveryStep2Form({
   const [value, setValue] = React.useState<string | null>(null)
   const [inputValue, setInputValue] = React.useState('')
 
-  console.log(errors)
-
   return (
     <>
       <Controller

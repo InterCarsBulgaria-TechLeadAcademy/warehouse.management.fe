@@ -35,7 +35,7 @@ export default function GoodDetailsForm({
   return (
     <Box sx={{ display: 'flex', gap: '1em', alignItems: 'center' }}>
       <Controller
-        name={`goods.${index}.goodType`} // Използване на индекса за уникално име на полето
+        name={`goods.${index}.goodTypeStep3`} // Използване на индекса за уникално име на полето
         control={control}
         render={({ field }) => (
           <Autocomplete
@@ -50,7 +50,7 @@ export default function GoodDetailsForm({
             onInputChange={(event, newInputValue) => {
               setInputValue(newInputValue)
             }}
-            id={`controllable-states-demo-${index}`} // Уникален ID за Autocomplete
+            id={`GoodDetailsForm.controllable-states-demo${index}`} // Уникален ID за Autocomplete
             options={goodType}
             sx={{ flex: 1 }}
             renderInput={(params) => (
@@ -58,10 +58,10 @@ export default function GoodDetailsForm({
                 {...params}
                 required
                 label={translate('newDelivery.labels.step3.goodType')}
-                error={!!errors?.goods?.[index]?.goodType}
+                error={!!errors?.goods?.[index]?.goodTypeStep3}
                 helperText={
-                  errors?.goods?.[index]?.goodType?.message
-                    ? translate(errors.goods[index].goodType.message!)
+                  errors?.goods?.[index]?.goodTypeStep3?.message
+                    ? translate(errors.goods[index].goodTypeStep3.message!)
                     : ''
                 }
               />
@@ -70,20 +70,20 @@ export default function GoodDetailsForm({
         )}
       />
       <Controller
-        name={`goods.${index}.goodQuantity`} // Използване на индекса за уникално име на полето
+        name={`goods.${index}.goodQuantityStep3`} // Използване на индекса за уникално име на полето
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             label={translate('newDelivery.labels.step3.goodQuantity')}
-            id={`goodQuantity-${index}`} // Уникален ID за TextField
-            name={`goodQuantity-${index}`} // Уникално име за полето
+            id={`GoodDetailsForm.goodQuantity${index}`} // Уникален ID за TextField
+            name={`GoodDetailsForm.goodQuantity-${index}`} // Уникално име за полето
             sx={{ flex: 1 }}
             required
-            error={!!errors?.goods?.[index]?.goodQuantity}
+            error={!!errors?.goods?.[index]?.goodQuantityStep3}
             helperText={
-              errors?.goods?.[index]?.goodQuantity?.message
-                ? translate(errors.goods[index].goodQuantity.message!)
+              errors?.goods?.[index]?.goodQuantityStep3?.message
+                ? translate(errors.goods[index].goodQuantityStep3.message!)
                 : ''
             }
           />

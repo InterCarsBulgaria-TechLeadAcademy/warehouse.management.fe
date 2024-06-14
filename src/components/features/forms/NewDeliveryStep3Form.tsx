@@ -1,4 +1,4 @@
-import { Button, Box } from '@mui/material'
+import { Button } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import GoodDetailsForm from './GoodDetailsForm'
 import { UseFormReturn } from 'react-hook-form'

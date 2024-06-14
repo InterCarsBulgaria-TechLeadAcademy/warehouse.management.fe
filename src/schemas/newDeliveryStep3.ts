@@ -18,22 +18,25 @@
 
 import * as yup from 'yup'
 
-export const newDeliveryStep3Schema = yup.object({
-  goods: yup.array().of(
-    yup.object({
-      goodType: yup.string().required('newDelivery.errors.step3.goodType.required'),
-      goodQuantity: yup
-        .number()
-        .required('newDelivery.errors.step3.goodQuantity.required')
-        .typeError('newDelivery.errors.step3.goodQuantity.typeError')
-        .min(1, 'newDelivery.errors.step3.goodQuantity.min')
-    })
-  )
-})
+export const newDeliveryStep3Schema = yup
+  .object({
+    goods: yup.array().of(
+      yup.object({
+        goodTypeStep3: yup.string().required('newDelivery.errors.step3.goodType.required'),
+        goodQuantityStep3: yup
+          .number()
+          .required('newDelivery.errors.step3.goodQuantity.required')
+          .typeError('newDelivery.errors.step3.goodQuantity.typeError')
+          .min(1, 'newDelivery.errors.step3.goodQuantity.min')
+      })
+    )
+  })
+  .required()
 
-export interface NewDeliveryStep3FormData {
+export interface NewDeliveryStep3FormData extends yup.InferType<typeof newDeliveryStep3Schema> {
   goods: {
-    goodType: string
-    goodQuantity: number
+    // понеже goodType и goodQuantity ги има в Step4, трябва да бъдат уникални
+    goodTypeStep3: string
+    goodQuantityStep3: number
   }[]
 }
