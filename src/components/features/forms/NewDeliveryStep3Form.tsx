@@ -20,7 +20,7 @@ export default function NewDeliveryStep3Form({
   const [goodDetailsForms, setGoodDetailsForms] = useState<number[]>([0]) //Списък с индексите на формите
   const [selectedGoodTypes, setSelectedGoodTypes] = useState<(string | null)[]>([null])
 
-  function deleteHandler(index: number) {
+  function onDeleteHandler(index: number) {
     const updatedForms = goodDetailsForms.filter((_, id) => id !== index)
     const updatedSelectedGoodTypes = selectedGoodTypes.filter((_, id) => id !== index)
     setGoodDetailsForms(updatedForms)
@@ -53,7 +53,7 @@ export default function NewDeliveryStep3Form({
           control={control}
           errors={errors}
           goodType={availableGoodTypes(index)}
-          deleteHandler={() => deleteHandler(index)}
+          onDeleteHandler={() => onDeleteHandler(index)}
           index={index} // Предаване на индекса като проп
           formsCount={goodDetailsForms.length} //Предаване на броя на формите, за да контролиране
           onGoodTypeChange={(value) => handleGoodTypeChange(index, value)} // Предаване на функция за актуализиране на избраните goodType
@@ -86,7 +86,7 @@ export default function NewDeliveryStep3Form({
 
 //   const [goodDetailsFormCount, setGoodDetailsFormCount] = useState(1)
 
-//   function deleteHandler() {}
+//   function onDeleteHandler() {}
 
 //   function addGoodHandler() {}
 
@@ -96,7 +96,7 @@ export default function NewDeliveryStep3Form({
 //         control={control}
 //         errors={errors}
 //         goodType={goodType}
-//         deleteHandler={deleteHandler}
+//         onDeleteHandler={onDeleteHandler}
 //       />
 //       <Button variant="contained" sx={{ alignSelf: 'flex-start' }} onClick={addGoodHandler}>
 //         {translate('newDelivery.labels.step3.addGood')}
@@ -136,7 +136,7 @@ export default function NewDeliveryStep3Form({
     translate('newDelivery.goodType.pieces')
   ]
 
-  function deleteHandler() {
+  function onDeleteHandler() {
     console.log('clicked')
   }
 
@@ -195,7 +195,7 @@ export default function NewDeliveryStep3Form({
         )}
       />
 
-      <DeleteIcon sx={{ cursor: 'pointer' }} onClick={deleteHandler} />
+      <DeleteIcon sx={{ cursor: 'pointer' }} onClick={onDeleteHandler} />
     </Box>
   )
 } */

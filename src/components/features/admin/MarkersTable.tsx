@@ -2,9 +2,9 @@ import React from 'react'
 
 import DataTable from '@/components/shared/DataTable'
 import { useTranslation } from 'react-i18next'
-import TableActionsMenu from '../../shared/TableActionsMenu'
-import SearchInput from '../SearchInput'
 import { Column } from '@/interfaces/dataTable'
+import TableActionsMenu from '@/components/shared/TableActionsMenu'
+import SearchInput from '../SearchInput'
 
 export default function MarkersTable() {
   const { t: translate } = useTranslation()
@@ -24,13 +24,13 @@ export default function MarkersTable() {
       name: 'Motoul',
       vendorNumber: 1,
       markers: 'Масло',
-      actions: <TableActionsMenu itemProps={['update', 'delete']} page='markers' />
+      actions: <TableActionsMenu itemProps={['update', 'delete']} page="markers" />
     },
     {
       name: 'Ferodo',
       vendorNumber: 2,
       markers: 'Накладки',
-      actions: <TableActionsMenu itemProps={['update', 'delete']} page='markers' />
+      actions: <TableActionsMenu itemProps={['update', 'delete']} page="markers" />
     }
   ]
 
@@ -41,10 +41,7 @@ export default function MarkersTable() {
   })
 
   return (
-    <DataTable
-      columnsData={columnsData}
-      rowData={filteredRows}
-    >
+    <DataTable columnsData={columnsData} rowData={filteredRows}>
       <SearchInput
         value={searchTerm}
         onChange={handleSearchChange}
