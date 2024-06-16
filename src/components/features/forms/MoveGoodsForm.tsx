@@ -66,12 +66,12 @@ export default function MoveGoodsForm({
           <Autocomplete
             {...field}
             value={goodTypeValue}
-            onChange={(event: any, newValue: string | null) => {
+            onChange={(_event: any, newValue: string | null) => {
               setGoodTypeValue(newValue)
               field.onChange(newValue)
             }}
             inputValue={goodTypeInputValue}
-            onInputChange={(event, newInputValue) => {
+            onInputChange={(_event, newInputValue) => {
               setGoodTypeInputValue(newInputValue)
             }}
             id={`moveGoodsForm.controllable-states-demo-goodType${index}`} // Уникален ID за Autocomplete
@@ -85,7 +85,7 @@ export default function MoveGoodsForm({
                 error={!!errors?.goods?.[index]?.goodTypeStep4}
                 helperText={
                   errors?.goods?.[index]?.goodTypeStep4?.message
-                    ? translate(errors.goods[index].goodTypeStep4.message)
+                    ? translate(errors?.goods[index]?.goodTypeStep4?.message || '')
                     : ''
                 }
               />
@@ -113,7 +113,7 @@ export default function MoveGoodsForm({
             error={!!errors?.goods?.[index]?.goodQuantityStep4}
             helperText={
               errors?.goods?.[index]?.goodQuantityStep4?.message
-                ? translate(errors.goods[index].goodQuantityStep4.message!)
+                ? translate(errors?.goods[index]?.goodQuantityStep4?.message || '')
                 : ''
             }
           />
@@ -126,12 +126,12 @@ export default function MoveGoodsForm({
           <Autocomplete
             {...field}
             value={zoneValue}
-            onChange={(event: any, newValue: string | null) => {
+            onChange={(_event: any, newValue: string | null) => {
               setZoneValue(newValue)
               field.onChange(newValue)
             }}
             inputValue={zoneInputValue}
-            onInputChange={(event, newInputValue) => {
+            onInputChange={(_event, newInputValue) => {
               setZoneInputValue(newInputValue)
             }}
             id={`moveGoodsForm.controllable-states-demo-zone${index}`} // Уникален ID за Autocomplete
@@ -146,7 +146,7 @@ export default function MoveGoodsForm({
                 error={!!errors?.goods?.[index]?.zone}
                 helperText={
                   errors?.goods?.[index]?.zone?.message
-                    ? translate(errors.goods[index].zone.message)
+                    ? translate(errors?.goods[index]?.zone?.message || '')
                     : ''
                 }
               />
