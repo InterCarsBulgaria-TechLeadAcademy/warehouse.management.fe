@@ -11,7 +11,7 @@ interface HorizontalStepperProps {
 export default function HorizontalStepper({ steps, activeStep }: HorizontalStepperProps) {
   return (
     <Box sx={{ width: '100%', marginBottom: '3em' }}>
-      <Stepper activeStep={activeStep} alternativeLabel>
+      <Stepper activeStep={activeStep - 1} alternativeLabel>
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
