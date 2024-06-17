@@ -84,20 +84,20 @@ export default function NewDeliveryStep2Form({
 
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Controller
-          name="deliveryTime"
+          name="deliveryDate"
           control={control}
           render={({ field }) => (
             <DatePicker
               {...field}
-              label={translate('newDelivery.labels.step2.deliveryTime')}
+              label={translate('newDelivery.labels.step2.deliveryDate')}
               format="DD/MM/YYYY"
               slotProps={{
                 textField: {
                   required: true,
                   fullWidth: true,
-                  error: !!errors.deliveryTime,
-                  helperText: errors.deliveryTime?.message
-                    ? translate(errors.deliveryTime.message)
+                  error: !!errors.deliveryDate,
+                  helperText: errors.deliveryDate?.message
+                    ? translate(errors.deliveryDate.message)
                     : ''
                 }
               }}
