@@ -4,17 +4,14 @@ import { UseFormReturn } from 'react-hook-form'
 import { useState } from 'react'
 import MoveGoodsForm from './MoveGoodsForm'
 import { NewDeliveryStep4FormData } from '@/schemas/newDeliverySchemas'
-
-interface NewDeliveryStep4FormProps extends UseFormReturn<NewDeliveryStep4FormData> {
-  formsData: any
-}
+import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 
 export default function NewDeliveryStep4Form({
   control,
-  formState: { errors },
-  formsData
-}: NewDeliveryStep4FormProps) {
+  formState: { errors }
+}: UseFormReturn<NewDeliveryStep4FormData>) {
   const { t: translate } = useTranslation()
+  const { formsData } = useNewDeliveryContext()
 
   //Only the goodType selected in step 3 should be available
   const goodType = formsData.goods.map((good: any) => good.goodTypeStep3)

@@ -10,15 +10,8 @@ import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 export default function Deliveries() {
   const { t: translate } = useTranslation()
   const steps = useNewDeliverySteps()
-  const {
-    currentStep,
-    formsData,
-    openDialog,
-    onCloseDialog,
-    handleBack,
-    handleClickOpen,
-    handleSubmit
-  } = useNewDeliveryContext()
+  const { currentStep, openDialog, onCloseDialog, handleBack, handleClickOpen, handleSubmit } =
+    useNewDeliveryContext()
   const schema = useSchema(currentStep)
 
   return (
@@ -43,10 +36,7 @@ export default function Deliveries() {
         handleBack={handleBack}
         schema={schema}
         onSubmit={handleSubmit}
-        // да пробвам да изнеса methods
-        renderForm={(methods) => (
-          <NewDeliveryRenderForm currentStep={currentStep} formsData={formsData} {...methods} />
-        )}
+        renderForm={(methods) => <NewDeliveryRenderForm {...methods} />}
       />
     </>
   )

@@ -1,19 +1,12 @@
-import { UseFormReturn } from 'react-hook-form'
+import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import NewDeliveryStep1Form from './NewDeliveryStep1Form'
 import NewDeliveryStep2Form from './NewDeliveryStep2Form'
 import NewDeliveryStep3Form from './NewDeliveryStep3Form'
 import NewDeliveryStep4Form from './NewDeliveryStep4Form'
+import { UseFormReturn } from 'react-hook-form'
 
-interface NewDeliveryRenderFormProps extends UseFormReturn<any> {
-  currentStep: number
-  formsData: any
-}
-
-export default function NewDeliveryRenderForm({
-  currentStep,
-  formsData,
-  ...methods
-}: NewDeliveryRenderFormProps) {
+export default function NewDeliveryRenderForm({ ...methods }: UseFormReturn<any>) {
+  const { currentStep } = useNewDeliveryContext()
   switch (currentStep) {
     case 0:
       return <NewDeliveryStep1Form {...methods} />
@@ -22,7 +15,7 @@ export default function NewDeliveryRenderForm({
     case 2:
       return <NewDeliveryStep3Form {...methods} />
     case 3:
-      return <NewDeliveryStep4Form {...methods} formsData={formsData} />
+      return <NewDeliveryStep4Form {...methods} />
     //   case 4:
     //   return
     default:

@@ -66,35 +66,3 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
     </NewDeliveryContext.Provider>
   )
 }
-
-// import { NewDeliveryContextValues } from '@/interfaces/newDeliveryContextValues'
-// import { createContext, ReactNode, useState } from 'react'
-
-// interface NewDeliveryProviderProps {
-//   children: ReactNode
-// }
-
-// export const NewDeliveryContext = createContext<NewDeliveryContextValues>({
-//   currentStep: 0,
-//   setCurrentStep: () => {},
-//   formsData: {},
-//   setFormsData: () => {}
-// })
-
-// export default function NewDeliveryProvider({ children }: NewDeliveryProviderProps) {
-//   const [currentStep, setCurrentStep] = useState(0)
-//   const [formsData, setFormsData] = useState<any>({})
-
-//   const newDeliveryContextValues: NewDeliveryContextValues = {
-//     currentStep,
-//     setCurrentStep,
-//     formsData,
-//     setFormsData
-//   }
-
-//   return (
-//     <NewDeliveryContext.Provider value={newDeliveryContextValues}>
-//       {children}
-//     </NewDeliveryContext.Provider>
-//   )
-// }
