@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import { useEffect, useState } from 'react'
 import { NewDeliveryStep4FormData } from '@/schemas/newDeliverySchemas'
+import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 
 interface GoodDetailsFormProps {
   control: Control<NewDeliveryStep4FormData, any>
@@ -12,7 +13,6 @@ interface GoodDetailsFormProps {
   goodType: string[]
   zones: string[]
   index: number
-  formsData: any
 }
 
 export default function MoveGoodsForm({
@@ -20,10 +20,11 @@ export default function MoveGoodsForm({
   errors,
   goodType,
   zones,
-  index,
-  formsData
+  index
 }: GoodDetailsFormProps) {
   const { t: translate } = useTranslation()
+  const { formsData, setPallets, setPackets, setPieces, setAlertQuantities } =
+    useNewDeliveryContext()
 
   const [goodTypeValue, setGoodTypeValue] = useState<string | null>(null)
   const [goodTypeInputValue, setGoodTypeInputValue] = useState('')
@@ -32,19 +33,57 @@ export default function MoveGoodsForm({
   const [goodQuantityValue, setGoodQuantityValue] = useState('')
   const [fieldsDisabled, setFieldsDisabled] = useState(true)
 
-  // За сравняване дали съм въвел по-голямо/по-малко количество от това във степ3 за този продукт
-  // if (goodTypeValue !== null && zoneValue !== null && goodQuantityValue !== '') {
-  // formsData.goods[0].goodQuantityStep3 ne e ok towa
-  //   // if (goodQuantityValue > formsData.goods[0].goodQuantityStep3) {
-  //   //   console.log('po-golqmo')
-  //   // } else {
-  //   //   console.log('po-malko')
-  //   // }
-  // } else {
-  //   console.log('ne')
-  // }
+  useEffect(() => {
+    if (goodTypeValue !== null && zoneValue !== null && goodQuantityValue !== '') {
+      const good = formsData.goods.find((good: any) => good.goodTypeStep3 === goodTypeValue)
+      if (good) {
+        if (Number(goodQuantityValue) < good.goodQuantityStep3) {
+          switch (goodTypeValue) {
+            case 'Палети': {
+              return setPallets(good.goodQuantityStep3 - Number(goodQuantityValue))
+            }
+            case 'Пакети': {
+              return setPackets(good.goodQuantityStep3 - Number(goodQuantityValue))
+            }
+            case 'Бройки': {
+              return setPieces(good.goodQuantityStep3 - Number(goodQuantityValue))
+            }
+            default:
+              return setPallets(0), setPackets(0), setPieces(0)
+          }
+        } else if (Number(goodQuantityValue) === good.goodQuantityStep3) {
+          // switch (goodTypeValue) {
+          //   case 'Палети': {
+          //     return setPallets(0)
+          //   }
+          //   case 'Пакети': {
+          //     return setPackets(0)
+          //   }
+          //   case 'Бройки': {
+          //     return setPieces(0)
+          //   }
+          //   default:
+          //     return setPallets(0), setPackets(0), setPieces(0)
+          // }
+        } else {
+          // setStep4Quantity(
+          //   `You can place a maximum of ${good.goodQuantityStep3} ${goodTypeValue.toLowerCase()}`
+          // )
+        }
+      }
+    } else {
+      setAlertQuantities('')
+    }
+  }, [
+    goodTypeValue,
+    zoneValue,
+    goodQuantityValue,
+    formsData.goods,
+    setPallets,
+    setPackets,
+    setPieces
+  ])
 
-  console.log(formsData)
   useEffect(() => {
     if (goodTypeValue) {
       setFieldsDisabled(false)
@@ -59,7 +98,7 @@ export default function MoveGoodsForm({
   return (
     <Box sx={{ display: 'flex', gap: '1em', alignItems: 'center' }}>
       <Controller
-        name={`goods.${index}.goodTypeStep4`} //Use the index for unique a name field
+        name={`goods.${index}.goodTypeStep4`} // Use the index for a unique field name
         control={control}
         render={({ field }) => (
           <Autocomplete
@@ -73,7 +112,7 @@ export default function MoveGoodsForm({
             onInputChange={(_event, newInputValue) => {
               setGoodTypeInputValue(newInputValue)
             }}
-            id={`moveGoodsForm.controllable-states-demo-goodType${index}`} //Unique id for Autocomplete
+            id={`moveGoodsForm.controllable-states-demo-goodType${index}`} // Unique id for Autocomplete
             options={goodType}
             sx={{ flex: 1 }}
             renderInput={(params) => (
@@ -93,18 +132,18 @@ export default function MoveGoodsForm({
         )}
       />
       <Controller
-        name={`goods.${index}.goodQuantityStep4`} //Use the index for unique a name field
+        name={`goods.${index}.goodQuantityStep4`} // Use the index for a unique field name
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             label={translate('newDelivery.labels.step4.goodQuantity')}
-            id={`moveGoodsForm.goodQuantity${index}`} //Unique id for TextField
-            name={`moveGoodsForm.goodQuantity${index}`} //Use the index for unique a name field
+            id={`moveGoodsForm.goodQuantity${index}`} // Unique id for TextField
+            name={`moveGoodsForm.goodQuantity${index}`} // Use the index for a unique field name
             sx={{ flex: 1 }}
             required
-            disabled={fieldsDisabled} //Diable the field when we haven't selected goodType
-            value={fieldsDisabled ? '' : goodQuantityValue} //Set the base value to fieldsDisabled
+            disabled={fieldsDisabled} // Disable the field when goodType is not selected
+            value={fieldsDisabled ? '' : goodQuantityValue} // Set the base value when fields are disabled
             onChange={(e) => {
               setGoodQuantityValue(e.target.value)
               field.onChange(e.target.value)
@@ -119,7 +158,7 @@ export default function MoveGoodsForm({
         )}
       />
       <Controller
-        name={`goods.${index}.zone`} //Use the index for unique a name field
+        name={`goods.${index}.zone`} // Use the index for a unique field name
         control={control}
         render={({ field }) => (
           <Autocomplete
@@ -133,10 +172,10 @@ export default function MoveGoodsForm({
             onInputChange={(_event, newInputValue) => {
               setZoneInputValue(newInputValue)
             }}
-            id={`moveGoodsForm.controllable-states-demo-zone${index}`} //Unique id for Autocomplete
+            id={`moveGoodsForm.controllable-states-demo-zone${index}`} // Unique id for Autocomplete
             options={zones}
             sx={{ flex: 1 }}
-            disabled={fieldsDisabled} //Diable the field when we haven't selected goodType
+            disabled={fieldsDisabled} // Disable the field when goodType is not selected
             renderInput={(params) => (
               <TextField
                 {...params}

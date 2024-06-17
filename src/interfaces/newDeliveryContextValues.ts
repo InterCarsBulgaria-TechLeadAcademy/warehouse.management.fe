@@ -8,4 +8,12 @@ export interface NewDeliveryContextValues {
   handleBack: () => void
   handleClickOpen: () => void
   handleSubmit: SubmitHandler<any>
+  pallets: number
+  setPallets: React.Dispatch<React.SetStateAction<number>>
+  packets: number
+  setPackets: React.Dispatch<React.SetStateAction<number>>
+  pieces: number
+  setPieces: React.Dispatch<React.SetStateAction<number>>
+  alertQuantities: string
+  setAlertQuantities: React.Dispatch<React.SetStateAction<string>>
 }

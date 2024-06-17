@@ -1,4 +1,4 @@
-import { Button } from '@mui/material'
+import { Box, Button } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { UseFormReturn } from 'react-hook-form'
 import { useState } from 'react'
@@ -11,7 +11,7 @@ export default function NewDeliveryStep4Form({
   formState: { errors }
 }: UseFormReturn<NewDeliveryStep4FormData>) {
   const { t: translate } = useTranslation()
-  const { formsData } = useNewDeliveryContext()
+  const { formsData, alertQuantities } = useNewDeliveryContext()
 
   //Only the goodType selected in step 3 should be available
   const goodType = formsData.goods.map((good: any) => good.goodTypeStep3)
@@ -35,9 +35,9 @@ export default function NewDeliveryStep4Form({
           goodType={goodType}
           zones={zones}
           index={index}
-          formsData={formsData}
         />
       ))}
+      <Box>{alertQuantities}</Box>
       <Button variant="contained" sx={{ alignSelf: 'flex-start' }} onClick={addGoodHandler}>
         {translate('newDelivery.labels.step4.addNewMove')}
       </Button>
