@@ -17,12 +17,11 @@ export const newDeliveryStep2Schema = yup
   .object({
     vendorName: yup.string().required('newDelivery.errors.step2.vendorName.required'),
     vendorId: yup.number().typeError('newDelivery.errors.step2.vendorId.typeError'),
-    truckNumber: yup.number().typeError('newDelivery.errors.step2.truckNumber.typeError')
-
-    // deliveryTime: yup
-    //   .date()
-    //   .typeError('newDelivery.errors.step2.deliveryTime.validDate')
-    //   .required('newDelivery.errors.step2.deliveryTime.required')
+    truckNumber: yup.number().typeError('newDelivery.errors.step2.truckNumber.typeError'),
+    deliveryTime: yup
+      .date()
+      .required('newDelivery.errors.step2.deliveryTime.required')
+      .typeError('newDelivery.errors.step2.deliveryTime.validDate')
   })
   .required()
 
@@ -30,26 +29,8 @@ export interface NewDeliveryStep2FormData extends yup.InferType<typeof newDelive
   vendorName: string
   vendorId: number
   truckNumber: number
-  // deliveryTime: Date
+  deliveryTime: Date
 }
-
-// import * as yup from 'yup'
-
-// export const newDeliveryStep3Schema = yup
-//   .object({
-//     goodType: yup.string().required('newDelivery.errors.step3.goodType.required'),
-//     goodQuantity: yup
-//       .number()
-//       .required('newDelivery.errors.step3.goodQuantity.required')
-//       .typeError('newDelivery.errors.step3.goodQuantity.typeError')
-//       .min(1, 'newDelivery.errors.step3.goodQuantity.min')
-//   })
-//   .required()
-
-// export interface NewDeliveryStep3FormData extends yup.InferType<typeof newDeliveryStep3Schema> {
-//   goodType: string
-//   goodQuantity: number
-// }
 
 export const newDeliveryStep3Schema = yup
   .object({
@@ -68,7 +49,7 @@ export const newDeliveryStep3Schema = yup
 
 export interface NewDeliveryStep3FormData extends yup.InferType<typeof newDeliveryStep3Schema> {
   goods: {
-    // понеже goodType и goodQuantity ги има в Step4, трябва да бъдат уникални
+    //Because goodType and goodQuantity are in Step4, they must be unique
     goodTypeStep3: string
     goodQuantityStep3: number
   }[]
@@ -92,7 +73,7 @@ export const newDeliveryStep4Schema = yup
 
 export interface NewDeliveryStep4FormData extends yup.InferType<typeof newDeliveryStep4Schema> {
   goods: {
-    // понеже goodType и goodQuantity ги има в Step3, трябва да бъдат уникални
+    //because goodType and goodQuantity are in Step3, they must be unique
     goodTypeStep4: string
     goodQuantityStep4: number
     zone: string

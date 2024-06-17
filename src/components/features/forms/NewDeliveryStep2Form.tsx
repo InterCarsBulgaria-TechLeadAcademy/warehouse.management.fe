@@ -3,13 +3,9 @@ import { Autocomplete, TextField } from '@mui/material'
 import React from 'react'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-
-// Please npm install @mui/x-date-pickers from the project.
-
-// import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
-// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-// import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 
 const vendorName = ['Bosch', 'Valeo']
 
@@ -86,32 +82,29 @@ export default function NewDeliveryStep2Form({
         )}
       />
 
-      {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DemoContainer components={['DatePicker']}>
-            <Controller
-              name="deliveryTime"
-              control={control}
-              render={({ field }) => (
-                <DatePicker
-                  {...field}
-                  label={translate('newDelivery.labels.step2.deliveryTime')}
-                  inputFormat="dd/MM/yyyy" // Define your desired date format here
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      required
-                      fullWidth
-                      error={!!errors.deliveryTime}
-                      helperText={
-                        errors.deliveryTime?.message ? translate(errors.deliveryTime.message) : ''
-                      }
-                    />
-                  )}
-                />
-              )}
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <Controller
+          name="deliveryTime"
+          control={control}
+          render={({ field }) => (
+            <DatePicker
+              {...field}
+              label={translate('newDelivery.labels.step2.deliveryTime')}
+              format="DD/MM/YYYY"
+              slotProps={{
+                textField: {
+                  required: true,
+                  fullWidth: true,
+                  error: !!errors.deliveryTime,
+                  helperText: errors.deliveryTime?.message
+                    ? translate(errors.deliveryTime.message)
+                    : ''
+                }
+              }}
             />
-          </DemoContainer>
-        </LocalizationProvider> */}
+          )}
+        />
+      </LocalizationProvider>
     </>
   )
 }
