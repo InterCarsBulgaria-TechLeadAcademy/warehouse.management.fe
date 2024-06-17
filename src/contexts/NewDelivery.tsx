@@ -35,16 +35,38 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   const [alertQuantities, setAlertQuantities] = useState('')
   const steps = useNewDeliverySteps()
 
-  console.log(`Pallets: ${pallets}`)
-  console.log(`Pallets: ${packets}`)
-  console.log(`Pallets: ${pieces}`)
+  useEffect(() => {
+    // Calculate quantities based on formsData when it changes
+    if (formsData.goods) {
+      const palletsCount = formsData.goods.reduce((acc: number, good: any) => {
+        if (good.goodTypeStep3 === 'Палети') {
+          return acc + good.goodQuantityStep3
+        }
+        return acc
+      }, 0)
+
+      const packetsCount = formsData.goods.reduce((acc: number, good: any) => {
+        if (good.goodTypeStep3 === 'Пакети') {
+          return acc + good.goodQuantityStep3
+        }
+        return acc
+      }, 0)
+
+      const piecesCount = formsData.goods.reduce((acc: number, good: any) => {
+        if (good.goodTypeStep3 === 'Бройки') {
+          return acc + good.goodQuantityStep3
+        }
+        return acc
+      }, 0)
+
+      setPallets(palletsCount)
+      setPackets(packetsCount)
+      setPieces(piecesCount)
+    }
+  }, [formsData])
 
   useEffect(() => {
-    if (pallets > 0 || packets > 0 || pieces > 0) {
-      setAlertQuantities(
-        `Остава да поставите още ${pallets} палети, ${packets} пакети, ${pieces} бройки`
-      )
-    }
+    setAlertQuantities(`Поставите ${pallets} палети, ${packets} пакети, ${pieces} бройки в зони`)
   }, [pallets, packets, pieces])
 
   const handleClickOpen = () => {
@@ -73,6 +95,8 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
       setCurrentStep((prev) => prev + 1)
     }
   }
+
+  console.log(`pallets: ${pallets}`)
 
   const newDeliveryContextValues: NewDeliveryContextValues = {
     currentStep,

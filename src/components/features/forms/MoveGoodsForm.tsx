@@ -33,6 +33,10 @@ export default function MoveGoodsForm({
   const [goodQuantityValue, setGoodQuantityValue] = useState('')
   const [fieldsDisabled, setFieldsDisabled] = useState(true)
 
+  // console.log(formsData)
+  console.log(`goodTypeValue: ${goodTypeValue}`)
+  console.log(`goodTypeInputValue: ${goodTypeInputValue}`)
+
   useEffect(() => {
     if (goodTypeValue !== null && zoneValue !== null && goodQuantityValue !== '') {
       const good = formsData.goods.find((good: any) => good.goodTypeStep3 === goodTypeValue)
