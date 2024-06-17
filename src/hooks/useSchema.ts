@@ -9,13 +9,13 @@ import { ObjectSchema } from 'yup'
 
 export default function useSchema(currentStep: number): ObjectSchema<any> | undefined {
   switch (currentStep) {
-    case 0:
-      return newDeliveryStep1Schema
     case 1:
-      return newDeliveryStep2Schema
+      return newDeliveryStep1Schema
     case 2:
-      return newDeliveryStep3Schema
+      return newDeliveryStep2Schema
     case 3:
+      return newDeliveryStep3Schema
+    case 4:
       return newDeliveryStep4Schema
     default:
       return undefined

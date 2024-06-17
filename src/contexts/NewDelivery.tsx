@@ -8,7 +8,7 @@ interface NewDeliveryProviderProps {
 }
 
 export const NewDeliveryContext = createContext<NewDeliveryContextValues>({
-  currentStep: 0,
+  currentStep: 1,
   formsData: {},
   openDialog: false,
   onCloseDialog: () => {},
@@ -18,7 +18,7 @@ export const NewDeliveryContext = createContext<NewDeliveryContextValues>({
 })
 
 export default function NewDeliveryProvider({ children }: NewDeliveryProviderProps) {
-  const [currentStep, setCurrentStep] = useState(0)
+  const [currentStep, setCurrentStep] = useState(1)
   const [formsData, setFormsData] = useState<any>({})
   const [openDialog, setOpenDialog] = useState(false)
   const steps = useNewDeliverySteps()
@@ -29,11 +29,11 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
 
   const onCloseDialog = () => {
     setOpenDialog(false)
-    setCurrentStep(0)
+    setCurrentStep(1)
   }
 
   const handleBack = () => {
-    if (currentStep > 0) {
+    if (currentStep > 1) {
       setCurrentStep((prev) => prev - 1)
     }
   }

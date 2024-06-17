@@ -28,7 +28,7 @@ export default function FormDialog<T extends FieldValues>({
   open,
   title,
   steps,
-  activeStep = 0,
+  activeStep = 1,
   discardText,
   confirmText,
   onCloseDialog,
@@ -79,8 +79,8 @@ export default function FormDialog<T extends FieldValues>({
             <Button
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={activeStep === 0 ? handleClose : handleBack}>
-              {activeStep === 0 ? translate('newDelivery.labels.exit') : discardText}
+              onClick={activeStep === 1 ? handleClose : handleBack}>
+              {activeStep === 1 ? translate('newDelivery.labels.exit') : discardText}
             </Button>
 
             <Button
