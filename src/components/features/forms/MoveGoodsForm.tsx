@@ -59,7 +59,7 @@ export default function MoveGoodsForm({
   return (
     <Box sx={{ display: 'flex', gap: '1em', alignItems: 'center' }}>
       <Controller
-        name={`goods.${index}.goodTypeStep4`} // Използване на индекса за уникално име на полето
+        name={`goods.${index}.goodTypeStep4`} //Use the index for unique a name field
         control={control}
         render={({ field }) => (
           <Autocomplete
@@ -73,7 +73,7 @@ export default function MoveGoodsForm({
             onInputChange={(_event, newInputValue) => {
               setGoodTypeInputValue(newInputValue)
             }}
-            id={`moveGoodsForm.controllable-states-demo-goodType${index}`} // Уникален ID за Autocomplete
+            id={`moveGoodsForm.controllable-states-demo-goodType${index}`} //Unique id for Autocomplete
             options={goodType}
             sx={{ flex: 1 }}
             renderInput={(params) => (
@@ -93,18 +93,18 @@ export default function MoveGoodsForm({
         )}
       />
       <Controller
-        name={`goods.${index}.goodQuantityStep4`} // Използване на индекса за уникално име на полето
+        name={`goods.${index}.goodQuantityStep4`} //Use the index for unique a name field
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             label={translate('newDelivery.labels.step4.goodQuantity')}
-            id={`moveGoodsForm.goodQuantity${index}`} // Уникален ID за TextField
-            name={`moveGoodsForm.goodQuantity${index}`} // Уникално име за полето
+            id={`moveGoodsForm.goodQuantity${index}`} //Unique id for TextField
+            name={`moveGoodsForm.goodQuantity${index}`} //Use the index for unique a name field
             sx={{ flex: 1 }}
             required
-            disabled={fieldsDisabled} // Деактивиране на полетото при липса на избран тип
-            value={fieldsDisabled ? '' : goodQuantityValue} // Задаване на стойността на основата на fieldsDisabled
+            disabled={fieldsDisabled} //Diable the field when we haven't selected goodType
+            value={fieldsDisabled ? '' : goodQuantityValue} //Set the base value to fieldsDisabled
             onChange={(e) => {
               setGoodQuantityValue(e.target.value)
               field.onChange(e.target.value)
@@ -119,7 +119,7 @@ export default function MoveGoodsForm({
         )}
       />
       <Controller
-        name={`goods.${index}.zone`} // Използване на индекса за уникално име на полето
+        name={`goods.${index}.zone`} //Use the index for unique a name field
         control={control}
         render={({ field }) => (
           <Autocomplete
@@ -133,10 +133,10 @@ export default function MoveGoodsForm({
             onInputChange={(_event, newInputValue) => {
               setZoneInputValue(newInputValue)
             }}
-            id={`moveGoodsForm.controllable-states-demo-zone${index}`} // Уникален ID за Autocomplete
+            id={`moveGoodsForm.controllable-states-demo-zone${index}`} //Unique id for Autocomplete
             options={zones}
             sx={{ flex: 1 }}
-            disabled={fieldsDisabled} // Деактивиране на полетото при липса на избран тип
+            disabled={fieldsDisabled} //Diable the field when we haven't selected goodType
             renderInput={(params) => (
               <TextField
                 {...params}

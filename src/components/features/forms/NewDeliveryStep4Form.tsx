@@ -16,15 +16,15 @@ export default function NewDeliveryStep4Form({
 }: NewDeliveryStep4FormProps) {
   const { t: translate } = useTranslation()
 
-  // Да са налични само тези, които са в step3
+  //Only the goodType selected in step 3 should be available
   const goodType = formsData.goods.map((good: any) => good.goodTypeStep3)
 
   const zones = ['Зона 1', 'Зона 2', 'Зона 3']
 
-  const [moveGoodsForms, setMoveGoodsForms] = useState<number[]>([0]) //Списък с индексите на формите
+  const [moveGoodsForms, setMoveGoodsForms] = useState<number[]>([0]) //List with form indexes
 
   function addGoodHandler() {
-    const newIndex = moveGoodsForms.length // Нов индекс за новата форма
+    const newIndex = moveGoodsForms.length //New index for the new form
     setMoveGoodsForms([...moveGoodsForms, newIndex])
   }
 
@@ -37,8 +37,8 @@ export default function NewDeliveryStep4Form({
           errors={errors}
           goodType={goodType}
           zones={zones}
-          index={index} // Предаване на индекса като проп
-          formsData={formsData} //Предаване на данните на попълнените форми до момента
+          index={index}
+          formsData={formsData}
         />
       ))}
       <Button variant="contained" sx={{ alignSelf: 'flex-start' }} onClick={addGoodHandler}>

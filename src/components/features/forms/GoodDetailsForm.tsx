@@ -14,7 +14,7 @@ interface GoodDetailsFormProps {
   onDeleteHandler: () => void
   index: number
   formsCount: number
-  onGoodTypeChange: (value: string | null) => void // Добавяне на функция за актуализиране на избраните goodType
+  onGoodTypeChange: (value: string | null) => void //Add a function for update selected goodType
 }
 
 export default function GoodDetailsForm({
@@ -34,7 +34,7 @@ export default function GoodDetailsForm({
   return (
     <Box sx={{ display: 'flex', gap: '1em', alignItems: 'center' }}>
       <Controller
-        name={`goods.${index}.goodTypeStep3`} // Използване на индекса за уникално име на полето
+        name={`goods.${index}.goodTypeStep3`} //Use the index for unique a name field
         control={control}
         render={({ field }) => (
           <Autocomplete
@@ -43,13 +43,13 @@ export default function GoodDetailsForm({
             onChange={(_event: any, newValue: string | null) => {
               setValue(newValue)
               field.onChange(newValue)
-              onGoodTypeChange(newValue) // Актуализиране на избраните goodType
+              onGoodTypeChange(newValue) //Updating the selected goodType
             }}
             inputValue={inputValue}
             onInputChange={(_event, newInputValue) => {
               setInputValue(newInputValue)
             }}
-            id={`GoodDetailsForm.controllable-states-demo${index}`} // Уникален ID за Autocomplete
+            id={`GoodDetailsForm.controllable-states-demo${index}`} //Unique id for Autocomplete
             options={goodType}
             sx={{ flex: 1 }}
             renderInput={(params) => (
@@ -69,14 +69,14 @@ export default function GoodDetailsForm({
         )}
       />
       <Controller
-        name={`goods.${index}.goodQuantityStep3`} // Използване на индекса за уникално име на полето
+        name={`goods.${index}.goodQuantityStep3`} //Use the index for unique a name field
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             label={translate('newDelivery.labels.step3.goodQuantity')}
-            id={`GoodDetailsForm.goodQuantity${index}`} // Уникален ID за TextField
-            name={`GoodDetailsForm.goodQuantity-${index}`} // Уникално име за полето
+            id={`GoodDetailsForm.goodQuantity${index}`} //Unique id for TextField
+            name={`GoodDetailsForm.goodQuantity-${index}`} //Use the index for unique a name field
             sx={{ flex: 1 }}
             required
             error={!!errors?.goods?.[index]?.goodQuantityStep3}

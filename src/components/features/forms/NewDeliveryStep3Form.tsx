@@ -17,7 +17,7 @@ export default function NewDeliveryStep3Form({
     translate('newDelivery.goodType.pieces')
   ]
 
-  const [goodDetailsForms, setGoodDetailsForms] = useState<number[]>([0]) //Списък с индексите на формите
+  const [goodDetailsForms, setGoodDetailsForms] = useState<number[]>([0]) //List with form indexes
   const [selectedGoodTypes, setSelectedGoodTypes] = useState<(string | null)[]>([null])
 
   function onDeleteHandler(index: number) {
@@ -28,7 +28,7 @@ export default function NewDeliveryStep3Form({
   }
 
   function addGoodHandler() {
-    const newIndex = goodDetailsForms.length // Нов индекс за новата форма
+    const newIndex = goodDetailsForms.length //New index for the new form
     setGoodDetailsForms([...goodDetailsForms, newIndex])
     setSelectedGoodTypes([...selectedGoodTypes, null])
   }
@@ -54,9 +54,9 @@ export default function NewDeliveryStep3Form({
           errors={errors}
           goodType={availableGoodTypes(index)}
           onDeleteHandler={() => onDeleteHandler(index)}
-          index={index} // Предаване на индекса като проп
-          formsCount={goodDetailsForms.length} //Предаване на броя на формите, за да контролиране
-          onGoodTypeChange={(value) => handleGoodTypeChange(index, value)} // Предаване на функция за актуализиране на избраните goodType
+          index={index}
+          formsCount={goodDetailsForms.length}
+          onGoodTypeChange={(value) => handleGoodTypeChange(index, value)} //Pass a function for updating selected goodType
         />
       ))}
       <Button variant="contained" sx={{ alignSelf: 'flex-start' }} onClick={addGoodHandler}>
