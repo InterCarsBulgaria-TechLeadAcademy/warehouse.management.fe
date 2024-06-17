@@ -2,13 +2,13 @@ import Paper from '@mui/material/Paper'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
-import login_image from '../../assets/login-image.webp'
-import intercars_logo from '../../assets/ic_new_logo.jpg'
+import login_image from '../assets/login-image.webp'
+import intercars_logo from '../assets/ic_new_logo.jpg'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useTranslation } from 'react-i18next'
 import { LoginFormData, loginSchema } from '@/schemas/loginSchema'
-import LoginForm from '@/components/features/forms/LoginForm' // Импортираме LoginForm
+import LoginForm from '@/components/features/forms/LoginForm'
 
 export default function Login() {
   const { t: translate } = useTranslation()

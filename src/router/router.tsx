@@ -15,7 +15,7 @@ import {
 
 const Home = lazy(() => import('@/pages/main/Home.tsx'))
 const Projects = lazy(() => import('@/pages/main/Projects.tsx'))
-const Login = lazy(() => import('@/pages/main/Login.tsx'))
+const Login = lazy(() => import('@/pages/Login.tsx'))
 const DefaultLayout = lazy(() => import('@/layouts/DefaultLayout.tsx'))
 const Vendors = lazy(() => import('@/pages/admin/Vendors.tsx'))
 const Zones = lazy(() => import('@/pages/admin/Zones.tsx'))
