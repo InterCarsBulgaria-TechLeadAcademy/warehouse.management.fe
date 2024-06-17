@@ -1,4 +1,4 @@
-import { NewDeliveryStep2FormData } from '@/schemas/newDeliveryStep2'
+import { NewDeliveryStep2FormData } from '@/schemas/newDeliverySchemas'
 import { Autocomplete, TextField } from '@mui/material'
 import React from 'react'
 import { Controller, UseFormReturn } from 'react-hook-form'
@@ -31,12 +31,12 @@ export default function NewDeliveryStep2Form({
           <Autocomplete
             {...field}
             value={value}
-            onChange={(event: any, newValue: string | null) => {
+            onChange={(_event: any, newValue: string | null) => {
               setValue(newValue)
               field.onChange(newValue)
             }}
             inputValue={inputValue}
-            onInputChange={(event, newInputValue) => {
+            onInputChange={(_event, newInputValue) => {
               setInputValue(newInputValue)
             }}
             id="controllable-states-demo"

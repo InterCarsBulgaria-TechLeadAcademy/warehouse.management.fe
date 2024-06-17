@@ -1,12 +1,11 @@
 import { Box } from '@mui/material'
 import { Control, Controller, FieldErrors } from 'react-hook-form'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { NewDeliveryStep3FormData } from '@/schemas/newDeliveryStep3'
 import { useTranslation } from 'react-i18next'
-
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import React from 'react'
+import { NewDeliveryStep3FormData } from '@/schemas/newDeliverySchemas'
 
 interface GoodDetailsFormProps {
   control: Control<NewDeliveryStep3FormData, any>

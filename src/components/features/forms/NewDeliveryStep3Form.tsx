@@ -2,8 +2,8 @@ import { Button } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import GoodDetailsForm from './GoodDetailsForm'
 import { UseFormReturn } from 'react-hook-form'
-import { NewDeliveryStep3FormData } from '@/schemas/newDeliveryStep3'
 import { useState } from 'react'
+import { NewDeliveryStep3FormData } from '@/schemas/newDeliverySchemas'
 
 export default function NewDeliveryStep3Form({
   control,

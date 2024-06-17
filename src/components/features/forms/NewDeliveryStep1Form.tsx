@@ -1,4 +1,4 @@
-import { NewDeliveryStep1FormData } from '@/schemas/newDeliveryStep1'
+import { NewDeliveryStep1FormData } from '@/schemas/newDeliverySchemas'
 import {
   Checkbox,
   FormControl,

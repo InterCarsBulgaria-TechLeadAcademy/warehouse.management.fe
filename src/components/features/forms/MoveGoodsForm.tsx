@@ -1,11 +1,10 @@
 import { Box } from '@mui/material'
 import { Control, Controller, FieldErrors } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import { useEffect, useState } from 'react'
-import { NewDeliveryStep4FormData } from '@/schemas/newDeliveryStep4'
+import { NewDeliveryStep4FormData } from '@/schemas/newDeliverySchemas'
 
 interface GoodDetailsFormProps {
   control: Control<NewDeliveryStep4FormData, any>

@@ -2,8 +2,8 @@ import { Button } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { UseFormReturn } from 'react-hook-form'
 import { useState } from 'react'
-import { NewDeliveryStep4FormData } from '@/schemas/newDeliveryStep4'
 import MoveGoodsForm from './MoveGoodsForm'
+import { NewDeliveryStep4FormData } from '@/schemas/newDeliverySchemas'
 
 interface NewDeliveryStep4FormProps extends UseFormReturn<NewDeliveryStep4FormData> {
   formsData: any

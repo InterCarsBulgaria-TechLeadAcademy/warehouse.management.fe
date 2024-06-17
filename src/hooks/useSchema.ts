@@ -1,4 +1,4 @@
-import { newDeliveryStep1Schema } from '@/schemas/newDeliveryStep1'
+import { newDeliveryStep1Schema } from '@/schemas/newDeliverySchemas'
 import { newDeliveryStep2Schema } from '@/schemas/newDeliveryStep2'
 import { newDeliveryStep3Schema } from '@/schemas/newDeliveryStep3'
 import { newDeliveryStep4Schema } from '@/schemas/newDeliveryStep4'
