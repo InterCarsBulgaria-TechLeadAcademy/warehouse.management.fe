@@ -59,8 +59,6 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
     )
   }, [goodsTypeQuantityStep4])
 
-  console.log(goodsTypeQuantityStep4)
-
   const handleClickOpen = () => {
     setOpenDialog(true)
   }

@@ -32,8 +32,6 @@ export default function NewDeliveryStep4Form({
     setMoveGoodsForms(updatedForms)
 
     if (typeof goodTypeValue === 'string') {
-      console.log(`goodTypeValue:${goodTypeValue}`)
-      console.log(`goodQuantityValue:${goodQuantityValue}`)
       const newGoodsTypeQuantityStep4: any = [...goodsTypeQuantityStep4]
       switch (goodTypeValue) {
         case 'Палети': {
