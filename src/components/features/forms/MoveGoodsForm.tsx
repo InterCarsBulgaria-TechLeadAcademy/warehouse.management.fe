@@ -6,6 +6,7 @@ import Autocomplete from '@mui/material/Autocomplete'
 import { useEffect, useState } from 'react'
 import { NewDeliveryStep4FormData } from '@/schemas/newDeliverySchemas'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 interface GoodDetailsFormProps {
   control: Control<NewDeliveryStep4FormData, any>
@@ -13,6 +14,8 @@ interface GoodDetailsFormProps {
   goodType: string[]
   zones: string[]
   index: number
+  onDeleteHandler: () => void
+  formsCount: number
 }
 
 export default function MoveGoodsForm({
@@ -20,7 +23,9 @@ export default function MoveGoodsForm({
   errors,
   goodType,
   zones,
-  index
+  index,
+  onDeleteHandler,
+  formsCount
 }: GoodDetailsFormProps) {
   const { t: translate } = useTranslation()
   const { formsData, setPallets, setPackets, setPieces, setAlertQuantities } =
@@ -196,6 +201,7 @@ export default function MoveGoodsForm({
           />
         )}
       />
+      {formsCount > 1 ? <DeleteIcon sx={{ cursor: 'pointer' }} onClick={onDeleteHandler} /> : null}
     </Box>
   )
 }

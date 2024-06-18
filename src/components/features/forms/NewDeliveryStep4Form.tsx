@@ -25,6 +25,11 @@ export default function NewDeliveryStep4Form({
     setMoveGoodsForms([...moveGoodsForms, newIndex])
   }
 
+  function onDeleteHandler(index: number) {
+    const updatedForms = moveGoodsForms.filter((_, id) => id !== index)
+    setMoveGoodsForms(updatedForms)
+  }
+
   return (
     <>
       {moveGoodsForms.map((index) => (
@@ -35,6 +40,8 @@ export default function NewDeliveryStep4Form({
           goodType={goodType}
           zones={zones}
           index={index}
+          formsCount={moveGoodsForms.length}
+          onDeleteHandler={() => onDeleteHandler(index)}
         />
       ))}
       <Box>{alertQuantities}</Box>
