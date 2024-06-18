@@ -14,7 +14,7 @@ interface GoodDetailsFormProps {
   goodType: string[]
   zones: string[]
   index: number
-  onDeleteHandler: () => void
+  onDeleteHandler: (goodTypeValue: string | null, quantity: number) => void
   formsCount: number
 }
 
@@ -28,7 +28,7 @@ export default function MoveGoodsForm({
   formsCount
 }: GoodDetailsFormProps) {
   const { t: translate } = useTranslation()
-  const { formsData, setPallets, setPackets, setPieces, setAlertQuantities } =
+  const { formsData, goodsTypeQuantityStep4, setGoodTypeQuantityStep4, setAlertQuantities } =
     useNewDeliveryContext()
 
   const [goodTypeValue, setGoodTypeValue] = useState<string | null>(null)
@@ -38,27 +38,28 @@ export default function MoveGoodsForm({
   const [goodQuantityValue, setGoodQuantityValue] = useState('')
   const [fieldsDisabled, setFieldsDisabled] = useState(true)
 
-  // console.log(formsData)
-  console.log(`goodTypeValue: ${goodTypeValue}`)
-  console.log(`goodTypeInputValue: ${goodTypeInputValue}`)
-
+  // console.log(goodsTypeQuantityStep4)
   useEffect(() => {
     if (goodTypeValue !== null && zoneValue !== null && goodQuantityValue !== '') {
       const good = formsData.goods.find((good: any) => good.goodTypeStep3 === goodTypeValue)
       if (good) {
         if (Number(goodQuantityValue) < good.goodQuantityStep3) {
+          const newGoodsTypeQuantityStep4 = [...goodsTypeQuantityStep4]
           switch (goodTypeValue) {
             case 'Палети': {
-              return setPallets(good.goodQuantityStep3 - Number(goodQuantityValue))
+              newGoodsTypeQuantityStep4[0].pallets -= Number(goodQuantityValue)
+              return setGoodTypeQuantityStep4(newGoodsTypeQuantityStep4)
             }
             case 'Пакети': {
-              return setPackets(good.goodQuantityStep3 - Number(goodQuantityValue))
+              newGoodsTypeQuantityStep4[0].packages -= Number(goodQuantityValue)
+              return setGoodTypeQuantityStep4(newGoodsTypeQuantityStep4)
             }
             case 'Бройки': {
-              return setPieces(good.goodQuantityStep3 - Number(goodQuantityValue))
+              newGoodsTypeQuantityStep4[0].pieces -= Number(goodQuantityValue)
+              return setGoodTypeQuantityStep4(newGoodsTypeQuantityStep4)
             }
             default:
-              return setPallets(0), setPackets(0), setPieces(0)
+            // return setPallets(0), setPackets(0), setPieces(0)
           }
         } else if (Number(goodQuantityValue) === good.goodQuantityStep3) {
           // switch (goodTypeValue) {
@@ -81,16 +82,16 @@ export default function MoveGoodsForm({
         }
       }
     } else {
-      setAlertQuantities('')
+      // setAlertQuantities('')
     }
   }, [
     goodTypeValue,
     zoneValue,
     goodQuantityValue,
-    formsData.goods,
-    setPallets,
-    setPackets,
-    setPieces
+    formsData.goods
+    // setPallets,
+    // setPackets,
+    // setPieces
   ])
 
   useEffect(() => {
@@ -201,7 +202,12 @@ export default function MoveGoodsForm({
           />
         )}
       />
-      {formsCount > 1 ? <DeleteIcon sx={{ cursor: 'pointer' }} onClick={onDeleteHandler} /> : null}
+      {formsCount > 1 ? (
+        <DeleteIcon
+          sx={{ cursor: 'pointer' }}
+          onClick={() => onDeleteHandler(goodTypeValue, Number(goodQuantityValue))}
+        />
+      ) : null}
     </Box>
   )
 }

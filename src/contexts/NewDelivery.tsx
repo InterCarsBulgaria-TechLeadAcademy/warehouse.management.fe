@@ -15,12 +15,8 @@ export const NewDeliveryContext = createContext<NewDeliveryContextValues>({
   handleBack: () => {},
   handleClickOpen: () => {},
   handleSubmit: () => {},
-  pallets: 0,
-  setPallets: () => {},
-  packets: 0,
-  setPackets: () => {},
-  pieces: 0,
-  setPieces: () => {},
+  goodsTypeQuantityStep4: [{ pallets: 0, packages: 0, pieces: 0 }],
+  setGoodTypeQuantityStep4: () => {},
   alertQuantities: '',
   setAlertQuantities: () => {}
 })
@@ -29,45 +25,41 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   const [currentStep, setCurrentStep] = useState(1)
   const [formsData, setFormsData] = useState<any>({})
   const [openDialog, setOpenDialog] = useState(false)
-  const [pallets, setPallets] = useState(0)
-  const [packets, setPackets] = useState(0)
-  const [pieces, setPieces] = useState(0)
+  const [goodsTypeQuantityStep4, setGoodTypeQuantityStep4] = useState([
+    { pallets: 0, packages: 0, pieces: 0 }
+  ])
   const [alertQuantities, setAlertQuantities] = useState('')
   const steps = useNewDeliverySteps()
 
+  // console.log(formsData)
+  //Initial set goodsTypeQuantityStep4 from step3 quantities
   useEffect(() => {
-    // Calculate quantities based on formsData when it changes
-    if (formsData.goods) {
-      const palletsCount = formsData.goods.reduce((acc: number, good: any) => {
-        if (good.goodTypeStep3 === 'Палети') {
-          return acc + good.goodQuantityStep3
-        }
-        return acc
-      }, 0)
-
-      const packetsCount = formsData.goods.reduce((acc: number, good: any) => {
-        if (good.goodTypeStep3 === 'Пакети') {
-          return acc + good.goodQuantityStep3
-        }
-        return acc
-      }, 0)
-
-      const piecesCount = formsData.goods.reduce((acc: number, good: any) => {
-        if (good.goodTypeStep3 === 'Бройки') {
-          return acc + good.goodQuantityStep3
-        }
-        return acc
-      }, 0)
-
-      setPallets(palletsCount)
-      setPackets(packetsCount)
-      setPieces(piecesCount)
-    }
+    const newGoodsTypeQuantity = { pallets: 0, packages: 0, pieces: 0 }
+    formsData.goods?.forEach((good: any) => {
+      switch (good.goodTypeStep3) {
+        case 'Палети':
+          newGoodsTypeQuantity.pallets += good.goodQuantityStep3
+          break
+        case 'Пакети':
+          newGoodsTypeQuantity.packages += good.goodQuantityStep3
+          break
+        case 'Бройки':
+          newGoodsTypeQuantity.pieces += good.goodQuantityStep3
+          break
+        default:
+          break
+      }
+    })
+    setGoodTypeQuantityStep4([newGoodsTypeQuantity])
   }, [formsData])
 
   useEffect(() => {
-    setAlertQuantities(`Поставите ${pallets} палети, ${packets} пакети, ${pieces} бройки в зони`)
-  }, [pallets, packets, pieces])
+    setAlertQuantities(
+      `Поставите ${goodsTypeQuantityStep4[0].pallets} палети, ${goodsTypeQuantityStep4[0].packages} пакети, ${goodsTypeQuantityStep4[0].pieces} бройки в зони`
+    )
+  }, [goodsTypeQuantityStep4])
+
+  console.log(goodsTypeQuantityStep4)
 
   const handleClickOpen = () => {
     setOpenDialog(true)
@@ -96,8 +88,6 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
     }
   }
 
-  console.log(`pallets: ${pallets}`)
-
   const newDeliveryContextValues: NewDeliveryContextValues = {
     currentStep,
     formsData,
@@ -106,12 +96,8 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
     handleBack,
     handleClickOpen,
     handleSubmit,
-    pallets,
-    setPallets,
-    packets,
-    setPackets,
-    pieces,
-    setPieces,
+    goodsTypeQuantityStep4,
+    setGoodTypeQuantityStep4,
     alertQuantities,
     setAlertQuantities
   }
