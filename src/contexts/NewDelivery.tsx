@@ -1,7 +1,7 @@
-import useNewDeliverySteps from '@/hooks/useNewDeliverySteps'
-import { NewDeliveryContextValues } from '@/interfaces/newDeliveryContextValues'
 import { createContext, ReactNode, useEffect, useState } from 'react'
 import { SubmitHandler } from 'react-hook-form'
+import useNewDeliverySteps from '@/hooks/useNewDeliverySteps'
+import { NewDeliveryContextValues } from '@/interfaces/newDeliveryContextValues'
 
 interface NewDeliveryProviderProps {
   children: ReactNode
@@ -15,49 +15,115 @@ export const NewDeliveryContext = createContext<NewDeliveryContextValues>({
   handleBack: () => {},
   handleClickOpen: () => {},
   handleSubmit: () => {},
-  goodsTypeQuantityStep4: [{ pallets: 0, packages: 0, pieces: 0 }],
-  setGoodTypeQuantityStep4: () => {},
-  alertQuantities: '',
-  setAlertQuantities: () => {}
+  step4Items: [{ type: '', quantity: 0, zone: '' }],
+  setStep4Items: () => {},
+  updateStep4Item: () => {},
+  deleteStep4Item: () => {},
+  alertMessage: '',
+  isCompletedMove: false,
+  isExceedQuantity: false
 })
+
+interface MoveGood {
+  type: string // palettes | packages | pieces
+  quantity: number
+  zone: string
+}
 
 export default function NewDeliveryProvider({ children }: NewDeliveryProviderProps) {
   const [currentStep, setCurrentStep] = useState(1)
   const [formsData, setFormsData] = useState<any>({})
   const [openDialog, setOpenDialog] = useState(false)
-  const [goodsTypeQuantityStep4, setGoodTypeQuantityStep4] = useState([
-    { pallets: 0, packages: 0, pieces: 0 }
-  ])
-  const [alertQuantities, setAlertQuantities] = useState('')
   const steps = useNewDeliverySteps()
+  const [step4Items, setStep4Items] = useState<MoveGood[]>([{ type: '', quantity: 0, zone: '' }])
+  const [step3Items, setStep3Items] = useState({ pallets: 0, packages: 0, pieces: 0 })
+  const [alertMessage, setAlertMessage] = useState('')
+  const [isCompletedMove, setIsCompletedMove] = useState(false)
+  const [isExceedQuantity, setIsExceedQuantity] = useState(false)
 
-  // console.log(formsData)
-  //Initial set goodsTypeQuantityStep4 from step3 quantities
   useEffect(() => {
-    const newGoodsTypeQuantity = { pallets: 0, packages: 0, pieces: 0 }
-    formsData.goods?.forEach((good: any) => {
-      switch (good.goodTypeStep3) {
-        case 'Палети':
-          newGoodsTypeQuantity.pallets += good.goodQuantityStep3
-          break
-        case 'Пакети':
-          newGoodsTypeQuantity.packages += good.goodQuantityStep3
-          break
-        case 'Бройки':
-          newGoodsTypeQuantity.pieces += good.goodQuantityStep3
-          break
-        default:
-          break
-      }
-    })
-    setGoodTypeQuantityStep4([newGoodsTypeQuantity])
+    // Махни if проверката, когато context не е в main.ts
+    if (formsData.goods) {
+      const newStep3Items = { ...step3Items }
+      formsData.goods.map((good: any) => {
+        switch (good.goodTypeStep3) {
+          case 'Палети':
+            newStep3Items.pallets = good.goodQuantityStep3
+            return setStep3Items(newStep3Items)
+          case 'Пакети':
+            newStep3Items.packages = good.goodQuantityStep3
+            return setStep3Items(newStep3Items)
+          case 'Бройки':
+            newStep3Items.pieces = good.goodQuantityStep3
+            return setStep3Items(newStep3Items)
+        }
+      })
+    }
   }, [formsData])
 
   useEffect(() => {
-    setAlertQuantities(
-      `Поставите ${goodsTypeQuantityStep4[0].pallets} палети, ${goodsTypeQuantityStep4[0].packages} пакети, ${goodsTypeQuantityStep4[0].pieces} бройки в зони`
+    setAlertMessage(
+      `Остава да поставите ${step3Items.pallets} палети, ${step3Items.packages} пакети, ${step3Items.pieces} бройки в зони`
     )
-  }, [goodsTypeQuantityStep4])
+  }, [step3Items])
+
+  function updateStep4Item(index: number, newItem: MoveGood) {
+    const newStep4Items = [...step4Items]
+    newStep4Items[index] = newItem
+    setStep4Items(newStep4Items)
+  }
+
+  function deleteStep4Item(index: number) {
+    const newStep4Items = step4Items.filter((_, id) => id !== index)
+    setStep4Items(newStep4Items)
+  }
+
+  useEffect(() => {
+    const currentItems = { pallets: 0, packages: 0, pieces: 0 }
+
+    step4Items.map((item) => {
+      if (item.type === 'Палети') {
+        currentItems.pallets += item.quantity
+      } else if (item.type === 'Пакети') {
+        currentItems.packages += item.quantity
+      } else if (item.type === 'Бройки') {
+        currentItems.pieces += item.quantity
+      }
+      return item
+    })
+
+    const leftItems = {
+      pallets: step3Items.pallets - currentItems.pallets,
+      packages: step3Items.packages - currentItems.packages,
+      pieces: step3Items.pieces - currentItems.pieces
+    }
+
+    if (leftItems.pallets < 0) {
+      setIsExceedQuantity(true)
+      setAlertMessage(
+        `Количеството на палетите е надвишено с ${currentItems.pallets - step3Items.pallets}`
+      )
+    } else if (leftItems.packages < 0) {
+      setIsExceedQuantity(true)
+      setAlertMessage(
+        `Количеството на палетите е надвишено с ${currentItems.packages - step3Items.packages}`
+      )
+    } else if (leftItems.pieces < 0) {
+      setIsExceedQuantity(true)
+      setAlertMessage(
+        `Количеството на палетите е надвишено с ${currentItems.pieces - step3Items.pieces}`
+      )
+    } else if (leftItems.pallets === 0 && leftItems.packages === 0 && leftItems.pieces === 0) {
+      setIsCompletedMove(true)
+      setAlertMessage('Всички стоки са разпределени по зони')
+    } else {
+      setIsCompletedMove(false)
+      setIsExceedQuantity(false)
+      setAlertMessage(
+        `Остава да поставите ${leftItems.pallets} палети, ${leftItems.packages} пакети, ${leftItems.pieces} бройки в зони`
+      )
+    }
+  }, [step4Items])
 
   const handleClickOpen = () => {
     setOpenDialog(true)
@@ -76,7 +142,6 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
 
   const handleSubmit: SubmitHandler<any> = (data) => {
     if (currentStep === steps.length) {
-      // Final data
       console.log('Final submission:', data)
       setFormsData(data)
     } else {
@@ -94,10 +159,13 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
     handleBack,
     handleClickOpen,
     handleSubmit,
-    goodsTypeQuantityStep4,
-    setGoodTypeQuantityStep4,
-    alertQuantities,
-    setAlertQuantities
+    step4Items,
+    setStep4Items,
+    updateStep4Item,
+    deleteStep4Item,
+    alertMessage,
+    isCompletedMove,
+    isExceedQuantity
   }
 
   return (

@@ -8,10 +8,16 @@ export interface NewDeliveryContextValues {
   handleBack: () => void
   handleClickOpen: () => void
   handleSubmit: SubmitHandler<any>
-  goodsTypeQuantityStep4: { pallets: number; packages: number; pieces: number }[]
-  setGoodTypeQuantityStep4: React.Dispatch<
-    React.SetStateAction<{ pallets: number; packages: number; pieces: number }[]>
+  step4Items: { type: string; quantity: number; zone: string }[]
+  setStep4Items: React.Dispatch<
+    React.SetStateAction<{ type: string; quantity: number; zone: string }[]>
   >
-  alertQuantities: string
-  setAlertQuantities: React.Dispatch<React.SetStateAction<string>>
+  updateStep4Item: (
+    index: number,
+    newItem: { type: string; quantity: number; zone: string }
+  ) => void
+  deleteStep4Item: (index: number) => void
+  alertMessage: string
+  isCompletedMove: boolean
+  isExceedQuantity: boolean
 }

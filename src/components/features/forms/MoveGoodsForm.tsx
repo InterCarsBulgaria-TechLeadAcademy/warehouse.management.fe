@@ -14,7 +14,7 @@ interface GoodDetailsFormProps {
   goodType: string[]
   zones: string[]
   index: number
-  onDeleteHandler: (goodTypeValue: string | null, quantity: number) => void
+  onDeleteHandler: () => void
   formsCount: number
 }
 
@@ -28,81 +28,31 @@ export default function MoveGoodsForm({
   formsCount
 }: GoodDetailsFormProps) {
   const { t: translate } = useTranslation()
-  const { formsData, goodsTypeQuantityStep4, setGoodTypeQuantityStep4, setAlertQuantities } =
-    useNewDeliveryContext()
+  const { updateStep4Item, deleteStep4Item } = useNewDeliveryContext()
 
   const [goodTypeValue, setGoodTypeValue] = useState<string | null>(null)
   const [goodTypeInputValue, setGoodTypeInputValue] = useState('')
   const [zoneValue, setZoneValue] = useState<string | null>(null)
   const [zoneInputValue, setZoneInputValue] = useState('')
-  const [goodQuantityValue, setGoodQuantityValue] = useState('')
-  const [beforeRemoveGoodQuantityValue, setBeforeRemoveGoodQuantityValue] = useState(0)
+  const [goodQuantityValue, setGoodQuantityValue] = useState<string | undefined>('')
   const [fieldsDisabled, setFieldsDisabled] = useState(true)
 
   useEffect(() => {
-    //When remove only quantity
-    if (goodTypeValue !== null && zoneValue !== null && goodQuantityValue === '') {
-      const newGoodsTypeQuantityStep4: any = [...goodsTypeQuantityStep4]
-      switch (goodTypeValue) {
-        case 'Палети': {
-          if (beforeRemoveGoodQuantityValue <= newGoodsTypeQuantityStep4[0].pallets) {
-            newGoodsTypeQuantityStep4[0].pallets += beforeRemoveGoodQuantityValue
-          }
-          return setGoodTypeQuantityStep4(newGoodsTypeQuantityStep4)
-        }
-        case 'Пакети': {
-          if (beforeRemoveGoodQuantityValue <= newGoodsTypeQuantityStep4[0].packages) {
-            newGoodsTypeQuantityStep4[0].packages += beforeRemoveGoodQuantityValue
-          }
-          return setGoodTypeQuantityStep4(newGoodsTypeQuantityStep4)
-        }
-        case 'Бройки': {
-          if (beforeRemoveGoodQuantityValue <= newGoodsTypeQuantityStep4[0].pieces) {
-            newGoodsTypeQuantityStep4[0].pieces += beforeRemoveGoodQuantityValue
-          }
-          return setGoodTypeQuantityStep4(newGoodsTypeQuantityStep4)
-        }
-      }
+    // When i click to clear goodType and clear all inputs
+    if (goodTypeValue === null && goodQuantityValue === '' && zoneValue === null) {
+      deleteStep4Item(index)
     }
-  }, [goodQuantityValue])
-
-  useEffect(() => {
-    if (goodTypeValue !== null && zoneValue !== null && goodQuantityValue !== '') {
-      const newGoodsTypeQuantityStep4 = [...goodsTypeQuantityStep4]
-      switch (goodTypeValue) {
-        case 'Палети': {
-          if (Number(goodQuantityValue) <= newGoodsTypeQuantityStep4[0].pallets) {
-            newGoodsTypeQuantityStep4[0].pallets -= Number(goodQuantityValue)
-            return setGoodTypeQuantityStep4(newGoodsTypeQuantityStep4)
-          } else {
-            return setAlertQuantities(
-              `Количеството на ${goodTypeValue.toLocaleLowerCase()} е надвишено`
-            )
-          }
-        }
-        case 'Пакети': {
-          if (Number(goodQuantityValue) <= newGoodsTypeQuantityStep4[0].packages) {
-            newGoodsTypeQuantityStep4[0].packages -= Number(goodQuantityValue)
-            return setGoodTypeQuantityStep4(newGoodsTypeQuantityStep4)
-          } else {
-            return setAlertQuantities(
-              `Количеството на ${goodTypeValue.toLocaleLowerCase()} е надвишено`
-            )
-          }
-        }
-        case 'Бройки': {
-          if (Number(goodQuantityValue) <= newGoodsTypeQuantityStep4[0].pieces) {
-            newGoodsTypeQuantityStep4[0].pieces -= Number(goodQuantityValue)
-            return setGoodTypeQuantityStep4(newGoodsTypeQuantityStep4)
-          } else {
-            return setAlertQuantities(
-              `Количеството на ${goodTypeValue.toLocaleLowerCase()} е надвишено`
-            )
-          }
-        }
-      }
+    if (
+      (goodTypeValue !== null && goodQuantityValue !== '' && zoneValue !== null) ||
+      (goodTypeValue !== null && goodQuantityValue === '' && zoneValue !== null)
+    ) {
+      updateStep4Item(index, {
+        type: goodTypeValue,
+        quantity: goodQuantityValue === '' ? 0 : Number(goodQuantityValue),
+        zone: zoneValue
+      })
     }
-  }, [goodTypeValue, zoneValue, goodQuantityValue, formsData.goods])
+  }, [goodTypeValue, zoneValue, goodQuantityValue, index, updateStep4Item])
 
   useEffect(() => {
     if (goodTypeValue) {
@@ -118,7 +68,7 @@ export default function MoveGoodsForm({
   return (
     <Box sx={{ display: 'flex', gap: '1em', alignItems: 'center' }}>
       <Controller
-        name={`goods.${index}.goodTypeStep4`} // Use the index for a unique field name
+        name={`goods.${index}.goodTypeStep4`}
         control={control}
         render={({ field }) => (
           <Autocomplete
@@ -132,7 +82,7 @@ export default function MoveGoodsForm({
             onInputChange={(_event, newInputValue) => {
               setGoodTypeInputValue(newInputValue)
             }}
-            id={`moveGoodsForm.controllable-states-demo-goodType${index}`} // Unique id for Autocomplete
+            id={`moveGoodsForm.controllable-states-demo-goodType${index}`}
             options={goodType}
             sx={{ flex: 1 }}
             renderInput={(params) => (
@@ -152,36 +102,37 @@ export default function MoveGoodsForm({
         )}
       />
       <Controller
-        name={`goods.${index}.goodQuantityStep4`} // Use the index for a unique field name
+        name={`goods.${index}.goodQuantityStep4`}
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             label={translate('newDelivery.labels.step4.goodQuantity')}
-            id={`moveGoodsForm.goodQuantity${index}`} // Unique id for TextField
-            name={`moveGoodsForm.goodQuantity${index}`} // Use the index for a unique field name
+            id={`moveGoodsForm.goodQuantity${index}`}
+            name={`moveGoodsForm.goodQuantity${index}`}
             sx={{ flex: 1 }}
             required
-            disabled={fieldsDisabled} // Disable the field when goodType is not selected
-            value={fieldsDisabled ? '' : goodQuantityValue} // Set the base value when fields are disabled
+            disabled={fieldsDisabled}
+            value={fieldsDisabled ? '' : goodQuantityValue}
             onChange={(e) => {
-              if (e.target.value === '') {
-                setBeforeRemoveGoodQuantityValue(Number(goodQuantityValue))
+              const inputValue = e.target.value
+              // Check if entiry value is a number
+              if (inputValue === '' || !isNaN(Number(inputValue))) {
+                setGoodQuantityValue(inputValue)
+                field.onChange(inputValue)
               }
-              setGoodQuantityValue(e.target.value)
-              field.onChange(e.target.value)
             }}
             error={!!errors?.goods?.[index]?.goodQuantityStep4}
             helperText={
               errors?.goods?.[index]?.goodQuantityStep4?.message
-                ? translate(errors?.goods[index]?.goodQuantityStep4?.message || '')
+                ? translate(errors.goods[index]?.goodQuantityStep4?.message || '')
                 : ''
             }
           />
         )}
       />
       <Controller
-        name={`goods.${index}.zone`} // Use the index for a unique field name
+        name={`goods.${index}.zone`}
         control={control}
         render={({ field }) => (
           <Autocomplete
@@ -195,10 +146,10 @@ export default function MoveGoodsForm({
             onInputChange={(_event, newInputValue) => {
               setZoneInputValue(newInputValue)
             }}
-            id={`moveGoodsForm.controllable-states-demo-zone${index}`} // Unique id for Autocomplete
+            id={`moveGoodsForm.controllable-states-demo-zone${index}`}
             options={zones}
             sx={{ flex: 1 }}
-            disabled={fieldsDisabled} // Disable the field when goodType is not selected
+            disabled={fieldsDisabled}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -215,12 +166,7 @@ export default function MoveGoodsForm({
           />
         )}
       />
-      {formsCount > 1 ? (
-        <DeleteIcon
-          sx={{ cursor: 'pointer' }}
-          onClick={() => onDeleteHandler(goodTypeValue, Number(goodQuantityValue))}
-        />
-      ) : null}
+      {formsCount > 1 ? <DeleteIcon sx={{ cursor: 'pointer' }} onClick={onDeleteHandler} /> : null}
     </Box>
   )
 }

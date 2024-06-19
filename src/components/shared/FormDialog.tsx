@@ -9,6 +9,7 @@ import * as yup from 'yup'
 import HorizontalStepper from '../features/Stepper'
 import { useIsSmallScreen } from '@/hooks/useIsSmallScreen'
 import { useTranslation } from 'react-i18next'
+import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 
 interface FormDialogProps<T extends FieldValues> {
   open: boolean
@@ -42,6 +43,7 @@ export default function FormDialog<T extends FieldValues>({
   const { control, handleSubmit, formState, reset } = useForm<T>({
     resolver: schema ? yupResolver(schema) : undefined
   })
+  const { isCompletedMove } = useNewDeliveryContext()
 
   const handleClose = () => {
     reset()
@@ -87,7 +89,7 @@ export default function FormDialog<T extends FieldValues>({
               type="submit"
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              disabled={Object.keys(formState.errors).length > 0}>
+              disabled={Object.keys(formState.errors).length > 0 || !isCompletedMove}>
               {confirmText}
             </Button>
           </Box>

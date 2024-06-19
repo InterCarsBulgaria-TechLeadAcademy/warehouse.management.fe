@@ -1,17 +1,18 @@
-import { Box, Button } from '@mui/material'
+import { Button } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { UseFormReturn } from 'react-hook-form'
 import { useState } from 'react'
 import MoveGoodsForm from './MoveGoodsForm'
 import { NewDeliveryStep4FormData } from '@/schemas/newDeliverySchemas'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
+import Alert from '@mui/material/Alert'
 
 export default function NewDeliveryStep4Form({
   control,
   formState: { errors }
 }: UseFormReturn<NewDeliveryStep4FormData>) {
   const { t: translate } = useTranslation()
-  const { formsData, alertQuantities, goodsTypeQuantityStep4, setGoodTypeQuantityStep4 } =
+  const { formsData, alertMessage, deleteStep4Item, isCompletedMove, isExceedQuantity } =
     useNewDeliveryContext()
 
   //Only the goodType selected in step 3 should be available
@@ -26,28 +27,10 @@ export default function NewDeliveryStep4Form({
     setMoveGoodsForms([...moveGoodsForms, newIndex])
   }
 
-  // function onDeleteHandler(index: number, goodQuantityValue: number) {
-  function onDeleteHandler(index: number, goodTypeValue: string | null, goodQuantityValue: number) {
+  function onDeleteHandler(index: number) {
     const updatedForms = moveGoodsForms.filter((_, id) => id !== index)
     setMoveGoodsForms(updatedForms)
-
-    if (typeof goodTypeValue === 'string') {
-      const newGoodsTypeQuantityStep4: any = [...goodsTypeQuantityStep4]
-      switch (goodTypeValue) {
-        case 'Палети': {
-          newGoodsTypeQuantityStep4[0].pallets += Number(goodQuantityValue)
-          return setGoodTypeQuantityStep4(newGoodsTypeQuantityStep4)
-        }
-        case 'Пакети': {
-          newGoodsTypeQuantityStep4[0].packages += Number(goodQuantityValue)
-          return setGoodTypeQuantityStep4(newGoodsTypeQuantityStep4)
-        }
-        case 'Бройки': {
-          newGoodsTypeQuantityStep4[0].pieces += Number(goodQuantityValue)
-          return setGoodTypeQuantityStep4(newGoodsTypeQuantityStep4)
-        }
-      }
-    }
+    deleteStep4Item(index)
   }
 
   return (
@@ -61,13 +44,19 @@ export default function NewDeliveryStep4Form({
           zones={zones}
           index={index}
           formsCount={moveGoodsForms.length}
-          onDeleteHandler={(goodTypeValue: string | null, quantity: number) =>
-            onDeleteHandler(index, goodTypeValue, quantity)
-          }
+          onDeleteHandler={() => onDeleteHandler(index)}
         />
       ))}
-      <Box>{alertQuantities}</Box>
-      <Button variant="contained" sx={{ alignSelf: 'flex-start' }} onClick={addGoodHandler}>
+      <Alert
+        variant="outlined"
+        severity={isCompletedMove ? 'success' : isExceedQuantity ? 'error' : 'info'}>
+        {alertMessage}
+      </Alert>
+      <Button
+        variant="contained"
+        disabled={isCompletedMove || isExceedQuantity}
+        sx={{ alignSelf: 'flex-start' }}
+        onClick={addGoodHandler}>
         {translate('newDelivery.labels.step4.addNewMove')}
       </Button>
     </>

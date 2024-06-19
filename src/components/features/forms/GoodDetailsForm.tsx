@@ -30,6 +30,7 @@ export default function GoodDetailsForm({
 
   const [value, setValue] = React.useState<string | null>(null)
   const [inputValue, setInputValue] = React.useState('')
+  const [goodQuantityValue, setGoodQuantityValue] = React.useState<string | undefined>('')
 
   return (
     <Box sx={{ display: 'flex', gap: '1em', alignItems: 'center' }}>
@@ -79,6 +80,15 @@ export default function GoodDetailsForm({
             name={`GoodDetailsForm.goodQuantity-${index}`} //Use the index for unique a name field
             sx={{ flex: 1 }}
             required
+            value={goodQuantityValue}
+            onChange={(e) => {
+              const inputValue = e.target.value
+              // Check if entiry value is a number
+              if (inputValue === '' || !isNaN(Number(inputValue))) {
+                setGoodQuantityValue(inputValue)
+                field.onChange(inputValue)
+              }
+            }}
             error={!!errors?.goods?.[index]?.goodQuantityStep3}
             helperText={
               errors?.goods?.[index]?.goodQuantityStep3?.message

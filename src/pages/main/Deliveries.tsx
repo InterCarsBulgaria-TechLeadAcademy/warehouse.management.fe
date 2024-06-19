@@ -6,6 +6,7 @@ import NewDeliveryRenderForm from '@/components/features/forms/NewDeliveryRender
 import useSchema from '@/hooks/useSchema'
 import useNewDeliverySteps from '@/hooks/useNewDeliverySteps'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
+import NewDeliveryProvider from '@/contexts/NewDelivery'
 
 export default function Deliveries() {
   const { t: translate } = useTranslation()
@@ -15,7 +16,7 @@ export default function Deliveries() {
   const schema = useSchema(currentStep)
 
   return (
-    <>
+    <NewDeliveryProvider>
       <SkeletonPage
         header={translate('deliveries.title')}
         description={translate('deliveries.description')}
@@ -38,6 +39,6 @@ export default function Deliveries() {
         onSubmit={handleSubmit}
         renderForm={(methods) => <NewDeliveryRenderForm {...methods} />}
       />
-    </>
+    </NewDeliveryProvider>
   )
 }
