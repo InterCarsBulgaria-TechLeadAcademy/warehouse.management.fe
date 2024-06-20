@@ -147,6 +147,11 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   function handleBack() {
     if (currentStep > 1) {
       setCurrentStep((prev) => prev - 1)
+      // Проблемът е, че когато дам back във formsData вече имаме създаден масив goods
+      // Не знам как да го изтрия или зануля.
+      // Най-доброто решение е при back да ми зареди step3 със попълнените вече полета,
+      // Не знам как да стане точно
+      setStep3Items({ pallets: 0, packages: 0, pieces: 0 })
       setStep4Items([{ type: '', quantity: 0, zone: '' }])
     }
   }

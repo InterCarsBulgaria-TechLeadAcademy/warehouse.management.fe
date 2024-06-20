@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import React from 'react'
 import { NewDeliveryStep3FormData } from '@/schemas/newDeliverySchemas'
+// import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 
 interface GoodDetailsFormProps {
   control: Control<NewDeliveryStep3FormData, any>
@@ -27,10 +28,18 @@ export default function GoodDetailsForm({
   onGoodTypeChange
 }: GoodDetailsFormProps) {
   const { t: translate } = useTranslation()
+  // const { formsData } = useNewDeliveryContext()
+
+  // if (formsData.goods) {
+  //   console.log(formsData.goods[index].goodQuantityStep3)
+  // }
 
   const [value, setValue] = React.useState<string | null>(null)
   const [inputValue, setInputValue] = React.useState('')
   const [goodQuantityValue, setGoodQuantityValue] = React.useState<string | undefined>('')
+  // const [goodQuantityValue, setGoodQuantityValue] = React.useState<string | undefined>(
+  //   formsData?.goods ? formsData.goods[index].goodQuantityStep3 : ''
+  // )
 
   return (
     <Box sx={{ display: 'flex', gap: '1em', alignItems: 'center' }}>

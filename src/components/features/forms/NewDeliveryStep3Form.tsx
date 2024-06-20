@@ -4,12 +4,14 @@ import GoodDetailsForm from './GoodDetailsForm'
 import { UseFormReturn } from 'react-hook-form'
 import { useState } from 'react'
 import { NewDeliveryStep3FormData } from '@/schemas/newDeliverySchemas'
+import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 
 export default function NewDeliveryStep3Form({
   control,
   formState: { errors }
 }: UseFormReturn<NewDeliveryStep3FormData>) {
   const { t: translate } = useTranslation()
+  const { formsData } = useNewDeliveryContext()
 
   const initialGoodType = [
     translate('newDelivery.goodType.pallets'),
@@ -18,6 +20,10 @@ export default function NewDeliveryStep3Form({
   ]
 
   const [goodDetailsForms, setGoodDetailsForms] = useState<number[]>([0]) //List with forms indexes
+  // const [goodDetailsForms, setGoodDetailsForms] = useState<number[]>(
+  //   formsData?.goods ? formsData.goods : [0]
+  // )
+  //List with forms indexes
   const [selectedGoodTypes, setSelectedGoodTypes] = useState<(string | null)[]>([null])
 
   function onDeleteHandler(index: number) {
