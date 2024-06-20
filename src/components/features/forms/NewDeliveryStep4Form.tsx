@@ -39,7 +39,6 @@ export default function NewDeliveryStep4Form({
     deleteStep4Item(index)
   }
 
-  console.log(moveGoodsForms)
   return (
     <>
       {moveGoodsForms.map((index) => (

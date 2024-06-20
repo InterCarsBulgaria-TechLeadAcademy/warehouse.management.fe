@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 
 const vendorName = ['Bosch', 'Valeo']
 
@@ -14,10 +15,10 @@ export default function NewDeliveryStep2Form({
   formState: { errors }
 }: UseFormReturn<NewDeliveryStep2FormData>) {
   const { t: translate } = useTranslation()
-
-  const [value, setValue] = React.useState<string | null>(null)
+  const { formsData } = useNewDeliveryContext()
+  const [value, setValue] = React.useState<string | null>(formsData.vendorName)
   const [inputValue, setInputValue] = React.useState('')
-  const [vendorIdValue, setVendorIdValue] = React.useState<string | undefined>('')
+  const [vendorIdValue, setVendorIdValue] = React.useState<string | undefined>(formsData.vendorId)
 
   return (
     <>
