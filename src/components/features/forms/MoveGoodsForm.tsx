@@ -38,10 +38,11 @@ export default function MoveGoodsForm({
   const [fieldsDisabled, setFieldsDisabled] = useState(true)
 
   useEffect(() => {
-    // When i click to clear goodType and clear all inputs
+    // When click to clear goodType and clear all inputs
     if (goodTypeValue === null && goodQuantityValue === '' && zoneValue === null) {
       deleteStep4Item(index)
     }
+
     if (
       (goodTypeValue !== null && goodQuantityValue !== '' && zoneValue !== null) ||
       (goodTypeValue !== null && goodQuantityValue === '' && zoneValue !== null)

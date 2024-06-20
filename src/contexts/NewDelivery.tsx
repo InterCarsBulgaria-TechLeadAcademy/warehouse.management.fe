@@ -2,6 +2,7 @@ import { createContext, ReactNode, useEffect, useState } from 'react'
 import { SubmitHandler } from 'react-hook-form'
 import useNewDeliverySteps from '@/hooks/useNewDeliverySteps'
 import { NewDeliveryContextValues } from '@/interfaces/newDeliveryContextValues'
+import { useTranslation } from 'react-i18next'
 
 interface NewDeliveryProviderProps {
   children: ReactNode
@@ -31,18 +32,20 @@ interface MoveGood {
 }
 
 export default function NewDeliveryProvider({ children }: NewDeliveryProviderProps) {
+  const { t: translate } = useTranslation()
   const [currentStep, setCurrentStep] = useState(1)
   const [formsData, setFormsData] = useState<any>({})
   const [openDialog, setOpenDialog] = useState(false)
   const steps = useNewDeliverySteps()
-  const [step4Items, setStep4Items] = useState<MoveGood[]>([{ type: '', quantity: 0, zone: '' }])
   const [step3Items, setStep3Items] = useState({ pallets: 0, packages: 0, pieces: 0 })
+  const [step4Items, setStep4Items] = useState<MoveGood[]>([{ type: '', quantity: 0, zone: '' }])
   const [alertMessage, setAlertMessage] = useState('')
   const [isCompletedMove, setIsCompletedMove] = useState(false)
   const [isExceedQuantity, setIsExceedQuantity] = useState(false)
 
   useEffect(() => {
-    // Махни if проверката, когато context не е в main.ts
+    // Delete if condition when the newDeliveryProvider is not in main.tsx
+    // Initial set step3Items
     if (formsData.goods) {
       const newStep3Items = { ...step3Items }
       formsData.goods.map((good: any) => {
@@ -62,10 +65,75 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   }, [formsData])
 
   useEffect(() => {
-    setAlertMessage(
-      `Остава да поставите ${step3Items.pallets} палети, ${step3Items.packages} пакети, ${step3Items.pieces} бройки в зони`
-    )
-  }, [step3Items])
+    const currentItems = { pallets: 0, packages: 0, pieces: 0 }
+
+    step4Items.map((item) => {
+      if (item.type === translate('newDelivery.goodType.pallets')) {
+        currentItems.pallets += item.quantity
+      } else if (item.type === translate('newDelivery.goodType.packages')) {
+        currentItems.packages += item.quantity
+      } else if (item.type === translate('newDelivery.goodType.pieces')) {
+        currentItems.pieces += item.quantity
+      }
+      return item
+    })
+
+    const leftItems = {
+      pallets: step3Items.pallets - currentItems.pallets,
+      packages: step3Items.packages - currentItems.packages,
+      pieces: step3Items.pieces - currentItems.pieces
+    }
+
+    // for (const [key, value] of Object.entries(leftItems)) {
+    //   if (value < 0) {
+    //     setIsExceedQuantity(true)
+    //     setAlertMessage(
+    //       `Количеството на ${key} е надвишено с ${currentItems[key] - step3Items[key]}`
+    //     )
+    //   }
+    // }
+
+    if (leftItems.pallets < 0) {
+      setIsExceedQuantity(true)
+      setAlertMessage(
+        `Количеството на палетите е надвишено с ${currentItems.pallets - step3Items.pallets}`
+      )
+    } else if (leftItems.packages < 0) {
+      setIsExceedQuantity(true)
+      setAlertMessage(
+        `Количеството на пакетите е надвишено с ${currentItems.packages - step3Items.packages}`
+      )
+    } else if (leftItems.pieces < 0) {
+      setIsExceedQuantity(true)
+      setAlertMessage(
+        `Количеството на бройките е надвишено с ${currentItems.pieces - step3Items.pieces}`
+      )
+    } else if (leftItems.pallets === 0 && leftItems.packages === 0 && leftItems.pieces === 0) {
+      setIsCompletedMove(true)
+      setAlertMessage('Всички стоки са разпределени по зони')
+    } else {
+      setIsCompletedMove(false)
+      setIsExceedQuantity(false)
+
+      let palletsMessage = leftItems.pallets === 0 ? '' : `${leftItems.pallets} палети`
+      let packagesMessage =
+        leftItems.packages === 0
+          ? ''
+          : palletsMessage === ''
+            ? `${leftItems.packages} пакети`
+            : `, ${leftItems.packages} пакети`
+      let piecesMessage =
+        leftItems.pieces === 0
+          ? ''
+          : palletsMessage === '' && packagesMessage === ''
+            ? `${leftItems.pieces} бройки`
+            : `, ${leftItems.pieces} бройки`
+
+      setAlertMessage(
+        `Остава да поставите ${palletsMessage} ${packagesMessage} ${piecesMessage} в зони`
+      )
+    }
+  }, [step4Items])
 
   function updateStep4Item(index: number, newItem: MoveGood) {
     const newStep4Items = [...step4Items]
@@ -78,63 +146,16 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
     setStep4Items(newStep4Items)
   }
 
-  useEffect(() => {
-    const currentItems = { pallets: 0, packages: 0, pieces: 0 }
-
-    step4Items.map((item) => {
-      if (item.type === 'Палети') {
-        currentItems.pallets += item.quantity
-      } else if (item.type === 'Пакети') {
-        currentItems.packages += item.quantity
-      } else if (item.type === 'Бройки') {
-        currentItems.pieces += item.quantity
-      }
-      return item
-    })
-
-    const leftItems = {
-      pallets: step3Items.pallets - currentItems.pallets,
-      packages: step3Items.packages - currentItems.packages,
-      pieces: step3Items.pieces - currentItems.pieces
-    }
-
-    if (leftItems.pallets < 0) {
-      setIsExceedQuantity(true)
-      setAlertMessage(
-        `Количеството на палетите е надвишено с ${currentItems.pallets - step3Items.pallets}`
-      )
-    } else if (leftItems.packages < 0) {
-      setIsExceedQuantity(true)
-      setAlertMessage(
-        `Количеството на палетите е надвишено с ${currentItems.packages - step3Items.packages}`
-      )
-    } else if (leftItems.pieces < 0) {
-      setIsExceedQuantity(true)
-      setAlertMessage(
-        `Количеството на палетите е надвишено с ${currentItems.pieces - step3Items.pieces}`
-      )
-    } else if (leftItems.pallets === 0 && leftItems.packages === 0 && leftItems.pieces === 0) {
-      setIsCompletedMove(true)
-      setAlertMessage('Всички стоки са разпределени по зони')
-    } else {
-      setIsCompletedMove(false)
-      setIsExceedQuantity(false)
-      setAlertMessage(
-        `Остава да поставите ${leftItems.pallets} палети, ${leftItems.packages} пакети, ${leftItems.pieces} бройки в зони`
-      )
-    }
-  }, [step4Items])
-
-  const handleClickOpen = () => {
+  function handleClickOpen() {
     setOpenDialog(true)
   }
 
-  const onCloseDialog = () => {
+  function onCloseDialog() {
     setOpenDialog(false)
     setCurrentStep(1)
   }
 
-  const handleBack = () => {
+  function handleBack() {
     if (currentStep > 1) {
       setCurrentStep((prev) => prev - 1)
     }
