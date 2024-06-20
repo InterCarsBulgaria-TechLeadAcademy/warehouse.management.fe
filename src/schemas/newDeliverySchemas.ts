@@ -17,7 +17,7 @@ export const newDeliveryStep2Schema = yup
   .object({
     vendorName: yup.string().required('newDelivery.errors.step2.vendorName.required'),
     vendorId: yup.number().typeError('newDelivery.errors.step2.vendorId.typeError'),
-    truckNumber: yup.number().typeError('newDelivery.errors.step2.truckNumber.typeError'),
+    truckNumber: yup.string().required('newDelivery.errors.step2.truckNumber.required'),
     deliveryDate: yup
       .date()
       .required('newDelivery.errors.step2.deliveryTime.required')
@@ -28,7 +28,7 @@ export const newDeliveryStep2Schema = yup
 export interface NewDeliveryStep2FormData extends yup.InferType<typeof newDeliveryStep2Schema> {
   vendorName: string
   vendorId: number
-  truckNumber: number
+  truckNumber: string
   deliveryDate: Date
 }
 

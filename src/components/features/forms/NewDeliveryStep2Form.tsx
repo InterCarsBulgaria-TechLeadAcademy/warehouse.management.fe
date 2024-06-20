@@ -17,6 +17,7 @@ export default function NewDeliveryStep2Form({
 
   const [value, setValue] = React.useState<string | null>(null)
   const [inputValue, setInputValue] = React.useState('')
+  const [vendorIdValue, setVendorIdValue] = React.useState<string | undefined>('')
 
   return (
     <>
@@ -61,11 +62,21 @@ export default function NewDeliveryStep2Form({
             name="vendorId"
             // readOnly
             required
+            value={vendorIdValue}
+            onChange={(e) => {
+              const inputValue = e.target.value
+              // Check if entiry value is a number
+              if (inputValue === '' || !isNaN(Number(inputValue))) {
+                setVendorIdValue(inputValue)
+                field.onChange(inputValue)
+              }
+            }}
             error={!!errors.vendorId}
             helperText={errors.vendorId?.message ? translate(errors.vendorId.message) : ''}
           />
         )}
       />
+
       <Controller
         name="truckNumber"
         control={control}

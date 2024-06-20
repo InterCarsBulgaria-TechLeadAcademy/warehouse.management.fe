@@ -53,7 +53,7 @@ export default function MoveGoodsForm({
         zone: zoneValue
       })
     }
-  }, [goodTypeValue, zoneValue, goodQuantityValue, index, updateStep4Item])
+  }, [goodTypeValue, zoneValue, goodQuantityValue, index])
 
   useEffect(() => {
     if (goodTypeValue) {

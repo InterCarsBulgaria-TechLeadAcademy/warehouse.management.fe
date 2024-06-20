@@ -8,10 +8,6 @@ export interface NewDeliveryContextValues {
   handleBack: () => void
   handleClickOpen: () => void
   handleSubmit: SubmitHandler<any>
-  step4Items: { type: string; quantity: number; zone: string }[]
-  setStep4Items: React.Dispatch<
-    React.SetStateAction<{ type: string; quantity: number; zone: string }[]>
-  >
   updateStep4Item: (
     index: number,
     newItem: { type: string; quantity: number; zone: string }

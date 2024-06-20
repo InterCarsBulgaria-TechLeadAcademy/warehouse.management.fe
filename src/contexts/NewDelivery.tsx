@@ -16,8 +16,6 @@ export const NewDeliveryContext = createContext<NewDeliveryContextValues>({
   handleBack: () => {},
   handleClickOpen: () => {},
   handleSubmit: () => {},
-  step4Items: [{ type: '', quantity: 0, zone: '' }],
-  setStep4Items: () => {},
   updateStep4Item: () => {},
   deleteStep4Item: () => {},
   alertMessage: '',
@@ -84,15 +82,6 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
       pieces: step3Items.pieces - currentItems.pieces
     }
 
-    // for (const [key, value] of Object.entries(leftItems)) {
-    //   if (value < 0) {
-    //     setIsExceedQuantity(true)
-    //     setAlertMessage(
-    //       `Количеството на ${key} е надвишено с ${currentItems[key] - step3Items[key]}`
-    //     )
-    //   }
-    // }
-
     if (leftItems.pallets < 0) {
       setIsExceedQuantity(true)
       setAlertMessage(
@@ -143,6 +132,8 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
 
   function deleteStep4Item(index: number) {
     const newStep4Items = step4Items.filter((_, id) => id !== index)
+    console.log(`index:${index}`)
+    console.log(step4Items)
     setStep4Items(newStep4Items)
   }
 
@@ -180,8 +171,6 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
     handleBack,
     handleClickOpen,
     handleSubmit,
-    step4Items,
-    setStep4Items,
     updateStep4Item,
     deleteStep4Item,
     alertMessage,
