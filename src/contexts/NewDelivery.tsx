@@ -132,8 +132,6 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
 
   function deleteStep4Item(index: number) {
     const newStep4Items = step4Items.filter((_, id) => id !== index)
-    console.log(`index:${index}`)
-    console.log(step4Items)
     setStep4Items(newStep4Items)
   }
 

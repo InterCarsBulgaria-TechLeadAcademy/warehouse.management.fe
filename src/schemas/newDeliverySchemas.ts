@@ -1,6 +1,7 @@
 import * as yup from 'yup'
 
 export const newDeliveryStep1Schema = yup.object({
+  // да ги оправя да са string и required
   deliveryNumber: yup.number().typeError('newDelivery.errors.step3.goodQuantity.typeError'),
   receptionNumber: yup.number().typeError('newDelivery.errors.step1.receptionNumber.typeError'),
   cmrNumber: yup.number().typeError('newDelivery.errors.step1.cmrNumber.typeError'),

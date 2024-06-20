@@ -28,11 +28,18 @@ export default function NewDeliveryStep4Form({
   }
 
   function onDeleteHandler(index: number) {
+    // С изтриването на поле модифицирам moveGoodsForms масива, чрез който създавам MoveGoodsForm компонентите
+    // Какво следва от това: Когато два moveGoodsForms, например палети, 1 бр, зона 1 и палети 1бр. зона 3.
+    // Когато изтрия първият ред остава само палети 1бр. зона 3 с правилното количество и оставащи бройки за запълване на зоните.
+    // Когато обаче изтрия количеството не работи както трябва. Причината е updateStep4Item в  MoveGoodsForm компонента.
+    // Тя все още има индекс 1, но след изтриване на компонента реално трябва вече да е с индекс 0.
+    // Не знам как да го направя да работи както трябва. Моля да ми помогнеш.
     const updatedForms = moveGoodsForms.filter((_, id) => id !== index)
     setMoveGoodsForms(updatedForms)
     deleteStep4Item(index)
   }
 
+  console.log(moveGoodsForms)
   return (
     <>
       {moveGoodsForms.map((index) => (
