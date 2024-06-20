@@ -89,6 +89,7 @@ export default function FormDialog<T extends FieldValues>({
               type="submit"
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              // В стъпка 4 когато isCompletedMove e false, при back всички стъпки назад са disabled
               disabled={Object.keys(formState.errors).length > 0 || !isCompletedMove}>
               {confirmText}
             </Button>

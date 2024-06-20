@@ -147,6 +147,7 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   function handleBack() {
     if (currentStep > 1) {
       setCurrentStep((prev) => prev - 1)
+      setStep4Items([{ type: '', quantity: 0, zone: '' }])
     }
   }
 
