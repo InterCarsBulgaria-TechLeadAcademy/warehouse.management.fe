@@ -19,14 +19,14 @@ const queryClient = new QueryClient({
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ToggleColorMode>
-      {/* <NewDeliveryProvider> */}
+      <NewDeliveryProvider>
         <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools initialIsOpen={false} />
           <BrowserRouter>
             <App />
           </BrowserRouter>
         </QueryClientProvider>
-      {/* </NewDeliveryProvider> */}
+      </NewDeliveryProvider>
     </ToggleColorMode>
   </React.StrictMode>
 )
