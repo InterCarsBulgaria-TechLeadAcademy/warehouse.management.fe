@@ -1,3 +1,6 @@
+// Да го направя както step4 с уникални goodDetailsForms.
+// Да се редактира и GoodDetailsForm
+
 import { Button } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import GoodDetailsForm from './GoodDetailsForm'
