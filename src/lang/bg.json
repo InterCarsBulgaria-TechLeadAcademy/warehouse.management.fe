@@ -269,7 +269,8 @@
       "deliveryDetails":"Детайли за доставка",
       "truckDetails": "Детайли за камион",
       "goodDetails": "Детайли за стока",
-      "goodRelocate": "Местене на стока"
+      "goodRelocate": "Местене на стока",
+      "reviewDelivery": "Преглед на доставката"
       },
       "goodType": {
         "pallets": "Палети",

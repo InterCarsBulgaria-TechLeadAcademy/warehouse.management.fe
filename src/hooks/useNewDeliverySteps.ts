@@ -6,7 +6,8 @@ export default function useNewDeliverySteps(): string[] {
     translate('newDelivery.steps.deliveryDetails'),
     translate('newDelivery.steps.truckDetails'),
     translate('newDelivery.steps.goodDetails'),
-    translate('newDelivery.steps.goodRelocate')
+    translate('newDelivery.steps.goodRelocate'),
+    translate('newDelivery.steps.reviewDelivery')
   ]
 
   return steps

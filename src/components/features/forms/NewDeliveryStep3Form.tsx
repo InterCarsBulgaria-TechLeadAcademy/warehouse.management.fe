@@ -1,8 +1,8 @@
 import { Button } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import GoodDetailsForm from './GoodDetailsForm'
-import { UseFormReturn } from 'react-hook-form'
-import { useState } from 'react'
+import { UseFormReturn, useFieldArray } from 'react-hook-form'
+import { useState, useEffect } from 'react'
 import { NewDeliveryStep3FormData } from '@/schemas/newDeliverySchemas'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 
@@ -13,37 +13,48 @@ export default function NewDeliveryStep3Form({
   const { t: translate } = useTranslation()
   const { formsData } = useNewDeliveryContext()
 
+  const { remove, append } = useFieldArray({
+    control,
+    name: 'goods' //the path to the goods array in formsData object, which we need to manage dynamically.
+  })
+
   const initialGoodType = [
     translate('newDelivery.goodType.pallets'),
     translate('newDelivery.goodType.packages'),
     translate('newDelivery.goodType.pieces')
   ]
 
-  let initialValue: number[] = [0]
+  // Initialize goodDetailsForms and selectedGoodTypes based on formsData.goods
+  const goodDetailsFormsInitialValue = formsData.goods
+    ? formsData.goods.map((_: any, index: number) => index)
+    : [0]
+  const selectedGoodTypesInitialValue = formsData.goods
+    ? formsData.goods.map((good: any) => good.goodTypeStep3 || '')
+    : ['']
 
-  if (formsData.goods) {
-    initialValue = formsData.goods.map((_: any, index: number) => index)
-  }
-  const [goodDetailsForms, setGoodDetailsForms] = useState<number[]>(initialValue) //List with forms indexes
-  const [selectedGoodTypes, setSelectedGoodTypes] = useState<(string | null)[]>([null])
+  const [goodDetailsForms, setGoodDetailsForms] = useState<number[]>(goodDetailsFormsInitialValue)
+  const [selectedGoodTypes, setSelectedGoodTypes] = useState<string[]>(
+    selectedGoodTypesInitialValue
+  )
 
   function onDeleteHandler(index: number) {
-    const updatedForms = goodDetailsForms.filter((_, id) => id !== index)
-    const updatedSelectedGoodTypes = selectedGoodTypes.filter((_, id) => id !== index)
-    setGoodDetailsForms(updatedForms)
-    setSelectedGoodTypes(updatedSelectedGoodTypes)
+    remove(index) // This removes the item from goods array in formsData object
+    setGoodDetailsForms((prev) => prev.filter((_, id) => id !== index))
+    setSelectedGoodTypes((prev) => prev.filter((_, id) => id !== index))
   }
 
   function addGoodHandler() {
-    const newIndex = goodDetailsForms.length //New index for the new form
-    setGoodDetailsForms([...goodDetailsForms, newIndex])
-    setSelectedGoodTypes([...selectedGoodTypes, null])
+    append({ goodTypeStep3: '', goodQuantityStep3: 0 }) // add this object in goods array in formsData object
+    setGoodDetailsForms((prev) => [...prev, prev.length])
+    setSelectedGoodTypes((prev) => [...prev, ''])
   }
 
   function handleGoodTypeChange(index: number, value: string | null) {
-    const updatedSelectedGoodTypes = [...selectedGoodTypes]
-    updatedSelectedGoodTypes[index] = value
-    setSelectedGoodTypes(updatedSelectedGoodTypes)
+    setSelectedGoodTypes((prev) => {
+      const updated = [...prev]
+      updated[index] = value || '' // Convert null to empty string
+      return updated
+    })
   }
 
   function availableGoodTypes(index: number) {
@@ -53,7 +64,15 @@ export default function NewDeliveryStep3Form({
   }
 
   const allOptionsSelected =
-    selectedGoodTypes.filter((type) => type !== null).length >= initialGoodType.length
+    selectedGoodTypes.filter((type) => type !== '').length >= initialGoodType.length
+
+  useEffect(() => {
+    if (formsData.goods) {
+      // Update form values when formsData changes
+      setGoodDetailsForms(formsData.goods.map((_: any, index: number) => index))
+      setSelectedGoodTypes(formsData.goods.map((good: any) => good.goodTypeStep3 || ''))
+    }
+  }, [formsData])
 
   return (
     <>
@@ -66,93 +85,16 @@ export default function NewDeliveryStep3Form({
           onDeleteHandler={() => onDeleteHandler(index)}
           index={index}
           formsCount={goodDetailsForms.length}
-          onGoodTypeChange={(value) => handleGoodTypeChange(index, value)} //Pass a function for updating selected goodType
+          onGoodTypeChange={(value) => handleGoodTypeChange(index, value)} // Pass a function to change the item type
         />
       ))}
-      {!allOptionsSelected && (
-        <Button variant="contained" sx={{ alignSelf: 'flex-start' }} onClick={addGoodHandler}>
-          {translate('newDelivery.labels.step3.addGood')}
-        </Button>
-      )}
+      <Button
+        variant="contained"
+        sx={{ alignSelf: 'flex-start' }}
+        onClick={addGoodHandler}
+        disabled={allOptionsSelected}>
+        {translate('newDelivery.labels.step3.addGood')}
+      </Button>
     </>
   )
 }
-
-// import { Button } from '@mui/material'
-// import { useTranslation } from 'react-i18next'
-// import GoodDetailsForm from './GoodDetailsForm'
-// import { UseFormReturn } from 'react-hook-form'
-// import { useState } from 'react'
-// import { NewDeliveryStep3FormData } from '@/schemas/newDeliverySchemas'
-// import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
-
-// export default function NewDeliveryStep3Form({
-//   control,
-//   formState: { errors }
-// }: UseFormReturn<NewDeliveryStep3FormData>) {
-//   const { t: translate } = useTranslation()
-//   const { formsData } = useNewDeliveryContext()
-
-//   const initialGoodType = [
-//     translate('newDelivery.goodType.pallets'),
-//     translate('newDelivery.goodType.packages'),
-//     translate('newDelivery.goodType.pieces')
-//   ]
-
-//   const [goodDetailsForms, setGoodDetailsForms] = useState<number[]>([0]) //List with forms indexes
-//   // const [goodDetailsForms, setGoodDetailsForms] = useState<number[]>(
-//   //   formsData?.goods ? formsData.goods : [0]
-//   // )
-//   //List with forms indexes
-//   const [selectedGoodTypes, setSelectedGoodTypes] = useState<(string | null)[]>([null])
-
-//   function onDeleteHandler(index: number) {
-//     const updatedForms = goodDetailsForms.filter((_, id) => id !== index)
-//     const updatedSelectedGoodTypes = selectedGoodTypes.filter((_, id) => id !== index)
-//     setGoodDetailsForms(updatedForms)
-//     setSelectedGoodTypes(updatedSelectedGoodTypes)
-//   }
-
-//   function addGoodHandler() {
-//     const newIndex = goodDetailsForms.length //New index for the new form
-//     setGoodDetailsForms([...goodDetailsForms, newIndex])
-//     setSelectedGoodTypes([...selectedGoodTypes, null])
-//   }
-
-//   function handleGoodTypeChange(index: number, value: string | null) {
-//     const updatedSelectedGoodTypes = [...selectedGoodTypes]
-//     updatedSelectedGoodTypes[index] = value
-//     setSelectedGoodTypes(updatedSelectedGoodTypes)
-//   }
-
-//   function availableGoodTypes(index: number) {
-//     return initialGoodType.filter(
-//       (type) => !selectedGoodTypes.includes(type) || selectedGoodTypes[index] === type
-//     )
-//   }
-
-//   const allOptionsSelected =
-//     selectedGoodTypes.filter((type) => type !== null).length >= initialGoodType.length
-
-//   return (
-//     <>
-//       {goodDetailsForms.map((index) => (
-//         <GoodDetailsForm
-//           key={index}
-//           control={control}
-//           errors={errors}
-//           goodType={availableGoodTypes(index)}
-//           onDeleteHandler={() => onDeleteHandler(index)}
-//           index={index}
-//           formsCount={goodDetailsForms.length}
-//           onGoodTypeChange={(value) => handleGoodTypeChange(index, value)} //Pass a function for updating selected goodType
-//         />
-//       ))}
-//       {!allOptionsSelected && (
-//         <Button variant="contained" sx={{ alignSelf: 'flex-start' }} onClick={addGoodHandler}>
-//           {translate('newDelivery.labels.step3.addGood')}
-//         </Button>
-//       )}
-//     </>
-//   )
-// }
