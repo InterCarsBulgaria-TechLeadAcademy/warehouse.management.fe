@@ -13,6 +13,7 @@ interface GoodDetailsFormProps {
   errors: FieldErrors<NewDeliveryStep4FormData>
   goodType: string[]
   zones: string[]
+  id: number
   index: number
   onDeleteHandler: () => void
   formsCount: number
@@ -23,6 +24,7 @@ export default function MoveGoodsForm({
   errors,
   goodType,
   zones,
+  id,
   index,
   onDeleteHandler,
   formsCount
@@ -53,7 +55,7 @@ export default function MoveGoodsForm({
         zone: zoneValue
       })
     }
-  }, [goodTypeValue, zoneValue, goodQuantityValue, index])
+  }, [goodTypeValue, zoneValue, goodQuantityValue, id])
 
   useEffect(() => {
     if (goodTypeValue) {
@@ -69,7 +71,7 @@ export default function MoveGoodsForm({
   return (
     <Box sx={{ display: 'flex', gap: '1em', alignItems: 'center' }}>
       <Controller
-        name={`goods.${index}.goodTypeStep4`}
+        name={`goods.${id}.goodTypeStep4`}
         control={control}
         render={({ field }) => (
           <Autocomplete
@@ -83,7 +85,7 @@ export default function MoveGoodsForm({
             onInputChange={(_event, newInputValue) => {
               setGoodTypeInputValue(newInputValue)
             }}
-            id={`moveGoodsForm.controllable-states-demo-goodType${index}`}
+            id={`moveGoodsForm.controllable-states-demo-goodType${id}`}
             options={goodType}
             sx={{ flex: 1 }}
             renderInput={(params) => (
@@ -91,10 +93,10 @@ export default function MoveGoodsForm({
                 {...params}
                 required
                 label={translate('newDelivery.labels.step4.goodType')}
-                error={!!errors?.goods?.[index]?.goodTypeStep4}
+                error={!!errors?.goods?.[id]?.goodTypeStep4}
                 helperText={
-                  errors?.goods?.[index]?.goodTypeStep4?.message
-                    ? translate(errors?.goods[index]?.goodTypeStep4?.message || '')
+                  errors?.goods?.[id]?.goodTypeStep4?.message
+                    ? translate(errors?.goods[id]?.goodTypeStep4?.message || '')
                     : ''
                 }
               />
@@ -103,14 +105,14 @@ export default function MoveGoodsForm({
         )}
       />
       <Controller
-        name={`goods.${index}.goodQuantityStep4`}
+        name={`goods.${id}.goodQuantityStep4`}
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
             label={translate('newDelivery.labels.step4.goodQuantity')}
-            id={`moveGoodsForm.goodQuantity${index}`}
-            name={`moveGoodsForm.goodQuantity${index}`}
+            id={`moveGoodsForm.goodQuantity${id}`}
+            name={`moveGoodsForm.goodQuantity${id}`}
             sx={{ flex: 1 }}
             required
             disabled={fieldsDisabled}
@@ -123,17 +125,17 @@ export default function MoveGoodsForm({
                 field.onChange(inputValue)
               }
             }}
-            error={!!errors?.goods?.[index]?.goodQuantityStep4}
+            error={!!errors?.goods?.[id]?.goodQuantityStep4}
             helperText={
-              errors?.goods?.[index]?.goodQuantityStep4?.message
-                ? translate(errors.goods[index]?.goodQuantityStep4?.message || '')
+              errors?.goods?.[id]?.goodQuantityStep4?.message
+                ? translate(errors.goods[id]?.goodQuantityStep4?.message || '')
                 : ''
             }
           />
         )}
       />
       <Controller
-        name={`goods.${index}.zone`}
+        name={`goods.${id}.zone`}
         control={control}
         render={({ field }) => (
           <Autocomplete
@@ -147,7 +149,7 @@ export default function MoveGoodsForm({
             onInputChange={(_event, newInputValue) => {
               setZoneInputValue(newInputValue)
             }}
-            id={`moveGoodsForm.controllable-states-demo-zone${index}`}
+            id={`moveGoodsForm.controllable-states-demo-zone${id}`}
             options={zones}
             sx={{ flex: 1 }}
             disabled={fieldsDisabled}
@@ -156,10 +158,10 @@ export default function MoveGoodsForm({
                 {...params}
                 required
                 label={translate('newDelivery.labels.step4.zone')}
-                error={!!errors?.goods?.[index]?.zone}
+                error={!!errors?.goods?.[id]?.zone}
                 helperText={
-                  errors?.goods?.[index]?.zone?.message
-                    ? translate(errors?.goods[index]?.zone?.message || '')
+                  errors?.goods?.[id]?.zone?.message
+                    ? translate(errors?.goods[id]?.zone?.message || '')
                     : ''
                 }
               />
