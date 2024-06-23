@@ -24,6 +24,7 @@ export default function NewDeliveryStep1Form({
       <Controller
         name="deliveryNumber"
         control={control}
+        defaultValue=""
         render={({ field }) => (
           <TextField
             {...field}
@@ -41,6 +42,7 @@ export default function NewDeliveryStep1Form({
       <Controller
         name="receptionNumber"
         control={control}
+        defaultValue=""
         render={({ field }) => (
           <TextField
             {...field}
@@ -59,6 +61,7 @@ export default function NewDeliveryStep1Form({
       <Controller
         name="cmrNumber"
         control={control}
+        defaultValue=""
         render={({ field }) => (
           <TextField
             {...field}
@@ -75,6 +78,7 @@ export default function NewDeliveryStep1Form({
       <Controller
         name="markers"
         control={control}
+        defaultValue={[]}
         render={({ field }) => (
           <FormControl>
             <InputLabel id="demo-multiple-checkbox-label">

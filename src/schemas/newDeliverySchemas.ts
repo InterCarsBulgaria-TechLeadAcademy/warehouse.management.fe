@@ -1,23 +1,22 @@
 import * as yup from 'yup'
 
 export const newDeliveryStep1Schema = yup.object({
-  // да ги оправя да са string и required
-  deliveryNumber: yup.number().typeError('newDelivery.errors.step3.goodQuantity.typeError'),
-  receptionNumber: yup.number().typeError('newDelivery.errors.step1.receptionNumber.typeError'),
-  cmrNumber: yup.number().typeError('newDelivery.errors.step1.cmrNumber.typeError'),
+  deliveryNumber: yup.string().required('newDelivery.errors.step1.deliveryNumber.required'),
+  receptionNumber: yup.string().required('newDelivery.errors.step1.receptionNumber.required'),
+  cmrNumber: yup.string().required('newDelivery.errors.step1.cmrNumber.required'),
   markers: yup.array().of(yup.string())
 })
 
 export interface NewDeliveryStep1FormData extends yup.InferType<typeof newDeliveryStep1Schema> {
-  deliveryNumber: number
-  receptionNumber: number
-  cmrNumber: number
+  deliveryNumber: string
+  receptionNumber: string
+  cmrNumber: string
 }
 
 export const newDeliveryStep2Schema = yup
   .object({
     vendorName: yup.string().required('newDelivery.errors.step2.vendorName.required'),
-    vendorId: yup.number().typeError('newDelivery.errors.step2.vendorId.typeError'),
+    vendorId: yup.string().required('newDelivery.errors.step2.vendorId.required'),
     truckNumber: yup.string().required('newDelivery.errors.step2.truckNumber.required'),
     deliveryDate: yup
       .date()
@@ -28,7 +27,7 @@ export const newDeliveryStep2Schema = yup
 
 export interface NewDeliveryStep2FormData extends yup.InferType<typeof newDeliveryStep2Schema> {
   vendorName: string
-  vendorId: number
+  vendorId: string
   truckNumber: string
   deliveryDate: Date
 }

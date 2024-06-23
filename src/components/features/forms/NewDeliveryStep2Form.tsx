@@ -10,6 +10,7 @@ import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 
 const vendorName = ['Bosch', 'Valeo']
 
+// Да се направи контролиран обект
 export default function NewDeliveryStep2Form({
   control,
   formState: { errors }
