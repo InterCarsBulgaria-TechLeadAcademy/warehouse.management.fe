@@ -1,3 +1,4 @@
+import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import { NewDeliveryStep1FormData } from '@/schemas/newDeliverySchemas'
 import {
   Checkbox,
@@ -19,11 +20,13 @@ export default function NewDeliveryStep1Form({
   formState: { errors }
 }: UseFormReturn<NewDeliveryStep1FormData>) {
   const { t: translate } = useTranslation()
+  const { formsData } = useNewDeliveryContext()
   return (
     <>
       <Controller
         name="deliveryNumber"
         control={control}
+        defaultValue={formsData.deliveryNumber || ''}
         render={({ field }) => (
           <TextField
             {...field}
@@ -41,6 +44,7 @@ export default function NewDeliveryStep1Form({
       <Controller
         name="receptionNumber"
         control={control}
+        defaultValue={formsData.receptionNumber || ''}
         render={({ field }) => (
           <TextField
             {...field}
@@ -59,6 +63,7 @@ export default function NewDeliveryStep1Form({
       <Controller
         name="cmrNumber"
         control={control}
+        defaultValue={formsData.cmrNumber || ''}
         render={({ field }) => (
           <TextField
             {...field}
@@ -75,6 +80,7 @@ export default function NewDeliveryStep1Form({
       <Controller
         name="markers"
         control={control}
+        defaultValue={formsData.markers || []}
         render={({ field }) => (
           <FormControl>
             <InputLabel id="demo-multiple-checkbox-label">

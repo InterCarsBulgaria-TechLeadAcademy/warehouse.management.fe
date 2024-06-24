@@ -7,8 +7,6 @@ import { NewDeliveryStep3FormData } from '@/schemas/newDeliverySchemas'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import { useGenerateId } from '@/hooks/useGenerateId.ts'
 
-let id = 0
-
 export default function NewDeliveryStep3Form({
   control,
   formState: { errors }
@@ -42,8 +40,6 @@ export default function NewDeliveryStep3Form({
   )
 
   function onDeleteHandler(index: number) {
-    // Не работи както трябва
-    console.log(index)
     remove(index) // This removes the item from goods array in formsData object
     setGoodDetailsForms((prev) => prev.filter((_, id) => id !== index))
     setSelectedGoodTypes((prev) => prev.filter((_, id) => id !== index))
@@ -51,7 +47,7 @@ export default function NewDeliveryStep3Form({
 
   function addGoodHandler() {
     append({ goodTypeStep3: '', goodQuantityStep3: 0 }) // add this object in goods array in formsData object
-    setGoodDetailsForms((prev) => [...prev, generateId()])
+    setGoodDetailsForms((prev) => [...prev, prev.length])
     setSelectedGoodTypes((prev) => [...prev, ''])
   }
 
