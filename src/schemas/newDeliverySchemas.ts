@@ -20,8 +20,8 @@ export const newDeliveryStep2Schema = yup
     truckNumber: yup.string().required('newDelivery.errors.step2.truckNumber.required'),
     deliveryDate: yup
       .date()
-      .required('newDelivery.errors.step2.deliveryTime.required')
-      .typeError('newDelivery.errors.step2.deliveryTime.validDate')
+      .required('newDelivery.errors.step2.deliveryDate.required')
+      .typeError('newDelivery.errors.step2.deliveryDate.validDate')
   })
   .required()
 

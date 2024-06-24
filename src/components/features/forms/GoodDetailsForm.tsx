@@ -39,6 +39,7 @@ export default function GoodDetailsForm({
   )
 
   return (
+    //Трябва да се направят контролирани компоненти. Не знам как да им задам defaultValue
     <Box sx={{ display: 'flex', gap: '1em', alignItems: 'center' }}>
       <Controller
         name={`goods.${index}.goodTypeStep3`} //Use the index for unique a name field
