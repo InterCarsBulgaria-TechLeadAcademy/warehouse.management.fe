@@ -21,11 +21,7 @@ export default function NewDeliveryStep3Form({
     name: 'goods' //the path to the goods array in formsData object, which we need to manage dynamically.
   })
 
-  const initialGoodType = [
-    translate('newDelivery.goodType.pallets'),
-    translate('newDelivery.goodType.packages'),
-    translate('newDelivery.goodType.pieces')
-  ]
+  const initialGoodType = ['pallets', 'packages', 'pieces']
 
   // Initialize goodDetailsForms and selectedGoodTypes based on formsData.goods
   const goodDetailsFormsInitialValue = formsData.goods
@@ -55,7 +51,7 @@ export default function NewDeliveryStep3Form({
   function handleGoodTypeChange(index: number, value: string | null) {
     setSelectedGoodTypes((prev) => {
       const updated = [...prev]
-      updated[index] = value || '' // Convert null to empty string
+      updated[index] = value || ''
       return updated
     })
   }
@@ -76,8 +72,6 @@ export default function NewDeliveryStep3Form({
       setSelectedGoodTypes(formsData.goods.map((good: any) => good.goodTypeStep3 || ''))
     }
   }, [formsData])
-
-  console.log(goodDetailsForms)
 
   return (
     <>

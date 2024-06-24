@@ -2,7 +2,6 @@ import { createContext, ReactNode, useEffect, useState } from 'react'
 import { SubmitHandler } from 'react-hook-form'
 import useNewDeliverySteps from '@/hooks/useNewDeliverySteps'
 import { NewDeliveryContextValues } from '@/interfaces/newDeliveryContextValues'
-import { useTranslation } from 'react-i18next'
 
 interface NewDeliveryProviderProps {
   children: ReactNode
@@ -30,7 +29,6 @@ interface MoveGood {
 }
 
 export default function NewDeliveryProvider({ children }: NewDeliveryProviderProps) {
-  const { t: translate } = useTranslation()
   const [currentStep, setCurrentStep] = useState(1)
   const [formsData, setFormsData] = useState<any>({})
   const [openDialog, setOpenDialog] = useState(false)
@@ -42,19 +40,18 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   const [isExceedQuantity, setIsExceedQuantity] = useState(false)
 
   useEffect(() => {
-    // Delete if condition when the newDeliveryProvider is not in main.tsx
     // Initial set step3Items
     if (formsData.goods) {
       const newStep3Items = { ...step3Items }
       formsData.goods.map((good: any) => {
         switch (good.goodTypeStep3) {
-          case 'Палети':
+          case 'pallets':
             newStep3Items.pallets = good.goodQuantityStep3
             return setStep3Items(newStep3Items)
-          case 'Пакети':
+          case 'packages':
             newStep3Items.packages = good.goodQuantityStep3
             return setStep3Items(newStep3Items)
-          case 'Бройки':
+          case 'pieces':
             newStep3Items.pieces = good.goodQuantityStep3
             return setStep3Items(newStep3Items)
         }
@@ -66,11 +63,11 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
     const currentItems = { pallets: 0, packages: 0, pieces: 0 }
 
     step4Items.map((item) => {
-      if (item.type === translate('newDelivery.goodType.pallets')) {
+      if (item.type === 'pallets') {
         currentItems.pallets += item.quantity
-      } else if (item.type === translate('newDelivery.goodType.packages')) {
+      } else if (item.type === 'packages') {
         currentItems.packages += item.quantity
-      } else if (item.type === translate('newDelivery.goodType.pieces')) {
+      } else if (item.type === 'pieces') {
         currentItems.pieces += item.quantity
       }
       return item

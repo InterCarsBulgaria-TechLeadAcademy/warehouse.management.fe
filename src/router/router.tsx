@@ -12,6 +12,7 @@ import {
   ZONES_CONTENT_PATH,
   MAIN_PATH
 } from '@/router/routerPaths.ts'
+import NewDeliveryProvider from '@/contexts/NewDelivery'
 
 const Home = lazy(() => import('@/pages/main/Home.tsx'))
 const Projects = lazy(() => import('@/pages/main/Projects.tsx'))
@@ -69,7 +70,11 @@ export default function Router() {
         },
         {
           path: DELIVERIES_PATH,
-          element: <Deliveries />
+          element: (
+            <NewDeliveryProvider>
+              <Deliveries />
+            </NewDeliveryProvider>
+          )
         }
       ]
     }
