@@ -5,9 +5,7 @@ import { UseFormReturn, useFieldArray } from 'react-hook-form'
 import { useState, useEffect } from 'react'
 import { NewDeliveryStep3FormData } from '@/schemas/newDeliverySchemas'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
-import useGenerateId from '@/hooks/useGenerateId'
-
-const generateId = useGenerateId()
+import { useGenerateId } from '@/hooks/useGenerateId.ts'
 
 export default function NewDeliveryStep3Form({
   control,
@@ -15,6 +13,7 @@ export default function NewDeliveryStep3Form({
 }: UseFormReturn<NewDeliveryStep3FormData>) {
   const { t: translate } = useTranslation()
   const { formsData } = useNewDeliveryContext()
+  const generateId = useGenerateId()
 
   const { remove, append } = useFieldArray({
     control,
@@ -36,16 +35,16 @@ export default function NewDeliveryStep3Form({
     selectedGoodTypesInitialValue
   )
 
-  function addGoodHandler() {
-    append({ goodTypeStep3: '', goodQuantityStep3: 0 }) // add this object in goods array in formsData object
-    setGoodDetailsForms((prev) => [...prev, generateId()])
-    setSelectedGoodTypes((prev) => [...prev, ''])
-  }
-
   function onDeleteHandler(index: number) {
     remove(index) // This removes the item from goods array in formsData object
     setGoodDetailsForms((prev) => prev.filter((_, id) => id !== index))
     setSelectedGoodTypes((prev) => prev.filter((_, id) => id !== index))
+  }
+
+  function addGoodHandler() {
+    append({ goodTypeStep3: '', goodQuantityStep3: 0 }) // add this object in goods array in formsData object
+    setGoodDetailsForms((prev) => [...prev, prev.length])
+    setSelectedGoodTypes((prev) => [...prev, ''])
   }
 
   function handleGoodTypeChange(index: number, value: string | null) {
@@ -75,7 +74,7 @@ export default function NewDeliveryStep3Form({
 
   return (
     <>
-      {goodDetailsForms.map((id: number, index: number) => (
+      {goodDetailsForms.map((id, index) => (
         <GoodDetailsForm
           key={id}
           control={control}

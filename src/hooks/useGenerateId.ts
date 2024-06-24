@@ -1,8 +1,8 @@
-export default function useGenerateId() {
-  let id: number = 0
+export function useGenerateId() {
+  let id = 0
 
-  function generateId(): number {
-    return id++
+  function generateId() {
+    return ++id
   }
 
   return generateId
