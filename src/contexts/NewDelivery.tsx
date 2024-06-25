@@ -2,6 +2,7 @@ import { createContext, ReactNode, useEffect, useState } from 'react'
 import { SubmitHandler } from 'react-hook-form'
 import useNewDeliverySteps from '@/hooks/useNewDeliverySteps'
 import { NewDeliveryContextValues } from '@/interfaces/newDeliveryContextValues'
+import useSetStep3Items from '@/hooks/useSetStep3Items'
 
 interface NewDeliveryProviderProps {
   children: ReactNode
@@ -19,7 +20,9 @@ export const NewDeliveryContext = createContext<NewDeliveryContextValues>({
   deleteStep4Item: () => {},
   alertMessage: '',
   isCompletedMove: false,
-  isExceedQuantity: false
+  isExceedQuantity: false,
+  step3Items: { pallets: 0, packages: 0, pieces: 0 },
+  setStep3Items: () => {}
 })
 
 interface MoveGood {
@@ -39,25 +42,7 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   const [isCompletedMove, setIsCompletedMove] = useState(false)
   const [isExceedQuantity, setIsExceedQuantity] = useState(false)
 
-  useEffect(() => {
-    // Initial set step3Items
-    if (formsData.goods) {
-      const newStep3Items = { ...step3Items }
-      formsData.goods.map((good: any) => {
-        switch (good.goodTypeStep3) {
-          case 'pallets':
-            newStep3Items.pallets = good.goodQuantityStep3
-            return setStep3Items(newStep3Items)
-          case 'packages':
-            newStep3Items.packages = good.goodQuantityStep3
-            return setStep3Items(newStep3Items)
-          case 'pieces':
-            newStep3Items.pieces = good.goodQuantityStep3
-            return setStep3Items(newStep3Items)
-        }
-      })
-    }
-  }, [formsData])
+  useSetStep3Items(formsData, step3Items, setStep3Items)
 
   useEffect(() => {
     const currentItems = { pallets: 0, packages: 0, pieces: 0 }
@@ -175,7 +160,9 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
     deleteStep4Item,
     alertMessage,
     isCompletedMove,
-    isExceedQuantity
+    isExceedQuantity,
+    step3Items,
+    setStep3Items
   }
 
   return (

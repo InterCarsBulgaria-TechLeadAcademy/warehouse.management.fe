@@ -16,4 +16,8 @@ export interface NewDeliveryContextValues {
   alertMessage: string
   isCompletedMove: boolean
   isExceedQuantity: boolean
+  step3Items: { pallets: number; packages: number; pieces: number }
+  setStep3Items: React.Dispatch<
+    React.SetStateAction<{ pallets: number; packages: number; pieces: number }>
+  >
 }
