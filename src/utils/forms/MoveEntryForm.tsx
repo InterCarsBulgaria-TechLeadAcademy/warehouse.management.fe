@@ -1,7 +1,5 @@
 import {
-  Checkbox,
   FormControl,
-  FormControlLabel,
   InputLabel,
   ListItemText,
   MenuItem,
@@ -10,39 +8,39 @@ import {
   TextField
 } from '@mui/material'
 import { Controller, UseFormReturn, SubmitHandler } from 'react-hook-form'
-import { NewZoneFormData, newZoneSchema } from '@/schemas/newZoneSchema'
 import { useTranslation } from 'react-i18next'
+import { NewEntryFormData } from '@/schemas/moveEntrySchema'
 
-export default function MoveEntryForm({ control, formState: { errors } }: UseFormReturn<NewZoneFormData>) {
+export default function MoveEntryForm({ control, formState: { errors } }: UseFormReturn<NewEntryFormData>) {
   const { t: translate } = useTranslation()
-  const markers = ['Масло', 'Гуми', 'Чистачки']
+  const zones = ['Първа', 'Втора', 'Трета']
   return (
     <>
       <Controller
-        name="zoneName"
+        name="quantity"
         control={control}
         render={({ field }) => (
           <TextField
             {...field}
-            label={translate('newZone.labels.name')}
-            id="zoneName"
-            name="zoneName"
+            label={translate('zones.moveEntry.quantity')}
+            id="quantity"
+            name="quantity"
             required
             fullWidth
             autoFocus
-            error={!!errors.zoneName}
-            helperText={errors.zoneName?.message ? translate(errors.zoneName.message) : ''}
+            error={!!errors.quantity}
+            helperText={errors.quantity?.message ? translate(errors.quantity.message) : ''}
           />
         )}
       />
-
-      {/* <Controller
-        name="markers"
+        
+      <Controller
+        name="zones"
         control={control}
         render={({ field }) => (
           <FormControl fullWidth>
             <InputLabel id="demo-multiple-checkbox-label">
-              {translate('newZone.labels.markers')}
+              {translate('zones.moveEntry.zones')}
             </InputLabel>
             <Select
               {...field}
@@ -53,25 +51,13 @@ export default function MoveEntryForm({ control, formState: { errors } }: UseFor
               onChange={(e) => field.onChange(e.target.value)}
               input={<OutlinedInput />}
               renderValue={(selected) => (selected as string[]).join(', ')}>
-              {markers.map((marker) => (
-                <MenuItem key={marker} value={marker}>
-                  <Checkbox checked={field.value?.includes(marker)} />{' '}
-                  <ListItemText primary={marker} />
+              {zones.map((zone) => (
+                <MenuItem key={zone} value={zone}>
+                  <ListItemText primary={zone} />
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
-        )}
-      /> */}
-
-      <Controller
-        name="isFinal"
-        control={control}
-        render={({ field }) => (
-          <FormControlLabel
-            control={<Checkbox {...field} checked={field.value} />}
-            label={translate('newZone.labels.isFinal')}
-          />
         )}
       />
     </>
