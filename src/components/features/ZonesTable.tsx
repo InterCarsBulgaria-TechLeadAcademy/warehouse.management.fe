@@ -10,6 +10,7 @@ import FormDialog from '../shared/FormDialog'
 import { useMoveEntryDialog } from '@/hooks/forms/useMoveEntryDialog'
 import MoveEntryForm from '@/utils/forms/MoveEntryForm'
 import { NewEntryFormData, moveEntrySchema } from '@/schemas/moveEntrySchema'
+import { ZonesTableActions } from '@/hooks/forms/useMoveEntryDialog'
 
 export default function ZonesTable() {
   const { t: translate } = useTranslation()
@@ -46,7 +47,7 @@ export default function ZonesTable() {
       receptionNumbers: 12,
       numberOfGoods: 33,
       status: 'finished',
-      actions: <TableActionsMenu specificOptionHandler={onOpenMoveEntryDialog} itemProps={['MoveToNewZone', 'StartProcessing', 'FinishProcessing', 'DeliveryDetails']} page='zones' />
+      actions: <TableActionsMenu specificOptionHandler={onOpenMoveEntryDialog} itemProps={[ ZonesTableActions.MoveToNewZone, 'StartProcessing', 'FinishProcessing', 'DeliveryDetails']} page='zones' />
     },
     {
       entryNumber: 2,

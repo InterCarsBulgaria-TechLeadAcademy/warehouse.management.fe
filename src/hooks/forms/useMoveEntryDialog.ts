@@ -4,7 +4,7 @@ export const useMoveEntryDialog = () => {
     const [openMoveEntryDialog, setOpenMoveEntryDialog] = useState(false);
     
     const onOpenMoveEntryDialog = (option: string) => {
-        if (option === 'MoveToNewZone') setOpenMoveEntryDialog(true);
+        if (option === ZonesTableActions.MoveToNewZone) setOpenMoveEntryDialog(true);
     }
 
     const onCloseMoveEntryDialog = () => {
@@ -22,3 +22,7 @@ export const useMoveEntryDialog = () => {
         handleMoveEntryDialog,
     };
 };
+
+export enum ZonesTableActions {
+    MoveToNewZone = 'MoveToNewZone'
+}
