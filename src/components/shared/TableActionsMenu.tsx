@@ -37,7 +37,7 @@ export default function TableActionsMenu({ itemProps, page }: TableActionsMenuPr
     setSelectedOption(option)
   }
 
-  const options = itemProps.map((str) => translate(`actionsMenu.options.${str}`))
+  const options = itemProps.map((str) => str)
 
 
   return (
@@ -61,7 +61,7 @@ export default function TableActionsMenu({ itemProps, page }: TableActionsMenuPr
         onClose={handleClose}>
         {options.map((option) => (
           <MenuItem key={option} onClick={() => actionHandler(option)}>
-            {option}
+            {translate(`actionsMenu.options.${option}`)}
           </MenuItem>
         ))}
       </Menu>
