@@ -91,6 +91,12 @@
       "receptionNumbers": "Рецепция №",
       "numberOfGoods": "Стока №",
       "status": "Статус"
+    },
+    "moveEntry": {
+      "title": "Местене на стока",
+      "confirm": "Потвърди",
+      "quantity": "Количество",
+      "zones": "Зони"
     }
   },
   "vendors": {
