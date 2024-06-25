@@ -47,7 +47,7 @@ export default function NewDeliveryStep3Form({
 
   function addGoodHandler() {
     append({ goodTypeStep3: '', goodQuantityStep3: 0 }) // add this object in goods array in formsData object
-    setGoodDetailsForms((prev) => [...prev, prev.length])
+    setGoodDetailsForms((prev) => [...prev, generateId()])
     setSelectedGoodTypes((prev) => [...prev, ''])
   }
 
