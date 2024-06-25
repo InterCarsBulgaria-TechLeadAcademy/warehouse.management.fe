@@ -7,7 +7,7 @@ import { FormControlLabel, Switch } from '@mui/material'
 import { Column } from '@/interfaces/dataTable'
 import SearchInput from './SearchInput'
 import FormDialog from '../shared/FormDialog'
-import { useMoveEntryDialog } from '@/hooks/useMoveEntryDialog'
+import { useMoveEntryDialog } from '@/hooks/forms/useMoveEntryDialog'
 import MoveEntryForm from '@/utils/forms/MoveEntryForm'
 import { NewEntryFormData, moveEntrySchema } from '@/schemas/moveEntrySchema'
 
