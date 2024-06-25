@@ -6,11 +6,22 @@ import TableActionsMenu from '../shared/TableActionsMenu'
 import { FormControlLabel, Switch } from '@mui/material'
 import { Column } from '@/interfaces/dataTable'
 import SearchInput from './SearchInput'
+import FormDialog from '../shared/FormDialog'
+import { useMoveEntryDialog } from '@/hooks/useMoveEntryDialog'
+import MoveEntryForm from '@/utils/forms/MoveEntryForm'
+import { NewEntryFormData, moveEntrySchema } from '@/schemas/moveEntrySchema'
 
 export default function ZonesTable() {
   const { t: translate } = useTranslation()
   const [toggleOn, setToggleOn] = React.useState(false)
   const [searchTerm, setSearchTerm] = React.useState('')
+
+  const {
+    openMoveEntryDialog,
+    onCloseMoveEntryDialog,
+    handleMoveEntryDialog,
+    onOpenMoveEntryDialog
+  } = useMoveEntryDialog();
 
   const handleToggleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setToggleOn(event.target.checked);
@@ -35,7 +46,7 @@ export default function ZonesTable() {
       receptionNumbers: 12,
       numberOfGoods: 33,
       status: 'finished',
-      actions: <TableActionsMenu itemProps={['MoveToNewZone', 'StartProcessing', 'FinishProcessing', 'DeliveryDetails']} page='zones' />
+      actions: <TableActionsMenu specificOptionHandler={onOpenMoveEntryDialog} itemProps={['MoveToNewZone', 'StartProcessing', 'FinishProcessing', 'DeliveryDetails']} page='zones' />
     },
     {
       entryNumber: 2,
@@ -44,7 +55,7 @@ export default function ZonesTable() {
       numberOfGoods: 52,
       status: 'processing',
       markers: 'Накладки',
-      actions: <TableActionsMenu itemProps={['MoveToNewZone', 'StartProcessing', 'FinishProcessing', 'DeliveryDetails']} page='zones' />
+      actions: <TableActionsMenu specificOptionHandler={onOpenMoveEntryDialog} itemProps={['MoveToNewZone', 'StartProcessing', 'FinishProcessing', 'DeliveryDetails']} page='zones' />
     }
   ]
 
@@ -77,6 +88,17 @@ export default function ZonesTable() {
         control={<Switch color="primary" onChange={handleToggleChange} />}
         label={translate('zones.labels.toggle')}
         labelPlacement="start"
+      />
+
+      <FormDialog<NewEntryFormData>
+        open={openMoveEntryDialog}
+        title={translate('zones.moveEntry.title')}
+        discardText={translate('newZone.labels.exit')}
+        confirmText={translate('zones.moveEntry.confirm')}
+        onCloseDialog={onCloseMoveEntryDialog}
+        schema={moveEntrySchema}
+        onSubmit={handleMoveEntryDialog}
+        renderForm={MoveEntryForm}
       />
     </DataTable>
   )
