@@ -55,6 +55,8 @@ export default function NewDeliveryStep3Form({
     })
   }
 
+  console.log(goodDetailsForms)
+
   function availableGoodTypes(index: number) {
     return initialGoodType.filter(
       (type) => !selectedGoodTypes.includes(type) || selectedGoodTypes[index] === type
