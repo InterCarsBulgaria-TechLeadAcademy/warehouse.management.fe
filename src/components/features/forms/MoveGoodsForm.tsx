@@ -7,6 +7,9 @@ import { useEffect, useState } from 'react'
 import { NewDeliveryStep4FormData } from '@/schemas/newDeliverySchemas'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import DeleteIcon from '@mui/icons-material/Delete'
+import useTranslateGoodTypesOptionsToBulgarian from '@/hooks/useTranslateGoodTypesOptionsToBulgarian'
+import useTranslateGoodTypeToBulgarian from '@/hooks/useTranslateGoodTypeToBulgarian'
+import useTranslateGoodTypeToEnglish from '@/hooks/useTranslateGoodTypeToEnglish'
 
 interface GoodDetailsFormProps {
   control: Control<NewDeliveryStep4FormData, any>
@@ -76,17 +79,18 @@ export default function MoveGoodsForm({
         render={({ field }) => (
           <Autocomplete
             {...field}
-            value={goodTypeValue}
+            value={useTranslateGoodTypeToBulgarian(goodTypeValue)}
             onChange={(_event: any, newValue: string | null) => {
-              setGoodTypeValue(newValue)
-              field.onChange(newValue)
+              const englishValue = useTranslateGoodTypeToEnglish(newValue)
+              setGoodTypeValue(englishValue)
+              field.onChange(englishValue)
             }}
             inputValue={goodTypeInputValue}
             onInputChange={(_event, newInputValue) => {
               setGoodTypeInputValue(newInputValue)
             }}
             id={`moveGoodsForm.controllable-states-demo-goodType${id}`}
-            options={goodType}
+            options={useTranslateGoodTypesOptionsToBulgarian(goodType)}
             sx={{ flex: 1 }}
             renderInput={(params) => (
               <TextField

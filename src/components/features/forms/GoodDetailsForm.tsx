@@ -7,6 +7,9 @@ import Autocomplete from '@mui/material/Autocomplete'
 import React from 'react'
 import { NewDeliveryStep3FormData } from '@/schemas/newDeliverySchemas'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
+import useTranslateGoodTypesOptionsToBulgarian from '@/hooks/useTranslateGoodTypesOptionsToBulgarian'
+import useTranslateGoodTypeToBulgarian from '@/hooks/useTranslateGoodTypeToBulgarian'
+import useTranslateGoodTypeToEnglish from '@/hooks/useTranslateGoodTypeToEnglish'
 
 interface GoodDetailsFormProps {
   control: Control<NewDeliveryStep3FormData, any>
@@ -47,18 +50,19 @@ export default function GoodDetailsForm({
         render={({ field }) => (
           <Autocomplete
             {...field}
-            value={value}
+            value={useTranslateGoodTypeToBulgarian(value)}
             onChange={(_event: any, newValue: string | null) => {
-              setValue(newValue)
-              field.onChange(newValue)
-              onGoodTypeChange(newValue) //Updating the selected goodType
+              const englishValue = useTranslateGoodTypeToEnglish(newValue)
+              setValue(englishValue)
+              field.onChange(englishValue)
+              onGoodTypeChange(englishValue)
             }}
             inputValue={inputValue}
             onInputChange={(_event, newInputValue) => {
               setInputValue(newInputValue)
             }}
             id={`GoodDetailsForm.controllable-states-demo${index}`} //Unique id for Autocomplete
-            options={goodType}
+            options={useTranslateGoodTypesOptionsToBulgarian(goodType)}
             sx={{ flex: 1 }}
             renderInput={(params) => (
               <TextField
