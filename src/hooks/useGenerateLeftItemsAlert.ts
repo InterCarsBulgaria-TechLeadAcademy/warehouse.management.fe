@@ -1,70 +1,90 @@
-import { useEffect } from 'react'
+import { MoveGood } from '@/interfaces/moveGood'
+import { Step3Items } from '@/interfaces/step3Items'
+import calculateCurrentItems from '@/utils/calculateCurrentItems'
+import calculateLeftItems from '@/utils/calculateLeftItems'
+import { Dispatch, SetStateAction, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export default function useGenerateLeftItemsAlert(
-  step3Items: any,
-  step4Items: any,
-  setIsExceedQuantity: any,
-  setAlertMessage: any,
-  setIsCompletedMove: any
+  step3Items: Step3Items,
+  step4Items: MoveGood[],
+  setAlertMessage: Dispatch<SetStateAction<string>>,
+  setIsExceedQuantity: Dispatch<SetStateAction<boolean>>,
+  setIsCompletedMove: Dispatch<SetStateAction<boolean>>
 ) {
+  const { t: translate } = useTranslation()
+
   useEffect(() => {
-    const currentItems = { pallets: 0, packages: 0, pieces: 0 }
+    const currentItems = calculateCurrentItems(step4Items)
+    const leftItems = calculateLeftItems(step3Items, currentItems)
 
-    step4Items.map((item: any) => {
-      if (item.type === 'pallets') {
-        currentItems.pallets += item.quantity
-      } else if (item.type === 'packages') {
-        currentItems.packages += item.quantity
-      } else if (item.type === 'pieces') {
-        currentItems.pieces += item.quantity
-      }
-      return item
-    })
-
-    const leftItems = {
-      pallets: step3Items.pallets - currentItems.pallets,
-      packages: step3Items.packages - currentItems.packages,
-      pieces: step3Items.pieces - currentItems.pieces
-    }
-
-    if (leftItems.pallets < 0) {
+    if (leftItems.pallets === 0 && leftItems.packages === 0 && leftItems.pieces === 0) {
+      setIsExceedQuantity(false)
+      setIsCompletedMove(true)
+      setAlertMessage(translate('newDelivery.alertMessages.completedMove'))
+    } else if (leftItems.pallets < 0) {
+      setIsCompletedMove(false)
       setIsExceedQuantity(true)
       setAlertMessage(
-        `Количеството на палетите е надвишено с ${currentItems.pallets - step3Items.pallets}`
+        translate('newDelivery.alertMessages.exceedPallets', {
+          quantity: currentItems.pallets - step3Items.pallets
+        })
       )
     } else if (leftItems.packages < 0) {
+      setIsCompletedMove(false)
       setIsExceedQuantity(true)
       setAlertMessage(
-        `Количеството на пакетите е надвишено с ${currentItems.packages - step3Items.packages}`
+        translate('newDelivery.alertMessages.exceedPackages', {
+          quantity: currentItems.packages - step3Items.packages
+        })
       )
     } else if (leftItems.pieces < 0) {
+      setIsCompletedMove(false)
       setIsExceedQuantity(true)
       setAlertMessage(
-        `Количеството на бройките е надвишено с ${currentItems.pieces - step3Items.pieces}`
+        translate('newDelivery.alertMessages.exceedPieces', {
+          quantity: currentItems.pieces - step3Items.pieces
+        })
       )
-    } else if (leftItems.pallets === 0 && leftItems.packages === 0 && leftItems.pieces === 0) {
-      setIsCompletedMove(true)
-      setAlertMessage('Всички стоки са разпределени по зони')
     } else {
       setIsCompletedMove(false)
       setIsExceedQuantity(false)
 
-      let palletsMessage = leftItems.pallets === 0 ? '' : `${leftItems.pallets} палети`
+      let palletsMessage =
+        leftItems.pallets === 0
+          ? ''
+          : translate('newDelivery.alertMessages.leftPallets', {
+              quantity: leftItems.pallets
+            })
+
       let packagesMessage =
         leftItems.packages === 0
           ? ''
           : palletsMessage === ''
-            ? `${leftItems.packages} пакети`
-            : `, ${leftItems.packages} пакети`
+            ? translate('newDelivery.alertMessages.leftPackages', {
+                quantity: leftItems.packages
+              })
+            : translate('newDelivery.alertMessages.leftPackagesWithComma', {
+                quantity: leftItems.packages
+              })
+
       let piecesMessage =
         leftItems.pieces === 0
           ? ''
           : palletsMessage === '' && packagesMessage === ''
-            ? `${leftItems.pieces} бройки`
-            : `, ${leftItems.pieces} бройки`
+            ? translate('newDelivery.alertMessages.leftPieces', {
+                quantity: leftItems.pieces
+              })
+            : translate('newDelivery.alertMessages.leftPiecesWithComma', {
+                quantity: leftItems.pieces
+              })
 
       setAlertMessage(
-        `Остава да поставите ${palletsMessage} ${packagesMessage} ${piecesMessage} в зони`
+        translate('newDelivery.alertMessages.remainingItems', {
+          palletsMessage: palletsMessage,
+          packagesMessage: packagesMessage,
+          piecesMessage: piecesMessage
+        })
       )
     }
   }, [step4Items])

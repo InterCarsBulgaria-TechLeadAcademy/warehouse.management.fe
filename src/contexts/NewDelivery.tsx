@@ -4,6 +4,7 @@ import useNewDeliverySteps from '@/hooks/useNewDeliverySteps'
 import { NewDeliveryContextValues } from '@/interfaces/newDeliveryContextValues'
 import useSetStep3Items from '@/hooks/useSetStep3Items'
 import useGenerateLeftItemsAlert from '@/hooks/useGenerateLeftItemsAlert'
+import { MoveGood } from '@/interfaces/moveGood'
 
 interface NewDeliveryProviderProps {
   children: ReactNode
@@ -26,12 +27,6 @@ export const NewDeliveryContext = createContext<NewDeliveryContextValues>({
   setStep3Items: () => {}
 })
 
-export interface MoveGood {
-  type: string // palettes | packages | pieces
-  quantity: number
-  zone: string
-}
-
 export default function NewDeliveryProvider({ children }: NewDeliveryProviderProps) {
   const [currentStep, setCurrentStep] = useState(1)
   const [formsData, setFormsData] = useState<any>({})
@@ -47,8 +42,8 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   useGenerateLeftItemsAlert(
     step3Items,
     step4Items,
-    setIsExceedQuantity,
     setAlertMessage,
+    setIsExceedQuantity,
     setIsCompletedMove
   )
 

@@ -275,7 +275,19 @@
         "pallets": "Палети",
         "packages": "Пакети",
         "pieces": "Бройки"
-      }
+      },
+      "alertMessages": {
+    "exceedPallets": "Количеството на палетите е надвишено с {{quantity}}",
+    "exceedPackages": "Количеството на пакетите е надвишено с {{quantity}}",
+    "exceedPieces": "Количеството на бройките е надвишено с {{quantity}}",
+    "leftPallets": "{{quantity}} палети",
+    "leftPackages": "{{quantity}} пакети",
+    "leftPackagesWithComma": ", {{quantity}} пакети",
+    "leftPieces": "{{quantity}} бройки",
+    "leftPiecesWithComma": ", {{quantity}} бройки",
+    "remainingItems": "Остава да поставите {{palletsMessage}}{{packagesMessage}}{{piecesMessage}} в зони",
+    "completedMove": "Всички стоки са разпределени по зони"
+  }
   },
   "zonesContent": {
     "title": "Зони ",

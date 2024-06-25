@@ -33,5 +33,5 @@ export default function useSetStep3Items(
       })
       setStep3Items(newStep3Items)
     }
-  }, [formsData.goods, step3Items, setStep3Items])
+  }, [formsData.goods])
 }
