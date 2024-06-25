@@ -7,7 +7,7 @@ import {
   Select,
   TextField
 } from '@mui/material'
-import { Controller, UseFormReturn, SubmitHandler } from 'react-hook-form'
+import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { NewEntryFormData } from '@/schemas/moveEntrySchema'
 
@@ -35,12 +35,12 @@ export default function MoveEntryForm({ control, formState: { errors } }: UseFor
       />
         
       <Controller
-        name="zones"
+        name="zone"
         control={control}
         render={({ field }) => (
           <FormControl fullWidth>
             <InputLabel id="demo-multiple-checkbox-label">
-              {translate('zones.moveEntry.zones')}
+              {translate('zones.moveEntry.zone')}
             </InputLabel>
             <Select
               {...field}
