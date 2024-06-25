@@ -7,11 +7,12 @@ import WarningActionDialog from '../shared/WarningActionDialog'
 import { useTranslation } from 'react-i18next'
 
 interface TableActionsMenuProps {
+  specificOptionHandler: Function;
   itemProps: string[];
   page: string;
 }
 
-export default function TableActionsMenu({ itemProps, page }: TableActionsMenuProps) {
+export default function TableActionsMenu({ specificOptionHandler, itemProps, page }: TableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
@@ -34,7 +35,9 @@ export default function TableActionsMenu({ itemProps, page }: TableActionsMenuPr
   }
 
   const actionHandler = (option: string) => {
+    specificOptionHandler(option)
     setSelectedOption(option)
+    handleClose()
   }
 
   const options = itemProps.map((str) => str)
