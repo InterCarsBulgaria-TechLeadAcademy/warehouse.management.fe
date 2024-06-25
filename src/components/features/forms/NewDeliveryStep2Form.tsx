@@ -19,12 +19,10 @@ export default function NewDeliveryStep2Form({
 
   return (
     <>
-      //Не успях vendorName да го направя контролиран компонент, който да не показва нито една от
-      стойностите //В vendorName масива, първоначално
       <Controller
         name="vendorName"
         control={control}
-        defaultValue={formsData.vendorName || vendorName[0]}
+        defaultValue={formsData.vendorName || null}
         render={({ field }) => (
           <Autocomplete
             {...field}

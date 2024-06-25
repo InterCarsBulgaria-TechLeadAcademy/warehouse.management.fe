@@ -47,6 +47,7 @@ export default function GoodDetailsForm({
       <Controller
         name={`goods.${index}.goodTypeStep3`} //Use the index for unique a name field
         control={control}
+        // defaultValue={formsData?.goods ? formsData.goods[index]?.goodTypeStep3 || null : null}
         render={({ field }) => (
           <Autocomplete
             {...field}
@@ -83,6 +84,7 @@ export default function GoodDetailsForm({
       <Controller
         name={`goods.${index}.goodQuantityStep3`} //Use the index for unique a name field
         control={control}
+        // defaultValue={formsData?.goods ? formsData.goods[index]?.goodQuantityStep3 || null : null}
         render={({ field }) => (
           <TextField
             {...field}
