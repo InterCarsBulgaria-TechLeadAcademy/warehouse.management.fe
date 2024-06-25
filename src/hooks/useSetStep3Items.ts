@@ -1,18 +1,13 @@
+import { Step3Items } from '@/interfaces/step3Items'
 import { useEffect } from 'react'
 
-interface Good {
+export interface Good {
   goodTypeStep3: 'pallets' | 'packages' | 'pieces'
   goodQuantityStep3: number
 }
 
 interface FormsData {
   goods: Good[]
-}
-
-interface Step3Items {
-  pallets: number
-  packages: number
-  pieces: number
 }
 
 export default function useSetStep3Items(
