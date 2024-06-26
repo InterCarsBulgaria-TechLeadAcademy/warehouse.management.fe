@@ -3,7 +3,6 @@ import {
   InputLabel,
   ListItemText,
   MenuItem,
-  OutlinedInput,
   Select,
   TextField
 } from '@mui/material'
