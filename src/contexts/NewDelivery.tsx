@@ -74,14 +74,11 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   }
 
   function handleBack() {
-    if (currentStep > 1) {
-      setCurrentStep((prev) => prev - 1)
-      setStep3Items({ pallets: 0, packages: 0, pieces: 0 })
-      setStep4Items([{ type: '', quantity: 0, zone: '' }])
-    }
+    setCurrentStep((prev) => prev - 1)
   }
 
   const handleSubmit: SubmitHandler<any> = (data) => {
+    console.log('v handleSubmit')
     //В стъпка 4 при натискане на submit не се извиква тази функция и не мога да разбера защо
     if (currentStep === steps.length) {
       console.log('Final submission:', data)
