@@ -8,6 +8,6 @@ export const moveEntrySchema = yup.object({
   zone: yup.array().of(yup.string())
 })
 
-export interface NewEntryFormData extends yup.InferType<typeof moveEntrySchema> {
+export interface MoveEntryFormData extends yup.InferType<typeof moveEntrySchema> {
   quantity: number
 }

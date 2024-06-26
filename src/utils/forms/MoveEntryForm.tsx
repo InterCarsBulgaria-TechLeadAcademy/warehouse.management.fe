@@ -9,9 +9,9 @@ import {
 } from '@mui/material'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { NewEntryFormData } from '@/schemas/moveEntrySchema'
+import { MoveEntryFormData } from '@/schemas/moveEntrySchema'
 
-export default function MoveEntryForm({ control, formState: { errors } }: UseFormReturn<NewEntryFormData>) {
+export default function MoveEntryForm({ control, formState: { errors } }: UseFormReturn<MoveEntryFormData>) {
   const { t: translate } = useTranslation()
   const zones = ['Първа', 'Втора', 'Трета']
   return (

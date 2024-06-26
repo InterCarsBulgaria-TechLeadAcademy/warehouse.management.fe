@@ -9,7 +9,7 @@ import SearchInput from './SearchInput'
 import FormDialog from '../shared/FormDialog'
 import { useMoveEntryDialog } from '@/hooks/forms/useMoveEntryDialog'
 import MoveEntryForm from '@/utils/forms/MoveEntryForm'
-import { NewEntryFormData, moveEntrySchema } from '@/schemas/moveEntrySchema'
+import { MoveEntryFormData, moveEntrySchema } from '@/schemas/moveEntrySchema'
 import { ZonesTableActions } from '@/hooks/forms/useMoveEntryDialog'
 
 export default function ZonesTable() {
@@ -91,7 +91,7 @@ export default function ZonesTable() {
         labelPlacement="start"
       />
 
-      <FormDialog<NewEntryFormData>
+      <FormDialog<MoveEntryFormData>
         open={openMoveEntryDialog}
         title={translate('zones.moveEntry.title')}
         discardText={translate('newZone.labels.exit')}
