@@ -36,21 +36,21 @@ export default function GoodDetailsForm({
   const [value, setValue] = React.useState<string | null>(
     formsData?.goods ? formsData.goods[index]?.goodTypeStep3 : null
   )
-  const [inputValue, setInputValue] = React.useState('')
   const [goodQuantityValue, setGoodQuantityValue] = React.useState<string | undefined>(
     formsData?.goods ? formsData.goods[index]?.goodQuantityStep3 : ''
   )
 
   return (
-    //Трябва да се направят контролирани компоненти. Не знам как да им задам defaultValue
     <Box sx={{ display: 'flex', gap: '1em', alignItems: 'center' }}>
       <Controller
         name={`goods.${index}.goodTypeStep3`} //Use the index for unique a name field
         control={control}
-        // defaultValue={formsData?.goods ? formsData.goods[index]?.goodTypeStep3 || null : null}
+        defaultValue={formsData?.goods ? formsData.goods[index]?.goodTypeStep3 || null : null}
         render={({ field }) => (
           <Autocomplete
             {...field}
+            id={`GoodDetailsForm.controllable-states-demo${index}`} //Unique id for Autocomplete
+            options={useTranslateGoodTypesOptionsToBulgarian(goodType)}
             value={useTranslateGoodTypeToBulgarian(value)}
             onChange={(_event: any, newValue: string | null) => {
               const englishValue = useTranslateGoodTypeToEnglish(newValue)
@@ -58,12 +58,6 @@ export default function GoodDetailsForm({
               field.onChange(englishValue)
               onGoodTypeChange(englishValue)
             }}
-            inputValue={inputValue}
-            onInputChange={(_event, newInputValue) => {
-              setInputValue(newInputValue)
-            }}
-            id={`GoodDetailsForm.controllable-states-demo${index}`} //Unique id for Autocomplete
-            options={useTranslateGoodTypesOptionsToBulgarian(goodType)}
             sx={{ flex: 1 }}
             renderInput={(params) => (
               <TextField
@@ -84,14 +78,13 @@ export default function GoodDetailsForm({
       <Controller
         name={`goods.${index}.goodQuantityStep3`} //Use the index for unique a name field
         control={control}
-        // defaultValue={formsData?.goods ? formsData.goods[index]?.goodQuantityStep3 || null : null}
+        defaultValue={formsData?.goods ? formsData.goods[index]?.goodQuantityStep3 || '' : ''}
         render={({ field }) => (
           <TextField
             {...field}
             label={translate('newDelivery.labels.step3.goodQuantity')}
             id={`GoodDetailsForm.goodQuantity${index}`} //Unique id for TextField
             name={`GoodDetailsForm.goodQuantity-${index}`} //Use the index for unique a name field
-            sx={{ flex: 1 }}
             required
             value={goodQuantityValue}
             onChange={(e) => {
@@ -102,6 +95,7 @@ export default function GoodDetailsForm({
                 field.onChange(inputValue)
               }
             }}
+            sx={{ flex: 1 }}
             error={!!errors?.goods?.[index]?.goodQuantityStep3}
             helperText={
               errors?.goods?.[index]?.goodQuantityStep3?.message
