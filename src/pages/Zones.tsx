@@ -11,7 +11,6 @@ import {
   Select,
   MenuItem,
   ListItemText,
-  OutlinedInput
 } from '@mui/material'
 import { Controller, UseFormReturn, SubmitHandler } from 'react-hook-form'
 import ZonesTable from '@/components/features/ZonesTable'
