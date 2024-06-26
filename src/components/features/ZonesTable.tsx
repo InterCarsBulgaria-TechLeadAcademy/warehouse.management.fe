@@ -18,6 +18,7 @@ export default function ZonesTable() {
   const [searchTerm, setSearchTerm] = React.useState('')
 
   const {
+    quantity,
     openMoveEntryDialog,
     onCloseMoveEntryDialog,
     handleMoveEntryDialog,
@@ -47,7 +48,6 @@ export default function ZonesTable() {
       receptionNumbers: 12,
       numberOfGoods: 33,
       status: 'finished',
-      actions: <TableActionsMenu specificOptionHandler={onOpenMoveEntryDialog} itemProps={[ ZonesTableActions.MoveToNewZone, 'StartProcessing', 'FinishProcessing', 'DeliveryDetails']} page='zones' />
     },
     {
       entryNumber: 2,
@@ -55,12 +55,23 @@ export default function ZonesTable() {
       receptionNumbers: 11,
       numberOfGoods: 52,
       status: 'processing',
-      markers: 'Накладки',
-      actions: <TableActionsMenu specificOptionHandler={onOpenMoveEntryDialog} itemProps={['MoveToNewZone', 'StartProcessing', 'FinishProcessing', 'DeliveryDetails']} page='zones' />
     }
   ]
 
-  const filteredRows = rowData.filter((row: any) => {
+  const tableRowDataWithActions = rowData.map((row) => {
+    return {
+      ...row,
+      actions: (
+        <TableActionsMenu
+          specificOptionHandler={(action: string) => onOpenMoveEntryDialog(action, row.numberOfGoods)}
+          itemProps={[ZonesTableActions.MoveToNewZone, 'StartProcessing', 'FinishProcessing', 'DeliveryDetails']}
+          page='zones'
+        />
+      )
+    }
+  })
+
+  const filteredRows = tableRowDataWithActions.filter((row: any) => {
     if (toggleOn) {
       return columnsData.some((column) => {
         return row[column.key]?.toString().toLowerCase().includes('finished')
