@@ -39,18 +39,16 @@ export default function MoveEntryForm({ control, formState: { errors } }: UseFor
         control={control}
         render={({ field }) => (
           <FormControl fullWidth>
-            <InputLabel id="demo-multiple-checkbox-label">
+            <InputLabel id="move-entry-checkbox-label">
               {translate('zones.moveEntry.zone')}
             </InputLabel>
             <Select
               {...field}
-              labelId="demo-multiple-checkbox-label"
-              id="demo-multiple-checkbox"
-              multiple
-              value={field.value || []}
+              labelId="move-entry-checkbox-label"
+              id="move-entry-checkbox"
+              value={field.value || ''}
               onChange={(e) => field.onChange(e.target.value)}
-              input={<OutlinedInput />}
-              renderValue={(selected) => (selected as string[]).join(', ')}>
+              input={<OutlinedInput />}>
               {zones.map((zone) => (
                 <MenuItem key={zone} value={zone}>
                   <ListItemText primary={zone} />
