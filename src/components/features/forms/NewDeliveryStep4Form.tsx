@@ -1,4 +1,4 @@
-import { Button } from '@mui/material'
+import { Box, Button } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { UseFormReturn } from 'react-hook-form'
 import { useState } from 'react'
@@ -16,6 +16,7 @@ export default function NewDeliveryStep4Form({
   const { formsData, alertMessage, deleteStep4Item, isCompletedMove, isExceedQuantity } =
     useNewDeliveryContext()
 
+  // След като мога да минавам на стъпка 5 да оправя при "Назад" да се зарежда попълнената форма
   const goodType = formsData.goods.map((good: any) => good.goodTypeStep3)
   const zones = ['Зона 1', 'Зона 2', 'Зона 3']
 
@@ -53,7 +54,9 @@ export default function NewDeliveryStep4Form({
       <Alert
         variant="outlined"
         severity={isCompletedMove ? 'success' : isExceedQuantity ? 'error' : 'info'}>
-        {alertMessage}
+        {alertMessage.map((currentMessage) => (
+          <Box>{currentMessage}</Box>
+        ))}
       </Alert>
       <Button
         variant="contained"

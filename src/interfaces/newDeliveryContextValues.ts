@@ -13,7 +13,7 @@ export interface NewDeliveryContextValues {
     newItem: { type: string; quantity: number; zone: string }
   ) => void
   deleteStep4Item: (index: number) => void
-  alertMessage: string
+  alertMessage: string[]
   isCompletedMove: boolean
   isExceedQuantity: boolean
   step3Items: { pallets: number; packages: number; pieces: number }
