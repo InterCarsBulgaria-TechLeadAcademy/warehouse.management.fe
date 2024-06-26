@@ -9,6 +9,7 @@ export const useMoveEntryDialog = () => {
     const onOpenMoveEntryDialog = (option: string, quantity: number) => {
         if (option === ZonesTableActions.MoveToNewZone) setOpenMoveEntryDialog(true);
         setQuantity(quantity);
+        console.log(quantity);
     }
 
     const onCloseMoveEntryDialog = () => {
