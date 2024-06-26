@@ -6,6 +6,7 @@ import {
   Select,
   TextField
 } from '@mui/material'
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { MoveEntryFormData } from '@/schemas/moveEntrySchema'
@@ -32,6 +33,8 @@ export default function MoveEntryForm({ control, formState: { errors } }: UseFor
           />
         )}
       />
+      {/* TODO: Fix the arrow placement */}
+      <ArrowDownwardIcon />
 
       <Controller
         name="zone"
