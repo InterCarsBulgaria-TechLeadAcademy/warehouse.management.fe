@@ -280,10 +280,13 @@
     "exceedPallets": "Количеството на палетите е надвишено с {{quantity}}",
     "exceedPackages": "Количеството на пакетите е надвишено с {{quantity}}",
     "exceedPieces": "Количеството на бройките е надвишено с {{quantity}}",
-    "leftPallets": "Остава да поставите {{quantity}} палети",
-    "leftPackages": "Остава да поставите {{quantity}} пакети",
-    "leftPieces": "Остава да поставите {{quantity}} бройки",
-    "completedMove": "Всички стоки са разпределени по зони"
+    "leftPallets": "Остава да преместите {{quantity}} палети",
+    "leftPackages": "Остава да преместите {{quantity}} пакети",
+    "leftPieces": "Остава да преместите {{quantity}} бройки",
+    "completedMove": "Всички стоки са разпределени по зони",
+    "completedMoveTitle": "Завършено местене на стока",
+    "exceedTitle": "Предупреждение",
+    "leftItemsTitle": "Оставащо местене на стока"
   }
   },
   "zonesContent": {

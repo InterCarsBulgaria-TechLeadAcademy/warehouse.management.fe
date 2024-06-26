@@ -6,6 +6,7 @@ import MoveGoodsForm from './MoveGoodsForm'
 import { NewDeliveryStep4FormData } from '@/schemas/newDeliverySchemas'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import Alert from '@mui/material/Alert'
+import AlertTitle from '@mui/material/AlertTitle'
 import { generateUniqueNumber } from '@/utils/generateUniqueNumber'
 
 export default function NewDeliveryStep4Form({
@@ -51,13 +52,22 @@ export default function NewDeliveryStep4Form({
           onDeleteHandler={() => onDeleteHandler(id, index)}
         />
       ))}
+
       <Alert
         variant="outlined"
         severity={isCompletedMove ? 'success' : isExceedQuantity ? 'error' : 'info'}>
+        <AlertTitle>
+          {isCompletedMove
+            ? translate('newDelivery.alertMessages.completedMoveTitle')
+            : isExceedQuantity
+              ? translate('newDelivery.alertMessages.exceedTitle')
+              : translate('newDelivery.alertMessages.leftItemsTitle')}
+        </AlertTitle>
         {alertMessage.map((currentMessage) => (
           <Box>{currentMessage}</Box>
         ))}
       </Alert>
+
       <Button
         variant="contained"
         disabled={isCompletedMove || isExceedQuantity}
