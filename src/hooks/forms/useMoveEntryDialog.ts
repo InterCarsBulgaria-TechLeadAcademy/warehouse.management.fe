@@ -4,9 +4,11 @@ import { SubmitHandler } from 'react-hook-form';
 
 export const useMoveEntryDialog = () => {
     const [openMoveEntryDialog, setOpenMoveEntryDialog] = useState(false);
+    const [quantity, setQuantity] = useState(0);
 
-    const onOpenMoveEntryDialog = (option: string) => {
+    const onOpenMoveEntryDialog = (option: string, quantity: number) => {
         if (option === ZonesTableActions.MoveToNewZone) setOpenMoveEntryDialog(true);
+        setQuantity(quantity);
     }
 
     const onCloseMoveEntryDialog = () => {
@@ -19,6 +21,7 @@ export const useMoveEntryDialog = () => {
     }
 
     return {
+        quantity,
         openMoveEntryDialog,
         onOpenMoveEntryDialog,
         onCloseMoveEntryDialog,
