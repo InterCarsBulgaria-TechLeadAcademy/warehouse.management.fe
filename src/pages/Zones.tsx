@@ -71,8 +71,8 @@ export default function Zones() {
                 id="demo-multiple-checkbox"
                 multiple
                 value={field.value || []}
+                label={translate('newZone.labels.markers')}
                 onChange={(e) => field.onChange(e.target.value)}
-                input={<OutlinedInput />}
                 renderValue={(selected) => (selected as string[]).join(', ')}>
                 {markers.map((marker) => (
                   <MenuItem key={marker} value={marker}>
