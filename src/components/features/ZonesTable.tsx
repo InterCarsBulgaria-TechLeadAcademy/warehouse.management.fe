@@ -7,10 +7,10 @@ import { FormControlLabel, Switch } from '@mui/material'
 import { Column } from '@/interfaces/dataTable'
 import SearchInput from './SearchInput'
 import FormDialog from '../shared/FormDialog'
-import { useMoveEntryDialog } from '@/hooks/forms/useMoveEntryDialog'
+import { useMoveEntryDialog } from '@/hooks/dialogs/useMoveEntryDialog'
 import MoveEntryForm from '@/utils/forms/MoveEntryForm'
 import { MoveEntryFormData, moveEntrySchema } from '@/schemas/moveEntrySchema'
-import { ZonesTableActions } from '@/hooks/forms/useMoveEntryDialog'
+import { ZonesTableActions } from '@/hooks/dialogs/useMoveEntryDialog'
 
 export default function ZonesTable() {
   const { t: translate } = useTranslation()
