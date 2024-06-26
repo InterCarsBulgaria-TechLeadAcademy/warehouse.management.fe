@@ -36,6 +36,7 @@ export default function NewDeliveryStep3Form({
   )
 
   function onDeleteHandler(index: number) {
+    // TODO: don't work properly
     remove(index) // This removes the item from goods array in formsData object
     setGoodDetailsForms((prev) => prev.filter((_, id) => id !== index))
     setSelectedGoodTypes((prev) => prev.filter((_, id) => id !== index))

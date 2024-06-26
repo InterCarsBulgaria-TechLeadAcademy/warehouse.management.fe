@@ -5,13 +5,13 @@ import StepLabel from '@mui/material/StepLabel'
 
 interface HorizontalStepperProps {
   steps: string[]
-  activeStep: number
+  currentStep: number
 }
 
-export default function HorizontalStepper({ steps, activeStep }: HorizontalStepperProps) {
+export default function HorizontalStepper({ steps, currentStep }: HorizontalStepperProps) {
   return (
     <Box sx={{ width: '100%', marginBottom: '3em' }}>
-      <Stepper activeStep={activeStep - 1} alternativeLabel>
+      <Stepper activeStep={currentStep - 1} alternativeLabel>
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>

@@ -1,18 +1,16 @@
 import SkeletonPage from '@/components/features/SkeletonPage'
 import { useTranslation } from 'react-i18next'
 import VendorsTable from '@/components/features/admin/VendorsTable'
-import FormDialog from '@/components/shared/FormDialog'
-import NewDeliveryRenderForm from '@/components/features/forms/NewDeliveryRenderForm'
-import useSchema from '@/hooks/useSchema'
-import useNewDeliverySteps from '@/hooks/useNewDeliverySteps'
+// import FormDialog from '@/components/shared/FormDialog'
+// import NewDeliveryRenderForm from '@/components/features/forms/NewDeliveryRenderForm'
+// import useSchema from '@/hooks/useSchema'
+// import useNewDeliverySteps from '@/hooks/useNewDeliverySteps'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
+import NewDeliveryFormDialog from '@/components/features/NewDeliveryFormDialog'
 
 export default function Deliveries() {
   const { t: translate } = useTranslation()
-  const steps = useNewDeliverySteps()
-  const { currentStep, openDialog, onCloseDialog, handleBack, handleClickOpen, handleSubmit } =
-    useNewDeliveryContext()
-  const schema = useSchema(currentStep)
+  const { handleClickOpen } = useNewDeliveryContext()
 
   return (
     <>
@@ -25,19 +23,7 @@ export default function Deliveries() {
         table={<VendorsTable />}
       />
 
-      <FormDialog<any>
-        open={openDialog}
-        title={translate('newDelivery.title')}
-        steps={steps}
-        activeStep={currentStep}
-        confirmText={translate('newDelivery.labels.forward')}
-        discardText={translate('newDelivery.labels.back')}
-        onCloseDialog={onCloseDialog}
-        handleBack={handleBack}
-        schema={schema}
-        onSubmit={handleSubmit}
-        renderForm={(methods) => <NewDeliveryRenderForm {...methods} />}
-      />
+      <NewDeliveryFormDialog />
     </>
   )
 }

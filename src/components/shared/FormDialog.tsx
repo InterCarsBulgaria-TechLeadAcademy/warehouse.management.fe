@@ -10,12 +10,11 @@ import HorizontalStepper from '../features/Stepper'
 import { useIsSmallScreen } from '@/hooks/useIsSmallScreen'
 import { useTranslation } from 'react-i18next'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
+import useNewDeliverySteps from '@/hooks/useNewDeliverySteps'
 
 interface FormDialogProps<T extends FieldValues> {
   open: boolean
   title: string
-  steps?: string[]
-  activeStep?: number
   discardText: string
   confirmText: string
   onCloseDialog: () => void
@@ -28,8 +27,6 @@ interface FormDialogProps<T extends FieldValues> {
 export default function FormDialog<T extends FieldValues>({
   open,
   title,
-  steps,
-  activeStep = 1,
   discardText,
   confirmText,
   onCloseDialog,
@@ -43,6 +40,7 @@ export default function FormDialog<T extends FieldValues>({
   const { control, handleSubmit, formState, reset } = useForm<T>({
     resolver: schema ? yupResolver(schema) : undefined
   })
+  const steps = useNewDeliverySteps()
   const { currentStep, isCompletedMove } = useNewDeliveryContext()
 
   const handleClose = () => {
@@ -61,7 +59,7 @@ export default function FormDialog<T extends FieldValues>({
       </DialogTitle>
 
       <Box sx={{ margin: '2em' }}>
-        {steps && <HorizontalStepper steps={steps} activeStep={activeStep} />}
+        {steps && <HorizontalStepper steps={steps} currentStep={currentStep} />}
         <Box
           component="form"
           onSubmit={handleSubmit(onSubmit)}
@@ -81,8 +79,8 @@ export default function FormDialog<T extends FieldValues>({
             <Button
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={activeStep === 1 ? handleClose : handleBack}>
-              {activeStep === 1 ? translate('newDelivery.labels.exit') : discardText}
+              onClick={currentStep === 1 ? handleClose : handleBack}>
+              {currentStep === 1 ? translate('newDelivery.labels.exit') : discardText}
             </Button>
 
             <Button
