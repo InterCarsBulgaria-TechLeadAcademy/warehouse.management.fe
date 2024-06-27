@@ -5,7 +5,7 @@ export const moveEntrySchema = yup.object({
     .number()
     .required('quantity.errors.name.required')
     .min(1, 'quantity.errors.name.max'),
-  zone: yup.string()
+  zone: yup.string().required('Zone is required')
 })
 
 export interface MoveEntryFormData extends yup.InferType<typeof moveEntrySchema> {
