@@ -16,7 +16,7 @@ export default function ZonesTable() {
   const { t: translate } = useTranslation()
   const [toggleOn, setToggleOn] = React.useState(false)
   const [searchTerm, setSearchTerm] = React.useState('')
-
+  
   const {
     quantity,
     openMoveEntryDialog,
@@ -24,6 +24,7 @@ export default function ZonesTable() {
     handleMoveEntryDialog,
     onOpenMoveEntryDialog
   } = useMoveEntryDialog();
+  
 
   const handleToggleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setToggleOn(event.target.checked);
@@ -110,7 +111,8 @@ export default function ZonesTable() {
         onCloseDialog={onCloseMoveEntryDialog}
         schema={moveEntrySchema}
         onSubmit={handleMoveEntryDialog}
-        renderForm={MoveEntryForm}
+        renderForm={(methods) => <MoveEntryForm methods={methods} quantity={quantity} />}
+        extraProps={{ quantity }}
       />
     </DataTable>
   )
