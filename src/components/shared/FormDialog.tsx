@@ -34,6 +34,12 @@ export default function FormDialog<T extends FieldValues>({
     resolver: yupResolver(schema)
   })
 
+  const handleFormSubmit: SubmitHandler<T> = (data) => {
+    onSubmit(data);
+    reset();
+    onCloseDialog();
+  };
+
   const handleClose = () => {
     reset()
     onCloseDialog()
@@ -51,7 +57,7 @@ export default function FormDialog<T extends FieldValues>({
 
       <Box
         component="form"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(handleFormSubmit)}
         sx={{
           display: 'flex',
           flexDirection: 'column',
