@@ -15,7 +15,8 @@ interface FormDialogProps<T extends FieldValues> {
   onCloseDialog: () => void
   schema: yup.ObjectSchema<T>
   onSubmit: SubmitHandler<T>
-  renderForm: (methods: UseFormReturn<T>) => React.ReactNode
+  renderForm: (methods: UseFormReturn<T>, extraProps: any) => React.ReactNode
+  extraProps?: any
 }
 
 export default function FormDialog<T extends FieldValues>({
@@ -26,7 +27,8 @@ export default function FormDialog<T extends FieldValues>({
   onCloseDialog,
   schema,
   onSubmit,
-  renderForm
+  renderForm,
+  extraProps
 }: FormDialogProps<T>) {
   const { control, handleSubmit, formState, reset } = useForm<T>({
     resolver: yupResolver(schema)
@@ -57,7 +59,7 @@ export default function FormDialog<T extends FieldValues>({
           padding: '2em',
           '& .MuiTextField-root': { width: '450px' }
         }}>
-        {renderForm({ control, handleSubmit, formState, reset } as UseFormReturn<T>)}
+        {renderForm({ control, handleSubmit, formState, reset } as UseFormReturn<T>, extraProps)}
 
         <Box sx={{ display: 'flex', justifyContent: 'center', gap: '1em' }}>
           <Button
