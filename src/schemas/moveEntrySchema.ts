@@ -11,4 +11,6 @@ export const moveEntrySchema = yup.object({
 
 export interface MoveEntryFormData extends yup.InferType<typeof moveEntrySchema> {
   quantity: number
+  zone: string
+  isFinal: boolean
 }
