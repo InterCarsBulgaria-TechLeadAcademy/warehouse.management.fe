@@ -1,8 +1,9 @@
-import { Checkbox, FormControl, FormControlLabel, InputLabel, ListItemText, MenuItem, Select, TextField } from '@mui/material'
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward'
+import { Box, FormControl, InputLabel, ListItemText, MenuItem, Select, TextField } from '@mui/material'
+import EastIcon from '@mui/icons-material/East';
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { MoveEntryFormData } from '@/schemas/moveEntrySchema'
+import { useState } from 'react';
 
 interface MoveEntryFormProps {
   methods: UseFormReturn<MoveEntryFormData>
@@ -10,6 +11,8 @@ interface MoveEntryFormProps {
 }
 
 export default function MoveEntryForm({ methods, quantity }: MoveEntryFormProps) {
+  const [first, setFirst] = useState(quantity)
+  
   const {
     control,
     formState: { errors }
@@ -20,63 +23,57 @@ export default function MoveEntryForm({ methods, quantity }: MoveEntryFormProps)
 
   return (
     <>
-      <Controller
-        name="quantity"
-        control={control}
-        defaultValue={quantity}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            label={translate('zones.moveEntry.quantity')}
-            id="quantity"
-            name="quantity"
-            value={quantity}
-            required
-            fullWidth
-            autoFocus
-            error={!!errors.quantity}
-            helperText={errors.quantity?.message ? translate(errors.quantity.message) : ''}
-          />
-        )}
-      />
-
-      <ArrowDownwardIcon />
-
-      <Controller
-        name="zone"
-        control={control}
-        render={({ field }) => (
-          <FormControl fullWidth>
-            <InputLabel id="move-entry-select-label">
-              {translate('zones.moveEntry.zone')}
-            </InputLabel>
-            <Select
+      <Box sx={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+        <Controller
+          name="quantity"
+          control={control}
+          defaultValue={quantity}
+          render={({ field }) => (
+            <TextField
               {...field}
-              labelId="move-entry-select-label"
-              id="move-entry-select"
-              label={translate('zones.moveEntry.zone')}
-              value={field.value || ''}
-              onChange={(e) => field.onChange(e.target.value)}>
-              {zones.map((zone) => (
-                <MenuItem key={zone} value={zone}>
-                  <ListItemText primary={zone} />
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        )}
-      />
+              label={translate('zones.moveEntry.quantity')}
+              id="quantity"
+              name="quantity"
+              type='number'
+              value={first}
+              onChange={((e) => (setFirst(e.target.value)))}
+              required
+              fullWidth
+              autoFocus
+              error={!!errors.quantity}
+              helperText={errors.quantity?.message ? translate(errors.quantity.message) : ''}
+            />
+          )}
+        />
 
-      <Controller
-        name="isFinal"
-        control={control}
-        render={({ field }) => (
-          <FormControlLabel
-            control={<Checkbox {...field} checked={field.value} />}
-            label={translate('newZone.labels.isFinal')}
-          />
-        )}
-      />
+        <EastIcon />
+
+        <Controller
+          name="zone"
+          control={control}
+          render={({ field }) => (
+            <FormControl fullWidth>
+              <InputLabel id="move-entry-select-label">
+                {translate('zones.moveEntry.zone')}
+              </InputLabel>
+              <Select
+                {...field}
+                labelId="move-entry-select-label"
+                id="move-entry-select"
+                label={translate('zones.moveEntry.zone')}
+                value={field.value || ''}
+                onChange={(e) => field.onChange(e.target.value)}
+              >
+                {zones.map((zone) => (
+                  <MenuItem key={zone} value={zone}>
+                    <ListItemText primary={zone} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
+        />
+      </Box>
     </>
   )
 }
