@@ -17,7 +17,6 @@ export const useMoveEntryDialog = () => {
     }
 
     const handleMoveEntryDialog: SubmitHandler<MoveEntryFormData> = (data) => {
-        console.log(data)
         setOpenMoveEntryDialog(false);
     }
 
