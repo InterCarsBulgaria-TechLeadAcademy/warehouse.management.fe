@@ -35,6 +35,7 @@ export default function FormDialog<T extends FieldValues>({
   })
 
   const handleFormSubmit: SubmitHandler<T> = (data) => {
+    console.log(data)
     onSubmit(data);
     reset();
     onCloseDialog();
