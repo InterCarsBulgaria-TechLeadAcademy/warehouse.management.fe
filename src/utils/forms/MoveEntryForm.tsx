@@ -30,21 +30,21 @@ export default function MoveEntryForm({ methods, quantity }: MoveEntryFormProps)
           control={control}
           defaultValue={quantity}
           render={({ field }) => (
-            <NumberInputBasic />
-            // <TextField
-            //   {...field}
-            //   label={translate('zones.moveEntry.quantity')}
-            //   id="quantity"
-            //   name="quantity"
-            //   type='number'
-            //   value={first}
-            //   onChange={((e) => (setFirst(e.target.value)))}
-            //   required
-            //   fullWidth
-            //   autoFocus
-            //   error={!!errors.quantity}
-            //   helperText={errors.quantity?.message ? translate(errors.quantity.message) : ''}
-            // />
+            // <NumberInputBasic />
+            <TextField
+              {...field}
+              label={translate('zones.moveEntry.quantity')}
+              id="quantity"
+              name="quantity"
+              type='number'
+              value={first}
+              onChange={((e) => (setFirst(e.target.value)))}
+              required
+              fullWidth
+              autoFocus
+              error={!!errors.quantity}
+              helperText={errors.quantity?.message ? translate(errors.quantity.message) : ''}
+            />
           )}
         />
 
