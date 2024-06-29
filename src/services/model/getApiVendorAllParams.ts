@@ -5,11 +5,8 @@
  * OpenAPI spec version: 1.0
  */
 
-export interface ZoneFormDto {
-  /**
-   * @minLength 1
-   * @maxLength 500
-   * @nullable
-   */
-  name?: string | null
+export type GetApiVendorAllParams = {
+  PageNumber?: number
+  PageSize?: number
+  SearchQuery?: string
 }

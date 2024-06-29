@@ -5,14 +5,15 @@
  * OpenAPI spec version: 1.0
  */
 
-export interface ZoneEntryDto {
+export interface EntryDto {
   deliveryId?: number
-  entryId?: number
   /** @nullable */
   finishedProccessing?: string | null
+  id?: number
   packages?: number
   pallets?: number
   pieces?: number
   /** @nullable */
   startedProccessing?: string | null
+  zoneId?: number
 }

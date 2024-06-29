@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios'
 
 export const AXIOS_INSTANCE = axios.create({
-  baseURL: 'https://petstore.swagger.io/v2'
+  baseURL: 'http://leads-academy-intercars.com'
 })
 
 export const customInstance = <T>(
