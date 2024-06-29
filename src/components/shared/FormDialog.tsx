@@ -65,7 +65,8 @@ export default function FormDialog<T extends FieldValues>({
           gap: '2em',
           padding: '2em',
           '& .MuiTextField-root': { width: '450px' }
-        }}>
+        }}
+      >
         {renderForm({ control, handleSubmit, formState, reset } as UseFormReturn<T>, extraProps)}
 
         <Box sx={{ display: 'flex', justifyContent: 'center', gap: '1em' }}>
