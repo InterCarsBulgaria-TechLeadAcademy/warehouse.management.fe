@@ -30,7 +30,7 @@ export default function NewDeliveryFormDialog() {
       handleBack={handleBack}
       schema={schema}
       onSubmit={handleSubmit}
-      renderForm={(methods) => <NewDeliveryRenderForm {...methods} />}
+      renderForm={(methods) => <NewDeliveryRenderForm {...methods} key={openDialog} />}
     />
   )
 }
