@@ -98,10 +98,10 @@ export default function MoveGoodsForm({
                 {...params}
                 required
                 label={translate('newDelivery.labels.step4.goodType')}
-                error={!!errors?.goods?.[id]?.goodTypeStep4}
+                error={!!errors?.goodsInZones?.[id]?.goodTypeStep4}
                 helperText={
-                  errors?.goods?.[id]?.goodTypeStep4?.message
-                    ? translate(errors?.goods[id]?.goodTypeStep4?.message || '')
+                  errors?.goodsInZones?.[id]?.goodTypeStep4?.message
+                    ? translate(errors?.goodsInZones[id]?.goodTypeStep4?.message || '')
                     : ''
                 }
               />
@@ -130,10 +130,10 @@ export default function MoveGoodsForm({
                 field.onChange(inputValue)
               }
             }}
-            error={!!errors?.goods?.[id]?.goodQuantityStep4}
+            error={!!errors?.goodsInZones?.[id]?.goodQuantityStep4}
             helperText={
-              errors?.goods?.[id]?.goodQuantityStep4?.message
-                ? translate(errors.goods[id]?.goodQuantityStep4?.message || '')
+              errors?.goodsInZones?.[id]?.goodQuantityStep4?.message
+                ? translate(errors.goodsInZones[id]?.goodQuantityStep4?.message || '')
                 : ''
             }
           />
@@ -163,10 +163,10 @@ export default function MoveGoodsForm({
                 {...params}
                 required
                 label={translate('newDelivery.labels.step4.zone')}
-                error={!!errors?.goods?.[id]?.zone}
+                error={!!errors?.goodsInZones?.[id]?.zone}
                 helperText={
-                  errors?.goods?.[id]?.zone?.message
-                    ? translate(errors?.goods[id]?.zone?.message || '')
+                  errors?.goodsInZones?.[id]?.zone?.message
+                    ? translate(errors?.goodsInZones[id]?.zone?.message || '')
                     : ''
                 }
               />

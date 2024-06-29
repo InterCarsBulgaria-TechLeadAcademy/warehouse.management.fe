@@ -57,7 +57,7 @@ export interface NewDeliveryStep3FormData extends yup.InferType<typeof newDelive
 
 export const newDeliveryStep4Schema = yup
   .object({
-    goods: yup.array().of(
+    goodsInZones: yup.array().of(
       yup.object({
         goodTypeStep4: yup.string().required('newDelivery.errors.step4.goodType.required'),
         goodQuantityStep4: yup
@@ -72,7 +72,7 @@ export const newDeliveryStep4Schema = yup
   .required()
 
 export interface NewDeliveryStep4FormData extends yup.InferType<typeof newDeliveryStep4Schema> {
-  goods: {
+  goodsInZones: {
     //because goodType and goodQuantity are in Step3, they must be unique
     goodTypeStep4: string
     goodQuantityStep4: number
