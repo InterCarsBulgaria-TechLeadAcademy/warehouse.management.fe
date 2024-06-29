@@ -11,6 +11,7 @@ import { useMoveEntryDialog } from '@/hooks/dialogs/useMoveEntryDialog'
 import MoveEntryForm from '@/utils/forms/MoveEntryForm'
 import { MoveEntryFormData, moveEntrySchema } from '@/schemas/moveEntrySchema'
 import { ZonesTableActions } from '@/hooks/dialogs/useMoveEntryDialog'
+import DialogForm from '../shared/DialogForm'
 
 export default function ZonesTable() {
   const { t: translate } = useTranslation()
@@ -114,6 +115,13 @@ export default function ZonesTable() {
         renderForm={(methods) => <MoveEntryForm methods={methods} quantity={quantity} />}
         extraProps={{ quantity }}
       />
+
+      <DialogForm
+        open={false}
+        title={translate('zones.moveEntry.title')}
+      >
+        {/* <MoveEntryForm /> */}
+      </DialogForm>
     </DataTable>
   )
 }
