@@ -39,20 +39,6 @@ export default function NewDeliveryStep4Form({
 
   return (
     <>
-      {moveGoodsForms.map((id, index) => (
-        <MoveGoodsForm
-          key={id}
-          control={control}
-          errors={errors}
-          goodType={goodType}
-          zones={zones}
-          id={id}
-          index={index}
-          formsCount={moveGoodsForms.length}
-          onDeleteHandler={() => onDeleteHandler(id, index)}
-        />
-      ))}
-
       <Alert
         variant="outlined"
         severity={isCompletedMove ? 'success' : isExceedQuantity ? 'error' : 'info'}>
@@ -67,6 +53,20 @@ export default function NewDeliveryStep4Form({
           <Box>{currentMessage}</Box>
         ))}
       </Alert>
+
+      {moveGoodsForms.map((id, index) => (
+        <MoveGoodsForm
+          key={id}
+          control={control}
+          errors={errors}
+          goodType={goodType}
+          zones={zones}
+          id={id}
+          index={index}
+          formsCount={moveGoodsForms.length}
+          onDeleteHandler={() => onDeleteHandler(id, index)}
+        />
+      ))}
 
       <Button
         variant="contained"
