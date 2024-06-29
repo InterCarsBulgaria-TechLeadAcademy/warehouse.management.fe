@@ -83,17 +83,17 @@ export default function NewDeliveryStep1Form({
         defaultValue={formsData.markers || []}
         render={({ field }) => (
           <FormControl>
-            <InputLabel id="demo-multiple-checkbox-label">
+            <InputLabel id="markers-label">
               {translate('newDelivery.labels.step1.markers')}
             </InputLabel>
             <Select
               {...field}
-              labelId="demo-multiple-checkbox-label"
-              id="demo-multiple-checkbox"
+              labelId="markers-label"
+              id="markers"
               multiple
               value={field.value || []}
               onChange={(e) => field.onChange(e.target.value)}
-              input={<OutlinedInput />}
+              input={<OutlinedInput label={translate('newDelivery.labels.step1.markers')} />}
               renderValue={(selected) => (selected as string[]).join(', ')}>
               {markers.map((marker) => (
                 <MenuItem key={marker} value={marker}>
