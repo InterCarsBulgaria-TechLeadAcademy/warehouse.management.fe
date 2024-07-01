@@ -44,8 +44,6 @@ export default function FormDialog<T extends FieldValues>({
   const { currentStep, isCompletedMove } = useNewDeliveryContext()
 
   const handleClose = () => {
-    // Когато попълня стъпка 1 и отива на стъпка 2, след което се върна на стъпка 1 и затворя модала
-    // След като пак го отворя стъпка 1 е с попълнените данни. Не разбирам защо reset не работи
     reset()
     onCloseDialog()
   }
@@ -89,10 +87,9 @@ export default function FormDialog<T extends FieldValues>({
               type="submit"
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              // disabled={
-              //   currentStep === 4 ? !isCompletedMove : Object.keys(formState.errors).length > 0
-              // }
-            >
+              disabled={
+                currentStep === 4 ? !isCompletedMove : Object.keys(formState.errors).length > 0
+              }>
               {confirmText}
             </Button>
           </Box>

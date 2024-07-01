@@ -25,8 +25,6 @@ export default function NewDeliveryStep4Form({
     useNewDeliveryContext()
   const generateId = useGenerateId()
 
-  //   const goodTypes = formsData.goods.map((good: any) => good.goodTypeStep3)
-
   const goodTypes = formsData.goods.map((good: any) => {
     const goodType = good.goodTypeStep3
     return {
@@ -73,8 +71,6 @@ export default function NewDeliveryStep4Form({
       setMoveGoodsForms(formsData.goodsInZones.map(() => generateId()))
     }
   }, [formsData])
-
-  console.log(moveGoodsForms)
 
   return (
     <>
