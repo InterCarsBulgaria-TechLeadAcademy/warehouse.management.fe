@@ -3,9 +3,8 @@ import DataTable from '@/components/shared/DataTable'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Column } from '@/interfaces/dataTable'
-import SearchInput from './SearchInput'
+import SearchInput from '../SearchInput'
 import { Autocomplete, TextField } from '@mui/material'
-
 
 export default function VendorsTable() {
   const { t: translate } = useTranslation()
@@ -47,10 +46,7 @@ export default function VendorsTable() {
   })
 
   return (
-    <DataTable
-      columnsData={columnsData}
-      rowData={filteredRows}
-    >
+    <DataTable columnsData={columnsData} rowData={filteredRows}>
       <SearchInput
         value={searchTerm}
         onChange={handleSearchChange}
@@ -65,7 +61,6 @@ export default function VendorsTable() {
         sx={{ width: '235px' }}
         renderInput={(params) => <TextField {...params} label={translate('vendors.labels.role')} />}
       />
-
     </DataTable>
   )
 }

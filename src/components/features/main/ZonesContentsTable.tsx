@@ -1,31 +1,30 @@
 import React from 'react'
-
 import DataTable from '@/components/shared/DataTable'
 import { useTranslation } from 'react-i18next'
-import TableActionsMenu from '../shared/TableActionsMenu'
 import { FormControlLabel, Switch } from '@mui/material'
 import { Column } from '@/interfaces/dataTable'
-import SearchInput from './SearchInput'
+import TableActionsMenu from '@/components/shared/TableActionsMenu'
+import SearchInput from '../SearchInput'
 
-export default function ZonesTable() {
+export default function ZonesContentsTable() {
   const { t: translate } = useTranslation()
   const [toggleOn, setToggleOn] = React.useState(false)
   const [searchTerm, setSearchTerm] = React.useState('')
 
   const handleToggleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setToggleOn(event.target.checked);
+    setToggleOn(event.target.checked)
   }
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
   }
 
   const columnsData: Column[] = [
-    { key: 'entryNumber', title: translate('zones.table.entryNumber') },
-    { key: 'vendorName', title: translate('zones.table.vendorName') },
-    { key: 'receptionNumbers', title: translate('zones.table.receptionNumbers') },
-    { key: 'numberOfGoods', title: translate('zones.table.numberOfGoods') },
-    { key: 'status', title: translate('zones.table.status') },
-    { key: 'actions', title: translate('markers.table.actions'), minWidth: 50, align: 'right' }
+    { key: 'entryNumber', title: translate('zonesContent.table.entryNumber') },
+    { key: 'vendorName', title: translate('zonesContent.table.vendorName') },
+    { key: 'receptionNumbers', title: translate('zonesContent.table.receptionNumbers') },
+    { key: 'numberOfGoods', title: translate('zonesContent.table.numberOfGoods') },
+    { key: 'status', title: translate('zonesContent.table.status') },
+    { key: 'actions', title: translate('zonesContent.table.actions'), minWidth: 50, align: 'right' }
   ]
 
   const rowData = [
@@ -35,7 +34,12 @@ export default function ZonesTable() {
       receptionNumbers: 12,
       numberOfGoods: 33,
       status: 'finished',
-      actions: <TableActionsMenu itemProps={['MoveToNewZone', 'StartProcessing', 'FinishProcessing', 'DeliveryDetails']} page='zones' />
+      actions: (
+        <TableActionsMenu
+          itemProps={['MoveToNewZone', 'StartProcessing', 'FinishProcessing', 'DeliveryDetails']}
+          page="zones"
+        />
+      )
     },
     {
       entryNumber: 2,
@@ -44,7 +48,12 @@ export default function ZonesTable() {
       numberOfGoods: 52,
       status: 'processing',
       markers: 'Накладки',
-      actions: <TableActionsMenu itemProps={['MoveToNewZone', 'StartProcessing', 'FinishProcessing', 'DeliveryDetails']} page='zones' />
+      actions: (
+        <TableActionsMenu
+          itemProps={['MoveToNewZone', 'StartProcessing', 'FinishProcessing', 'DeliveryDetails']}
+          page="zones"
+        />
+      )
     }
   ]
 
@@ -53,7 +62,6 @@ export default function ZonesTable() {
       return columnsData.some((column) => {
         return row[column.key]?.toString().toLowerCase().includes('finished')
       })
-
     } else {
       return columnsData.some((column) => {
         return row[column.key]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
@@ -62,10 +70,7 @@ export default function ZonesTable() {
   })
 
   return (
-    <DataTable
-      columnsData={columnsData}
-      rowData={filteredRows}
-    >
+    <DataTable columnsData={columnsData} rowData={filteredRows}>
       <SearchInput
         value={searchTerm}
         onChange={handleSearchChange}
