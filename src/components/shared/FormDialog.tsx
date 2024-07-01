@@ -48,6 +48,8 @@ export default function FormDialog<T extends FieldValues>({
     onCloseDialog()
   }
 
+  //За страниците, различни от newDelivery да не се вижда степера
+
   return (
     <Dialog
       open={open}
@@ -70,7 +72,7 @@ export default function FormDialog<T extends FieldValues>({
             ...(isSmallScreen
               ? {}
               : {
-                  '& .MuiTypography-root': { minWidth: '400px' }
+                  // '& .MuiTypography-root': { minWidth: '400px' }
                 })
           }}>
           {renderForm({ control, handleSubmit, formState, reset } as UseFormReturn<T>)}
