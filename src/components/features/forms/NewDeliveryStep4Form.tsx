@@ -1,13 +1,19 @@
 import { Box, Button } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { UseFormReturn } from 'react-hook-form'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import MoveGoodsForm from './MoveGoodsForm'
 import { NewDeliveryStep4FormData } from '@/schemas/newDeliverySchemas'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import Alert from '@mui/material/Alert'
 import AlertTitle from '@mui/material/AlertTitle'
-import { generateUniqueNumber } from '@/utils/generateUniqueNumber'
+import { useGenerateId } from '@/hooks/useGenerateId'
+
+enum Zones {
+  zone1 = 'zone1',
+  zone2 = 'zone2',
+  zone3 = 'zone3'
+}
 
 export default function NewDeliveryStep4Form({
   control,
@@ -16,26 +22,37 @@ export default function NewDeliveryStep4Form({
   const { t: translate } = useTranslation()
   const { formsData, alertMessage, deleteStep4Item, isCompletedMove, isExceedQuantity } =
     useNewDeliveryContext()
+  const generateId = useGenerateId()
 
-  // След като мога да минавам на стъпка 5 да оправя при "Назад" да се зарежда попълнената форма
   const goodType = formsData.goods.map((good: any) => good.goodTypeStep3)
-  const zones = ['Зона 1', 'Зона 2', 'Зона 3']
 
-  const [moveGoodsForms, setMoveGoodsForms] = useState<number[]>([generateUniqueNumber()])
+  const zones = [
+    { title: translate('newDelivery.zones.zone1'), value: Zones.zone1 },
+    { title: translate('newDelivery.zones.zone2'), value: Zones.zone2 },
+    { title: translate('newDelivery.zones.zone3'), value: Zones.zone3 }
+  ]
+
+  const moveGoodsFormsInitialValue = formsData.goodsInZones
+    ? formsData.goodsInZones.map(() => generateId())
+    : [0]
+
+  const [moveGoodsForms, setMoveGoodsForms] = useState<number[]>(moveGoodsFormsInitialValue)
 
   function addGoodHandler() {
-    let newId = generateUniqueNumber()
-    while (moveGoodsForms.includes(newId)) {
-      newId = generateUniqueNumber()
-    }
-    setMoveGoodsForms([...moveGoodsForms, newId])
+    setMoveGoodsForms([...moveGoodsForms, generateId()])
   }
 
-  function onDeleteHandler(id: number, index: number) {
-    const updatedForms = moveGoodsForms.filter((formId) => formId !== id)
-    setMoveGoodsForms(updatedForms)
+  function onDeleteHandler(index: number) {
+    setMoveGoodsForms((prev) => prev.filter((_, id) => id !== index))
     deleteStep4Item(index)
   }
+
+  useEffect(() => {
+    if (formsData.goodsInZones) {
+      // Update form values when formsData changes
+      setMoveGoodsForms(formsData.goodsInZones.map(() => generateId()))
+    }
+  }, [formsData])
 
   return (
     <>
@@ -49,8 +66,8 @@ export default function NewDeliveryStep4Form({
               ? translate('newDelivery.alertMessages.exceedTitle')
               : translate('newDelivery.alertMessages.leftItemsTitle')}
         </AlertTitle>
-        {alertMessage.map((currentMessage) => (
-          <Box>{currentMessage}</Box>
+        {alertMessage.map((currentMessage, index) => (
+          <Box key={index}>{currentMessage}</Box>
         ))}
       </Alert>
 
@@ -61,10 +78,9 @@ export default function NewDeliveryStep4Form({
           errors={errors}
           goodType={goodType}
           zones={zones}
-          id={id}
           index={index}
           formsCount={moveGoodsForms.length}
-          onDeleteHandler={() => onDeleteHandler(id, index)}
+          onDeleteHandler={() => onDeleteHandler(index)}
         />
       ))}
 

@@ -43,8 +43,6 @@ export default function FormDialog<T extends FieldValues>({
   const steps = useNewDeliverySteps()
   const { currentStep, isCompletedMove } = useNewDeliveryContext()
 
-  console.log(formState.errors)
-
   const handleClose = () => {
     // Когато попълня стъпка 1 и отива на стъпка 2, след което се върна на стъпка 1 и затворя модала
     // След като пак го отворя стъпка 1 е с попълнените данни. Не разбирам защо reset не работи

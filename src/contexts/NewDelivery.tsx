@@ -78,8 +78,6 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   }
 
   const handleSubmit: SubmitHandler<any> = (data) => {
-    console.log('v handleSubmit')
-    //В стъпка 4 при натискане на submit не се извиква тази функция и не мога да разбера защо
     if (currentStep === steps.length) {
       console.log('Final submission:', data)
       setFormsData(data)
