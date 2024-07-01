@@ -7,15 +7,11 @@ import { useEffect, useState } from 'react'
 import { NewDeliveryStep4FormData } from '@/schemas/newDeliverySchemas'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import DeleteIcon from '@mui/icons-material/Delete'
-import useTranslateGoodTypesOptionsToBulgarian from '@/hooks/useTranslateGoodTypesOptionsToBulgarian'
-import useTranslateGoodTypeToBulgarian from '@/hooks/useTranslateGoodTypeToBulgarian'
-import useTranslateGoodTypeToEnglish from '@/hooks/useTranslateGoodTypeToEnglish'
 
 interface GoodDetailsFormProps {
   control: Control<NewDeliveryStep4FormData, any>
   errors: FieldErrors<NewDeliveryStep4FormData>
-  goodType: string[]
-  // zones: string[]
+  goodTypes: { title: string; value: string }[]
   zones: { title: string; value: string }[]
   index: number
   onDeleteHandler: () => void
@@ -25,7 +21,7 @@ interface GoodDetailsFormProps {
 export default function MoveGoodsForm({
   control,
   errors,
-  goodType,
+  goodTypes,
   zones,
   index,
   onDeleteHandler,
@@ -66,13 +62,14 @@ export default function MoveGoodsForm({
   }, [goodTypeValue, zoneValue, goodQuantityValue, index])
 
   useEffect(() => {
-    if (goodTypeValue) {
-      setFieldsDisabled(false)
-    } else {
+    if (goodTypeValue === null) {
       setFieldsDisabled(true)
+      // След това се презаписва с изтритата стойност и не разбирам защо
       setGoodQuantityValue('')
       setZoneValue(null)
       setZoneInputValue('')
+    } else {
+      setFieldsDisabled(false)
     }
   }, [goodTypeValue])
 
@@ -88,12 +85,14 @@ export default function MoveGoodsForm({
           <Autocomplete
             {...field}
             id={`moveGoodsForm.controllable-states-demo-goodType${index}`}
-            options={useTranslateGoodTypesOptionsToBulgarian(goodType)}
-            value={useTranslateGoodTypeToBulgarian(goodTypeValue)}
+            options={goodTypes.map((goodType) => goodType.title)}
+            value={goodTypes.find((goodType) => goodType.value === field.value)?.title || null}
             onChange={(_event: any, newValue: string | null) => {
-              const englishValue = useTranslateGoodTypeToEnglish(newValue)
-              setGoodTypeValue(englishValue)
-              field.onChange(englishValue)
+              newValue = newValue
+                ? goodTypes.find((goodType) => goodType.title === newValue)?.value || null
+                : null
+              setGoodTypeValue(newValue)
+              field.onChange(newValue)
             }}
             inputValue={goodTypeInputValue}
             onInputChange={(_event, newInputValue) => {
@@ -157,8 +156,12 @@ export default function MoveGoodsForm({
         render={({ field }) => (
           <Autocomplete
             {...field}
-            value={zoneValue}
+            options={zones.map((zone) => zone.title)}
+            value={zones.find((zone) => zone.value === field.value)?.title || null}
             onChange={(_event: any, newValue: string | null) => {
+              newValue = newValue
+                ? zones.find((zone) => zone.title === newValue)?.value || null
+                : null
               setZoneValue(newValue)
               field.onChange(newValue)
             }}
@@ -167,7 +170,6 @@ export default function MoveGoodsForm({
               setZoneInputValue(newInputValue)
             }}
             id={`moveGoodsForm.controllable-states-demo-zone${index}`}
-            options={zones.map((zone) => zone.title)}
             sx={{ flex: 1 }}
             disabled={fieldsDisabled}
             renderInput={(params) => (

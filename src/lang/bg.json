@@ -276,6 +276,11 @@
         "packages": "Пакети",
         "pieces": "Бройки"
       },
+      "zones": {
+        "zone1": "Зона 1",
+        "zone2": "Зона 2",
+        "zone3": "Зона 3"
+      },
       "alertMessages": {
     "exceedPallets": "Количеството на палетите е надвишено с {{quantity}}",
     "exceedPackages": "Количеството на пакетите е надвишено с {{quantity}}",
@@ -287,11 +292,6 @@
     "completedMoveTitle": "Завършено местене на стока",
     "exceedTitle": "Предупреждение",
     "leftItemsTitle": "Оставащо местене на стока"
-  },
-  "zones": {
-    "zone1": "Зона 1",
-    "zone2": "Зона 2",
-    "zone3": "Зона 3"
   }
   },
   "zonesContent": {

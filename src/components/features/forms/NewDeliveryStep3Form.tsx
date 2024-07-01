@@ -7,6 +7,12 @@ import { NewDeliveryStep3FormData } from '@/schemas/newDeliverySchemas'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import { useGenerateId } from '@/hooks/useGenerateId.ts'
 
+export enum GoodType {
+  pallets = 'pallets',
+  packages = 'packages',
+  pieces = 'pieces'
+}
+
 export default function NewDeliveryStep3Form({
   control,
   formState: { errors }
@@ -20,7 +26,14 @@ export default function NewDeliveryStep3Form({
     name: 'goods' //the path to the goods array in formsData object, which we need to manage dynamically.
   })
 
-  const initialGoodType = ['pallets', 'packages', 'pieces']
+  const initialGoodTypes = [
+    { title: translate('newDelivery.goodType.pallets'), value: GoodType.pallets },
+    { title: translate('newDelivery.goodType.packages'), value: GoodType.packages },
+    { title: translate('newDelivery.goodType.pieces'), value: GoodType.pieces }
+    // same for others
+  ]
+
+  // const initialGoodType = ['pallets', 'packages', 'pieces']
 
   // Initialize goodDetailsForms and selectedGoodTypes based on formsData.goods
   const goodDetailsFormsInitialValue = formsData.goods
@@ -28,7 +41,7 @@ export default function NewDeliveryStep3Form({
     : [0]
   const selectedGoodTypesInitialValue = formsData.goods
     ? formsData.goods.map((good: any) => good.goodTypeStep3 || '')
-    : ['']
+    : [{ title: '', value: '' }]
 
   const [goodDetailsForms, setGoodDetailsForms] = useState<number[]>(goodDetailsFormsInitialValue)
   const [selectedGoodTypes, setSelectedGoodTypes] = useState<string[]>(
@@ -37,7 +50,14 @@ export default function NewDeliveryStep3Form({
 
   function addGoodHandler() {
     append({ goodTypeStep3: '', goodQuantityStep3: 1 }) // add this object in goods array in formsData object
-    setGoodDetailsForms((prev) => [...prev, generateId()])
+    // setGoodDetailsForms((prev) => [...prev, generateId()])
+    // setSelectedGoodTypes((prev) => [...prev, ''])
+    let newId
+    do {
+      newId = generateId()
+    } while (goodDetailsForms.includes(newId))
+
+    setGoodDetailsForms((prev) => [...prev, newId])
     setSelectedGoodTypes((prev) => [...prev, ''])
   }
 
@@ -57,13 +77,15 @@ export default function NewDeliveryStep3Form({
   }
 
   function availableGoodTypes(index: number) {
-    return initialGoodType.filter(
-      (type) => !selectedGoodTypes.includes(type) || selectedGoodTypes[index] === type
+    return initialGoodTypes.filter(
+      (initialGoodType) =>
+        !selectedGoodTypes.includes(initialGoodType.value) ||
+        selectedGoodTypes[index] === initialGoodType.value
     )
   }
 
   const allOptionsSelected =
-    selectedGoodTypes.filter((type) => type !== '').length >= initialGoodType.length
+    selectedGoodTypes.filter((type) => type !== '').length >= initialGoodTypes.length
 
   useEffect(() => {
     if (formsData.goods) {
@@ -80,7 +102,7 @@ export default function NewDeliveryStep3Form({
           key={id}
           control={control}
           errors={errors}
-          goodType={availableGoodTypes(index)}
+          goodTypes={availableGoodTypes(index)}
           onDeleteHandler={() => onDeleteHandler(index)}
           index={index}
           formsCount={goodDetailsForms.length}
