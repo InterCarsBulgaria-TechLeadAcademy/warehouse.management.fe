@@ -2,7 +2,7 @@ import DataTable from '@/components/shared/DataTable'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Column } from '@/interfaces/dataTable'
-import { Autocomplete, TextField } from '@mui/material'
+import { Autocomplete, Box, TextField, Typography } from '@mui/material'
 import SearchInput from './SearchInput'
 import VendorTableActionsMenu from './VendorTableActionsMenu'
 import ChipsList from './ChipsList'
@@ -20,10 +20,6 @@ export default function NewDeliveryTable() {
   let options = sortOptions.map((option) => ({ label: option }))
 
   const columnsData: Column[] = [
-    // { key: 'name', title: translate('vendors.table.name') },
-    // { key: 'vendorNumber', title: translate('vendors.table.vendorNumber') },
-    // { key: 'markers', title: translate('vendors.table.markers') },
-    // { key: 'actions', title: translate('vendors.table.actions'), minWidth: 50, align: 'right' }
     { key: 'number', title: 'Номер' },
     { key: 'vendorName', title: 'Доставчик' },
     { key: 'deliveryNumber', title: 'Номер(а) на доставка' },
@@ -42,7 +38,12 @@ export default function NewDeliveryTable() {
       vendorName: 'Bosch',
       deliveryNumber: 1,
       receptionNumber: 1,
-      waitingGoods: <PositionedPopper />,
+      waitingGoods: (
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography>1</Typography>
+          <PositionedPopper content="proba" />
+        </Box>
+      ),
       completedGoods: 0,
       status: <ChipsList items={['Изчакване']} color="default" />,
       approvedOn: '01.02.2024',
@@ -55,7 +56,12 @@ export default function NewDeliveryTable() {
       vendorName: 'Valeo',
       deliveryNumber: 2,
       receptionNumber: 2,
-      waitingGoods: 2,
+      waitingGoods: (
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography>2</Typography>
+          <PositionedPopper content="proba" />
+        </Box>
+      ),
       completedGoods: 1,
       status: <ChipsList items={['Обработва се']} color="warning" />,
       approvedOn: '01.02.2024',
@@ -68,7 +74,12 @@ export default function NewDeliveryTable() {
       vendorName: 'Dunlop',
       deliveryNumber: 3,
       receptionNumber: 3,
-      waitingGoods: 3,
+      waitingGoods: (
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography>3</Typography>
+          <PositionedPopper content="proba" />
+        </Box>
+      ),
       completedGoods: 2,
       status: <ChipsList items={['Одобрена']} color="success" />,
       approvedOn: '01.02.2024',
@@ -81,7 +92,12 @@ export default function NewDeliveryTable() {
       vendorName: 'Michelin',
       deliveryNumber: 4,
       receptionNumber: 4,
-      waitingGoods: 4,
+      waitingGoods: (
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography>4</Typography>
+          <PositionedPopper content="proba" />
+        </Box>
+      ),
       completedGoods: 3,
       status: <ChipsList items={['Приключена']} color="info" />,
       approvedOn: '01.02.2024',
