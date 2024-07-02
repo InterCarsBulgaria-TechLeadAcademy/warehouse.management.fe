@@ -60,7 +60,11 @@ export default function FormDialog<T extends FieldValues>({
         {title}
       </DialogTitle>
 
-      <Box sx={{ margin: '2em' }}>
+      <Box
+        sx={{
+          margin: '2em',
+          '& .css-1qxadfk-MuiPaper-root-MuiDialog-paper': { maxWidth: 'auto' }
+        }}>
         {steps && <HorizontalStepper steps={steps} currentStep={currentStep} />}
         <Box
           component="form"
@@ -71,8 +75,11 @@ export default function FormDialog<T extends FieldValues>({
             gap: '2em',
             ...(isSmallScreen
               ? {}
-              : {
-                  // '& .MuiTypography-root': { minWidth: '400px' }
+              : // : {
+                //     // '& .MuiTypography-root': { minWidth: '400px' }
+                //   }
+                {
+                  // minWidth: '400px'
                 })
           }}>
           {renderForm({ control, handleSubmit, formState, reset } as UseFormReturn<T>)}

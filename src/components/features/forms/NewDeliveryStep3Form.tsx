@@ -30,12 +30,8 @@ export default function NewDeliveryStep3Form({
     { title: translate('newDelivery.goodType.pallets'), value: GoodType.pallets },
     { title: translate('newDelivery.goodType.packages'), value: GoodType.packages },
     { title: translate('newDelivery.goodType.pieces'), value: GoodType.pieces }
-    // same for others
   ]
 
-  // const initialGoodType = ['pallets', 'packages', 'pieces']
-
-  // Initialize goodDetailsForms and selectedGoodTypes based on formsData.goods
   const goodDetailsFormsInitialValue = formsData.goods
     ? formsData.goods.map(() => generateId())
     : [0]
@@ -50,8 +46,6 @@ export default function NewDeliveryStep3Form({
 
   function addGoodHandler() {
     append({ goodTypeStep3: '', goodQuantityStep3: 1 }) // add this object in goods array in formsData object
-    // setGoodDetailsForms((prev) => [...prev, generateId()])
-    // setSelectedGoodTypes((prev) => [...prev, ''])
     let newId
     do {
       newId = generateId()
@@ -89,7 +83,6 @@ export default function NewDeliveryStep3Form({
 
   useEffect(() => {
     if (formsData.goods) {
-      // Update form values when formsData changes
       setGoodDetailsForms(formsData.goods.map(() => generateId()))
       setSelectedGoodTypes(formsData.goods.map((good: any) => good.goodTypeStep3 || ''))
     }
