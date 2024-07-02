@@ -5,9 +5,10 @@ import * as React from 'react'
 
 interface MarkersProps {
   items: string[]
+  color?: 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning'
 }
 
-export default function ChipsList({ items }: MarkersProps) {
+export default function ChipsList({ items, color }: MarkersProps) {
   const isSmallScreen = useIsSmallScreen()
 
   const [open, setOpen] = React.useState(false)
@@ -24,7 +25,12 @@ export default function ChipsList({ items }: MarkersProps) {
   return (
     <Box sx={{ display: 'flex', gap: '0.5em' }}>
       {items.slice(0, 2).map((item, index) => (
-        <Chip key={index} label={item} color="primary" />
+        <Chip
+          key={index}
+          label={item}
+          color={color ? color : 'primary'}
+          // color="primary"
+        />
       ))}
 
       {items.length > 2 && !isSmallScreen && (
