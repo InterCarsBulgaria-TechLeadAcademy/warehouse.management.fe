@@ -262,6 +262,10 @@
         "goodQuantity": "Количество",
         "zone": "Зона",
         "addNewMove": "Добави ново местене"
+      },
+      "step5": {
+        "deliveryActions": "Извършени действия в доставка",
+        "createNewDelivery": "Създай"
       }
     },
     "steps": {

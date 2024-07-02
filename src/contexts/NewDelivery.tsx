@@ -80,7 +80,8 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   const handleSubmit: SubmitHandler<any> = (data) => {
     if (currentStep === steps.length) {
       console.log('Final submission:', data)
-      setFormsData(data)
+      // setFormsData(data)
+      onCloseDialog()
     } else {
       console.log(data)
       setFormsData(data)

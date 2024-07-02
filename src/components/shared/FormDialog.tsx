@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as React from 'react'
 import * as yup from 'yup'
 import HorizontalStepper from '../features/Stepper'
-import { useIsSmallScreen } from '@/hooks/useIsSmallScreen'
+// import { useIsSmallScreen } from '@/hooks/useIsSmallScreen'
 import { useTranslation } from 'react-i18next'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import useNewDeliverySteps from '@/hooks/useNewDeliverySteps'
@@ -35,7 +35,7 @@ export default function FormDialog<T extends FieldValues>({
   onSubmit,
   renderForm
 }: FormDialogProps<T>) {
-  const isSmallScreen = useIsSmallScreen()
+  // const isSmallScreen = useIsSmallScreen()
   const { t: translate } = useTranslation()
   const { control, handleSubmit, formState, reset } = useForm<T>({
     resolver: schema ? yupResolver(schema) : undefined
@@ -60,11 +60,7 @@ export default function FormDialog<T extends FieldValues>({
         {title}
       </DialogTitle>
 
-      <Box
-        sx={{
-          margin: '2em',
-          '& .css-1qxadfk-MuiPaper-root-MuiDialog-paper': { maxWidth: 'auto' }
-        }}>
+      <Box sx={{ margin: '2em' }}>
         {steps && <HorizontalStepper steps={steps} currentStep={currentStep} />}
         <Box
           component="form"
@@ -72,15 +68,15 @@ export default function FormDialog<T extends FieldValues>({
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '2em',
-            ...(isSmallScreen
-              ? {}
-              : // : {
-                //     // '& .MuiTypography-root': { minWidth: '400px' }
-                //   }
-                {
-                  // minWidth: '400px'
-                })
+            gap: '2em'
+            // ...(isSmallScreen
+            // ? {}
+            // : // : {
+            //     // '& .MuiTypography-root': { minWidth: '400px' }
+            //   }
+            // {
+            // minWidth: '400px'
+            // })
           }}>
           {renderForm({ control, handleSubmit, formState, reset } as UseFormReturn<T>)}
 
@@ -99,7 +95,10 @@ export default function FormDialog<T extends FieldValues>({
               disabled={
                 currentStep === 4 ? !isCompletedMove : Object.keys(formState.errors).length > 0
               }>
-              {confirmText}
+              {/* {confirmText} */}
+              {currentStep === steps.length
+                ? translate('newDelivery.labels.step5.createNewDelivery')
+                : confirmText}
             </Button>
           </Box>
         </Box>
