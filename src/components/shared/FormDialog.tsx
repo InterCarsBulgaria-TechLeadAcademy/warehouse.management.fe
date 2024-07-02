@@ -35,7 +35,6 @@ export default function FormDialog<T extends FieldValues>({
   onSubmit,
   renderForm
 }: FormDialogProps<T>) {
-  // const isSmallScreen = useIsSmallScreen()
   const { t: translate } = useTranslation()
   const { control, handleSubmit, formState, reset } = useForm<T>({
     resolver: schema ? yupResolver(schema) : undefined
@@ -69,14 +68,6 @@ export default function FormDialog<T extends FieldValues>({
             display: 'flex',
             flexDirection: 'column',
             gap: '2em'
-            // ...(isSmallScreen
-            // ? {}
-            // : // : {
-            //     // '& .MuiTypography-root': { minWidth: '400px' }
-            //   }
-            // {
-            // minWidth: '400px'
-            // })
           }}>
           {renderForm({ control, handleSubmit, formState, reset } as UseFormReturn<T>)}
 
@@ -95,7 +86,6 @@ export default function FormDialog<T extends FieldValues>({
               disabled={
                 currentStep === 4 ? !isCompletedMove : Object.keys(formState.errors).length > 0
               }>
-              {/* {confirmText} */}
               {currentStep === steps.length
                 ? translate('newDelivery.labels.step5.createNewDelivery')
                 : confirmText}

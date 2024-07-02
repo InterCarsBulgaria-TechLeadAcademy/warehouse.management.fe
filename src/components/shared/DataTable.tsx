@@ -17,11 +17,7 @@ interface DataTableProps {
   children: React.ReactNode
 }
 
-export default function DataTable({
-  columnsData,
-  rowData,
-  children
-}: DataTableProps) {
+export default function DataTable({ columnsData, rowData, children }: DataTableProps) {
   const { t: translate } = useTranslation()
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)

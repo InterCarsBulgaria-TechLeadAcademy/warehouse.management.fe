@@ -1,9 +1,9 @@
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import { Box, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import ChipsList from '../ChipsList'
+import ChipsList from '../../ChipsList'
 import dayjs from 'dayjs'
-import NewDeliveryStep5Table from '../NewDeliveryStep5Table'
+import NewDeliveryStep5Table from './NewDeliveryStep5Table'
 
 export default function NewDeliveryStep5Form() {
   const { t: translate } = useTranslation()
@@ -72,10 +72,8 @@ export default function NewDeliveryStep5Form() {
         <Box sx={{ display: 'flex', gap: '2em' }}>
           {formsData.goods.map((good: any, index: number) => {
             return (
-              <Box>
-                <Typography key={index}>
-                  {translate(`newDelivery.goodType.${good.goodTypeStep3}`)}
-                </Typography>
+              <Box key={index}>
+                <Typography>{translate(`newDelivery.goodType.${good.goodTypeStep3}`)}</Typography>
                 <Typography>{good.goodQuantityStep3}</Typography>
               </Box>
             )

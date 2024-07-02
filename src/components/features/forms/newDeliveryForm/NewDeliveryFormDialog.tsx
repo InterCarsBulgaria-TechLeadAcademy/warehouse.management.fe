@@ -1,14 +1,14 @@
 import { useTranslation } from 'react-i18next'
-import FormDialog from '../shared/FormDialog'
 import useSchema from '@/hooks/useSchema'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
-import NewDeliveryRenderForm from './forms/NewDeliveryRenderForm'
 import {
   NewDeliveryStep1FormData,
   NewDeliveryStep2FormData,
   NewDeliveryStep3FormData,
   NewDeliveryStep4FormData
 } from '@/schemas/newDeliverySchemas'
+import FormDialog from '@/components/shared/FormDialog'
+import NewDeliveryRenderForm from './NewDeliveryRenderForm'
 
 export default function NewDeliveryFormDialog() {
   const { t: translate } = useTranslation()
@@ -30,7 +30,9 @@ export default function NewDeliveryFormDialog() {
       handleBack={handleBack}
       schema={schema}
       onSubmit={handleSubmit}
-      renderForm={(methods) => <NewDeliveryRenderForm {...methods} key={openDialog} />}
+      //This key is not good
+      // renderForm={(methods) => <NewDeliveryRenderForm {...methods} key={openDialog} />}
+      renderForm={(methods) => <NewDeliveryRenderForm {...methods} />}
     />
   )
 }

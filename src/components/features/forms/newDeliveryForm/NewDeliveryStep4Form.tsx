@@ -2,13 +2,13 @@ import { Box, Button } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { UseFormReturn, useFieldArray } from 'react-hook-form'
 import { useEffect, useState } from 'react'
-import MoveGoodsForm from './MoveGoodsForm'
 import { NewDeliveryStep4FormData } from '@/schemas/newDeliverySchemas'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import Alert from '@mui/material/Alert'
 import AlertTitle from '@mui/material/AlertTitle'
 import { useGenerateId } from '@/hooks/useGenerateId'
 import { GoodType } from './NewDeliveryStep3Form'
+import MoveGoodsForm from './MoveGoodsForm'
 
 enum Zones {
   zone1 = 'zone1',
@@ -60,6 +60,7 @@ export default function NewDeliveryStep4Form({
   }
 
   function onDeleteHandler(index: number) {
+    // TODO: don't work properly
     remove(index)
     setMoveGoodsForms((prev) => prev.filter((_, id) => id !== index))
     deleteStep4Item(index)
