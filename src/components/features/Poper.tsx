@@ -8,15 +8,18 @@ import Fade from '@mui/material/Fade'
 import Paper from '@mui/material/Paper'
 import InfoIcon from '@mui/icons-material/Info'
 import { useTranslation } from 'react-i18next'
-import { GoodType } from './forms/newDeliveryForm/NewDeliveryStep3Form'
 
-interface goodType {
+interface GoodType {
   title: string
   value: string
   quantity: number
 }
 
-export default function PositionedPopper() {
+interface PositionedPopperProps {
+  goodTypes: GoodType[]
+}
+
+export default function PositionedPopper({ goodTypes }: PositionedPopperProps) {
   const { t: translate } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null)
   const [open, setOpen] = React.useState(false)
@@ -28,12 +31,6 @@ export default function PositionedPopper() {
       setOpen((prev) => placement !== newPlacement || !prev)
       setPlacement(newPlacement)
     }
-
-  const goodTypes = [
-    { title: translate('newDelivery.goodType.pallets'), value: GoodType.pallets, quantity: 1 },
-    { title: translate('newDelivery.goodType.packages'), value: GoodType.packages, quantity: 2 },
-    { title: translate('newDelivery.goodType.pieces'), value: GoodType.pieces, quantity: 3 }
-  ]
 
   return (
     <Box>
@@ -50,7 +47,7 @@ export default function PositionedPopper() {
                     <b>{translate('deliveries.poper.quantity')}</b>
                   </Typography>
                 </Box>
-                {goodTypes.map((goodType: goodType, index: number) => {
+                {goodTypes.map((goodType: GoodType, index: number) => {
                   return (
                     <Box key={index} sx={{ display: 'flex', justifyContent: 'space-between' }}>
                       <Typography>{goodType.title}</Typography>

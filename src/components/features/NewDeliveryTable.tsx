@@ -4,9 +4,10 @@ import { useTranslation } from 'react-i18next'
 import { Column } from '@/interfaces/dataTable'
 import { Autocomplete, Box, TextField, Typography } from '@mui/material'
 import SearchInput from './SearchInput'
-import VendorTableActionsMenu from './VendorTableActionsMenu'
 import ChipsList from './ChipsList'
 import PositionedPopper from './Poper'
+import { GoodType } from './forms/newDeliveryForm/NewDeliveryStep3Form'
+import DeliveriesTableActionsMenu from './DeliveriesTableActionsMenu'
 
 export default function NewDeliveryTable() {
   const { t: translate } = useTranslation()
@@ -20,16 +21,34 @@ export default function NewDeliveryTable() {
   let options = sortOptions.map((option) => ({ label: option }))
 
   const columnsData: Column[] = [
-    { key: 'number', title: 'Номер' },
-    { key: 'vendorName', title: 'Доставчик' },
-    { key: 'deliveryNumber', title: 'Номер(а) на доставка' },
-    { key: 'receptionNumber', title: 'Номер(а) на рецепция' },
-    { key: 'waitingGoods', title: 'Стока чакаща обработка' },
-    { key: 'completedGoods', title: 'Стока завършила обработка' },
-    { key: 'status', title: 'Статус' },
-    { key: 'approvedOn', title: 'Одобрена на' },
-    { key: 'createdOn', title: 'Създадена на' },
+    { key: 'number', title: translate('deliveries.newDeliveryTable.columnsData.number') },
+    { key: 'vendorName', title: translate('deliveries.newDeliveryTable.columnsData.vendorName') },
+    {
+      key: 'deliveryNumber',
+      title: translate('deliveries.newDeliveryTable.columnsData.deliveryNumber')
+    },
+    {
+      key: 'receptionNumber',
+      title: translate('deliveries.newDeliveryTable.columnsData.receptionNumber')
+    },
+    {
+      key: 'waitingGoods',
+      title: translate('deliveries.newDeliveryTable.columnsData.waitingGoods')
+    },
+    {
+      key: 'completedGoods',
+      title: translate('deliveries.newDeliveryTable.columnsData.completedGoods')
+    },
+    { key: 'status', title: translate('deliveries.newDeliveryTable.columnsData.status') },
+    { key: 'approvedOn', title: translate('deliveries.newDeliveryTable.columnsData.approvedOn') },
+    { key: 'createdOn', title: translate('deliveries.newDeliveryTable.columnsData.createdOn') },
     { key: 'actions', title: translate('vendors.table.actions'), minWidth: 50, align: 'right' }
+  ]
+
+  const goodTypes = [
+    { title: translate('newDelivery.goodType.pallets'), value: GoodType.pallets, quantity: 1 },
+    { title: translate('newDelivery.goodType.packages'), value: GoodType.packages, quantity: 2 },
+    { title: translate('newDelivery.goodType.pieces'), value: GoodType.pieces, quantity: 3 }
   ]
 
   const rowData = [
@@ -41,15 +60,19 @@ export default function NewDeliveryTable() {
       waitingGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>1</Typography>
-          <PositionedPopper content="proba" />
+          <PositionedPopper goodTypes={goodTypes} />
         </Box>
       ),
-      completedGoods: 0,
+      completedGoods: (
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography>1</Typography>
+          <PositionedPopper goodTypes={goodTypes} />
+        </Box>
+      ),
       status: <ChipsList items={['Изчакване']} color="default" />,
       approvedOn: '01.02.2024',
       createdOn: '01.02.2024',
-      //   example action
-      actions: <VendorTableActionsMenu />
+      actions: <DeliveriesTableActionsMenu />
     },
     {
       number: 2,
@@ -59,15 +82,19 @@ export default function NewDeliveryTable() {
       waitingGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>2</Typography>
-          <PositionedPopper content="proba" />
+          <PositionedPopper goodTypes={goodTypes} />
         </Box>
       ),
-      completedGoods: 1,
+      completedGoods: (
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography>1</Typography>
+          <PositionedPopper goodTypes={goodTypes} />
+        </Box>
+      ),
       status: <ChipsList items={['Обработва се']} color="warning" />,
       approvedOn: '01.02.2024',
       createdOn: '01.02.2024',
-      //   example action
-      actions: <VendorTableActionsMenu />
+      actions: <DeliveriesTableActionsMenu />
     },
     {
       number: 3,
@@ -77,15 +104,19 @@ export default function NewDeliveryTable() {
       waitingGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>3</Typography>
-          <PositionedPopper content="proba" />
+          <PositionedPopper goodTypes={goodTypes} />
         </Box>
       ),
-      completedGoods: 2,
+      completedGoods: (
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography>1</Typography>
+          <PositionedPopper goodTypes={goodTypes} />
+        </Box>
+      ),
       status: <ChipsList items={['Одобрена']} color="success" />,
       approvedOn: '01.02.2024',
       createdOn: '01.02.2024',
-      //   example action
-      actions: <VendorTableActionsMenu />
+      actions: <DeliveriesTableActionsMenu />
     },
     {
       number: 4,
@@ -95,15 +126,19 @@ export default function NewDeliveryTable() {
       waitingGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>4</Typography>
-          <PositionedPopper content="proba" />
+          <PositionedPopper goodTypes={goodTypes} />
         </Box>
       ),
-      completedGoods: 3,
+      completedGoods: (
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography>1</Typography>
+          <PositionedPopper goodTypes={goodTypes} />
+        </Box>
+      ),
       status: <ChipsList items={['Приключена']} color="info" />,
       approvedOn: '01.02.2024',
       createdOn: '01.02.2024',
-      //   example action
-      actions: <VendorTableActionsMenu />
+      actions: <DeliveriesTableActionsMenu />
     }
   ]
 
