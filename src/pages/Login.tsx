@@ -1,28 +1,19 @@
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
 import Paper from '@mui/material/Paper'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import login_image from '../assets/login-image.webp'
 import intercars_logo from '../assets/ic_new_logo.jpg'
-import { useForm, Controller, SubmitHandler } from 'react-hook-form'
-import Visibility from '@mui/icons-material/Visibility'
-import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import { useForm, SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useTranslation } from 'react-i18next'
-import ShowHideFunctionality from '@/components/shared/ShowHideFunctionality'
-import { formHasErrors } from '@/utils/formUtils'
 import { LoginFormData, loginSchema } from '@/schemas/loginSchema'
+import LoginForm from '@/components/features/forms/LoginForm'
 
 export default function Login() {
   const { t: translate } = useTranslation()
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<LoginFormData>({
+  const methods = useForm<LoginFormData>({
     resolver: yupResolver(loginSchema)
   })
 
@@ -108,59 +99,11 @@ export default function Login() {
             {translate('login.title')}
           </Typography>
 
-          <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 1, maxWidth: '30em' }}>
-            <Controller
-              name="email"
-              control={control}
-              defaultValue=""
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  label={translate('label.email')}
-                  id="email"
-                  name="email"
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  autoComplete="email"
-                  autoFocus
-                  color="secondary"
-                  error={!!errors.email}
-                  helperText={errors.email?.message ? translate(errors.email.message) : ''}
-                />
-              )}
-            />
-
-            <Controller
-              name="password"
-              control={control}
-              defaultValue=""
-              render={({ field }) => (
-                <ShowHideFunctionality
-                  field={field}
-                  label={translate('label.password')}
-                  id="password"
-                  name="password"
-                  required={true}
-                  fullWidth={true}
-                  VisibilityOff={VisibilityOff}
-                  Visibility={Visibility}
-                  color="secondary"
-                  error={!!errors.password}
-                  helperText={errors.password?.message}
-                />
-              )}
-            />
-
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              disabled={formHasErrors(errors)}>
-              {translate('login.title')}
-            </Button>
+          <Box
+            component="form"
+            onSubmit={methods.handleSubmit(onSubmit)}
+            sx={{ mt: 1, maxWidth: '30em' }}>
+            <LoginForm {...methods} />
           </Box>
         </Box>
       </Grid>

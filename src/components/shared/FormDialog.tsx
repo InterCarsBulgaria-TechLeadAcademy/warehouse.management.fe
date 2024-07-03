@@ -6,6 +6,8 @@ import { useForm, SubmitHandler, UseFormReturn, FieldValues } from 'react-hook-f
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as React from 'react'
 import * as yup from 'yup'
+import HorizontalStepper from '../features/Stepper'
+import { useTranslation } from 'react-i18next'
 
 interface FormDialogProps<T extends FieldValues> {
   open: boolean
@@ -13,9 +15,13 @@ interface FormDialogProps<T extends FieldValues> {
   discardText: string
   confirmText: string
   onCloseDialog: () => void
-  schema: yup.ObjectSchema<T>
+  handleBack?: () => void
+  schema: yup.ObjectSchema<any> | undefined
   onSubmit: SubmitHandler<T>
   renderForm: (methods: UseFormReturn<T>) => React.ReactNode
+  steps?: string[]
+  currentStep?: number
+  isCompletedMove?: boolean
 }
 
 export default function FormDialog<T extends FieldValues>({
@@ -24,12 +30,17 @@ export default function FormDialog<T extends FieldValues>({
   discardText,
   confirmText,
   onCloseDialog,
+  handleBack,
   schema,
   onSubmit,
-  renderForm
+  renderForm,
+  steps,
+  currentStep,
+  isCompletedMove
 }: FormDialogProps<T>) {
+  const { t: translate } = useTranslation()
   const { control, handleSubmit, formState, reset } = useForm<T>({
-    resolver: yupResolver(schema)
+    resolver: schema ? yupResolver(schema) : undefined
   })
 
   const handleClose = () => {
@@ -47,30 +58,38 @@ export default function FormDialog<T extends FieldValues>({
         {title}
       </DialogTitle>
 
-      <Box
-        component="form"
-        onSubmit={handleSubmit(onSubmit)}
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '2em',
-          padding: '2em',
-          '& .MuiTextField-root': { width: '450px' }
-        }}>
-        {renderForm({ control, handleSubmit, formState, reset } as UseFormReturn<T>)}
+      <Box sx={{ margin: '2em', minWidth: '450px' }}>
+        {steps && currentStep && <HorizontalStepper currentStep={currentStep} steps={steps} />}
+        <Box
+          component="form"
+          onSubmit={handleSubmit(onSubmit)}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '2em'
+          }}>
+          {renderForm({ control, handleSubmit, formState, reset } as UseFormReturn<T>)}
 
-        <Box sx={{ display: 'flex', justifyContent: 'center', gap: '1em' }}>
-          <Button
-            type="submit"
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-            disabled={Object.keys(formState.errors).length > 0}>
-            {confirmText}
-          </Button>
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: '1em' }}>
+            <Button
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={currentStep === 1 ? handleClose : handleBack}>
+              {currentStep === 1 ? translate('newDelivery.labels.exit') : discardText}
+            </Button>
 
-          <Button variant="contained" sx={{ mt: 3, mb: 2 }} onClick={handleClose}>
-            {discardText}
-          </Button>
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              disabled={
+                currentStep === 4 ? !isCompletedMove : Object.keys(formState.errors).length > 0
+              }>
+              {currentStep === steps?.length
+                ? translate('newDelivery.labels.step5.createNewDelivery')
+                : confirmText}
+            </Button>
+          </Box>
         </Box>
       </Box>
     </Dialog>

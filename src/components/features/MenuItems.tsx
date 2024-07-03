@@ -4,6 +4,7 @@ import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined'
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined'
 import DifferenceOutlinedIcon from '@mui/icons-material/DifferenceOutlined'
+import AlignHorizontalRightIcon from '@mui/icons-material/AlignHorizontalRight'
 import MenuListItem from './MenuListItem'
 import { useTranslation } from 'react-i18next'
 import {
@@ -13,7 +14,9 @@ import {
   USERS_PATH,
   VENDORS_PATH,
   ZONES_PATH,
-  MARKERS_PATH
+  MARKERS_PATH,
+  DELIVERIES_PATH,
+  ZONES_CONTENT_PATH
 } from '@/router/routerPaths'
 
 interface MenuItem {
@@ -25,7 +28,7 @@ interface MenuItem {
 export default function MenuItems() {
   const { t: translate } = useTranslation()
 
-  const MenuItems: MenuItem[] = [
+  const adminMenuItems: MenuItem[] = [
     {
       title: translate('menuItems.users'),
       icon: PeopleAltOutlinedIcon,
@@ -58,12 +61,25 @@ export default function MenuItems() {
     },
     {
       title: translate('menuItems.markers'),
-      // TODO: Change icon for Markers.
-      icon: DifferenceOutlinedIcon,
+      icon: AlignHorizontalRightIcon,
       link: MARKERS_PATH
     }
   ]
-  return MenuItems.map((menuItem, index) => (
+
+  const mainMenuItems: MenuItem[] = [
+    {
+      title: translate('menuItems.zonesContent'),
+      icon: AccountTreeOutlinedIcon,
+      link: ZONES_CONTENT_PATH
+    },
+    {
+      title: translate('menuItems.deliveries'),
+      icon: LocalShippingOutlinedIcon,
+      link: DELIVERIES_PATH
+    }
+  ]
+
+  return [...adminMenuItems, ...mainMenuItems].map((menuItem, index) => (
     <MenuListItem key={index} title={menuItem.title} Icon={menuItem.icon} link={menuItem.link} />
   ))
 }

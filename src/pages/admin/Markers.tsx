@@ -1,12 +1,11 @@
 import { useState } from 'react'
-import { Controller, SubmitHandler, UseFormReturn } from 'react-hook-form'
-
+import { SubmitHandler } from 'react-hook-form'
 import SkeletonPage from '@/components/features/SkeletonPage'
 import { useTranslation } from 'react-i18next'
-import MarkersTable from '@/components/features/MarkersTable'
+import MarkersTable from '@/components/features/admin/MarkersTable'
 import { NewMarkerFormData, newMarkerSchema } from '@/schemas/newMarkerSchema'
-import { Checkbox, FormControlLabel, TextField } from '@mui/material'
 import FormDialog from '@/components/shared/FormDialog'
+import NewMarkerForm from '@/components/features/forms/NewMarkerForm'
 
 export default function Markers() {
   const { t: translate } = useTranslation()
@@ -30,34 +29,6 @@ export default function Markers() {
     onCloseDialog()
   }
 
-  function CreateMarkerForm({ control, formState: { errors } }: UseFormReturn<NewMarkerFormData>) {
-    return (
-      <>
-        <Controller
-          name="markerName"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label={translate('newMarker.labels.name')}
-              id="markerName"
-              name="markerName"
-              required
-              fullWidth
-              autoFocus
-              error={!!errors.markerName}
-              helperText={errors.markerName?.message ? translate(errors.markerName.message) : ''}
-            />
-          )}
-        />
-        <FormControlLabel
-          control={<Checkbox checked={isFinal} onChange={() => setIsFinal(!isFinal)} />}
-          label={translate('newMarker.labels.isFinal')}
-        />
-      </>
-    )
-  }
-
   return (
     <>
       <SkeletonPage
@@ -76,7 +47,9 @@ export default function Markers() {
         onCloseDialog={onCloseDialog}
         schema={newMarkerSchema}
         onSubmit={handleSubmit}
-        renderForm={CreateMarkerForm}
+        renderForm={(methods) => (
+          <NewMarkerForm {...methods} isFinal={isFinal} setIsFinal={setIsFinal} />
+        )}
       />
     </>
   )

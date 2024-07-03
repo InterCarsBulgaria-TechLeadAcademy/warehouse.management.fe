@@ -22,7 +22,7 @@ export default function SmallMainMenu() {
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}>
-        <DehazeIcon sx={{ color: 'black' }} />
+        <DehazeIcon />
       </Button>
       <Menu
         id="basic-menu"
