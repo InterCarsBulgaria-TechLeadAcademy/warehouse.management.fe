@@ -1,5 +1,5 @@
-import { GoodQuantityStep3 } from '@/interfaces/goodQuantityStep3'
 import { useEffect } from 'react'
+import { GoodQuantityStep3 } from '@/interfaces/NewDelivery.ts'
 
 export interface Good {
   goodTypeStep3: 'pallets' | 'packages' | 'pieces'
@@ -10,7 +10,7 @@ interface FormsData {
   goods: Good[]
 }
 
-export default function useSetGoodTypeStep3(
+export default function useSetGoodsType(
   formsData: FormsData,
   goodTypeStep3: GoodQuantityStep3,
   setGoodTypeStep3: React.Dispatch<

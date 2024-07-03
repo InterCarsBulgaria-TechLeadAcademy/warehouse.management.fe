@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 import { NewDeliveryStep3FormData } from '@/schemas/newDeliverySchemas'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import { useGenerateId } from '@/hooks/useGenerateId.ts'
-import { Good } from '@/hooks/useSetGoodTypeStep3'
+import { Good } from '@/hooks/useSetGoodsType.ts'
 
 export enum GoodType {
   pallets = 'pallets',

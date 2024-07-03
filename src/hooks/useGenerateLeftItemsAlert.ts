@@ -1,9 +1,8 @@
-import { GoodQuantityStep3 } from '@/interfaces/goodQuantityStep3'
-import { MoveGood } from '@/interfaces/moveGood'
 import calculateCurrentItems from '@/utils/calculateCurrentItems'
 import calculateLeftItems from '@/utils/calculateLeftItems'
 import { Dispatch, SetStateAction, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { GoodQuantityStep3, MoveGood } from '@/interfaces/NewDelivery.ts'
 
 export default function useGenerateLeftItemsAlert(
   goodTypeStep3: GoodQuantityStep3,

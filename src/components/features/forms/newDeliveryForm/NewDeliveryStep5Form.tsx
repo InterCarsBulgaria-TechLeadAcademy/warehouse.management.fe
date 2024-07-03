@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import ChipsList from '../../ChipsList'
 import dayjs from 'dayjs'
 import NewDeliveryStep5Table from './NewDeliveryStep5Table'
-import { Good } from '@/hooks/useSetGoodTypeStep3'
+import { Good } from '@/hooks/useSetGoodsType.ts'
 
 export default function NewDeliveryStep5Form() {
   const { t: translate } = useTranslation()

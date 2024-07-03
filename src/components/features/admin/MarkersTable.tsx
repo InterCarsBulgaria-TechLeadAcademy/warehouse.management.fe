@@ -3,6 +3,7 @@ import DataTable from '@/components/shared/DataTable'
 import { useTranslation } from 'react-i18next'
 import TableActionsMenu from '@/components/shared/TableActionsMenu'
 import SearchInput from '../SearchInput'
+import { Column } from '@/interfaces/column.ts'
 
 interface Row {
   name: string
@@ -19,12 +20,12 @@ export default function MarkersTable() {
     setSearchTerm(event.target.value)
   }
 
-  let columnsData: Column<Row>[] = [
+  const columnsData: Column<Row>[] = [
     { key: 'name', title: translate('markers.table.name') },
     { key: 'actions', title: translate('markers.table.actions'), minWidth: 50, align: 'right' }
   ]
 
-  let rowData: Row[] = [
+  const rowData: Row[] = [
     {
       name: 'Motoul',
       vendorNumber: 1,

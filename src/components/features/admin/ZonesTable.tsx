@@ -5,6 +5,7 @@ import ZonesTableActionsMenu from '../ZonesTableActionsMenu'
 import ChipsList from '../ChipsList'
 import SearchInput from '../SearchInput'
 import { Autocomplete, TextField } from '@mui/material'
+import { Column } from '@/interfaces/column.ts'
 
 interface Row {
   name: string
@@ -21,8 +22,8 @@ export default function ZonesTable() {
     setSearchTerm(event.target.value)
   }
 
-  let sortOptions = ['regular', 'admin']
-  let options = sortOptions.map((option) => ({ label: option }))
+  const sortOptions = ['regular', 'admin']
+  const options = sortOptions.map((option) => ({ label: option }))
 
   const columnsData: Column<Row>[] = [
     { key: 'name', title: translate('zones.table.name') },

@@ -9,7 +9,7 @@ import AlertTitle from '@mui/material/AlertTitle'
 import { useGenerateId } from '@/hooks/useGenerateId'
 import { GoodType } from './NewDeliveryStep3Form'
 import MoveGoodsForm from './MoveGoodsForm'
-import { Good } from '@/hooks/useSetGoodTypeStep3'
+import { Good } from '@/hooks/useSetGoodsType.ts'
 
 enum Zones {
   zone1 = 'zone1',

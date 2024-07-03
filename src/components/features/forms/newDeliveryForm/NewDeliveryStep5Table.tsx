@@ -7,7 +7,8 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import { useTranslation } from 'react-i18next'
-import { MoveGood } from '@/interfaces/moveGood'
+
+import { MoveGood } from '@/interfaces/NewDelivery.ts'
 
 export default function NewDeliveryStep5Table() {
   const { t: translate } = useTranslation()

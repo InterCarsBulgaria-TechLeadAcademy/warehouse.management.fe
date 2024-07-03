@@ -1,14 +1,35 @@
 import { createContext, ReactNode, useState } from 'react'
 import { SubmitHandler } from 'react-hook-form'
 import useNewDeliverySteps from '@/hooks/useNewDeliverySteps'
-import { NewDeliveryContextValues } from '@/interfaces/newDeliveryContextValues'
 
 import useGenerateLeftItemsAlert from '@/hooks/useGenerateLeftItemsAlert'
-import { MoveGood } from '@/interfaces/moveGood'
-import useSetGoodTypeStep3 from '@/hooks/useSetGoodTypeStep3'
+import useSetGoodsType from '@/hooks/useSetGoodsType.ts'
+import { MoveGood } from '@/interfaces/NewDelivery.ts'
 
 interface NewDeliveryProviderProps {
   children: ReactNode
+}
+
+interface NewDeliveryContextValues {
+  currentStep: number
+  formsData: { [key: string]: any }
+  openDialog: boolean
+  onCloseDialog: () => void
+  handleBack: () => void
+  handleClickOpen: () => void
+  handleSubmit: SubmitHandler<any>
+  updateGoodsInZones: (
+    index: number,
+    newItem: { goodTypeStep4: string; goodQuantityStep4: number; zone: string }
+  ) => void
+  deleteGoodsInZones: (index: number) => void
+  alertMessage: string[]
+  isCompletedMove: boolean
+  isExceedQuantity: boolean
+  goodTypeStep3: { pallets: number; packages: number; pieces: number }
+  setGoodTypeStep3: React.Dispatch<
+    React.SetStateAction<{ pallets: number; packages: number; pieces: number }>
+  >
 }
 
 export const NewDeliveryContext = createContext<NewDeliveryContextValues>({
@@ -41,7 +62,7 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   const [isCompletedMove, setIsCompletedMove] = useState(false)
   const [isExceedQuantity, setIsExceedQuantity] = useState(false)
 
-  useSetGoodTypeStep3(formsData, goodTypeStep3, setGoodTypeStep3)
+  useSetGoodsType(formsData, goodTypeStep3, setGoodTypeStep3)
   useGenerateLeftItemsAlert(
     goodTypeStep3,
     goodsInZones,

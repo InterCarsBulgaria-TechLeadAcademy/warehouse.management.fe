@@ -4,6 +4,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import SearchInput from '../SearchInput'
 import { Autocomplete, TextField } from '@mui/material'
+import { Column } from '@/interfaces/column.ts'
 
 interface Row {
   name: string
@@ -20,8 +21,8 @@ export default function VendorsTable() {
     setSearchTerm(event.target.value)
   }
 
-  let sortOptions = ['regular', 'admin']
-  let options = sortOptions.map((option) => ({ label: option }))
+  const sortOptions = ['regular', 'admin']
+  const options = sortOptions.map((option) => ({ label: option }))
 
   const columnsData: Column<Row>[] = [
     { key: 'name', title: translate('vendors.table.name') },

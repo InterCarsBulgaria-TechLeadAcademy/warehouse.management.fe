@@ -1,4 +1,4 @@
-import { GoodQuantityStep3 } from '@/interfaces/goodQuantityStep3'
+import { GoodQuantityStep3 } from '@/interfaces/NewDelivery.ts'
 
 export default function calculateLeftItems(
   goodTypeStep3: GoodQuantityStep3,

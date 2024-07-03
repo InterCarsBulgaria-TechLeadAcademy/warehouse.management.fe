@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import useSchema from '@/hooks/useSchema'
+import useCreateDeliverySchemasStepper from '@/hooks/useCreateDeliverySchemasStepper.ts'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import {
   NewDeliveryStep1FormData,
@@ -16,7 +16,7 @@ export default function NewDeliveryFormDialog() {
   const { currentStep, openDialog, onCloseDialog, handleBack, handleSubmit, isCompletedMove } =
     useNewDeliveryContext()
   const steps = useNewDeliverySteps()
-  const schema = useSchema(currentStep)
+  const schema = useCreateDeliverySchemasStepper(currentStep)
   return (
     <FormDialog<
       | NewDeliveryStep1FormData

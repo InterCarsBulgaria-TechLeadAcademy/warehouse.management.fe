@@ -9,10 +9,10 @@ import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
 import { Box, FormControlLabel, Switch } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { Column } from '@/interfaces/dataTable'
+import { Column } from '@/interfaces/column.ts'
 
 interface DataTableProps {
-  columnsData: Column[]
+  columnsData: Column<Record<any, any>>[]
   rowData: any
   children: React.ReactNode
 }
@@ -23,7 +23,7 @@ export default function DataTable({ columnsData, rowData, children }: DataTableP
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const [dense, setDense] = React.useState(false)
 
-  const columns: readonly Column[] = columnsData
+  const columns: readonly Column<Record<any, any>>[] = columnsData
 
   const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage)

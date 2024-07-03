@@ -59,7 +59,7 @@ export default function FormDialog<T extends FieldValues>({
       </DialogTitle>
 
       <Box sx={{ margin: '2em', minWidth: '450px' }}>
-        {steps && currentStep && <HorizontalStepper />}
+        {steps && currentStep && <HorizontalStepper currentStep={currentStep} steps={steps} />}
         <Box
           component="form"
           onSubmit={handleSubmit(onSubmit)}

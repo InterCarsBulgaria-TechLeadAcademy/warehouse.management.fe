@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { FormControlLabel, Switch } from '@mui/material'
 import TableActionsMenu from '@/components/shared/TableActionsMenu'
 import SearchInput from '../SearchInput'
+import { Column } from '@/interfaces/column.ts'
 
 interface Row {
   entryNumber: number

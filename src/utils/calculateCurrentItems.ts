@@ -1,5 +1,4 @@
-import { GoodQuantityStep3 } from '@/interfaces/goodQuantityStep3'
-import { MoveGood } from '@/interfaces/moveGood'
+import { GoodQuantityStep3, MoveGood } from '@/interfaces/NewDelivery.ts'
 
 export default function calculateCurrentItems(goodsInZones: MoveGood[]): GoodQuantityStep3 {
   const currentItems: GoodQuantityStep3 = { pallets: 0, packages: 0, pieces: 0 }

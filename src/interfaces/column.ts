@@ -1,4 +1,4 @@
-interface Column<T> {
+export interface Column<T> {
   key: keyof T
   title: string
   minWidth?: number
