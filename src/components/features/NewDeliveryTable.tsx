@@ -9,6 +9,11 @@ import PositionedPopper from './Poper'
 import { GoodType } from './forms/newDeliveryForm/NewDeliveryStep3Form'
 import DeliveriesTableActionsMenu from './DeliveriesTableActionsMenu'
 
+let vendorsNames: string[] = ['Bosch', 'Valeo', 'Dunlop', 'Michelin']
+let selectedVendorName = vendorsNames.map((vendorName) => ({ label: vendorName }))
+
+const markers = ['Масло', 'Гуми', 'Чистачки']
+
 export default function NewDeliveryTable() {
   const { t: translate } = useTranslation()
   const [searchTerm, setSearchTerm] = React.useState('')
@@ -16,9 +21,6 @@ export default function NewDeliveryTable() {
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
   }
-
-  let sortOptions = ['regular', 'admin']
-  let options = sortOptions.map((option) => ({ label: option }))
 
   const columnsData: Column[] = [
     { key: 'number', title: translate('deliveries.newDeliveryTable.columnsData.number') },
@@ -39,6 +41,7 @@ export default function NewDeliveryTable() {
       key: 'completedGoods',
       title: translate('deliveries.newDeliveryTable.columnsData.completedGoods')
     },
+    { key: 'markers', title: translate('deliveries.newDeliveryTable.columnsData.markers') },
     { key: 'status', title: translate('deliveries.newDeliveryTable.columnsData.status') },
     { key: 'approvedOn', title: translate('deliveries.newDeliveryTable.columnsData.approvedOn') },
     { key: 'createdOn', title: translate('deliveries.newDeliveryTable.columnsData.createdOn') },
@@ -69,6 +72,7 @@ export default function NewDeliveryTable() {
           <PositionedPopper goodTypes={goodTypes} />
         </Box>
       ),
+      markers: <ChipsList items={markers} />,
       status: <ChipsList items={['Изчакване']} color="default" />,
       approvedOn: '01.02.2024',
       createdOn: '01.02.2024',
@@ -91,6 +95,7 @@ export default function NewDeliveryTable() {
           <PositionedPopper goodTypes={goodTypes} />
         </Box>
       ),
+      markers: <ChipsList items={markers} />,
       status: <ChipsList items={['Обработва се']} color="warning" />,
       approvedOn: '01.02.2024',
       createdOn: '01.02.2024',
@@ -113,6 +118,7 @@ export default function NewDeliveryTable() {
           <PositionedPopper goodTypes={goodTypes} />
         </Box>
       ),
+      markers: <ChipsList items={markers} />,
       status: <ChipsList items={['Одобрена']} color="success" />,
       approvedOn: '01.02.2024',
       createdOn: '01.02.2024',
@@ -135,6 +141,7 @@ export default function NewDeliveryTable() {
           <PositionedPopper goodTypes={goodTypes} />
         </Box>
       ),
+      markers: <ChipsList items={markers} />,
       status: <ChipsList items={['Приключена']} color="info" />,
       approvedOn: '01.02.2024',
       createdOn: '01.02.2024',
@@ -153,16 +160,29 @@ export default function NewDeliveryTable() {
       <SearchInput
         value={searchTerm}
         onChange={handleSearchChange}
-        placeholder={translate('vendors.labels.search')}
+        placeholder={translate('deliveries.filters.search')}
       />
 
       <Autocomplete
         disablePortal
         id="combo-box-demo"
-        options={options}
+        options={markers}
         size="small"
         sx={{ width: '235px' }}
-        renderInput={(params) => <TextField {...params} label={translate('vendors.labels.role')} />}
+        renderInput={(params) => (
+          <TextField {...params} label={translate('deliveries.filters.markers')} />
+        )}
+      />
+
+      <Autocomplete
+        disablePortal
+        id="combo-box-demo"
+        options={selectedVendorName}
+        size="small"
+        sx={{ width: '235px' }}
+        renderInput={(params) => (
+          <TextField {...params} label={translate('deliveries.filters.vendorName')} />
+        )}
       />
     </DataTable>
   )

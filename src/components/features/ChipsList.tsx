@@ -25,12 +25,7 @@ export default function ChipsList({ items, color }: MarkersProps) {
   return (
     <Box sx={{ display: 'flex', gap: '0.5em' }}>
       {items.slice(0, 2).map((item, index) => (
-        <Chip
-          key={index}
-          label={item}
-          color={color ? color : 'primary'}
-          // color="primary"
-        />
+        <Chip key={index} label={item} color={color ? color : 'primary'} />
       ))}
 
       {items.length > 2 && !isSmallScreen && (

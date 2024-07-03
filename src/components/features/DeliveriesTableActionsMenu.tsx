@@ -64,7 +64,7 @@ export default function DeliveriesTableActionsMenu() {
         ))}
       </Menu>
 
-      {selectedOption === 'Изтрий' && (
+      {selectedOption === translate('actionsMenu.options.delete') && (
         <WarningActionDialog
           open={open}
           title={translate('deliveries.deleteActions.title')}

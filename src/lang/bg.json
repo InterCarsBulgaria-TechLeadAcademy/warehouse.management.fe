@@ -196,6 +196,7 @@
         "receptionNumber": "Номер(а) на рецепция",
         "waitingGoods": "Стока чакаща обработка",
         "completedGoods": "Стока завършила обработка",
+        "markers": "Маркери",
         "status": "Статус",
         "approvedOn": "Одобрена на",
         "createdOn": "Създадена на"
@@ -208,6 +209,12 @@
         "discard": "Откажи",
         "confirm": "Потвърди"
         }
+    }, 
+    "filters": {
+      "search": "Търсене",
+      "markers": "Маркери",
+      "deliveryTime": "Време за доставка",
+      "vendorName":"Име на доставчик"
     }
   },
   "newDelivery": {
