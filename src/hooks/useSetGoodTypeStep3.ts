@@ -13,7 +13,9 @@ interface FormsData {
 export default function useSetGoodTypeStep3(
   formsData: FormsData,
   goodTypeStep3: GoodQuantityStep3,
-  setGoodTypeStep3: any
+  setGoodTypeStep3: React.Dispatch<
+    React.SetStateAction<{ pallets: number; packages: number; pieces: number }>
+  >
 ) {
   useEffect(() => {
     if (formsData.goods) {

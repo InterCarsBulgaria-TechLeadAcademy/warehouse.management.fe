@@ -5,7 +5,13 @@ import ZonesTableActionsMenu from '../ZonesTableActionsMenu'
 import ChipsList from '../ChipsList'
 import SearchInput from '../SearchInput'
 import { Autocomplete, TextField } from '@mui/material'
-import { Column } from '@/interfaces/dataTable'
+
+interface Row {
+  name: string
+  markers: React.ReactNode
+  isFinalZone: string
+  actions: React.ReactNode
+}
 
 export default function ZonesTable() {
   const { t: translate } = useTranslation()
@@ -18,14 +24,14 @@ export default function ZonesTable() {
   let sortOptions = ['regular', 'admin']
   let options = sortOptions.map((option) => ({ label: option }))
 
-  const columnsData: Column[] = [
+  const columnsData: Column<Row>[] = [
     { key: 'name', title: translate('zones.table.name') },
     { key: 'markers', title: translate('zones.table.markers') },
     { key: 'isFinalZone', title: translate('zones.table.isFinalZone') },
     { key: 'actions', title: translate('zones.table.actions'), minWidth: 50, align: 'right' }
   ]
 
-  const rowData = [
+  const rowData: Row[] = [
     {
       name: 'Зона 1',
       markers: <ChipsList items={['Гуми', 'Масло', 'Чистачки', 'Филтри', 'Брони']} />,
@@ -40,8 +46,8 @@ export default function ZonesTable() {
     }
   ]
 
-  const filteredRows = rowData.filter((row: any) => {
-    return columnsData.some((column) => {
+  const filteredRows = rowData.filter((row: Row) => {
+    return columnsData.some((column: Column<Row>) => {
       return row[column.key]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
     })
   })

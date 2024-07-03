@@ -49,7 +49,7 @@ export default function DataTable({ columnsData, rowData, children }: DataTableP
           <Table stickyHeader aria-label="sticky table" size={dense ? 'small' : 'medium'}>
             <TableHead>
               <TableRow>
-                {columns.map((column) => (
+                {columns.map((column: Column) => (
                   <TableCell
                     key={column.key}
                     align={column.align}

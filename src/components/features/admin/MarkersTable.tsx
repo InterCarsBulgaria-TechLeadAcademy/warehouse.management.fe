@@ -1,10 +1,15 @@
 import React from 'react'
-
 import DataTable from '@/components/shared/DataTable'
 import { useTranslation } from 'react-i18next'
-import { Column } from '@/interfaces/dataTable'
 import TableActionsMenu from '@/components/shared/TableActionsMenu'
 import SearchInput from '../SearchInput'
+
+interface Row {
+  name: string
+  vendorNumber: number
+  markers: string
+  actions: React.ReactNode
+}
 
 export default function MarkersTable() {
   const { t: translate } = useTranslation()
@@ -14,12 +19,12 @@ export default function MarkersTable() {
     setSearchTerm(event.target.value)
   }
 
-  let columnsData: Column[] = [
+  let columnsData: Column<Row>[] = [
     { key: 'name', title: translate('markers.table.name') },
     { key: 'actions', title: translate('markers.table.actions'), minWidth: 50, align: 'right' }
   ]
 
-  let rowData = [
+  let rowData: Row[] = [
     {
       name: 'Motoul',
       vendorNumber: 1,
@@ -34,8 +39,8 @@ export default function MarkersTable() {
     }
   ]
 
-  const filteredRows = rowData.filter((row: any) => {
-    return columnsData.some((column) => {
+  const filteredRows = rowData.filter((row: Row) => {
+    return columnsData.some((column: Column<Row>) => {
       return row[column.key]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
     })
   })

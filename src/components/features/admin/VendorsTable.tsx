@@ -2,9 +2,15 @@ import VendorTableActionsMenu from '@/components/features/VendorTableActionsMenu
 import DataTable from '@/components/shared/DataTable'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Column } from '@/interfaces/dataTable'
 import SearchInput from '../SearchInput'
 import { Autocomplete, TextField } from '@mui/material'
+
+interface Row {
+  name: string
+  vendorNumber: number
+  markers: string
+  actions: React.ReactNode
+}
 
 export default function VendorsTable() {
   const { t: translate } = useTranslation()
@@ -17,14 +23,14 @@ export default function VendorsTable() {
   let sortOptions = ['regular', 'admin']
   let options = sortOptions.map((option) => ({ label: option }))
 
-  const columnsData: Column[] = [
+  const columnsData: Column<Row>[] = [
     { key: 'name', title: translate('vendors.table.name') },
     { key: 'vendorNumber', title: translate('vendors.table.vendorNumber') },
     { key: 'markers', title: translate('vendors.table.markers') },
     { key: 'actions', title: translate('vendors.table.actions'), minWidth: 50, align: 'right' }
   ]
 
-  const rowData = [
+  const rowData: Row[] = [
     {
       name: 'Bosch',
       vendorNumber: 1,
@@ -39,8 +45,8 @@ export default function VendorsTable() {
     }
   ]
 
-  const filteredRows = rowData.filter((row: any) => {
-    return columnsData.some((column) => {
+  const filteredRows = rowData.filter((row: Row) => {
+    return columnsData.some((column: Column<Row>) => {
       return row[column.key]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
     })
   })
