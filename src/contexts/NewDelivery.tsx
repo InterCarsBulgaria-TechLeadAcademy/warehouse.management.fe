@@ -2,9 +2,10 @@ import { createContext, ReactNode, useState } from 'react'
 import { SubmitHandler } from 'react-hook-form'
 import useNewDeliverySteps from '@/hooks/useNewDeliverySteps'
 import { NewDeliveryContextValues } from '@/interfaces/newDeliveryContextValues'
-import useSetStep3Items from '@/hooks/useSetStep3Items'
+
 import useGenerateLeftItemsAlert from '@/hooks/useGenerateLeftItemsAlert'
 import { MoveGood } from '@/interfaces/moveGood'
+import useSetGoodTypeStep3 from '@/hooks/useSetGoodTypeStep3'
 
 interface NewDeliveryProviderProps {
   children: ReactNode
@@ -18,13 +19,13 @@ export const NewDeliveryContext = createContext<NewDeliveryContextValues>({
   handleBack: () => {},
   handleClickOpen: () => {},
   handleSubmit: () => {},
-  updateStep4Item: () => {},
-  deleteStep4Item: () => {},
+  updateGoodsInZones: () => {},
+  deleteGoodsInZones: () => {},
   alertMessage: [],
   isCompletedMove: false,
   isExceedQuantity: false,
-  step3Items: { pallets: 0, packages: 0, pieces: 0 },
-  setStep3Items: () => {}
+  goodTypeStep3: { pallets: 0, packages: 0, pieces: 0 },
+  setGoodTypeStep3: () => {}
 })
 
 export default function NewDeliveryProvider({ children }: NewDeliveryProviderProps) {
@@ -32,30 +33,33 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   const [formsData, setFormsData] = useState<any>({})
   const [openDialog, setOpenDialog] = useState(false)
   const steps = useNewDeliverySteps()
-  const [step3Items, setStep3Items] = useState({ pallets: 0, packages: 0, pieces: 0 })
-  const [step4Items, setStep4Items] = useState<MoveGood[]>([{ type: '', quantity: 0, zone: '' }])
+  const [goodTypeStep3, setGoodTypeStep3] = useState({ pallets: 0, packages: 0, pieces: 0 })
+  const [goodsInZones, setGoodsInZones] = useState<MoveGood[]>([
+    { goodTypeStep4: '', goodQuantityStep4: 0, zone: '' }
+  ])
+  // const [step4Items, setStep4Items] = useState<MoveGood[]>([{ type: '', quantity: 0, zone: '' }])
   const [alertMessage, setAlertMessage] = useState<string[]>([])
   const [isCompletedMove, setIsCompletedMove] = useState(false)
   const [isExceedQuantity, setIsExceedQuantity] = useState(false)
 
-  useSetStep3Items(formsData, step3Items, setStep3Items)
+  useSetGoodTypeStep3(formsData, goodTypeStep3, setGoodTypeStep3)
   useGenerateLeftItemsAlert(
-    step3Items,
-    step4Items,
+    goodTypeStep3,
+    goodsInZones,
     setAlertMessage,
     setIsExceedQuantity,
     setIsCompletedMove
   )
 
-  function updateStep4Item(index: number, newItem: MoveGood) {
-    const newStep4Items = [...step4Items]
-    newStep4Items[index] = newItem
-    setStep4Items(newStep4Items)
+  function updateGoodsInZones(index: number, newItem: MoveGood) {
+    const newGoodsInZones = [...goodsInZones]
+    newGoodsInZones[index] = newItem
+    setGoodsInZones(newGoodsInZones)
   }
 
-  function deleteStep4Item(index: number) {
-    const newStep4Items = step4Items.filter((_, id) => id !== index)
-    setStep4Items(newStep4Items)
+  function deleteGoodsInZones(index: number) {
+    const newGoodsInZones = goodsInZones.filter((_, id) => id !== index)
+    setGoodsInZones(newGoodsInZones)
   }
 
   function handleClickOpen() {
@@ -66,8 +70,8 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
     setCurrentStep(1)
     setFormsData({})
     setOpenDialog(false)
-    setStep3Items({ pallets: 0, packages: 0, pieces: 0 })
-    setStep4Items([{ type: '', quantity: 0, zone: '' }])
+    setGoodTypeStep3({ pallets: 0, packages: 0, pieces: 0 })
+    setGoodsInZones([{ goodTypeStep4: '', goodQuantityStep4: 0, zone: '' }])
     setAlertMessage([])
     setIsCompletedMove(false)
     setIsExceedQuantity(false)
@@ -80,7 +84,6 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   const handleSubmit: SubmitHandler<any> = (data) => {
     if (currentStep === steps.length) {
       console.log('Final submission:', data)
-      // setFormsData(data)
       onCloseDialog()
     } else {
       console.log(data)
@@ -97,13 +100,13 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
     handleBack,
     handleClickOpen,
     handleSubmit,
-    updateStep4Item,
-    deleteStep4Item,
+    updateGoodsInZones,
+    deleteGoodsInZones,
     alertMessage,
     isCompletedMove,
     isExceedQuantity,
-    step3Items,
-    setStep3Items
+    goodTypeStep3,
+    setGoodTypeStep3
   }
 
   return (

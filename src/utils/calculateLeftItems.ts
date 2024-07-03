@@ -1,10 +1,13 @@
-import { Step3Items } from '@/interfaces/step3Items'
+import { GoodQuantityStep3 } from '@/interfaces/goodQuantityStep3'
 
-export default function calculateLeftItems(step3Items: Step3Items, currentItems: Step3Items) {
-  const leftItems: Step3Items = {
-    pallets: step3Items.pallets - currentItems.pallets,
-    packages: step3Items.packages - currentItems.packages,
-    pieces: step3Items.pieces - currentItems.pieces
+export default function calculateLeftItems(
+  goodTypeStep3: GoodQuantityStep3,
+  currentItems: GoodQuantityStep3
+): GoodQuantityStep3 {
+  const leftItems: GoodQuantityStep3 = {
+    pallets: goodTypeStep3.pallets - currentItems.pallets,
+    packages: goodTypeStep3.packages - currentItems.packages,
+    pieces: goodTypeStep3.pieces - currentItems.pieces
   }
   return leftItems
 }

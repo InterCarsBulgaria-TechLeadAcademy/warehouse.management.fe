@@ -1,5 +1,5 @@
 export interface MoveGood {
-  type: string // palettes | packages | pieces
-  quantity: number
+  goodTypeStep4: string // palettes | packages | pieces
+  goodQuantityStep4: number
   zone: string
 }

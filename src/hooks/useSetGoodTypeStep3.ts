@@ -1,4 +1,4 @@
-import { Step3Items } from '@/interfaces/step3Items'
+import { GoodQuantityStep3 } from '@/interfaces/goodQuantityStep3'
 import { useEffect } from 'react'
 
 export interface Good {
@@ -10,28 +10,28 @@ interface FormsData {
   goods: Good[]
 }
 
-export default function useSetStep3Items(
+export default function useSetGoodTypeStep3(
   formsData: FormsData,
-  step3Items: Step3Items,
-  setStep3Items: any
+  goodTypeStep3: GoodQuantityStep3,
+  setGoodTypeStep3: any
 ) {
   useEffect(() => {
     if (formsData.goods) {
-      const newStep3Items = { ...step3Items }
+      const newGoodTypeStep3 = { ...goodTypeStep3 }
       formsData.goods.map((good: Good) => {
         switch (good.goodTypeStep3) {
           case 'pallets':
-            newStep3Items.pallets = good.goodQuantityStep3
+            newGoodTypeStep3.pallets = good.goodQuantityStep3
             break
           case 'packages':
-            newStep3Items.packages = good.goodQuantityStep3
+            newGoodTypeStep3.packages = good.goodQuantityStep3
             break
           case 'pieces':
-            newStep3Items.pieces = good.goodQuantityStep3
+            newGoodTypeStep3.pieces = good.goodQuantityStep3
             break
         }
       })
-      setStep3Items(newStep3Items)
+      setGoodTypeStep3(newGoodTypeStep3)
     }
   }, [formsData.goods])
 }

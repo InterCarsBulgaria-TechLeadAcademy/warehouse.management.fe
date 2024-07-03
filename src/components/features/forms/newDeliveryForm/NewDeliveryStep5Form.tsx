@@ -91,28 +91,6 @@ export default function NewDeliveryStep5Form() {
           <NewDeliveryStep5Table />
         </Box>
       </Box>
-
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: '1em' }}>
-          <ChipsList items={['5']} />
-          <Typography variant="h6">
-            {translate('newDelivery.labels.step5.deliveryActions')}
-          </Typography>
-        </Box>
-
-        <Box sx={{ display: 'flex', gap: '2em' }}>
-          {formsData.goods.map((good: any, index: number) => {
-            return (
-              <Box>
-                <Typography key={index}>
-                  {translate(`newDelivery.goodType.${good.goodTypeStep3}`)}
-                </Typography>
-                <Typography>{good.goodQuantityStep3}</Typography>
-              </Box>
-            )
-          })}
-        </Box>
-      </Box>
     </Box>
   )
 }

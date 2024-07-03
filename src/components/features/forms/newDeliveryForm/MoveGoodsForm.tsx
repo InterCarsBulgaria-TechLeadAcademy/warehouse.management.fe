@@ -28,7 +28,7 @@ export default function MoveGoodsForm({
   formsCount
 }: GoodDetailsFormProps) {
   const { t: translate } = useTranslation()
-  const { formsData, updateStep4Item, deleteStep4Item } = useNewDeliveryContext()
+  const { formsData, updateGoodsInZones, deleteGoodsInZones } = useNewDeliveryContext()
 
   const [goodTypeValue, setGoodTypeValue] = useState<string | null>(
     formsData?.goodsInZones ? formsData.goodsInZones[index]?.goodTypeStep4 : null
@@ -46,16 +46,16 @@ export default function MoveGoodsForm({
   useEffect(() => {
     // When click to clear goodType and clear all inputs
     if (goodTypeValue === null && goodQuantityValue === '' && zoneValue === null) {
-      deleteStep4Item(index)
+      deleteGoodsInZones(index)
     }
 
     if (
       (goodTypeValue !== null && goodQuantityValue !== '' && zoneValue !== null) ||
       (goodTypeValue !== null && goodQuantityValue === '' && zoneValue !== null)
     ) {
-      updateStep4Item(index, {
-        type: goodTypeValue,
-        quantity: goodQuantityValue === '' ? 0 : Number(goodQuantityValue),
+      updateGoodsInZones(index, {
+        goodTypeStep4: goodTypeValue,
+        goodQuantityStep4: goodQuantityValue === '' ? 0 : Number(goodQuantityValue),
         zone: zoneValue
       })
     }

@@ -21,7 +21,7 @@ export default function NewDeliveryStep4Form({
   formState: { errors }
 }: UseFormReturn<NewDeliveryStep4FormData>) {
   const { t: translate } = useTranslation()
-  const { formsData, alertMessage, deleteStep4Item, isCompletedMove, isExceedQuantity } =
+  const { formsData, alertMessage, deleteGoodsInZones, isCompletedMove, isExceedQuantity } =
     useNewDeliveryContext()
   const generateId = useGenerateId()
 
@@ -63,7 +63,7 @@ export default function NewDeliveryStep4Form({
     // TODO: don't work properly
     remove(index)
     setMoveGoodsForms((prev) => prev.filter((_, id) => id !== index))
-    deleteStep4Item(index)
+    deleteGoodsInZones(index)
   }
 
   useEffect(() => {

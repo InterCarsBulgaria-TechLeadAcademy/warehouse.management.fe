@@ -1,13 +1,13 @@
+import { GoodQuantityStep3 } from '@/interfaces/goodQuantityStep3'
 import { MoveGood } from '@/interfaces/moveGood'
-import { Step3Items } from '@/interfaces/step3Items'
 import calculateCurrentItems from '@/utils/calculateCurrentItems'
 import calculateLeftItems from '@/utils/calculateLeftItems'
 import { Dispatch, SetStateAction, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export default function useGenerateLeftItemsAlert(
-  step3Items: Step3Items,
-  step4Items: MoveGood[],
+  goodTypeStep3: GoodQuantityStep3,
+  goodsInZones: MoveGood[],
   setAlertMessage: Dispatch<SetStateAction<string[]>>,
   setIsExceedQuantity: Dispatch<SetStateAction<boolean>>,
   setIsCompletedMove: Dispatch<SetStateAction<boolean>>
@@ -15,8 +15,8 @@ export default function useGenerateLeftItemsAlert(
   const { t: translate } = useTranslation()
 
   useEffect(() => {
-    const currentItems = calculateCurrentItems(step4Items)
-    const leftItems = calculateLeftItems(step3Items, currentItems)
+    const currentItems = calculateCurrentItems(goodsInZones)
+    const leftItems = calculateLeftItems(goodTypeStep3, currentItems)
 
     if (leftItems.pallets === 0 && leftItems.packages === 0 && leftItems.pieces === 0) {
       setIsExceedQuantity(false)
@@ -32,21 +32,21 @@ export default function useGenerateLeftItemsAlert(
             case 'pallets':
               newAlertMessage.push(
                 translate('newDelivery.alertMessages.exceedPallets', {
-                  quantity: currentItems.pallets - step3Items.pallets
+                  quantity: currentItems.pallets - goodTypeStep3.pallets
                 })
               )
               break
             case 'packages':
               newAlertMessage.push(
                 translate('newDelivery.alertMessages.exceedPackages', {
-                  quantity: currentItems.packages - step3Items.packages
+                  quantity: currentItems.packages - goodTypeStep3.packages
                 })
               )
               break
             case 'pieces':
               newAlertMessage.push(
                 translate('newDelivery.alertMessages.exceedPieces', {
-                  quantity: currentItems.pieces - step3Items.pieces
+                  quantity: currentItems.pieces - goodTypeStep3.pieces
                 })
               )
               break
@@ -87,5 +87,5 @@ export default function useGenerateLeftItemsAlert(
         }
       }
     }
-  }, [step4Items])
+  }, [goodsInZones])
 }
