@@ -2,13 +2,12 @@ import Box from '@mui/material/Box'
 import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
 import StepLabel from '@mui/material/StepLabel'
+import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
+import useNewDeliverySteps from '@/hooks/useNewDeliverySteps'
 
-interface HorizontalStepperProps {
-  steps: string[]
-  currentStep: number
-}
-
-export default function HorizontalStepper({ steps, currentStep }: HorizontalStepperProps) {
+export default function HorizontalStepper() {
+  const { currentStep } = useNewDeliveryContext()
+  const steps = useNewDeliverySteps()
   return (
     <Box sx={{ width: '100%', marginBottom: '3em' }}>
       <Stepper activeStep={currentStep - 1} alternativeLabel>

@@ -9,11 +9,13 @@ import {
 } from '@/schemas/newDeliverySchemas'
 import FormDialog from '@/components/shared/FormDialog'
 import NewDeliveryRenderForm from './NewDeliveryRenderForm'
+import useNewDeliverySteps from '@/hooks/useNewDeliverySteps'
 
 export default function NewDeliveryFormDialog() {
   const { t: translate } = useTranslation()
-  const { currentStep, openDialog, onCloseDialog, handleBack, handleSubmit } =
+  const { currentStep, openDialog, onCloseDialog, handleBack, handleSubmit, isCompletedMove } =
     useNewDeliveryContext()
+  const steps = useNewDeliverySteps()
   const schema = useSchema(currentStep)
   return (
     <FormDialog<
@@ -33,6 +35,9 @@ export default function NewDeliveryFormDialog() {
       //This key is not good
       // renderForm={(methods) => <NewDeliveryRenderForm {...methods} key={openDialog} />}
       renderForm={(methods) => <NewDeliveryRenderForm {...methods} />}
+      steps={steps}
+      currentStep={currentStep}
+      isCompletedMove={isCompletedMove}
     />
   )
 }

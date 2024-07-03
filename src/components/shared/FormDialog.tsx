@@ -7,10 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as React from 'react'
 import * as yup from 'yup'
 import HorizontalStepper from '../features/Stepper'
-// import { useIsSmallScreen } from '@/hooks/useIsSmallScreen'
 import { useTranslation } from 'react-i18next'
-import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
-import useNewDeliverySteps from '@/hooks/useNewDeliverySteps'
 
 interface FormDialogProps<T extends FieldValues> {
   open: boolean
@@ -22,6 +19,9 @@ interface FormDialogProps<T extends FieldValues> {
   schema: yup.ObjectSchema<any> | undefined
   onSubmit: SubmitHandler<T>
   renderForm: (methods: UseFormReturn<T>) => React.ReactNode
+  steps?: string[]
+  currentStep?: number
+  isCompletedMove?: boolean
 }
 
 export default function FormDialog<T extends FieldValues>({
@@ -33,21 +33,20 @@ export default function FormDialog<T extends FieldValues>({
   handleBack,
   schema,
   onSubmit,
-  renderForm
+  renderForm,
+  steps,
+  currentStep,
+  isCompletedMove
 }: FormDialogProps<T>) {
   const { t: translate } = useTranslation()
   const { control, handleSubmit, formState, reset } = useForm<T>({
     resolver: schema ? yupResolver(schema) : undefined
   })
-  const steps = useNewDeliverySteps()
-  const { currentStep, isCompletedMove } = useNewDeliveryContext()
 
   const handleClose = () => {
     reset()
     onCloseDialog()
   }
-
-  //За страниците, различни от newDelivery да не се вижда степера
 
   return (
     <Dialog
@@ -59,8 +58,8 @@ export default function FormDialog<T extends FieldValues>({
         {title}
       </DialogTitle>
 
-      <Box sx={{ margin: '2em' }}>
-        {steps && <HorizontalStepper steps={steps} currentStep={currentStep} />}
+      <Box sx={{ margin: '2em', minWidth: '450px' }}>
+        {steps && currentStep && <HorizontalStepper />}
         <Box
           component="form"
           onSubmit={handleSubmit(onSubmit)}
@@ -86,7 +85,7 @@ export default function FormDialog<T extends FieldValues>({
               disabled={
                 currentStep === 4 ? !isCompletedMove : Object.keys(formState.errors).length > 0
               }>
-              {currentStep === steps.length
+              {currentStep === steps?.length
                 ? translate('newDelivery.labels.step5.createNewDelivery')
                 : confirmText}
             </Button>
