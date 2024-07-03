@@ -7,12 +7,17 @@ import Button from '@mui/material/Button'
 import Fade from '@mui/material/Fade'
 import Paper from '@mui/material/Paper'
 import InfoIcon from '@mui/icons-material/Info'
+import { useTranslation } from 'react-i18next'
+import { GoodType } from './forms/newDeliveryForm/NewDeliveryStep3Form'
 
-interface PositionedPopperProps {
-  content: string
+interface goodType {
+  title: string
+  value: string
+  quantity: number
 }
-// Май е по-добре да използвам toolip
-export default function PositionedPopper({ content }: PositionedPopperProps) {
+
+export default function PositionedPopper() {
+  const { t: translate } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null)
   const [open, setOpen] = React.useState(false)
   const [placement, setPlacement] = React.useState<PopperPlacementType>()
@@ -24,28 +29,35 @@ export default function PositionedPopper({ content }: PositionedPopperProps) {
       setPlacement(newPlacement)
     }
 
+  const goodTypes = [
+    { title: translate('newDelivery.goodType.pallets'), value: GoodType.pallets, quantity: 1 },
+    { title: translate('newDelivery.goodType.packages'), value: GoodType.packages, quantity: 2 },
+    { title: translate('newDelivery.goodType.pieces'), value: GoodType.pieces, quantity: 3 }
+  ]
+
   return (
     <Box>
-      <Popper
-        // Note: The following zIndex style is specifically for documentation purposes and may not be necessary in your application.
-        // sx={{ zIndex: 1200 }}
-        open={open}
-        anchorEl={anchorEl}
-        placement={placement}
-        transition>
+      <Popper open={open} anchorEl={anchorEl} placement={placement} transition>
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
-            <Paper>
-              {/* <Typography sx={{ p: 2 }}>{content}</Typography> */}
-              <Box>
-                <Box sx={{ display: 'flex', gap: '2em', padding: '1em' }}>
-                  <Typography>Тип</Typography>
-                  <Typography>Количество</Typography>
+            <Paper sx={{ width: '200px' }}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5em', padding: '1em' }}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <Typography>
+                    <b>{translate('deliveries.poper.type')}</b>
+                  </Typography>
+                  <Typography>
+                    <b>{translate('deliveries.poper.quantity')}</b>
+                  </Typography>
                 </Box>
-                <Box>
-                  {/* <Typography>Палети</Typography>
-                  <Typography>Количество</Typography> */}
-                </Box>
+                {goodTypes.map((goodType: goodType, index: number) => {
+                  return (
+                    <Box key={index} sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <Typography>{goodType.title}</Typography>
+                      <Typography>{goodType.quantity}</Typography>
+                    </Box>
+                  )
+                })}
               </Box>
             </Paper>
           </Fade>

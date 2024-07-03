@@ -181,6 +181,10 @@
     "description": "Управление на доставки",
     "labels": {
       "newDelivery": "нова доставка"
+    },
+    "poper": {
+      "type": "Тип",
+      "quantity": "Количество" 
     }
   },
   "newDelivery": {
@@ -296,7 +300,7 @@
     "completedMoveTitle": "Завършено местене на стока",
     "exceedTitle": "Предупреждение",
     "leftItemsTitle": "Оставащо местене на стока"
-  }
+    }
   },
   "zonesContent": {
     "title": "Зони ",
