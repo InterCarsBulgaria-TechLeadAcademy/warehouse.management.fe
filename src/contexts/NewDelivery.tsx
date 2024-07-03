@@ -37,7 +37,6 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   const [goodsInZones, setGoodsInZones] = useState<MoveGood[]>([
     { goodTypeStep4: '', goodQuantityStep4: 0, zone: '' }
   ])
-  // const [step4Items, setStep4Items] = useState<MoveGood[]>([{ type: '', quantity: 0, zone: '' }])
   const [alertMessage, setAlertMessage] = useState<string[]>([])
   const [isCompletedMove, setIsCompletedMove] = useState(false)
   const [isExceedQuantity, setIsExceedQuantity] = useState(false)

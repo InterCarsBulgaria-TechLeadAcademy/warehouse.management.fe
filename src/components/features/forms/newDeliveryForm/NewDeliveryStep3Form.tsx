@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'
 import { NewDeliveryStep3FormData } from '@/schemas/newDeliverySchemas'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import { useGenerateId } from '@/hooks/useGenerateId.ts'
+import { Good } from '@/hooks/useSetGoodTypeStep3'
 
 export enum GoodType {
   pallets = 'pallets',
@@ -36,7 +37,7 @@ export default function NewDeliveryStep3Form({
     ? formsData.goods.map(() => generateId())
     : [0]
   const selectedGoodTypesInitialValue = formsData.goods
-    ? formsData.goods.map((good: any) => good.goodTypeStep3 || '')
+    ? formsData.goods.map((good: Good) => good.goodTypeStep3 || '')
     : [{ title: '', value: '' }]
 
   const [goodDetailsForms, setGoodDetailsForms] = useState<number[]>(goodDetailsFormsInitialValue)
@@ -84,7 +85,7 @@ export default function NewDeliveryStep3Form({
   useEffect(() => {
     if (formsData.goods) {
       setGoodDetailsForms(formsData.goods.map(() => generateId()))
-      setSelectedGoodTypes(formsData.goods.map((good: any) => good.goodTypeStep3 || ''))
+      setSelectedGoodTypes(formsData.goods.map((good: Good) => good.goodTypeStep3 || ''))
     }
   }, [formsData])
 
