@@ -7,7 +7,7 @@ interface GoodType {
   quantity: number
 }
 
-export default function useDeliveryGoodsInfo(goodTypes: GoodType[]) {
+export default function DeliveryGoodsInfo({ goodTypes }: any) {
   const { t: translate } = useTranslation()
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5em', padding: '1em' }}>

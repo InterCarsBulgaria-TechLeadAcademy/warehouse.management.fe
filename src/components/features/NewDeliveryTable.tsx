@@ -7,12 +7,12 @@ import SearchInput from './SearchInput'
 import ChipsList from './ChipsList'
 import { GoodType } from './forms/newDeliveryForm/NewDeliveryStep3Form'
 import DeliveriesTableActionsMenu from './DeliveriesTableActionsMenu'
-import { Dayjs } from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import useDeliveryGoodsInfo from '@/hooks/useDeliveryGoodsInfo'
 import InfoPopper from './InfoPoper'
+import DeliveryGoodsInfo from './DeliveryGoodsInfo'
 
 let vendorsNames: string[] = ['Bosch', 'Valeo', 'Dunlop', 'Michelin']
 let selectedVendorName = vendorsNames.map((vendorName) => ({ label: vendorName }))
@@ -30,7 +30,9 @@ export default function NewDeliveryTable() {
     { title: translate('newDelivery.goodType.packages'), value: GoodType.packages, quantity: 2 },
     { title: translate('newDelivery.goodType.pieces'), value: GoodType.pieces, quantity: 3 }
   ]
-  const deliveryGoodsInfo = useDeliveryGoodsInfo(goodTypes)
+
+  const randomApprovedOn: string = '2024-07-04T10:06:12.594Z'
+  const randomCreatedOn: string = '2024-07-04T10:06:12.594Z'
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
@@ -71,19 +73,19 @@ export default function NewDeliveryTable() {
       waitingGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>1</Typography>
-          <InfoPopper content={deliveryGoodsInfo} />
+          <InfoPopper content={<DeliveryGoodsInfo goodTypes={goodTypes} />} />
         </Box>
       ),
       completedGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>1</Typography>
-          <InfoPopper content={deliveryGoodsInfo} />
+          <InfoPopper content={<DeliveryGoodsInfo goodTypes={goodTypes} />} />
         </Box>
       ),
       markers: <ChipsList items={markers} />,
       status: <ChipsList items={['Изчакване']} color="default" />,
-      approvedOn: '01.02.2024',
-      createdOn: '01.02.2024',
+      approvedOn: dayjs(randomApprovedOn).format('DD.MM.YYYY'),
+      createdOn: dayjs(randomCreatedOn).format('DD.MM.YYYY'),
       actions: <DeliveriesTableActionsMenu />
     },
     {
@@ -94,19 +96,19 @@ export default function NewDeliveryTable() {
       waitingGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>2</Typography>
-          <InfoPopper content={deliveryGoodsInfo} />
+          <InfoPopper content={<DeliveryGoodsInfo goodTypes={goodTypes} />} />
         </Box>
       ),
       completedGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>1</Typography>
-          <InfoPopper content={deliveryGoodsInfo} />
+          <InfoPopper content={<DeliveryGoodsInfo goodTypes={goodTypes} />} />
         </Box>
       ),
       markers: <ChipsList items={markers} />,
       status: <ChipsList items={['Обработва се']} color="warning" />,
-      approvedOn: '01.02.2024',
-      createdOn: '01.02.2024',
+      approvedOn: dayjs(randomApprovedOn).format('DD.MM.YYYY'),
+      createdOn: dayjs(randomCreatedOn).format('DD.MM.YYYY'),
       actions: <DeliveriesTableActionsMenu />
     },
     {
@@ -117,19 +119,19 @@ export default function NewDeliveryTable() {
       waitingGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>3</Typography>
-          <InfoPopper content={deliveryGoodsInfo} />
+          <InfoPopper content={<DeliveryGoodsInfo goodTypes={goodTypes} />} />
         </Box>
       ),
       completedGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>1</Typography>
-          <InfoPopper content={deliveryGoodsInfo} />
+          <InfoPopper content={<DeliveryGoodsInfo goodTypes={goodTypes} />} />
         </Box>
       ),
       markers: <ChipsList items={markers} />,
       status: <ChipsList items={['Одобрена']} color="success" />,
-      approvedOn: '01.02.2024',
-      createdOn: '01.02.2024',
+      approvedOn: dayjs(randomApprovedOn).format('DD.MM.YYYY'),
+      createdOn: dayjs(randomCreatedOn).format('DD.MM.YYYY'),
       actions: <DeliveriesTableActionsMenu />
     },
     {
@@ -140,19 +142,19 @@ export default function NewDeliveryTable() {
       waitingGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>4</Typography>
-          <InfoPopper content={deliveryGoodsInfo} />
+          <InfoPopper content={<DeliveryGoodsInfo goodTypes={goodTypes} />} />
         </Box>
       ),
       completedGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>1</Typography>
-          <InfoPopper content={deliveryGoodsInfo} />
+          <InfoPopper content={<DeliveryGoodsInfo goodTypes={goodTypes} />} />
         </Box>
       ),
       markers: <ChipsList items={markers} />,
       status: <ChipsList items={['Приключена']} color="info" />,
-      approvedOn: '01.02.2024',
-      createdOn: '01.02.2024',
+      approvedOn: dayjs(randomApprovedOn).format('DD.MM.YYYY'),
+      createdOn: dayjs(randomCreatedOn).format('DD.MM.YYYY'),
       actions: <DeliveriesTableActionsMenu />
     }
   ]
