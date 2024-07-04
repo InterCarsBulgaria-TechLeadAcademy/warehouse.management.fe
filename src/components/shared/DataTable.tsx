@@ -41,7 +41,9 @@ export default function DataTable({ columnsData, rowData, children }: DataTableP
   return (
     <Box>
       <Paper sx={{ width: '100%', overflow: 'hidden', padding: '0.5em' }}>
-        <Box component="div" sx={{ display: 'flex', gap: '2em', padding: '0.5em 0' }}>
+        <Box
+          component="div"
+          sx={{ display: 'flex', gap: '2em', padding: '0.5em 0', alignItems: 'center' }}>
           {children}
         </Box>
 

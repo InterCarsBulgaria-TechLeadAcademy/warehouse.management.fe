@@ -8,6 +8,10 @@ import ChipsList from './ChipsList'
 import PositionedPopper from './Poper'
 import { GoodType } from './forms/newDeliveryForm/NewDeliveryStep3Form'
 import DeliveriesTableActionsMenu from './DeliveriesTableActionsMenu'
+import { Dayjs } from 'dayjs'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 
 let vendorsNames: string[] = ['Bosch', 'Valeo', 'Dunlop', 'Michelin']
 let selectedVendorName = vendorsNames.map((vendorName) => ({ label: vendorName }))
@@ -17,6 +21,8 @@ const markers = ['Масло', 'Гуми', 'Чистачки']
 export default function NewDeliveryTable() {
   const { t: translate } = useTranslation()
   const [searchTerm, setSearchTerm] = React.useState('')
+  const [deliveryStartTime, setDeliveryStartTime] = React.useState<Dayjs | null>(null)
+  const [deliveryEndTime, setDeliveryEndTime] = React.useState<Dayjs | null>(null)
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
@@ -165,7 +171,7 @@ export default function NewDeliveryTable() {
 
       <Autocomplete
         disablePortal
-        id="combo-box-demo"
+        id="markers-filter"
         options={markers}
         size="small"
         sx={{ width: '235px' }}
@@ -176,7 +182,7 @@ export default function NewDeliveryTable() {
 
       <Autocomplete
         disablePortal
-        id="combo-box-demo"
+        id="vendorName-filter"
         options={selectedVendorName}
         size="small"
         sx={{ width: '235px' }}
@@ -184,6 +190,22 @@ export default function NewDeliveryTable() {
           <TextField {...params} label={translate('deliveries.filters.vendorName')} />
         )}
       />
+
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DatePicker
+          label={translate('deliveries.filters.deliveryStart')}
+          value={deliveryStartTime}
+          onChange={(newValue) => setDeliveryStartTime(newValue)}
+        />
+      </LocalizationProvider>
+
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DatePicker
+          label={translate('deliveries.filters.deliveryEnd')}
+          value={deliveryEndTime}
+          onChange={(newValue) => setDeliveryEndTime(newValue)}
+        />
+      </LocalizationProvider>
     </DataTable>
   )
 }

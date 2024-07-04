@@ -214,6 +214,8 @@
       "search": "Търсене",
       "markers": "Маркери",
       "deliveryTime": "Време за доставка",
+      "deliveryStart":"Начало на доставка",
+      "deliveryEnd":"Край на доставка",
       "vendorName":"Име на доставчик"
     }
   },
