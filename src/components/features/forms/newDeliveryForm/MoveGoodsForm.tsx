@@ -45,6 +45,7 @@ export default function MoveGoodsForm({
 
   useEffect(() => {
     // When click to clear goodType and clear all inputs
+    //TODO: don't work properly
     if (goodTypeValue === null && goodQuantityValue === '' && zoneValue === null) {
       deleteStep4Item(index)
     }
