@@ -5,13 +5,14 @@ import { Column } from '@/interfaces/dataTable'
 import { Autocomplete, Box, TextField, Typography } from '@mui/material'
 import SearchInput from './SearchInput'
 import ChipsList from './ChipsList'
-import PositionedPopper from './Poper'
 import { GoodType } from './forms/newDeliveryForm/NewDeliveryStep3Form'
 import DeliveriesTableActionsMenu from './DeliveriesTableActionsMenu'
 import { Dayjs } from 'dayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import useDeliveryGoodsInfo from '@/hooks/useDeliveryGoodsInfo'
+import InfoPopper from './InfoPoper'
 
 let vendorsNames: string[] = ['Bosch', 'Valeo', 'Dunlop', 'Michelin']
 let selectedVendorName = vendorsNames.map((vendorName) => ({ label: vendorName }))
@@ -23,6 +24,13 @@ export default function NewDeliveryTable() {
   const [searchTerm, setSearchTerm] = React.useState('')
   const [deliveryStartTime, setDeliveryStartTime] = React.useState<Dayjs | null>(null)
   const [deliveryEndTime, setDeliveryEndTime] = React.useState<Dayjs | null>(null)
+
+  const goodTypes = [
+    { title: translate('newDelivery.goodType.pallets'), value: GoodType.pallets, quantity: 1 },
+    { title: translate('newDelivery.goodType.packages'), value: GoodType.packages, quantity: 2 },
+    { title: translate('newDelivery.goodType.pieces'), value: GoodType.pieces, quantity: 3 }
+  ]
+  const deliveryGoodsInfo = useDeliveryGoodsInfo(goodTypes)
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
@@ -54,12 +62,6 @@ export default function NewDeliveryTable() {
     { key: 'actions', title: translate('vendors.table.actions'), minWidth: 50, align: 'right' }
   ]
 
-  const goodTypes = [
-    { title: translate('newDelivery.goodType.pallets'), value: GoodType.pallets, quantity: 1 },
-    { title: translate('newDelivery.goodType.packages'), value: GoodType.packages, quantity: 2 },
-    { title: translate('newDelivery.goodType.pieces'), value: GoodType.pieces, quantity: 3 }
-  ]
-
   const rowData = [
     {
       number: 1,
@@ -69,13 +71,13 @@ export default function NewDeliveryTable() {
       waitingGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>1</Typography>
-          <PositionedPopper goodTypes={goodTypes} />
+          <InfoPopper content={deliveryGoodsInfo} />
         </Box>
       ),
       completedGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>1</Typography>
-          <PositionedPopper goodTypes={goodTypes} />
+          <InfoPopper content={deliveryGoodsInfo} />
         </Box>
       ),
       markers: <ChipsList items={markers} />,
@@ -92,13 +94,13 @@ export default function NewDeliveryTable() {
       waitingGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>2</Typography>
-          <PositionedPopper goodTypes={goodTypes} />
+          <InfoPopper content={deliveryGoodsInfo} />
         </Box>
       ),
       completedGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>1</Typography>
-          <PositionedPopper goodTypes={goodTypes} />
+          <InfoPopper content={deliveryGoodsInfo} />
         </Box>
       ),
       markers: <ChipsList items={markers} />,
@@ -115,13 +117,13 @@ export default function NewDeliveryTable() {
       waitingGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>3</Typography>
-          <PositionedPopper goodTypes={goodTypes} />
+          <InfoPopper content={deliveryGoodsInfo} />
         </Box>
       ),
       completedGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>1</Typography>
-          <PositionedPopper goodTypes={goodTypes} />
+          <InfoPopper content={deliveryGoodsInfo} />
         </Box>
       ),
       markers: <ChipsList items={markers} />,
@@ -138,13 +140,13 @@ export default function NewDeliveryTable() {
       waitingGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>4</Typography>
-          <PositionedPopper goodTypes={goodTypes} />
+          <InfoPopper content={deliveryGoodsInfo} />
         </Box>
       ),
       completedGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>1</Typography>
-          <PositionedPopper goodTypes={goodTypes} />
+          <InfoPopper content={deliveryGoodsInfo} />
         </Box>
       ),
       markers: <ChipsList items={markers} />,

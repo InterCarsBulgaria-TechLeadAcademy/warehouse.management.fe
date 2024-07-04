@@ -64,6 +64,7 @@ export default function DeliveriesTableActionsMenu() {
         ))}
       </Menu>
 
+      {/* TODO: Only admin action */}
       {selectedOption === translate('actionsMenu.options.delete') && (
         <WarningActionDialog
           open={open}
