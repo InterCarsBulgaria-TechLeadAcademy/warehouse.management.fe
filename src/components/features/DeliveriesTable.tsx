@@ -14,7 +14,6 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import InfoPopper from './InfoPoper'
 import DeliveryGoodsInfo from './DeliveryGoodsInfo'
 import dateHelpers from '@/utils/dateHelpers'
-import AlertsSnackbar from './AlertsSnackbar'
 
 let vendorsNames: string[] = ['Bosch', 'Valeo', 'Dunlop', 'Michelin']
 let selectedVendorName = vendorsNames.map((vendorName) => ({ label: vendorName }))
@@ -182,8 +181,6 @@ export default function DeliveriesTable() {
 
   return (
     <DataTable columnsData={columnsData} rowData={filteredRows}>
-      <AlertsSnackbar/>
-
       <SearchInput
         value={searchTerm}
         onChange={handleSearchChange}
