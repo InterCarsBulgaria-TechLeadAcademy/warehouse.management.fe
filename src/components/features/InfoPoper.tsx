@@ -8,10 +8,10 @@ import Paper from '@mui/material/Paper'
 import InfoIcon from '@mui/icons-material/Info'
 
 interface InfoPopperProps {
-  content: JSX.Element
+  children: React.ReactNode
 }
 
-export default function InfoPopper({ content }: InfoPopperProps) {
+export default function InfoPopper({ children }: InfoPopperProps) {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null)
   const [open, setOpen] = React.useState(false)
   const [placement, setPlacement] = React.useState<PopperPlacementType>()
@@ -28,7 +28,7 @@ export default function InfoPopper({ content }: InfoPopperProps) {
       <Popper open={open} anchorEl={anchorEl} placement={placement} transition>
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
-            <Paper sx={{ width: '200px' }}>{content}</Paper>
+            <Paper sx={{ width: '200px' }}>{children}</Paper>
           </Fade>
         )}
       </Popper>
