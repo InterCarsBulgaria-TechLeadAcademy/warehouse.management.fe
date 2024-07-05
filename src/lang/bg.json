@@ -309,7 +309,7 @@
       "entryNumber": "Запис №",
       "vendorName": "Доставчик",
       "receptionNumbers": "Рецепция №",
-      "numberOfGoods": "Стока №",
+      "numberOfGoods": "Количество",
       "status": "Статус",
       "actions": "Действия"
     }
