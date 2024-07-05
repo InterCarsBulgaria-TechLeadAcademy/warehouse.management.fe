@@ -1,9 +1,9 @@
-import { SnackbarOrigin } from '@mui/material'
+export interface ShowSnackBarProps {
+  message: string
+  type: 'success' | 'error' | 'warning' | 'info'
+  timeOut?: number
+}
 
 export interface SnackbarContextValue {
-  showSnackbar: (
-    message: string,
-    type: 'success' | 'error' | 'warning' | 'info',
-    position?: SnackbarOrigin
-  ) => void
+  showSnackbar: (data: ShowSnackBarProps) => void
 }

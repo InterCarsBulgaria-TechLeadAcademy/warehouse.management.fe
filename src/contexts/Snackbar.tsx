@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useState } from 'react'
-import { Alert, Snackbar, SnackbarOrigin } from '@mui/material'
-import { SnackbarContextValue } from '@/interfaces/snackbarContextValue'
+import { Alert, Snackbar } from '@mui/material'
+import { ShowSnackBarProps, SnackbarContextValue } from '@/interfaces/snackbarContextValue'
 
 export const SnackbarContext = createContext<SnackbarContextValue | undefined>(undefined)
 
@@ -8,16 +8,17 @@ export default function SnackbarProvider({ children }: { children: ReactNode }) 
   const [snackbar, setSnackbar] = useState<{
     message: string
     type: 'success' | 'error' | 'warning' | 'info'
+    timeOut: number
     open: boolean
-    position?: SnackbarOrigin
-  }>({ message: '', type: 'info', open: false })
+  }>({ message: '', type: 'info', timeOut: 0, open: false })
 
-  function showSnackbar(
-    message: string,
-    type: 'success' | 'error' | 'warning' | 'info',
-    position?: SnackbarOrigin
-  ) {
-    setSnackbar({ message, type, open: true, position })
+  function showSnackbar(data: ShowSnackBarProps) {
+    setSnackbar({
+      message: data.message,
+      type: data.type,
+      timeOut: data?.timeOut || 5000,
+      open: true
+    })
   }
 
   const handleClose = () => {
@@ -33,9 +34,9 @@ export default function SnackbarProvider({ children }: { children: ReactNode }) 
       {children}
       <Snackbar
         open={snackbar.open}
-        autoHideDuration={6000}
+        autoHideDuration={snackbar.timeOut}
         onClose={handleClose}
-        anchorOrigin={snackbar.position || { vertical: 'top', horizontal: 'right' }}>
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
         <Alert
           onClose={handleClose}
           severity={snackbar.type}
