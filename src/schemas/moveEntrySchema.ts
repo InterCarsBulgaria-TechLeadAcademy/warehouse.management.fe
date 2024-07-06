@@ -3,10 +3,10 @@ import * as yup from 'yup'
 const createMoveEntrySchema = (maxQuantity: number) => yup.object({
   quantity: yup
     .number()
-    .required('zones.errors.quantity.message')
-    .min(1, 'zones.errors.quantity.max')
-    .max(maxQuantity, 'zones.errors.quantity.max'),
-  zone: yup.string().required('zones.errors.zone.message'),
+    .required('zonesContent.moveEntryForm.errors.quantity.message')
+    .min(1, 'zonesContent.moveEntryForm.errors.quantity.min')
+    .max(maxQuantity, 'zonesContent.moveEntryForm.errors.quantity.max'),
+  zone: yup.string().required('zonesContent.moveEntryForm.errors.zone.message'),
 })
 
 export { createMoveEntrySchema }
