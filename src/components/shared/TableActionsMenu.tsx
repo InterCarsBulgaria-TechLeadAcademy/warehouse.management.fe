@@ -64,7 +64,7 @@ export default function TableActionsMenu({ specificOptionHandler, itemProps, pag
         onClose={handleClose}>
         {options.map((option) => (
           <MenuItem key={option} onClick={() => actionHandler(option)}>
-            {translate(`actionsMenu.options.${option}`)}
+            {translate(`${page}.actionsMenu.${option}`)}
           </MenuItem>
         ))}
       </Menu>
