@@ -6,7 +6,7 @@ import TableActionsMenu from '@/components/shared/TableActionsMenu'
 import SearchInput from '../SearchInput'
 import { Column } from '@/interfaces/column.ts'
 import BaseFormDialog from '@/components/shared/BaseFormDialog'
-import { useMoveEntryDialog, ZonesTableActions } from '@/hooks/dialogs/useMoveEntryDialog'
+import { useMoveEntryDialog, ZonesTableActions } from '@/hooks/dialogs/zonesContent/useMoveEntryDialog'
 import MoveEntryForm from '../forms/ZonesContentForms/MoveEntryForm'
 
 interface Row {
