@@ -53,6 +53,10 @@ export default function FormDialog<T extends FieldValues>({
       reset();
       onCloseDialog();
     }
+    if(!currentStep) {
+      reset();
+      onCloseDialog();
+    }
   };
 
   const handleClose = () => {
