@@ -22,5 +22,8 @@ export const useMoveEntryDialog = () => {
 };
 
 export enum ZonesTableActions {
-    MoveToNewZone = 'MoveToNewZone'
+    MoveToNewZone = 'MoveToNewZone',
+    StartProcessing = 'StartProcessing',
+    FinishProcessing = 'FinishProcessing',
+    DeliveryDetails = 'DeliveryDetails'
 }
