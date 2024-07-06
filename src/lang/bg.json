@@ -312,6 +312,12 @@
       "numberOfGoods": "Количество",
       "status": "Статус",
       "actions": "Действия"
+    },
+    "actionsMenu":{
+      "MoveToNewZone": "Премести в нова зона",
+      "StartProcessing": "Започни обработка",
+      "FinishProcessing": "Завърши обработка",
+      "DeliveryDetails": "Детайли"
     }
   }
 }
