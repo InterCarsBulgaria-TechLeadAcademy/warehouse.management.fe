@@ -15,7 +15,7 @@ import { Controller, useForm, SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useTranslation } from 'react-i18next'
 import { MoveEntryFormData, createMoveEntrySchema } from '@/schemas/moveEntrySchema'
-import { useMoveEntryDialog } from '@/hooks/dialogs/useMoveEntryDialog'
+import { useMoveEntryDialog } from '@/hooks/dialogs/zonesContent/useMoveEntryDialog'
 
 interface FormMoveEntryProps {
   quantity: number
