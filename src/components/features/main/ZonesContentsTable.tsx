@@ -113,7 +113,7 @@ export default function ZonesContentsTable() {
       <BaseFormDialog
         open={openMoveEntryDialog}
         onCloseDialog={onCloseMoveEntryDialog}
-        title={translate('zones.moveEntry.title')}
+        title={translate('zonesContent.labels.moveEntry')}
         renderForm={(handleCloseForm) => (
           <MoveEntryForm handleCloseForm={handleCloseForm} quantity={quantity} />
         )}
