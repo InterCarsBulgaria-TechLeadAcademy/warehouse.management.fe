@@ -43,9 +43,12 @@ export default function FormDialog<T extends FieldValues>({
     resolver: schema ? yupResolver(schema) : undefined
   })
 
+  // Адаш попромених кодът надолу според нуждите на други форми тествах с стъпковата и работи.
+  // Все пак не забравяй ако има проблем да го погледнеш. Затова пиша този коментар :)
+
   const handleFormSubmit: SubmitHandler<T> = (data) => {
     onSubmit(data);
-    
+
     if(currentStep && currentStep === steps?.length) {
       reset();
       onCloseDialog();
