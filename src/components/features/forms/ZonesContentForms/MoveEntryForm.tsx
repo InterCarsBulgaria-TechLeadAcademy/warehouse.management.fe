@@ -55,7 +55,7 @@ export default function MoveEntryForm({ quantity, handleCloseForm }: FormMoveEnt
           render={({ field }) => (
             <TextField
               {...field}
-              label={translate('zones.moveEntry.quantity')}
+              label={translate('zonesContent.moveEntryForm.quantity')}
               id="quantity"
               type="number"
               value={currentQuantity}
@@ -83,13 +83,13 @@ export default function MoveEntryForm({ quantity, handleCloseForm }: FormMoveEnt
           render={({ field }) => (
             <FormControl fullWidth error={!!errors.zone}>
               <InputLabel id="move-entry-select-label">
-                {translate('zones.moveEntry.zone')}
+                {translate('zonesContent.moveEntryForm.zone')}
               </InputLabel>
               <Select
                 {...field}
                 labelId="move-entry-select-label"
                 id="move-entry-select"
-                label={translate('zones.moveEntry.zone')}
+                label={translate('zonesContent.moveEntryForm.zone')}
                 value={field.value || ''}
                 onChange={(e) => field.onChange(e.target.value)}>
                 {zones.map((zone) => (
@@ -107,7 +107,7 @@ export default function MoveEntryForm({ quantity, handleCloseForm }: FormMoveEnt
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'right', gap: '1em' }}>
         <Button type="submit" variant="contained" sx={{ mt: 5 }}>
-          {translate('zones.moveEntry.confirm')}
+          {translate('zonesContent.moveEntryForm.confirm')}
         </Button>
       </Box>
     </Box>
