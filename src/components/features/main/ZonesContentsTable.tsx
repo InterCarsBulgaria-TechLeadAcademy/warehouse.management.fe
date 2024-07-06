@@ -73,11 +73,11 @@ export default function ZonesContentsTable() {
           }
           itemProps={[
             ZonesTableActions.MoveToNewZone,
-            'StartProcessing',
-            'FinishProcessing',
-            'DeliveryDetails'
+            ZonesTableActions.StartProcessing,
+            ZonesTableActions.FinishProcessing,
+            ZonesTableActions.DeliveryDetails
           ]}
-          page="zones"
+          page="zonesContent"
         />
       )
     }
