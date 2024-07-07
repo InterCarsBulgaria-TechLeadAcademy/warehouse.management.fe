@@ -87,7 +87,12 @@ export default function MoveGoodsForm({
             id={`moveGoodsForm.controllable-states-demo-goodType${index}`}
             options={goodTypes.map((goodType) => goodType.title)}
             value={goodTypes.find((goodType) => goodType.value === field.value)?.title || null}
-            onChange={(_event: any, newValue: string | null) => {
+            onChange={(_event: any, newValue: string | null, reason) => {
+              if (reason === 'clear') {
+                onDeleteHandler()
+                return
+              }
+
               newValue = newValue
                 ? goodTypes.find((goodType) => goodType.title === newValue)?.value || null
                 : null
