@@ -1,7 +1,7 @@
 import DataTable from '@/components/shared/DataTable'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Column } from '@/interfaces/dataTable'
+import { Column } from '@/interfaces/DataTable'
 import { Autocomplete, Box, TextField, Typography } from '@mui/material'
 import SearchInput from './SearchInput'
 import ChipsList from './ChipsList'

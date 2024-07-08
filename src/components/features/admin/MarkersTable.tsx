@@ -2,7 +2,7 @@ import React from 'react'
 
 import DataTable from '@/components/shared/DataTable'
 import { useTranslation } from 'react-i18next'
-import { Column } from '@/interfaces/dataTable'
+import { Column } from '@/interfaces/DataTable'
 import TableActionsMenu from '@/components/shared/TableActionsMenu'
 import SearchInput from '../SearchInput'
 

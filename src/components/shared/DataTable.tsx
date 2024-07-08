@@ -9,7 +9,7 @@ import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
 import { Box, FormControlLabel, Switch } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { Column } from '@/interfaces/dataTable'
+import { Column } from '@/interfaces/DataTable'
 
 interface DataTableProps {
   columnsData: Column[]

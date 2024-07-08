@@ -1,4 +1,4 @@
-import { Step3Items } from '@/interfaces/step3Items'
+import { Step3Items } from '@/interfaces/Step3Items'
 
 export default function calculateLeftItems(step3Items: Step3Items, currentItems: Step3Items) {
   const leftItems: Step3Items = {

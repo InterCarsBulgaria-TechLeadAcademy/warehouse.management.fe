@@ -1,5 +1,5 @@
-import { MoveGood } from '@/interfaces/moveGood'
-import { Step3Items } from '@/interfaces/step3Items'
+import { MoveGood } from '@/interfaces/MoveGood'
+import { Step3Items } from '@/interfaces/Step3Items'
 
 export default function calculateCurrentItems(step4Items: MoveGood[]): Step3Items {
   const currentItems: Step3Items = { pallets: 0, packages: 0, pieces: 0 }

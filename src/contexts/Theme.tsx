@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { ThemeProvider } from '@mui/material/styles'
 import { dark, light } from '@/plugins/muiTheme'
-import { ColorModeContextValue } from '@/interfaces/colorModeContextValue'
+import { ColorModeContextValue } from '@/interfaces/ColorModeContextValue'
 
 interface Children {
   children: React.ReactNode

@@ -2,7 +2,7 @@ import VendorTableActionsMenu from '@/components/features/VendorTableActionsMenu
 import DataTable from '@/components/shared/DataTable'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Column } from '@/interfaces/dataTable'
+import { Column } from '@/interfaces/DataTable'
 import SearchInput from '../SearchInput'
 import { Autocomplete, TextField } from '@mui/material'
 

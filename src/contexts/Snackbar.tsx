@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useState } from 'react'
 import { Alert, Snackbar } from '@mui/material'
-import { ShowSnackBarProps, SnackbarContextValue } from '@/interfaces/snackbarContextValue'
+import { ShowSnackBarProps, SnackbarContextValue } from '@/interfaces/SnackbarContextValue'
 
 export const SnackbarContext = createContext<SnackbarContextValue | undefined>(undefined)
 

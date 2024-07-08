@@ -1,5 +1,5 @@
-import { MoveGood } from '@/interfaces/moveGood'
-import { Step3Items } from '@/interfaces/step3Items'
+import { MoveGood } from '@/interfaces/MoveGood'
+import { Step3Items } from '@/interfaces/Step3Items'
 import calculateCurrentItems from '@/utils/calculateCurrentItems'
 import calculateLeftItems from '@/utils/calculateLeftItems'
 import { Dispatch, SetStateAction, useEffect } from 'react'

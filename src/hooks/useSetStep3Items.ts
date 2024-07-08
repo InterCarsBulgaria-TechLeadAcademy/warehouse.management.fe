@@ -1,4 +1,4 @@
-import { Step3Items } from '@/interfaces/step3Items'
+import { Step3Items } from '@/interfaces/Step3Items'
 import { useEffect } from 'react'
 
 export interface Good {

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { SnackbarContext } from '@/contexts/Snackbar'
-import { SnackbarContextValue } from '@/interfaces/snackbarContextValue'
+import { SnackbarContextValue } from '@/interfaces/SnackbarContextValue'
 
 export const useSnackbar = (): SnackbarContextValue => {
   const context = React.useContext(SnackbarContext)

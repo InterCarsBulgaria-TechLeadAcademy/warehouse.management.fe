@@ -1,10 +1,10 @@
 import { createContext, ReactNode, useState } from 'react'
 import { SubmitHandler } from 'react-hook-form'
 import useNewDeliverySteps from '@/hooks/useNewDeliverySteps'
-import { NewDeliveryContextValues } from '@/interfaces/newDeliveryContextValues'
+import { NewDeliveryContextValues } from '@/interfaces/NewDeliveryContextValues'
 import useSetStep3Items from '@/hooks/useSetStep3Items'
 import useGenerateLeftItemsAlert from '@/hooks/useGenerateLeftItemsAlert'
-import { MoveGood } from '@/interfaces/moveGood'
+import { MoveGood } from '@/interfaces/MoveGood'
 
 interface NewDeliveryProviderProps {
   children: ReactNode

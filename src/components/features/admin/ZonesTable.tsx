@@ -5,7 +5,7 @@ import ZonesTableActionsMenu from '../ZonesTableActionsMenu'
 import ChipsList from '../ChipsList'
 import SearchInput from '../SearchInput'
 import { Autocomplete, TextField } from '@mui/material'
-import { Column } from '@/interfaces/dataTable'
+import { Column } from '@/interfaces/DataTable'
 
 export default function ZonesTable() {
   const { t: translate } = useTranslation()
