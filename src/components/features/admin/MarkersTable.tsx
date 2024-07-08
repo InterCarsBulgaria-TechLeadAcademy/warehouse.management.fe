@@ -9,6 +9,7 @@ import { MarkerDto } from '@/services/model'
 import MarkersTableActionsMenu from '../actionsMenu/MarkersTableActionsMenu'
 
 interface Row {
+  id: number
   name: string
   actions: React.ReactNode
 }
@@ -36,9 +37,10 @@ export default function MarkersTable() {
   let rowData: Row[] = []
 
   if (data) {
-    rowData = data.map((marker: MarkerDto, index: number) => ({
+    rowData = data.map((marker: MarkerDto) => ({
+      id: marker.id,
       name: marker.name ?? '', //if marker.name is null/undefined, set ''
-      actions: <MarkersTableActionsMenu key={index} />
+      actions: <MarkersTableActionsMenu key={marker.id} />
     }))
   }
 

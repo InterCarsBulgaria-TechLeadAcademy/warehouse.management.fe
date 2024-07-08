@@ -64,9 +64,9 @@ export default function DataTable<T>({ columnsData, rowData, children }: DataTab
             <TableBody>
               {rowData
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row: any, index: number) => {
+                .map((row: any) => {
                   return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                    <TableRow key={row.id} hover role="checkbox" tabIndex={-1}>
                       {columns.map((column) => {
                         const value = row[column.key]
                         return (
