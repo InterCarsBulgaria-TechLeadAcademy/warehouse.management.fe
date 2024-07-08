@@ -9,21 +9,21 @@ import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
 import { Box, FormControlLabel, Switch } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { Column } from '@/interfaces/DataTable'
+import { Column } from '@/interfaces/column.ts'
 
-interface DataTableProps {
-  columnsData: Column[]
-  rowData: any
+interface DataTableProps<T> {
+  columnsData: Column<T>[]
+  rowData: T[]
   children: React.ReactNode
 }
 
-export default function DataTable({ columnsData, rowData, children }: DataTableProps) {
+export default function DataTable<T>({ columnsData, rowData, children }: DataTableProps<T>) {
   const { t: translate } = useTranslation()
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const [dense, setDense] = React.useState(false)
 
-  const columns: readonly Column[] = columnsData
+  const columns: readonly Column<Record<any, any>>[] = columnsData
 
   const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage)
@@ -51,9 +51,9 @@ export default function DataTable({ columnsData, rowData, children }: DataTableP
           <Table stickyHeader aria-label="sticky table" size={dense ? 'small' : 'medium'}>
             <TableHead>
               <TableRow>
-                {columns.map((column) => (
+                {columnsData.map((column: Column<T>) => (
                   <TableCell
-                    key={column.key}
+                    key={column.key.toString()}
                     align={column.align}
                     sx={{ minWidth: column.minWidth }}>
                     {column.title}

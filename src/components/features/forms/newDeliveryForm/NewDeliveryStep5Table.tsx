@@ -8,6 +8,8 @@ import Paper from '@mui/material/Paper'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import { useTranslation } from 'react-i18next'
 
+import { MoveGood } from '@/interfaces/NewDelivery.ts'
+
 export default function NewDeliveryStep5Table() {
   const { t: translate } = useTranslation()
   const { formsData } = useNewDeliveryContext()
@@ -23,7 +25,7 @@ export default function NewDeliveryStep5Table() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {formsData.goodsInZones.map((good: any, index: number) => (
+          {formsData.goodsInZones.map((good: MoveGood, index: number) => (
             <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">
                 {translate(`newDelivery.goodType.${good.goodTypeStep4}`)}

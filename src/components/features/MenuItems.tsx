@@ -79,23 +79,7 @@ export default function MenuItems() {
     }
   ]
 
-  // Return for admin paths
-  // return adminMenuItems.map((adminMenuItem, index) => (
-  //   <MenuListItem
-  //     key={index}
-  //     title={adminMenuItem.title}
-  //     Icon={adminMenuItem.icon}
-  //     link={adminMenuItem.link}
-  //   />
-  // ))
-
-  // Return main paths
-  return mainMenuItems.map((mainMenuItem, index) => (
-    <MenuListItem
-      key={index}
-      title={mainMenuItem.title}
-      Icon={mainMenuItem.icon}
-      link={mainMenuItem.link}
-    />
+  return [...adminMenuItems, ...mainMenuItems].map((menuItem, index) => (
+    <MenuListItem key={index} title={menuItem.title} Icon={menuItem.icon} link={menuItem.link} />
   ))
 }

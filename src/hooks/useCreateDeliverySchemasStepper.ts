@@ -7,7 +7,9 @@ import {
 
 import { ObjectSchema } from 'yup'
 
-export default function useSchema(currentStep: number): ObjectSchema<any> | undefined {
+export default function useCreateDeliverySchemasStepper(
+  currentStep: number
+): ObjectSchema<any> | undefined {
   switch (currentStep) {
     case 1:
       return newDeliveryStep1Schema

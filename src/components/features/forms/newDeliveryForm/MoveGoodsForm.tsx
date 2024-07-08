@@ -28,7 +28,7 @@ export default function MoveGoodsForm({
   formsCount
 }: GoodDetailsFormProps) {
   const { t: translate } = useTranslation()
-  const { formsData, updateStep4Item, deleteStep4Item } = useNewDeliveryContext()
+  const { formsData, updateGoodsInZones, deleteGoodsInZones } = useNewDeliveryContext()
 
   const [goodTypeValue, setGoodTypeValue] = useState<string | null>(
     formsData?.goodsInZones ? formsData.goodsInZones[index]?.goodTypeStep4 : null
@@ -47,16 +47,16 @@ export default function MoveGoodsForm({
     // When click to clear goodType and clear all inputs
     //TODO: don't work properly
     if (goodTypeValue === null && goodQuantityValue === '' && zoneValue === null) {
-      deleteStep4Item(index)
+      deleteGoodsInZones(index)
     }
 
     if (
       (goodTypeValue !== null && goodQuantityValue !== '' && zoneValue !== null) ||
       (goodTypeValue !== null && goodQuantityValue === '' && zoneValue !== null)
     ) {
-      updateStep4Item(index, {
-        type: goodTypeValue,
-        quantity: goodQuantityValue === '' ? 0 : Number(goodQuantityValue),
+      updateGoodsInZones(index, {
+        goodTypeStep4: goodTypeValue,
+        goodQuantityStep4: goodQuantityValue === '' ? 0 : Number(goodQuantityValue),
         zone: zoneValue
       })
     }
@@ -88,7 +88,12 @@ export default function MoveGoodsForm({
             id={`moveGoodsForm.controllable-states-demo-goodType${index}`}
             options={goodTypes.map((goodType) => goodType.title)}
             value={goodTypes.find((goodType) => goodType.value === field.value)?.title || null}
-            onChange={(_event: any, newValue: string | null) => {
+            onChange={(_event: any, newValue: string | null, reason) => {
+              if (reason === 'clear') {
+                onDeleteHandler()
+                return
+              }
+
               newValue = newValue
                 ? goodTypes.find((goodType) => goodType.title === newValue)?.value || null
                 : null

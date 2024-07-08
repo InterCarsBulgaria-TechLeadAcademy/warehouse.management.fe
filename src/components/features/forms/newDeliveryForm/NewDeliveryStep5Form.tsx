@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import ChipsList from '../../ChipsList'
 import dayjs from 'dayjs'
 import NewDeliveryStep5Table from './NewDeliveryStep5Table'
+import { Good } from '@/hooks/useSetGoodsType.ts'
 
 export default function NewDeliveryStep5Form() {
   const { t: translate } = useTranslation()
@@ -70,7 +71,7 @@ export default function NewDeliveryStep5Form() {
         </Box>
 
         <Box sx={{ display: 'flex', gap: '2em' }}>
-          {formsData.goods.map((good: any, index: number) => {
+          {formsData.goods.map((good: Good, index: number) => {
             return (
               <Box key={index}>
                 <Typography>{translate(`newDelivery.goodType.${good.goodTypeStep3}`)}</Typography>
@@ -89,28 +90,6 @@ export default function NewDeliveryStep5Form() {
 
         <Box>
           <NewDeliveryStep5Table />
-        </Box>
-      </Box>
-
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: '1em' }}>
-          <ChipsList items={['5']} />
-          <Typography variant="h6">
-            {translate('newDelivery.labels.step5.deliveryActions')}
-          </Typography>
-        </Box>
-
-        <Box sx={{ display: 'flex', gap: '2em' }}>
-          {formsData.goods.map((good: any, index: number) => {
-            return (
-              <Box>
-                <Typography key={index}>
-                  {translate(`newDelivery.goodType.${good.goodTypeStep3}`)}
-                </Typography>
-                <Typography>{good.goodQuantityStep3}</Typography>
-              </Box>
-            )
-          })}
         </Box>
       </Box>
     </Box>
