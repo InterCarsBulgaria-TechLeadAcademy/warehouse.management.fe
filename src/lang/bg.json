@@ -64,7 +64,7 @@
         "discard": "Откажи",
         "confirm": "Потвърди"
       }
-    }
+      }
   },
   "newMarker": {
     "title": "Създаване на нов маркер",
@@ -141,7 +141,9 @@
     "options": {
       "edit": "Редактирай",
       "delete": "Изтрий",
-      "update": "Актуализирай"
+      "update": "Актуализирай",
+      "details": "Детайли",
+      "approve": "Одобри"
     }
   },
   "zones": {
@@ -181,6 +183,40 @@
     "description": "Управление на доставки",
     "labels": {
       "newDelivery": "нова доставка"
+    },
+    "poper": {
+      "type": "Тип",
+      "quantity": "Количество" 
+    }, 
+    "newDeliveryTable": {
+      "columnsData": {
+        "number": "Номер",
+        "vendorName": "Доставчик",
+        "deliveryNumber": "Номер(а) на доставка",
+        "receptionNumber": "Номер(а) на рецепция",
+        "waitingGoods": "Стока чакаща обработка",
+        "completedGoods": "Стока завършила обработка",
+        "markers": "Маркери",
+        "status": "Статус",
+        "approvedOn": "Одобрена на",
+        "createdOn": "Създадена на"
+      }
+    },
+    "deleteActions": {
+        "title": "Изтриване на доставка",
+        "message": "Сигурни ли сте, че искате да изтриете тази доставка?",
+        "labels": {
+        "discard": "Откажи",
+        "confirm": "Потвърди"
+        }
+    }, 
+    "filters": {
+      "search": "Търсене",
+      "markers": "Маркери",
+      "deliveryTime": "Време за доставка",
+      "deliveryStart":"Начало на доставка",
+      "deliveryEnd":"Край на доставка",
+      "vendorName":"Име на доставчик"
     }
   },
   "newDelivery": {
@@ -295,7 +331,7 @@
     "completedMoveTitle": "Завършено местене на стока",
     "exceedTitle": "Предупреждение",
     "leftItemsTitle": "Оставащо местене на стока"
-  }
+    }
   },
   "zonesContent": {
     "title": "Зони ",

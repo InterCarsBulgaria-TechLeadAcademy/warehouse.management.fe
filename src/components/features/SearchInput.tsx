@@ -1,4 +1,3 @@
-import { SearchInputProps } from '@/interfaces/searchInput'
 import { Search, SearchIconWrapper, StyledInputBase } from '@/utils/searchInputStyles'
 import SearchIcon from '@mui/icons-material/Search'
 
