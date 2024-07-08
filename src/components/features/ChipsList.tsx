@@ -29,21 +29,19 @@ export default function ChipsList({ items, color }: MarkersProps) {
       ))}
 
       {items.length > 2 && !isSmallScreen && (
-        <>
-          <Tooltip
-            title={
-              <Box>
-                {items.slice(2).map((item, index) => (
-                  <Typography key={index} variant="body1">
-                    {item}
-                  </Typography>
-                ))}
-              </Box>
-            }
-            arrow>
-            <Chip label={chipLabel} color="primary" />
-          </Tooltip>
-        </>
+        <Tooltip
+          title={
+            <Box>
+              {items.slice(2).map((item, index) => (
+                <Typography key={index} variant="body1">
+                  {item}
+                </Typography>
+              ))}
+            </Box>
+          }
+          arrow>
+          <Chip label={chipLabel} color="primary" />
+        </Tooltip>
       )}
 
       {items.length > 2 && isSmallScreen && (
