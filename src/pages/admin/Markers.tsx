@@ -10,7 +10,6 @@ import NewMarkerForm from '@/components/features/forms/NewMarkerForm'
 export default function Markers() {
   const { t: translate } = useTranslation()
   const [openDialog, setOpenDialog] = useState(false)
-  const [isFinal, setIsFinal] = useState(false)
 
   const handleClickOpen = () => {
     setOpenDialog(true)
@@ -21,11 +20,7 @@ export default function Markers() {
   }
 
   const handleSubmit: SubmitHandler<NewMarkerFormData> = (data) => {
-    const formData = {
-      ...data,
-      isFinal
-    }
-    console.log(formData)
+    console.log(data)
     onCloseDialog()
   }
 
@@ -47,9 +42,7 @@ export default function Markers() {
         onCloseDialog={onCloseDialog}
         schema={newMarkerSchema}
         onSubmit={handleSubmit}
-        renderForm={(methods) => (
-          <NewMarkerForm {...methods} isFinal={isFinal} setIsFinal={setIsFinal} />
-        )}
+        renderForm={(methods) => <NewMarkerForm {...methods} />}
       />
     </>
   )

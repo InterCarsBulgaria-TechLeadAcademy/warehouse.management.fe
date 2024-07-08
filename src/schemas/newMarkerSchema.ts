@@ -4,8 +4,7 @@ export const newMarkerSchema = yup.object({
   markerName: yup
     .string()
     .required('newMarker.errors.name.required')
-    .max(25, 'newMarker.errors.name.max'),
-  isFinal: yup.boolean()
+    .max(25, 'newMarker.errors.name.max')
 })
 
 export interface NewMarkerFormData extends yup.InferType<typeof newMarkerSchema> {
