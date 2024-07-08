@@ -3,10 +3,10 @@ import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import React from 'react'
-import WarningActionDialog from '../shared/WarningActionDialog'
 import { useTranslation } from 'react-i18next'
+import WarningActionDialog from '@/components/shared/WarningActionDialog'
 
-export default function DeliveriesTableActionsMenu() {
+export default function MarkersTableActionsMenu() {
   const { t: translate } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
@@ -32,11 +32,7 @@ export default function DeliveriesTableActionsMenu() {
     setSelectedOption(option)
   }
 
-  const options = [
-    translate('actionsMenu.options.details'),
-    translate('actionsMenu.options.approve'),
-    translate('actionsMenu.options.delete')
-  ]
+  const options = [translate('actionsMenu.options.edit'), translate('actionsMenu.options.delete')]
 
   return (
     <div>
@@ -64,7 +60,6 @@ export default function DeliveriesTableActionsMenu() {
         ))}
       </Menu>
 
-      {/* TODO: Only admin action */}
       {selectedOption === translate('actionsMenu.options.delete') && (
         <WarningActionDialog
           open={open}

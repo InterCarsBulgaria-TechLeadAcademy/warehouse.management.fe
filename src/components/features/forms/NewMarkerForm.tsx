@@ -15,11 +15,13 @@ export default function NewMarkerForm({
   setIsFinal
 }: NewMarkerFormProps) {
   const { t: translate } = useTranslation()
+
   return (
     <>
       <Controller
         name="markerName"
         control={control}
+        defaultValue=""
         render={({ field }) => (
           <TextField
             {...field}
