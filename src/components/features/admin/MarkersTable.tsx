@@ -3,7 +3,7 @@ import DataTable from '@/components/shared/DataTable'
 import { useTranslation } from 'react-i18next'
 import TableActionsMenu from '@/components/shared/TableActionsMenu'
 import SearchInput from '../SearchInput'
-import { Column } from '@/interfaces/column.ts'
+import { Column } from '@/interfaces/column'
 
 interface Row {
   name: string

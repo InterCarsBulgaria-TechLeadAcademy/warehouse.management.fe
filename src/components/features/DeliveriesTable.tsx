@@ -1,8 +1,7 @@
 import DataTable from '@/components/shared/DataTable'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Column } from '@/interfaces/dataTable'
-import { Autocomplete, Box, TextField, Typography } from '@mui/material'
+import { Autocomplete, Box, Button, TextField, Typography } from '@mui/material'
 import SearchInput from './SearchInput'
 import ChipsList from './ChipsList'
 import { GoodType } from './forms/newDeliveryForm/NewDeliveryStep3Form'
@@ -14,6 +13,23 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import InfoPopper from './InfoPoper'
 import DeliveryGoodsInfo from './DeliveryGoodsInfo'
 import dateHelpers from '@/utils/dateHelpers'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { getWarehouseManagementApi } from '@/services/generated-api'
+import { Column } from '@/interfaces/column'
+
+interface Row {
+  number: number
+  vendorName: string
+  deliveryNumber: number
+  receptionNumber: number
+  waitingGoods: React.ReactNode
+  completedGoods: React.ReactNode
+  markers: React.ReactNode
+  status: React.ReactNode
+  approvedOn: string
+  createdOn: string
+  actions: React.ReactNode
+}
 
 let vendorsNames: string[] = ['Bosch', 'Valeo', 'Dunlop', 'Michelin']
 let selectedVendorName = vendorsNames.map((vendorName) => ({ label: vendorName }))
@@ -36,7 +52,7 @@ export default function DeliveriesTable() {
     setSearchTerm(event.target.value)
   }
 
-  const columnsData: Column[] = [
+  const columnsData: Column<Row>[] = [
     { key: 'number', title: translate('deliveries.newDeliveryTable.columnsData.number') },
     { key: 'vendorName', title: translate('deliveries.newDeliveryTable.columnsData.vendorName') },
     {
@@ -62,7 +78,7 @@ export default function DeliveriesTable() {
     { key: 'actions', title: translate('vendors.table.actions'), minWidth: 50, align: 'right' }
   ]
 
-  const rowData = [
+  const rowData: Row[] = [
     {
       number: 1,
       vendorName: 'Bosch',
