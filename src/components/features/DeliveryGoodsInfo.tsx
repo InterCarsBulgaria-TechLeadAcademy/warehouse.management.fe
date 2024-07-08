@@ -12,11 +12,9 @@ export default function DeliveryGoodsInfo({ goodTypes }: any) {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '0.5em', padding: '1em' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography>
-          <b>{translate('deliveries.poper.type')}</b>
-        </Typography>
-        <Typography>
-          <b>{translate('deliveries.poper.quantity')}</b>
+        <Typography sx={{ fontWeight: 'bold' }}>{translate('deliveries.poper.type')}</Typography>
+        <Typography sx={{ fontWeight: 'bold' }}>
+          {translate('deliveries.poper.quantity')}
         </Typography>
       </Box>
       {goodTypes.map((goodType: GoodType, index: number) => {
