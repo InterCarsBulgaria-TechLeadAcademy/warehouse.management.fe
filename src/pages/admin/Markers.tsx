@@ -33,7 +33,6 @@ export default function Markers() {
 
   const handleSubmit: SubmitHandler<NewMarkerFormData> = (data) => {
     console.log(data)
-    // mutation.mutate(JSON.stringify({ name: data.markerName }))
     mutation.mutate({ name: data.markerName })
     onCloseDialog()
   }

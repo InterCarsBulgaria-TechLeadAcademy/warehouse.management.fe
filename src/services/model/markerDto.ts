@@ -11,6 +11,7 @@ import type { MarkerZoneDto } from './markerZoneDto'
 export interface MarkerDto {
   /** @nullable */
   deliveries?: MarkerDeliveryDto[] | null
+  id?: number
   /** @nullable */
   name?: string | null
   /** @nullable */

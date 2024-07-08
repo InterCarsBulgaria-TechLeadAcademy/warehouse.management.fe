@@ -38,7 +38,7 @@ export default function MarkersTable() {
 
   if (data) {
     rowData = data.map((marker: MarkerDto) => ({
-      id: marker.id,
+      id: marker.id ?? -1, // Default value -1, if marker.id is undefined
       name: marker.name ?? '', //if marker.name is null/undefined, set ''
       actions: <MarkersTableActionsMenu key={marker.id} />
     }))

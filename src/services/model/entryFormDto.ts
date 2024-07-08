@@ -6,6 +6,7 @@
  */
 
 export interface EntryFormDto {
+  deliveryId: number
   /**
    * @minimum 0
    * @maximum 5000
@@ -21,4 +22,5 @@ export interface EntryFormDto {
    * @maximum 5000
    */
   pieces?: number
+  zoneId: number
 }

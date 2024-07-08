@@ -5,9 +5,12 @@
  * OpenAPI spec version: 1.0
  */
 import type {
+  DeliveryDto,
+  DeliveryFormDto,
   EntryDto,
   EntryFormDto,
   EntryRequest,
+  GetApiDeliveryAllParams,
   GetApiMarkerAllParams,
   GetApiVendorAllParams,
   GetApiZoneEntriesParams,
@@ -24,6 +27,72 @@ import type { BodyType } from './api'
 type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 
 export const getWarehouseManagementApi = () => {
+  const getApiDeliveryId = (id: number, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<DeliveryDto>({ url: `/api/Delivery/${id}`, method: 'GET' }, options)
+  }
+
+  const getApiDeliveryAll = (
+    params?: GetApiDeliveryAllParams,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<DeliveryDto[]>(
+      { url: `/api/Delivery/all`, method: 'GET', params },
+      options
+    )
+  }
+
+  const postApiDeliveryAdd = (
+    deliveryFormDto: BodyType<DeliveryFormDto>,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<void>(
+      {
+        url: `/api/Delivery/add`,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        data: deliveryFormDto
+      },
+      options
+    )
+  }
+
+  const putApiDeliveryEditId = (
+    id: number,
+    deliveryFormDto: BodyType<DeliveryFormDto>,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<void>(
+      {
+        url: `/api/Delivery/edit/${id}`,
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        data: deliveryFormDto
+      },
+      options
+    )
+  }
+
+  const deleteApiDeliveryDeleteId = (
+    id: number,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<void>({ url: `/api/Delivery/delete/${id}`, method: 'DELETE' }, options)
+  }
+
+  const putApiDeliveryRestoreId = (
+    id: number,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<void>({ url: `/api/Delivery/restore/${id}`, method: 'PUT' }, options)
+  }
+
+  const getApiDeliveryAllDeleted = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<DeliveryDto[]>(
+      { url: `/api/Delivery/all-deleted`, method: 'GET' },
+      options
+    )
+  }
+
   const getApiEntry = (
     entryRequest: BodyType<EntryRequest>,
     options?: SecondParameter<typeof customInstance>
@@ -53,7 +122,7 @@ export const getWarehouseManagementApi = () => {
   }
 
   const postApiEntryAdd = (
-    entryFormDto: BodyType<EntryFormDto>,
+    entryFormDto: EntryFormDto[],
     options?: SecondParameter<typeof customInstance>
   ) => {
     return customInstance<void>(
@@ -264,6 +333,13 @@ export const getWarehouseManagementApi = () => {
   }
 
   return {
+    getApiDeliveryId,
+    getApiDeliveryAll,
+    postApiDeliveryAdd,
+    putApiDeliveryEditId,
+    deleteApiDeliveryDeleteId,
+    putApiDeliveryRestoreId,
+    getApiDeliveryAllDeleted,
     getApiEntry,
     getApiEntryId,
     getApiEntryAllWithDeleted,
@@ -295,6 +371,27 @@ export const getWarehouseManagementApi = () => {
     getApiZoneEntries
   }
 }
+export type GetApiDeliveryIdResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiDeliveryId']>>
+>
+export type GetApiDeliveryAllResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiDeliveryAll']>>
+>
+export type PostApiDeliveryAddResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiDeliveryAdd']>>
+>
+export type PutApiDeliveryEditIdResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['putApiDeliveryEditId']>>
+>
+export type DeleteApiDeliveryDeleteIdResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['deleteApiDeliveryDeleteId']>>
+>
+export type PutApiDeliveryRestoreIdResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['putApiDeliveryRestoreId']>>
+>
+export type GetApiDeliveryAllDeletedResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiDeliveryAllDeleted']>>
+>
 export type GetApiEntryResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiEntry']>>
 >

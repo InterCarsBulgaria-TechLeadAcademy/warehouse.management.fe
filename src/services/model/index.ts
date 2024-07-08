@@ -5,10 +5,15 @@
  * OpenAPI spec version: 1.0
  */
 
+export * from './deliveryDto'
+export * from './deliveryEntryDto'
+export * from './deliveryFormDto'
+export * from './deliveryMarkerDto'
 export * from './entryDto'
 export * from './entryFormDto'
 export * from './entryRequest'
 export * from './entryStatuses'
+export * from './getApiDeliveryAllParams'
 export * from './getApiMarkerAllParams'
 export * from './getApiVendorAllParams'
 export * from './getApiZoneEntriesParams'

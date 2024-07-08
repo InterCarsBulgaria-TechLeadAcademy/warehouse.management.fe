@@ -9,6 +9,8 @@ export default function NewMarkerForm({
 }: UseFormReturn<NewMarkerFormData>) {
   const { t: translate } = useTranslation()
 
+  //Валидацията не работи както трябва
+
   return (
     <Controller
       name="markerName"
