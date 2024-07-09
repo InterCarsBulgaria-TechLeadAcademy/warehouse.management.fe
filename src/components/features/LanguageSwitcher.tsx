@@ -10,7 +10,8 @@ export default function LanguageSwitcher() {
       sx={{
         width: '35px',
         height: 'auto',
-        marginRight: '1.5em'
+        marginRight: '1.5em',
+        boxShadow: '0px 0px 8px 0px #00000040'
       }}
     />
   )

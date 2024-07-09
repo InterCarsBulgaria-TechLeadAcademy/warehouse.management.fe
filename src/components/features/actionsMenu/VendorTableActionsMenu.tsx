@@ -6,30 +6,29 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import WarningActionDialog from '@/components/shared/WarningActionDialog'
 
-export default function VendorTableActionsMenu() {
+interface TableActionsMenuProps {
+  specificOptionHandler: Function
+  options: { title: string; value: string }[]
+}
+
+export default function TableActionsMenu({
+  specificOptionHandler,
+  options
+}: TableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
-  const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
   }
   const handleClose = () => {
-    setSelectedOption(null)
     setAnchorEl(null)
   }
 
-  const onDiscardClick = () => {
-    handleClose()
-  }
-
-  const onConfirmClick = () => {
-    handleClose()
-  }
-
   const actionHandler = (option: string) => {
-    setSelectedOption(option)
+    specificOptionHandler(option)
+    handleClose()
   }
 
   const options = [translate('actionsMenu.options.edit'), translate('actionsMenu.options.delete')]
@@ -54,8 +53,8 @@ export default function VendorTableActionsMenu() {
         open={open}
         onClose={handleClose}>
         {options.map((option) => (
-          <MenuItem key={option} onClick={() => actionHandler(option)}>
-            {option}
+          <MenuItem key={option.value} onClick={() => actionHandler(option.value)}>
+            {translate(option.title)}
           </MenuItem>
         ))}
       </Menu>
