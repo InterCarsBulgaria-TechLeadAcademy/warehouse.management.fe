@@ -48,6 +48,12 @@ export default function FormDialog<T extends FieldValues>({
     onCloseDialog()
   }
 
+  const handleFormSubmit: SubmitHandler<T> = (data, event) => {
+    onSubmit(data, event)
+    reset()
+    onCloseDialog()
+  }
+
   return (
     <Dialog
       open={open}
@@ -62,7 +68,7 @@ export default function FormDialog<T extends FieldValues>({
         {steps && currentStep && <HorizontalStepper currentStep={currentStep} steps={steps} />}
         <Box
           component="form"
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(handleFormSubmit)}
           sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -74,7 +80,7 @@ export default function FormDialog<T extends FieldValues>({
             <Button
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={currentStep === 1 ? handleClose : handleBack}>
+              onClick={currentStep ? (currentStep === 1 ? handleClose : handleBack) : handleClose}>
               {currentStep === 1 ? translate('newDelivery.labels.exit') : discardText}
             </Button>
 

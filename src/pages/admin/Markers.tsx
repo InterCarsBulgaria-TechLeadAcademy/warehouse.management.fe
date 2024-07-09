@@ -35,7 +35,6 @@ export default function Markers() {
 
   const handleSubmit: SubmitHandler<NewMarkerFormData> = (data) => {
     mutation.mutate({ name: data.markerName })
-    onCloseDialog()
   }
 
   return (

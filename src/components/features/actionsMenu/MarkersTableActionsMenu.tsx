@@ -10,9 +10,10 @@ import { getWarehouseManagementApi } from '@/services/generated-api'
 
 interface MarkersTableActionsMenuProps {
   id: number
+  name: string
 }
 
-export default function MarkersTableActionsMenu({ id }: MarkersTableActionsMenuProps) {
+export default function MarkersTableActionsMenu({ id, name }: MarkersTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
@@ -82,10 +83,12 @@ export default function MarkersTableActionsMenu({ id }: MarkersTableActionsMenuP
       {selectedOption === translate('actionsMenu.options.delete') && (
         <WarningActionDialog
           open={open}
-          title={translate('deliveries.deleteActions.title')}
-          content={translate('deliveries.deleteActions.message')}
-          discardText={translate('deliveries.deleteActions.labels.discard')}
-          confirmText={translate('deliveries.deleteActions.labels.confirm')}
+          title={translate('newMarker.deleteAction.title')}
+          content={translate('newMarker.deleteAction.message', {
+            marker: name
+          })}
+          discardText={translate('newMarker.deleteAction.labels.discard')}
+          confirmText={translate('newMarker.deleteAction.labels.confirm')}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
           onConfirmClick={onConfirmClick}
