@@ -5,8 +5,14 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import WarningActionDialog from '@/components/shared/WarningActionDialog'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { getWarehouseManagementApi } from '@/services/generated-api'
 
-export default function MarkersTableActionsMenu() {
+interface MarkersTableActionsMenuProps {
+  id: number
+}
+
+export default function MarkersTableActionsMenu({ id }: MarkersTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
@@ -24,7 +30,20 @@ export default function MarkersTableActionsMenu() {
     handleClose()
   }
 
+  const queryClient = useQueryClient()
+
+  const mutation = useMutation({
+    mutationFn: (id: number) => getWarehouseManagementApi().deleteApiMarkerDeleteId(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['markers'] })
+    },
+    onError: (error) => {
+      console.error('Грешка при заявката', error)
+    }
+  })
+
   const onConfirmClick = () => {
+    mutation.mutate(id)
     handleClose()
   }
 

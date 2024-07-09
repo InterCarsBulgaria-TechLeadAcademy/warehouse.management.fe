@@ -32,17 +32,15 @@ export default function MarkersTable() {
     queryFn: () => getWarehouseManagementApi().getApiMarkerAll()
   })
 
-  console.log(data)
-
-  let rowData: Row[] = []
-
-  if (data) {
-    rowData = data.map((marker: MarkerDto) => ({
-      id: marker.id ?? -1, // Default value -1, if marker.id is undefined
-      name: marker.name ?? '', //if marker.name is null/undefined, set ''
-      actions: <MarkersTableActionsMenu key={marker.id} />
+  function transformDataToRows(markers: MarkerDto[]): Row[] {
+    return markers.map((marker: MarkerDto) => ({
+      id: marker.id!,
+      name: marker.name!,
+      actions: <MarkersTableActionsMenu key={marker.id} id={marker.id!} />
     }))
   }
+
+  const rowData = transformDataToRows(data)
 
   const filteredRows = rowData.filter((row: Row) => {
     return columnsData.some((column: Column<Row>) => {

@@ -6,7 +6,7 @@ import MarkersTable from '@/components/features/admin/MarkersTable'
 import { NewMarkerFormData, newMarkerSchema } from '@/schemas/newMarkerSchema'
 import FormDialog from '@/components/shared/FormDialog'
 import NewMarkerForm from '@/components/features/forms/NewMarkerForm'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { getWarehouseManagementApi } from '@/services/generated-api'
 
 export default function Markers() {
@@ -21,10 +21,12 @@ export default function Markers() {
     setOpenDialog(false)
   }
 
+  const queryClient = useQueryClient()
+
   const mutation = useMutation({
     mutationFn: getWarehouseManagementApi().postApiMarkerAdd,
-    onSuccess: (data) => {
-      console.log('Успешна заявка', data)
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['markers'] })
     },
     onError: (error) => {
       console.error('Грешка при заявката', error)
@@ -32,7 +34,6 @@ export default function Markers() {
   })
 
   const handleSubmit: SubmitHandler<NewMarkerFormData> = (data) => {
-    console.log(data)
     mutation.mutate({ name: data.markerName })
     onCloseDialog()
   }
