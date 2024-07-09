@@ -25,13 +25,16 @@ export default function MenuDrawer() {
               onClick={showMenuHandler}
               sx={{
                 alignSelf: 'center',
-                height: '100vh'
+                height: '100vh',
+                cursor: 'pointer'
               }}
             />
           ) : (
             <>
               <MainMenu />
-              <ArrowBackIosNewIcon onClick={hideMenuHandler} sx={{ alignSelf: 'center' }} />
+              <Box onClick={hideMenuHandler} sx={{ display: 'flex', cursor: 'pointer' }}>
+                <ArrowBackIosNewIcon sx={{ alignSelf: 'center' }} />
+              </Box>
             </>
           )}
         </Box>

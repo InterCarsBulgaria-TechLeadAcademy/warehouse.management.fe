@@ -34,7 +34,6 @@
     "typesDifference": "Типове Разлика",
     "markers": "Маркери",
     "deliveries": "Доставки"
-    
   },
   "profileMenu": {
     "name": "Христо Бояджиев",
@@ -75,10 +74,10 @@
       "exit": "Изход"
     },
     "errors": {
-    "name": {
-      "required": "Полето за име e задължително",
-      "max": "Името трябва да e до 25 символа"
-    }
+      "name": {
+        "required": "Полето за име e задължително",
+        "max": "Името трябва да e до 25 символа"
+      }
     }
   },
   "vendors": {
@@ -122,21 +121,21 @@
   "deleteAction": {
     "vendors": {
       "title": "Изтриване на доставчик",
-    "message": "Сигурни ли сте, че искате да изтриете този доставчик?",
-    "labels": {
-      "discard": "Откажи",
-      "confirm": "Потвърди"
-    }
-  },
+      "message": "Сигурни ли сте, че искате да изтриете този доставчик?",
+      "labels": {
+        "discard": "Откажи",
+        "confirm": "Потвърди"
+      }
+    },
     "zones": {
       "title": "Изтриване на зона",
       "message": "Сигурни ли сте, че искате да изтриете тази зона?",
       "labels": {
         "discard": "Откажи",
         "confirm": "Потвърди"
+      }
     }
-  }
-    },
+  },
   "actionsMenu": {
     "options": {
       "edit": "Редактирай",
@@ -156,10 +155,10 @@
       "role": "Роля"
     },
     "table": {
-    "name": "Име",
-    "markers": "Маркери",
-    "isFinalZone": "Финална зона",
-    "actions": "Действия"
+      "name": "Име",
+      "markers": "Маркери",
+      "isFinalZone": "Финална зона",
+      "actions": "Действия"
     }
   },
   "newZone": {
@@ -174,8 +173,8 @@
       "name": "Име",
       "markers": "Маркери",
       "isFinal": "Финализирано",
-      "create":"Създай",
-      "exit":"Изход"
+      "create": "Създай",
+      "exit": "Изход"
     }
   },
   "deliveries": {
@@ -224,29 +223,29 @@
     "errors": {
       "step1": {
         "deliveryNumber": {
-        "required": "Полето за доставка № е задължително"
-      },
-      "receptionNumber": {
-        "required": "Полето за рецепция № е задължително"
-      },
-      "cmrNumber": {
-        "required": "Полето за ЧМР № е задължително"
-      }
+          "required": "Полето за доставка № е задължително"
+        },
+        "receptionNumber": {
+          "required": "Полето за рецепция № е задължително"
+        },
+        "cmrNumber": {
+          "required": "Полето за ЧМР № е задължително"
+        }
       },
       "step2": {
         "vendorName": {
           "required": "Полето за име на доставчик e задължително"
         },
         "vendorId": {
-           "required":"Полето за доставчик №e задължително"
+          "required": "Полето за доставчик №e задължително"
         },
         "truckNumber": {
-           "required":"Полето за номер на камион е задължително"
-       },
-       "deliveryDate": {
-        "required": "Полето за дата на доставка e задължително",
-        "validDate": "Въведете валидна дата"
-     }
+          "required": "Полето за номер на камион е задължително"
+        },
+        "deliveryDate": {
+          "required": "Полето за дата на доставка e задължително",
+          "validDate": "Въведете валидна дата"
+        }
       },
       "step3": {
         "goodType": {
@@ -254,7 +253,7 @@
         },
         "goodQuantity": {
           "required": "Количеството e задължително",
-          "typeError":"Количеството трябва да е число",
+          "typeError": "Количеството трябва да е число",
           "min": "Количеството трябва да минимум 1"
         }
       },
@@ -264,7 +263,7 @@
         },
         "goodQuantity": {
           "required": "Количеството e задължително",
-          "typeError":"Количеството трябва да е число",
+          "typeError": "Количеството трябва да е число",
           "min": "Количеството трябва да минимум 1"
         },
         "zone": {
@@ -281,13 +280,13 @@
         "receptionNumber": "Рецепция №",
         "cmrNumber": "ЧМР №",
         "markers": "Маркери"
-      }, 
+      },
       "step2": {
-        "vendorName":"Име на доставчик",
-        "vendorId":"Доставчик №",
+        "vendorName": "Име на доставчик",
+        "vendorId": "Доставчик №",
         "truckNumber": "Номер на камион",
-        "deliveryDate": "Дата на доставка" 
-      }, 
+        "deliveryDate": "Дата на доставка"
+      },
       "step3": {
         "goodType": "Вид стока",
         "goodQuantity": "Количество",
@@ -304,33 +303,33 @@
       }
     },
     "steps": {
-      "deliveryDetails":"Детайли за доставка",
+      "deliveryDetails": "Детайли за доставка",
       "truckDetails": "Детайли за камион",
       "goodDetails": "Детайли за стока",
       "goodRelocate": "Местене на стока",
       "reviewDelivery": "Преглед на доставката"
-      },
-      "goodType": {
-        "pallets": "Палети",
-        "packages": "Пакети",
-        "pieces": "Бройки"
-      },
-      "zones": {
-        "zone1": "Зона 1",
-        "zone2": "Зона 2",
-        "zone3": "Зона 3"
-      },
-      "alertMessages": {
-    "exceedPallets": "Количеството на палетите е надвишено с {{quantity}}",
-    "exceedPackages": "Количеството на пакетите е надвишено с {{quantity}}",
-    "exceedPieces": "Количеството на бройките е надвишено с {{quantity}}",
-    "leftPallets": "Остава да преместите {{quantity}} палети",
-    "leftPackages": "Остава да преместите {{quantity}} пакети",
-    "leftPieces": "Остава да преместите {{quantity}} бройки",
-    "completedMove": "Всички стоки са разпределени по зони",
-    "completedMoveTitle": "Завършено местене на стока",
-    "exceedTitle": "Предупреждение",
-    "leftItemsTitle": "Оставащо местене на стока"
+    },
+    "goodType": {
+      "pallets": "Палети",
+      "packages": "Пакети",
+      "pieces": "Бройки"
+    },
+    "zones": {
+      "zone1": "Зона 1",
+      "zone2": "Зона 2",
+      "zone3": "Зона 3"
+    },
+    "alertMessages": {
+      "exceedPallets": "Количеството на палетите е надвишено с {{quantity}}",
+      "exceedPackages": "Количеството на пакетите е надвишено с {{quantity}}",
+      "exceedPieces": "Количеството на бройките е надвишено с {{quantity}}",
+      "leftPallets": "Остава да преместите {{quantity}} палети",
+      "leftPackages": "Остава да преместите {{quantity}} пакети",
+      "leftPieces": "Остава да преместите {{quantity}} бройки",
+      "completedMove": "Всички стоки са разпределени по зони",
+      "completedMoveTitle": "Завършено местене на стока",
+      "exceedTitle": "Предупреждение",
+      "leftItemsTitle": "Оставащо местене на стока"
     }
   },
   "zonesContent": {
@@ -339,15 +338,37 @@
     "labels": {
       "newZone": "нова зона",
       "search": "Търсене",
-      "toggle": "Покажи готовите записи"
+      "toggle": "Покажи готовите записи",
+      "moveEntry": "Местене на стока"
     },
     "table": {
       "entryNumber": "Запис №",
       "vendorName": "Доставчик",
       "receptionNumbers": "Рецепция №",
-      "numberOfGoods": "Стока №",
+      "numberOfGoods": "Количество",
       "status": "Статус",
       "actions": "Действия"
+    },
+    "actionsMenu": {
+      "MoveToNewZone": "Премести в нова зона",
+      "StartProcessing": "Започни обработка",
+      "FinishProcessing": "Завърши обработка",
+      "DeliveryDetails": "Детайли"
+    },
+    "moveEntryForm": {
+      "quantity": "Количество",
+      "zone": "Зона",
+      "confirm": "Потвърди",
+      "errors": {
+        "quantity": {
+          "message": "Добавете количество",
+          "max": "Количеството не може да е повече от максималното",
+          "min": "Количеството не може да е по малко от 1"
+        },
+        "zone": {
+          "message": "Добавете зона"
+        }
+      }
     }
   }
 }

@@ -43,6 +43,22 @@ export default function FormDialog<T extends FieldValues>({
     resolver: schema ? yupResolver(schema) : undefined
   })
 
+  // Адаш попромених кодът надолу според нуждите на други форми тествах с стъпковата и работи.
+  // Все пак не забравяй ако има проблем да го погледнеш. Затова пиша този коментар :)
+
+  const handleFormSubmit: SubmitHandler<T> = (data) => {
+    onSubmit(data);
+
+    if(currentStep && currentStep === steps?.length) {
+      reset();
+      onCloseDialog();
+    }
+    if(!currentStep) {
+      reset();
+      onCloseDialog();
+    }
+  };
+
   const handleClose = () => {
     reset()
     onCloseDialog()
@@ -62,7 +78,7 @@ export default function FormDialog<T extends FieldValues>({
         {steps && currentStep && <HorizontalStepper currentStep={currentStep} steps={steps} />}
         <Box
           component="form"
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(handleFormSubmit)}
           sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -74,7 +90,7 @@ export default function FormDialog<T extends FieldValues>({
             <Button
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={currentStep === 1 ? handleClose : handleBack}>
+              onClick={currentStep === undefined ? handleClose : currentStep === 1 ? handleClose : handleBack}>
               {currentStep === 1 ? translate('newDelivery.labels.exit') : discardText}
             </Button>
 
