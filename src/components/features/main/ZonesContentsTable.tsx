@@ -77,7 +77,6 @@ export default function ZonesContentsTable() {
             ZonesTableActions.FinishProcessing,
             ZonesTableActions.DeliveryDetails
           ]}
-          page="zonesContent"
         />
       )
     }
