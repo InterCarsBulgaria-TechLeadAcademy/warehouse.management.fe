@@ -6,12 +6,12 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import WarningActionDialog from '@/components/shared/WarningActionDialog'
 
-interface TableActionsMenuProps {
+interface VendorTableActionsMenuProps {
   specificOptionHandler: Function
   options: { title: string; value: string }[]
 }
 
-export default function TableActionsMenu({
+export default function VendorTableActionsMenu({
   specificOptionHandler,
   options
 }: TableActionsMenuProps) {
