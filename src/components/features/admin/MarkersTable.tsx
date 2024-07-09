@@ -17,9 +17,23 @@ interface Row {
 export default function MarkersTable() {
   const { t: translate } = useTranslation()
   const [searchTerm, setSearchTerm] = React.useState('')
+  const [page, setPage] = React.useState(0)
+  const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
+  }
+
+  console.log(`PageNumber:${page + 1}`)
+  console.log(`PageSize:${rowsPerPage}`)
+
+  const onPageChange = (newPage: number) => {
+    setPage(newPage)
+  }
+
+  const onRowsPerPageChange = (newRowsPerPage: number) => {
+    setRowsPerPage(newRowsPerPage)
+    setPage(0)
   }
 
   const columnsData: Column<Row>[] = [
@@ -29,7 +43,13 @@ export default function MarkersTable() {
 
   const { data } = useSuspenseQuery({
     queryKey: ['markers'],
-    queryFn: () => getWarehouseManagementApi().getApiMarkerAll()
+    queryFn: () => {
+      return getWarehouseManagementApi().getApiMarkerAll({
+        PageNumber: page + 1,
+        PageSize: rowsPerPage
+        // SearchQuery за какво да го използвам?
+      })
+    }
   })
 
   function transformDataToRows(markers: MarkerDto[]): Row[] {
@@ -40,7 +60,7 @@ export default function MarkersTable() {
     }))
   }
 
-  const rowData = transformDataToRows(data)
+  const rowData = transformDataToRows(data || [])
 
   const filteredRows = rowData.filter((row: Row) => {
     return columnsData.some((column: Column<Row>) => {
@@ -49,7 +69,13 @@ export default function MarkersTable() {
   })
 
   return (
-    <DataTable columnsData={columnsData} rowData={filteredRows}>
+    <DataTable
+      columnsData={columnsData}
+      rowData={filteredRows}
+      page={page}
+      rowsPerPage={rowsPerPage}
+      onPageChange={onPageChange}
+      onRowsPerPageChange={onRowsPerPageChange}>
       <SearchInput
         value={searchTerm}
         onChange={handleSearchChange}

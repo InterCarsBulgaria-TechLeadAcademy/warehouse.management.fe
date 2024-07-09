@@ -8,6 +8,13 @@ import WarningActionDialog from '@/components/shared/WarningActionDialog'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { getWarehouseManagementApi } from '@/services/generated-api'
 
+import { SubmitHandler } from 'react-hook-form'
+import { NewMarkerFormData, newMarkerSchema } from '@/schemas/newMarkerSchema'
+import FormDialog from '@/components/shared/FormDialog'
+import NewMarkerForm from '@/components/features/forms/NewMarkerForm'
+import { BodyType } from '@/services/api'
+import { MarkerFormDto } from '@/services/model'
+
 interface MarkersTableActionsMenuProps {
   id: number
   name: string
@@ -31,9 +38,13 @@ export default function MarkersTableActionsMenu({ id, name }: MarkersTableAction
     handleClose()
   }
 
+  const actionHandler = (option: string) => {
+    setSelectedOption(option)
+  }
+
   const queryClient = useQueryClient()
 
-  const mutation = useMutation({
+  const mutationDelete = useMutation({
     mutationFn: (id: number) => getWarehouseManagementApi().deleteApiMarkerDeleteId(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['markers'] })
@@ -44,12 +55,24 @@ export default function MarkersTableActionsMenu({ id, name }: MarkersTableAction
   })
 
   const onConfirmClick = () => {
-    mutation.mutate(id)
+    mutationDelete.mutate(id)
     handleClose()
   }
 
-  const actionHandler = (option: string) => {
-    setSelectedOption(option)
+  const mutationUpdate = useMutation({
+    mutationFn: ({ id, data }: { id: number; data: BodyType<MarkerFormDto> }) =>
+      getWarehouseManagementApi().putApiMarkerEditId(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['markers'] })
+    },
+    onError: (error) => {
+      console.error('Грешка при заявката', error)
+    }
+  })
+
+  const handleSubmit: SubmitHandler<NewMarkerFormData> = (data) => {
+    console.log()
+    mutationUpdate.mutate({ id, data: { name: data.markerName } })
   }
 
   const options = [translate('actionsMenu.options.edit'), translate('actionsMenu.options.delete')]
@@ -92,6 +115,19 @@ export default function MarkersTableActionsMenu({ id, name }: MarkersTableAction
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
           onConfirmClick={onConfirmClick}
+        />
+      )}
+
+      {selectedOption === translate('actionsMenu.options.edit') && (
+        <FormDialog<NewMarkerFormData>
+          open={open}
+          title={translate('editMarker.title')}
+          discardText={translate('editMarker.labels.exit')}
+          confirmText={translate('editMarker.labels.create')}
+          onCloseDialog={handleClose}
+          schema={newMarkerSchema}
+          onSubmit={handleSubmit}
+          renderForm={(methods) => <NewMarkerForm {...methods} defaultValue={name} />}
         />
       )}
     </div>

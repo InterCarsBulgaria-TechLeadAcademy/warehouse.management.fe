@@ -3,19 +3,24 @@ import { TextField } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { NewMarkerFormData } from '@/schemas/newMarkerSchema'
 
+interface NewMarkerFormProps extends UseFormReturn<NewMarkerFormData> {
+  defaultValue: string
+}
+
 export default function NewMarkerForm({
   control,
-  formState: { errors }
-}: UseFormReturn<NewMarkerFormData>) {
+  formState: { errors },
+  defaultValue
+}: NewMarkerFormProps) {
   const { t: translate } = useTranslation()
 
-  //Валидацията не работи както трябва
+  //Да оправя валидацията да е същата като на БЕ
 
   return (
     <Controller
       name="markerName"
       control={control}
-      defaultValue=""
+      defaultValue={defaultValue || ''}
       render={({ field }) => (
         <TextField
           {...field}
