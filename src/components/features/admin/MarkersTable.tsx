@@ -43,8 +43,8 @@ export default function MarkersTable() {
     queryFn: () => {
       return getWarehouseManagementApi().getApiMarkerAll({
         PageNumber: page + 1,
-        PageSize: rowsPerPage
-        // SearchQuery да го използвам като оправят pagination
+        PageSize: rowsPerPage,
+        SearchQuery: searchTerm
       })
     }
   })
