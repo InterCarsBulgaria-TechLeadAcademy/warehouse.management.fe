@@ -71,11 +71,23 @@ export default function ZonesContentsTable() {
           specificOptionHandler={(action: string) =>
             onOpenMoveEntryDialog(action, row.quantity)
           }
-          itemProps={[
-            ZonesTableActions.MoveToNewZone,
-            ZonesTableActions.StartProcessing,
-            ZonesTableActions.FinishProcessing,
-            ZonesTableActions.DeliveryDetails
+          options={[
+            {
+              title: `zonesContent.actionsMenu.${ZonesTableActions.MoveToNewZone}`,
+              value: ZonesTableActions.MoveToNewZone
+            },
+            {
+              title: `zonesContent.actionsMenu.${ZonesTableActions.StartProcessing}`,
+              value: ZonesTableActions.StartProcessing
+            },
+            {
+              title: `zonesContent.actionsMenu.${ZonesTableActions.FinishProcessing}`,
+              value: ZonesTableActions.FinishProcessing
+            },
+            {
+              title: `zonesContent.actionsMenu.${ZonesTableActions.DeliveryDetails}`,
+              value: ZonesTableActions.DeliveryDetails
+            }
           ]}
         />
       )
