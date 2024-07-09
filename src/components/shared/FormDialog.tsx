@@ -68,7 +68,7 @@ export default function FormDialog<T extends FieldValues>({
         {steps && currentStep && <HorizontalStepper currentStep={currentStep} steps={steps} />}
         <Box
           component="form"
-          onSubmit={handleSubmit(handleFormSubmit)}
+          onSubmit={currentStep ? handleSubmit(onSubmit) : handleSubmit(handleFormSubmit)}
           sx={{
             display: 'flex',
             flexDirection: 'column',
