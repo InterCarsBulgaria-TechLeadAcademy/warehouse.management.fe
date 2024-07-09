@@ -76,6 +76,22 @@
         "discard": "Откажи",
         "confirm":"Потвърди"
       }
+    },
+    "snackBar": {
+      "messages": {
+        "createMarker": {
+          "success": "Маркерът е добавен успешно",
+          "error": "Възникна грешка"
+        },
+       "deleteMarker": {
+          "success": "Маркерът е изтрит успешно",
+          "error": "Възникна грешка"
+       },
+       "updateMarker": {
+          "success": "Маркерът е променен успешно",
+          "error": "Възникна грешка"
+       }
+      }
     }
   },
   "editMarker": {

@@ -14,6 +14,7 @@ import FormDialog from '@/components/shared/FormDialog'
 import NewMarkerForm from '@/components/features/forms/NewMarkerForm'
 import { BodyType } from '@/services/api'
 import { MarkerFormDto } from '@/services/model'
+import { useSnackbar } from '@/hooks/useSnackbar'
 
 interface MarkersTableActionsMenuProps {
   id: number
@@ -25,6 +26,7 @@ export default function MarkersTableActionsMenu({ id, name }: MarkersTableAction
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
+  const { showSnackbar } = useSnackbar()
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -48,9 +50,16 @@ export default function MarkersTableActionsMenu({ id, name }: MarkersTableAction
     mutationFn: (id: number) => getWarehouseManagementApi().deleteApiMarkerDeleteId(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['markers'] })
+      showSnackbar({
+        message: translate('newMarker.snackBar.messages.deleteMarker.success'),
+        type: 'success'
+      })
     },
-    onError: (error) => {
-      console.error('Грешка при заявката', error)
+    onError: () => {
+      showSnackbar({
+        message: translate('newMarker.snackBar.messages.deleteMarker.error'),
+        type: 'error'
+      })
     }
   })
 
@@ -64,9 +73,16 @@ export default function MarkersTableActionsMenu({ id, name }: MarkersTableAction
       getWarehouseManagementApi().putApiMarkerEditId(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['markers'] })
+      showSnackbar({
+        message: translate('newMarker.snackBar.messages.updateMarker.success'),
+        type: 'success'
+      })
     },
-    onError: (error) => {
-      console.error('Грешка при заявката', error)
+    onError: () => {
+      showSnackbar({
+        message: translate('newMarker.snackBar.messages.updateMarker.error'),
+        type: 'error'
+      })
     }
   })
 

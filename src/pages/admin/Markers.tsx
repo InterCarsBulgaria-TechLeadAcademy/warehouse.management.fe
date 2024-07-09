@@ -8,10 +8,12 @@ import FormDialog from '@/components/shared/FormDialog'
 import NewMarkerForm from '@/components/features/forms/NewMarkerForm'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { getWarehouseManagementApi } from '@/services/generated-api'
+import { useSnackbar } from '@/hooks/useSnackbar'
 
 export default function Markers() {
   const { t: translate } = useTranslation()
   const [openDialog, setOpenDialog] = useState(false)
+  const { showSnackbar } = useSnackbar()
 
   const handleClickOpen = () => {
     setOpenDialog(true)
@@ -27,9 +29,16 @@ export default function Markers() {
     mutationFn: getWarehouseManagementApi().postApiMarkerAdd,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['markers'] })
+      showSnackbar({
+        message: translate('newMarker.snackBar.messages.createMarker.success'),
+        type: 'success'
+      })
     },
-    onError: (error) => {
-      console.error('Грешка при заявката', error)
+    onError: () => {
+      showSnackbar({
+        message: translate('newMarker.snackBar.messages.createMarker.error'),
+        type: 'error'
+      })
     }
   })
 
