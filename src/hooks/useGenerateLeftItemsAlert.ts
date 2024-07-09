@@ -24,7 +24,7 @@ export default function useGenerateLeftItemsAlert(
     } else if (leftItems.pallets < 0 || leftItems.packages < 0 || leftItems.pieces < 0) {
       const newAlertMessage = []
       for (const [key, value] of Object.entries(leftItems)) {
-        if (value < 0) {
+        if (Number(value) < 0) {
           setIsCompletedMove(false)
           setIsExceedQuantity(true)
           switch (key) {
@@ -56,7 +56,7 @@ export default function useGenerateLeftItemsAlert(
     } else {
       const newAlertMessage = []
       for (const [key, value] of Object.entries(leftItems)) {
-        if (value > 0) {
+        if (Number(value) > 0) {
           setIsCompletedMove(false)
           setIsExceedQuantity(false)
           switch (key) {

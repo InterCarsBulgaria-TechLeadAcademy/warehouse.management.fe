@@ -4,7 +4,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import SearchInput from '../SearchInput'
 import { Autocomplete, TextField } from '@mui/material'
-import { Column } from '@/interfaces/column.ts'
+import { Column } from '@/interfaces/column'
 
 interface Row {
   name: string

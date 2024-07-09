@@ -52,6 +52,7 @@ export default function NewDeliveryStep4Form({
   })
 
   function addGoodHandler() {
+    console.log('wtf')
     append({ goodTypeStep4: '', goodQuantityStep4: 1, zone: '' })
     let newId
     do {
@@ -61,7 +62,6 @@ export default function NewDeliveryStep4Form({
   }
 
   function onDeleteHandler(index: number) {
-    // TODO: don't work properly
     remove(index)
     setMoveGoodsForms((prev) => prev.filter((_, id) => id !== index))
     deleteGoodsInZones(index)
@@ -73,6 +73,12 @@ export default function NewDeliveryStep4Form({
       setMoveGoodsForms(formsData.goodsInZones.map(() => generateId()))
     }
   }, [formsData])
+
+  useEffect(() => {
+    if (moveGoodsForms.length === 0) {
+      addGoodHandler()
+    }
+  }, [moveGoodsForms])
 
   return (
     <>

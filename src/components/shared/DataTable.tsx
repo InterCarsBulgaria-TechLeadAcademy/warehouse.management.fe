@@ -11,13 +11,13 @@ import { Box, FormControlLabel, Switch } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { Column } from '@/interfaces/column.ts'
 
-interface DataTableProps {
-  columnsData: Column<Record<any, any>>[]
-  rowData: any
+interface DataTableProps<T> {
+  columnsData: Column<T>[]
+  rowData: T[]
   children: React.ReactNode
 }
 
-export default function DataTable({ columnsData, rowData, children }: DataTableProps) {
+export default function DataTable<T>({ columnsData, rowData, children }: DataTableProps<T>) {
   const { t: translate } = useTranslation()
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
@@ -41,7 +41,9 @@ export default function DataTable({ columnsData, rowData, children }: DataTableP
   return (
     <Box>
       <Paper sx={{ width: '100%', overflow: 'hidden', padding: '0.5em' }}>
-        <Box component="div" sx={{ display: 'flex', gap: '2em', padding: '0.5em 0' }}>
+        <Box
+          component="div"
+          sx={{ display: 'flex', gap: '2em', padding: '0.5em 0', alignItems: 'center' }}>
           {children}
         </Box>
 
@@ -49,9 +51,9 @@ export default function DataTable({ columnsData, rowData, children }: DataTableP
           <Table stickyHeader aria-label="sticky table" size={dense ? 'small' : 'medium'}>
             <TableHead>
               <TableRow>
-                {columns.map((column: Column) => (
+                {columnsData.map((column: Column<T>) => (
                   <TableCell
-                    key={column.key}
+                    key={column.key.toString()}
                     align={column.align}
                     sx={{ minWidth: column.minWidth }}>
                     {column.title}

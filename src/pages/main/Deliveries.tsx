@@ -1,8 +1,8 @@
 import SkeletonPage from '@/components/features/SkeletonPage'
 import { useTranslation } from 'react-i18next'
-import VendorsTable from '@/components/features/admin/VendorsTable'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import NewDeliveryFormDialog from '@/components/features/forms/newDeliveryForm/NewDeliveryFormDialog'
+import DeliveriesTable from '@/components/features/DeliveriesTable'
 
 export default function Deliveries() {
   const { t: translate } = useTranslation()
@@ -15,8 +15,7 @@ export default function Deliveries() {
         description={translate('deliveries.description')}
         buttonText={translate('deliveries.labels.newDelivery')}
         buttonClickHandler={handleClickOpen}
-        //For example. Make Deliveries table
-        table={<VendorsTable />}
+        table={<DeliveriesTable />}
       />
 
       <NewDeliveryFormDialog />
