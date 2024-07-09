@@ -13,9 +13,6 @@ export default function NewMarkerForm({
   defaultValue
 }: NewMarkerFormProps) {
   const { t: translate } = useTranslation()
-
-  //Да оправя валидацията да е същата като на БЕ
-
   return (
     <Controller
       name="markerName"

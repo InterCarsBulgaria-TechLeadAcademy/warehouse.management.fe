@@ -24,9 +24,6 @@ export default function MarkersTable() {
     setSearchTerm(event.target.value)
   }
 
-  console.log(`PageNumber:${page + 1}`)
-  console.log(`PageSize:${rowsPerPage}`)
-
   const onPageChange = (newPage: number) => {
     setPage(newPage)
   }
@@ -47,7 +44,7 @@ export default function MarkersTable() {
       return getWarehouseManagementApi().getApiMarkerAll({
         PageNumber: page + 1,
         PageSize: rowsPerPage
-        // SearchQuery за какво да го използвам?
+        // SearchQuery да го използвам като оправят pagination
       })
     }
   })
