@@ -7,10 +7,10 @@ import { useTranslation } from 'react-i18next'
 
 interface TableActionsMenuProps {
   specificOptionHandler: Function;
-  itemProps: string[];
+  options: { title: string, value: string }[];
 }
 
-export default function TableActionsMenu({ specificOptionHandler, itemProps }: TableActionsMenuProps) {
+export default function TableActionsMenu({ specificOptionHandler, options }: TableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
@@ -26,8 +26,6 @@ export default function TableActionsMenu({ specificOptionHandler, itemProps }: T
     specificOptionHandler(option)
     handleClose()
   }
-
-  const options = itemProps.map((str) => str)
 
 
   return (
@@ -50,8 +48,8 @@ export default function TableActionsMenu({ specificOptionHandler, itemProps }: T
         open={open}
         onClose={handleClose}>
         {options.map((option) => (
-          <MenuItem key={option} onClick={() => actionHandler(option)}>
-            {translate(`${page}.actionsMenu.${option}`)}
+          <MenuItem key={option.value} onClick={() => actionHandler(option.value)}>
+            {translate(option.title)}
           </MenuItem>
         ))}
       </Menu>
