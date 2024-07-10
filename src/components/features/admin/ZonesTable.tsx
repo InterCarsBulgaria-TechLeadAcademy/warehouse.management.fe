@@ -12,7 +12,7 @@ import { ZoneDto } from '@/services/model'
 interface Row {
   name: string
   markers: React.ReactNode
-  isFinalZone: boolean
+  isFinal: boolean
   actions: React.ReactNode
 }
 
@@ -74,14 +74,14 @@ export default function ZonesTable() {
       id: zone.id!,
       name: zone.name!,
       markers: zone.markers,
-      // isFinalZone:
+      isFinal: zone.isFinal,
       actions: (
         <ZonesTableActionsMenu
           key={zone.id}
           id={zone.id!}
           name={zone.name!}
           markers={zone.markers}
-          // isFinalZone={zone.}
+          isFinal={zone.isFinal}
         />
       )
     }))
@@ -89,7 +89,7 @@ export default function ZonesTable() {
 
   const rowData = transformDataToRows(data || [])
 
-  console.log(rowData)
+  console.log(data)
 
   //като му добавя isFinalZone ще се оправи
   const filteredRows = rowData.filter((row: Row) => {
