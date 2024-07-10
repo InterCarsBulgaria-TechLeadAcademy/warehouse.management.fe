@@ -78,7 +78,7 @@ export default function NewZoneForm({
               renderValue={(selected) => {
                 const selectedMarkerNames = selected
                   .map((id) => {
-                    const isMarker = data.find((marker) => marker.id === id)
+                    const isMarker = data.find((marker) => marker.id === Number(id))
                     if (isMarker) {
                       return isMarker.name
                     }

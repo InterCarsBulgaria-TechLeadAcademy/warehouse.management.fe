@@ -6,10 +6,13 @@
  */
 
 export interface ZoneFormDto {
+  /** @nullable */
+  isFinal?: boolean | null
+  /** @nullable */
+  markerIds?: number[] | null
   /**
    * @minLength 1
    * @maxLength 500
-   * @nullable
    */
-  name?: string | null
+  name: string
 }

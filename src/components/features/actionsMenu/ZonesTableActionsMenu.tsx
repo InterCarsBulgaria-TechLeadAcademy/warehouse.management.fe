@@ -16,11 +16,15 @@ interface ZonesTableActionsMenuProps {
   id: number
   name: string
   markers: any
-  // isFinalZone: boolean
+  isFinal: boolean
 }
 
-//da priema isFinalZone
-export default function ZonesTableActionsMenu({ id, name, markers }: ZonesTableActionsMenuProps) {
+export default function ZonesTableActionsMenu({
+  id,
+  name,
+  markers,
+  isFinal
+}: ZonesTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
@@ -45,6 +49,7 @@ export default function ZonesTableActionsMenu({ id, name, markers }: ZonesTableA
     mutationFn: (id: number) => getWarehouseManagementApi().deleteApiZoneDeleteId(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['zones'] })
+      //Да променя да присъства и името на изтритото нещо
       showSnackbar({
         message: translate('newZone.snackBar.messages.deleteZone.success'),
         type: 'success'

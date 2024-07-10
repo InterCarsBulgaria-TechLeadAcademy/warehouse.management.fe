@@ -43,8 +43,8 @@ export default function Zones() {
   })
 
   const handleSubmit: SubmitHandler<NewZoneFormData> = (data) => {
-    console.log(data)
-    mutationPost.mutate({ name: data.zoneName, markers: data.markers, isFinal: data.isFinal })
+    const markerIds = data.markers!.map((marker) => Number(marker))
+    mutationPost.mutate({ name: data.zoneName, markerIds: markerIds, isFinal: data.isFinal })
   }
 
   return (
