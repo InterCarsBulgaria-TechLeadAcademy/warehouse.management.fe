@@ -75,9 +75,20 @@ export default function NewZoneForm({
               value={field.value || []}
               onChange={(e) => field.onChange(e.target.value)}
               input={<OutlinedInput />}
-              renderValue={(selected) => (selected as string[]).join(', ')}>
+              renderValue={(selected) => {
+                const selectedMarkerNames = selected
+                  .map((id) => {
+                    const isMarker = data.find((marker) => marker.id === id)
+                    if (isMarker) {
+                      return isMarker.name
+                    }
+                  })
+                  .join(', ')
+
+                return selectedMarkerNames
+              }}>
               {data.map((marker: MarkerDto) => (
-                <MenuItem key={marker.id!} value={marker.name!}>
+                <MenuItem key={marker.id!} value={marker.id!}>
                   <Checkbox checked={field.value?.includes(marker.name!)} />{' '}
                   <ListItemText primary={marker.name!} />
                 </MenuItem>
