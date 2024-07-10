@@ -14,21 +14,21 @@ import { Column } from '@/interfaces/Column'
 interface DataTableProps<T> {
   columnsData: Column<T>[]
   rowData: T[]
-  children: React.ReactNode
   page: number
   rowsPerPage: number
   onPageChange: (newPage: number) => void
   onRowsPerPageChange: (newRowsPerPage: number) => void
+  children: React.ReactNode
 }
 
 export default function DataTable<T>({
   columnsData,
   rowData,
-  children,
   page,
   rowsPerPage,
   onPageChange,
-  onRowsPerPageChange
+  onRowsPerPageChange,
+  children
 }: DataTableProps<T>) {
   const { t: translate } = useTranslation()
   const [dense, setDense] = React.useState(false)
