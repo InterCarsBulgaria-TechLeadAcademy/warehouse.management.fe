@@ -25,7 +25,7 @@ export default function Markers() {
 
   const queryClient = useQueryClient()
 
-  const mutation = useMutation({
+  const mutationPost = useMutation({
     mutationFn: getWarehouseManagementApi().postApiMarkerAdd,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['markers'] })
@@ -43,7 +43,7 @@ export default function Markers() {
   })
 
   const handleSubmit: SubmitHandler<NewMarkerFormData> = (data) => {
-    mutation.mutate({ name: data.markerName })
+    mutationPost.mutate({ name: data.markerName })
   }
 
   return (

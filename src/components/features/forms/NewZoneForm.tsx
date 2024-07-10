@@ -1,4 +1,6 @@
 import { NewZoneFormData } from '@/schemas/newZoneSchema'
+import { getWarehouseManagementApi } from '@/services/generated-api'
+import { MarkerDto } from '@/services/model'
 import {
   Checkbox,
   FormControl,
@@ -10,21 +12,37 @@ import {
   Select,
   TextField
 } from '@mui/material'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
-const markers = ['Масло', 'Гуми', 'Чистачки']
+interface NewZoneFormProps extends UseFormReturn<NewZoneFormData> {
+  defaultValue?: any
+}
 
+//трябва да подавам defaultValue за всички, не само за zoneName.
+//При един да се заредят попълнените данни
 export default function NewZoneForm({
   control,
-  formState: { errors }
-}: UseFormReturn<NewZoneFormData>) {
+  formState: { errors },
+  defaultValue
+}: NewZoneFormProps) {
   const { t: translate } = useTranslation()
+
+  // da korigiram, za da vzimam vsichki markers, a ne samo pyrvite 10 kato opravqt back-end-a
+  const { data } = useSuspenseQuery({
+    queryKey: ['markers'],
+    queryFn: () => {
+      return getWarehouseManagementApi().getApiMarkerAll()
+    }
+  })
+
   return (
     <>
       <Controller
         name="zoneName"
         control={control}
+        defaultValue={defaultValue || ''}
         render={({ field }) => (
           <TextField
             {...field}
@@ -43,6 +61,7 @@ export default function NewZoneForm({
       <Controller
         name="markers"
         control={control}
+        // defaultValue=
         render={({ field }) => (
           <FormControl fullWidth>
             <InputLabel id="demo-multiple-checkbox-label">
@@ -57,10 +76,10 @@ export default function NewZoneForm({
               onChange={(e) => field.onChange(e.target.value)}
               input={<OutlinedInput />}
               renderValue={(selected) => (selected as string[]).join(', ')}>
-              {markers.map((marker) => (
-                <MenuItem key={marker} value={marker}>
-                  <Checkbox checked={field.value?.includes(marker)} />{' '}
-                  <ListItemText primary={marker} />
+              {data.map((marker: MarkerDto) => (
+                <MenuItem key={marker.id!} value={marker.name!}>
+                  <Checkbox checked={field.value?.includes(marker.name!)} />{' '}
+                  <ListItemText primary={marker.name!} />
                 </MenuItem>
               ))}
             </Select>
@@ -71,6 +90,7 @@ export default function NewZoneForm({
       <Controller
         name="isFinal"
         control={control}
+        // defaultValue=
         render={({ field }) => (
           <FormControlLabel
             control={<Checkbox {...field} checked={field.value} />}

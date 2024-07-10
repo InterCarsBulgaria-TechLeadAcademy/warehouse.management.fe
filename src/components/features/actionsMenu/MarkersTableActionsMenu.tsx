@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import WarningActionDialog from '@/components/shared/WarningActionDialog'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { getWarehouseManagementApi } from '@/services/generated-api'
-
 import { SubmitHandler } from 'react-hook-form'
 import { NewMarkerFormData, newMarkerSchema } from '@/schemas/newMarkerSchema'
 import FormDialog from '@/components/shared/FormDialog'
@@ -80,7 +79,6 @@ export default function MarkersTableActionsMenu({ id, name }: MarkersTableAction
   })
 
   const handleSubmit: SubmitHandler<NewMarkerFormData> = (data) => {
-    console.log()
     mutationUpdate.mutate({ id, data: { name: data.markerName } })
   }
 
@@ -92,6 +90,19 @@ export default function MarkersTableActionsMenu({ id, name }: MarkersTableAction
   return (
     <div>
       <TableActionsMenu specificOptionHandler={actionHandler} options={options} />
+
+      {selectedOption === 'edit' && (
+        <FormDialog<NewMarkerFormData>
+          open={true}
+          title={translate('editMarker.title')}
+          discardText={translate('editMarker.labels.exit')}
+          confirmText={translate('editMarker.labels.create')}
+          onCloseDialog={handleClose}
+          schema={newMarkerSchema}
+          onSubmit={handleSubmit}
+          renderForm={(methods) => <NewMarkerForm {...methods} defaultValue={name} />}
+        />
+      )}
 
       {selectedOption === 'delete' && (
         <WarningActionDialog
@@ -105,19 +116,6 @@ export default function MarkersTableActionsMenu({ id, name }: MarkersTableAction
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
           onConfirmClick={onConfirmClick}
-        />
-      )}
-
-      {selectedOption === 'edit' && (
-        <FormDialog<NewMarkerFormData>
-          open={true}
-          title={translate('editMarker.title')}
-          discardText={translate('editMarker.labels.exit')}
-          confirmText={translate('editMarker.labels.create')}
-          onCloseDialog={handleClose}
-          schema={newMarkerSchema}
-          onSubmit={handleSubmit}
-          renderForm={(methods) => <NewMarkerForm {...methods} defaultValue={name} />}
         />
       )}
     </div>

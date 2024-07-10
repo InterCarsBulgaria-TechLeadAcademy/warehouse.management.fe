@@ -197,6 +197,22 @@
       "isFinal": "Финализирано",
       "create": "Създай",
       "exit": "Изход"
+    },
+    "snackBar": {
+      "messages": {
+        "createZone": {
+          "success": "Зоната е добавена успешно",
+          "error": "Възникна грешка"
+        },
+       "deleteZone": {
+          "success": "Зоната е изтрита успешно",
+          "error": "Възникна грешка"
+       },
+       "updateZone": {
+          "success": "Зоната е променена успешно",
+          "error": "Възникна грешка"
+       }
+      }
     }
   },
   "deliveries": {
