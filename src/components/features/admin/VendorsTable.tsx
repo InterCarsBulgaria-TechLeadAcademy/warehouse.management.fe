@@ -12,7 +12,7 @@ import { VendorDto } from '@/services/model'
 interface Row {
   id: number
   name: string
-  vendorNumber: number
+  vendorNumber: string
   markers: string
   actions: React.ReactNode
 }
@@ -76,9 +76,8 @@ export default function VendorsTable() {
     return vendors.map((vendor: VendorDto) => ({
       id: vendor.id!,
       name: vendor.name!,
-      vendorNumber: vendor.systemNumber,
-      markers: vendor.markers,
-      zones: vendor.zones,
+      vendorNumber: vendor.systemNumber!,
+      markers: vendor.markers!.map((marker) => marker.markerName).join(', '),
       actions: <VendorTableActionsMenu key={vendor.id} id={vendor.id!} name={vendor.name!} />
     }))
   }
