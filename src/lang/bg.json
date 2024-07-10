@@ -113,6 +113,22 @@
       "isFinal": "Финализирано",
       "create": "Създай",
       "exit": "Изход"
+    },
+    "snackBar": {
+      "messages": {
+        "createVendor": {
+          "success": "Вендорът е добавен успешно",
+          "error": "Възникна грешка"
+        },
+       "deleteVendor": {
+          "success": "Вендорът е изтрит успешно",
+          "error": "Възникна грешка"
+       },
+       "updateVendor": {
+          "success": "Вендорът е променен успешно",
+          "error": "Възникна грешка"
+       }
+      }
     }
   },
   "table": {
