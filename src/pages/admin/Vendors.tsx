@@ -6,10 +6,32 @@ import { SubmitHandler } from 'react-hook-form'
 import VendorsTable from '@/components/features/admin/VendorsTable'
 import { NewVendorFormData, newVendorSchema } from '@/schemas/newVendorSchema'
 import NewVendorForm from '@/components/features/forms/NewVendorForm'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { getWarehouseManagementApi } from '@/services/generated-api'
+import { useSnackbar } from '@/hooks/useSnackbar'
 
 export default function Vendors() {
   const { t: translate } = useTranslation()
   const [openDialog, setOpenDialog] = useState(false)
+  const queryClient = useQueryClient()
+  const { showSnackbar } = useSnackbar()
+
+  const mutation = useMutation({
+    mutationFn: getWarehouseManagementApi().postApiVendorAdd,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['vendors'] })
+      showSnackbar({
+        message: translate('newVendor.snackBar.messages.createVendor.success'),
+        type: 'success'
+      })
+    },
+    onError: () => {
+      showSnackbar({
+        message: translate('newVendor.snackBar.messages.createVendor.error'),
+        type: 'error'
+      })
+    }
+  })
 
   const handleClickOpen = () => {
     setOpenDialog(true)
@@ -20,8 +42,7 @@ export default function Vendors() {
   }
 
   const handleSubmit: SubmitHandler<NewVendorFormData> = (data) => {
-    console.log(data)
-    onCloseDialog()
+    mutation.mutate({ name: data.vendorName, systemNumber: data.vendorNumber })
   }
 
   return (
