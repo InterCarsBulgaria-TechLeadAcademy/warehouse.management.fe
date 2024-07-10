@@ -14,24 +14,33 @@ import { Column } from '@/interfaces/column.ts'
 interface DataTableProps<T> {
   columnsData: Column<T>[]
   rowData: T[]
+  page: number
+  rowsPerPage: number
+  onPageChange: (newPage: number) => void
+  onRowsPerPageChange: (newRowsPerPage: number) => void
   children: React.ReactNode
 }
 
-export default function DataTable<T>({ columnsData, rowData, children }: DataTableProps<T>) {
+export default function DataTable<T>({
+  columnsData,
+  rowData,
+  page,
+  rowsPerPage,
+  onPageChange,
+  onRowsPerPageChange,
+  children
+}: DataTableProps<T>) {
   const { t: translate } = useTranslation()
-  const [page, setPage] = React.useState(0)
-  const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const [dense, setDense] = React.useState(false)
 
   const columns: readonly Column<Record<any, any>>[] = columnsData
 
   const handleChangePage = (_event: unknown, newPage: number) => {
-    setPage(newPage)
+    onPageChange(newPage)
   }
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(+event.target.value)
-    setPage(0)
+    onRowsPerPageChange(+event.target.value)
   }
 
   const handleChangeDense = (event: React.ChangeEvent<HTMLInputElement>) => {
