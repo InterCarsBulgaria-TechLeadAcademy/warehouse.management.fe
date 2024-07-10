@@ -179,7 +179,7 @@
     "table": {
       "name": "Име",
       "markers": "Маркери",
-      "isFinalZone": "Финална зона",
+      "isFinal": "Финална зона",
       "actions": "Действия"
     }
   },

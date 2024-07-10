@@ -2,17 +2,19 @@ import React from 'react'
 import DataTable from '@/components/shared/DataTable'
 import { useTranslation } from 'react-i18next'
 import SearchInput from '../SearchInput'
-import { Autocomplete, TextField } from '@mui/material'
+import { Autocomplete, TextField, Typography } from '@mui/material'
 import { Column } from '@/interfaces/Column.ts'
 import ZonesTableActionsMenu from '../actionsMenu/ZonesTableActionsMenu'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { getWarehouseManagementApi } from '@/services/generated-api'
 import { ZoneDto } from '@/services/model'
+import ChipsList from '../ChipsList'
 
 interface Row {
+  id: number
   name: string
-  markers: React.ReactNode
-  isFinal: boolean
+  markers: any
+  isFinal: string | undefined
   actions: React.ReactNode
 }
 
@@ -38,7 +40,7 @@ export default function ZonesTable() {
   const columnsData: Column<Row>[] = [
     { key: 'name', title: translate('zones.table.name') },
     { key: 'markers', title: translate('zones.table.markers') },
-    { key: 'isFinalZone', title: translate('zones.table.isFinalZone') },
+    { key: 'isFinal', title: translate('zones.table.isFinal') },
     { key: 'actions', title: translate('zones.table.actions'), minWidth: 50, align: 'right' }
   ]
 
@@ -69,19 +71,26 @@ export default function ZonesTable() {
     }
   })
 
-  function transformDataToRows(zones: ZoneDto[]) {
+  function transformDataToRows(zones: ZoneDto[]): Row[] {
     return zones.map((zone: ZoneDto) => ({
       id: zone.id!,
       name: zone.name!,
-      markers: zone.markers,
-      isFinal: zone.isFinal,
+      markers:
+        zone.markers!.length > 0 ? (
+          <ChipsList
+            items={zone.markers?.map((marker) => marker.markerName!) || ([] as string[])}
+          />
+        ) : (
+          <Typography>Empty</Typography>
+        ),
+      isFinal: zone.isFinal ? 'Yes' : 'No',
       actions: (
         <ZonesTableActionsMenu
           key={zone.id}
           id={zone.id!}
           name={zone.name!}
           markers={zone.markers}
-          isFinal={zone.isFinal}
+          isFinal={zone.isFinal!}
         />
       )
     }))
@@ -89,7 +98,7 @@ export default function ZonesTable() {
 
   const rowData = transformDataToRows(data || [])
 
-  console.log(data)
+  console.log(rowData)
 
   //като му добавя isFinalZone ще се оправи
   const filteredRows = rowData.filter((row: Row) => {

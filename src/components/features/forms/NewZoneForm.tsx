@@ -61,7 +61,7 @@ export default function NewZoneForm({
       <Controller
         name="markers"
         control={control}
-        // defaultValue=
+        defaultValue={[]}
         render={({ field }) => (
           <FormControl fullWidth>
             <InputLabel id="demo-multiple-checkbox-label">
@@ -101,7 +101,7 @@ export default function NewZoneForm({
       <Controller
         name="isFinal"
         control={control}
-        // defaultValue=
+        defaultValue={false}
         render={({ field }) => (
           <FormControlLabel
             control={<Checkbox {...field} checked={field.value} />}
