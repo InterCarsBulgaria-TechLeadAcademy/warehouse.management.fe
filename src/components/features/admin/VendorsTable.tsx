@@ -3,17 +3,18 @@ import DataTable from '@/components/shared/DataTable'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import SearchInput from '../SearchInput'
-import { Autocomplete, TextField } from '@mui/material'
+import { Autocomplete, TextField, Typography } from '@mui/material'
 import { Column } from '@/interfaces/column'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { getWarehouseManagementApi } from '@/services/generated-api'
 import { VendorDto } from '@/services/model'
+import ChipsList from '../ChipsList'
 
 interface Row {
   id: number
   name: string
   vendorNumber: string
-  markers: string
+  markers: React.ReactNode
   actions: React.ReactNode
 }
 
@@ -77,8 +78,14 @@ export default function VendorsTable() {
       id: vendor.id!,
       name: vendor.name!,
       vendorNumber: vendor.systemNumber!,
-      markers: vendor.markers!.map((marker) => marker.markerName).join(', '),
-      actions: <VendorTableActionsMenu key={vendor.id} id={vendor.id!} name={vendor.name!} />
+      markers: vendor.markers!.length > 0 ? (
+          <ChipsList
+            items={vendor.markers?.map((marker) => marker.markerName!) || ([] as string[])}
+          />
+        ) : (
+          <Typography>Empty</Typography>
+        ),
+      actions: <VendorTableActionsMenu key={vendor.id} vendor={vendor} /> // Да вкарам целият обект върте и после да си го ползвам в компонента (добра практика)!
     }))
   }
 
@@ -97,8 +104,7 @@ export default function VendorsTable() {
       page={page}
       rowsPerPage={rowsPerPage}
       onPageChange={onPageChange}
-      onRowsPerPageChange={onRowsPerPageChange}
-    >
+      onRowsPerPageChange={onRowsPerPageChange}>
       <SearchInput
         value={searchTerm}
         onChange={handleSearchChange}
