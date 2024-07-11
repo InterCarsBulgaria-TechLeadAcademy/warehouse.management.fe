@@ -110,7 +110,7 @@
     "labels": {
       "name": "Име",
       "vendorNumber": "Доставчик №",
-      "isFinal": "Финализирано",
+      "markers": "Маркери",
       "create": "Създай",
       "exit": "Изход"
     },
