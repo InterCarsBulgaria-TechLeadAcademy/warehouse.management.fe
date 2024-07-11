@@ -10,14 +10,16 @@ interface NewMarkerFormProps extends UseFormReturn<NewMarkerFormData> {
 export default function NewMarkerForm({
   control,
   formState: { errors },
-  defaultValue
+  defaultValue = ''
 }: NewMarkerFormProps) {
   const { t: translate } = useTranslation()
+
+  console.log(defaultValue)
   return (
     <Controller
       name="markerName"
       control={control}
-      defaultValue={defaultValue || ''}
+      defaultValue={defaultValue}
       render={({ field }) => (
         <TextField
           {...field}
