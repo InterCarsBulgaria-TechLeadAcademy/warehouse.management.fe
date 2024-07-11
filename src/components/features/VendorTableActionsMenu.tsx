@@ -5,12 +5,18 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import React from 'react'
 import WarningActionDialog from '../shared/WarningActionDialog'
 import { useTranslation } from 'react-i18next'
+import { VendorDto } from '@/services/model'
 
-export default function VendorTableActionsMenu() {
+interface MarkersTableActionsMenuProps {
+  vendor: VendorDto
+}
+
+export default function VendorTableActionsMenu({ vendor }: MarkersTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
+  console.log(vendor);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -64,7 +70,9 @@ export default function VendorTableActionsMenu() {
         <WarningActionDialog
           open={open}
           title={translate('deleteAction.vendors.title')}
-          content={translate('deleteAction.vendors.message')}
+          content={translate('deleteAction.vendors.message', {
+            vendor: vendor.name
+          })}
           discardText={translate('deleteAction.vendors.labels.discard')}
           confirmText={translate('deleteAction.vendors.labels.confirm')}
           onCloseDialog={handleClose}
