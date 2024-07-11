@@ -37,6 +37,9 @@ export default function VendorsTable() {
     setPage(0)
   }
 
+  const sortOptions = ['regular', 'admin']
+  const options = sortOptions.map((option) => ({ label: option }))
+
   const columnsData: Column<Row>[] = [
     { key: 'name', title: translate('vendors.table.name') },
     { key: 'vendorNumber', title: translate('vendors.table.vendorNumber') },
@@ -44,16 +47,14 @@ export default function VendorsTable() {
     { key: 'actions', title: translate('vendors.table.actions'), minWidth: 50, align: 'right' }
   ]
 
-  //TODO: Като направят БЕ pagination го оправи
   const { data } = useSuspenseQuery({
     queryKey: ['vendors'],
     queryFn: () => {
-      // return getWarehouseManagementApi().getApiVendorAll({
-      //   PageNumber: page + 1,
-      //   PageSize: rowsPerPage,
-      //   SearchQuery: searchTerm
-      // })
-      return getWarehouseManagementApi().getApiVendorAll() //БЕ сега работят по Pagination
+      return getWarehouseManagementApi().getApiVendorAll({
+        PageNumber: page + 1,
+        PageSize: rowsPerPage,
+        SearchQuery: searchTerm
+      })
     }
   })
 
@@ -62,25 +63,14 @@ export default function VendorsTable() {
       id: vendor.id!,
       name: vendor.name!,
       vendorNumber: vendor.systemNumber!,
-      markers:
-        vendor.markers!.length > 0 ? (
+      markers: vendor.markers!.length > 0 ? (
           <ChipsList
             items={vendor.markers?.map((marker) => marker.markerName!) || ([] as string[])}
           />
         ) : (
-          <Typography>-</Typography>
+          <Typography>Empty</Typography>
         ),
-      // actions: <VendorTableActionsMenu key={vendor.id} vendor={vendor} />
-      //Подай тези пропс
-      actions: (
-        <VendorTableActionsMenu
-          key={vendor.id}
-          id={vendor.id!}
-          name={vendor.name!}
-          vendorNumber={vendor.systemNumber!}
-          markersIds={vendor.markers?.map((marker) => marker.markerId!) || ([] as string[])}
-        />
-      )
+      actions: <VendorTableActionsMenu key={vendor.id} vendor={vendor} />
     }))
   }
 
@@ -91,9 +81,6 @@ export default function VendorsTable() {
       return row[column.key]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
     })
   })
-
-  const sortOptions = ['regular', 'admin']
-  const options = sortOptions.map((option) => ({ label: option }))
 
   return (
     <DataTable
