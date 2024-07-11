@@ -55,6 +55,10 @@
     "table": {
       "name": "Име",
       "actions": "Действия"
+    },
+    "error": {
+      "zones": "Зони",
+      "errorMessage": "Маркерът се използва в {{location}}"
     }
   },
   "newMarker": {
@@ -80,15 +84,15 @@
     "snackBar": {
       "messages": {
         "createMarker": {
-          "success": "Маркерът е добавен успешно",
+          "success": "Маркер {{name}} е добавен успешно",
           "error": "Възникна грешка"
         },
        "deleteMarker": {
-          "success": "Маркерът е изтрит успешно",
+          "success": "Маркер {{name}} е изтрит успешно",
           "error": "Възникна грешка"
        },
        "updateMarker": {
-          "success": "Маркерът е променен успешно",
+          "success": "Маркер {{name}} е променен успешно",
           "error": "Възникна грешка"
        }
       }
@@ -98,7 +102,7 @@
     "title": "Редактиране на маркер",
     "labels": {
       "name": "Име",
-      "create": "Създай",
+      "edit": "Промени",
       "exit": "Изход"
     }
   },

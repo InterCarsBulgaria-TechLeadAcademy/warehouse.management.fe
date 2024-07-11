@@ -13,6 +13,7 @@ import { useSnackbar } from '@/hooks/useSnackbar'
 export default function Markers() {
   const { t: translate } = useTranslation()
   const [openDialog, setOpenDialog] = useState(false)
+  const [markerName, setMarkerName] = useState('')
   const { showSnackbar } = useSnackbar()
 
   const handleClickOpen = () => {
@@ -25,12 +26,14 @@ export default function Markers() {
 
   const queryClient = useQueryClient()
 
-  const mutation = useMutation({
+  const mutationCreate = useMutation({
     mutationFn: getWarehouseManagementApi().postApiMarkerAdd,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['markers'] })
       showSnackbar({
-        message: translate('newMarker.snackBar.messages.createMarker.success'),
+        message: translate('newMarker.snackBar.messages.createMarker.success', {
+          name: markerName
+        }),
         type: 'success'
       })
     },
@@ -43,7 +46,8 @@ export default function Markers() {
   })
 
   const handleSubmit: SubmitHandler<NewMarkerFormData> = (data) => {
-    mutation.mutate({ name: data.markerName })
+    setMarkerName(data.markerName)
+    mutationCreate.mutate({ name: data.markerName })
   }
 
   return (

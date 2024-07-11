@@ -12,6 +12,7 @@ import { BodyType } from '@/services/api'
 import { MarkerFormDto } from '@/services/model'
 import { useSnackbar } from '@/hooks/useSnackbar'
 import TableActionsMenu from './TableActionsMenu'
+import axios, { AxiosError } from 'axios'
 
 interface MarkersTableActionsMenuProps {
   id: number
@@ -44,15 +45,40 @@ export default function MarkersTableActionsMenu({ id, name }: MarkersTableAction
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['markers'] })
       showSnackbar({
-        message: translate('newMarker.snackBar.messages.deleteMarker.success'),
+        message: translate('newMarker.snackBar.messages.deleteMarker.success', { name: name }),
         type: 'success'
       })
     },
-    onError: () => {
-      showSnackbar({
-        message: translate('newMarker.snackBar.messages.deleteMarker.error'),
-        type: 'error'
-      })
+    onError: (error: unknown) => {
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.status === 400) {
+          let location = error.response.data.Message.split(':').shift().split(' ').pop() //example: zones
+          let specificLocation = error.response.data.Message.split(':').pop() // example: zone 1
+          switch (location) {
+            case 'Zones':
+              location = translate('markers.error.zones')
+              break
+            //TODO: ако има други места, където се използва Markers
+            default:
+              break
+          }
+          showSnackbar({
+            message: `${translate('markers.error.errorMessage', { location: location })}: ${specificLocation}`,
+            type: 'error'
+          })
+        } else {
+          showSnackbar({
+            message: translate('newMarker.snackBar.messages.deleteMarker.error'),
+            type: 'error'
+          })
+        }
+      } else {
+        // Ако грешката не е от тип AxiosError, показваме общо съобщение за грешка
+        showSnackbar({
+          message: translate('newMarker.snackBar.messages.deleteMarker.error'),
+          type: 'error'
+        })
+      }
     }
   })
 
@@ -67,7 +93,7 @@ export default function MarkersTableActionsMenu({ id, name }: MarkersTableAction
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['markers'] })
       showSnackbar({
-        message: translate('newMarker.snackBar.messages.updateMarker.success'),
+        message: translate('newMarker.snackBar.messages.updateMarker.success', { name: name }),
         type: 'success'
       })
     },
@@ -93,6 +119,19 @@ export default function MarkersTableActionsMenu({ id, name }: MarkersTableAction
     <div>
       <TableActionsMenu specificOptionHandler={actionHandler} options={options} />
 
+      {selectedOption === 'edit' && (
+        <FormDialog<NewMarkerFormData>
+          open={true}
+          title={translate('editMarker.title')}
+          discardText={translate('editMarker.labels.exit')}
+          confirmText={translate('editMarker.labels.edit')}
+          onCloseDialog={handleClose}
+          schema={newMarkerSchema}
+          onSubmit={handleSubmit}
+          renderForm={(methods) => <NewMarkerForm {...methods} defaultValue={name} />}
+        />
+      )}
+
       {selectedOption === 'delete' && (
         <WarningActionDialog
           open={true}
@@ -105,19 +144,6 @@ export default function MarkersTableActionsMenu({ id, name }: MarkersTableAction
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
           onConfirmClick={onConfirmClick}
-        />
-      )}
-
-      {selectedOption === 'edit' && (
-        <FormDialog<NewMarkerFormData>
-          open={true}
-          title={translate('editMarker.title')}
-          discardText={translate('editMarker.labels.exit')}
-          confirmText={translate('editMarker.labels.create')}
-          onCloseDialog={handleClose}
-          schema={newMarkerSchema}
-          onSubmit={handleSubmit}
-          renderForm={(methods) => <NewMarkerForm {...methods} defaultValue={name} />}
         />
       )}
     </div>
