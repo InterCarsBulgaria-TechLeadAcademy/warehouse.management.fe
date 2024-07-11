@@ -70,7 +70,7 @@ export default function VendorsTable() {
         ) : (
           <Typography>Empty</Typography>
         ),
-      actions: <VendorTableActionsMenu key={vendor.id} vendor={vendor} /> // Да вкарам целият обект върте и после да си го ползвам в компонента (добра практика)!
+      actions: <VendorTableActionsMenu key={vendor.id} vendor={vendor} />
     }))
   }
 
