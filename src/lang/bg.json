@@ -63,7 +63,7 @@
         "discard": "Откажи",
         "confirm": "Потвърди"
       }
-      }
+    }
   },
   "newMarker": {
     "title": "Създаване на нов маркер",
@@ -117,18 +117,26 @@
     "snackBar": {
       "messages": {
         "createVendor": {
-          "success": "Вендорът е добавен успешно",
+          "success": "Вендор \"{{name}}\" е добавен успешно",
           "error": "Възникна грешка"
         },
-       "deleteVendor": {
-          "success": "Вендорът е изтрит успешно",
+        "deleteVendor": {
+          "success": "Вендор \"{{name}}\" е изтрит успешно",
           "error": "Възникна грешка"
-       },
-       "updateVendor": {
-          "success": "Вендорът е променен успешно",
+        },
+        "updateVendor": {
+          "success": "Вендор \"{{name}}\" е променен успешно",
           "error": "Възникна грешка"
-       }
+        }
       }
+    }
+  },
+  "editVendor": {
+    "title": "Редактиране на доставчик",
+    "labels": {
+      "name": "Име",
+      "edit": "Промени",
+      "exit": "Изход"
     }
   },
   "table": {
@@ -137,7 +145,7 @@
   "deleteAction": {
     "vendors": {
       "title": "Изтриване на доставчик",
-      "message": "Сигурни ли сте, че искате да изтриете доставчик \"{{vendor}}\" ?",
+      "message": "Сигурни ли сте, че искате да изтриете доставчик \"{{name}}\" ?",
       "labels": {
         "discard": "Откажи",
         "confirm": "Потвърди"
@@ -201,8 +209,8 @@
     },
     "poper": {
       "type": "Тип",
-      "quantity": "Количество" 
-    }, 
+      "quantity": "Количество"
+    },
     "newDeliveryTable": {
       "columnsData": {
         "number": "Номер",
@@ -218,20 +226,20 @@
       }
     },
     "deleteActions": {
-        "title": "Изтриване на доставка",
-        "message": "Сигурни ли сте, че искате да изтриете тази доставка?",
-        "labels": {
+      "title": "Изтриване на доставка",
+      "message": "Сигурни ли сте, че искате да изтриете тази доставка?",
+      "labels": {
         "discard": "Откажи",
         "confirm": "Потвърди"
-        }
-    }, 
+      }
+    },
     "filters": {
       "search": "Търсене",
       "markers": "Маркери",
       "deliveryTime": "Време за доставка",
-      "deliveryStart":"Начало на доставка",
-      "deliveryEnd":"Край на доставка",
-      "vendorName":"Име на доставчик"
+      "deliveryStart": "Начало на доставка",
+      "deliveryEnd": "Край на доставка",
+      "vendorName": "Име на доставчик"
     }
   },
   "newDelivery": {
