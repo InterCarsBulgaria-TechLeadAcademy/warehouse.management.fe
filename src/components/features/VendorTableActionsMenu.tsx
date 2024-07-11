@@ -5,10 +5,15 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import React from 'react'
 import WarningActionDialog from '../shared/WarningActionDialog'
 import { useTranslation } from 'react-i18next'
-import { VendorDto } from '@/services/model'
+import { VendorDto, VendorFormDto } from '@/services/model'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { getWarehouseManagementApi } from '@/services/generated-api'
 import { useSnackbar } from '@/hooks/useSnackbar'
+import FormDialog from '../shared/FormDialog'
+import { NewVendorFormData, newVendorSchema } from '@/schemas/newVendorSchema'
+import NewVendorForm from './forms/NewVendorForm'
+import { BodyType } from '@/services/api'
+import { SubmitHandler } from 'react-hook-form'
 
 interface MarkersTableActionsMenuProps {
   vendor: VendorDto
@@ -41,7 +46,7 @@ export default function VendorTableActionsMenu({ vendor }: MarkersTableActionsMe
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['vendors'] })
       showSnackbar({
-        message: translate('newVendor.snackBar.messages.deleteVendor.success'),
+        message: translate('newVendor.snackBar.messages.deleteVendor.success', { name: vendor.name }),
         type: 'success'
       })
     },
@@ -52,6 +57,30 @@ export default function VendorTableActionsMenu({ vendor }: MarkersTableActionsMe
       })
     }
   })
+
+  const mutationUpdate = useMutation({
+    mutationFn: ({ id, data }: { id: number; data: BodyType<VendorFormDto> }) =>
+      getWarehouseManagementApi().putApiVendorEditId(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['vendors'] })
+      showSnackbar({
+        message: translate('newVendor.snackBar.messages.updateVendor.success', {
+          name: vendor.name
+        }),
+        type: 'success'
+      })
+    },
+    onError: () => {
+      showSnackbar({
+        message: translate('newVendor.snackBar.messages.updateVendor.error'),
+        type: 'error'
+      })
+    }
+  })
+
+  const handleSubmit: SubmitHandler<NewVendorFormData> = (data) => {
+    mutationUpdate.mutate({ id: vendor.id!, data: { name: data.vendorName, systemNumber: data.vendorNumber } })
+  }
 
   const onConfirmClick = () => {
     mutationDelete.mutate(vendor.id!)
@@ -90,13 +119,24 @@ export default function VendorTableActionsMenu({ vendor }: MarkersTableActionsMe
         ))}
       </Menu>
 
+      {selectedOption === 'Редактирай' && (
+        <FormDialog<NewVendorFormData>
+          open={true}
+          title={translate('editVendor.title')}
+          discardText={translate('editVendor.labels.exit')}
+          confirmText={translate('editVendor.labels.edit')}
+          onCloseDialog={handleClose}
+          schema={newVendorSchema}
+          onSubmit={handleSubmit}
+          renderForm={(methods) => <NewVendorForm {...methods} defaultValues={vendor} />}
+        />
+      )}
+
       {selectedOption === 'Изтрий' && (
         <WarningActionDialog
-          open={open}
+          open={true}
           title={translate('deleteAction.vendors.title')}
-          content={translate('deleteAction.vendors.message', {
-            vendor: vendor.name
-          })}
+          content={translate('deleteAction.vendors.message', { name: vendor.name })}
           discardText={translate('deleteAction.vendors.labels.discard')}
           confirmText={translate('deleteAction.vendors.labels.confirm')}
           onCloseDialog={handleClose}
