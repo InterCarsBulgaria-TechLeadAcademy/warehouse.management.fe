@@ -101,7 +101,7 @@ export default function FormDialog<T extends FieldValues>({
               disabled={
                 currentStep === 4 ? !isCompletedMove : Object.keys(formState.errors).length > 0
               }>
-              {currentStep === steps?.length
+              {currentStep && currentStep === steps?.length
                 ? translate('newDelivery.labels.step5.createNewDelivery')
                 : confirmText}
             </Button>
