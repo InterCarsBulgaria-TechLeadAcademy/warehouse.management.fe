@@ -1,12 +1,18 @@
 import { NewVendorFormData } from '@/schemas/newVendorSchema'
+import { VendorDto } from '@/services/model'
 import { FormControl, InputLabel, ListItemText, MenuItem, Select, TextField } from '@mui/material'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
+interface NewVendorFormProps extends UseFormReturn<NewVendorFormData> {
+  defaultValues?: VendorDto
+}
+
 export default function NewVendorForm({
   control,
-  formState: { errors }
-}: UseFormReturn<NewVendorFormData>) {
+  formState: { errors },
+  defaultValues
+}: NewVendorFormProps) {
   const { t: translate } = useTranslation()
 
   const markers = ['Масло', 'Гуми', 'Чистачки', "Накладки"]
@@ -15,6 +21,7 @@ export default function NewVendorForm({
     <>
       <Controller
         name="vendorName"
+        defaultValue={defaultValues?.name || ''}
         control={control}
         render={({ field }) => (
           <TextField
@@ -32,6 +39,7 @@ export default function NewVendorForm({
       />
       <Controller
         name="vendorNumber"
+        defaultValue={defaultValues?.systemNumber || ''}
         control={control}
         render={({ field }) => (
           <TextField
