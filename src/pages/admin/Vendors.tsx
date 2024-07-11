@@ -14,6 +14,7 @@ export default function Vendors() {
   const { t: translate } = useTranslation()
   const [openDialog, setOpenDialog] = useState(false)
   const queryClient = useQueryClient()
+  const [vendorName, setVendorName] = useState('')
   const { showSnackbar } = useSnackbar()
 
   const mutation = useMutation({
@@ -21,7 +22,7 @@ export default function Vendors() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['vendors'] })
       showSnackbar({
-        message: translate('newVendor.snackBar.messages.createVendor.success'),
+        message: translate('newVendor.snackBar.messages.createVendor.success', { name: vendorName }),
         type: 'success'
       })
     },
@@ -42,6 +43,7 @@ export default function Vendors() {
   }
 
   const handleSubmit: SubmitHandler<NewVendorFormData> = (data) => {
+    setVendorName(data.vendorName);
     mutation.mutate({ name: data.vendorName, systemNumber: data.vendorNumber })
   }
 
