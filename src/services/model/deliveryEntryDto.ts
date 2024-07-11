@@ -5,14 +5,11 @@
  * OpenAPI spec version: 1.0
  */
 
-export interface ZoneFormDto {
+export interface DeliveryEntryDto {
   /** @nullable */
-  isFinal?: boolean | null
+  finishedProccessing?: string | null
+  id?: number
   /** @nullable */
-  markerIds?: number[] | null
-  /**
-   * @minLength 1
-   * @maxLength 500
-   */
-  name: string
+  startedProccessing?: string | null
+  zoneId?: number
 }

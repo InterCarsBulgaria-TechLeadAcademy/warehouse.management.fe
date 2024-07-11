@@ -12,6 +12,7 @@ export interface ZoneDto {
   /** @nullable */
   entries?: ZoneEntryDto[] | null
   id?: number
+  isFinal?: boolean
   /** @nullable */
   markers?: ZoneMarkerDto[] | null
   /** @nullable */

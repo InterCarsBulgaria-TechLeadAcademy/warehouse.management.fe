@@ -16,7 +16,15 @@ export default function Vendors() {
   const queryClient = useQueryClient()
   const { showSnackbar } = useSnackbar()
 
-  const mutation = useMutation({
+  const handleClickOpen = () => {
+    setOpenDialog(true)
+  }
+
+  const onCloseDialog = () => {
+    setOpenDialog(false)
+  }
+
+  const mutationPost = useMutation({
     mutationFn: getWarehouseManagementApi().postApiVendorAdd,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['vendors'] })
@@ -33,16 +41,11 @@ export default function Vendors() {
     }
   })
 
-  const handleClickOpen = () => {
-    setOpenDialog(true)
-  }
-
-  const onCloseDialog = () => {
-    setOpenDialog(false)
-  }
 
   const handleSubmit: SubmitHandler<NewVendorFormData> = (data) => {
-    mutation.mutate({ name: data.vendorName, systemNumber: data.vendorNumber, markers: data.markers })
+    // mutationPost.mutate({ name: data.vendorName, systemNumber: data.vendorNumber, markers: data.markers })
+    const markerIds = data.markers!.map((marker) => Number(marker))
+    mutationPost.mutate({ name: data.vendorName, systemNumber: data.vendorNumber, markers: markerIds})
   }
 
   return (
