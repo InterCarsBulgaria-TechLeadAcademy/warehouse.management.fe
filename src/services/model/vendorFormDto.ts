@@ -16,4 +16,6 @@ export interface VendorFormDto {
    * @maxLength 100
    */
   systemNumber: string
+  /** @nullable */
+  markers?: string[] | null
 }
