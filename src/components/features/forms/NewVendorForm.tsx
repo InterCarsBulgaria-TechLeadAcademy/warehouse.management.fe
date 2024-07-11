@@ -1,5 +1,5 @@
 import { NewVendorFormData } from '@/schemas/newVendorSchema'
-import { Checkbox, FormControlLabel, TextField } from '@mui/material'
+import { FormControl, InputLabel, ListItemText, MenuItem, Select, TextField } from '@mui/material'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
@@ -8,6 +8,9 @@ export default function NewVendorForm({
   formState: { errors }
 }: UseFormReturn<NewVendorFormData>) {
   const { t: translate } = useTranslation()
+
+  const markers = ['Масло', 'Гуми', 'Чистачки', "Накладки"]
+  
   return (
     <>
       <Controller
@@ -47,13 +50,29 @@ export default function NewVendorForm({
       />
 
       <Controller
-        name="isFinal"
+        name="markers"
         control={control}
         render={({ field }) => (
-          <FormControlLabel
-            control={<Checkbox {...field} checked={field.value} />}
-            label={translate('newVendor.labels.isFinal')}
-          />
+          <FormControl fullWidth>
+          <InputLabel id="demo-multiple-markers-label">
+            {translate('newVendor.labels.markers')}
+          </InputLabel>
+          <Select
+            {...field}
+            label={translate('newVendor.labels.markers')}
+            labelId="demo-multiple-markers-label"
+            id="demo-multiple-markers"
+            multiple
+            value={field.value || []}
+            onChange={(e) => field.onChange(e.target.value)}
+            renderValue={(selected) => (selected as string[]).join(', ')}>
+            {markers.map((marker) => (
+              <MenuItem key={marker} value={marker}>
+                <ListItemText primary={marker} />
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
         )}
       />
     </>
