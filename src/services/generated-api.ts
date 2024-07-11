@@ -163,6 +163,8 @@ export const getWarehouseManagementApi = () => {
     vendorFormDto: BodyType<VendorFormDto>,
     options?: SecondParameter<typeof customInstance>
   ) => {
+    console.log(vendorFormDto);
+    
     return customInstance<void>(
       {
         url: `/api/Vendor/add`,
