@@ -13,7 +13,7 @@ import ChipsList from '../ChipsList'
 interface Row {
   id: number
   name: string
-  markers: any
+  markers: React.ReactNode
   isFinal: string | undefined
   actions: React.ReactNode
 }
@@ -44,21 +44,7 @@ export default function ZonesTable() {
     { key: 'actions', title: translate('zones.table.actions'), minWidth: 50, align: 'right' }
   ]
 
-  // const rowData: Row[] = [
-  //   {
-  //     name: 'Зона 1',
-  //     markers: <ChipsList items={['Гуми', 'Масло', 'Чистачки', 'Филтри', 'Брони']} />,
-  //     isFinalZone: 'Да',
-  //     actions: <ZonesTableActionsMenu />
-  //   },
-  //   {
-  //     name: 'Зона 2',
-  //     markers: <ChipsList items={['Чистачки', 'Брони']} />,
-  //     isFinalZone: 'Не',
-  //     actions: <ZonesTableActionsMenu />
-  //   }
-  // ]
-
+  //TODO: Да оправя Pagination-a, когато БЕ са готови
   const { data } = useSuspenseQuery({
     queryKey: ['zones'],
     queryFn: () => {
@@ -81,15 +67,15 @@ export default function ZonesTable() {
             items={zone.markers?.map((marker) => marker.markerName!) || ([] as string[])}
           />
         ) : (
-          <Typography>Empty</Typography>
+          <Typography>-</Typography>
         ),
-      isFinal: zone.isFinal ? 'Yes' : 'No',
+      isFinal: zone.isFinal ? translate('zones.isFinal.yes') : translate('zones.isFinal.no'),
       actions: (
         <ZonesTableActionsMenu
           key={zone.id}
           id={zone.id!}
           name={zone.name!}
-          markers={zone.markers}
+          markersIds={zone.markers?.map((marker) => marker.markerId!) || ([] as string[])}
           isFinal={zone.isFinal!}
         />
       )
@@ -98,9 +84,6 @@ export default function ZonesTable() {
 
   const rowData = transformDataToRows(data || [])
 
-  console.log(rowData)
-
-  //като му добавя isFinalZone ще се оправи
   const filteredRows = rowData.filter((row: Row) => {
     return columnsData.some((column: Column<Row>) => {
       return row[column.key]?.toString().toLowerCase().includes(searchTerm.toLowerCase())

@@ -96,7 +96,7 @@ export default function MarkersTableActionsMenu({ id, name }: MarkersTableAction
           open={true}
           title={translate('editMarker.title')}
           discardText={translate('editMarker.labels.exit')}
-          confirmText={translate('editMarker.labels.create')}
+          confirmText={translate('editMarker.labels.edit')}
           onCloseDialog={handleClose}
           schema={newMarkerSchema}
           onSubmit={handleSubmit}

@@ -13,6 +13,7 @@ import { getWarehouseManagementApi } from '@/services/generated-api'
 export default function Zones() {
   const { t: translate } = useTranslation()
   const [openDialog, setOpenDialog] = useState(false)
+  const [zoneName, setZoneName] = useState('')
   const { showSnackbar } = useSnackbar()
 
   const handleClickOpen = () => {
@@ -30,7 +31,7 @@ export default function Zones() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['zones'] })
       showSnackbar({
-        message: translate('newZone.snackBar.messages.createZone.success'),
+        message: translate('newZone.snackBar.messages.createZone.success', { name: zoneName }),
         type: 'success'
       })
     },
@@ -43,6 +44,7 @@ export default function Zones() {
   })
 
   const handleSubmit: SubmitHandler<NewZoneFormData> = (data) => {
+    setZoneName(data.zoneName)
     const markerIds = data.markers!.map((marker) => Number(marker))
     mutationPost.mutate({ name: data.zoneName, markerIds: markerIds, isFinal: data.isFinal })
   }

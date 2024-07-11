@@ -17,19 +17,21 @@ import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
 interface NewZoneFormProps extends UseFormReturn<NewZoneFormData> {
-  defaultValue?: any
+  defaultValues?: {
+    name?: string
+    markersIds?: any //трябва да е [] | string[], но така гърми ZoneTableActionsMenu и не знам как
+    isFinal?: boolean
+  }
 }
 
-//трябва да подавам defaultValue за всички, не само за zoneName.
-//При един да се заредят попълнените данни
 export default function NewZoneForm({
   control,
   formState: { errors },
-  defaultValue
+  defaultValues = { name: '', markersIds: [], isFinal: false } //set defaultValues when is undefined
 }: NewZoneFormProps) {
   const { t: translate } = useTranslation()
 
-  // da korigiram, za da vzimam vsichki markers, a ne samo pyrvite 10 kato opravqt back-end-a
+  //TODO: da korigiram, za da vzimam vsichki markers, a ne samo pyrvite 10 kato opravqt back-end-a
   const { data } = useSuspenseQuery({
     queryKey: ['markers'],
     queryFn: () => {
@@ -42,7 +44,7 @@ export default function NewZoneForm({
       <Controller
         name="zoneName"
         control={control}
-        defaultValue={defaultValue || ''}
+        defaultValue={defaultValues.name}
         render={({ field }) => (
           <TextField
             {...field}
@@ -61,7 +63,7 @@ export default function NewZoneForm({
       <Controller
         name="markers"
         control={control}
-        defaultValue={[]}
+        defaultValue={defaultValues.markersIds}
         render={({ field }) => (
           <FormControl fullWidth>
             <InputLabel id="demo-multiple-checkbox-label">
@@ -101,7 +103,7 @@ export default function NewZoneForm({
       <Controller
         name="isFinal"
         control={control}
-        defaultValue={false}
+        defaultValue={defaultValues.isFinal}
         render={({ field }) => (
           <FormControlLabel
             control={<Checkbox {...field} checked={field.value} />}

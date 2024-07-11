@@ -15,14 +15,14 @@ import NewZoneForm from '../forms/NewZoneForm'
 interface ZonesTableActionsMenuProps {
   id: number
   name: string
-  markers: any
+  markersIds: number[] | string[]
   isFinal: boolean
 }
 
 export default function ZonesTableActionsMenu({
   id,
   name,
-  markers,
+  markersIds,
   isFinal
 }: ZonesTableActionsMenuProps) {
   const { t: translate } = useTranslation()
@@ -49,9 +49,8 @@ export default function ZonesTableActionsMenu({
     mutationFn: (id: number) => getWarehouseManagementApi().deleteApiZoneDeleteId(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['zones'] })
-      //Да променя да присъства и името на изтритото нещо
       showSnackbar({
-        message: translate('newZone.snackBar.messages.deleteZone.success'),
+        message: translate('newZone.snackBar.messages.deleteZone.success', { name: name }),
         type: 'success'
       })
     },
@@ -72,9 +71,9 @@ export default function ZonesTableActionsMenu({
     mutationFn: ({ id, data }: { id: number; data: BodyType<ZoneFormDto> }) =>
       getWarehouseManagementApi().putApiZoneEditId(id, data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['markers'] })
+      queryClient.invalidateQueries({ queryKey: ['zones'] })
       showSnackbar({
-        message: translate('newZone.snackBar.messages.updateZone.success'),
+        message: translate('newZone.snackBar.messages.updateZone.success', { name: name }),
         type: 'success'
       })
     },
@@ -86,8 +85,13 @@ export default function ZonesTableActionsMenu({
     }
   })
 
+  //TODO: да тествам когато БЕ оправят дали се променят всички полета, не само name
   const handleSubmit: SubmitHandler<NewZoneFormData> = (data) => {
-    mutationUpdate.mutate({ id, data: { name: data.zoneName } })
+    const markerIds = data.markers!.map((marker) => Number(marker))
+    mutationUpdate.mutate({
+      id,
+      data: { name: data.zoneName, markerIds: markerIds, isFinal: data.isFinal }
+    })
   }
 
   const options = [
@@ -102,18 +106,15 @@ export default function ZonesTableActionsMenu({
       {selectedOption === 'edit' && (
         <FormDialog<NewZoneFormData>
           open={true}
-          title={translate('editMarker.title')}
-          discardText={translate('editMarker.labels.exit')}
-          confirmText={translate('editMarker.labels.create')}
+          title={translate('newZone.editZone.title')}
+          discardText={translate('newZone.editZone.labels.exit')}
+          confirmText={translate('newZone.editZone.labels.edit')}
           onCloseDialog={handleClose}
           schema={newZoneSchema}
           onSubmit={handleSubmit}
-          //trqbva da promenq i da podavam defaultValue за всички полета
-
-          // renderForm={(methods) => (
-          // <NewZoneForm {...methods} defaultValues={(name, markers, isFinalZone)} />
-          // )}
-          renderForm={(methods) => <NewZoneForm {...methods} defaultValue={name} />}
+          renderForm={(methods) => (
+            <NewZoneForm {...methods} defaultValues={{ name, markersIds, isFinal }} />
+          )}
         />
       )}
 
@@ -121,7 +122,7 @@ export default function ZonesTableActionsMenu({
         <WarningActionDialog
           open={true}
           title={translate('deleteAction.zones.title')}
-          content={translate('deleteAction.zones.message')}
+          content={translate('deleteAction.zones.message', { name: name })}
           discardText={translate('deleteAction.zones.labels.discard')}
           confirmText={translate('deleteAction.zones.labels.confirm')}
           onCloseDialog={handleClose}
