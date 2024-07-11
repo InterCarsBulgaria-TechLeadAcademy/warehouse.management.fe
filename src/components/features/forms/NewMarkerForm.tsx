@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { NewMarkerFormData } from '@/schemas/newMarkerSchema'
 
 interface NewMarkerFormProps extends UseFormReturn<NewMarkerFormData> {
-  defaultValue?: string | undefined | null
+  defaultValue?: string
 }
 
 export default function NewMarkerForm({
