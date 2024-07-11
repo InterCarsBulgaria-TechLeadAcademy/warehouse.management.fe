@@ -6,6 +6,9 @@ import React from 'react'
 import WarningActionDialog from '../shared/WarningActionDialog'
 import { useTranslation } from 'react-i18next'
 import { VendorDto } from '@/services/model'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { getWarehouseManagementApi } from '@/services/generated-api'
+import { useSnackbar } from '@/hooks/useSnackbar'
 
 interface MarkersTableActionsMenuProps {
   vendor: VendorDto
@@ -16,7 +19,8 @@ export default function VendorTableActionsMenu({ vendor }: MarkersTableActionsMe
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
-  console.log(vendor);
+
+  const { showSnackbar } = useSnackbar()
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -30,7 +34,27 @@ export default function VendorTableActionsMenu({ vendor }: MarkersTableActionsMe
     handleClose()
   }
 
+  const queryClient = useQueryClient()
+
+  const mutationDelete = useMutation({
+    mutationFn: (id: number) => getWarehouseManagementApi().deleteApiVendorDeleteId(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['vendors'] })
+      showSnackbar({
+        message: translate('newVendor.snackBar.messages.deleteVendor.success'),
+        type: 'success'
+      })
+    },
+    onError: () => {
+      showSnackbar({
+        message: translate('newVendor.snackBar.messages.deleteVendor.error'),
+        type: 'error'
+      })
+    }
+  })
+
   const onConfirmClick = () => {
+    mutationDelete.mutate(vendor.id!)
     handleClose()
   }
 
