@@ -74,6 +74,8 @@ export default function ZonesTable() {
     }))
   }
 
+  console.log(data)
+
   const rowData = transformDataToRows(data || [])
 
   const filteredRows = rowData.filter((row: Row) => {

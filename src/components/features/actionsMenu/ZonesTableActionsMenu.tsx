@@ -22,8 +22,6 @@ export default function ZonesTableActionsMenu({ zone }: ZonesTableActionsMenuPro
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
   const { showSnackbar } = useSnackbar()
 
-  console.log(zone)
-
   const handleClose = () => {
     setSelectedOption(null)
     setAnchorEl(null)
