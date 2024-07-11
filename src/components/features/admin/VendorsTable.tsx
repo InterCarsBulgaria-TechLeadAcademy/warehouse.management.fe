@@ -47,23 +47,8 @@ export default function VendorsTable() {
     { key: 'actions', title: translate('vendors.table.actions'), minWidth: 50, align: 'right' }
   ]
 
-  // const rowData: Row[] = [
-  //   {
-  //     name: 'Bosch',
-  //     vendorNumber: 1,
-  //     markers: 'Масло',
-  //     actions: <VendorTableActionsMenu />
-  //   },
-  //   {
-  //     name: 'Valeo',
-  //     vendorNumber: 2,
-  //     markers: 'Чистачки',
-  //     actions: <VendorTableActionsMenu />
-  //   }
-  // ]
-
   const { data } = useSuspenseQuery({
-    queryKey: ['markers'],
+    queryKey: ['vendors'],
     queryFn: () => {
       return getWarehouseManagementApi().getApiVendorAll({
         PageNumber: page + 1,
