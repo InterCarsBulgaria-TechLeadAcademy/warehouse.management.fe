@@ -42,7 +42,7 @@ export default function Vendors() {
   }
 
   const handleSubmit: SubmitHandler<NewVendorFormData> = (data) => {
-    mutation.mutate({ name: data.vendorName, systemNumber: data.vendorNumber, markers: data.markers })
+    mutation.mutate({ name: data.vendorName, systemNumber: data.vendorNumber })
   }
 
   return (
