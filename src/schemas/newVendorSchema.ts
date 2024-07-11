@@ -9,10 +9,11 @@ export const newVendorSchema = yup.object({
     .string()
     .typeError('newVendor.errors.vendorNumber.typeError')
     .max(25, 'newVendor.errors.vendorNumber.max'),
-  isFinal: yup.boolean()
+  markers: yup.array().of(yup.string()),
 })
 
 export interface NewVendorFormData extends yup.InferType<typeof newVendorSchema> {
   vendorName: string
   vendorNumber: string
+  markers: string[]
 }
