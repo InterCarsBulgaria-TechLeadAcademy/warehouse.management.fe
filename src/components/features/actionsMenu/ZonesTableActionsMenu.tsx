@@ -4,7 +4,7 @@ import WarningActionDialog from '@/components/shared/WarningActionDialog'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { getWarehouseManagementApi } from '@/services/generated-api'
 import { useSnackbar } from '@/hooks/useSnackbar'
-import { ZoneFormDto } from '@/services/model'
+import { ZoneDto, ZoneFormDto } from '@/services/model'
 import { BodyType } from '@/services/api'
 import { SubmitHandler } from 'react-hook-form'
 import { NewZoneFormData, newZoneSchema } from '@/schemas/newZoneSchema'
@@ -13,22 +13,16 @@ import FormDialog from '@/components/shared/FormDialog'
 import NewZoneForm from '../forms/NewZoneForm'
 
 interface ZonesTableActionsMenuProps {
-  id: number
-  name: string
-  markersIds: number[] | string[]
-  isFinal: boolean
+  zone: ZoneDto
 }
 
-export default function ZonesTableActionsMenu({
-  id,
-  name,
-  markersIds,
-  isFinal
-}: ZonesTableActionsMenuProps) {
+export default function ZonesTableActionsMenu({ zone }: ZonesTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
   const { showSnackbar } = useSnackbar()
+
+  console.log(zone)
 
   const handleClose = () => {
     setSelectedOption(null)
@@ -50,7 +44,7 @@ export default function ZonesTableActionsMenu({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['zones'] })
       showSnackbar({
-        message: translate('newZone.snackBar.messages.deleteZone.success', { name: name }),
+        message: translate('newZone.snackBar.messages.deleteZone.success', { name: zone.name }),
         type: 'success'
       })
     },
@@ -63,7 +57,7 @@ export default function ZonesTableActionsMenu({
   })
 
   const onConfirmClick = () => {
-    mutationDelete.mutate(id)
+    mutationDelete.mutate(zone.id!)
     handleClose()
   }
 
@@ -73,7 +67,7 @@ export default function ZonesTableActionsMenu({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['zones'] })
       showSnackbar({
-        message: translate('newZone.snackBar.messages.updateZone.success', { name: name }),
+        message: translate('newZone.snackBar.messages.updateZone.success', { name: zone.name }),
         type: 'success'
       })
     },
@@ -89,7 +83,7 @@ export default function ZonesTableActionsMenu({
   const handleSubmit: SubmitHandler<NewZoneFormData> = (data) => {
     const markerIds = data.markers!.map((marker) => Number(marker))
     mutationUpdate.mutate({
-      id,
+      id: zone.id!,
       data: { name: data.zoneName, markerIds: markerIds, isFinal: data.isFinal }
     })
   }
@@ -113,7 +107,14 @@ export default function ZonesTableActionsMenu({
           schema={newZoneSchema}
           onSubmit={handleSubmit}
           renderForm={(methods) => (
-            <NewZoneForm {...methods} defaultValues={{ name, markersIds, isFinal }} />
+            <NewZoneForm
+              {...methods}
+              defaultValues={{
+                name: zone.name!,
+                markersIds: zone.markers?.map((marker) => marker.markerId!) || ([] as string[]),
+                isFinal: zone.isFinal
+              }}
+            />
           )}
         />
       )}

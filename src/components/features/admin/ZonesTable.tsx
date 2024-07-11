@@ -70,15 +70,7 @@ export default function ZonesTable() {
           <Typography>-</Typography>
         ),
       isFinal: zone.isFinal ? translate('zones.isFinal.yes') : translate('zones.isFinal.no'),
-      actions: (
-        <ZonesTableActionsMenu
-          key={zone.id}
-          id={zone.id!}
-          name={zone.name!}
-          markersIds={zone.markers?.map((marker) => marker.markerId!) || ([] as string[])}
-          isFinal={zone.isFinal!}
-        />
-      )
+      actions: <ZonesTableActionsMenu key={zone.id} zone={zone} />
     }))
   }
 
