@@ -21,7 +21,6 @@ export default function Zones() {
 
   const handleSubmit: SubmitHandler<NewZoneFormData> = (data) => {
     console.log(data)
-    onCloseDialog()
   }
 
   return (
