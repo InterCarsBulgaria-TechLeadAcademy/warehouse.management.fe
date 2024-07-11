@@ -4,22 +4,21 @@ import { useTranslation } from 'react-i18next'
 import { NewMarkerFormData } from '@/schemas/newMarkerSchema'
 
 interface NewMarkerFormProps extends UseFormReturn<NewMarkerFormData> {
-  defaultValue?: string
+  defaultValue?: string | undefined | null
 }
 
 export default function NewMarkerForm({
   control,
   formState: { errors },
-  defaultValue = ''
+  defaultValue
 }: NewMarkerFormProps) {
   const { t: translate } = useTranslation()
 
-  console.log(defaultValue)
   return (
     <Controller
       name="markerName"
       control={control}
-      defaultValue={defaultValue}
+      defaultValue={defaultValue || ''}
       render={({ field }) => (
         <TextField
           {...field}

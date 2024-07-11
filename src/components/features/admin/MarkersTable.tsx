@@ -53,7 +53,7 @@ export default function MarkersTable() {
     return markers.map((marker: MarkerDto) => ({
       id: marker.id!,
       name: marker.name!,
-      actions: <MarkersTableActionsMenu key={marker.id} id={marker.id!} name={marker.name!} />
+      actions: <MarkersTableActionsMenu key={marker.id} marker={marker} />
     }))
   }
 
