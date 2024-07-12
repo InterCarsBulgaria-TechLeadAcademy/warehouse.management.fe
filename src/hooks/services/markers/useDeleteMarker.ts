@@ -14,8 +14,7 @@ export default function useDeleteMarker(markerName: string) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['markers'] })
       showSnackbar({
-        message: translate('newMarker.snackBar.messages.deleteMarker.success', {
-          //   name: marker.name
+        message: translate('snackBar.messages.markers.deleteMarker.success', {
           name: markerName
         }),
         type: 'success'
@@ -38,13 +37,13 @@ export default function useDeleteMarker(markerName: string) {
           })
         } else {
           showSnackbar({
-            message: translate('newMarker.snackBar.messages.deleteMarker.error'),
+            message: translate('snackBar.messages.markers.deleteMarker.error'),
             type: 'error'
           })
         }
       } else {
         showSnackbar({
-          message: translate('newMarker.snackBar.messages.deleteMarker.error'),
+          message: translate('snackBar.messages.markers.deleteMarker.error'),
           type: 'error'
         })
       }

@@ -13,7 +13,7 @@ export default function usePostMarker(markerName: string) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['markers'] })
       showSnackbar({
-        message: translate('newMarker.snackBar.messages.createMarker.success', {
+        message: translate('snackBar.messages.markers.createMarker.success', {
           name: markerName
         }),
         type: 'success'
@@ -21,7 +21,7 @@ export default function usePostMarker(markerName: string) {
     },
     onError: () => {
       showSnackbar({
-        message: translate('newMarker.snackBar.messages.createMarker.error'),
+        message: translate('snackBar.messages.markers.createMarker.error'),
         type: 'error'
       })
     }

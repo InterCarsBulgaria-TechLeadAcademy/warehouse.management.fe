@@ -80,22 +80,6 @@
         "discard": "Откажи",
         "confirm":"Потвърди"
       }
-    },
-    "snackBar": {
-      "messages": {
-        "createMarker": {
-          "success": "Маркер {{name}} е добавен успешно",
-          "error": "Възникна грешка"
-        },
-       "deleteMarker": {
-          "success": "Маркер {{name}} е изтрит успешно",
-          "error": "Възникна грешка"
-       },
-       "updateMarker": {
-          "success": "Маркер {{name}} е променен успешно",
-          "error": "Възникна грешка"
-       }
-      }
     }
   },
   "editMarker": {
@@ -394,6 +378,24 @@
         "zone": {
           "message": "Добавете зона"
         }
+      }
+    }
+  },
+  "snackBar": {
+    "messages": {
+      "markers": {
+        "createMarker": {
+          "success": "Маркер {{name}} е добавен успешно",
+          "error": "Възникна грешка"
+        },
+       "deleteMarker": {
+          "success": "Маркер {{name}} е изтрит успешно",
+          "error": "Възникна грешка"
+       },
+       "updateMarker": {
+          "success": "Маркер {{name}} е променен успешно",
+          "error": "Възникна грешка"
+       }
       }
     }
   }
