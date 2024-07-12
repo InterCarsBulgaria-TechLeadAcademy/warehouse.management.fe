@@ -1,4 +1,6 @@
+import useGetMarkers from '@/hooks/services/markers/useGetMarkers'
 import { NewZoneFormData } from '@/schemas/newZoneSchema'
+import { MarkerDto } from '@/services/model'
 import {
   Checkbox,
   FormControl,
@@ -13,18 +15,28 @@ import {
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
-const markers = ['Масло', 'Гуми', 'Чистачки']
+interface NewZoneFormProps extends UseFormReturn<NewZoneFormData> {
+  defaultValues?: {
+    name?: string
+    markersIds?: number[]
+    isFinal?: boolean
+  }
+}
 
 export default function NewZoneForm({
   control,
-  formState: { errors }
-}: UseFormReturn<NewZoneFormData>) {
+  formState: { errors },
+  defaultValues = { name: '', markersIds: [], isFinal: false } //set defaultValues when is undefined
+}: NewZoneFormProps) {
   const { t: translate } = useTranslation()
+  const markers = useGetMarkers()
+
   return (
     <>
       <Controller
         name="zoneName"
         control={control}
+        defaultValue={defaultValues.name}
         render={({ field }) => (
           <TextField
             {...field}
@@ -43,6 +55,7 @@ export default function NewZoneForm({
       <Controller
         name="markers"
         control={control}
+        defaultValue={defaultValues.markersIds?.map(String)}
         render={({ field }) => (
           <FormControl fullWidth>
             <InputLabel id="demo-multiple-checkbox-label">
@@ -56,11 +69,22 @@ export default function NewZoneForm({
               value={field.value || []}
               onChange={(e) => field.onChange(e.target.value)}
               input={<OutlinedInput />}
-              renderValue={(selected) => (selected as string[]).join(', ')}>
-              {markers.map((marker) => (
-                <MenuItem key={marker} value={marker}>
-                  <Checkbox checked={field.value?.includes(marker)} />{' '}
-                  <ListItemText primary={marker} />
+              renderValue={(selected) => {
+                const selectedMarkerNames = selected
+                  .map((id) => {
+                    const isMarker = markers.find((marker) => marker.id === Number(id))
+                    if (isMarker) {
+                      return isMarker.name
+                    }
+                  })
+                  .join(', ')
+
+                return selectedMarkerNames
+              }}>
+              {markers.map((marker: MarkerDto) => (
+                <MenuItem key={marker.id!} value={marker.id!}>
+                  <Checkbox checked={field.value?.includes(marker.name!)} />{' '}
+                  <ListItemText primary={marker.name!} />
                 </MenuItem>
               ))}
             </Select>
@@ -71,6 +95,7 @@ export default function NewZoneForm({
       <Controller
         name="isFinal"
         control={control}
+        defaultValue={defaultValues.isFinal}
         render={({ field }) => (
           <FormControlLabel
             control={<Checkbox {...field} checked={field.value} />}

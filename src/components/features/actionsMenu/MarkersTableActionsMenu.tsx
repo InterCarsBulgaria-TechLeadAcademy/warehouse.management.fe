@@ -16,14 +16,12 @@ interface MarkersTableActionsMenuProps {
 
 export default function MarkersTableActionsMenu({ marker }: MarkersTableActionsMenuProps) {
   const { t: translate } = useTranslation()
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
   const mutationDelete = useDeleteMarker(marker.name!)
   const mutationUpdate = useUpdateMarker(marker.name!)
 
   const handleClose = () => {
     setSelectedOption(null)
-    setAnchorEl(null)
   }
 
   const onDiscardClick = () => {

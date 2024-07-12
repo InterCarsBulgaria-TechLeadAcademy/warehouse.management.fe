@@ -96,7 +96,6 @@ export default function DataTable<T>({
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          //da promenq count da ne e tova
           count={rowData.length}
           rowsPerPage={rowsPerPage}
           page={page}

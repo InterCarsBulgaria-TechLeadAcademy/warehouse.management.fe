@@ -139,7 +139,7 @@
     },
     "zones": {
       "title": "Изтриване на зона",
-      "message": "Сигурни ли сте, че искате да изтриете тази зона?",
+      "message": "Сигурни ли сте, че искате да изтриете {{name}} зона?",
       "labels": {
         "discard": "Откажи",
         "confirm": "Потвърди"
@@ -167,8 +167,12 @@
     "table": {
       "name": "Име",
       "markers": "Маркери",
-      "isFinalZone": "Финална зона",
+      "isFinal": "Финална зона",
       "actions": "Действия"
+    },
+    "isFinal": {
+      "yes": "Да",
+      "no": "Не"
     }
   },
   "newZone": {
@@ -185,6 +189,14 @@
       "isFinal": "Финализирано",
       "create": "Създай",
       "exit": "Изход"
+    },
+    "editZone": {
+      "title": "Редактиране на зона",
+      "labels": {
+        "name": "Име",
+        "edit": "Промени",
+        "exit": "Изход"
+      }
     }
   },
   "deliveries": {
@@ -383,19 +395,33 @@
   },
   "snackBar": {
     "messages": {
+      "zones": {
+        "createZone": {
+          "success": "Зона {{name}} e добавена успешно",
+          "error": "Възникна грешка"
+        },
+        "deleteZone": {
+          "success": "Зона {{name}} e изтрита успешно",
+          "error": "Възникна грешка"
+        },
+        "updateZone": {
+          "success": "Зона {{name}} e променена успешно",
+          "error": "Възникна грешка"
+        }
+      },
       "markers": {
         "createMarker": {
           "success": "Маркер {{name}} е добавен успешно",
           "error": "Възникна грешка"
         },
-       "deleteMarker": {
+        "deleteMarker": {
           "success": "Маркер {{name}} е изтрит успешно",
           "error": "Възникна грешка"
-       },
-       "updateMarker": {
+        },
+        "updateMarker": {
           "success": "Маркер {{name}} е променен успешно",
           "error": "Възникна грешка"
-       }
+        }
       }
     }
   }
