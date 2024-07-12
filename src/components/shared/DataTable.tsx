@@ -9,29 +9,38 @@ import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
 import { Box, FormControlLabel, Switch } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { Column } from '@/interfaces/column.ts'
+import { Column } from '@/interfaces/Column'
 
 interface DataTableProps<T> {
   columnsData: Column<T>[]
   rowData: T[]
+  page: number
+  rowsPerPage: number
+  onPageChange: (newPage: number) => void
+  onRowsPerPageChange: (newRowsPerPage: number) => void
   children: React.ReactNode
 }
 
-export default function DataTable<T>({ columnsData, rowData, children }: DataTableProps<T>) {
+export default function DataTable<T>({
+  columnsData,
+  rowData,
+  page,
+  rowsPerPage,
+  onPageChange,
+  onRowsPerPageChange,
+  children
+}: DataTableProps<T>) {
   const { t: translate } = useTranslation()
-  const [page, setPage] = React.useState(0)
-  const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const [dense, setDense] = React.useState(false)
 
   const columns: readonly Column<Record<any, any>>[] = columnsData
 
   const handleChangePage = (_event: unknown, newPage: number) => {
-    setPage(newPage)
+    onPageChange(newPage)
   }
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(+event.target.value)
-    setPage(0)
+    onRowsPerPageChange(+event.target.value)
   }
 
   const handleChangeDense = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,7 +75,7 @@ export default function DataTable<T>({ columnsData, rowData, children }: DataTab
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row: any) => {
                   return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={row.vendorNumber}>
+                    <TableRow key={row.id} hover role="checkbox" tabIndex={-1}>
                       {columns.map((column) => {
                         const value = row[column.key]
                         return (
@@ -87,6 +96,7 @@ export default function DataTable<T>({ columnsData, rowData, children }: DataTab
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
+          //da promenq count da ne e tova
           count={rowData.length}
           rowsPerPage={rowsPerPage}
           page={page}

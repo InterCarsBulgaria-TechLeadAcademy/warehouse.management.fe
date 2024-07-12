@@ -6,11 +6,13 @@ import MarkersTable from '@/components/features/admin/MarkersTable'
 import { NewMarkerFormData, newMarkerSchema } from '@/schemas/newMarkerSchema'
 import FormDialog from '@/components/shared/FormDialog'
 import NewMarkerForm from '@/components/features/forms/NewMarkerForm'
+import usePostMarker from '@/hooks/services/markers/usePostMarker'
 
 export default function Markers() {
   const { t: translate } = useTranslation()
   const [openDialog, setOpenDialog] = useState(false)
-  const [isFinal, setIsFinal] = useState(false)
+  const [markerName, setMarkerName] = useState('')
+  const mutationCreate = usePostMarker(markerName)
 
   const handleClickOpen = () => {
     setOpenDialog(true)
@@ -21,12 +23,8 @@ export default function Markers() {
   }
 
   const handleSubmit: SubmitHandler<NewMarkerFormData> = (data) => {
-    const formData = {
-      ...data,
-      isFinal
-    }
-    console.log(formData)
-    onCloseDialog()
+    setMarkerName(data.markerName)
+    mutationCreate.mutate({ name: data.markerName })
   }
 
   return (
@@ -47,9 +45,7 @@ export default function Markers() {
         onCloseDialog={onCloseDialog}
         schema={newMarkerSchema}
         onSubmit={handleSubmit}
-        renderForm={(methods) => (
-          <NewMarkerForm {...methods} isFinal={isFinal} setIsFinal={setIsFinal} />
-        )}
+        renderForm={(methods) => <NewMarkerForm {...methods} />}
       />
     </>
   )

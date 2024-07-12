@@ -1,10 +1,10 @@
-import VendorTableActionsMenu from '@/components/features/VendorTableActionsMenu'
 import DataTable from '@/components/shared/DataTable'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import SearchInput from '../SearchInput'
 import { Autocomplete, TextField } from '@mui/material'
-import { Column } from '@/interfaces/column'
+import { Column } from '@/interfaces/Column'
+import VendorTableActionsMenu from '../actionsMenu/VendorTableActionsMenu'
 
 interface Row {
   name: string

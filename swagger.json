@@ -5,6 +5,426 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/Delivery/{id}": {
+      "get": {
+        "tags": [
+          "Delivery"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeliveryDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeliveryDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeliveryDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Delivery/all": {
+      "get": {
+        "tags": [
+          "Delivery"
+        ],
+        "parameters": [
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SearchQuery",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeliveryDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeliveryDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeliveryDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Delivery/add": {
+      "post": {
+        "tags": [
+          "Delivery"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeliveryFormDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeliveryFormDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeliveryFormDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Delivery/edit/{id}": {
+      "put": {
+        "tags": [
+          "Delivery"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeliveryFormDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeliveryFormDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeliveryFormDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Delivery/delete/{id}": {
+      "delete": {
+        "tags": [
+          "Delivery"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Delivery/restore/{id}": {
+      "put": {
+        "tags": [
+          "Delivery"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Delivery/all-deleted": {
+      "get": {
+        "tags": [
+          "Delivery"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeliveryDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeliveryDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DeliveryDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Entry": {
       "get": {
         "tags": [
@@ -188,17 +608,26 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EntryFormDto"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EntryFormDto"
+                }
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/EntryFormDto"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EntryFormDto"
+                }
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/EntryFormDto"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EntryFormDto"
+                }
               }
             }
           }
@@ -358,6 +787,132 @@
         }
       }
     },
+    "/api/Entry/start/{id}": {
+      "get": {
+        "tags": [
+          "Entry"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Entry/finish/{id}": {
+      "get": {
+        "tags": [
+          "Entry"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Marker/{id}": {
       "get": {
         "tags": [
@@ -419,6 +974,44 @@
       }
     },
     "/api/Marker/all": {
+      "get": {
+        "tags": [
+          "Marker"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MarkerDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MarkerDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MarkerDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Marker/all-with-params": {
       "get": {
         "tags": [
           "Marker"
@@ -571,8 +1164,8 @@
           "200": {
             "description": "Success"
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -591,8 +1184,8 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -909,8 +1502,8 @@
           "200": {
             "description": "Success"
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -929,8 +1522,8 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -991,8 +1584,8 @@
           "200": {
             "description": "Success"
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1011,8 +1604,8 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1296,6 +1889,69 @@
         }
       }
     },
+    "/api/Zone/all-with-params": {
+      "get": {
+        "tags": [
+          "Zone"
+        ],
+        "parameters": [
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SearchQuery",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ZoneDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ZoneDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ZoneDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Zone/add": {
       "post": {
         "tags": [
@@ -1386,8 +2042,8 @@
           "200": {
             "description": "Success"
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1406,8 +2062,8 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1449,8 +2105,8 @@
           "200": {
             "description": "Success"
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1469,8 +2125,8 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1512,8 +2168,8 @@
           "200": {
             "description": "Success"
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1532,8 +2188,8 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1560,6 +2216,63 @@
         "tags": [
           "Zone"
         ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ZoneDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ZoneDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ZoneDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Zone/all-with-deleted-with-params": {
+      "get": {
+        "tags": [
+          "Zone"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaginationParameters"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaginationParameters"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaginationParameters"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -1674,6 +2387,178 @@
   },
   "components": {
     "schemas": {
+      "DeliveryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "systemNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "receptionNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "truckNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "cmr": {
+            "type": "string",
+            "nullable": true
+          },
+          "deliveryTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "pallets": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "packages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pieces": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isApproved": {
+            "type": "boolean"
+          },
+          "vendorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vendorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeliveryEntryDto"
+            },
+            "nullable": true
+          },
+          "markers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeliveryMarkerDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeliveryEntryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "zoneId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "startedProccessing": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "finishedProccessing": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeliveryFormDto": {
+        "required": [
+          "cmr",
+          "receptionNumber",
+          "systemNumber",
+          "truckNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "systemNumber": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "receptionNumber": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "truckNumber": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "cmr": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "deliveryTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "pallets": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "packages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pieces": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isApproved": {
+            "type": "boolean"
+          },
+          "vendorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "markers": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeliveryMarkerDto": {
+        "type": "object",
+        "properties": {
+          "markerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "markerName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "EntryDto": {
         "type": "object",
         "properties": {
@@ -1715,6 +2600,10 @@
         "additionalProperties": false
       },
       "EntryFormDto": {
+        "required": [
+          "deliveryId",
+          "zoneId"
+        ],
         "type": "object",
         "properties": {
           "pallets": {
@@ -1732,6 +2621,14 @@
           "pieces": {
             "maximum": 5000,
             "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "deliveryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "zoneId": {
             "type": "integer",
             "format": "int32"
           }
@@ -1782,6 +2679,10 @@
       "MarkerDto": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
           "name": {
             "type": "string",
             "nullable": true
@@ -1856,6 +2757,24 @@
         },
         "additionalProperties": false
       },
+      "PaginationParameters": {
+        "type": "object",
+        "properties": {
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "searchQuery": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ProblemDetails": {
         "type": "object",
         "properties": {
@@ -1881,7 +2800,7 @@
             "nullable": true
           }
         },
-        "additionalProperties": {}
+        "additionalProperties": { }
       },
       "VendorDto": {
         "type": "object",
@@ -1931,6 +2850,14 @@
             "maxLength": 100,
             "minLength": 1,
             "type": "string"
+          },
+          "markerIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1976,6 +2903,9 @@
           "name": {
             "type": "string",
             "nullable": true
+          },
+          "isFinal": {
+            "type": "boolean"
           },
           "markers": {
             "type": "array",
@@ -2038,12 +2968,26 @@
         "additionalProperties": false
       },
       "ZoneFormDto": {
+        "required": [
+          "name"
+        ],
         "type": "object",
         "properties": {
           "name": {
             "maxLength": 500,
             "minLength": 1,
-            "type": "string",
+            "type": "string"
+          },
+          "isFinal": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "markerIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
             "nullable": true
           }
         },
