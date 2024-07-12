@@ -16,14 +16,12 @@ interface ZonesTableActionsMenuProps {
 
 export default function ZonesTableActionsMenu({ zone }: ZonesTableActionsMenuProps) {
   const { t: translate } = useTranslation()
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
   const mutationDelete = useDeleteZone(zone.name!)
   const mutationUpdate = useUpdateZone(zone.name!)
 
   const handleClose = () => {
     setSelectedOption(null)
-    setAnchorEl(null)
   }
 
   const onDiscardClick = () => {
