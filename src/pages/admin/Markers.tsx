@@ -6,15 +6,13 @@ import MarkersTable from '@/components/features/admin/MarkersTable'
 import { NewMarkerFormData, newMarkerSchema } from '@/schemas/newMarkerSchema'
 import FormDialog from '@/components/shared/FormDialog'
 import NewMarkerForm from '@/components/features/forms/NewMarkerForm'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { getWarehouseManagementApi } from '@/services/generated-api'
-import { useSnackbar } from '@/hooks/useSnackbar'
+import usePostMarker from '@/hooks/services/markers/usePostMarker'
 
 export default function Markers() {
   const { t: translate } = useTranslation()
   const [openDialog, setOpenDialog] = useState(false)
   const [markerName, setMarkerName] = useState('')
-  const { showSnackbar } = useSnackbar()
+  const mutationCreate = usePostMarker(markerName)
 
   const handleClickOpen = () => {
     setOpenDialog(true)
@@ -23,27 +21,6 @@ export default function Markers() {
   const onCloseDialog = () => {
     setOpenDialog(false)
   }
-
-  const queryClient = useQueryClient()
-
-  const mutationCreate = useMutation({
-    mutationFn: getWarehouseManagementApi().postApiMarkerAdd,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['markers'] })
-      showSnackbar({
-        message: translate('newMarker.snackBar.messages.createMarker.success', {
-          name: markerName
-        }),
-        type: 'success'
-      })
-    },
-    onError: () => {
-      showSnackbar({
-        message: translate('newMarker.snackBar.messages.createMarker.error'),
-        type: 'error'
-      })
-    }
-  })
 
   const handleSubmit: SubmitHandler<NewMarkerFormData> = (data) => {
     setMarkerName(data.markerName)
