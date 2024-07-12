@@ -5,7 +5,7 @@ import { MarkerFormDto } from '@/services/model'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 
-export default function usePutMarker(markerName: string) {
+export default function useUpdateMarker(markerName: string) {
   const { t: translate } = useTranslation()
   const { showSnackbar } = useSnackbar()
   const queryClient = useQueryClient()

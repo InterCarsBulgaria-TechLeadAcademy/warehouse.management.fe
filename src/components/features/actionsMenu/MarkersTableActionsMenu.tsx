@@ -8,7 +8,7 @@ import NewMarkerForm from '@/components/features/forms/NewMarkerForm'
 import { MarkerDto } from '@/services/model'
 import TableActionsMenu from './TableActionsMenu'
 import useDeleteMarker from '@/hooks/services/markers/useDeleteMarker'
-import usePutMarker from '@/hooks/services/markers/usePutMarker'
+import useUpdateMarker from '@/hooks/services/markers/useUpdateMarker'
 
 interface MarkersTableActionsMenuProps {
   marker: MarkerDto
@@ -19,7 +19,7 @@ export default function MarkersTableActionsMenu({ marker }: MarkersTableActionsM
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
   const mutationDelete = useDeleteMarker(marker.name!)
-  const mutationUpdate = usePutMarker(marker.name!)
+  const mutationUpdate = useUpdateMarker(marker.name!)
 
   const handleClose = () => {
     setSelectedOption(null)
