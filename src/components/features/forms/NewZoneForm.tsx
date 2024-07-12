@@ -1,5 +1,5 @@
+import useGetMarkers from '@/hooks/services/markers/useGetMarkers'
 import { NewZoneFormData } from '@/schemas/newZoneSchema'
-import { getWarehouseManagementApi } from '@/services/generated-api'
 import { MarkerDto } from '@/services/model'
 import {
   Checkbox,
@@ -12,7 +12,6 @@ import {
   Select,
   TextField
 } from '@mui/material'
-import { useSuspenseQuery } from '@tanstack/react-query'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
@@ -30,14 +29,7 @@ export default function NewZoneForm({
   defaultValues = { name: '', markersIds: [], isFinal: false } //set defaultValues when is undefined
 }: NewZoneFormProps) {
   const { t: translate } = useTranslation()
-
-  //TODO: След като се merged, ще имам достъп до useGetMarkers хук и ще преправя логиката.
-  const { data } = useSuspenseQuery({
-    queryKey: ['markers'],
-    queryFn: () => {
-      return getWarehouseManagementApi().getApiMarkerAll()
-    }
-  })
+  const markers = useGetMarkers()
 
   return (
     <>
@@ -80,7 +72,7 @@ export default function NewZoneForm({
               renderValue={(selected) => {
                 const selectedMarkerNames = selected
                   .map((id) => {
-                    const isMarker = data.find((marker) => marker.id === Number(id))
+                    const isMarker = markers.find((marker) => marker.id === Number(id))
                     if (isMarker) {
                       return isMarker.name
                     }
@@ -89,7 +81,7 @@ export default function NewZoneForm({
 
                 return selectedMarkerNames
               }}>
-              {data.map((marker: MarkerDto) => (
+              {markers.map((marker: MarkerDto) => (
                 <MenuItem key={marker.id!} value={marker.id!}>
                   <Checkbox checked={field.value?.includes(marker.name!)} />{' '}
                   <ListItemText primary={marker.name!} />
