@@ -1,16 +1,14 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import WarningActionDialog from '@/components/shared/WarningActionDialog'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { getWarehouseManagementApi } from '@/services/generated-api'
-import { useSnackbar } from '@/hooks/useSnackbar'
-import { ZoneDto, ZoneFormDto } from '@/services/model'
-import { BodyType } from '@/services/api'
+import { ZoneDto } from '@/services/model'
 import { SubmitHandler } from 'react-hook-form'
 import { NewZoneFormData, newZoneSchema } from '@/schemas/newZoneSchema'
 import TableActionsMenu from './TableActionsMenu'
 import FormDialog from '@/components/shared/FormDialog'
 import NewZoneForm from '../forms/NewZoneForm'
+import useDeleteZone from '@/hooks/services/zones/useDeleteZone'
+import useUpdateZone from '@/hooks/services/zones/useUpdateZone'
 
 interface ZonesTableActionsMenuProps {
   zone: ZoneDto
@@ -20,7 +18,8 @@ export default function ZonesTableActionsMenu({ zone }: ZonesTableActionsMenuPro
   const { t: translate } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
-  const { showSnackbar } = useSnackbar()
+  const mutationDelete = useDeleteZone(zone.name!)
+  const mutationUpdate = useUpdateZone(zone.name!)
 
   const handleClose = () => {
     setSelectedOption(null)
@@ -35,47 +34,10 @@ export default function ZonesTableActionsMenu({ zone }: ZonesTableActionsMenuPro
     setSelectedOption(option)
   }
 
-  const queryClient = useQueryClient()
-
-  const mutationDelete = useMutation({
-    mutationFn: (id: number) => getWarehouseManagementApi().deleteApiZoneDeleteId(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['zones'] })
-      showSnackbar({
-        message: translate('newZone.snackBar.messages.deleteZone.success', { name: zone.name }),
-        type: 'success'
-      })
-    },
-    onError: () => {
-      showSnackbar({
-        message: translate('newZone.snackBar.messages.deleteZone.error'),
-        type: 'error'
-      })
-    }
-  })
-
   const onConfirmClick = () => {
     mutationDelete.mutate(zone.id!)
     handleClose()
   }
-
-  const mutationUpdate = useMutation({
-    mutationFn: ({ id, data }: { id: number; data: BodyType<ZoneFormDto> }) =>
-      getWarehouseManagementApi().putApiZoneEditId(id, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['zones'] })
-      showSnackbar({
-        message: translate('newZone.snackBar.messages.updateZone.success', { name: zone.name }),
-        type: 'success'
-      })
-    },
-    onError: () => {
-      showSnackbar({
-        message: translate('newZone.snackBar.messages.updateZone.error'),
-        type: 'error'
-      })
-    }
-  })
 
   //TODO: да тествам когато БЕ оправят дали се променят всички полета, не само name
   const handleSubmit: SubmitHandler<NewZoneFormData> = (data) => {

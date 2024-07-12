@@ -202,22 +202,6 @@
       "create": "Създай",
       "exit": "Изход"
     },
-    "snackBar": {
-      "messages": {
-        "createZone": {
-          "success": "Зона {{name}} e добавена успешно",
-          "error": "Възникна грешка"
-        },
-       "deleteZone": {
-          "success": "Зона {{name}} e изтрита успешно",
-          "error": "Възникна грешка"
-       },
-       "updateZone": {
-          "success": "Зона {{name}} e променена успешно",
-          "error": "Възникна грешка"
-       }
-      }
-    },
     "editZone": {
       "title": "Редактиране на зона",
       "labels": {
@@ -418,6 +402,24 @@
         "zone": {
           "message": "Добавете зона"
         }
+      }
+    }
+  },
+  "snackBar": {
+    "messages": {
+      "zones": {
+        "createZone": {
+          "success": "Зона {{name}} e добавена успешно",
+          "error": "Възникна грешка"
+    },
+        "deleteZone": {
+          "success": "Зона {{name}} e изтрита успешно",
+          "error": "Възникна грешка"
+   },
+        "updateZone": {
+          "success": "Зона {{name}} e променена успешно",
+          "error": "Възникна грешка"
+   }
       }
     }
   }

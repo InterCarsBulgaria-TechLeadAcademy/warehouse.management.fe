@@ -5,10 +5,9 @@ import SearchInput from '../SearchInput'
 import { Autocomplete, TextField, Typography } from '@mui/material'
 import { Column } from '@/interfaces/Column.ts'
 import ZonesTableActionsMenu from '../actionsMenu/ZonesTableActionsMenu'
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { getWarehouseManagementApi } from '@/services/generated-api'
 import { ZoneDto } from '@/services/model'
 import ChipsList from '../ChipsList'
+import useGetZones from '@/hooks/services/zones/useGetZones'
 
 interface Row {
   id: number
@@ -23,6 +22,7 @@ export default function ZonesTable() {
   const [searchTerm, setSearchTerm] = React.useState('')
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
+  const zones = useGetZones()
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
@@ -44,19 +44,6 @@ export default function ZonesTable() {
     { key: 'actions', title: translate('zones.table.actions'), minWidth: 50, align: 'right' }
   ]
 
-  //TODO: Да оправя Pagination-a, когато БЕ са готови
-  const { data } = useSuspenseQuery({
-    queryKey: ['zones'],
-    queryFn: () => {
-      // return getWarehouseManagementApi().getApiZoneAll({
-      //   PageNumber: page + 1,
-      //   PageSize: rowsPerPage,
-      //   SearchQuery: searchTerm
-      // })
-      return getWarehouseManagementApi().getApiZoneAll()
-    }
-  })
-
   function transformDataToRows(zones: ZoneDto[]): Row[] {
     return zones.map((zone: ZoneDto) => ({
       id: zone.id!,
@@ -74,9 +61,7 @@ export default function ZonesTable() {
     }))
   }
 
-  console.log(data)
-
-  const rowData = transformDataToRows(data || [])
+  const rowData = transformDataToRows(zones || [])
 
   const filteredRows = rowData.filter((row: Row) => {
     return columnsData.some((column: Column<Row>) => {
