@@ -71,7 +71,7 @@ export default function ZonesTableActionsMenu({ zone }: ZonesTableActionsMenuPro
               {...methods}
               defaultValues={{
                 name: zone.name!,
-                markersIds: zone.markers?.map((marker) => marker.markerId!) || ([] as string[]),
+                markersIds: zone.markers?.map((marker) => marker.markerId!) || ([] as number[]),
                 isFinal: zone.isFinal
               }}
             />
@@ -83,7 +83,7 @@ export default function ZonesTableActionsMenu({ zone }: ZonesTableActionsMenuPro
         <WarningActionDialog
           open={true}
           title={translate('deleteAction.zones.title')}
-          content={translate('deleteAction.zones.message', { name: name })}
+          content={translate('deleteAction.zones.message', { name: zone.name })}
           discardText={translate('deleteAction.zones.labels.discard')}
           confirmText={translate('deleteAction.zones.labels.confirm')}
           onCloseDialog={handleClose}

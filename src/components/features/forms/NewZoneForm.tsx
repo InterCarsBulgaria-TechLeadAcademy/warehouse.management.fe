@@ -19,7 +19,7 @@ import { useTranslation } from 'react-i18next'
 interface NewZoneFormProps extends UseFormReturn<NewZoneFormData> {
   defaultValues?: {
     name?: string
-    markersIds?: any //трябва да е [] | string[], но така гърми ZoneTableActionsMenu и не знам как
+    markersIds?: number[]
     isFinal?: boolean
   }
 }
@@ -63,7 +63,7 @@ export default function NewZoneForm({
       <Controller
         name="markers"
         control={control}
-        defaultValue={defaultValues.markersIds}
+        defaultValue={defaultValues.markersIds?.map(String)}
         render={({ field }) => (
           <FormControl fullWidth>
             <InputLabel id="demo-multiple-checkbox-label">
