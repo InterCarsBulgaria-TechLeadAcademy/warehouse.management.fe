@@ -1,27 +1,25 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import WarningActionDialog from '@/components/shared/WarningActionDialog'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { getWarehouseManagementApi } from '@/services/generated-api'
 import { SubmitHandler } from 'react-hook-form'
 import { NewMarkerFormData, newMarkerSchema } from '@/schemas/newMarkerSchema'
 import FormDialog from '@/components/shared/FormDialog'
 import NewMarkerForm from '@/components/features/forms/NewMarkerForm'
-import { BodyType } from '@/services/api'
-import { MarkerFormDto } from '@/services/model'
-import { useSnackbar } from '@/hooks/useSnackbar'
+import { MarkerDto } from '@/services/model'
 import TableActionsMenu from './TableActionsMenu'
+import useDeleteMarker from '@/hooks/services/markers/useDeleteMarker'
+import useUpdateMarker from '@/hooks/services/markers/useUpdateMarker'
 
 interface MarkersTableActionsMenuProps {
-  id: number
-  name: string
+  marker: MarkerDto
 }
 
-export default function MarkersTableActionsMenu({ id, name }: MarkersTableActionsMenuProps) {
+export default function MarkersTableActionsMenu({ marker }: MarkersTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
-  const { showSnackbar } = useSnackbar()
+  const mutationDelete = useDeleteMarker(marker.name!)
+  const mutationUpdate = useUpdateMarker(marker.name!)
 
   const handleClose = () => {
     setSelectedOption(null)
@@ -36,50 +34,13 @@ export default function MarkersTableActionsMenu({ id, name }: MarkersTableAction
     setSelectedOption(option)
   }
 
-  const queryClient = useQueryClient()
-
-  const mutationDelete = useMutation({
-    mutationFn: (id: number) => getWarehouseManagementApi().deleteApiMarkerDeleteId(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['markers'] })
-      showSnackbar({
-        message: translate('newMarker.snackBar.messages.deleteMarker.success'),
-        type: 'success'
-      })
-    },
-    onError: () => {
-      showSnackbar({
-        message: translate('newMarker.snackBar.messages.deleteMarker.error'),
-        type: 'error'
-      })
-    }
-  })
-
   const onConfirmClick = () => {
-    mutationDelete.mutate(id)
+    mutationDelete.mutate(marker.id!)
     handleClose()
   }
 
-  const mutationUpdate = useMutation({
-    mutationFn: ({ id, data }: { id: number; data: BodyType<MarkerFormDto> }) =>
-      getWarehouseManagementApi().putApiMarkerEditId(id, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['markers'] })
-      showSnackbar({
-        message: translate('newMarker.snackBar.messages.updateMarker.success'),
-        type: 'success'
-      })
-    },
-    onError: () => {
-      showSnackbar({
-        message: translate('newMarker.snackBar.messages.updateMarker.error'),
-        type: 'error'
-      })
-    }
-  })
-
   const handleSubmit: SubmitHandler<NewMarkerFormData> = (data) => {
-    mutationUpdate.mutate({ id, data: { name: data.markerName } })
+    mutationUpdate.mutate({ id: marker.id!, data: { name: data.markerName } })
   }
 
   const options = [
@@ -100,7 +61,7 @@ export default function MarkersTableActionsMenu({ id, name }: MarkersTableAction
           onCloseDialog={handleClose}
           schema={newMarkerSchema}
           onSubmit={handleSubmit}
-          renderForm={(methods) => <NewMarkerForm {...methods} defaultValue={name} />}
+          renderForm={(methods) => <NewMarkerForm {...methods} defaultValue={marker.name!} />}
         />
       )}
 

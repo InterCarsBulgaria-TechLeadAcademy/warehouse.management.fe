@@ -13,6 +13,7 @@ export default function NewMarkerForm({
   defaultValue
 }: NewMarkerFormProps) {
   const { t: translate } = useTranslation()
+
   return (
     <Controller
       name="markerName"

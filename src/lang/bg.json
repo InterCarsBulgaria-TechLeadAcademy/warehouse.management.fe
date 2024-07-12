@@ -55,6 +55,10 @@
     "table": {
       "name": "Име",
       "actions": "Действия"
+    },
+    "error": {
+      "zones": "Зони",
+      "errorMessage": "Маркерът се използва в {{location}}"
     }
   },
   "newMarker": {
@@ -75,22 +79,6 @@
       "labels": {
         "discard": "Откажи",
         "confirm":"Потвърди"
-      }
-    },
-    "snackBar": {
-      "messages": {
-        "createMarker": {
-          "success": "Маркерът е добавен успешно",
-          "error": "Възникна грешка"
-        },
-       "deleteMarker": {
-          "success": "Маркерът е изтрит успешно",
-          "error": "Възникна грешка"
-       },
-       "updateMarker": {
-          "success": "Маркерът е променен успешно",
-          "error": "Възникна грешка"
-       }
       }
     }
   },
@@ -411,15 +399,29 @@
         "createZone": {
           "success": "Зона {{name}} e добавена успешно",
           "error": "Възникна грешка"
-    },
+        },
         "deleteZone": {
           "success": "Зона {{name}} e изтрита успешно",
           "error": "Възникна грешка"
-   },
+        },
         "updateZone": {
           "success": "Зона {{name}} e променена успешно",
           "error": "Възникна грешка"
-   }
+        }
+      },
+      "markers": {
+        "createMarker": {
+          "success": "Маркер {{name}} е добавен успешно",
+          "error": "Възникна грешка"
+        },
+        "deleteMarker": {
+          "success": "Маркер {{name}} е изтрит успешно",
+          "error": "Възникна грешка"
+        },
+        "updateMarker": {
+          "success": "Маркер {{name}} е променен успешно",
+          "error": "Възникна грешка"
+        }
       }
     }
   }
