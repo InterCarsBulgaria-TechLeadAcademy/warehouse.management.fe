@@ -31,7 +31,7 @@ export default function NewZoneForm({
 }: NewZoneFormProps) {
   const { t: translate } = useTranslation()
 
-  //TODO: da korigiram, za da vzimam vsichki markers, a ne samo pyrvite 10 kato opravqt back-end-a
+  //TODO: След като се merged, ще имам достъп до useGetMarkers хук и ще преправя логиката.
   const { data } = useSuspenseQuery({
     queryKey: ['markers'],
     queryFn: () => {
