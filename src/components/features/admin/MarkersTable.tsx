@@ -3,10 +3,9 @@ import DataTable from '@/components/shared/DataTable'
 import { useTranslation } from 'react-i18next'
 import SearchInput from '../SearchInput'
 import { Column } from '@/interfaces/Column'
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { getWarehouseManagementApi } from '@/services/generated-api'
 import { MarkerDto } from '@/services/model'
 import MarkersTableActionsMenu from '../actionsMenu/MarkersTableActionsMenu'
+import useGetMarkers from '@/hooks/services/markers/useGetMarkers'
 
 interface Row {
   id: number
@@ -19,6 +18,7 @@ export default function MarkersTable() {
   const [searchTerm, setSearchTerm] = React.useState('')
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
+  const markers = useGetMarkers()
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
@@ -38,17 +38,6 @@ export default function MarkersTable() {
     { key: 'actions', title: translate('markers.table.actions'), minWidth: 50, align: 'right' }
   ]
 
-  const { data } = useSuspenseQuery({
-    queryKey: ['markers'],
-    queryFn: () => {
-      return getWarehouseManagementApi().getApiMarkerAll({
-        PageNumber: page + 1,
-        PageSize: rowsPerPage,
-        SearchQuery: searchTerm
-      })
-    }
-  })
-
   function transformDataToRows(markers: MarkerDto[]): Row[] {
     return markers.map((marker: MarkerDto) => ({
       id: marker.id!,
@@ -57,7 +46,7 @@ export default function MarkersTable() {
     }))
   }
 
-  const rowData = transformDataToRows(data || [])
+  const rowData = transformDataToRows(markers || [])
 
   const filteredRows = rowData.filter((row: Row) => {
     return columnsData.some((column: Column<Row>) => {
