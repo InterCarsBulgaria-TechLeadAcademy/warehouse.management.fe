@@ -32,8 +32,6 @@ export default function NewDeliveryFormDialog() {
       handleBack={handleBack}
       schema={schema}
       onSubmit={handleSubmit}
-      //This key is not good
-      // renderForm={(methods) => <NewDeliveryRenderForm {...methods} key={openDialog} />}
       renderForm={(methods) => <NewDeliveryRenderForm {...methods} />}
       steps={steps}
       currentStep={currentStep}
