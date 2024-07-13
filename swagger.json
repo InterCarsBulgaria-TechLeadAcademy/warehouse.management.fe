@@ -2850,6 +2850,14 @@
             "maxLength": 100,
             "minLength": 1,
             "type": "string"
+          },
+          "markerIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
