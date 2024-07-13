@@ -15,11 +15,11 @@ import NewVendorForm from './forms/NewVendorForm'
 import { BodyType } from '@/services/api'
 import { SubmitHandler } from 'react-hook-form'
 
-interface MarkersTableActionsMenuProps {
+interface VendorsTableActionsMenuProps {
   vendor: VendorDto
 }
 
-export default function VendorTableActionsMenu({ vendor }: MarkersTableActionsMenuProps) {
+export default function VendorTableActionsMenu({ vendor }: VendorsTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
@@ -81,6 +81,8 @@ export default function VendorTableActionsMenu({ vendor }: MarkersTableActionsMe
   })
 
   const handleSubmit: SubmitHandler<NewVendorFormData> = (data) => {
+    console.log('SUBMITTT', data, 'Vendooor', vendor);
+    
     const markerIds = data.markers!.map((marker) => Number(marker))
     mutationUpdate.mutate({
       id: vendor.id!,
