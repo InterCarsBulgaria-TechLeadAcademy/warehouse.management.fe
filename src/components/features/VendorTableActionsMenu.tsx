@@ -46,7 +46,9 @@ export default function VendorTableActionsMenu({ vendor }: MarkersTableActionsMe
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['vendors'] })
       showSnackbar({
-        message: translate('newVendor.snackBar.messages.deleteVendor.success', { name: vendor.name }),
+        message: translate('newVendor.snackBar.messages.deleteVendor.success', {
+          name: vendor.name
+        }),
         type: 'success'
       })
     },
@@ -79,7 +81,11 @@ export default function VendorTableActionsMenu({ vendor }: MarkersTableActionsMe
   })
 
   const handleSubmit: SubmitHandler<NewVendorFormData> = (data) => {
-    mutationUpdate.mutate({ id: vendor.id!, data: { name: data.vendorName, systemNumber: data.vendorNumber } })
+    const markerIds = data.markers!.map((marker) => Number(marker))
+    mutationUpdate.mutate({
+      id: vendor.id!,
+      data: { name: data.vendorName, systemNumber: data.vendorNumber, markerIds: markerIds }
+    })
   }
 
   const onConfirmClick = () => {
@@ -128,7 +134,16 @@ export default function VendorTableActionsMenu({ vendor }: MarkersTableActionsMe
           onCloseDialog={handleClose}
           schema={newVendorSchema}
           onSubmit={handleSubmit}
-          renderForm={(methods) => <NewVendorForm {...methods} defaultValues={vendor} />}
+          renderForm={(methods) => (
+            <NewVendorForm
+              {...methods}
+              defaultValues={{
+                name: vendor.name!,
+                systemNumber: vendor.systemNumber!,
+                markerIds: vendor.markers?.map((marker) => marker.markerId!) || ([] as number[])
+              }}
+            />
+          )}
         />
       )}
 
