@@ -44,7 +44,8 @@ export default function Vendors() {
 
   const handleSubmit: SubmitHandler<NewVendorFormData> = (data) => {
     setVendorName(data.vendorName);
-    mutation.mutate({ name: data.vendorName, systemNumber: data.vendorNumber })
+    const markerIds = data.markers!.map((marker) => Number(marker))
+    mutation.mutate({ name: data.vendorName, systemNumber: data.vendorNumber, markerIds: markerIds })
   }
 
   return (
