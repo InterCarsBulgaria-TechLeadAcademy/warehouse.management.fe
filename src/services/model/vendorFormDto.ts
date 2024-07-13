@@ -6,6 +6,8 @@
  */
 
 export interface VendorFormDto {
+  /** @nullable */
+  markerIds?: number[] | null
   /**
    * @minLength 1
    * @maxLength 100
