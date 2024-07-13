@@ -1,22 +1,27 @@
 import { NewVendorFormData } from '@/schemas/newVendorSchema'
-import { VendorDto } from '@/services/model'
+import { MarkerDto } from '@/services/model'
 import { FormControl, InputLabel, ListItemText, MenuItem, Select, TextField } from '@mui/material'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import useGetMarkers from '@/hooks/services/markers/useGetMarkers'
 
 interface NewVendorFormProps extends UseFormReturn<NewVendorFormData> {
-  defaultValues?: VendorDto
+  defaultValues?: {
+    name: string
+    systemNumber: string
+    markerIds: number[]
+  }
 }
 
 export default function NewVendorForm({
   control,
   formState: { errors },
-  defaultValues
+  defaultValues = { name: '', systemNumber: '', markerIds: [] }
 }: NewVendorFormProps) {
   const { t: translate } = useTranslation()
-
-  const markers = ['Масло', 'Гуми', 'Чистачки', "Накладки"]
   
+  const markers = useGetMarkers()
+
   return (
     <>
       <Controller
@@ -47,7 +52,7 @@ export default function NewVendorForm({
             label={translate('newVendor.labels.vendorNumber')}
             id="vendorNumber"
             name="vendorNumber"
-            type='number'
+            type="number"
             required
             fullWidth
             autoFocus
@@ -59,28 +64,29 @@ export default function NewVendorForm({
 
       <Controller
         name="markers"
+        defaultValue={defaultValues.markerIds?.map(String)}
         control={control}
         render={({ field }) => (
           <FormControl fullWidth>
-          <InputLabel id="demo-multiple-markers-label">
-            {translate('newVendor.labels.markers')}
-          </InputLabel>
-          <Select
-            {...field}
-            label={translate('newVendor.labels.markers')}
-            labelId="demo-multiple-markers-label"
-            id="demo-multiple-markers"
-            multiple
-            value={field.value || []}
-            onChange={(e) => field.onChange(e.target.value)}
-            renderValue={(selected) => (selected as string[]).join(', ')}>
-            {markers.map((marker) => (
-              <MenuItem key={marker} value={marker}>
-                <ListItemText primary={marker} />
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+            <InputLabel id="demo-multiple-markers-label">
+              {translate('newVendor.labels.markers')}
+            </InputLabel>
+            <Select
+              {...field}
+              label={translate('newVendor.labels.markers')}
+              labelId="demo-multiple-markers-label"
+              id="demo-multiple-markers"
+              multiple
+              value={field.value || []}
+              onChange={(e) => field.onChange(e.target.value)}
+              renderValue={(selected) => (selected as string[]).join(', ')}>
+              {markers.map((marker: MarkerDto) => (
+                <MenuItem key={marker.id} value={marker.id?.toString()}>
+                  <ListItemText primary={marker.name} />
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         )}
       />
     </>
