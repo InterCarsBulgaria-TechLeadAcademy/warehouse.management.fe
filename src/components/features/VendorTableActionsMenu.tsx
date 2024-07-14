@@ -81,8 +81,6 @@ export default function VendorTableActionsMenu({ vendor }: VendorsTableActionsMe
   })
 
   const handleSubmit: SubmitHandler<NewVendorFormData> = (data) => {
-    console.log('SUBMITTT', data, 'Vendooor', vendor);
-    
     const markerIds = data.markers!.map((marker) => Number(marker))
     mutationUpdate.mutate({
       id: vendor.id!,
