@@ -1,7 +1,7 @@
 import React from 'react'
 import DataTable from '@/components/shared/DataTable'
 import { useTranslation } from 'react-i18next'
-import ZonesTableActionsMenu from '../ZonesTableActionsMenu'
+import ZonesTableActionsMenu from '../actionsMenu/ZonesTableActionsMenu'
 import ChipsList from '../ChipsList'
 import SearchInput from '../SearchInput'
 import { Autocomplete, TextField } from '@mui/material'
