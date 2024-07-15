@@ -106,7 +106,6 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
     if (currentStep === steps.length) {
       console.log('Final submission:', data)
       // mutationPost.mutate({ name: data.zoneName, markerIds: markerIds, isFinal: data.isFinal })
-      // onCloseDialog()
     } else {
       console.log(data)
       setFormsData(data)

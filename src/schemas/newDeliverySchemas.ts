@@ -3,14 +3,14 @@ import * as yup from 'yup'
 export const newDeliveryStep1Schema = yup.object({
   deliveryNumber: yup.string().required('newDelivery.errors.step1.deliveryNumber.required'),
   receptionNumber: yup.string().required('newDelivery.errors.step1.receptionNumber.required'),
-  cmrNumber: yup.string().required('newDelivery.errors.step1.cmrNumber.required'),
+  cmr: yup.string().required('newDelivery.errors.step1.cmrNumber.required'),
   markers: yup.array().of(yup.string())
 })
 
 export interface NewDeliveryStep1FormData extends yup.InferType<typeof newDeliveryStep1Schema> {
   deliveryNumber: string
   receptionNumber: string
-  cmrNumber: string
+  cmr: string
 }
 
 export const newDeliveryStep2Schema = yup

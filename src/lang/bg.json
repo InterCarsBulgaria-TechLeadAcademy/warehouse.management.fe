@@ -250,8 +250,8 @@
         "receptionNumber": {
           "required": "Полето за рецепция № е задължително"
         },
-        "cmrNumber": {
-          "required": "Полето за ЧМР № е задължително"
+        "cmr": {
+          "required": "Полето за ЧМР е задължително"
         }
       },
       "step2": {
@@ -300,7 +300,7 @@
       "step1": {
         "deliveryNumber": "Доставка №",
         "receptionNumber": "Рецепция №",
-        "cmrNumber": "ЧМР №",
+        "cmr": "ЧМР",
         "markers": "Маркери"
       },
       "step2": {

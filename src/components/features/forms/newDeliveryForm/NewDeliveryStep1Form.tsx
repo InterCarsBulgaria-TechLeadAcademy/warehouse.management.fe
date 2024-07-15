@@ -63,18 +63,18 @@ export default function NewDeliveryStep1Form({
       />
 
       <Controller
-        name="cmrNumber"
+        name="cmr"
         control={control}
-        defaultValue={formsData.cmrNumber || ''}
+        defaultValue={formsData.cmr || ''}
         render={({ field }) => (
           <TextField
             {...field}
-            label={translate('newDelivery.labels.step1.cmrNumber')}
-            id="cmrNumber"
-            name="cmrNumber"
+            label={translate('newDelivery.labels.step1.cmr')}
+            id="cmr"
+            name="cmr"
             required
-            error={!!errors.cmrNumber}
-            helperText={errors.cmrNumber?.message ? translate(errors.cmrNumber.message) : ''}
+            error={!!errors.cmr}
+            helperText={errors.cmr?.message ? translate(errors.cmr.message) : ''}
           />
         )}
       />
