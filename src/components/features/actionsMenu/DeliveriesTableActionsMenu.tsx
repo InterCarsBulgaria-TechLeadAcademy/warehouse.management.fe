@@ -6,6 +6,7 @@ import React from 'react'
 import WarningActionDialog from '../../shared/WarningActionDialog'
 import { useTranslation } from 'react-i18next'
 
+
 export default function DeliveriesTableActionsMenu() {
   const { t: translate } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)

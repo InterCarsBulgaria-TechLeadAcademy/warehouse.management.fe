@@ -1,7 +1,7 @@
 import DataTable from '@/components/shared/DataTable'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Autocomplete, Box, Button, TextField, Typography } from '@mui/material'
+import { Autocomplete, Box, TextField, Typography } from '@mui/material'
 import SearchInput from './SearchInput'
 import ChipsList from './ChipsList'
 import { GoodType } from './forms/newDeliveryForm/NewDeliveryStep3Form'
@@ -13,8 +13,6 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import InfoPopper from './InfoPoper'
 import DeliveryGoodsInfo from './DeliveryGoodsInfo'
 import dateHelpers from '@/utils/dateHelpers'
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { getWarehouseManagementApi } from '@/services/generated-api'
 import { Column } from '@/interfaces/column'
 
 interface Row {

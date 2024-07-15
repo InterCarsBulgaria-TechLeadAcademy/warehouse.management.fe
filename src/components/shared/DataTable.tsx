@@ -9,7 +9,7 @@ import TablePagination from '@mui/material/TablePagination'
 import TableRow from '@mui/material/TableRow'
 import { Box, FormControlLabel, Switch } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { Column } from '@/interfaces/column.ts'
+import { Column } from '@/interfaces/Column'
 
 interface DataTableProps<T> {
   columnsData: Column<T>[]
@@ -75,7 +75,7 @@ export default function DataTable<T>({
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row: any) => {
                   return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={row.vendorNumber}>
+                    <TableRow key={row.id} hover role="checkbox" tabIndex={-1}>
                       {columns.map((column) => {
                         const value = row[column.key]
                         return (

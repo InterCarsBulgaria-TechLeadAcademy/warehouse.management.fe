@@ -1,4 +1,3 @@
-import VendorTableActionsMenu from '@/components/features/VendorTableActionsMenu'
 import DataTable from '@/components/shared/DataTable'
 import React from 'react'
 import { useTranslation } from 'react-i18next'

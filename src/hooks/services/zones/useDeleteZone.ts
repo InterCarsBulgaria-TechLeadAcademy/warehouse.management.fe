@@ -27,3 +27,4 @@ export default function useDeleteZone(zoneName: string) {
 
   return mutationDelete
 }
+

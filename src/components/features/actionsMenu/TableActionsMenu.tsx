@@ -6,11 +6,14 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 interface TableActionsMenuProps {
-  specificOptionHandler: Function;
-  options: { title: string, value: string }[];
+  specificOptionHandler: Function
+  options: { title: string; value: string }[]
 }
 
-export default function TableActionsMenu({ specificOptionHandler, options }: TableActionsMenuProps) {
+export default function TableActionsMenu({
+  specificOptionHandler,
+  options
+}: TableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
@@ -26,7 +29,6 @@ export default function TableActionsMenu({ specificOptionHandler, options }: Tab
     specificOptionHandler(option)
     handleClose()
   }
-
 
   return (
     <div>

@@ -30,3 +30,4 @@ export default function useUpdateZone(zoneName: string) {
 
   return mutationUpdate
 }
+

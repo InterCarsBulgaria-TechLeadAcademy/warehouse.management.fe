@@ -21,7 +21,6 @@ export default function NewVendorForm({
   const { t: translate } = useTranslation()
   
   const markers = useGetMarkers()
-
   return (
     <>
       <Controller

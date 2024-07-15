@@ -6,10 +6,13 @@ import { SubmitHandler } from 'react-hook-form'
 import { NewZoneFormData, newZoneSchema } from '@/schemas/newZoneSchema'
 import ZonesTable from '@/components/features/admin/ZonesTable'
 import NewZoneForm from '@/components/features/forms/NewZoneForm'
+import usePostZone from '@/hooks/services/zones/usePostZone'
 
 export default function Zones() {
   const { t: translate } = useTranslation()
   const [openDialog, setOpenDialog] = useState(false)
+  const [zoneName, setZoneName] = useState('')
+  const mutationPost = usePostZone(zoneName)
 
   const handleClickOpen = () => {
     setOpenDialog(true)
@@ -20,7 +23,9 @@ export default function Zones() {
   }
 
   const handleSubmit: SubmitHandler<NewZoneFormData> = (data) => {
-    console.log(data)
+    setZoneName(data.zoneName)
+    const markerIds = data.markers!.map((marker) => Number(marker))
+    mutationPost.mutate({ name: data.zoneName, markerIds: markerIds, isFinal: data.isFinal })
   }
 
   return (
