@@ -13,7 +13,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import InfoPopper from './InfoPoper'
 import DeliveryGoodsInfo from './DeliveryGoodsInfo'
 import dateHelpers from '@/utils/dateHelpers'
-import { Column } from '@/interfaces/column'
+import { Column } from '@/interfaces/Column.ts'
 
 interface Row {
   number: number

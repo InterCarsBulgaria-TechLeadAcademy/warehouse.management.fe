@@ -63,10 +63,10 @@
         "discard": "Откажи",
         "confirm": "Потвърди"
       },
-    "error": {
-      "zones": "Зони",
-      "errorMessage": "Маркерът се използва в {{location}}"
-
+      "error": {
+        "zones": "Зони",
+        "errorMessage": "Маркерът се използва в {{location}}"
+      }
     }
   },
   "newMarker": {
@@ -86,7 +86,7 @@
       "message": "Сигурни ли сте, че искате да изтриете {{marker}}?",
       "labels": {
         "discard": "Откажи",
-        "confirm":"Потвърди"
+        "confirm": "Потвърди"
       }
     }
   },

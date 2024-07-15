@@ -3,11 +3,12 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import SearchInput from '../SearchInput'
 import { Autocomplete, TextField, Typography } from '@mui/material'
-import { Column } from '@/interfaces/column'
+import { Column } from '@/interfaces/Column.ts'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { getWarehouseManagementApi } from '@/services/generated-api'
 import { VendorDto } from '@/services/model'
 import ChipsList from '../ChipsList'
+import VendorTableActionsMenu from '@/components/features/actionsMenu/VendorTableActionsMenu.tsx'
 
 interface Row {
   id: number
@@ -62,7 +63,8 @@ export default function VendorsTable() {
       id: vendor.id!,
       name: vendor.name!,
       vendorNumber: vendor.systemNumber!,
-      markers: vendor.markers!.length > 0 ? (
+      markers:
+        vendor.markers!.length > 0 ? (
           <ChipsList
             items={vendor.markers?.map((marker) => marker.markerName!) || ([] as string[])}
           />
