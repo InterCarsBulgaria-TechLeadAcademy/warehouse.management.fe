@@ -1,14 +1,14 @@
 import * as yup from 'yup'
 
 export const newDeliveryStep1Schema = yup.object({
-  deliveryNumber: yup.string().required('newDelivery.errors.step1.deliveryNumber.required'),
+  systemNumber: yup.string().required('newDelivery.errors.step1.systemNumber.required'),
   receptionNumber: yup.string().required('newDelivery.errors.step1.receptionNumber.required'),
   cmr: yup.string().required('newDelivery.errors.step1.cmrNumber.required'),
   markers: yup.array().of(yup.string())
 })
 
 export interface NewDeliveryStep1FormData extends yup.InferType<typeof newDeliveryStep1Schema> {
-  deliveryNumber: string
+  systemNumber: string
   receptionNumber: string
   cmr: string
 }
@@ -18,10 +18,10 @@ export const newDeliveryStep2Schema = yup
     vendorName: yup.string().required('newDelivery.errors.step2.vendorName.required'),
     vendorId: yup.string().required('newDelivery.errors.step2.vendorId.required'),
     truckNumber: yup.string().required('newDelivery.errors.step2.truckNumber.required'),
-    deliveryDate: yup
+    deliveryTime: yup
       .date()
-      .required('newDelivery.errors.step2.deliveryDate.required')
-      .typeError('newDelivery.errors.step2.deliveryDate.validDate')
+      .required('newDelivery.errors.step2.deliveryTime.required')
+      .typeError('newDelivery.errors.step2.deliveryTime.validDate')
   })
   .required()
 
@@ -29,7 +29,7 @@ export interface NewDeliveryStep2FormData extends yup.InferType<typeof newDelive
   vendorName: string
   vendorId: string
   truckNumber: string
-  deliveryDate: Date
+  deliveryTime: Date
 }
 
 export const newDeliveryStep3Schema = yup

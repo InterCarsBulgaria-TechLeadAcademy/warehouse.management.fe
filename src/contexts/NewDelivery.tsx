@@ -105,6 +105,50 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   const handleSubmit: SubmitHandler<any> = (data) => {
     if (currentStep === steps.length) {
       console.log('Final submission:', data)
+      //Final submission
+      //   {
+      //     "deliveryNumber": "1",
+      //     "receptionNumber": "1", DA
+      //     "cmr": "1", DA
+      //     "markers": [ DA
+      //         "55"
+      //     ],
+      //     "vendorName": "Bosch",
+      //     "vendorId": "1", DA
+      //     "truckNumber": "1", DA
+      //     "deliveryTime": "2024-07-15T08:28:03.419Z",
+      //     "goods": [
+      //         {
+      //             "goodTypeStep3": "pallets",
+      //             "goodQuantityStep3": "1"
+      //         }
+      //     ],
+      //     "goodsInZones": [
+      //         {
+      //             "goodTypeStep4": "pallets",
+      //             "goodQuantityStep4": "1",
+      //             "zone": "Zone12"
+      //         }
+      //     ]
+      // }
+
+      //must be
+      // {
+      //   "systemNumber": "string", deliveryNumber при мен
+      //   "receptionNumber": "string", DA
+      //   "truckNumber": "string", DA
+      //   "cmr": "string", DA
+      //   "deliveryTime": "2024-07-15T08:31:24.301Z", DA
+      //   "pallets": 0,
+      //   "packages": 0,
+      //   "pieces": 0,
+      //   "isApproved": true,
+      //   "vendorId": 0, DA
+      //   "markers": [ DA
+      //     0
+      //   ]
+      // }
+
       // mutationPost.mutate({ name: data.zoneName, markerIds: markerIds, isFinal: data.isFinal })
     } else {
       console.log(data)

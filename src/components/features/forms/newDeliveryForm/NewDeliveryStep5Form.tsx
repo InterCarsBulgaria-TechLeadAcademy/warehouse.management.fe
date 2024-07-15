@@ -20,8 +20,8 @@ export default function NewDeliveryStep5Form() {
 
         <Box sx={{ display: 'flex', gap: '2em' }}>
           <Box>
-            <Typography>{translate('newDelivery.labels.step1.deliveryNumber')}</Typography>
-            <Typography>{formsData.deliveryNumber}</Typography>
+            <Typography>{translate('newDelivery.labels.step1.systemNumber')}</Typography>
+            <Typography>{formsData.systemNumber}</Typography>
           </Box>
           <Box>
             <Typography>{translate('newDelivery.labels.step1.receptionNumber')}</Typography>

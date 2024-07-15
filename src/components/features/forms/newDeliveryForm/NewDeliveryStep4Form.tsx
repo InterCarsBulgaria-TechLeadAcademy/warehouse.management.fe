@@ -12,12 +12,6 @@ import MoveGoodsForm from './MoveGoodsForm'
 import { Good } from '@/hooks/useSetGoodsType.ts'
 import useGetZones from '@/hooks/services/zones/useGetZones'
 
-// enum Zones {
-//   zone1 = 'zone1',
-//   zone2 = 'zone2',
-//   zone3 = 'zone3'
-// }
-
 export default function NewDeliveryStep4Form({
   control,
   formState: { errors }
@@ -35,12 +29,6 @@ export default function NewDeliveryStep4Form({
       value: GoodType[goodType as keyof typeof GoodType]
     }
   })
-
-  // const zones = [
-  //   { title: translate('newDelivery.zones.zone1'), value: Zones.zone1 },
-  //   { title: translate('newDelivery.zones.zone2'), value: Zones.zone2 },
-  //   { title: translate('newDelivery.zones.zone3'), value: Zones.zone3 }
-  // ]
 
   const moveGoodsFormsInitialValue = formsData.goodsInZones
     ? formsData.goodsInZones.map(() => generateId())

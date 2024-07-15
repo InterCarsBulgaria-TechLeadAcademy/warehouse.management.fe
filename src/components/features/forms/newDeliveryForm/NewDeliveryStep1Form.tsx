@@ -26,20 +26,18 @@ export default function NewDeliveryStep1Form({
   return (
     <>
       <Controller
-        name="deliveryNumber"
+        name="systemNumber"
         control={control}
-        defaultValue={formsData.deliveryNumber || ''}
+        defaultValue={formsData.systemNumber || ''}
         render={({ field }) => (
           <TextField
             {...field}
-            label={translate('newDelivery.labels.step1.deliveryNumber')}
-            id="deliveryNumber"
-            name="deliveryNumber"
+            label={translate('newDelivery.labels.step1.systemNumber')}
+            id="systemNumber"
+            name="systemNumber"
             required
-            error={!!errors.deliveryNumber}
-            helperText={
-              errors.deliveryNumber?.message ? translate(errors.deliveryNumber.message) : ''
-            }
+            error={!!errors.systemNumber}
+            helperText={errors.systemNumber?.message ? translate(errors.systemNumber.message) : ''}
           />
         )}
       />
