@@ -64,6 +64,8 @@ export default function NewDeliveryStep3Form({
     setSelectedGoodTypes((prev) => prev.filter((_, id) => id !== index))
   }
 
+  console.log(goodDetailsForms)
+
   function handleGoodTypeChange(index: number, value: string | null) {
     setSelectedGoodTypes((prev) => {
       const updated = [...prev]

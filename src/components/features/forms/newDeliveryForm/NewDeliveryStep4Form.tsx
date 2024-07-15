@@ -14,6 +14,7 @@ import useGetZones from '@/hooks/services/zones/useGetZones'
 
 export default function NewDeliveryStep4Form({
   control,
+  setValue, //add setValue for dinamic control on values
   formState: { errors }
 }: UseFormReturn<NewDeliveryStep4FormData>) {
   const { t: translate } = useTranslation()
@@ -42,7 +43,6 @@ export default function NewDeliveryStep4Form({
   })
 
   function addGoodHandler() {
-    console.log('wtf')
     append({ goodTypeStep4: '', goodQuantityStep4: 1, zone: '' })
     let newId
     do {
@@ -91,6 +91,7 @@ export default function NewDeliveryStep4Form({
         <MoveGoodsForm
           key={id}
           control={control}
+          setValue={setValue}
           errors={errors}
           goodTypes={goodTypes}
           zones={zones.map((zone) => zone.name!)}
