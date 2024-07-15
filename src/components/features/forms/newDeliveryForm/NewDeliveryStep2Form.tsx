@@ -16,6 +16,8 @@ export default function NewDeliveryStep2Form({
 }: UseFormReturn<NewDeliveryStep2FormData>) {
   const { t: translate } = useTranslation()
   const { formsData } = useNewDeliveryContext()
+  //TODO replace vendorName with vendors and make vendorId readOnly
+  // const vendors = useGetVendors()
 
   return (
     <>
@@ -28,6 +30,7 @@ export default function NewDeliveryStep2Form({
             {...field}
             id="vendorName"
             options={vendorName}
+            // options={vendors}
             value={field.value}
             onChange={(_, newValue) => {
               field.onChange(newValue)

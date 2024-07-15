@@ -12,7 +12,7 @@ interface GoodDetailsFormProps {
   control: Control<NewDeliveryStep4FormData, any>
   errors: FieldErrors<NewDeliveryStep4FormData>
   goodTypes: { title: string; value: string }[]
-  zones: { title: string; value: string }[]
+  zones: string[]
   index: number
   onDeleteHandler: () => void
   formsCount: number
@@ -155,6 +155,7 @@ export default function MoveGoodsForm({
           />
         )}
       />
+
       <Controller
         name={`goodsInZones.${index}.zone`}
         control={control}
@@ -162,12 +163,10 @@ export default function MoveGoodsForm({
         render={({ field }) => (
           <Autocomplete
             {...field}
-            options={zones.map((zone) => zone.title)}
-            value={zones.find((zone) => zone.value === field.value)?.title || null}
-            onChange={(_event: any, newValue: string | null) => {
-              newValue = newValue
-                ? zones.find((zone) => zone.title === newValue)?.value || null
-                : null
+            options={zones}
+            value={field.value || null}
+            onChange={(_event: any, newValue) => {
+              newValue = newValue || null
               setZoneValue(newValue)
               field.onChange(newValue)
             }}

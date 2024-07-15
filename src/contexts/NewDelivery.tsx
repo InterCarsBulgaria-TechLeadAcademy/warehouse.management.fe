@@ -4,6 +4,7 @@ import useNewDeliverySteps from '@/hooks/useNewDeliverySteps'
 import useGenerateLeftItemsAlert from '@/hooks/useGenerateLeftItemsAlert'
 import useSetGoodsType from '@/hooks/useSetGoodsType.ts'
 import { MoveGood } from '@/interfaces/NewDelivery.ts'
+import usePostDelivery from '@/hooks/services/deliveries/usePostDelivery'
 
 interface NewDeliveryProviderProps {
   children: ReactNode
@@ -60,6 +61,7 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   const [alertMessage, setAlertMessage] = useState<string[]>([])
   const [isCompletedMove, setIsCompletedMove] = useState(false)
   const [isExceedQuantity, setIsExceedQuantity] = useState(false)
+  const postMutation = usePostDelivery()
 
   useSetGoodsType(formsData, goodTypeStep3, setGoodTypeStep3)
   useGenerateLeftItemsAlert(
@@ -103,7 +105,8 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   const handleSubmit: SubmitHandler<any> = (data) => {
     if (currentStep === steps.length) {
       console.log('Final submission:', data)
-      onCloseDialog()
+      // mutationPost.mutate({ name: data.zoneName, markerIds: markerIds, isFinal: data.isFinal })
+      // onCloseDialog()
     } else {
       console.log(data)
       setFormsData(data)
