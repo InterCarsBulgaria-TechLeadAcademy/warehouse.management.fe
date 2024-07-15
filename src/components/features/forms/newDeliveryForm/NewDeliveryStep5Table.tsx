@@ -31,7 +31,7 @@ export default function NewDeliveryStep5Table() {
                 {translate(`newDelivery.goodType.${good.goodTypeStep4}`)}
               </TableCell>
               <TableCell align="left">{good.goodQuantityStep4}</TableCell>
-              <TableCell align="left">{translate(`newDelivery.zones.${good.zone}`)}</TableCell>
+              <TableCell align="left">{good.zone}</TableCell>
             </TableRow>
           ))}
         </TableBody>
