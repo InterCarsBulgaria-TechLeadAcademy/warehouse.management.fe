@@ -2,18 +2,21 @@ import DataTable from '@/components/shared/DataTable'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Autocomplete, Box, TextField, Typography } from '@mui/material'
-import SearchInput from './SearchInput'
-import ChipsList from './ChipsList'
-import { GoodType } from './forms/newDeliveryForm/NewDeliveryStep3Form'
-import DeliveriesTableActionsMenu from './actionsMenu/DeliveriesTableActionsMenu'
+import SearchInput from '../SearchInput'
+import ChipsList from '../ChipsList'
+import { GoodType } from '../forms/newDeliveryForm/NewDeliveryStep3Form'
+import DeliveriesTableActionsMenu from '../actionsMenu/DeliveriesTableActionsMenu'
 import { Dayjs } from 'dayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import InfoPopper from './InfoPoper'
-import DeliveryGoodsInfo from './DeliveryGoodsInfo'
+import InfoPopper from '../InfoPoper'
+import DeliveryGoodsInfo from '../DeliveryGoodsInfo'
 import dateHelpers from '@/utils/dateHelpers'
 import { Column } from '@/interfaces/column'
+import useGetDeliveries from '@/hooks/services/deliveries/useGetDeliveries'
+import { DeliveryDto } from '@/services/model'
+import useGetMarkers from '@/hooks/services/markers/useGetMarkers'
 
 interface Row {
   number: number
@@ -32,13 +35,15 @@ interface Row {
 let vendorsNames: string[] = ['Bosch', 'Valeo', 'Dunlop', 'Michelin']
 let selectedVendorName = vendorsNames.map((vendorName) => ({ label: vendorName }))
 
-const markers = ['Масло', 'Гуми', 'Чистачки']
-
 export default function DeliveriesTable() {
   const { t: translate } = useTranslation()
   const [searchTerm, setSearchTerm] = React.useState('')
+  const [page, setPage] = React.useState(0)
+  const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const [deliveryStartTime, setDeliveryStartTime] = React.useState<Dayjs | null>(null)
   const [deliveryEndTime, setDeliveryEndTime] = React.useState<Dayjs | null>(null)
+  const markers = useGetMarkers()
+  const deliveries = useGetDeliveries()
 
   const goodTypes = [
     { title: translate('newDelivery.goodType.pallets'), value: GoodType.pallets, quantity: 1 },
@@ -48,6 +53,15 @@ export default function DeliveriesTable() {
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
+  }
+
+  const onPageChange = (newPage: number) => {
+    setPage(newPage)
+  }
+
+  const onRowsPerPageChange = (newRowsPerPage: number) => {
+    setRowsPerPage(newRowsPerPage)
+    setPage(0)
   }
 
   const columnsData: Column<Row>[] = [
@@ -76,6 +90,18 @@ export default function DeliveriesTable() {
     { key: 'actions', title: translate('vendors.table.actions'), minWidth: 50, align: 'right' }
   ]
 
+  // function transformDataToRows(deliveries: DeliveryDto[]): Row[] {
+  //   return deliveries.map((delivery: DeliveryDto) => ({
+  //     id: delivery.id!,
+
+  //   }))
+  // }
+
+  // console.log(deliveries)
+  // const rowData = transformDataToRows(deliveries || [])
+
+  const markersName = markers.map((marker) => marker.name!)
+
   const rowData: Row[] = [
     {
       number: 1,
@@ -98,7 +124,7 @@ export default function DeliveriesTable() {
           </InfoPopper>
         </Box>
       ),
-      markers: <ChipsList items={markers} />,
+      markers: <ChipsList items={markersName} />,
       status: <ChipsList items={['Изчакване']} color="default" />,
       approvedOn: dateHelpers('2024-07-04T10:06:12.594Z'),
       createdOn: dateHelpers('2024-07-04T10:06:12.594Z'),
@@ -125,7 +151,7 @@ export default function DeliveriesTable() {
           </InfoPopper>
         </Box>
       ),
-      markers: <ChipsList items={markers} />,
+      markers: <ChipsList items={markersName} />,
       status: <ChipsList items={['Обработва се']} color="warning" />,
       approvedOn: dateHelpers('2024-07-04T10:06:12.594Z'),
       createdOn: dateHelpers('2024-07-04T10:06:12.594Z'),
@@ -152,7 +178,7 @@ export default function DeliveriesTable() {
           </InfoPopper>
         </Box>
       ),
-      markers: <ChipsList items={markers} />,
+      markers: <ChipsList items={markersName} />,
       status: <ChipsList items={['Одобрена']} color="success" />,
       approvedOn: dateHelpers('2024-07-04T10:06:12.594Z'),
       createdOn: dateHelpers('2024-07-04T10:06:12.594Z'),
@@ -179,7 +205,7 @@ export default function DeliveriesTable() {
           </InfoPopper>
         </Box>
       ),
-      markers: <ChipsList items={markers} />,
+      markers: <ChipsList items={markersName} />,
       status: <ChipsList items={['Приключена']} color="info" />,
       approvedOn: dateHelpers('2024-07-04T10:06:12.594Z'),
       createdOn: dateHelpers('2024-07-04T10:06:12.594Z'),
@@ -194,7 +220,13 @@ export default function DeliveriesTable() {
   })
 
   return (
-    <DataTable columnsData={columnsData} rowData={filteredRows}>
+    <DataTable
+      columnsData={columnsData}
+      rowData={filteredRows}
+      page={page}
+      rowsPerPage={rowsPerPage}
+      onPageChange={onPageChange}
+      onRowsPerPageChange={onRowsPerPageChange}>
       <SearchInput
         value={searchTerm}
         onChange={handleSearchChange}
