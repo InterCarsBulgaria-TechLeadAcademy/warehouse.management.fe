@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { Control, Controller, FieldErrors, UseFormSetValue } from 'react-hook-form'
+import { Control, Controller, FieldErrors } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
@@ -10,7 +10,6 @@ import DeleteIcon from '@mui/icons-material/Delete'
 
 interface GoodDetailsFormProps {
   control: Control<NewDeliveryStep4FormData, any>
-  setValue: UseFormSetValue<NewDeliveryStep4FormData>
   errors: FieldErrors<NewDeliveryStep4FormData>
   goodTypes: { title: string; value: string }[]
   zones: string[]
@@ -21,7 +20,6 @@ interface GoodDetailsFormProps {
 
 export default function MoveGoodsForm({
   control,
-  setValue,
   errors,
   goodTypes,
   zones,

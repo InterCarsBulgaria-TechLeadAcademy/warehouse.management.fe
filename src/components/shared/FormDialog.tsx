@@ -39,7 +39,7 @@ export default function FormDialog<T extends FieldValues>({
   isCompletedMove
 }: FormDialogProps<T>) {
   const { t: translate } = useTranslation()
-  const { control, handleSubmit, formState, reset, setValue } = useForm<T>({
+  const { control, handleSubmit, formState, reset } = useForm<T>({
     resolver: schema ? yupResolver(schema) : undefined
   })
 
@@ -74,7 +74,7 @@ export default function FormDialog<T extends FieldValues>({
             flexDirection: 'column',
             gap: '2em'
           }}>
-          {renderForm({ control, handleSubmit, formState, reset, setValue } as UseFormReturn<T>)}
+          {renderForm({ control, handleSubmit, formState, reset } as UseFormReturn<T>)}
 
           <Box sx={{ display: 'flex', justifyContent: 'center', gap: '1em' }}>
             <Button
