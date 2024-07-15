@@ -45,6 +45,8 @@ export default function DeliveriesTable() {
   const markers = useGetMarkers()
   const deliveries = useGetDeliveries()
 
+  const markersName = markers.map((marker) => marker.name!)
+
   const goodTypes = [
     { title: translate('newDelivery.goodType.pallets'), value: GoodType.pallets, quantity: 1 },
     { title: translate('newDelivery.goodType.packages'), value: GoodType.packages, quantity: 2 },
@@ -93,14 +95,36 @@ export default function DeliveriesTable() {
   // function transformDataToRows(deliveries: DeliveryDto[]): Row[] {
   //   return deliveries.map((delivery: DeliveryDto) => ({
   //     id: delivery.id!,
-
+  //     vendorName: delivery.vendorName,
+  //     deliveryNumber: delivery.systemNumber,
+  //     receptionNumber: delivery.receptionNumber,
+  //     waitingGoods: (
+  //       <Box sx={{ display: 'flex', alignItems: 'center' }}>
+  //         <Typography>1</Typography>
+  //         <InfoPopper>
+  //           <DeliveryGoodsInfo goodTypes={goodTypes} />
+  //         </InfoPopper>
+  //       </Box>
+  //     ),
+  //     completedGoods: (
+  //       <Box sx={{ display: 'flex', alignItems: 'center' }}>
+  //         <Typography>1</Typography>
+  //         <InfoPopper>
+  //           <DeliveryGoodsInfo goodTypes={goodTypes} />
+  //         </InfoPopper>
+  //       </Box>
+  //     ),
+  //     markers: <ChipsList items={markersName} />,
+  //     // status: <ChipsList items={['Изчакване']} color="default" />,
+  //     status: <ChipsList items={[delivery.status!]} color="default" />,
+  //     approvedOn: dateHelpers('2024-07-04T10:06:12.594Z'),
+  //     createdOn: dateHelpers('2024-07-04T10:06:12.594Z'),
+  //     actions: <DeliveriesTableActionsMenu />
   //   }))
   // }
 
   // console.log(deliveries)
   // const rowData = transformDataToRows(deliveries || [])
-
-  const markersName = markers.map((marker) => marker.name!)
 
   const rowData: Row[] = [
     {

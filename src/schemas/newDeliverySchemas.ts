@@ -13,10 +13,29 @@ export interface NewDeliveryStep1FormData extends yup.InferType<typeof newDelive
   cmr: string
 }
 
+// export const newDeliveryStep2Schema = yup
+//   .object({
+//     vendorName: yup.string().required('newDelivery.errors.step2.vendorName.required'),
+//     vendorId: yup.string().required('newDelivery.errors.step2.vendorId.required'),
+//     truckNumber: yup.string().required('newDelivery.errors.step2.truckNumber.required'),
+//     deliveryTime: yup
+//       .date()
+//       .required('newDelivery.errors.step2.deliveryTime.required')
+//       .typeError('newDelivery.errors.step2.deliveryTime.validDate')
+//   })
+//   .required()
+
+// export interface NewDeliveryStep2FormData extends yup.InferType<typeof newDeliveryStep2Schema> {
+//   vendorName: string
+//   vendorId: string
+//   truckNumber: string
+//   deliveryTime: Date
+// }
+
 export const newDeliveryStep2Schema = yup
   .object({
     vendorName: yup.string().required('newDelivery.errors.step2.vendorName.required'),
-    vendorId: yup.string().required('newDelivery.errors.step2.vendorId.required'),
+    vendorId: yup.string().nullable(),
     truckNumber: yup.string().required('newDelivery.errors.step2.truckNumber.required'),
     deliveryTime: yup
       .date()
@@ -27,7 +46,7 @@ export const newDeliveryStep2Schema = yup
 
 export interface NewDeliveryStep2FormData extends yup.InferType<typeof newDeliveryStep2Schema> {
   vendorName: string
-  vendorId: string
+  vendorId: string | null
   truckNumber: string
   deliveryTime: Date
 }

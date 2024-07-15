@@ -107,26 +107,24 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
       console.log('Final submission:', data)
       //Final submission
       //   {
-      //     "deliveryNumber": "1",
-      //     "receptionNumber": "1", DA
-      //     "cmr": "1", DA
-      //     "markers": [ DA
-      //         "55"
-      //     ],
+      //     "systemNumber": "1",
+      //     "receptionNumber": "1",
+      //     "cmr": "1",
+      //     "markers": [],
       //     "vendorName": "Bosch",
-      //     "vendorId": "1", DA
-      //     "truckNumber": "1", DA
-      //     "deliveryTime": "2024-07-15T08:28:03.419Z",
+      //     "vendorId": "1",
+      //     "truckNumber": "1",
+      //     "deliveryTime": "2024-07-15T08:57:41.973Z",
       //     "goods": [
       //         {
       //             "goodTypeStep3": "pallets",
-      //             "goodQuantityStep3": "1"
+      //             "goodQuantityStep3": "3"
       //         }
       //     ],
       //     "goodsInZones": [
       //         {
       //             "goodTypeStep4": "pallets",
-      //             "goodQuantityStep4": "1",
+      //             "goodQuantityStep4": "3",
       //             "zone": "Zone12"
       //         }
       //     ]
@@ -134,14 +132,14 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
 
       //must be
       // {
-      //   "systemNumber": "string", deliveryNumber при мен
+      //   "systemNumber": "string", DA
       //   "receptionNumber": "string", DA
       //   "truckNumber": "string", DA
       //   "cmr": "string", DA
       //   "deliveryTime": "2024-07-15T08:31:24.301Z", DA
-      //   "pallets": 0,
-      //   "packages": 0,
-      //   "pieces": 0,
+      //   "pallets": 0, DA
+      //   "packages": 0, DA
+      //   "pieces": 0, DA
       //   "isApproved": true,
       //   "vendorId": 0, DA
       //   "markers": [ DA
@@ -149,7 +147,14 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
       //   ]
       // }
 
-      // mutationPost.mutate({ name: data.zoneName, markerIds: markerIds, isFinal: data.isFinal })
+      // mutationPost.mutate({
+      //     systemNumber: data.systemNumber,
+      //     receptionNumber: data.receptionNumber,
+      //     truckNumber: data.truckNumber,
+      //     cmr: data.cmr,
+      //     deliveryTime: data.deliveryTime,
+      //     ..
+      // })
     } else {
       console.log(data)
       setFormsData(data)
