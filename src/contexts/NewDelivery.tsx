@@ -155,6 +155,7 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
       //     deliveryTime: data.deliveryTime,
       //     ..
       // })
+      onCloseDialog()
     } else {
       console.log(data)
       setFormsData(data)
