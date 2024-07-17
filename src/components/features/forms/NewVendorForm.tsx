@@ -19,8 +19,8 @@ export default function NewVendorForm({
   defaultValues = { name: '', systemNumber: '', markerIds: [] }
 }: NewVendorFormProps) {
   const { t: translate } = useTranslation()
-  
   const markers = useGetMarkers()
+
   return (
     <>
       <Controller
@@ -78,7 +78,18 @@ export default function NewVendorForm({
               multiple
               value={field.value || []}
               onChange={(e) => field.onChange(e.target.value)}
-              renderValue={(selected) => (selected as string[]).join(', ')}>
+              renderValue={(selected) => {
+                const selectedMarkerNames = selected
+                  .map((id) => {
+                    const isMarker = markers.find((marker) => marker.id === Number(id))
+                    if (isMarker) {
+                      return isMarker.name
+                    }
+                  })
+                  .join(', ')
+
+                return selectedMarkerNames
+              }}>
               {markers.map((marker: MarkerDto) => (
                 <MenuItem key={marker.id} value={marker.id?.toString()}>
                   <ListItemText primary={marker.name} />
