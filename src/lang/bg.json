@@ -56,9 +56,17 @@
       "name": "Име",
       "actions": "Действия"
     },
-    "error": {
-      "zones": "Зони",
-      "errorMessage": "Маркерът се използва в {{location}}"
+    "deleteAction": {
+      "title": "Изтриване на маркер",
+      "message": "Сигурни ли сте, че искате да изтриете този маркер?",
+      "labels": {
+        "discard": "Откажи",
+        "confirm": "Потвърди"
+      },
+      "error": {
+        "zones": "Зони",
+        "errorMessage": "Маркерът се използва в {{location}}"
+      }
     }
   },
   "newMarker": {
@@ -78,7 +86,7 @@
       "message": "Сигурни ли сте, че искате да изтриете {{marker}}?",
       "labels": {
         "discard": "Откажи",
-        "confirm":"Потвърди"
+        "confirm": "Потвърди"
       }
     }
   },
@@ -120,8 +128,32 @@
     "labels": {
       "name": "Име",
       "vendorNumber": "Доставчик №",
-      "isFinal": "Финализирано",
+      "markers": "Маркери",
       "create": "Създай",
+      "exit": "Изход"
+    },
+    "snackBar": {
+      "messages": {
+        "createVendor": {
+          "success": "Вендор \"{{name}}\" е добавен успешно",
+          "error": "Възникна грешка"
+        },
+        "deleteVendor": {
+          "success": "Вендор \"{{name}}\" е изтрит успешно",
+          "error": "Възникна грешка"
+        },
+        "updateVendor": {
+          "success": "Вендор \"{{name}}\" е променен успешно",
+          "error": "Възникна грешка"
+        }
+      }
+    }
+  },
+  "editVendor": {
+    "title": "Редактиране на доставчик",
+    "labels": {
+      "name": "Име",
+      "edit": "Промени",
       "exit": "Изход"
     }
   },
@@ -131,7 +163,7 @@
   "deleteAction": {
     "vendors": {
       "title": "Изтриване на доставчик",
-      "message": "Сигурни ли сте, че искате да изтриете този доставчик?",
+      "message": "Сигурни ли сте, че искате да изтриете доставчик \"{{name}}\" ?",
       "labels": {
         "discard": "Откажи",
         "confirm": "Потвърди"
@@ -207,8 +239,8 @@
     },
     "poper": {
       "type": "Тип",
-      "quantity": "Количество" 
-    }, 
+      "quantity": "Количество"
+    },
     "newDeliveryTable": {
       "columnsData": {
         "number": "Номер",
@@ -224,20 +256,20 @@
       }
     },
     "deleteActions": {
-        "title": "Изтриване на доставка",
-        "message": "Сигурни ли сте, че искате да изтриете тази доставка?",
-        "labels": {
+      "title": "Изтриване на доставка",
+      "message": "Сигурни ли сте, че искате да изтриете тази доставка?",
+      "labels": {
         "discard": "Откажи",
         "confirm": "Потвърди"
-        }
-    }, 
+      }
+    },
     "filters": {
       "search": "Търсене",
       "markers": "Маркери",
       "deliveryTime": "Време за доставка",
-      "deliveryStart":"Начало на доставка",
-      "deliveryEnd":"Край на доставка",
-      "vendorName":"Име на доставчик"
+      "deliveryStart": "Начало на доставка",
+      "deliveryEnd": "Край на доставка",
+      "vendorName": "Име на доставчик"
     }
   },
   "newDelivery": {

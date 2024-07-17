@@ -13,10 +13,10 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import InfoPopper from '../InfoPoper'
 import DeliveryGoodsInfo from '../DeliveryGoodsInfo'
 import dateHelpers from '@/utils/dateHelpers'
-import { Column } from '@/interfaces/column'
 import useGetDeliveries from '@/hooks/services/deliveries/useGetDeliveries'
 import { DeliveryDto } from '@/services/model'
 import useGetMarkers from '@/hooks/services/markers/useGetMarkers'
+import { Column } from '@/interfaces/Column'
 
 interface Row {
   number: number

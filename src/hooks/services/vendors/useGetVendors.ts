@@ -1,11 +1,11 @@
 import { getWarehouseManagementApi } from '@/services/generated-api'
 import { useSuspenseQuery } from '@tanstack/react-query'
 
-export default function useGetZones() {
+export default function useGetVendors() {
   const { data } = useSuspenseQuery({
-    queryKey: ['zones'],
+    queryKey: ['vendors'],
     queryFn: () => {
-      return getWarehouseManagementApi().getApiZoneAll()
+      return getWarehouseManagementApi().getApiVendorAll()
     }
   })
 
