@@ -7,7 +7,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import dayjs from 'dayjs'
-import useGetVendors from '@/hooks/services/vendors/useGetVendors'
 import React from 'react'
 import { VendorDto } from '@/services/model'
 
