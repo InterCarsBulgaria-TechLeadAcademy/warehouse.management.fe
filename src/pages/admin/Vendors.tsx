@@ -6,10 +6,13 @@ import { SubmitHandler } from 'react-hook-form'
 import VendorsTable from '@/components/features/admin/VendorsTable'
 import { NewVendorFormData, newVendorSchema } from '@/schemas/newVendorSchema'
 import NewVendorForm from '@/components/features/forms/NewVendorForm'
+import usePostVendor from '@/hooks/services/vendors/usePostVendor'
 
 export default function Vendors() {
   const { t: translate } = useTranslation()
   const [openDialog, setOpenDialog] = useState(false)
+  const [vendorName, setVendorName] = useState('')
+  const mutationPost = usePostVendor(vendorName)
 
   const handleClickOpen = () => {
     setOpenDialog(true)
@@ -20,8 +23,9 @@ export default function Vendors() {
   }
 
   const handleSubmit: SubmitHandler<NewVendorFormData> = (data) => {
-    console.log(data)
-    onCloseDialog()
+    setVendorName(data.vendorName);
+    const markerIds = data.markers!.map((marker) => Number(marker))
+    mutationPost.mutate({ name: data.vendorName, systemNumber: data.vendorNumber, markerIds: markerIds })
   }
 
   return (

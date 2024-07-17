@@ -4,9 +4,12 @@ import { useTranslation } from 'react-i18next'
 import { FormControlLabel, Switch } from '@mui/material'
 import TableActionsMenu from '@/components/shared/TableActionsMenu'
 import SearchInput from '../SearchInput'
-import { Column } from '@/interfaces/column.ts'
+import { Column } from '@/interfaces/Column.ts'
 import BaseFormDialog from '@/components/shared/BaseFormDialog'
-import { useMoveEntryDialog, ZonesTableActions } from '@/hooks/dialogs/zonesContent/useMoveEntryDialog'
+import {
+  useMoveEntryDialog,
+  ZonesTableActions
+} from '@/hooks/dialogs/zonesContent/useMoveEntryDialog'
 import MoveEntryForm from '../forms/ZonesContentForms/MoveEntryForm'
 
 interface Row {
@@ -23,12 +26,8 @@ export default function ZonesContentsTable() {
   const [toggleOn, setToggleOn] = React.useState(false)
   const [searchTerm, setSearchTerm] = React.useState('')
 
-  const {
-    quantity,
-    openMoveEntryDialog,
-    onCloseMoveEntryDialog,
-    onOpenMoveEntryDialog
-  } = useMoveEntryDialog()
+  const { quantity, openMoveEntryDialog, onCloseMoveEntryDialog, onOpenMoveEntryDialog } =
+    useMoveEntryDialog()
 
   const handleToggleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setToggleOn(event.target.checked)
@@ -68,9 +67,7 @@ export default function ZonesContentsTable() {
       ...row,
       actions: (
         <TableActionsMenu
-          specificOptionHandler={(action: string) =>
-            onOpenMoveEntryDialog(action, row.quantity)
-          }
+          specificOptionHandler={(action: string) => onOpenMoveEntryDialog(action, row.quantity)}
           options={[
             {
               title: `zonesContent.actionsMenu.${ZonesTableActions.MoveToNewZone}`,

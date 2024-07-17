@@ -1,18 +1,31 @@
 import { NewVendorFormData } from '@/schemas/newVendorSchema'
-import { Checkbox, FormControlLabel, TextField } from '@mui/material'
+import { MarkerDto } from '@/services/model'
+import { FormControl, InputLabel, ListItemText, MenuItem, Select, TextField } from '@mui/material'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import useGetMarkers from '@/hooks/services/markers/useGetMarkers'
+
+interface NewVendorFormProps extends UseFormReturn<NewVendorFormData> {
+  defaultValues?: {
+    name: string
+    systemNumber: string
+    markerIds: number[]
+  }
+}
 
 export default function NewVendorForm({
   control,
-  formState: { errors }
-}: UseFormReturn<NewVendorFormData>) {
+  formState: { errors },
+  defaultValues = { name: '', systemNumber: '', markerIds: [] }
+}: NewVendorFormProps) {
   const { t: translate } = useTranslation()
-  //TODO: add defaultValues
+  const markers = useGetMarkers()
+
   return (
     <>
       <Controller
         name="vendorName"
+        defaultValue={defaultValues?.name || ''}
         control={control}
         render={({ field }) => (
           <TextField
@@ -30,6 +43,7 @@ export default function NewVendorForm({
       />
       <Controller
         name="vendorNumber"
+        defaultValue={defaultValues?.systemNumber || ''}
         control={control}
         render={({ field }) => (
           <TextField
@@ -37,6 +51,7 @@ export default function NewVendorForm({
             label={translate('newVendor.labels.vendorNumber')}
             id="vendorNumber"
             name="vendorNumber"
+            type="number"
             required
             fullWidth
             autoFocus
@@ -47,13 +62,41 @@ export default function NewVendorForm({
       />
 
       <Controller
-        name="isFinal"
+        name="markers"
+        defaultValue={defaultValues.markerIds?.map(String)}
         control={control}
         render={({ field }) => (
-          <FormControlLabel
-            control={<Checkbox {...field} checked={field.value} />}
-            label={translate('newVendor.labels.isFinal')}
-          />
+          <FormControl fullWidth>
+            <InputLabel id="demo-multiple-markers-label">
+              {translate('newVendor.labels.markers')}
+            </InputLabel>
+            <Select
+              {...field}
+              label={translate('newVendor.labels.markers')}
+              labelId="demo-multiple-markers-label"
+              id="demo-multiple-markers"
+              multiple
+              value={field.value || []}
+              onChange={(e) => field.onChange(e.target.value)}
+              renderValue={(selected) => {
+                const selectedMarkerNames = selected
+                  .map((id) => {
+                    const isMarker = markers.find((marker) => marker.id === Number(id))
+                    if (isMarker) {
+                      return isMarker.name
+                    }
+                  })
+                  .join(', ')
+
+                return selectedMarkerNames
+              }}>
+              {markers.map((marker: MarkerDto) => (
+                <MenuItem key={marker.id} value={marker.id?.toString()}>
+                  <ListItemText primary={marker.name} />
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         )}
       />
     </>

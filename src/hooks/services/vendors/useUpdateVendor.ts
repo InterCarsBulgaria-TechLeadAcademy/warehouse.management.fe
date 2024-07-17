@@ -1,28 +1,28 @@
 import { useSnackbar } from '@/hooks/useSnackbar'
 import { BodyType } from '@/services/api'
 import { getWarehouseManagementApi } from '@/services/generated-api'
-import { ZoneFormDto } from '@/services/model'
+import { VendorFormDto } from '@/services/model'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 
-export default function useUpdateZone(zoneName: string) {
+export default function useUpdateVendor(vendorName: string) {
   const { t: translate } = useTranslation()
   const { showSnackbar } = useSnackbar()
   const queryClient = useQueryClient()
 
   const mutationUpdate = useMutation({
-    mutationFn: ({ id, data }: { id: number; data: BodyType<ZoneFormDto> }) =>
-      getWarehouseManagementApi().putApiZoneEditId(id, data),
+    mutationFn: ({ id, data }: { id: number; data: BodyType<VendorFormDto> }) =>
+      getWarehouseManagementApi().putApiVendorEditId(id, data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['zones'] })
+      queryClient.invalidateQueries({ queryKey: ['vendors'] })
       showSnackbar({
-        message: translate('snackBar.messages.zones.updateZone.success', { name: zoneName }),
+        message: translate('newVendor.snackBar.messages.updateVendor.success', { name: vendorName }),
         type: 'success'
       })
     },
     onError: () => {
       showSnackbar({
-        message: translate('snackBar.messages.zones.updateZone.error'),
+        message: translate('newVendor.snackBar.messages.updateVendor.error'),
         type: 'error'
       })
     }
@@ -30,4 +30,3 @@ export default function useUpdateZone(zoneName: string) {
 
   return mutationUpdate
 }
-

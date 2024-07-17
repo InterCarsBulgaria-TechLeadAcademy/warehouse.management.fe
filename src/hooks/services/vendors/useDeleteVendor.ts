@@ -3,28 +3,27 @@ import { getWarehouseManagementApi } from '@/services/generated-api'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 
-export default function usePostZone(zoneName: string) {
+export default function useDeleteVendor(vendorName: string) {
   const { t: translate } = useTranslation()
   const { showSnackbar } = useSnackbar()
   const queryClient = useQueryClient()
 
-  const mutationPost = useMutation({
-    mutationFn: getWarehouseManagementApi().postApiZoneAdd,
+  const mutationDelete = useMutation({
+    mutationFn: (id: number) => getWarehouseManagementApi().deleteApiVendorDeleteId(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['zones'] })
+      queryClient.invalidateQueries({ queryKey: ['vendors'] })
       showSnackbar({
-        message: translate('snackBar.messages.zones.createZone.success', { name: zoneName }),
+        message: translate('newVendor.snackBar.messages.deleteVendor.success', { name: vendorName }),
         type: 'success'
       })
     },
     onError: () => {
       showSnackbar({
-        message: translate('snackBar.messages.zones.createZone.error'),
+        message: translate('newVendor.snackBar.messages.deleteVendor.error'),
         type: 'error'
       })
     }
   })
 
-  return mutationPost
+  return mutationDelete
 }
-

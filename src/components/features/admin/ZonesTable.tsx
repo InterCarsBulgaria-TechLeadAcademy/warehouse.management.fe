@@ -1,12 +1,12 @@
 import React from 'react'
 import DataTable from '@/components/shared/DataTable'
 import { useTranslation } from 'react-i18next'
+import ZonesTableActionsMenu from '../actionsMenu/ZonesTableActionsMenu'
+import ChipsList from '../ChipsList'
 import SearchInput from '../SearchInput'
 import { Autocomplete, TextField, Typography } from '@mui/material'
 import { Column } from '@/interfaces/Column.ts'
-import ZonesTableActionsMenu from '../actionsMenu/ZonesTableActionsMenu'
 import { ZoneDto } from '@/services/model'
-import ChipsList from '../ChipsList'
 import useGetZones from '@/hooks/services/zones/useGetZones'
 
 interface Row {
