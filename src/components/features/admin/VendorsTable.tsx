@@ -58,7 +58,7 @@ export default function VendorsTable() {
             items={vendor.markers?.map((marker) => marker.markerName!) || ([] as string[])}
           />
         ) : (
-          <Typography>Empty</Typography>
+          <Typography>-</Typography>
         ),
       actions: <VendorTableActionsMenu key={vendor.id} vendor={vendor} />
     }))
