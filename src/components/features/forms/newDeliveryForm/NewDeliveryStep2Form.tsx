@@ -9,6 +9,7 @@ import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import dayjs from 'dayjs'
 import React from 'react'
 import { VendorDto } from '@/services/model'
+import useGetVendors from '@/hooks/services/vendors/useGetVendors'
 
 export default function NewDeliveryStep2Form({
   control,
