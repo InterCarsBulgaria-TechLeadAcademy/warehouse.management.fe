@@ -13,22 +13,53 @@ const removeTokens = () => {
   Cookies.remove('refreshToken');
 };
 
-export default function loginUser() {
-  fetch('https://dummyjson.com/auth/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      username: 'emilys',
-      password: 'emilyspass',
-      expiresInMins: 1, // optional, defaults to 60
+export async function loginUser() {
+  try {
+    const response = await fetch('https://dummyjson.com/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: 'emilys',
+        password: 'emilyspass',
+        expiresInMins: 1, // optional, defaults to 60
+      })
     })
-  })
-    .then(res => res.json())
-    .then((response) => {
-      setTokenCookies(response.token, response.refreshToken)
-      // Redirect after login
+  
+    const data = await response.json()
+    setTokenCookies(data.token, data.refreshToken)
+    return;
+  } catch (error) {
+    console.error('Error during login:', error);
+  }
+}
+
+export async function getUserFromCookies() {
+  const accessToken = getAccessToken()
+  const refreshToken = getRefreshToken()
+
+  if (!accessToken) {
+    // Redirect to login..
+    // After that try to handle refresh token..
+    return;
+  }
+
+  try {
+    const response = await fetch('https://dummyjson.com/auth/me', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+      },
     })
-    .catch(error => {
-      console.error('Error during login:', error);
-    });
+
+    return response.json()
+
+  } catch (error: any) {
+    if (error.response && error.response.status === 401) {
+      // Token might be expired, handle token refresh or re-login
+      removeTokens();
+      // Redirect to login or refresh tokens
+    } else {
+      console.error('Error fetching protected data', error);
+    }
+  }
 }
