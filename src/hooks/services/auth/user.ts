@@ -13,6 +13,7 @@ const removeTokens = () => {
   Cookies.remove('refreshToken');
 };
 
+
 export async function loginUser() {
   try {
     const response = await fetch('https://dummyjson.com/auth/login', {
@@ -50,7 +51,7 @@ export async function getUserFromCookies() {
         'Authorization': `Bearer ${accessToken}`,
       },
     })
-
+    
     return response.json()
 
   } catch (error: any) {
