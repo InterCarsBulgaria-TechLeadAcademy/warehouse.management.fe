@@ -13,13 +13,13 @@ export default function usePostZone(zoneName: string) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['zones'] })
       showSnackbar({
-        message: translate('snackBar.messages.zones.createZone.success', { name: zoneName }),
+        message: translate('zones.newZone.snackBar.success', { name: zoneName }),
         type: 'success'
       })
     },
     onError: () => {
       showSnackbar({
-        message: translate('snackBar.messages.zones.createZone.error'),
+        message: translate('zones.newZone.snackBar.error'),
         type: 'error'
       })
     }
@@ -27,4 +27,3 @@ export default function usePostZone(zoneName: string) {
 
   return mutationPost
 }
-

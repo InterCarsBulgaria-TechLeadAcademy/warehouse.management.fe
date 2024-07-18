@@ -13,7 +13,7 @@ export default function usePostVendor(vendorName: string) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['vendors'] })
       showSnackbar({
-        message: translate('snackBar.messages.vendors.createVendor.success', {
+        message: translate('vendors.newVendor.snackBar.success', {
           name: vendorName
         }),
         type: 'success'
@@ -21,7 +21,7 @@ export default function usePostVendor(vendorName: string) {
     },
     onError: () => {
       showSnackbar({
-        message: translate('snackBar.messages.vendors.createVendor.error'),
+        message: translate('vendors.newVendor.snackBar.error'),
         type: 'error'
       })
     }

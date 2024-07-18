@@ -23,9 +23,13 @@ export default function Vendors() {
   }
 
   const handleSubmit: SubmitHandler<NewVendorFormData> = (data) => {
-    setVendorName(data.vendorName);
+    setVendorName(data.vendorName)
     const markerIds = data.markers!.map((marker) => Number(marker))
-    mutationPost.mutate({ name: data.vendorName, systemNumber: data.vendorNumber, markerIds: markerIds })
+    mutationPost.mutate({
+      name: data.vendorName,
+      systemNumber: data.vendorNumber,
+      markerIds: markerIds
+    })
   }
 
   return (
@@ -40,9 +44,9 @@ export default function Vendors() {
 
       <FormDialog<NewVendorFormData>
         open={openDialog}
-        title={translate('newVendor.title')}
-        discardText={translate('newVendor.labels.exit')}
-        confirmText={translate('newVendor.labels.create')}
+        title={translate('vendors.newVendor.title')}
+        discardText={translate('vendors.newVendor.labels.exit')}
+        confirmText={translate('vendors.newVendor.labels.create')}
         onCloseDialog={onCloseDialog}
         schema={newVendorSchema}
         onSubmit={handleSubmit}

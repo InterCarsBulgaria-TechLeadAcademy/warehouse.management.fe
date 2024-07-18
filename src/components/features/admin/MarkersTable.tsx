@@ -34,8 +34,13 @@ export default function MarkersTable() {
   }
 
   const columnsData: Column<Row>[] = [
-    { key: 'name', title: translate('markers.table.name') },
-    { key: 'actions', title: translate('markers.table.actions'), minWidth: 50, align: 'right' }
+    { key: 'name', title: translate('markers.table.columns.name') },
+    {
+      key: 'actions',
+      title: translate('markers.table.columns.actions'),
+      minWidth: 50,
+      align: 'right'
+    }
   ]
 
   function transformDataToRows(markers: MarkerDto[]): Row[] {

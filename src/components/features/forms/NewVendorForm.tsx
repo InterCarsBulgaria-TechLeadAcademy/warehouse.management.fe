@@ -30,7 +30,7 @@ export default function NewVendorForm({
         render={({ field }) => (
           <TextField
             {...field}
-            label={translate('newVendor.labels.name')}
+            label={translate('vendors.newVendor.labels.name')}
             id="vendorName"
             name="vendorName"
             required
@@ -48,7 +48,7 @@ export default function NewVendorForm({
         render={({ field }) => (
           <TextField
             {...field}
-            label={translate('newVendor.labels.vendorNumber')}
+            label={translate('vendors.newVendor.labels.vendorNumber')}
             id="vendorNumber"
             name="vendorNumber"
             type="number"
@@ -68,11 +68,11 @@ export default function NewVendorForm({
         render={({ field }) => (
           <FormControl fullWidth>
             <InputLabel id="demo-multiple-markers-label">
-              {translate('newVendor.labels.markers')}
+              {translate('vendors.newVendor.labels.markers')}
             </InputLabel>
             <Select
               {...field}
-              label={translate('newVendor.labels.markers')}
+              label={translate('vendors.newVendor.labels.markers')}
               labelId="demo-multiple-markers-label"
               id="demo-multiple-markers"
               multiple

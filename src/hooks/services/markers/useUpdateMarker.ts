@@ -16,7 +16,7 @@ export default function useUpdateMarker(markerName: string) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['markers'] })
       showSnackbar({
-        message: translate('snackBar.messages.markers.updateMarker.success', {
+        message: translate('markers.table.actions.edit.snackBar.success', {
           name: markerName
         }),
         type: 'success'
@@ -24,7 +24,7 @@ export default function useUpdateMarker(markerName: string) {
     },
     onError: () => {
       showSnackbar({
-        message: translate('snackBar.messages.markers.updateMarker.error'),
+        message: translate('markers.table.actions.edit.snackBar.error'),
         type: 'error'
       })
     }

@@ -41,10 +41,15 @@ export default function VendorsTable() {
   const options = sortOptions.map((option) => ({ label: option }))
 
   const columnsData: Column<Row>[] = [
-    { key: 'name', title: translate('vendors.table.name') },
-    { key: 'vendorNumber', title: translate('vendors.table.vendorNumber') },
-    { key: 'markers', title: translate('vendors.table.markers') },
-    { key: 'actions', title: translate('vendors.table.actions'), minWidth: 50, align: 'right' }
+    { key: 'name', title: translate('vendors.table.columns.name') },
+    { key: 'vendorNumber', title: translate('vendors.table.columns.vendorNumber') },
+    { key: 'markers', title: translate('vendors.table.columns.markers') },
+    {
+      key: 'actions',
+      title: translate('vendors.table.columns.actions'),
+      minWidth: 50,
+      align: 'right'
+    }
   ]
 
   function transformDataToRows(vendors: VendorDto[]): Row[] {

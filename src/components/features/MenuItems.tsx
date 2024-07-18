@@ -30,37 +30,37 @@ export default function MenuItems() {
 
   const adminMenuItems: MenuItem[] = [
     {
-      title: translate('menuItems.users'),
+      title: translate('menu.menuItems.users'),
       icon: PeopleAltOutlinedIcon,
       link: USERS_PATH
     },
     {
-      title: translate('menuItems.zones'),
+      title: translate('menu.menuItems.zones'),
       icon: AccountTreeOutlinedIcon,
       link: ZONES_PATH
     },
     {
-      title: translate('menuItems.vendors'),
+      title: translate('menu.menuItems.vendors'),
       icon: LocalShippingOutlinedIcon,
       link: VENDORS_PATH
     },
     {
-      title: translate('menuItems.roles'),
+      title: translate('menu.menuItems.roles'),
       icon: ManageAccountsOutlinedIcon,
       link: ROLES_PATH
     },
     {
-      title: translate('menuItems.typesGoods'),
+      title: translate('menu.menuItems.typesGoods'),
       icon: Inventory2OutlinedIcon,
       link: TYPESGOODS_PATH
     },
     {
-      title: translate('menuItems.typesDifference'),
+      title: translate('menu.menuItems.typesDifference'),
       icon: DifferenceOutlinedIcon,
       link: DIFFERENCETYPE_PATH
     },
     {
-      title: translate('menuItems.markers'),
+      title: translate('menu.menuItems.markers'),
       icon: AlignHorizontalRightIcon,
       link: MARKERS_PATH
     }
@@ -68,12 +68,12 @@ export default function MenuItems() {
 
   const mainMenuItems: MenuItem[] = [
     {
-      title: translate('menuItems.zonesContent'),
+      title: translate('menu.menuItems.zonesContent'),
       icon: AccountTreeOutlinedIcon,
       link: ZONES_CONTENT_PATH
     },
     {
-      title: translate('menuItems.deliveries'),
+      title: translate('menu.menuItems.deliveries'),
       icon: LocalShippingOutlinedIcon,
       link: DELIVERIES_PATH
     }

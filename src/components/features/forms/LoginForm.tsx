@@ -22,7 +22,7 @@ export default function LoginForm({
         render={({ field }) => (
           <TextField
             {...field}
-            label={translate('label.email')}
+            label={translate('login.labels.email')}
             id="email"
             name="email"
             variant="outlined"
@@ -45,7 +45,7 @@ export default function LoginForm({
         render={({ field }) => (
           <ShowHideFunctionality
             field={field}
-            label={translate('label.password')}
+            label={translate('login.labels.password')}
             id="password"
             name="password"
             required
@@ -65,7 +65,7 @@ export default function LoginForm({
         variant="contained"
         sx={{ mt: 3, mb: 2 }}
         disabled={formHasErrors(errors)}>
-        {translate('login.title')}
+        {translate('login.labels.logged-in')}
       </Button>
     </>
   )

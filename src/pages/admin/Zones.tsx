@@ -40,9 +40,9 @@ export default function Zones() {
 
       <FormDialog<NewZoneFormData>
         open={openDialog}
-        title={translate('newZone.title')}
-        discardText={translate('newZone.labels.exit')}
-        confirmText={translate('newZone.labels.create')}
+        title={translate('zones.newZone.title')}
+        discardText={translate('zones.newZone.labels.exit')}
+        confirmText={translate('zones.newZone.labels.create')}
         onCloseDialog={onCloseDialog}
         schema={newZoneSchema}
         onSubmit={handleSubmit}
