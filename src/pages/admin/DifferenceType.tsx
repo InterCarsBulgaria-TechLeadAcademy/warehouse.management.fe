@@ -2,17 +2,20 @@ import { useState } from 'react'
 import { SubmitHandler } from 'react-hook-form'
 import SkeletonPage from '@/components/features/SkeletonPage'
 import { useTranslation } from 'react-i18next'
-import MarkersTable from '@/components/features/admin/MarkersTable'
-import { NewMarkerFormData, newMarkerSchema } from '@/schemas/newMarkerSchema'
 import FormDialog from '@/components/shared/FormDialog'
-import NewMarkerForm from '@/components/features/forms/NewMarkerForm'
-import usePostMarker from '@/hooks/services/markers/usePostMarker'
+import DifferenceTypeTable from '../../components/features/admin/DifferenceTypeTable'
+import NewDifferenceTypeForm from '@/components/features/forms/NewDifferenceTypeForm'
+import {
+  NewDifferenceTypeFormData,
+  newDifferenceTypeSchema
+} from '@/schemas/newDifferenceTypeSchema'
+import usePostDifferenceType from '@/hooks/services/differenceType/usePostDifferenceType'
 
 export default function DifferenceType() {
   const { t: translate } = useTranslation()
   const [openDialog, setOpenDialog] = useState(false)
-  const [markerName, setMarkerName] = useState('')
-  const mutationCreate = usePostMarker(markerName)
+  const [differenceTypeName, setDifferenceTypeName] = useState('')
+  const mutationCreate = usePostDifferenceType(differenceTypeName)
 
   const handleClickOpen = () => {
     setOpenDialog(true)
@@ -22,10 +25,10 @@ export default function DifferenceType() {
     setOpenDialog(false)
   }
 
-  //   const handleSubmit: SubmitHandler<NewMarkerFormData> = (data) => {
-  //     setMarkerName(data.markerName)
-  //     mutationCreate.mutate({ name: data.markerName })
-  //   }
+  const handleSubmit: SubmitHandler<NewDifferenceTypeFormData> = (data) => {
+    setDifferenceTypeName(data.differenceTypeName)
+    mutationCreate.mutate({ name: data.differenceTypeName })
+  }
 
   return (
     <>
@@ -34,20 +37,19 @@ export default function DifferenceType() {
         description={translate('differenceType.description')}
         buttonText={translate('differenceType.labels.newDifferenceType')}
         buttonClickHandler={handleClickOpen}
-        //smeni
-        table={<MarkersTable />}
+        table={<DifferenceTypeTable />}
       />
 
-      {/* <FormDialog<NewMarkerFormData>
+      <FormDialog<NewDifferenceTypeFormData>
         open={openDialog}
-        title={translate('newMarker.title')}
-        discardText={translate('newMarker.labels.exit')}
-        confirmText={translate('newMarker.labels.create')}
+        title={translate('newDifferenceType.title')}
+        discardText={translate('newDifferenceType.labels.exit')}
+        confirmText={translate('newDifferenceType.labels.create')}
         onCloseDialog={onCloseDialog}
-        schema={newMarkerSchema}
+        schema={newDifferenceTypeSchema}
         onSubmit={handleSubmit}
-        renderForm={(methods) => <NewMarkerForm {...methods} />}
-      /> */}
+        renderForm={(methods) => <NewDifferenceTypeForm {...methods} />}
+      />
     </>
   )
 }

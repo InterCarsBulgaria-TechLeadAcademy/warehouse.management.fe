@@ -8,7 +8,6 @@ import AlignHorizontalRightIcon from '@mui/icons-material/AlignHorizontalRight'
 import MenuListItem from './MenuListItem'
 import { useTranslation } from 'react-i18next'
 import {
-  TYPESDIFFERENCE_PATH,
   ROLES_PATH,
   TYPESGOODS_PATH,
   USERS_PATH,
@@ -16,7 +15,8 @@ import {
   ZONES_PATH,
   MARKERS_PATH,
   DELIVERIES_PATH,
-  ZONES_CONTENT_PATH
+  ZONES_CONTENT_PATH,
+  DIFFERENCETYPE_PATH
 } from '@/router/routerPaths'
 
 interface MenuItem {
@@ -57,7 +57,7 @@ export default function MenuItems() {
     {
       title: translate('menuItems.typesDifference'),
       icon: DifferenceOutlinedIcon,
-      link: TYPESDIFFERENCE_PATH
+      link: DIFFERENCETYPE_PATH
     },
     {
       title: translate('menuItems.markers'),

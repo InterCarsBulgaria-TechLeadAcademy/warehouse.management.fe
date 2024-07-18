@@ -58,7 +58,7 @@
     },
     "deleteAction": {
       "title": "Изтриване на маркер",
-      "message": "Сигурни ли сте, че искате да изтриете този маркер?",
+      "message": "Сигурни ли сте, че искате да изтриете {{marker}}?",
       "labels": {
         "discard": "Откажи",
         "confirm": "Потвърди"
@@ -80,14 +80,6 @@
       "required": "Полето за име e задължително",
       "min": "Името трябва да е минимум 2 символа",
       "max": "Името трябва да е до 100 символа"
-    },
-    "deleteAction": {
-      "title": "Изтриване на маркер",
-      "message": "Сигурни ли сте, че искате да изтриете {{marker}}?",
-      "labels": {
-        "discard": "Откажи",
-        "confirm": "Потвърди"
-      }
     }
   },
   "editMarker": {
@@ -131,22 +123,6 @@
       "markers": "Маркери",
       "create": "Създай",
       "exit": "Изход"
-    },
-    "snackBar": {
-      "messages": {
-        "createVendor": {
-          "success": "Вендор \"{{name}}\" е добавен успешно",
-          "error": "Възникна грешка"
-        },
-        "deleteVendor": {
-          "success": "Вендор \"{{name}}\" е изтрит успешно",
-          "error": "Възникна грешка"
-        },
-        "updateVendor": {
-          "success": "Вендор \"{{name}}\" е променен успешно",
-          "error": "Възникна грешка"
-        }
-      }
     }
   },
   "editVendor": {
@@ -454,6 +430,34 @@
           "success": "Маркер {{name}} е променен успешно",
           "error": "Възникна грешка"
         }
+      },
+      "vendors": {
+        "createVendor": {
+          "success": "Вендор \"{{name}}\" е добавен успешно",
+          "error": "Възникна грешка"
+        },
+        "deleteVendor": {
+          "success": "Вендор \"{{name}}\" е изтрит успешно",
+          "error": "Възникна грешка"
+        },
+        "updateVendor": {
+          "success": "Вендор \"{{name}}\" е променен успешно",
+          "error": "Възникна грешка"
+        }
+      },
+      "differenceType": {
+        "createDifferenceType": {
+          "success": "Тип разлика \"{{name}}\" е добавена успешно",
+          "error": "Възникна грешка"
+        },
+        "deleteDifferenceType": {
+          "success": "Тип разлика \"{{name}}\" е изтрита успешно",
+          "error": "Възникна грешка"
+        },
+        "updateDifferenceType": {
+          "success": "Тип разлика \"{{name}}\" е променена успешно",
+          "error": "Възникна грешка"
+        }
       }
     }
   },
@@ -461,24 +465,46 @@
     "title": "Типове разлика",
     "description": "Управление на типове разлика",
     "labels": {
-      "newDifferenceType": "Тип разлика",
+      "newDifferenceType": "Нов тип разлика",
       "search": "Търсене"
     },
     "table": {
+      "number": "Номер",
       "name": "Име",
       "actions": "Действия"
     },
     "deleteAction": {
-      "title": "Изтриване на маркер",
-      "message": "Сигурни ли сте, че искате да изтриете този маркер?",
+      "title": "Изтриване на тип разлика",
+      "message": "Сигурни ли сте, че искате да изтриете {{differenceType}}?",
       "labels": {
         "discard": "Откажи",
         "confirm": "Потвърди"
       },
       "error": {
         "zones": "Зони",
-        "errorMessage": "Маркерът се използва в {{location}}"
+        "errorMessage": "Типът разлика се използва в {{location}}"
       }
+    }
+  },
+  "newDifferenceType": {
+    "title": "Създаване на нов тип разлика",
+    "labels": {
+      "name": "Име",
+      "create": "Създай",
+      "exit": "Изход"
+    },
+    "errors": {
+      "required": "Полето за име e задължително",
+      "min": "Името трябва да е минимум 2 символа",
+      "max": "Името трябва да е до 100 символа"
+    }
+  },
+  "editDifferenceType": {
+    "title": "Редактиране на тип зона",
+    "labels": {
+      "name": "Име",
+      "edit": "Промени",
+      "exit": "Изход"
     }
   }
 }

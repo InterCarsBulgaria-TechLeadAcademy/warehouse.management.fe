@@ -68,7 +68,7 @@ export default function MarkersTableActionsMenu({ marker }: MarkersTableActionsM
           open={true}
           title={translate('newMarker.deleteAction.title')}
           content={translate('newMarker.deleteAction.message', {
-            marker: name
+            marker: marker.name
           })}
           discardText={translate('newMarker.deleteAction.labels.discard')}
           confirmText={translate('newMarker.deleteAction.labels.confirm')}
