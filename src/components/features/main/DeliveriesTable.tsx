@@ -17,6 +17,7 @@ import useGetDeliveries from '@/hooks/services/deliveries/useGetDeliveries'
 import { DeliveryDto } from '@/services/model'
 import useGetMarkers from '@/hooks/services/markers/useGetMarkers'
 import { Column } from '@/interfaces/Column'
+import useGetVendors from '@/hooks/services/vendors/useGetVendors'
 
 interface Row {
   number: number
@@ -32,9 +33,6 @@ interface Row {
   actions: React.ReactNode
 }
 
-let vendorsNames: string[] = ['Bosch', 'Valeo', 'Dunlop', 'Michelin']
-let selectedVendorName = vendorsNames.map((vendorName) => ({ label: vendorName }))
-
 export default function DeliveriesTable() {
   const { t: translate } = useTranslation()
   const [searchTerm, setSearchTerm] = React.useState('')
@@ -44,8 +42,10 @@ export default function DeliveriesTable() {
   const [deliveryEndTime, setDeliveryEndTime] = React.useState<Dayjs | null>(null)
   const markers = useGetMarkers()
   const deliveries = useGetDeliveries()
+  const vendors = useGetVendors()
 
   const markersName = markers.map((marker) => marker.name!)
+  const vendorsName = vendors.map((vendor) => vendor.name!)
 
   const goodTypes = [
     { title: translate('newDelivery.goodType.pallets'), value: GoodType.pallets, quantity: 1 },
@@ -260,7 +260,10 @@ export default function DeliveriesTable() {
       <Autocomplete
         disablePortal
         id="markers-filter"
-        options={markers}
+        options={markersName}
+        onChange={(_event, newValue) => {
+          console.log(newValue)
+        }}
         size="small"
         sx={{ width: '235px' }}
         renderInput={(params) => (
@@ -271,7 +274,10 @@ export default function DeliveriesTable() {
       <Autocomplete
         disablePortal
         id="vendorName-filter"
-        options={selectedVendorName}
+        options={vendorsName}
+        onChange={(_event, newValue) => {
+          console.log(newValue)
+        }}
         size="small"
         sx={{ width: '235px' }}
         renderInput={(params) => (

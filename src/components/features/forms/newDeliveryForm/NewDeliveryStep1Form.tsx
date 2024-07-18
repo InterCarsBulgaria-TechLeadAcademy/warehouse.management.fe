@@ -93,7 +93,7 @@ export default function NewDeliveryStep1Form({
               multiple
               value={field.value || []}
               onChange={(e) => field.onChange(e.target.value)}
-              input={<OutlinedInput />}
+              input={<OutlinedInput label={translate('newZone.labels.markers')} />}
               renderValue={(selected) => {
                 const selectedMarkerNames = selected
                   .map((id) => {
