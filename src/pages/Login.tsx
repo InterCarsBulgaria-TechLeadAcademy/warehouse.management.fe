@@ -10,9 +10,12 @@ import { useTranslation } from 'react-i18next'
 import { LoginFormData, loginSchema } from '@/schemas/loginSchema'
 import LoginForm from '@/components/features/forms/LoginForm'
 import { getUserFromCookies, loginUser } from '@/hooks/services/auth/user'
+import { useNavigate } from 'react-router-dom'
+import { MAIN_PATH, DELIVERIES_PATH } from '@/router/routerPaths';
 
 export default function Login() {
   const { t: translate } = useTranslation()
+  const navigate = useNavigate();
 
   const methods = useForm<LoginFormData>({
     resolver: yupResolver(loginSchema)
@@ -23,8 +26,7 @@ export default function Login() {
     try {
       await loginUser();
       const user = await getUserFromCookies();
-      console.log('useeer', user);
-
+      navigate(`${DELIVERIES_PATH}`);
     } catch (error) {
       console.log(error);
     }
