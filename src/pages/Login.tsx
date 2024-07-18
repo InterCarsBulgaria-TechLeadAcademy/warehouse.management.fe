@@ -10,6 +10,8 @@ import { useTranslation } from 'react-i18next'
 import { LoginFormData, loginSchema } from '@/schemas/loginSchema'
 import LoginForm from '@/components/features/forms/LoginForm'
 
+import Cookies from 'js-cookie';
+
 export default function Login() {
   const { t: translate } = useTranslation()
 
@@ -17,8 +19,31 @@ export default function Login() {
     resolver: yupResolver(loginSchema)
   })
 
-  const onSubmit: SubmitHandler<LoginFormData> = (data) => console.log(data)
+  const onSubmit: SubmitHandler<LoginFormData> = (data) => {
+    console.log(data);
 
+    fetch('https://dummyjson.com/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+
+        username: 'emilys',
+        password: 'emilyspass',
+        expiresInMins: 1, // optional, defaults to 60
+      })
+    })
+      .then(res => res.json())
+      .then((response) => {
+        console.log(response)
+        const token = response.token;
+        Cookies.set('useer', token, { expires: 1, secure: true });
+
+        console.log('Token set in cookie:', token);
+      })
+      .catch(error => {
+        console.error('Error during login:', error);
+      });
+  };
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>
       <Grid
