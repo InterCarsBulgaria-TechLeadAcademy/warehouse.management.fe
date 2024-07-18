@@ -9,7 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useTranslation } from 'react-i18next'
 import { LoginFormData, loginSchema } from '@/schemas/loginSchema'
 import LoginForm from '@/components/features/forms/LoginForm'
-import loginUser from '@/hooks/services/auth/user'
+import { getUserFromCookies, loginUser } from '@/hooks/services/auth/user'
 
 export default function Login() {
   const { t: translate } = useTranslation()
@@ -18,9 +18,16 @@ export default function Login() {
     resolver: yupResolver(loginSchema)
   })
 
-  const onSubmit: SubmitHandler<LoginFormData> = (data) => {
+  const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
     console.log(data);
-    loginUser();
+    try {
+      await loginUser();
+      const user = await getUserFromCookies();
+      console.log('useeer', user);
+
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
