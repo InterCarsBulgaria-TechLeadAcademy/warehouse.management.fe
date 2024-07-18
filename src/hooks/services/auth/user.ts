@@ -41,7 +41,7 @@ export async function getUserFromCookies() {
   if (!accessToken) {
     // Redirect to login..
     // After that try to handle refresh token..
-    return;
+    return null;
   }
 
   try {
@@ -52,7 +52,7 @@ export async function getUserFromCookies() {
       },
     })
     
-    return response.json()
+    return response.json();
 
   } catch (error: any) {
     if (error.response && error.response.status === 401) {
@@ -63,4 +63,5 @@ export async function getUserFromCookies() {
       console.error('Error fetching protected data', error);
     }
   }
+  return null;
 }
