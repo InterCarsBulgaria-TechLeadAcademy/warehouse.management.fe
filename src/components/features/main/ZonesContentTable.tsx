@@ -9,8 +9,9 @@ import {
   useMoveEntryDialog,
   ZonesTableActions
 } from '@/hooks/dialogs/zonesContent/useMoveEntryDialog'
-import MoveEntryForm from '../forms/ZonesContentForms/MoveEntryForm'
+import MoveEntryForm from '../forms/MoveEntryForm'
 import TableActionsMenu from '../actionsMenu/TableActionsMenu'
+import ZonesContentTableActionsMenu from '../actionsMenu/ZonesContentActionsMenu'
 
 interface Row {
   entryNumber: number
@@ -21,7 +22,7 @@ interface Row {
   actions?: React.ReactNode
 }
 
-export default function ZonesContentsTable() {
+export default function ZonesContentTable() {
   const { t: translate } = useTranslation()
   const [toggleOn, setToggleOn] = React.useState(false)
   const [searchTerm, setSearchTerm] = React.useState('')
@@ -52,6 +53,7 @@ export default function ZonesContentsTable() {
       receptionNumbers: 12,
       quantity: 33,
       status: 'finished'
+      // actions:
     },
     {
       entryNumber: 2,
@@ -59,6 +61,7 @@ export default function ZonesContentsTable() {
       receptionNumbers: 11,
       quantity: 52,
       status: 'processing'
+      // actions:
     }
   ]
 
