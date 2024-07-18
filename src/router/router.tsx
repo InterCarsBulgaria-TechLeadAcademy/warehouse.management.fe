@@ -1,5 +1,5 @@
-import { useRoutes } from 'react-router-dom'
-import { lazy } from 'react'
+import { Navigate, useRoutes } from 'react-router-dom'
+import { lazy, useEffect, useState } from 'react'
 import {
   LOGIN_PATH,
   DEFAULTLAYOUT_PATH,
@@ -13,6 +13,7 @@ import {
   MAIN_PATH
 } from '@/router/routerPaths.ts'
 import NewDeliveryProvider from '@/contexts/NewDelivery'
+import { getUserFromCookies } from '@/hooks/services/auth/user';
 
 const Home = lazy(() => import('@/pages/main/Home.tsx'))
 const Projects = lazy(() => import('@/pages/main/Projects.tsx'))
@@ -25,6 +26,29 @@ const Deliveries = lazy(() => import('@/pages/main/Deliveries'))
 const ZonesContent = lazy(() => import('@/pages/main/ZonesContent'))
 
 export default function Router() {
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchUser() {
+      const user = await getUserFromCookies();
+      // user.role = 'regular'
+      console.log('useer', user);
+      
+      setUser(user);
+      setLoading(false);
+    }
+
+    fetchUser();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  const isAuthenticated = !!user;
+  const isAdmin = user?.role === 'admin';
+
   return useRoutes([
     {
       path: '/',
@@ -44,7 +68,7 @@ export default function Router() {
     },
     {
       path: ADMIN_PATH,
-      element: <DefaultLayout />,
+      element: isAdmin ? <DefaultLayout /> : <Navigate to={LOGIN_PATH} />,
       children: [
         {
           path: VENDORS_PATH,
@@ -62,7 +86,7 @@ export default function Router() {
     },
     {
       path: MAIN_PATH,
-      element: <DefaultLayout />,
+      element: isAuthenticated ? <DefaultLayout /> : <Navigate to={LOGIN_PATH} />,
       children: [
         {
           path: ZONES_CONTENT_PATH,
