@@ -2,7 +2,6 @@ import React from 'react'
 import DataTable from '@/components/shared/DataTable'
 import { useTranslation } from 'react-i18next'
 import { FormControlLabel, Switch } from '@mui/material'
-import TableActionsMenu from '@/components/shared/TableActionsMenu'
 import SearchInput from '../SearchInput'
 import { Column } from '@/interfaces/Column.ts'
 import BaseFormDialog from '@/components/shared/BaseFormDialog'
@@ -11,6 +10,7 @@ import {
   ZonesTableActions
 } from '@/hooks/dialogs/zonesContent/useMoveEntryDialog'
 import MoveEntryForm from '../forms/ZonesContentForms/MoveEntryForm'
+import TableActionsMenu from '../actionsMenu/TableActionsMenu'
 
 interface Row {
   entryNumber: number
