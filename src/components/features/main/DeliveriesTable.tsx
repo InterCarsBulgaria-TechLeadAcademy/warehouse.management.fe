@@ -262,6 +262,7 @@ export default function DeliveriesTable() {
         id="markers-filter"
         options={markersName}
         onChange={(_event, newValue) => {
+          //TODO: BE must make logic to can put get request
           console.log(newValue)
         }}
         size="small"
@@ -276,6 +277,7 @@ export default function DeliveriesTable() {
         id="vendorName-filter"
         options={vendorsName}
         onChange={(_event, newValue) => {
+          //TODO: BE must make logic to can put get request
           console.log(newValue)
         }}
         size="small"
