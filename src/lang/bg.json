@@ -456,5 +456,29 @@
         }
       }
     }
+  },
+  "differenceType": {
+    "title": "Типове разлика",
+    "description": "Управление на типове разлика",
+    "labels": {
+      "newDifferenceType": "Тип разлика",
+      "search": "Търсене"
+    },
+    "table": {
+      "name": "Име",
+      "actions": "Действия"
+    },
+    "deleteAction": {
+      "title": "Изтриване на маркер",
+      "message": "Сигурни ли сте, че искате да изтриете този маркер?",
+      "labels": {
+        "discard": "Откажи",
+        "confirm": "Потвърди"
+      },
+      "error": {
+        "zones": "Зони",
+        "errorMessage": "Маркерът се използва в {{location}}"
+      }
+    }
   }
 }

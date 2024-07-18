@@ -10,7 +10,8 @@ import {
   DELIVERIES_PATH,
   ADMIN_PATH,
   ZONES_CONTENT_PATH,
-  MAIN_PATH
+  MAIN_PATH,
+  DIFFERENCETYPE_PATH
 } from '@/router/routerPaths.ts'
 import NewDeliveryProvider from '@/contexts/NewDelivery'
 
@@ -23,6 +24,7 @@ const Zones = lazy(() => import('@/pages/admin/Zones.tsx'))
 const Markers = lazy(() => import('@/pages/admin/Markers.tsx'))
 const Deliveries = lazy(() => import('@/pages/main/Deliveries'))
 const ZonesContent = lazy(() => import('@/pages/main/ZonesContent'))
+const DifferenceType = lazy(() => import('@/pages/admin/DifferenceType'))
 
 export default function Router() {
   return useRoutes([
@@ -57,6 +59,10 @@ export default function Router() {
         {
           path: MARKERS_PATH,
           element: <Markers />
+        },
+        {
+          path: DIFFERENCETYPE_PATH,
+          element: <DifferenceType />
         }
       ]
     },
