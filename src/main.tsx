@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import ToggleColorMode from './contexts/Theme.tsx'
 import SnackbarProvider from './contexts/Snackbar.tsx'
+import { AuthProvider } from './contexts/Auth.tsx'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,11 +22,13 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <ToggleColorMode>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
-        <BrowserRouter>
-          <SnackbarProvider>
-            <App />
-          </SnackbarProvider>
-        </BrowserRouter>
+        <AuthProvider>
+          <BrowserRouter>
+            <SnackbarProvider>
+              <App />
+            </SnackbarProvider>
+          </BrowserRouter>
+        </AuthProvider>
       </QueryClientProvider>
     </ToggleColorMode>
   </React.StrictMode>
