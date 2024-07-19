@@ -6,12 +6,14 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import { Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import WarningActionDialog from '../shared/WarningActionDialog'
+import { useAuthContext } from '@/contexts/Auth'
 
 export default function ProfileMenu() {
   const { t: translate } = useTranslation()
   const [dialogOpen, setDialogOpen] = React.useState(false)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const menuOpen = Boolean(anchorEl)
+  const { setUser } = useAuthContext();
 
   const onMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
@@ -35,6 +37,8 @@ export default function ProfileMenu() {
   }
 
   const onConfirmClick = () => {
+    // Log out from the context only!
+    setUser(null)
     onCloseMenu()
   }
 
