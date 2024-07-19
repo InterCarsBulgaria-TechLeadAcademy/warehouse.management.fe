@@ -88,7 +88,7 @@ export default function VendorsTable() {
       <SearchInput
         value={searchTerm}
         onChange={handleSearchChange}
-        placeholder={translate('vendors.labels.search')}
+        placeholder={translate('vendors.filters.search')}
       />
 
       <Autocomplete
@@ -97,7 +97,9 @@ export default function VendorsTable() {
         options={options}
         size="small"
         sx={{ width: '235px' }}
-        renderInput={(params) => <TextField {...params} label={translate('vendors.labels.role')} />}
+        renderInput={(params) => (
+          <TextField {...params} label={translate('vendors.filters.role')} />
+        )}
       />
     </DataTable>
   )

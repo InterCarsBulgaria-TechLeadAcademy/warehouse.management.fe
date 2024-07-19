@@ -90,7 +90,7 @@ export default function ZonesTable() {
       <SearchInput
         value={searchTerm}
         onChange={handleSearchChange}
-        placeholder={translate('zones.labels.search')}
+        placeholder={translate('zones.filters.search')}
       />
 
       <Autocomplete
@@ -99,7 +99,7 @@ export default function ZonesTable() {
         options={options}
         size="small"
         sx={{ width: '235px' }}
-        renderInput={(params) => <TextField {...params} label={translate('zones.labels.role')} />}
+        renderInput={(params) => <TextField {...params} label={translate('zones.filters.role')} />}
       />
     </DataTable>
   )

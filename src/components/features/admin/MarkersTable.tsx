@@ -70,7 +70,7 @@ export default function MarkersTable() {
       <SearchInput
         value={searchTerm}
         onChange={handleSearchChange}
-        placeholder={translate('vendors.labels.search')}
+        placeholder={translate('vendors.filters.search')}
       />
     </DataTable>
   )

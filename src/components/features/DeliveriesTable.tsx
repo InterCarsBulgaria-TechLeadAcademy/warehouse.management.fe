@@ -41,9 +41,21 @@ export default function DeliveriesTable() {
   const [deliveryEndTime, setDeliveryEndTime] = React.useState<Dayjs | null>(null)
 
   const goodTypes = [
-    { title: translate('newDelivery.goodType.pallets'), value: GoodType.pallets, quantity: 1 },
-    { title: translate('newDelivery.goodType.packages'), value: GoodType.packages, quantity: 2 },
-    { title: translate('newDelivery.goodType.pieces'), value: GoodType.pieces, quantity: 3 }
+    {
+      title: translate('deliveries.newDelivery.goodType.pallets'),
+      value: GoodType.pallets,
+      quantity: 1
+    },
+    {
+      title: translate('deliveries.newDelivery.goodType.packages'),
+      value: GoodType.packages,
+      quantity: 2
+    },
+    {
+      title: translate('deliveries.newDelivery.goodType.pieces'),
+      value: GoodType.pieces,
+      quantity: 3
+    }
   ]
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,29 +63,34 @@ export default function DeliveriesTable() {
   }
 
   const columnsData: Column<Row>[] = [
-    { key: 'number', title: translate('deliveries.newDeliveryTable.columnsData.number') },
-    { key: 'vendorName', title: translate('deliveries.newDeliveryTable.columnsData.vendorName') },
+    { key: 'number', title: translate('deliveries.table.columns.number') },
+    { key: 'vendorName', title: translate('deliveries.table.columns.vendorName') },
     {
       key: 'deliveryNumber',
-      title: translate('deliveries.newDeliveryTable.columnsData.deliveryNumber')
+      title: translate('deliveries.table.columns.deliveryNumber')
     },
     {
       key: 'receptionNumber',
-      title: translate('deliveries.newDeliveryTable.columnsData.receptionNumber')
+      title: translate('deliveries.table.columns.receptionNumber')
     },
     {
       key: 'waitingGoods',
-      title: translate('deliveries.newDeliveryTable.columnsData.waitingGoods')
+      title: translate('deliveries.table.columns.waitingGoods')
     },
     {
       key: 'completedGoods',
-      title: translate('deliveries.newDeliveryTable.columnsData.completedGoods')
+      title: translate('deliveries.table.columns.completedGoods')
     },
-    { key: 'markers', title: translate('deliveries.newDeliveryTable.columnsData.markers') },
-    { key: 'status', title: translate('deliveries.newDeliveryTable.columnsData.status') },
-    { key: 'approvedOn', title: translate('deliveries.newDeliveryTable.columnsData.approvedOn') },
-    { key: 'createdOn', title: translate('deliveries.newDeliveryTable.columnsData.createdOn') },
-    { key: 'actions', title: translate('vendors.table.actions'), minWidth: 50, align: 'right' }
+    { key: 'markers', title: translate('deliveries.table.columns.markers') },
+    { key: 'status', title: translate('deliveries.table.columns.status') },
+    { key: 'approvedOn', title: translate('deliveries.table.columns.approvedOn') },
+    { key: 'createdOn', title: translate('deliveries.table.columns.createdOn') },
+    {
+      key: 'actions',
+      title: translate('deliveries.table.columns.actions'),
+      minWidth: 50,
+      align: 'right'
+    }
   ]
 
   const rowData: Row[] = [
