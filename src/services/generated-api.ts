@@ -111,11 +111,14 @@ export const getWarehouseManagementApi = () => {
   }
 
   const getApiDifferenceTypeAll = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<void>({ url: `/api/DifferenceType/all`, method: 'GET' }, options)
+    return customInstance<DifferenceTypeDto[]>(
+      { url: `/api/DifferenceType/all`, method: 'GET' },
+      options
+    )
   }
 
   const getApiDifferenceTypeAllWithDeleted = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<void>(
+    return customInstance<DifferenceTypeDto[]>(
       { url: `/api/DifferenceType/all-with-deleted`, method: 'GET' },
       options
     )

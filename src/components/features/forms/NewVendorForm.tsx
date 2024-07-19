@@ -51,7 +51,6 @@ export default function NewVendorForm({
             label={translate('vendors.newVendor.labels.vendorNumber')}
             id="vendorNumber"
             name="vendorNumber"
-            type="number"
             required
             fullWidth
             autoFocus

@@ -46,8 +46,8 @@ export default function DifferenceTypeTable() {
 
   function transformDataToRows(differenceTypes: DifferenceTypeDto[]): Row[] {
     return differenceTypes.map((differenceType: DifferenceTypeDto) => ({
-      id: differenceType.id,
-      name: differenceType.name,
+      id: differenceType.id!,
+      name: differenceType.name!,
       actions: (
         <DifferentTypeTableActionsMenu key={differenceType.id} differenceType={differenceType} />
       )
