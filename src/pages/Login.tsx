@@ -11,7 +11,7 @@ import { LoginFormData, loginSchema } from '@/schemas/loginSchema'
 import LoginForm from '@/components/features/forms/LoginForm'
 import { getUserFromCookies, loginUser } from '@/hooks/services/auth/user'
 import { useNavigate } from 'react-router-dom'
-import { MAIN_PATH, DELIVERIES_PATH } from '@/router/routerPaths';
+import { DELIVERIES_PATH } from '@/router/routerPaths';
 
 export default function Login() {
   const { t: translate } = useTranslation()
