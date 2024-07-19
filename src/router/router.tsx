@@ -34,8 +34,9 @@ export default function Router() {
       const user = await getUserFromCookies();
       // user.role = 'regular'
       console.log('useer', user);
-      
-      setUser(user);
+      if (user?.username) {
+        setUser(user);
+      }
       setLoading(false);
     }
 
