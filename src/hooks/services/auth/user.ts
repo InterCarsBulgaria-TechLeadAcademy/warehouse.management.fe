@@ -51,8 +51,11 @@ export async function getUserFromCookies() {
         'Authorization': `Bearer ${accessToken}`,
       },
     })
+
+    const user = await response.json()
+    console.log('response', user);
     
-    return response.json();
+    return user;
 
   } catch (error: any) {
     if (error.response && error.response.status === 401) {
