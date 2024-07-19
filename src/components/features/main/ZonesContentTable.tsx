@@ -38,12 +38,16 @@ export default function ZonesContentTable() {
   }
 
   const columnsData: Column<Row>[] = [
-    { key: 'entryNumber', title: translate('zonesContent.table.entryNumber') },
-    { key: 'vendorName', title: translate('zonesContent.table.vendorName') },
-    { key: 'receptionNumbers', title: translate('zonesContent.table.receptionNumbers') },
-    { key: 'quantity', title: translate('zonesContent.table.numberOfGoods') },
-    { key: 'status', title: translate('zonesContent.table.status') },
-    { key: 'actions', title: translate('zonesContent.table.actions'), minWidth: 50, align: 'right' }
+    { key: 'entryNumber', title: translate('zonesContent.table.columns.entryNumber') },
+    { key: 'receptionNumbers', title: translate('zonesContent.table.columns.receptionNumbers') },
+    { key: 'quantity', title: translate('zonesContent.table.columns.numberOfGoods') },
+    { key: 'status', title: translate('zonesContent.table.columns.status') },
+    {
+      key: 'actions',
+      title: translate('zonesContent.table.columns.actions'),
+      minWidth: 50,
+      align: 'right'
+    }
   ]
 
   const rowData: Row[] = [
@@ -73,19 +77,19 @@ export default function ZonesContentTable() {
           specificOptionHandler={(action: string) => onOpenMoveEntryDialog(action, row.quantity)}
           options={[
             {
-              title: `zonesContent.actionsMenu.${ZonesTableActions.MoveToNewZone}`,
+              title: `zonesContent.table.actionsMenu.${ZonesTableActions.MoveToNewZone}`,
               value: ZonesTableActions.MoveToNewZone
             },
             {
-              title: `zonesContent.actionsMenu.${ZonesTableActions.StartProcessing}`,
+              title: `zonesContent.table.actionsMenu.${ZonesTableActions.StartProcessing}`,
               value: ZonesTableActions.StartProcessing
             },
             {
-              title: `zonesContent.actionsMenu.${ZonesTableActions.FinishProcessing}`,
+              title: `zonesContent.table.actionsMenu.${ZonesTableActions.FinishProcessing}`,
               value: ZonesTableActions.FinishProcessing
             },
             {
-              title: `zonesContent.actionsMenu.${ZonesTableActions.DeliveryDetails}`,
+              title: `zonesContent.table.actionsMenu.${ZonesTableActions.DeliveryDetails}`,
               value: ZonesTableActions.DeliveryDetails
             }
           ]}
@@ -111,13 +115,13 @@ export default function ZonesContentTable() {
       <SearchInput
         value={searchTerm}
         onChange={handleSearchChange}
-        placeholder={translate('vendors.labels.search')}
+        placeholder={translate('zonesContent.filters.search')}
       />
 
       <FormControlLabel
         value="start"
         control={<Switch color="primary" onChange={handleToggleChange} />}
-        label={translate('zonesContent.labels.toggle')}
+        label={translate('zonesContent.filters.toggle')}
         labelPlacement="start"
       />
 

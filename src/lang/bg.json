@@ -386,27 +386,34 @@
       "leftItemsTitle": "Оставащо местене на стока"
     }
   },
-  "zonesContent": {
-    "title": "Съдържание на зони",
-    "description": "Управление на съдържанието на зони",
+ "zonesContent": {
+    "title": "Зони ",
+    "description": "Съдържание на зони",
     "labels": {
-      "search": "Търсене",
-      "toggle": "Покажи готовите записи",
       "moveEntry": "Местене на стока"
     },
-    "table": {
-      "entryNumber": "Запис №",
-      "vendorName": "Доставчик",
-      "receptionNumbers": "Рецепция №",
-      "numberOfGoods": "Количество",
-      "status": "Статус",
-      "actions": "Действия"
+    "filters": {
+      "search": "Търсене",
+      "toggle": "Покажи готовите записи"
     },
-    "actionsMenu": {
-      "MoveToNewZone": "Премести в нова зона",
-      "StartProcessing": "Започни обработка",
-      "FinishProcessing": "Завърши обработка",
-      "DeliveryDetails": "Детайли"
+    "table": {
+      "columns": {
+        "entryNumber": "Запис №",
+        "vendorName": "Доставчик",
+        "receptionNumbers": "Рецепция №",
+        "numberOfGoods": "Количество",
+        "status": "Статус",
+        "actions": "Действия"
+      },
+      "actionsMenu": {
+        "MoveToNewZone": "Премести в нова зона",
+        "StartProcessing": "Започни обработка",
+        "FinishProcessing": "Завърши обработка",
+        "DeliveryDetails": "Детайли"
+      },
+      "actions": {
+
+      }
     },
     "moveEntryForm": {
       "quantity": "Количество",
