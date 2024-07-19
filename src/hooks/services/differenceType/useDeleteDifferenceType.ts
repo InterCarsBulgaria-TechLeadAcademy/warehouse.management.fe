@@ -13,7 +13,7 @@ export default function useDeleteDifferenceType(differenceTypeName: string) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['differenceType'] })
       showSnackbar({
-        message: translate('snackBar.messages.differenceType.deleteDifferenceType.success', {
+        message: translate('differenceType.table.actions.delete.snackBar.success', {
           name: differenceTypeName
         }),
         type: 'success'
@@ -21,7 +21,7 @@ export default function useDeleteDifferenceType(differenceTypeName: string) {
     },
     onError: () => {
       showSnackbar({
-        message: translate('snackBar.messages.differenceType.deleteDifferenceType.error'),
+        message: translate('differenceType.table.actions.delete.snackBar.error'),
         type: 'error'
       })
     }

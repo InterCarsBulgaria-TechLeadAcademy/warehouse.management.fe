@@ -47,8 +47,8 @@ export default function DifferentTypeTableActionsMenu({
   }
 
   const options = [
-    { title: 'actionsMenu.options.edit', value: 'edit' },
-    { title: 'actionsMenu.options.delete', value: 'delete' }
+    { title: 'differenceType.table.actionsMenu.edit', value: 'edit' },
+    { title: 'differenceType.table.actionsMenu.delete', value: 'delete' }
   ]
 
   return (
@@ -58,9 +58,9 @@ export default function DifferentTypeTableActionsMenu({
       {selectedOption === 'edit' && (
         <FormDialog<NewDifferenceTypeFormData>
           open={true}
-          title={translate('editDifferenceType.title')}
-          discardText={translate('editDifferenceType.labels.exit')}
-          confirmText={translate('editDifferenceType.labels.edit')}
+          title={translate('differenceType.table.actions.edit.title')}
+          discardText={translate('differenceType.table.actions.edit.labels.exit')}
+          confirmText={translate('differenceType.table.actions.edit.labels.edit')}
           onCloseDialog={handleClose}
           schema={newDifferenceTypeSchema}
           onSubmit={handleSubmit}
@@ -73,12 +73,12 @@ export default function DifferentTypeTableActionsMenu({
       {selectedOption === 'delete' && (
         <WarningActionDialog
           open={true}
-          title={translate('differenceType.deleteAction.title')}
-          content={translate('differenceType.deleteAction.message', {
+          title={translate('differenceType.table.actions.delete.title')}
+          content={translate('differenceType.table.actions.delete.message', {
             differenceType: differenceType.name
           })}
-          discardText={translate('differenceType.deleteAction.labels.discard')}
-          confirmText={translate('differenceType.deleteAction.labels.confirm')}
+          discardText={translate('differenceType.table.actions.delete.labels.discard')}
+          confirmText={translate('differenceType.table.actions.delete.labels.confirm')}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
           onConfirmClick={onConfirmClick}

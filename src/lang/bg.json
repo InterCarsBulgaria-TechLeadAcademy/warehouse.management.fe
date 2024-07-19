@@ -455,12 +455,11 @@
     "title": "Зони ",
     "description": "Съдържание на зони",
     "labels": {
-      "newZone": "нова зона",
-      "toggle": "Покажи готовите записи",
       "moveEntry": "Местене на стока"
     },
     "filters": {
-      "search": "Търсене"
+      "search": "Търсене",
+      "toggle": "Покажи готовите записи"
     },
     "table": {
       "columns": {
@@ -497,50 +496,74 @@
       }
     }
   },
+
   "differenceType": {
     "title": "Типове разлика",
     "description": "Управление на типове разлика",
     "labels": {
-      "newDifferenceType": "Нов тип разлика",
+      "newDifferenceType": "Нов тип разлика"
+    },
+    "filters": {
       "search": "Търсене"
     },
     "table": {
-      "number": "Номер",
-      "name": "Име",
-      "actions": "Действия"
-    },
-    "deleteAction": {
-      "title": "Изтриване на тип разлика",
-      "message": "Сигурни ли сте, че искате да изтриете {{differenceType}}?",
-      "labels": {
-        "discard": "Откажи",
-        "confirm": "Потвърди"
+      "columns": {
+        "number": "Номер",
+        "name": "Име",
+        "actions": "Действия"
       },
-      "error": {
-        "zones": "Зони",
-        "errorMessage": "Типът разлика се използва в {{location}}"
+      "actionsMenu": {
+        "delete": "Изтрий",
+        "edit":"Редактирай"
+      },
+      "actions": {
+        "delete": {
+          "title": "Изтриване на тип разлика",
+          "message": "Сигурни ли сте, че искате да изтриете {{differenceType}}?",
+          "labels": {
+            "discard": "Откажи",
+            "confirm": "Потвърди"
+          },
+          "snackBar": {
+            "success": "Тип разлика {{name}} е изтрита успешно",
+            "error": "Възникна грешка"
+          },
+          "errors": {
+            "zones": "Зони",
+            "errorMessage": "Типът разлика се използва в {{location}}"
+          }
+        }, 
+        "edit": {
+          "title": "Редактиране на тип зона",
+          "labels": {
+            "name": "Име",
+            "edit": "Промени",
+            "exit": "Изход"
+          },
+          "snackBar": {
+            "success": "Тип разлика {{name}} е променена успешно",
+            "error": "Възникна грешка"
+          }
+        }
       }
-    }
-  },
-  "newDifferenceType": {
-    "title": "Създаване на нов тип разлика",
-    "labels": {
-      "name": "Име",
-      "create": "Създай",
-      "exit": "Изход"
     },
-    "errors": {
-      "required": "Полето за име e задължително",
-      "min": "Името трябва да е минимум 2 символа",
-      "max": "Името трябва да е до 100 символа"
-    }
-  },
-  "editDifferenceType": {
-    "title": "Редактиране на тип зона",
-    "labels": {
-      "name": "Име",
-      "edit": "Промени",
-      "exit": "Изход"
+    "newDifferenceType": {
+      "title": "Създаване на нов тип разлика",
+      "labels": {
+        "name": "Име",
+        "create": "Създай",
+        "exit": "Изход"
+      },
+      "snackBar": {
+        "success": "Тип разлика {{name}} е добавена успешно",
+        "error": "Възникна грешка"
+      },
+      "errors": {
+        "required": "Полето за име e задължително",
+        "min": "Името трябва да е минимум 2 символа",
+        "max": "Името трябва да е до 100 символа"
+      }
     }
   }
 }
+

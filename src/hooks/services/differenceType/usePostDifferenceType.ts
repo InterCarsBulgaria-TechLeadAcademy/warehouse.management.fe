@@ -13,7 +13,7 @@ export default function usePostDifferenceType(differenceTypeName: string) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['differenceType'] })
       showSnackbar({
-        message: translate('snackBar.messages.differenceType.createDifferenceType.success', {
+        message: translate('differenceType.newDifferenceType.snackBar.success', {
           name: differenceTypeName
         }),
         type: 'success'
@@ -21,7 +21,7 @@ export default function usePostDifferenceType(differenceTypeName: string) {
     },
     onError: () => {
       showSnackbar({
-        message: translate('snackBar.messages.differenceType.createDifferenceType.error'),
+        message: translate('differenceType.newDifferenceType.snackBar.error'),
         type: 'error'
       })
     }

@@ -16,7 +16,7 @@ export default function useUpdateDifferenceType(differenceTypeName: string) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['differenceType'] })
       showSnackbar({
-        message: translate('snackBar.messages.differenceType.updateDifferenceType.success', {
+        message: translate('differenceType.table.actions.edit.snackBar.success', {
           name: differenceTypeName
         }),
         type: 'success'
@@ -24,7 +24,7 @@ export default function useUpdateDifferenceType(differenceTypeName: string) {
     },
     onError: () => {
       showSnackbar({
-        message: translate('snackBar.messages.differenceType.updateDifferenceType.error'),
+        message: translate('differenceType.table.actions.edit.snackBar.error'),
         type: 'error'
       })
     }

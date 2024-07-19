@@ -42,9 +42,9 @@ export default function DifferenceType() {
 
       <FormDialog<NewDifferenceTypeFormData>
         open={openDialog}
-        title={translate('newDifferenceType.title')}
-        discardText={translate('newDifferenceType.labels.exit')}
-        confirmText={translate('newDifferenceType.labels.create')}
+        title={translate('differenceType.newDifferenceType.title')}
+        discardText={translate('differenceType.newDifferenceType.labels.exit')}
+        confirmText={translate('differenceType.newDifferenceType.labels.create')}
         onCloseDialog={onCloseDialog}
         schema={newDifferenceTypeSchema}
         onSubmit={handleSubmit}

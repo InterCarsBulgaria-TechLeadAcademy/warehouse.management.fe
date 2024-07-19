@@ -34,11 +34,11 @@ export default function DifferenceTypeTable() {
   }
 
   const columnsData: Column<Row>[] = [
-    { key: 'id', title: translate('differenceType.table.number') },
-    { key: 'name', title: translate('differenceType.table.name') },
+    { key: 'id', title: translate('differenceType.table.columns.number') },
+    { key: 'name', title: translate('differenceType.table.columns.name') },
     {
       key: 'actions',
-      title: translate('differenceType.table.actions'),
+      title: translate('differenceType.table.columns.actions'),
       minWidth: 50,
       align: 'right'
     }
@@ -73,7 +73,7 @@ export default function DifferenceTypeTable() {
       <SearchInput
         value={searchTerm}
         onChange={handleSearchChange}
-        placeholder={translate('differenceType.labels.search')}
+        placeholder={translate('differenceType.filters.search')}
       />
     </DataTable>
   )

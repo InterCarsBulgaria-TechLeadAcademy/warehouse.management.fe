@@ -22,7 +22,7 @@ export default function NewDifferenceTypeForm({
       render={({ field }) => (
         <TextField
           {...field}
-          label={translate('newDifferenceType.labels.name')}
+          label={translate('differenceType.newDifferenceType.labels.name')}
           id="differenceTypeName"
           name="differenceTypeName"
           required
