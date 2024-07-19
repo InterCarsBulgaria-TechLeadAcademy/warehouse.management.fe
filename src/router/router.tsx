@@ -33,7 +33,7 @@ export default function Router() {
     async function fetchUser() {
       const user = await getUserFromCookies();
       // user.role = 'regular'
-      console.log('useer', user);
+      console.log('route', user);
       if (user?.username) {
         setUser(user);
       }
