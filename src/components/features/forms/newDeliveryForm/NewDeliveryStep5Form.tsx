@@ -28,7 +28,7 @@ export default function NewDeliveryStep5Form() {
             <Typography>{formsData.receptionNumber}</Typography>
           </Box>
           <Box>
-            <Typography>{translate('newDelivery.labels.step1.cmrNumber')}</Typography>
+            <Typography>{translate('newDelivery.labels.step1.cmr')}</Typography>
             <Typography>{formsData.cmrNumber}</Typography>
           </Box>
           <Box>

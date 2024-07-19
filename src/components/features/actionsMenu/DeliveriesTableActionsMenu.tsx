@@ -1,31 +1,17 @@
-import IconButton from '@mui/material/IconButton'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import React from 'react'
 import WarningActionDialog from '../../shared/WarningActionDialog'
 import { useTranslation } from 'react-i18next'
-
+import TableActionsMenu from './TableActionsMenu'
 
 export default function DeliveriesTableActionsMenu() {
   const { t: translate } = useTranslation()
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-  const open = Boolean(anchorEl)
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget)
-  }
   const handleClose = () => {
     setSelectedOption(null)
-    setAnchorEl(null)
   }
 
   const onDiscardClick = () => {
-    handleClose()
-  }
-
-  const onConfirmClick = () => {
     handleClose()
   }
 
@@ -33,42 +19,24 @@ export default function DeliveriesTableActionsMenu() {
     setSelectedOption(option)
   }
 
+  const onConfirmClick = () => {
+    handleClose()
+  }
+
   const options = [
-    translate('actionsMenu.options.details'),
-    translate('actionsMenu.options.approve'),
-    translate('actionsMenu.options.delete')
+    { title: 'actionsMenu.options.details', value: 'details' },
+    { title: 'actionsMenu.options.approve', value: 'approve' },
+    { title: 'actionsMenu.options.delete', value: 'delete' }
   ]
 
   return (
     <div>
-      <IconButton
-        aria-label="more"
-        id="long-button"
-        aria-controls={open ? 'long-menu' : undefined}
-        aria-expanded={open ? 'true' : undefined}
-        aria-haspopup="true"
-        onClick={handleClick}>
-        <MoreHorizIcon />
-      </IconButton>
-      <Menu
-        id="long-menu"
-        MenuListProps={{
-          'aria-labelledby': 'long-button'
-        }}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}>
-        {options.map((option) => (
-          <MenuItem key={option} onClick={() => actionHandler(option)}>
-            {option}
-          </MenuItem>
-        ))}
-      </Menu>
+      <TableActionsMenu specificOptionHandler={actionHandler} options={options} />
 
       {/* TODO: Only admin action */}
-      {selectedOption === translate('actionsMenu.options.delete') && (
+      {selectedOption === 'delete' && (
         <WarningActionDialog
-          open={open}
+          open={true}
           title={translate('deliveries.deleteActions.title')}
           content={translate('deliveries.deleteActions.message')}
           discardText={translate('deliveries.deleteActions.labels.discard')}
