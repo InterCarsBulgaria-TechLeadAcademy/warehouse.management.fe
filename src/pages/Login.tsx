@@ -28,7 +28,7 @@ export default function Login() {
     try {
       await loginUser();
       const fetchedUser = await getUserFromCookies();
-      fetchedUser.role = 'regular'
+      // fetchedUser.role = 'regular' // Uncomment it to change role..
       setUser({ username: fetchedUser.username, role: fetchedUser.role })
       navigate(`${DELIVERIES_PATH}`);
     } catch (error) {
