@@ -2,8 +2,9 @@ import React from 'react'
 import WarningActionDialog from '../../shared/WarningActionDialog'
 import { useTranslation } from 'react-i18next'
 import TableActionsMenu from './TableActionsMenu'
+import DeliveryDetails from '../DeliveryDetails'
 
-export default function DeliveriesTableActionsMenu() {
+export default function DeliveriesTableActionsMenu(deliveryId: number) {
   const { t: translate } = useTranslation()
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
 
@@ -32,6 +33,8 @@ export default function DeliveriesTableActionsMenu() {
   return (
     <div>
       <TableActionsMenu specificOptionHandler={actionHandler} options={options} />
+
+      {selectedOption === 'details' && <DeliveryDetails deliveryId={deliveryId} />}
 
       {/* TODO: Only admin action */}
       {selectedOption === 'delete' && (

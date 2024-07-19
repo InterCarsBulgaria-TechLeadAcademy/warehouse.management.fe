@@ -119,7 +119,7 @@ export default function DeliveriesTable() {
   //     status: <ChipsList items={[delivery.status!]} color="default" />,
   //     approvedOn: dateHelpers('2024-07-04T10:06:12.594Z'),
   //     createdOn: dateHelpers('2024-07-04T10:06:12.594Z'),
-  //     actions: <DeliveriesTableActionsMenu />
+  //     actions: <DeliveriesTableActionsMenu deliveryId={delivery.id!}/>
   //   }))
   // }
 
