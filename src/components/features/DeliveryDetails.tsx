@@ -32,19 +32,19 @@ export default function DeliveryDetails(deliveryId: number) {
         <Box sx={{ display: 'flex', gap: '2em' }}>
           <Box>
             <Typography>{translate('newDelivery.labels.step1.systemNumber')}</Typography>
-            <Typography>{data?.systemNumber}</Typography>
+            <Typography>{data.systemNumber}</Typography>
           </Box>
           <Box>
             <Typography>{translate('newDelivery.labels.step1.receptionNumber')}</Typography>
-            <Typography>{data?.receptionNumber}</Typography>
+            <Typography>{data.receptionNumber}</Typography>
           </Box>
           <Box>
             <Typography>{translate('newDelivery.labels.step1.cmr')}</Typography>
-            <Typography>{data?.cmr}</Typography>
+            <Typography>{data.cmr}</Typography>
           </Box>
           <Box>
             <Typography>{translate('newDelivery.labels.step1.markers')}</Typography>
-            <ChipsList items={data?.markers} />
+            <ChipsList items={data.markers} />
           </Box>
         </Box>
       </Box>
@@ -58,7 +58,7 @@ export default function DeliveryDetails(deliveryId: number) {
         <Box sx={{ display: 'flex', gap: '2em' }}>
           <Box>
             <Typography>{translate('newDelivery.labels.step2.vendorName')}</Typography>
-            <Typography>{data?.vendorName}</Typography>
+            <Typography>{data.vendorName}</Typography>
           </Box>
           <Box>
             <Typography>{translate('newDelivery.labels.step2.vendorId')}</Typography>
@@ -66,11 +66,11 @@ export default function DeliveryDetails(deliveryId: number) {
           </Box>
           <Box>
             <Typography>{translate('newDelivery.labels.step2.truckNumber')}</Typography>
-            <Typography>{data?.truckNumber}</Typography>
+            <Typography>{data.truckNumber}</Typography>
           </Box>
           <Box>
             <Typography>{translate('newDelivery.labels.step2.deliveryDate')}</Typography>
-            <Typography>{dayjs(data?.deliveryDate).format('DD.MM.YYYY')}</Typography>
+            <Typography>{dayjs(data.deliveryDate).format('DD.MM.YYYY')}</Typography>
           </Box>
         </Box>
       </Box>
@@ -82,7 +82,7 @@ export default function DeliveryDetails(deliveryId: number) {
         </Box>
 
         <Box sx={{ display: 'flex', gap: '2em' }}>
-          {data?.goods.map((good: Good, index: number) => {
+          {data.goods.map((good: Good, index: number) => {
             return (
               <Box key={index}>
                 <Typography>{translate(`newDelivery.goodType.${good.goodTypeStep3}`)}</Typography>
