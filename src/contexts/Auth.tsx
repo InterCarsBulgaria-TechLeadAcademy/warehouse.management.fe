@@ -3,8 +3,9 @@ import React, { createContext, ReactNode, useContext, useState } from "react";
 interface AuthContextProps {
   user: {
     username: string
+    role: string
   } | null;
-  setUser: (user: { username: string } | null) => void;
+  setUser: (user: { username: string, role: string } | null) => void;
 }
 
 const initialAuthContext: AuthContextProps = {
@@ -14,14 +15,14 @@ const initialAuthContext: AuthContextProps = {
 
 export const AuthContext = createContext<AuthContextProps>(initialAuthContext);
 
-export const useAuthContext = useContext(AuthContext)
+export const useAuthContext = () => useContext(AuthContext)
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<{ username: string } | null>(null);
+  const [user, setUser] = useState<{ username: string, role: string } | null>(null);
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
