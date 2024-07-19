@@ -38,10 +38,15 @@ export default function ZonesTable() {
   }
 
   const columnsData: Column<Row>[] = [
-    { key: 'name', title: translate('zones.table.name') },
-    { key: 'markers', title: translate('zones.table.markers') },
-    { key: 'isFinal', title: translate('zones.table.isFinal') },
-    { key: 'actions', title: translate('zones.table.actions'), minWidth: 50, align: 'right' }
+    { key: 'name', title: translate('zones.table.columns.name') },
+    { key: 'markers', title: translate('zones.table.columns.markers') },
+    { key: 'isFinal', title: translate('zones.table.columns.isFinal') },
+    {
+      key: 'actions',
+      title: translate('zones.table.columns.actions'),
+      minWidth: 50,
+      align: 'right'
+    }
   ]
 
   function transformDataToRows(zones: ZoneDto[]): Row[] {
@@ -56,7 +61,9 @@ export default function ZonesTable() {
         ) : (
           <Typography>-</Typography>
         ),
-      isFinal: zone.isFinal ? translate('zones.isFinal.yes') : translate('zones.isFinal.no'),
+      isFinal: zone.isFinal
+        ? translate('zones.table.rows.isFinal.options.yes')
+        : translate('zones.table.rows.isFinal.options.no'),
       actions: <ZonesTableActionsMenu key={zone.id} zone={zone} />
     }))
   }
@@ -83,7 +90,7 @@ export default function ZonesTable() {
       <SearchInput
         value={searchTerm}
         onChange={handleSearchChange}
-        placeholder={translate('zones.labels.search')}
+        placeholder={translate('zones.filters.search')}
       />
 
       <Autocomplete
@@ -92,7 +99,7 @@ export default function ZonesTable() {
         options={options}
         size="small"
         sx={{ width: '235px' }}
-        renderInput={(params) => <TextField {...params} label={translate('zones.labels.role')} />}
+        renderInput={(params) => <TextField {...params} label={translate('zones.filters.role')} />}
       />
     </DataTable>
   )

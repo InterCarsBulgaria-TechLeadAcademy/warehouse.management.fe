@@ -22,7 +22,7 @@ export default function NewMarkerForm({
       render={({ field }) => (
         <TextField
           {...field}
-          label={translate('newMarker.labels.name')}
+          label={translate('markers.newMarker.labels.name')}
           id="markerName"
           name="markerName"
           required

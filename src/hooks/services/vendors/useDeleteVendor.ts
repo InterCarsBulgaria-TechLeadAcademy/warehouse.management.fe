@@ -13,13 +13,15 @@ export default function useDeleteVendor(vendorName: string) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['vendors'] })
       showSnackbar({
-        message: translate('newVendor.snackBar.messages.deleteVendor.success', { name: vendorName }),
+        message: translate('vendors.table.actions.delete.snackBar.success', {
+          name: vendorName
+        }),
         type: 'success'
       })
     },
     onError: () => {
       showSnackbar({
-        message: translate('newVendor.snackBar.messages.deleteVendor.error'),
+        message: translate('vendors.table.actions.delete.snackBar.error'),
         type: 'error'
       })
     }

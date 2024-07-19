@@ -81,7 +81,7 @@ export default function FormDialog<T extends FieldValues>({
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               onClick={currentStep ? (currentStep === 1 ? handleClose : handleBack) : handleClose}>
-              {currentStep === 1 ? translate('newDelivery.labels.exit') : discardText}
+              {currentStep === 1 ? translate('deliveries.newDelivery.labels.exit') : discardText}
             </Button>
 
             <Button
@@ -92,7 +92,7 @@ export default function FormDialog<T extends FieldValues>({
                 currentStep === 4 ? !isCompletedMove : Object.keys(formState.errors).length > 0
               }>
               {currentStep && currentStep === steps?.length
-                ? translate('newDelivery.labels.step5.createNewDelivery')
+                ? translate('deliveries.newDelivery.labels.step5.createNewDelivery')
                 : confirmText}
             </Button>
           </Box>
