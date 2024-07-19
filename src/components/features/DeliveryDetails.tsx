@@ -11,10 +11,12 @@ export default function DeliveryDetails(deliveryId: number) {
   const { t: translate } = useTranslation()
   const { mutate, data, isError } = useGetDelivery()
 
-  //TODO: Check if it work. Dot 5 is not reading. View design.
+  //TODO: Check if it work. Dot 5 is not whiting. View design.
   useEffect(() => {
     mutate({ id: deliveryId })
   }, [deliveryId, mutate])
+
+  console.log(data)
 
   if (isError) {
     //TODO: to redirect to common error page
