@@ -1,5 +1,5 @@
 import { Navigate, useRoutes } from 'react-router-dom'
-import { lazy, useEffect, useState } from 'react'
+import { lazy } from 'react'
 import {
   LOGIN_PATH,
   DEFAULTLAYOUT_PATH,
@@ -13,7 +13,7 @@ import {
   MAIN_PATH
 } from '@/router/routerPaths.ts'
 import NewDeliveryProvider from '@/contexts/NewDelivery'
-import { getUserFromCookies } from '@/hooks/services/auth/user';
+import { useAuthContext } from '@/contexts/Auth';
 
 const Home = lazy(() => import('@/pages/main/Home.tsx'))
 const Projects = lazy(() => import('@/pages/main/Projects.tsx'))
@@ -26,26 +26,7 @@ const Deliveries = lazy(() => import('@/pages/main/Deliveries'))
 const ZonesContent = lazy(() => import('@/pages/main/ZonesContent'))
 
 export default function Router() {
-  const [user, setUser] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchUser() {
-      const user = await getUserFromCookies();
-      // user.role = 'regular'
-      console.log('route', user);
-      if (user?.username) {
-        setUser(user);
-      }
-      setLoading(false);
-    }
-
-    fetchUser();
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const { user } = useAuthContext();
 
   const isAuthenticated = !!user;
   const isAdmin = user?.role === 'admin';
