@@ -12,8 +12,10 @@ import LoginForm from '@/components/features/forms/LoginForm'
 import { getUserFromCookies, loginUser } from '@/hooks/services/auth/user'
 import { useNavigate } from 'react-router-dom'
 import { DELIVERIES_PATH } from '@/router/routerPaths';
+import { useAuthContext } from '@/contexts/Auth'
 
 export default function Login() {
+  const { setUser } = useAuthContext();
   const { t: translate } = useTranslation()
   const navigate = useNavigate();
 
@@ -25,7 +27,9 @@ export default function Login() {
     console.log(data);
     try {
       await loginUser();
-      const user = await getUserFromCookies();
+      const fetchedUser = await getUserFromCookies();
+      fetchedUser.role = 'regular'
+      setUser({ username: fetchedUser.username, role: fetchedUser.role })
       navigate(`${DELIVERIES_PATH}`);
     } catch (error) {
       console.log(error);
