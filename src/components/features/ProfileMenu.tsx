@@ -49,7 +49,6 @@ export default function ProfileMenu() {
       {user?.username && (
         <>
           <Typography component="p" variant="body1">
-            {/* {translate('profileMenu.name')} */}
             {user?.username}
           </Typography>
 
