@@ -27,7 +27,7 @@ export default function Login() {
     console.log(data);
     try {
       await loginUser();
-      const fetchedUser = await getUserFromCookies();
+      const fetchedUser = await getUserFromCookies(); // Request from BE for user data
       // fetchedUser.role = 'regular' // Uncomment it to change role..
       setUser({ username: fetchedUser.username, role: fetchedUser.role })
       navigate(`${DELIVERIES_PATH}`);
