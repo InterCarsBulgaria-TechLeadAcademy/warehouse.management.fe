@@ -68,3 +68,14 @@ export async function getUserFromCookies() {
   }
   return null;
 }
+
+export async function logoutUser() {
+  try {
+    // logout from BE
+  
+    removeTokens();
+    return;
+  } catch (error) {
+    console.error('Error during logout:', error);
+  }
+}
