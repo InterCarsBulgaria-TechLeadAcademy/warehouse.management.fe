@@ -34,6 +34,7 @@ export async function loginUser() {
   }
 }
 
+// Тази функция е допълнителна която служи за взимане на юзер данните и работи с логин-а заедно..
 export async function getUserFromCookies() {
   const accessToken = getAccessToken()
   const refreshToken = getRefreshToken()
