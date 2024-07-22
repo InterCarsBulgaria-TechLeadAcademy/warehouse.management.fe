@@ -7,7 +7,7 @@ import { Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import WarningActionDialog from '../shared/WarningActionDialog'
 import { useAuth } from '@/hooks/services/auth/useAuth'
-import { logoutUser } from '@/hooks/services/auth/user'
+import { logoutUser } from '@/hooks/services/auth/useAuth'
 
 export default function ProfileMenu() {
   const { t: translate } = useTranslation()
