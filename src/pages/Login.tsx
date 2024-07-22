@@ -26,12 +26,10 @@ export default function Login() {
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
     console.log(data);
     try {
-      // Тук ползвам двете функции едната за логване и сторване на токенте а другата за вземане на токена и пращам рекуест към БЕ за юзер данните..
-      await loginUser();
-      const fetchedUser = await getUserFromCookies(); // Request from BE for user data
-      // fetchedUser.role = 'regular' // Uncomment it to change role..
-      setUser({ username: fetchedUser.username, role: fetchedUser.role })
+      const user = await loginUser();
+      setUser({ username: user?.username, role: user?.role })
       navigate(`${DELIVERIES_PATH}`);
+
     } catch (error) {
       console.log(error);
     }
