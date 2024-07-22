@@ -13,13 +13,13 @@ export default function useDeleteZone(zoneName: string) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['zones'] })
       showSnackbar({
-        message: translate('snackBar.messages.zones.deleteZone.success', { name: zoneName }),
+        message: translate('zones.table.actions.delete.snackBar.success', { name: zoneName }),
         type: 'success'
       })
     },
     onError: () => {
       showSnackbar({
-        message: translate('snackBar.messages.zones.deleteZone.error'),
+        message: translate('zones.table.actions.delete.snackBar.error'),
         type: 'error'
       })
     }
@@ -27,4 +27,3 @@ export default function useDeleteZone(zoneName: string) {
 
   return mutationDelete
 }
-

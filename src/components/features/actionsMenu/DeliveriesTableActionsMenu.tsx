@@ -25,9 +25,9 @@ export default function DeliveriesTableActionsMenu(deliveryId: number) {
   }
 
   const options = [
-    { title: 'actionsMenu.options.details', value: 'details' },
-    { title: 'actionsMenu.options.approve', value: 'approve' },
-    { title: 'actionsMenu.options.delete', value: 'delete' }
+    { title: 'deliveries.table.actionsMenu.details', value: 'details' },
+    { title: 'deliveries.table.actionsMenu.approve', value: 'approve' },
+    { title: 'deliveries.table.actionsMenu.delete', value: 'delete' }
   ]
 
   return (
@@ -40,10 +40,10 @@ export default function DeliveriesTableActionsMenu(deliveryId: number) {
       {selectedOption === 'delete' && (
         <WarningActionDialog
           open={true}
-          title={translate('deliveries.deleteActions.title')}
-          content={translate('deliveries.deleteActions.message')}
-          discardText={translate('deliveries.deleteActions.labels.discard')}
-          confirmText={translate('deliveries.deleteActions.labels.confirm')}
+          title={translate('deliveries.table.actions.delete.title')}
+          content={translate('deliveries.table.actions.delete.message')}
+          discardText={translate('deliveries.table.actions.delete.discard')}
+          confirmText={translate('deliveries.table.actions.delete.confirm')}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
           onConfirmClick={onConfirmClick}

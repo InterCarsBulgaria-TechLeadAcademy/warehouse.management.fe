@@ -32,7 +32,7 @@ export default function NewDeliveryStep1Form({
         render={({ field }) => (
           <TextField
             {...field}
-            label={translate('newDelivery.labels.step1.systemNumber')}
+            label={translate('deliveries.newDelivery.labels.step1.deliveryNumber')}
             id="systemNumber"
             name="systemNumber"
             required
@@ -48,7 +48,7 @@ export default function NewDeliveryStep1Form({
         render={({ field }) => (
           <TextField
             {...field}
-            label={translate('newDelivery.labels.step1.receptionNumber')}
+            label={translate('deliveries.newDelivery.labels.step1.receptionNumber')}
             id="receptionNumber"
             name="receptionNumber"
             required
@@ -67,7 +67,7 @@ export default function NewDeliveryStep1Form({
         render={({ field }) => (
           <TextField
             {...field}
-            label={translate('newDelivery.labels.step1.cmr')}
+            label={translate('deliveries.newDelivery.labels.step1.cmrNumber')}
             id="cmr"
             name="cmr"
             required
@@ -82,9 +82,9 @@ export default function NewDeliveryStep1Form({
         control={control}
         defaultValue={formsData.markers || []}
         render={({ field }) => (
-          <FormControl fullWidth>
-            <InputLabel id="demo-multiple-checkbox-label">
-              {translate('newZone.labels.markers')}
+          <FormControl>
+            <InputLabel id="markers-label">
+              {translate('deliveries.newDelivery.labels.step1.markers')}
             </InputLabel>
             <Select
               {...field}
@@ -93,7 +93,9 @@ export default function NewDeliveryStep1Form({
               multiple
               value={field.value || []}
               onChange={(e) => field.onChange(e.target.value)}
-              input={<OutlinedInput label={translate('newZone.labels.markers')} />}
+              input={
+                <OutlinedInput label={translate('deliveries.newDelivery.labels.step1.markers')} />
+              }
               renderValue={(selected) => {
                 const selectedMarkerNames = selected
                   .map((id) => {

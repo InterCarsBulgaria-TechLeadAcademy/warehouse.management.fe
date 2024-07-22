@@ -3,27 +3,29 @@ import { getWarehouseManagementApi } from '@/services/generated-api'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 
-export default function usePostZone(zoneName: string) {
+export default function useDeleteDifferenceType(differenceTypeName: string) {
   const { t: translate } = useTranslation()
   const { showSnackbar } = useSnackbar()
   const queryClient = useQueryClient()
 
-  const mutationPost = useMutation({
-    mutationFn: getWarehouseManagementApi().postApiZoneAdd,
+  const mutationDelete = useMutation({
+    mutationFn: (id: number) => getWarehouseManagementApi().deleteApiDifferenceTypeDeleteId(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['zones'] })
+      queryClient.invalidateQueries({ queryKey: ['differenceType'] })
       showSnackbar({
-        message: translate('zones.newZone.snackBar.success', { name: zoneName }),
+        message: translate('differenceType.table.actions.delete.snackBar.success', {
+          name: differenceTypeName
+        }),
         type: 'success'
       })
     },
     onError: () => {
       showSnackbar({
-        message: translate('zones.newZone.snackBar.error'),
+        message: translate('differenceType.table.actions.delete.snackBar.error'),
         type: 'error'
       })
     }
   })
 
-  return mutationPost
+  return mutationDelete
 }

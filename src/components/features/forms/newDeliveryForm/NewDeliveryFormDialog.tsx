@@ -25,9 +25,9 @@ export default function NewDeliveryFormDialog() {
       | NewDeliveryStep4FormData
     >
       open={openDialog}
-      title={translate('newDelivery.title')}
-      confirmText={translate('newDelivery.labels.forward')}
-      discardText={translate('newDelivery.labels.back')}
+      title={translate('deliveries.newDelivery.title')}
+      confirmText={translate('deliveries.newDelivery.labels.forward')}
+      discardText={translate('deliveries.newDelivery.labels.back')}
       onCloseDialog={onCloseDialog}
       handleBack={handleBack}
       schema={schema}

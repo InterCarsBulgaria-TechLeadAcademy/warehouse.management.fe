@@ -3,9 +3,9 @@ import DataTable from '@/components/shared/DataTable'
 import { useTranslation } from 'react-i18next'
 import SearchInput from '../SearchInput'
 import { Column } from '@/interfaces/Column'
-import { MarkerDto } from '@/services/model'
-import MarkersTableActionsMenu from '../actionsMenu/MarkersTableActionsMenu'
-import useGetMarkers from '@/hooks/services/markers/useGetMarkers'
+import { DifferenceTypeDto } from '@/services/model'
+import useGetDifferenceTypes from '@/hooks/services/differenceType/useGetDifferenceTypes'
+import DifferentTypeTableActionsMenu from '../actionsMenu/DifferentTypeTableActionsMenu'
 
 interface Row {
   id: number
@@ -13,12 +13,12 @@ interface Row {
   actions: React.ReactNode
 }
 
-export default function MarkersTable() {
+export default function DifferenceTypeTable() {
   const { t: translate } = useTranslation()
   const [searchTerm, setSearchTerm] = React.useState('')
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
-  const markers = useGetMarkers()
+  const differenceTypes = useGetDifferenceTypes()
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
@@ -34,24 +34,27 @@ export default function MarkersTable() {
   }
 
   const columnsData: Column<Row>[] = [
-    { key: 'name', title: translate('markers.table.columns.name') },
+    { key: 'id', title: translate('differenceType.table.columns.number') },
+    { key: 'name', title: translate('differenceType.table.columns.name') },
     {
       key: 'actions',
-      title: translate('markers.table.columns.actions'),
+      title: translate('differenceType.table.columns.actions'),
       minWidth: 50,
       align: 'right'
     }
   ]
 
-  function transformDataToRows(markers: MarkerDto[]): Row[] {
-    return markers.map((marker: MarkerDto) => ({
-      id: marker.id!,
-      name: marker.name!,
-      actions: <MarkersTableActionsMenu key={marker.id} marker={marker} />
+  function transformDataToRows(differenceTypes: DifferenceTypeDto[]): Row[] {
+    return differenceTypes.map((differenceType: DifferenceTypeDto) => ({
+      id: differenceType.id!,
+      name: differenceType.name!,
+      actions: (
+        <DifferentTypeTableActionsMenu key={differenceType.id} differenceType={differenceType} />
+      )
     }))
   }
 
-  const rowData = transformDataToRows(markers || [])
+  const rowData = transformDataToRows(differenceTypes || [])
 
   const filteredRows = rowData.filter((row: Row) => {
     return columnsData.some((column: Column<Row>) => {
@@ -70,7 +73,7 @@ export default function MarkersTable() {
       <SearchInput
         value={searchTerm}
         onChange={handleSearchChange}
-        placeholder={translate('vendors.filters.search')}
+        placeholder={translate('differenceType.filters.search')}
       />
     </DataTable>
   )
