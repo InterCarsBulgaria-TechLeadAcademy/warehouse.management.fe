@@ -12,6 +12,8 @@ import {
 import MoveEntryForm from '../forms/MoveEntryForm'
 import TableActionsMenu from '../actionsMenu/TableActionsMenu'
 import ZonesContentTableActionsMenu from '../actionsMenu/ZonesContentActionsMenu'
+import useGetEntries from '@/hooks/services/entry/useGetEntries'
+import { EntryDto } from '@/services/model'
 
 interface Row {
   entryNumber: number
@@ -19,22 +21,27 @@ interface Row {
   receptionNumbers: number
   quantity: number
   status: string
-  actions?: React.ReactNode
+  actions: React.ReactNode
 }
 
 export default function ZonesContentTable() {
   const { t: translate } = useTranslation()
-  const [toggleOn, setToggleOn] = React.useState(false)
   const [searchTerm, setSearchTerm] = React.useState('')
+  const [page, setPage] = React.useState(0)
+  const [rowsPerPage, setRowsPerPage] = React.useState(10)
+  const entries = useGetEntries()
 
-  const { quantity, openMoveEntryDialog, onCloseMoveEntryDialog, onOpenMoveEntryDialog } =
-    useMoveEntryDialog()
-
-  const handleToggleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setToggleOn(event.target.checked)
-  }
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
+  }
+
+  const onPageChange = (newPage: number) => {
+    setPage(newPage)
+  }
+
+  const onRowsPerPageChange = (newRowsPerPage: number) => {
+    setRowsPerPage(newRowsPerPage)
+    setPage(0)
   }
 
   const columnsData: Column<Row>[] = [
@@ -50,68 +57,90 @@ export default function ZonesContentTable() {
     }
   ]
 
-  const rowData: Row[] = [
-    {
-      entryNumber: 1,
-      vendorName: 'truck',
-      receptionNumbers: 12,
-      quantity: 33,
-      status: 'finished'
-      // actions:
-    },
-    {
-      entryNumber: 2,
-      vendorName: 'truck',
-      receptionNumbers: 11,
-      quantity: 52,
-      status: 'processing'
-      // actions:
-    }
-  ]
+  // function transformDataToRows(entries: EntryDto[]): Row[] {
+  //   return entries.map((entry: EntryDto) => ({
+  //     id: entry.id!,
 
-  const tableRowDataWithActions = rowData.map((row) => {
-    return {
-      ...row,
-      actions: (
-        <TableActionsMenu
-          specificOptionHandler={(action: string) => onOpenMoveEntryDialog(action, row.quantity)}
-          options={[
-            {
-              title: `zonesContent.table.actionsMenu.${ZonesTableActions.MoveToNewZone}`,
-              value: ZonesTableActions.MoveToNewZone
-            },
-            {
-              title: `zonesContent.table.actionsMenu.${ZonesTableActions.StartProcessing}`,
-              value: ZonesTableActions.StartProcessing
-            },
-            {
-              title: `zonesContent.table.actionsMenu.${ZonesTableActions.FinishProcessing}`,
-              value: ZonesTableActions.FinishProcessing
-            },
-            {
-              title: `zonesContent.table.actionsMenu.${ZonesTableActions.DeliveryDetails}`,
-              value: ZonesTableActions.DeliveryDetails
-            }
-          ]}
-        />
-      )
-    }
+  //     actions: <MarkersTableActionsMenu key={marker.id} marker={marker} />
+  //   }))
+  // }
+
+  const rowData = transformDataToRows(entries || [])
+
+  const filteredRows = rowData.filter((row: Row) => {
+    return columnsData.some((column: Column<Row>) => {
+      return row[column.key]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
+    })
   })
 
-  const filteredRows = tableRowDataWithActions.filter((row: Row) => {
-    if (toggleOn) {
-      return columnsData.some((column: Column<Row>) => {
-        return row[column.key]?.toString().toLowerCase().includes('finished')
-      })
-    } else {
-      return columnsData.some((column) => {
-        return row[column.key]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
-      })
-    }
-  })
+  // const rowData: Row[] = [
+  //   {
+  //     entryNumber: 1,
+  //     vendorName: 'truck',
+  //     receptionNumbers: 12,
+  //     quantity: 33,
+  //     status: 'finished'
+  //     // actions:
+  //   },
+  //   {
+  //     entryNumber: 2,
+  //     vendorName: 'truck',
+  //     receptionNumbers: 11,
+  //     quantity: 52,
+  //     status: 'processing'
+  //     // actions:
+  //   }
+  // ]
+
+  // const tableRowDataWithActions = rowData.map((row) => {
+  //   return {
+  //     ...row,
+  //     actions: (
+  //       <TableActionsMenu
+  //         specificOptionHandler={(action: string) => onOpenMoveEntryDialog(action, row.quantity)}
+  //         options={[
+  //           {
+  //             title: `zonesContent.table.actionsMenu.${ZonesTableActions.MoveToNewZone}`,
+  //             value: ZonesTableActions.MoveToNewZone
+  //           },
+  //           {
+  //             title: `zonesContent.table.actionsMenu.${ZonesTableActions.StartProcessing}`,
+  //             value: ZonesTableActions.StartProcessing
+  //           },
+  //           {
+  //             title: `zonesContent.table.actionsMenu.${ZonesTableActions.FinishProcessing}`,
+  //             value: ZonesTableActions.FinishProcessing
+  //           },
+  //           {
+  //             title: `zonesContent.table.actionsMenu.${ZonesTableActions.DeliveryDetails}`,
+  //             value: ZonesTableActions.DeliveryDetails
+  //           }
+  //         ]}
+  //       />
+  //     )
+  //   }
+  // })
+
+  // const filteredRows = tableRowDataWithActions.filter((row: Row) => {
+  //   if (toggleOn) {
+  //     return columnsData.some((column: Column<Row>) => {
+  //       return row[column.key]?.toString().toLowerCase().includes('finished')
+  //     })
+  //   } else {
+  //     return columnsData.some((column) => {
+  //       return row[column.key]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
+  //     })
+  //   }
+  // })
 
   return (
-    <DataTable columnsData={columnsData} rowData={filteredRows}>
+    <DataTable
+      columnsData={columnsData}
+      rowData={filteredRows}
+      page={page}
+      rowsPerPage={rowsPerPage}
+      onPageChange={onPageChange}
+      onRowsPerPageChange={onRowsPerPageChange}>
       <SearchInput
         value={searchTerm}
         onChange={handleSearchChange}

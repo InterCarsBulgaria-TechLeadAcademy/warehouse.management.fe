@@ -18,7 +18,6 @@ export default function NewDeliveryStep2Form({
 }: UseFormReturn<NewDeliveryStep2FormData>) {
   const { t: translate } = useTranslation()
   const { formsData } = useNewDeliveryContext()
-  // TODO: delete useGetVendors when merged Hristo Yotov vendor branch
   const vendors: VendorDto[] = useGetVendors()
   const vendorsNames = vendors.map((vendor: VendorDto) => vendor.name!)
 

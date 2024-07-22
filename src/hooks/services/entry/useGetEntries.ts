@@ -1,11 +1,11 @@
 import { getWarehouseManagementApi } from '@/services/generated-api'
 import { useSuspenseQuery } from '@tanstack/react-query'
 
-export default function useGetEntry() {
+export default function useGetEntries() {
   const { data } = useSuspenseQuery({
     queryKey: ['entries'],
     queryFn: () => {
-      return getWarehouseManagementApi().getApiEntry()
+      return getWarehouseManagementApi().getApiEntryAll()
     }
   })
 
