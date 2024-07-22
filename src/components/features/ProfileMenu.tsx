@@ -6,7 +6,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import { Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import WarningActionDialog from '../shared/WarningActionDialog'
-import { useAuthContext } from '@/contexts/Auth'
+import { useAuth } from '@/hooks/services/auth/useAuth'
 import { logoutUser } from '@/hooks/services/auth/user'
 
 export default function ProfileMenu() {
@@ -14,7 +14,7 @@ export default function ProfileMenu() {
   const [dialogOpen, setDialogOpen] = React.useState(false)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const menuOpen = Boolean(anchorEl)
-  const { user, setUser } = useAuthContext()
+  const { user, setUser } = useAuth()
 
   const onMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
