@@ -25,10 +25,12 @@ export async function loginUser() {
         expiresInMins: 1, // optional, defaults to 60
       })
     })
-  
+
     const data = await response.json()
     setTokenCookies(data.token, data.refreshToken)
-    return;
+    const requestedUser = await getUserFromCookies()
+    // requestedUser.role = 'regular' // Uncomment it to change role..
+    return { username: requestedUser.username, role: requestedUser.role };
   } catch (error) {
     console.error('Error during login:', error);
   }
@@ -55,7 +57,7 @@ export async function getUserFromCookies() {
 
     const user = await response.json()
     console.log('response', user);
-    
+
     return user;
 
   } catch (error: any) {
@@ -73,7 +75,7 @@ export async function getUserFromCookies() {
 export async function logoutUser() {
   try {
     // logout from BE
-  
+
     removeTokens();
     return;
   } catch (error) {
