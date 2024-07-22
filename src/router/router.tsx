@@ -13,7 +13,7 @@ import {
   MAIN_PATH
 } from '@/router/routerPaths.ts'
 import NewDeliveryProvider from '@/contexts/NewDelivery'
-import { useAuthContext } from '@/contexts/Auth';
+import { useAuth } from '@/hooks/services/auth/useAuth'
 
 const Home = lazy(() => import('@/pages/main/Home.tsx'))
 const Projects = lazy(() => import('@/pages/main/Projects.tsx'))
@@ -26,7 +26,7 @@ const Deliveries = lazy(() => import('@/pages/main/Deliveries'))
 const ZonesContent = lazy(() => import('@/pages/main/ZonesContent'))
 
 export default function Router() {
-  const { user } = useAuthContext();
+  const { user } = useAuth();
 
   const isAuthenticated = !!user;
   const isAdmin = user?.role === 'admin';
