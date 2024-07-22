@@ -12,10 +12,10 @@ import LoginForm from '@/components/features/forms/LoginForm'
 import { getUserFromCookies, loginUser } from '@/hooks/services/auth/user'
 import { useNavigate } from 'react-router-dom'
 import { DELIVERIES_PATH } from '@/router/routerPaths';
-import { useAuthContext } from '@/contexts/Auth'
+import { useAuth } from '@/hooks/services/auth/useAuth'
 
 export default function Login() {
-  const { setUser } = useAuthContext();
+  const { setUser } = useAuth();
   const { t: translate } = useTranslation()
   const navigate = useNavigate();
 
