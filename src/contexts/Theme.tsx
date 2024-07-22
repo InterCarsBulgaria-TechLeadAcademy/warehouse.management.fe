@@ -15,7 +15,7 @@ export default function ToggleColorMode({ children }: Children) {
   const [mode, setMode] = React.useState<'light' | 'dark'>('light')
 
   React.useEffect(() => {
-    const savedMode = localStorage.getItem('mode') as 'light' | 'dark'
+    const savedMode = (localStorage.getItem('mode') as 'light' | 'dark') || 'light'
     setMode(savedMode)
   }, [])
 
