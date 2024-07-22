@@ -9,7 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useTranslation } from 'react-i18next'
 import { LoginFormData, loginSchema } from '@/schemas/loginSchema'
 import LoginForm from '@/components/features/forms/LoginForm'
-import { getUserFromCookies, loginUser } from '@/hooks/services/auth/user'
+import { loginUser } from '@/hooks/services/auth/useAuth'
 import { useNavigate } from 'react-router-dom'
 import { DELIVERIES_PATH } from '@/router/routerPaths';
 import { useAuth } from '@/hooks/services/auth/useAuth'
