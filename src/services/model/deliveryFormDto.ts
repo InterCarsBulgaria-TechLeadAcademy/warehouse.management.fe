@@ -12,7 +12,6 @@ export interface DeliveryFormDto {
    */
   cmr: string
   deliveryTime?: string
-  isApproved?: boolean
   /** @nullable */
   markers?: number[] | null
   packages?: number

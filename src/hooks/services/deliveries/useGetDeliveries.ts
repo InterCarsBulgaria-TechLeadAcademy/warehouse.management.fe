@@ -5,6 +5,7 @@ export default function useGetDeliveries() {
   const { data } = useSuspenseQuery({
     queryKey: ['deliveries'],
     queryFn: () => {
+      //TODO:трябва да използвам pagination
       return getWarehouseManagementApi().getApiDeliveryAll()
     }
   })

@@ -4,7 +4,13 @@ import { useTranslation } from 'react-i18next'
 import TableActionsMenu from './TableActionsMenu'
 import DeliveryDetails from '../DeliveryDetails'
 
-export default function DeliveriesTableActionsMenu(deliveryId: number) {
+interface DeliveriesTableActionsMenuProps {
+  deliveryId: number
+}
+
+export default function DeliveriesTableActionsMenu({
+  deliveryId
+}: DeliveriesTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
 

@@ -22,8 +22,8 @@ import useGetVendors from '@/hooks/services/vendors/useGetVendors'
 interface Row {
   number: number
   vendorName: string
-  deliveryNumber: number
-  receptionNumber: number
+  systemNumber: string
+  receptionNumber: string
   waitingGoods: React.ReactNode
   completedGoods: React.ReactNode
   markers: React.ReactNode
@@ -41,8 +41,8 @@ export default function DeliveriesTable() {
   const [deliveryStartTime, setDeliveryStartTime] = React.useState<Dayjs | null>(null)
   const [deliveryEndTime, setDeliveryEndTime] = React.useState<Dayjs | null>(null)
   const markers = useGetMarkers()
-  const deliveries = useGetDeliveries()
   const vendors = useGetVendors()
+  const deliveries = useGetDeliveries()
 
   const markersName = markers.map((marker) => marker.name!)
   const vendorsName = vendors.map((vendor) => vendor.name!)
@@ -82,7 +82,7 @@ export default function DeliveriesTable() {
     { key: 'number', title: translate('deliveries.table.columns.number') },
     { key: 'vendorName', title: translate('deliveries.table.columns.vendorName') },
     {
-      key: 'deliveryNumber',
+      key: 'systemNumber',
       title: translate('deliveries.table.columns.deliveryNumber')
     },
     {
@@ -109,12 +109,78 @@ export default function DeliveriesTable() {
     }
   ]
 
-  // function transformDataToRows(deliveries: DeliveryDto[]): Row[] {
-  //   return deliveries.map((delivery: DeliveryDto) => ({
-  //     id: delivery.id!,
-  //     vendorName: delivery.vendorName,
-  //     deliveryNumber: delivery.systemNumber,
-  //     receptionNumber: delivery.receptionNumber,
+  function transformDataToRows(deliveries: DeliveryDto[]): Row[] {
+    return deliveries.map((delivery: DeliveryDto) => ({
+      number: delivery.id!,
+      vendorName: delivery.vendorName!,
+      systemNumber: delivery.systemNumber!,
+      receptionNumber: delivery.receptionNumber!,
+      waitingGoods: (
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography>1</Typography>
+          <InfoPopper>
+            <DeliveryGoodsInfo goodTypes={goodTypes} />
+          </InfoPopper>
+        </Box>
+      ),
+      completedGoods: (
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography>1</Typography>
+          <InfoPopper>
+            <DeliveryGoodsInfo goodTypes={goodTypes} />
+          </InfoPopper>
+        </Box>
+      ),
+      markers: <ChipsList items={markersName} />,
+      status: <ChipsList items={[delivery.status!]} color="default" />,
+      approvedOn: delivery.approvedOn!,
+      // да го оправя след като БЕ го оправят
+      createdOn: dateHelpers('2024-07-04T10:06:12.594Z'),
+      actions: <DeliveriesTableActionsMenu deliveryId={delivery.id!} />
+    }))
+  }
+
+  // {
+  //   "id": 0, //da
+  //   "systemNumber": "string", //da
+  //   "receptionNumber": "string", //da
+  //   "truckNumber": "string",
+  //   "cmr": "string",
+  //   "deliveryTime": "2024-07-22T07:40:56.905Z",
+  //   "approvedOn": "2024-07-22T07:40:56.905Z",
+  //   "pallets": 0,
+  //   "packages": 0,
+  //   "pieces": 0,
+  //   "entriesWaitingProcessing": 0,
+  //   "entriesFinishedProcessing": 0,
+  //   "vendorId": 0, //da
+  //   "vendorName": "string", //da
+  //   "status": "string",
+  //   "entries": [
+  //     {
+  //       "id": 0,
+  //       "zoneId": 0,
+  //       "startedProccessing": "2024-07-22T07:40:56.905Z",
+  //       "finishedProccessing": "2024-07-22T07:40:56.905Z"
+  //     }
+  //   ],
+  //   "markers": [
+  //     {
+  //       "markerId": 0,
+  //       "markerName": "string"
+  //     }
+  //   ]
+  // }
+
+  console.log(deliveries)
+  const rowData = transformDataToRows(deliveries || [])
+
+  // const rowData: Row[] = [
+  //   {
+  //     number: 1,
+  //     vendorName: 'Bosch',
+  //     deliveryNumber: 1,
+  //     receptionNumber: 1,
   //     waitingGoods: (
   //       <Box sx={{ display: 'flex', alignItems: 'center' }}>
   //         <Typography>1</Typography>
@@ -132,127 +198,93 @@ export default function DeliveriesTable() {
   //       </Box>
   //     ),
   //     markers: <ChipsList items={markersName} />,
-  //     // status: <ChipsList items={['Изчакване']} color="default" />,
-  //     status: <ChipsList items={[delivery.status!]} color="default" />,
+  //     status: <ChipsList items={['Изчакване']} color="default" />,
   //     approvedOn: dateHelpers('2024-07-04T10:06:12.594Z'),
   //     createdOn: dateHelpers('2024-07-04T10:06:12.594Z'),
-  //     actions: <DeliveriesTableActionsMenu deliveryId={delivery.id!}/>
-  //   }))
-  // }
-
-  // console.log(deliveries)
-  // const rowData = transformDataToRows(deliveries || [])
-
-  const rowData: Row[] = [
-    {
-      number: 1,
-      vendorName: 'Bosch',
-      deliveryNumber: 1,
-      receptionNumber: 1,
-      waitingGoods: (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography>1</Typography>
-          <InfoPopper>
-            <DeliveryGoodsInfo goodTypes={goodTypes} />
-          </InfoPopper>
-        </Box>
-      ),
-      completedGoods: (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography>1</Typography>
-          <InfoPopper>
-            <DeliveryGoodsInfo goodTypes={goodTypes} />
-          </InfoPopper>
-        </Box>
-      ),
-      markers: <ChipsList items={markersName} />,
-      status: <ChipsList items={['Изчакване']} color="default" />,
-      approvedOn: dateHelpers('2024-07-04T10:06:12.594Z'),
-      createdOn: dateHelpers('2024-07-04T10:06:12.594Z'),
-      actions: <DeliveriesTableActionsMenu />
-    },
-    {
-      number: 2,
-      vendorName: 'Valeo',
-      deliveryNumber: 2,
-      receptionNumber: 2,
-      waitingGoods: (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography>2</Typography>
-          <InfoPopper>
-            <DeliveryGoodsInfo goodTypes={goodTypes} />
-          </InfoPopper>
-        </Box>
-      ),
-      completedGoods: (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography>1</Typography>
-          <InfoPopper>
-            <DeliveryGoodsInfo goodTypes={goodTypes} />
-          </InfoPopper>
-        </Box>
-      ),
-      markers: <ChipsList items={markersName} />,
-      status: <ChipsList items={['Обработва се']} color="warning" />,
-      approvedOn: dateHelpers('2024-07-04T10:06:12.594Z'),
-      createdOn: dateHelpers('2024-07-04T10:06:12.594Z'),
-      actions: <DeliveriesTableActionsMenu />
-    },
-    {
-      number: 3,
-      vendorName: 'Dunlop',
-      deliveryNumber: 3,
-      receptionNumber: 3,
-      waitingGoods: (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography>3</Typography>
-          <InfoPopper>
-            <DeliveryGoodsInfo goodTypes={goodTypes} />
-          </InfoPopper>
-        </Box>
-      ),
-      completedGoods: (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography>1</Typography>
-          <InfoPopper>
-            <DeliveryGoodsInfo goodTypes={goodTypes} />
-          </InfoPopper>
-        </Box>
-      ),
-      markers: <ChipsList items={markersName} />,
-      status: <ChipsList items={['Одобрена']} color="success" />,
-      approvedOn: dateHelpers('2024-07-04T10:06:12.594Z'),
-      createdOn: dateHelpers('2024-07-04T10:06:12.594Z'),
-      actions: <DeliveriesTableActionsMenu />
-    },
-    {
-      number: 4,
-      vendorName: 'Michelin',
-      deliveryNumber: 4,
-      receptionNumber: 4,
-      waitingGoods: (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography>4</Typography>
-          <InfoPopper>
-            <DeliveryGoodsInfo goodTypes={goodTypes} />
-          </InfoPopper>
-        </Box>
-      ),
-      completedGoods: (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography>1</Typography>
-          <InfoPopper>
-            <DeliveryGoodsInfo goodTypes={goodTypes} />
-          </InfoPopper>
-        </Box>
-      ),
-      markers: <ChipsList items={markersName} />,
-      status: <ChipsList items={['Приключена']} color="info" />,
-      approvedOn: dateHelpers('2024-07-04T10:06:12.594Z'),
-      createdOn: dateHelpers('2024-07-04T10:06:12.594Z'),
-      actions: <DeliveriesTableActionsMenu />
-    }
-  ]
+  //     actions: <DeliveriesTableActionsMenu />
+  //   },
+  //   {
+  //     number: 2,
+  //     vendorName: 'Valeo',
+  //     deliveryNumber: 2,
+  //     receptionNumber: 2,
+  //     waitingGoods: (
+  //       <Box sx={{ display: 'flex', alignItems: 'center' }}>
+  //         <Typography>2</Typography>
+  //         <InfoPopper>
+  //           <DeliveryGoodsInfo goodTypes={goodTypes} />
+  //         </InfoPopper>
+  //       </Box>
+  //     ),
+  //     completedGoods: (
+  //       <Box sx={{ display: 'flex', alignItems: 'center' }}>
+  //         <Typography>1</Typography>
+  //         <InfoPopper>
+  //           <DeliveryGoodsInfo goodTypes={goodTypes} />
+  //         </InfoPopper>
+  //       </Box>
+  //     ),
+  //     markers: <ChipsList items={markersName} />,
+  //     status: <ChipsList items={['Обработва се']} color="warning" />,
+  //     approvedOn: dateHelpers('2024-07-04T10:06:12.594Z'),
+  //     createdOn: dateHelpers('2024-07-04T10:06:12.594Z'),
+  //     actions: <DeliveriesTableActionsMenu />
+  //   },
+  //   {
+  //     number: 3,
+  //     vendorName: 'Dunlop',
+  //     deliveryNumber: 3,
+  //     receptionNumber: 3,
+  //     waitingGoods: (
+  //       <Box sx={{ display: 'flex', alignItems: 'center' }}>
+  //         <Typography>3</Typography>
+  //         <InfoPopper>
+  //           <DeliveryGoodsInfo goodTypes={goodTypes} />
+  //         </InfoPopper>
+  //       </Box>
+  //     ),
+  //     completedGoods: (
+  //       <Box sx={{ display: 'flex', alignItems: 'center' }}>
+  //         <Typography>1</Typography>
+  //         <InfoPopper>
+  //           <DeliveryGoodsInfo goodTypes={goodTypes} />
+  //         </InfoPopper>
+  //       </Box>
+  //     ),
+  //     markers: <ChipsList items={markersName} />,
+  //     status: <ChipsList items={['Одобрена']} color="success" />,
+  //     approvedOn: dateHelpers('2024-07-04T10:06:12.594Z'),
+  //     createdOn: dateHelpers('2024-07-04T10:06:12.594Z'),
+  //     actions: <DeliveriesTableActionsMenu />
+  //   },
+  //   {
+  //     number: 4,
+  //     vendorName: 'Michelin',
+  //     deliveryNumber: 4,
+  //     receptionNumber: 4,
+  //     waitingGoods: (
+  //       <Box sx={{ display: 'flex', alignItems: 'center' }}>
+  //         <Typography>4</Typography>
+  //         <InfoPopper>
+  //           <DeliveryGoodsInfo goodTypes={goodTypes} />
+  //         </InfoPopper>
+  //       </Box>
+  //     ),
+  //     completedGoods: (
+  //       <Box sx={{ display: 'flex', alignItems: 'center' }}>
+  //         <Typography>1</Typography>
+  //         <InfoPopper>
+  //           <DeliveryGoodsInfo goodTypes={goodTypes} />
+  //         </InfoPopper>
+  //       </Box>
+  //     ),
+  //     markers: <ChipsList items={markersName} />,
+  //     status: <ChipsList items={['Приключена']} color="info" />,
+  //     approvedOn: dateHelpers('2024-07-04T10:06:12.594Z'),
+  //     createdOn: dateHelpers('2024-07-04T10:06:12.594Z'),
+  //     actions: <DeliveriesTableActionsMenu />
+  //   }
+  // ]
 
   const filteredRows = rowData.filter((row: any) => {
     return columnsData.some((column) => {

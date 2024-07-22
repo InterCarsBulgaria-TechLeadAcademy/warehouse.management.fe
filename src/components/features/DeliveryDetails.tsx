@@ -7,7 +7,11 @@ import NewDeliveryStep5Table from './forms/newDeliveryForm/NewDeliveryStep5Table
 import useGetDelivery from '@/hooks/services/deliveries/useGetDelivery'
 import { useEffect } from 'react'
 
-export default function DeliveryDetails(deliveryId: number) {
+interface DeliveryDetailsProps {
+  deliveryId: number
+}
+
+export default function DeliveryDetails({ deliveryId }: DeliveryDetailsProps) {
   const { t: translate } = useTranslation()
   const { mutate, data, isError } = useGetDelivery()
 
