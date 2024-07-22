@@ -25,7 +25,7 @@ export default function NewDeliveryStep4Form({
   const goodTypes = formsData.goods.map((good: Good) => {
     const goodType = good.goodTypeStep3
     return {
-      title: translate(`newDelivery.goodType.${goodType}`),
+      title: translate(`deliveries.newDelivery.goodType.${goodType}`),
       value: GoodType[goodType as keyof typeof GoodType]
     }
   })
@@ -76,10 +76,10 @@ export default function NewDeliveryStep4Form({
         severity={isCompletedMove ? 'success' : isExceedQuantity ? 'error' : 'info'}>
         <AlertTitle>
           {isCompletedMove
-            ? translate('newDelivery.alertMessages.completedMoveTitle')
+            ? translate('deliveries.newDelivery.alertMessages.completedMoveTitle')
             : isExceedQuantity
-              ? translate('newDelivery.alertMessages.exceedTitle')
-              : translate('newDelivery.alertMessages.leftItemsTitle')}
+              ? translate('deliveries.newDelivery.alertMessages.exceedTitle')
+              : translate('deliveries.newDelivery.alertMessages.leftItemsTitle')}
         </AlertTitle>
         {alertMessage.map((currentMessage, index) => (
           <Box key={index}>{currentMessage}</Box>
@@ -104,7 +104,7 @@ export default function NewDeliveryStep4Form({
         disabled={isCompletedMove || isExceedQuantity}
         sx={{ alignSelf: 'flex-start' }}
         onClick={addGoodHandler}>
-        {translate('newDelivery.labels.step4.addNewMove')}
+        {translate('deliveries.newDelivery.labels.step4.addNewMove')}
       </Button>
     </>
   )

@@ -1,4 +1,3 @@
-
 import React from 'react'
 import WarningActionDialog from '../../shared/WarningActionDialog'
 import { useTranslation } from 'react-i18next'
@@ -18,7 +17,8 @@ interface VendorsTableActionsMenuProps {
 export default function VendorTableActionsMenu({ vendor }: VendorsTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
-  const mutationUpdate = useUpdateVendor(vendor.name!)
+  const [vendorNumber, setVendorNumber] = React.useState('')
+  const mutationUpdate = useUpdateVendor(vendor.name!, vendorNumber)
   const mutationDelete = useDeleteVendor(vendor.name!)
 
   const handleClose = () => {
@@ -30,6 +30,7 @@ export default function VendorTableActionsMenu({ vendor }: VendorsTableActionsMe
   }
 
   const handleSubmit: SubmitHandler<NewVendorFormData> = (data) => {
+    setVendorNumber(data.vendorNumber)
     const markerIds = data.markers!.map((marker) => Number(marker))
     mutationUpdate.mutate({
       id: vendor.id!,
@@ -47,8 +48,8 @@ export default function VendorTableActionsMenu({ vendor }: VendorsTableActionsMe
   }
 
   const options = [
-    { title: 'actionsMenu.options.edit', value: 'edit' },
-    { title: 'actionsMenu.options.delete', value: 'delete' }
+    { title: 'vendors.table.actionsMenu.edit', value: 'edit' },
+    { title: 'vendors.table.actionsMenu.delete', value: 'delete' }
   ]
 
   return (
@@ -58,9 +59,9 @@ export default function VendorTableActionsMenu({ vendor }: VendorsTableActionsMe
       {selectedOption === 'edit' && (
         <FormDialog<NewVendorFormData>
           open={true}
-          title={translate('editVendor.title')}
-          discardText={translate('editVendor.labels.exit')}
-          confirmText={translate('editVendor.labels.edit')}
+          title={translate('vendors.table.actions.edit.title')}
+          discardText={translate('vendors.table.actions.edit.labels.exit')}
+          confirmText={translate('vendors.table.actions.edit.labels.edit')}
           onCloseDialog={handleClose}
           schema={newVendorSchema}
           onSubmit={handleSubmit}
@@ -80,10 +81,10 @@ export default function VendorTableActionsMenu({ vendor }: VendorsTableActionsMe
       {selectedOption === 'delete' && (
         <WarningActionDialog
           open={true}
-          title={translate('deleteAction.vendors.title')}
-          content={translate('deleteAction.vendors.message', { name: vendor.name })}
-          discardText={translate('deleteAction.vendors.labels.discard')}
-          confirmText={translate('deleteAction.vendors.labels.confirm')}
+          title={translate('vendors.table.actions.delete.title')}
+          content={translate('vendors.table.actions.delete.message', { name: vendor.name })}
+          discardText={translate('vendors.table.actions.delete.labels.discard')}
+          confirmText={translate('vendors.table.actions.delete.labels.confirm')}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
           onConfirmClick={onConfirmClick}

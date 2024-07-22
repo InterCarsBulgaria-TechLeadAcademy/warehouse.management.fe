@@ -16,13 +16,13 @@ export default function useUpdateZone(zoneName: string) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['zones'] })
       showSnackbar({
-        message: translate('snackBar.messages.zones.updateZone.success', { name: zoneName }),
+        message: translate('zones.table.actions.edit.snackBar.success', { name: zoneName }),
         type: 'success'
       })
     },
     onError: () => {
       showSnackbar({
-        message: translate('snackBar.messages.zones.updateZone.error'),
+        message: translate('zones.table.actions.edit.snackBar.error'),
         type: 'error'
       })
     }
@@ -30,4 +30,3 @@ export default function useUpdateZone(zoneName: string) {
 
   return mutationUpdate
 }
-

@@ -1,248 +1,299 @@
 {
   "welcome": "Добре дошли.",
+
   "projects": {
     "title": "Проекти"
   },
-  "errors": {
-    "email": {
-      "required": "Полето за имейл e задължително",
-      "invalid": "Невалиден имейл адрес"
-    },
-    "password": {
-      "required": "Полето за парола e задължително",
-      "short": "Паролата трябва да e поне 4 символа",
-      "long": "Паролата трябва до 10 символа",
-      "digit": "Паролата трябва да съдържа поне една цифра",
-      "specialCharacter": "Паролата трябва да съдържа поне един специален знак"
-    }
+
+  "table": {
+    "densePadding": "Свий редовете"
   },
+
   "login": {
     "description": "Вътрешна система за менажиране на доставки",
-    "title": "Вход"
-  },
-  "label": {
-    "email": "Имейл",
-    "password": "Парола"
-  },
-  "menuItems": {
-    "users": "Потребители",
-    "zones": "Зони",
-    "zonesContent": "Съдържание на зони",
-    "vendors": "Доставчици",
-    "roles": "Роли",
-    "typesGoods": "Видове Стока",
-    "typesDifference": "Типове Разлика",
-    "markers": "Маркери",
-    "deliveries": "Доставки"
-  },
-  "profileMenu": {
-    "name": "Христо Бояджиев",
-    "title": "Изход от профила",
-    "message": "Сигурни ли сте, че искате да излезете от профила си?",
     "labels": {
-      "exit": "Изход",
-      "discard": "Откажи",
-      "confirm": "Потвърди"
+      "email": "Имейл",
+      "password": "Парола",
+      "logged-in": "Вход"
+    },
+    "errors": {
+      "email": {
+        "required": "Полето за имейл e задължително",
+        "invalid": "Невалиден имейл адрес"
+      },
+      "password": {
+        "required": "Полето за парола e задължително",
+        "min": "Паролата трябва да e поне 4 символа",
+        "max": "Паролата трябва до 10 символа",
+        "digit": "Паролата трябва да съдържа поне една цифра",
+        "specialCharacter": "Паролата трябва да съдържа поне един специален знак"
+      } 
     }
   },
+
+  "menu": {
+    "menuItems": {
+      "users": "Потребители",
+      "zones": "Зони",
+      "zonesContent": "Съдържание на зони",
+      "vendors": "Доставчици",
+      "roles": "Роли",
+      "typesGoods": "Видове Стока",
+      "typesDifference": "Типове Разлика",
+      "markers": "Маркери",
+      "deliveries": "Доставки"
+    },
+    "profileMenu": {
+      "name": "Христо Бояджиев",
+      "title": "Изход от профила",
+      "message": "Сигурни ли сте, че искате да излезете от профила си?",
+      "labels": {
+        "exit": "Изход",
+        "discard": "Откажи",
+        "confirm": "Потвърди"
+      }
+    }
+  },
+
   "markers": {
     "title": "Маркери",
     "description": "Управление на маркери",
     "labels": {
-      "newMarker": "нов маркер",
+      "newMarker": "нов маркер"
+    },
+    "filters": {
       "search": "Търсене"
     },
     "table": {
-      "name": "Име",
-      "actions": "Действия"
-    },
-    "deleteAction": {
-      "title": "Изтриване на маркер",
-      "message": "Сигурни ли сте, че искате да изтриете този маркер?",
-      "labels": {
-        "discard": "Откажи",
-        "confirm": "Потвърди"
+      "columns": {
+        "name": "Име",
+        "actions": "Действия"
       },
-      "error": {
-        "zones": "Зони",
-        "errorMessage": "Маркерът се използва в {{location}}"
+      "actionsMenu": {
+        "delete": "Изтрий",
+        "edit":"Редактирай"
+      },
+      "actions": {
+        "delete": {
+          "title": "Изтриване на маркер",
+          "message": "Сигурни ли сте, че искате да изтриете {{marker}}?",
+          "labels": {
+            "discard": "Откажи",
+            "confirm": "Потвърди"
+          },
+          "snackBar": {
+            "success": "Маркер {{name}} е изтрит успешно",
+            "error": "Възникна грешка"
+          }, 
+          "errors": {
+            "zones": "Зони",
+            "errorMessage": "Маркерът се използва в {{location}}"
+          }
+        },
+        "edit": {
+          "title": "Редактиране на маркер",
+          "labels": {
+            "name": "Име",
+            "edit": "Промени",
+            "exit": "Изход"
+          },
+          "snackBar": {
+            "success": "Маркер {{name}} е променен успешно",
+            "error": "Възникна грешка"
+          }
+        }
       }
-    }
-  },
-  "newMarker": {
-    "title": "Създаване на нов маркер",
-    "labels": {
-      "name": "Име",
-      "create": "Създай",
-      "exit": "Изход"
     },
-    "errors": {
-      "required": "Полето за име e задължително",
-      "min": "Името трябва да е минимум 2 символа",
-      "max": "Името трябва да е до 100 символа"
-    },
-    "deleteAction": {
-      "title": "Изтриване на маркер",
-      "message": "Сигурни ли сте, че искате да изтриете {{marker}}?",
+    "newMarker": {
+      "title": "Създаване на нов маркер",
       "labels": {
-        "discard": "Откажи",
-        "confirm": "Потвърди"
+        "name": "Име",
+        "create": "Създай",
+        "exit": "Изход"
+      },
+      "snackBar": {
+        "success": "Маркер {{name}} е добавен успешно",
+        "error": "Възникна грешка"
+      },
+      "errors": {
+        "required": "Полето за име e задължително",
+        "min": "Името трябва да е минимум 2 символа",
+        "max": "Името трябва да е до 100 символа"
       }
     }
   },
-  "editMarker": {
-    "title": "Редактиране на маркер",
-    "labels": {
-      "name": "Име",
-      "edit": "Промени",
-      "exit": "Изход"
-    }
-  },
+
   "vendors": {
     "title": "Доставчици",
     "description": "Управление на доставчици",
     "labels": {
-      "newVendor": "нов доставчик",
+      "newVendor": "нов доставчик"
+    },
+    "filters": {
       "search": "Търсене",
       "role": "Роля"
     },
     "table": {
-      "name": "Име",
-      "vendorNumber": "Доставчик №",
-      "markers": "Маркери",
-      "actions": "Действия"
-    }
-  },
-  "newVendor": {
-    "title": "Създаване на нов доставчик",
-    "errors": {
-      "name": {
-        "required": "Полето за име e задължително",
-        "max": "Името трябва да e до 50 символа"
+      "columns": {
+        "name": "Име",
+        "vendorNumber": "Доставчик №",
+        "markers": "Маркери",
+        "actions": "Действия"
       },
-      "vendorNumber": {
-        "typeError": "Доставчик № трябва да е число",
-        "max": "Доставчик № трябва да e до 25 символа"
+      "actionsMenu": {
+        "delete": "Изтрий",
+        "edit":"Редактирай"
+      }, 
+      "actions": {
+        "delete": {
+          "title": "Изтриване на доставчик",
+          "message": "Сигурни ли сте, че искате да изтриете доставчик {{name}}?",
+          "labels": {
+            "discard": "Откажи",
+            "confirm": "Потвърди"
+          },
+          "snackBar": {
+            "success": "Доставчик {{name}} е изтрит успешно",
+            "error": "Възникна грешка"
+          }
+        },
+        "edit": {
+          "title": "Редактиране на доставчик",
+          "labels": {
+            "name": "Име",
+            "edit": "Промени",
+            "exit": "Изход"
+          },
+          "snackBar": {
+            "success": "Доставчик {{name}} е променен успешно",
+            "error": "Възникна грешка"
+          },
+          "errors": {
+            "existVendor": "Доставчик №{{vendorNumber}} вече съществува"
+          }
+        }
       }
     },
-    "labels": {
-      "name": "Име",
-      "vendorNumber": "Доставчик №",
-      "markers": "Маркери",
-      "create": "Създай",
-      "exit": "Изход"
-    },
-    "snackBar": {
-      "messages": {
-        "createVendor": {
-          "success": "Вендор \"{{name}}\" е добавен успешно",
-          "error": "Възникна грешка"
+    "newVendor": {
+      "title": "Създаване на нов доставчик",
+      "labels": {
+        "name": "Име",
+        "vendorNumber": "Доставчик №",
+        "markers": "Маркери",
+        "create": "Създай",
+        "exit": "Изход"
+      },
+      "snackBar": {
+        "success": "Доставчик {{name}} е добавен успешно",
+        "error": "Възникна грешка"
+      },
+      "errors": {
+        "name": {
+          "required": "Полето за име e задължително",
+          "max": "Името трябва да e до 50 символа"
         },
-        "deleteVendor": {
-          "success": "Вендор \"{{name}}\" е изтрит успешно",
-          "error": "Възникна грешка"
-        },
-        "updateVendor": {
-          "success": "Вендор \"{{name}}\" е променен успешно",
-          "error": "Възникна грешка"
+        "vendorNumber": {
+          "typeError": "Доставчик № трябва да е число",
+          "max": "Доставчик № трябва да e до 25 символа"
         }
       }
     }
   },
-  "editVendor": {
-    "title": "Редактиране на доставчик",
-    "labels": {
-      "name": "Име",
-      "edit": "Промени",
-      "exit": "Изход"
-    }
-  },
-  "table": {
-    "densePadding": "Свий редовете"
-  },
-  "deleteAction": {
-    "vendors": {
-      "title": "Изтриване на доставчик",
-      "message": "Сигурни ли сте, че искате да изтриете доставчик \"{{name}}\" ?",
-      "labels": {
-        "discard": "Откажи",
-        "confirm": "Потвърди"
-      }
-    },
-    "zones": {
-      "title": "Изтриване на зона",
-      "message": "Сигурни ли сте, че искате да изтриете {{name}} зона?",
-      "labels": {
-        "discard": "Откажи",
-        "confirm": "Потвърди"
-      }
-    }
-  },
-  "actionsMenu": {
-    "options": {
-      "edit": "Редактирай",
-      "delete": "Изтрий",
-      "update": "Актуализирай",
-      "details": "Детайли",
-      "approve": "Одобри"
-    }
-  },
+
   "zones": {
     "title": "Зони",
     "description": "Управление на зони",
     "labels": {
-      "newZone": "нова зона",
+      "newZone": "нова зона"
+    },
+    "filters": {
       "search": "Търсене",
-      "markers": "Маркери",
       "role": "Роля"
     },
     "table": {
-      "name": "Име",
-      "markers": "Маркери",
-      "isFinal": "Финална зона",
-      "actions": "Действия"
-    },
-    "isFinal": {
-      "yes": "Да",
-      "no": "Не"
-    }
-  },
-  "newZone": {
-    "title": "Създаване на нова зона",
-    "errors": {
-      "name": {
-        "required": "Полето за име e задължително",
-        "max": "Името трябва да e до 25 символа"
+      "columns": {
+        "name": "Име",
+        "markers": "Маркери",
+        "isFinal": "Финална зона",
+        "actions": "Действия"
+      },
+      "rows": {
+        "isFinal": {
+          "options": {
+            "yes": "Да",
+            "no": "Не"
+          }
+        }
+      },
+      "actionsMenu": {
+        "delete": "Изтрий",
+        "edit":"Редактирай"
+      },
+      "actions": {
+        "delete": {
+            "title": "Изтриване на зона",
+            "message": "Сигурни ли сте, че искате да изтриете {{name}} зона?",
+            "labels": {
+              "discard": "Откажи",
+              "confirm": "Потвърди"
+            },
+            "snackBar": {
+              "success": "Зона {{name}} е изтрита успешно",
+              "error": "Възникна грешка"
+            }
+        },
+        "edit": {
+          "title": "Редактиране на зона",
+          "labels": {
+            "name": "Име",
+            "edit": "Промени",
+            "exit": "Изход"
+          },
+          "snackBar": {
+            "success": "Зона {{name}} е променена успешно",
+            "error": "Възникна грешка"
+          }
+        }
       }
     },
-    "labels": {
-      "name": "Име",
-      "markers": "Маркери",
-      "isFinal": "Финализирано",
-      "create": "Създай",
-      "exit": "Изход"
-    },
-    "editZone": {
-      "title": "Редактиране на зона",
+    "newZone": {
+      "title": "Създаване на нова зона",
       "labels": {
         "name": "Име",
-        "edit": "Промени",
+        "markers": "Маркери",
+        "isFinal": "Финализирано",
+        "create": "Създай",
         "exit": "Изход"
+      },
+      "snackBar": {
+        "success": "Зона {{name}} е добавена успешно",
+        "error": "Възникна грешка"
+      },
+      "errors": {
+        "name": {
+          "required": "Полето за име e задължително",
+          "max": "Името трябва да e до 25 символа"
+        }
       }
     }
   },
+
   "deliveries": {
     "title": "Доставки",
     "description": "Управление на доставки",
     "labels": {
       "newDelivery": "нова доставка"
     },
-    "poper": {
-      "type": "Тип",
-      "quantity": "Количество"
+    "filters": {
+      "search": "Търсене",
+      "markers": "Маркери",
+      "deliveryTime": "Време за доставка",
+      "deliveryStart": "Начало на доставка",
+      "deliveryEnd": "Край на доставка",
+      "vendorName": "Име на доставчик"
     },
-    "newDeliveryTable": {
-      "columnsData": {
+    "table": {
+      "columns": {
         "number": "Номер",
         "vendorName": "Доставчик",
         "deliveryNumber": "Номер(а) на доставка",
@@ -252,15 +303,150 @@
         "markers": "Маркери",
         "status": "Статус",
         "approvedOn": "Одобрена на",
-        "createdOn": "Създадена на"
+        "createdOn": "Създадена на",
+         "actions": "Действия"
+      },
+      "actionsMenu": {
+        "details": "Детайли",
+        "approve": "Одобри",
+        "delete": "Изтрий"
+      },
+      "actions": {
+        "delete": {
+          "title": "Изтриване на доставка",
+          "message": "Сигурни ли сте, че искате да изтриете тази доставка?",
+          "labels": {
+            "discard": "Откажи",
+            "confirm": "Потвърди"
+          },
+          "snackBar": {
+            "success": "Доставка {{name}} е изтрита успешно",
+            "error": "Възникна грешка"
+          }
+        }
+      },
+      "poper": {
+        "type": "Тип",
+        "quantity": "Количество"
       }
     },
-    "deleteActions": {
-      "title": "Изтриване на доставка",
-      "message": "Сигурни ли сте, че искате да изтриете тази доставка?",
+    "newDelivery": {
+      "title": "Създаване на нова доставка",
       "labels": {
-        "discard": "Откажи",
-        "confirm": "Потвърди"
+        "forward": "Напред",
+        "back": "Назад",
+        "exit": "Изход",
+        "step1": {
+          "deliveryNumber": "Доставка №",
+          "receptionNumber": "Рецепция №",
+          "cmrNumber": "ЧМР №",
+          "markers": "Маркери"
+        },
+        "step2": {
+          "vendorName": "Име на доставчик",
+          "vendorId": "Доставчик №",
+          "truckNumber": "Номер на камион",
+          "deliveryDate": "Дата на доставка"
+        },
+        "step3": {
+          "goodType": "Вид стока",
+          "goodQuantity": "Количество",
+          "addGood": "Добави нов вид"
+        },
+        "step4": {
+          "goodType": "Вид стока",
+          "goodQuantity": "Количество",
+          "zone": "Зона",
+          "addNewMove": "Добави ново местене"
+        },
+        "step5": {
+          "createNewDelivery": "Създай"
+        }
+      },
+      "snackBar": {
+        "success": "Доставка {{name}} е добавена успешно",
+        "error": "Възникна грешка"
+      },
+      "errors": {
+        "step1": {
+          "deliveryNumber": {
+            "required": "Полето за доставка № е задължително"
+          },
+          "receptionNumber": {
+            "required": "Полето за рецепция № е задължително"
+          },
+          "cmrNumber": {
+            "required": "Полето за ЧМР № е задължително"
+          }
+        },
+        "step2": {
+          "vendorName": {
+            "required": "Полето за име на доставчик e задължително"
+          },
+          "vendorId": {
+            "required": "Полето за доставчик №e задължително"
+          },
+          "truckNumber": {
+            "required": "Полето за номер на камион е задължително"
+          },
+          "deliveryDate": {
+            "required": "Полето за дата на доставка e задължително",
+            "validDate": "Въведете валидна дата"
+          }
+        },
+        "step3": {
+          "goodType": {
+            "required": "Полето за вид стока e задължително"
+          },
+          "goodQuantity": {
+            "required": "Количеството e задължително",
+            "typeError": "Количеството трябва да е число",
+            "min": "Количеството трябва да минимум 1"
+          }
+        },
+        "step4": {
+          "goodType": {
+            "required": "Полето за вид стока e задължително"
+          },
+          "goodQuantity": {
+            "required": "Количеството e задължително",
+            "typeError": "Количеството трябва да е число",
+            "min": "Количеството трябва да минимум 1"
+          },
+          "zone": {
+            "required": "Полето за зона e задължително"
+          }
+        }
+      },
+      "steps": {
+        "deliveryDetails": "Детайли за доставка",
+        "truckDetails": "Детайли за камион",
+        "goodDetails": "Детайли за стока",
+        "goodRelocate": "Местене на стока",
+        "reviewDelivery": "Преглед на доставката"
+      },
+      "goodType": {
+        "pallets": "Палети",
+        "packages": "Пакети",
+        "pieces": "Бройки"
+      },
+      "zones": {
+        "zone1": "Зона 1",
+        "zone2": "Зона 2",
+        "zone3": "Зона 3"
+      },
+      "alertMessages": {
+        "exceedPallets": "Количеството на палетите е надвишено с {{quantity}}",
+        "exceedPackages": "Количеството на пакетите е надвишено с {{quantity}}",
+        "exceedPieces": "Количеството на бройките е надвишено с {{quantity}}",
+        "leftPallets": "Остава да преместите {{quantity}} палети",
+        "leftPackages": "Остава да преместите {{quantity}} пакети",
+        "leftPieces": "Остава да преместите {{quantity}} бройки",
+        "completedMove": "Всички стоки са разпределени по зони",
+        "completedMoveTitle": "Завършено местене на стока",
+        "exceedTitle": "Предупреждение",
+        "leftItemsTitle": "Оставащо местене на стока"
+      }
       }
     },
     "filters": {
@@ -270,8 +456,7 @@
       "deliveryStart": "Начало на доставка",
       "deliveryEnd": "Край на доставка",
       "vendorName": "Име на доставчик"
-    }
-  },
+    },
   "newDelivery": {
     "title": "Създаване на нова доставка",
     "errors": {
@@ -431,34 +616,54 @@
       }
     }
   },
-  "snackBar": {
-    "messages": {
-      "zones": {
-        "createZone": {
-          "success": "Зона {{name}} e добавена успешно",
-          "error": "Възникна грешка"
-        },
-        "deleteZone": {
-          "success": "Зона {{name}} e изтрита успешно",
-          "error": "Възникна грешка"
-        },
-        "updateZone": {
-          "success": "Зона {{name}} e променена успешно",
-          "error": "Възникна грешка"
-        }
+
+  "differenceType": {
+    "title": "Типове разлика",
+    "description": "Управление на типове разлика",
+    "labels": {
+      "newDifferenceType": "Нов тип разлика"
+    },
+    "filters": {
+      "search": "Търсене"
+    },
+    "table": {
+      "columns": {
+        "number": "Номер",
+        "name": "Име",
+        "actions": "Действия"
       },
-      "markers": {
-        "createMarker": {
-          "success": "Маркер {{name}} е добавен успешно",
-          "error": "Възникна грешка"
-        },
-        "deleteMarker": {
-          "success": "Маркер {{name}} е изтрит успешно",
-          "error": "Възникна грешка"
-        },
-        "updateMarker": {
-          "success": "Маркер {{name}} е променен успешно",
-          "error": "Възникна грешка"
+      "actionsMenu": {
+        "delete": "Изтрий",
+        "edit":"Редактирай"
+      },
+      "actions": {
+        "delete": {
+          "title": "Изтриване на тип разлика",
+          "message": "Сигурни ли сте, че искате да изтриете {{differenceType}}?",
+          "labels": {
+            "discard": "Откажи",
+            "confirm": "Потвърди"
+          },
+          "snackBar": {
+            "success": "Тип разлика {{name}} е изтрита успешно",
+            "error": "Възникна грешка"
+          },
+          "errors": {
+            "zones": "Зони",
+            "errorMessage": "Типът разлика се използва в {{location}}"
+          }
+        }, 
+        "edit": {
+          "title": "Редактиране на тип зона",
+          "labels": {
+            "name": "Име",
+            "edit": "Промени",
+            "exit": "Изход"
+          },
+          "snackBar": {
+            "success": "Тип разлика {{name}} е променена успешно",
+            "error": "Възникна грешка"
+          }
         }
       },
       "deliveries": {
@@ -467,6 +672,24 @@
           "error": "Възникна грешка"
         }
       }
+    },
+    "newDifferenceType": {
+      "title": "Създаване на нов тип разлика",
+      "labels": {
+        "name": "Име",
+        "create": "Създай",
+        "exit": "Изход"
+      },
+      "snackBar": {
+        "success": "Тип разлика {{name}} е добавена успешно",
+        "error": "Възникна грешка"
+      },
+      "errors": {
+        "required": "Полето за име e задължително",
+        "min": "Името трябва да е минимум 2 символа",
+        "max": "Името трябва да е до 100 символа"
+      }
     }
   }
 }
+

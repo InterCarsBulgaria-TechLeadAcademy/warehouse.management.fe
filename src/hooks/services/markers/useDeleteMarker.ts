@@ -14,7 +14,7 @@ export default function useDeleteMarker(markerName: string) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['markers'] })
       showSnackbar({
-        message: translate('snackBar.messages.markers.deleteMarker.success', {
+        message: translate('markers.table.actions.delete.snackBar.success', {
           name: markerName
         }),
         type: 'success'
@@ -27,23 +27,25 @@ export default function useDeleteMarker(markerName: string) {
           let specificLocation = error.response.data.Message.split(':').pop() // example: zone 1
           switch (location) {
             case 'Zones':
-              location = translate('markers.error.zones')
+              location = translate('markers.table.actions.delete.errors.zones')
               break
+            case 'Vendors':
+            // location = translate('markers.table.actions.delete.errors.zones')
             //TODO: ако има други места, където се използва Markers
           }
           showSnackbar({
-            message: `${translate('markers.error.errorMessage', { location: location })}: ${specificLocation}`,
+            message: `${translate('markers.table.actions.delete.errors.errorMessage', { location: location })}: ${specificLocation}`,
             type: 'error'
           })
         } else {
           showSnackbar({
-            message: translate('snackBar.messages.markers.deleteMarker.error'),
+            message: translate('markers.table.actions.delete.snackBar.error'),
             type: 'error'
           })
         }
       } else {
         showSnackbar({
-          message: translate('snackBar.messages.markers.deleteMarker.error'),
+          message: translate('markers.table.actions.delete.snackBar.error'),
           type: 'error'
         })
       }

@@ -8,7 +8,6 @@ import AlignHorizontalRightIcon from '@mui/icons-material/AlignHorizontalRight'
 import MenuListItem from './MenuListItem'
 import { useTranslation } from 'react-i18next'
 import {
-  TYPESDIFFERENCE_PATH,
   ROLES_PATH,
   TYPESGOODS_PATH,
   USERS_PATH,
@@ -16,7 +15,8 @@ import {
   ZONES_PATH,
   MARKERS_PATH,
   DELIVERIES_PATH,
-  ZONES_CONTENT_PATH
+  ZONES_CONTENT_PATH,
+  DIFFERENCETYPE_PATH
 } from '@/router/routerPaths'
 
 interface MenuItem {
@@ -30,37 +30,37 @@ export default function MenuItems() {
 
   const adminMenuItems: MenuItem[] = [
     {
-      title: translate('menuItems.users'),
+      title: translate('menu.menuItems.users'),
       icon: PeopleAltOutlinedIcon,
       link: USERS_PATH
     },
     {
-      title: translate('menuItems.zones'),
+      title: translate('menu.menuItems.zones'),
       icon: AccountTreeOutlinedIcon,
       link: ZONES_PATH
     },
     {
-      title: translate('menuItems.vendors'),
+      title: translate('menu.menuItems.vendors'),
       icon: LocalShippingOutlinedIcon,
       link: VENDORS_PATH
     },
     {
-      title: translate('menuItems.roles'),
+      title: translate('menu.menuItems.roles'),
       icon: ManageAccountsOutlinedIcon,
       link: ROLES_PATH
     },
     {
-      title: translate('menuItems.typesGoods'),
+      title: translate('menu.menuItems.typesGoods'),
       icon: Inventory2OutlinedIcon,
       link: TYPESGOODS_PATH
     },
     {
-      title: translate('menuItems.typesDifference'),
+      title: translate('menu.menuItems.typesDifference'),
       icon: DifferenceOutlinedIcon,
-      link: TYPESDIFFERENCE_PATH
+      link: DIFFERENCETYPE_PATH
     },
     {
-      title: translate('menuItems.markers'),
+      title: translate('menu.menuItems.markers'),
       icon: AlignHorizontalRightIcon,
       link: MARKERS_PATH
     }
@@ -68,12 +68,12 @@ export default function MenuItems() {
 
   const mainMenuItems: MenuItem[] = [
     {
-      title: translate('menuItems.zonesContent'),
+      title: translate('menu.menuItems.zonesContent'),
       icon: AccountTreeOutlinedIcon,
       link: ZONES_CONTENT_PATH
     },
     {
-      title: translate('menuItems.deliveries'),
+      title: translate('menu.menuItems.deliveries'),
       icon: LocalShippingOutlinedIcon,
       link: DELIVERIES_PATH
     }

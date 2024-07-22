@@ -6,7 +6,6 @@ import React from 'react'
 import WarningActionDialog from '../../shared/WarningActionDialog'
 import { useTranslation } from 'react-i18next'
 
-
 export default function DeliveriesTableActionsMenu() {
   const { t: translate } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -34,9 +33,9 @@ export default function DeliveriesTableActionsMenu() {
   }
 
   const options = [
-    translate('actionsMenu.options.details'),
-    translate('actionsMenu.options.approve'),
-    translate('actionsMenu.options.delete')
+    translate('deliveries.table.actionsMenu.details'),
+    translate('deliveries.table.actionsMenu.approve'),
+    translate('deliveries.table.actionsMenu.delete')
   ]
 
   return (
@@ -66,13 +65,13 @@ export default function DeliveriesTableActionsMenu() {
       </Menu>
 
       {/* TODO: Only admin action */}
-      {selectedOption === translate('actionsMenu.options.delete') && (
+      {selectedOption === translate('deliveries.table.actionsMenu.delete') && (
         <WarningActionDialog
           open={open}
-          title={translate('deliveries.deleteActions.title')}
-          content={translate('deliveries.deleteActions.message')}
-          discardText={translate('deliveries.deleteActions.labels.discard')}
-          confirmText={translate('deliveries.deleteActions.labels.confirm')}
+          title={translate('deliveries.table.actions.delete.title')}
+          content={translate('deliveries.table.actions.delete.message')}
+          discardText={translate('deliveries.table.actions.delete.discard')}
+          confirmText={translate('deliveries.table.actions.delete.confirm')}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
           onConfirmClick={onConfirmClick}

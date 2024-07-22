@@ -109,7 +109,7 @@ export default function MoveGoodsForm({
               <TextField
                 {...params}
                 required
-                label={translate('newDelivery.labels.step4.goodType')}
+                label={translate('deliveries.newDelivery.labels.step4.goodType')}
                 error={!!errors?.goodsInZones?.[index]?.goodTypeStep4}
                 helperText={
                   errors?.goodsInZones?.[index]?.goodTypeStep4?.message
@@ -131,7 +131,7 @@ export default function MoveGoodsForm({
         render={({ field }) => (
           <TextField
             {...field}
-            label={translate('newDelivery.labels.step4.goodQuantity')}
+            label={translate('deliveries.newDelivery.labels.step4.goodQuantity')}
             id={`moveGoodsForm.goodQuantity${index}`}
             name={`moveGoodsForm.goodQuantity${index}`}
             sx={{ flex: 1 }}
@@ -181,7 +181,7 @@ export default function MoveGoodsForm({
               <TextField
                 {...params}
                 required
-                label={translate('newDelivery.labels.step4.zone')}
+                label={translate('deliveries.newDelivery.labels.step4.zone')}
                 error={!!errors?.goodsInZones?.[index]?.zone}
                 helperText={
                   errors?.goodsInZones?.[index]?.zone?.message

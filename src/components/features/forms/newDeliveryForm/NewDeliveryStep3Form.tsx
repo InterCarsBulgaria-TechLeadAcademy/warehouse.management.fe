@@ -28,9 +28,9 @@ export default function NewDeliveryStep3Form({
   })
 
   const initialGoodTypes = [
-    { title: translate('newDelivery.goodType.pallets'), value: GoodType.pallets },
-    { title: translate('newDelivery.goodType.packages'), value: GoodType.packages },
-    { title: translate('newDelivery.goodType.pieces'), value: GoodType.pieces }
+    { title: translate('deliveries.newDelivery.goodType.pallets'), value: GoodType.pallets },
+    { title: translate('deliveries.newDelivery.goodType.packages'), value: GoodType.packages },
+    { title: translate('deliveries.newDelivery.goodType.pieces'), value: GoodType.pieces }
   ]
 
   const goodDetailsFormsInitialValue = formsData.goods
@@ -108,7 +108,7 @@ export default function NewDeliveryStep3Form({
         sx={{ alignSelf: 'flex-start' }}
         onClick={addGoodHandler}
         disabled={allOptionsSelected}>
-        {translate('newDelivery.labels.step3.addGood')}
+        {translate('deliveries.newDelivery.labels.step3.addGood')}
       </Button>
     </>
   )

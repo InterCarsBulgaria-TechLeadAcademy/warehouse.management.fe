@@ -57,7 +57,7 @@ export default function NewDeliveryStep2Form({
               <TextField
                 {...params}
                 required
-                label={translate('newDelivery.labels.step2.vendorName')}
+                label={translate('deliveries.newDelivery.labels.step2.vendorName')}
                 error={!!errors.vendorName}
                 helperText={errors.vendorName?.message ? translate(errors.vendorName.message) : ''}
               />
@@ -75,7 +75,7 @@ export default function NewDeliveryStep2Form({
             <TextField
               {...field}
               id="outlined-read-only-input"
-              label={translate('newDelivery.labels.step2.vendorId')}
+              label={translate('deliveries.newDelivery.labels.step2.vendorId')}
               value={field.value}
               InputProps={{
                 readOnly: true
@@ -94,7 +94,7 @@ export default function NewDeliveryStep2Form({
         render={({ field }) => (
           <TextField
             {...field}
-            label={translate('newDelivery.labels.step2.truckNumber')}
+            label={translate('deliveries.newDelivery.labels.step2.truckNumber')}
             id="truckNumber"
             name="truckNumber"
             required
@@ -111,7 +111,7 @@ export default function NewDeliveryStep2Form({
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               {...field}
-              label={translate('newDelivery.labels.step2.deliveryDate')}
+              label={translate('deliveries.newDelivery.labels.step2.deliveryDate')}
               value={dayjs(field.value)}
               onChange={(newValue) => {
                 field.onChange(newValue?.toDate())
