@@ -9,12 +9,15 @@ import type { DeliveryMarkerDto } from './deliveryMarkerDto'
 
 export interface DeliveryDto {
   /** @nullable */
+  approvedOn?: string | null
+  /** @nullable */
   cmr?: string | null
   deliveryTime?: string
   /** @nullable */
   entries?: DeliveryEntryDto[] | null
+  entriesFinishedProcessing?: number
+  entriesWaitingProcessing?: number
   id?: number
-  isApproved?: boolean
   /** @nullable */
   markers?: DeliveryMarkerDto[] | null
   packages?: number

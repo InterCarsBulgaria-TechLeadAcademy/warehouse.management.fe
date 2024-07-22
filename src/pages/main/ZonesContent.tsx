@@ -1,4 +1,4 @@
-import ZonesContentsTable from '@/components/features/main/ZonesContentTable'
+import npm run devZonesContentsTable from '@/components/features/main/ZonesContentTable'
 import SkeletonPage from '@/components/features/SkeletonPage'
 import { useTranslation } from 'react-i18next'
 

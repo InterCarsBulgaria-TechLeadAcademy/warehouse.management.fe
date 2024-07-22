@@ -15,6 +15,7 @@ import type {
   EntryRequest,
   GetApiDeliveryAllParams,
   GetApiDeliveryHistoryIdParams,
+  GetApiEntryAllParams,
   GetApiMarkerAllWithParamsParams,
   GetApiVendorAllParams,
   GetApiZoneAllWithParamsParams,
@@ -110,12 +111,25 @@ export const getWarehouseManagementApi = () => {
     )
   }
 
+  const putApiDeliveryApproveId = (
+    id: number,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<VendorDto[]>(
+      { url: `/api/Delivery/Approve/${id}`, method: 'PUT' },
+      options
+    )
+  }
+
   const getApiDifferenceTypeAll = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<void>({ url: `/api/DifferenceType/all`, method: 'GET' }, options)
+    return customInstance<DifferenceTypeDto[]>(
+      { url: `/api/DifferenceType/all`, method: 'GET' },
+      options
+    )
   }
 
   const getApiDifferenceTypeAllWithDeleted = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<void>(
+    return customInstance<DifferenceTypeDto[]>(
       { url: `/api/DifferenceType/all-with-deleted`, method: 'GET' },
       options
     )
@@ -179,14 +193,11 @@ export const getWarehouseManagementApi = () => {
     )
   }
 
-  const getApiEntry = (
-    entryRequest: BodyType<EntryRequest>,
+  const getApiEntryAll = (
+    params?: GetApiEntryAllParams,
     options?: SecondParameter<typeof customInstance>
   ) => {
-    return customInstance<EntryDto[]>(
-      { url: `/api/Entry`, method: 'GET', headers: { 'Content-Type': 'application/json' } },
-      options
-    )
+    return customInstance<EntryDto[]>({ url: `/api/Entry/all`, method: 'GET', params }, options)
   }
 
   const getApiEntryId = (id: number, options?: SecondParameter<typeof customInstance>) => {
@@ -466,6 +477,7 @@ export const getWarehouseManagementApi = () => {
     putApiDeliveryRestoreId,
     getApiDeliveryAllDeleted,
     getApiDeliveryHistoryId,
+    putApiDeliveryApproveId,
     getApiDifferenceTypeAll,
     getApiDifferenceTypeAllWithDeleted,
     getApiDifferenceTypeId,
@@ -473,7 +485,7 @@ export const getWarehouseManagementApi = () => {
     putApiDifferenceTypeEditId,
     deleteApiDifferenceTypeDeleteId,
     putApiDifferenceTypeRestoreId,
-    getApiEntry,
+    getApiEntryAll,
     getApiEntryId,
     getApiEntryAllWithDeleted,
     postApiEntryAdd,
@@ -533,6 +545,9 @@ export type GetApiDeliveryAllDeletedResult = NonNullable<
 export type GetApiDeliveryHistoryIdResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiDeliveryHistoryId']>>
 >
+export type PutApiDeliveryApproveIdResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['putApiDeliveryApproveId']>>
+>
 export type GetApiDifferenceTypeAllResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiDifferenceTypeAll']>>
 >
@@ -558,8 +573,8 @@ export type DeleteApiDifferenceTypeDeleteIdResult = NonNullable<
 export type PutApiDifferenceTypeRestoreIdResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['putApiDifferenceTypeRestoreId']>>
 >
-export type GetApiEntryResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiEntry']>>
+export type GetApiEntryAllResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiEntryAll']>>
 >
 export type GetApiEntryIdResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiEntryId']>>
