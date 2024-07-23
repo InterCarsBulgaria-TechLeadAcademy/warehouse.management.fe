@@ -7,14 +7,13 @@ import { Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import WarningActionDialog from '../shared/WarningActionDialog'
 import { useAuth } from '@/hooks/services/auth/useAuth'
-import { logoutUser } from '@/hooks/services/auth/useAuth'
 
 export default function ProfileMenu() {
   const { t: translate } = useTranslation()
   const [dialogOpen, setDialogOpen] = React.useState(false)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const menuOpen = Boolean(anchorEl)
-  const { user, setUser } = useAuth()
+  const { user, setUser, logoutUser } = useAuth()
 
   const onMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
