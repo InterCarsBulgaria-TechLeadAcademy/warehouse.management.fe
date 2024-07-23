@@ -36,7 +36,7 @@ export const useAuth = () => {
       const requestedUser = await getUserFromCookies()
       // requestedUser.role = 'regular' // Uncomment it to change role..
       setUser({ username: requestedUser.username, role: requestedUser.role });
-      return user;
+      return { username: requestedUser.username, role: requestedUser.role };
     } catch (error) {
       console.error('Error during login:', error);
     }
