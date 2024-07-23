@@ -34,7 +34,7 @@ export const useAuth = () => {
       const data = await response.json()
       setTokenCookies(data.token, data.refreshToken)
       const requestedUser = await getUserFromCookies()
-      requestedUser.role = 'regular' // Uncomment it to change role..
+      // requestedUser.role = 'regular' // Uncomment it to change role..
       setUser({ username: requestedUser.username, role: requestedUser.role });
       return { username: requestedUser.username, role: requestedUser.role };
     } catch (error) {
