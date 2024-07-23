@@ -9,13 +9,12 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useTranslation } from 'react-i18next'
 import { LoginFormData, loginSchema } from '@/schemas/loginSchema'
 import LoginForm from '@/components/features/forms/LoginForm'
-import { loginUser } from '@/hooks/services/auth/useAuth'
 import { useNavigate } from 'react-router-dom'
 import { DELIVERIES_PATH } from '@/router/routerPaths';
 import { useAuth } from '@/hooks/services/auth/useAuth'
 
 export default function Login() {
-  const { setUser } = useAuth();
+  const { setUser, loginUser } = useAuth();
   const { t: translate } = useTranslation()
   const navigate = useNavigate();
 
@@ -27,7 +26,7 @@ export default function Login() {
     console.log(data);
     try {
       const user = await loginUser();
-      setUser({ username: user?.username, role: user?.role })
+      if (!user) return;
       navigate(`${DELIVERIES_PATH}`);
 
     } catch (error) {
