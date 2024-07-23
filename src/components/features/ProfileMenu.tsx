@@ -13,7 +13,7 @@ export default function ProfileMenu() {
   const [dialogOpen, setDialogOpen] = React.useState(false)
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const menuOpen = Boolean(anchorEl)
-  const { user, setUser, logoutUser } = useAuth()
+  const { user, logoutUser } = useAuth()
 
   const onMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
@@ -38,7 +38,6 @@ export default function ProfileMenu() {
 
   const onConfirmClick = () => {
     // Log out from the context only!
-    setUser(null)
     logoutUser()
     onCloseMenu()
   }
