@@ -42,11 +42,12 @@ export default function Router() {
     },
     {
       path: LOGIN_PATH,
-      element: <Login />
+      element: isAuthenticated ? <Navigate to={DELIVERIES_PATH} /> : <Login />
     },
     {
       path: DEFAULTLAYOUT_PATH,
-      element: <DefaultLayout />
+      // TODO: Later to discuss this path to include it in some cases or not
+      element: isAuthenticated ? <DefaultLayout /> : <Navigate to={LOGIN_PATH} />
     },
     {
       path: ADMIN_PATH,
