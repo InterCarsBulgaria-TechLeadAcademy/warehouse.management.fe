@@ -14,7 +14,7 @@ import { DELIVERIES_PATH } from '@/router/routerPaths';
 import { useAuth } from '@/hooks/services/auth/useAuth'
 
 export default function Login() {
-  const { setUser, loginUser } = useAuth();
+  const { loginUser } = useAuth();
   const { t: translate } = useTranslation()
   const navigate = useNavigate();
 
