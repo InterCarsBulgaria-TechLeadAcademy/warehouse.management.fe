@@ -36,7 +36,7 @@ export const useAuth = () => {
       const requestedUser = await getUserFromCookies()
       // requestedUser.role = 'regular' // Uncomment it to change role..
       setUser({ username: requestedUser.username, role: requestedUser.role });
-      return { username: requestedUser.username, role: requestedUser.role };
+      return user;
     } catch (error) {
       console.error('Error during login:', error);
     }
@@ -61,8 +61,8 @@ export const useAuth = () => {
         },
       })
 
-      const user = await response.json()
-      return user;
+      const requestedUser = await response.json()
+      return requestedUser;
 
     } catch (error: any) {
       if (error.response && error.response.status === 401) {
@@ -79,10 +79,10 @@ export const useAuth = () => {
   const logoutUser = async () => {
     try {
       // logout from BE
-
       removeTokens();
       setUser(null);
       return;
+
     } catch (error) {
       console.error('Error during logout:', error);
     }
