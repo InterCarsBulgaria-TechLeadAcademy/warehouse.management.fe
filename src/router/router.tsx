@@ -1,4 +1,4 @@
-import { useRoutes } from 'react-router-dom'
+import { Navigate, useRoutes } from 'react-router-dom'
 import { lazy } from 'react'
 import {
   LOGIN_PATH,
@@ -14,6 +14,7 @@ import {
   DIFFERENCETYPE_PATH
 } from '@/router/routerPaths.ts'
 import NewDeliveryProvider from '@/contexts/NewDelivery'
+import { useAuth } from '@/hooks/services/auth/useAuth'
 
 const Home = lazy(() => import('@/pages/main/Home.tsx'))
 const Projects = lazy(() => import('@/pages/main/Projects.tsx'))
@@ -28,6 +29,11 @@ const DifferenceType = lazy(() => import('@/pages/admin/DifferenceType'))
 const ErrorPage = lazy(() => import('@/pages/ErrorPage'))
 
 export default function Router() {
+  const { user } = useAuth();
+
+  const isAuthenticated = !!user;
+  const isAdmin = user?.role === 'admin';
+
   return useRoutes([
     {
       path: '/',
@@ -39,15 +45,16 @@ export default function Router() {
     },
     {
       path: LOGIN_PATH,
-      element: <Login />
+      element: isAuthenticated ? <Navigate to={DELIVERIES_PATH} /> : <Login />
     },
     {
       path: DEFAULTLAYOUT_PATH,
-      element: <DefaultLayout />
+      // TODO: Later to discuss this path to include it in some cases or not
+      element: isAuthenticated ? <DefaultLayout /> : <Navigate to={LOGIN_PATH} />
     },
     {
       path: ADMIN_PATH,
-      element: <DefaultLayout />,
+      element: isAdmin ? <DefaultLayout /> : <Navigate to={LOGIN_PATH} />,
       children: [
         {
           path: VENDORS_PATH,
@@ -69,7 +76,7 @@ export default function Router() {
     },
     {
       path: MAIN_PATH,
-      element: <DefaultLayout />,
+      element: isAuthenticated ? <DefaultLayout /> : <Navigate to={LOGIN_PATH} />,
       children: [
         {
           path: ZONES_CONTENT_PATH,
