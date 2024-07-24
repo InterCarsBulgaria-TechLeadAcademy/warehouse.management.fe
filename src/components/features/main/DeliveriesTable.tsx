@@ -42,7 +42,7 @@ export default function DeliveriesTable() {
   const [deliveryEndTime, setDeliveryEndTime] = React.useState<Dayjs | null>(null)
   const markers = useGetMarkers()
   const vendors = useGetVendors()
-  const deliveries = useGetDeliveries()
+  const deliveries = useGetDeliveries(page, rowsPerPage, searchTerm)
 
   const markersName = markers.map((marker) => marker.name!)
   const vendorsName = vendors.map((vendor) => vendor.name!)
