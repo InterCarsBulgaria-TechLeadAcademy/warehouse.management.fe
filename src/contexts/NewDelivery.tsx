@@ -6,6 +6,7 @@ import useSetGoodsType from '@/hooks/useSetGoodsType.ts'
 import { MoveGood } from '@/interfaces/NewDelivery.ts'
 import usePostDelivery from '@/hooks/services/deliveries/usePostDelivery'
 import goodQuantity from '@/utils/goodQuantity'
+import usePostEntry from '@/hooks/services/entries/usePostEntry'
 
 interface NewDeliveryProviderProps {
   children: ReactNode
@@ -62,7 +63,8 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   const [alertMessage, setAlertMessage] = useState<string[]>([])
   const [isCompletedMove, setIsCompletedMove] = useState(false)
   const [isExceedQuantity, setIsExceedQuantity] = useState(false)
-  const mutationPost = usePostDelivery()
+  const mutationDeliveryPost = usePostDelivery()
+  const mutationEntryPost = usePostEntry()
 
   useSetGoodsType(formsData, goodTypeStep3, setGoodTypeStep3)
   useGenerateLeftItemsAlert(
@@ -107,18 +109,50 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
     if (currentStep === steps.length) {
       console.log('Final submission:', data)
 
-      mutationPost.mutate({
-        systemNumber: data.systemNumber,
-        receptionNumber: data.receptionNumber,
-        truckNumber: data.truckNumber,
-        cmr: data.cmr,
-        deliveryTime: data.deliveryTime,
-        pallets: goodQuantity(data, 'pallets'),
-        packages: goodQuantity(data, 'packages'),
-        pieces: goodQuantity(data, 'pieces'),
-        vendorId: Number(data.vendorId),
-        markers: data.markers
-      })
+      mutationDeliveryPost.mutate(
+        {
+          systemNumber: data.systemNumber,
+          receptionNumber: data.receptionNumber,
+          truckNumber: data.truckNumber,
+          cmr: data.cmr,
+          deliveryTime: data.deliveryTime,
+          pallets: goodQuantity(data.goods, 'goodTypeStep3', 'goodQuantityStep3', 'pallets'),
+          packages: goodQuantity(data.goods, 'goodTypeStep3', 'goodQuantityStep3', 'packages'),
+          pieces: goodQuantity(data.goods, 'goodTypeStep3', 'goodQuantityStep3', 'pieces'),
+          vendorId: Number(data.vendorId),
+          markers: data.markers
+        },
+        {
+          onSuccess: (response) => {
+            //ТODO: От къде да взема това zoneId
+            // const deliveryId = Number(response)
+            // mutationEntryPost.mutate([
+            //   {
+            //     pallets: goodQuantity(
+            //       data.goodsInZones,
+            //       'goodTypeStep4',
+            //       'goodQuantityStep4',
+            //       'pallets'
+            //     ),
+            //     packages: goodQuantity(
+            //       data.goodsInZones,
+            //       'goodTypeStep4',
+            //       'goodQuantityStep4',
+            //       'packages'
+            //     ),
+            //     pieces: goodQuantity(
+            //       data.goodsInZones,
+            //       'goodTypeStep4',
+            //       'goodQuantityStep4',
+            //       'pieces'
+            //     ),
+            //     deliveryId: deliveryId,
+            //     zoneId: 1
+            //   }
+            // ])
+          }
+        }
+      )
     } else {
       console.log(data)
       setFormsData(data)

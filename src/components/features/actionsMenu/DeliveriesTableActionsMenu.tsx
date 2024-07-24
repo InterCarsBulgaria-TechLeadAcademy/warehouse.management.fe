@@ -3,6 +3,7 @@ import WarningActionDialog from '../../shared/WarningActionDialog'
 import { useTranslation } from 'react-i18next'
 import TableActionsMenu from './TableActionsMenu'
 import DeliveryDetails from '../DeliveryDetails'
+import useDeleteDelivery from '@/hooks/services/deliveries/useDeleteDelivery'
 
 interface DeliveriesTableActionsMenuProps {
   deliveryId: number
@@ -13,6 +14,7 @@ export default function DeliveriesTableActionsMenu({
 }: DeliveriesTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
+  const mutationDelete = useDeleteDelivery()
 
   const handleClose = () => {
     setSelectedOption(null)
@@ -27,6 +29,7 @@ export default function DeliveriesTableActionsMenu({
   }
 
   const onConfirmClick = () => {
+    mutationDelete.mutate(deliveryId)
     handleClose()
   }
 
@@ -48,8 +51,8 @@ export default function DeliveriesTableActionsMenu({
           open={true}
           title={translate('deliveries.table.actions.delete.title')}
           content={translate('deliveries.table.actions.delete.message')}
-          discardText={translate('deliveries.table.actions.delete.discard')}
-          confirmText={translate('deliveries.table.actions.delete.confirm')}
+          discardText={translate('deliveries.table.actions.delete.labels.discard')}
+          confirmText={translate('deliveries.table.actions.delete.labels.confirm')}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
           onConfirmClick={onConfirmClick}
