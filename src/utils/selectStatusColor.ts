@@ -1,4 +1,5 @@
-export type StatusType = 'Waiting' | 'Processing' | 'Finished' | 'Approved'
+import { StatusType } from '@/types/StatusType'
+
 type ColorType = 'default' | 'error' | 'success' | 'primary' | 'secondary' | 'info' | 'warning'
 
 export default function selectStatusColor(status: StatusType): ColorType {

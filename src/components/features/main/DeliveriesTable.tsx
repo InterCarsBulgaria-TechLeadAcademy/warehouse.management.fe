@@ -10,8 +10,8 @@ import { Dayjs } from 'dayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import InfoPopper from '../InfoPoper'
-import DeliveryGoodsInfo from '../DeliveryGoodsInfo'
+// import InfoPopper from '../InfoPoper'
+// import DeliveryGoodsInfo from '../DeliveryGoodsInfo'
 import dateHelpers from '@/utils/dateHelpers'
 import useGetDeliveries from '@/hooks/services/deliveries/useGetDeliveries'
 import { DeliveryDto } from '@/services/model'
@@ -141,33 +141,6 @@ export default function DeliveriesTable() {
       actions: <DeliveriesTableActionsMenu deliveryId={delivery.id!} />
     }))
   }
-
-  // {
-  //     "id": 1,
-  //     "systemNumber": "string",
-  //     "receptionNumber": "string",
-  //     "truckNumber": "string",
-  //     "cmr": "string",
-  //     "deliveryTime": "2024-07-23T16:24:47.437",
-  //     "approvedOn": null,
-  //     "pallets": 60,
-  //     "packages": 0,
-  //     "pieces": 0,
-  //     "entriesWaitingProcessing": 1,
-  //     "entriesFinishedProcessing": 0,
-  //     "vendorId": 1,
-  //     "vendorName": "Kris Test",
-  //     "status": "Waiting",
-  //     "entries": [
-  //         {
-  //             "id": 1,
-  //             "zoneId": 1,
-  //             "startedProccessing": null,
-  //             "finishedProccessing": null
-  //         }
-  //     ],
-  //     "markers": []
-  // }
 
   console.log(deliveries)
   const rowData = transformDataToRows(deliveries || [])

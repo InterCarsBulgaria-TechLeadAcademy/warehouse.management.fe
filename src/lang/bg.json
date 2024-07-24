@@ -306,6 +306,14 @@
         "createdOn": "Създадена на",
          "actions": "Действия"
       },
+      "rows": {
+        "status": {
+          "waiting": "Изчакване",
+          "processing": "Обработва се",
+          "finished": "Приключена",
+          "approved": "Одобрена"
+        }
+      },
       "actionsMenu": {
         "details": "Детайли",
         "approve": "Одобри",
