@@ -117,22 +117,24 @@ export default function DeliveriesTable() {
       receptionNumber: delivery.receptionNumber!,
       waitingGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography>1</Typography>
+          <Typography>{delivery.entriesWaitingProcessing!}</Typography>
+          {/* TODO: БЕ трябва да го направят като функционалност 
           <InfoPopper>
-            <DeliveryGoodsInfo goodTypes={goodTypes} />
-          </InfoPopper>
+            <DeliveryGoodsInfo goodTypes={goodTypes} /> 
+          </InfoPopper> */}
         </Box>
       ),
       completedGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography>1</Typography>
+          <Typography>{delivery.entriesFinishedProcessing}</Typography>
+          {/* TODO: БЕ трябва да го направят като функционалност
           <InfoPopper>
             <DeliveryGoodsInfo goodTypes={goodTypes} />
-          </InfoPopper>
+          </InfoPopper> */}
         </Box>
       ),
-      markers: <ChipsList items={markersName} />,
-      status: <ChipsList items={[delivery.status!]} color="default" />,
+      markers: <ChipsList items={delivery.markers!} />,
+      status: <ChipsList items={[delivery.status!]} />,
       approvedOn: delivery.approvedOn!,
       // да го оправя след като БЕ го оправят
       createdOn: dateHelpers('2024-07-04T10:06:12.594Z'),
@@ -141,35 +143,30 @@ export default function DeliveriesTable() {
   }
 
   // {
-  //   "id": 0, //da
-  //   "systemNumber": "string", //da
-  //   "receptionNumber": "string", //da
-  //   "truckNumber": "string",
-  //   "cmr": "string",
-  //   "deliveryTime": "2024-07-22T07:40:56.905Z",
-  //   "approvedOn": "2024-07-22T07:40:56.905Z",
-  //   "pallets": 0,
-  //   "packages": 0,
-  //   "pieces": 0,
-  //   "entriesWaitingProcessing": 0,
-  //   "entriesFinishedProcessing": 0,
-  //   "vendorId": 0, //da
-  //   "vendorName": "string", //da
-  //   "status": "string",
-  //   "entries": [
-  //     {
-  //       "id": 0,
-  //       "zoneId": 0,
-  //       "startedProccessing": "2024-07-22T07:40:56.905Z",
-  //       "finishedProccessing": "2024-07-22T07:40:56.905Z"
-  //     }
-  //   ],
-  //   "markers": [
-  //     {
-  //       "markerId": 0,
-  //       "markerName": "string"
-  //     }
-  //   ]
+  //     "id": 1,
+  //     "systemNumber": "string",
+  //     "receptionNumber": "string",
+  //     "truckNumber": "string",
+  //     "cmr": "string",
+  //     "deliveryTime": "2024-07-23T16:24:47.437",
+  //     "approvedOn": null,
+  //     "pallets": 60,
+  //     "packages": 0,
+  //     "pieces": 0,
+  //     "entriesWaitingProcessing": 1,
+  //     "entriesFinishedProcessing": 0,
+  //     "vendorId": 1,
+  //     "vendorName": "Kris Test",
+  //     "status": "Waiting",
+  //     "entries": [
+  //         {
+  //             "id": 1,
+  //             "zoneId": 1,
+  //             "startedProccessing": null,
+  //             "finishedProccessing": null
+  //         }
+  //     ],
+  //     "markers": []
   // }
 
   console.log(deliveries)

@@ -1,14 +1,14 @@
 import { useIsSmallScreen } from '@/hooks/useIsSmallScreen'
+import selectStatusColor, { StatusType } from '@/utils/selectStatusColor'
 import { Box, Chip, ClickAwayListener, Grid, Typography } from '@mui/material'
 import Tooltip from '@mui/material/Tooltip'
 import * as React from 'react'
 
 interface MarkersProps {
   items: string[]
-  color?: 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning'
 }
 
-export default function ChipsList({ items, color }: MarkersProps) {
+export default function ChipsList({ items }: MarkersProps) {
   const isSmallScreen = useIsSmallScreen()
 
   const [open, setOpen] = React.useState(false)
@@ -25,7 +25,7 @@ export default function ChipsList({ items, color }: MarkersProps) {
   return (
     <Box sx={{ display: 'flex', gap: '0.5em' }}>
       {items.slice(0, 2).map((item, index) => (
-        <Chip key={index} label={item} color={color ? color : 'primary'} />
+        <Chip key={index} label={item} color={selectStatusColor(items[0] as StatusType)} />
       ))}
 
       {items.length > 2 && !isSmallScreen && (
