@@ -13,13 +13,13 @@ export default function usePostDelivery() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['deliveries'] })
       showSnackbar({
-        message: translate('snackBar.messages.deliveries.createDelivery.success'),
+        message: translate('deliveries.newDelivery.snackBar.success'),
         type: 'success'
       })
     },
     onError: () => {
       showSnackbar({
-        message: translate('snackBar.messages.deliveries.createDelivery.error'),
+        message: translate('deliveries.newDelivery.snackBar.error'),
         type: 'error'
       })
     }

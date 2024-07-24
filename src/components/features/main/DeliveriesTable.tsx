@@ -148,7 +148,6 @@ export default function DeliveriesTable() {
     }))
   }
 
-  console.log(deliveries)
   const rowData = transformDataToRows(deliveries || [])
 
   const filteredRows = rowData.filter((row: any) => {
