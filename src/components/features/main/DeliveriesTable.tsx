@@ -111,6 +111,7 @@ export default function DeliveriesTable() {
 
   function transformDataToRows(deliveries: DeliveryDto[]): Row[] {
     return deliveries.map((delivery: DeliveryDto) => ({
+      id: delivery.id!,
       number: delivery.id!,
       vendorName: delivery.vendorName!,
       systemNumber: delivery.systemNumber!,
