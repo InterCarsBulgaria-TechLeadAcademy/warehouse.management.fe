@@ -14,8 +14,6 @@ export default function ChipsList({ items }: MarkersProps) {
   const isSmallScreen = useIsSmallScreen()
   const [open, setOpen] = React.useState(false)
 
-  console.log(items)
-
   const color = selectStatusColor(items[0] as StatusType)
   const chipLabel = `+ ${items.slice(2).length}`
 

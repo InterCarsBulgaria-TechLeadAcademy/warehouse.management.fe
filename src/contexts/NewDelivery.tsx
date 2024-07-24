@@ -5,6 +5,7 @@ import useGenerateLeftItemsAlert from '@/hooks/useGenerateLeftItemsAlert'
 import useSetGoodsType from '@/hooks/useSetGoodsType.ts'
 import { MoveGood } from '@/interfaces/NewDelivery.ts'
 import usePostDelivery from '@/hooks/services/deliveries/usePostDelivery'
+import goodQuantity from '@/utils/goodQuantity'
 
 interface NewDeliveryProviderProps {
   children: ReactNode
@@ -61,7 +62,7 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   const [alertMessage, setAlertMessage] = useState<string[]>([])
   const [isCompletedMove, setIsCompletedMove] = useState(false)
   const [isExceedQuantity, setIsExceedQuantity] = useState(false)
-  const postMutation = usePostDelivery()
+  const mutationPost = usePostDelivery()
 
   useSetGoodsType(formsData, goodTypeStep3, setGoodTypeStep3)
   useGenerateLeftItemsAlert(
@@ -105,56 +106,19 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   const handleSubmit: SubmitHandler<any> = (data) => {
     if (currentStep === steps.length) {
       console.log('Final submission:', data)
-      //Final submission
-      //   {
-      //     "systemNumber": "1",
-      //     "receptionNumber": "1",
-      //     "cmr": "1",
-      //     "markers": [],
-      //     "vendorName": "Bosch",
-      //     "vendorId": "1",
-      //     "truckNumber": "1",
-      //     "deliveryTime": "2024-07-15T08:57:41.973Z",
-      //     "goods": [
-      //         {
-      //             "goodTypeStep3": "pallets",
-      //             "goodQuantityStep3": "3"
-      //         }
-      //     ],
-      //     "goodsInZones": [
-      //         {
-      //             "goodTypeStep4": "pallets",
-      //             "goodQuantityStep4": "3",
-      //             "zone": "Zone12"
-      //         }
-      //     ]
-      // }
 
-      //must be
-      // {
-      //   "systemNumber": "string", DA
-      //   "receptionNumber": "string", DA
-      //   "truckNumber": "string", DA
-      //   "cmr": "string", DA
-      //   "deliveryTime": "2024-07-15T08:31:24.301Z", DA
-      //   "pallets": 0, DA
-      //   "packages": 0, DA
-      //   "pieces": 0, DA
-      //   "isApproved": true,
-      //   "vendorId": 0, DA
-      //   "markers": [ DA
-      //     0
-      //   ]
-      // }
-
-      // mutationPost.mutate({
-      //     systemNumber: data.systemNumber,
-      //     receptionNumber: data.receptionNumber,
-      //     truckNumber: data.truckNumber,
-      //     cmr: data.cmr,
-      //     deliveryTime: data.deliveryTime,
-      //     ..
-      // })
+      mutationPost.mutate({
+        systemNumber: data.systemNumber,
+        receptionNumber: data.receptionNumber,
+        truckNumber: data.truckNumber,
+        cmr: data.cmr,
+        deliveryTime: data.deliveryTime,
+        pallets: goodQuantity(data, 'pallets'),
+        packages: goodQuantity(data, 'packages'),
+        pieces: goodQuantity(data, 'pieces'),
+        vendorId: Number(data.vendorId),
+        markers: data.markers
+      })
       onCloseDialog()
     } else {
       console.log(data)
