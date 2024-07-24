@@ -40,7 +40,7 @@ export default function ChipsList({ items }: MarkersProps) {
             </Box>
           }
           arrow>
-          <Chip label={chipLabel} color="primary" />
+          <Chip label={chipLabel} color={selectStatusColor(items[0] as StatusType)} />
         </Tooltip>
       )}
 
@@ -66,7 +66,11 @@ export default function ChipsList({ items }: MarkersProps) {
                     ))}
                   </Box>
                 }>
-                <Chip label={chipLabel} color="primary" onClick={handleTooltipOpen} />
+                <Chip
+                  label={chipLabel}
+                  color={selectStatusColor(items[0] as StatusType)}
+                  onClick={handleTooltipOpen}
+                />
               </Tooltip>
             </div>
           </ClickAwayListener>
