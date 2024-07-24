@@ -15,6 +15,7 @@ export default function DeliveriesTableActionsMenu({
   const { t: translate } = useTranslation()
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
   const mutationDelete = useDeleteDelivery()
+  //TODO: Да говоря с Крис когато се изтрие доставка не трябва ли да се изтрие и entryto с този deliveryId
 
   const handleClose = () => {
     setSelectedOption(null)
