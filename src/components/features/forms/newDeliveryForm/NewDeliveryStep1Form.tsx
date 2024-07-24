@@ -30,7 +30,7 @@ export default function NewDeliveryStep1Form({
         render={({ field }) => (
           <TextField
             {...field}
-            label={translate('newDelivery.labels.step1.deliveryNumber')}
+            label={translate('deliveries.newDelivery.labels.step1.deliveryNumber')}
             id="deliveryNumber"
             name="deliveryNumber"
             required
@@ -48,7 +48,7 @@ export default function NewDeliveryStep1Form({
         render={({ field }) => (
           <TextField
             {...field}
-            label={translate('newDelivery.labels.step1.receptionNumber')}
+            label={translate('deliveries.newDelivery.labels.step1.receptionNumber')}
             id="receptionNumber"
             name="receptionNumber"
             required
@@ -67,7 +67,7 @@ export default function NewDeliveryStep1Form({
         render={({ field }) => (
           <TextField
             {...field}
-            label={translate('newDelivery.labels.step1.cmrNumber')}
+            label={translate('deliveries.newDelivery.labels.step1.cmrNumber')}
             id="cmrNumber"
             name="cmrNumber"
             required
@@ -84,7 +84,7 @@ export default function NewDeliveryStep1Form({
         render={({ field }) => (
           <FormControl>
             <InputLabel id="markers-label">
-              {translate('newDelivery.labels.step1.markers')}
+              {translate('deliveries.newDelivery.labels.step1.markers')}
             </InputLabel>
             <Select
               {...field}
@@ -93,7 +93,9 @@ export default function NewDeliveryStep1Form({
               multiple
               value={field.value || []}
               onChange={(e) => field.onChange(e.target.value)}
-              input={<OutlinedInput label={translate('newDelivery.labels.step1.markers')} />}
+              input={
+                <OutlinedInput label={translate('deliveries.newDelivery.labels.step1.markers')} />
+              }
               renderValue={(selected) => (selected as string[]).join(', ')}>
               {markers.map((marker) => (
                 <MenuItem key={marker} value={marker}>

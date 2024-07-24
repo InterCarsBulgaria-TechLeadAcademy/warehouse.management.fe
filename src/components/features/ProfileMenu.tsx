@@ -67,16 +67,16 @@ export default function ProfileMenu() {
               'aria-labelledby': 'basic-button'
             }}>
             <MenuItem onClick={onOpenDialog}>
-              <Typography component="p">{translate('profileMenu.labels.exit')}</Typography>
+              <Typography component="p">{translate('menu.profileMenu.labels.exit')}</Typography>
             </MenuItem>
           </Menu>
 
           <WarningActionDialog
             open={dialogOpen}
-            title={translate('profileMenu.title')}
-            content={translate('profileMenu.message')}
-            discardText={translate('profileMenu.labels.discard')}
-            confirmText={translate('profileMenu.labels.confirm')}
+            title={translate('menu.profileMenu.title')}
+            content={translate('menu.profileMenu.message')}
+            discardText={translate('menu.profileMenu.labels.discard')}
+            confirmText={translate('menu.profileMenu.labels.confirm')}
             onCloseDialog={onCloseDialog}
             onDiscardClick={onDiscardClick}
             onConfirmClick={onConfirmClick}

@@ -13,10 +13,20 @@ export const ColorModeContext = React.createContext<ColorModeContextValue>({
 
 export default function ToggleColorMode({ children }: Children) {
   const [mode, setMode] = React.useState<'light' | 'dark'>('light')
+
+  React.useEffect(() => {
+    const savedMode = (localStorage.getItem('mode') as 'light' | 'dark') || 'light'
+    setMode(savedMode)
+  }, [])
+
   const colorMode = React.useMemo(
     () => ({
       toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'))
+        setMode((prevMode) => {
+          const newMode = prevMode === 'light' ? 'dark' : 'light'
+          localStorage.setItem('mode', newMode)
+          return newMode
+        })
       }
     }),
     []

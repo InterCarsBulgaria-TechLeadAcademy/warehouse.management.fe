@@ -47,8 +47,8 @@ export default function ZonesTableActionsMenu({ zone }: ZonesTableActionsMenuPro
   }
 
   const options = [
-    { title: 'actionsMenu.options.edit', value: 'edit' },
-    { title: 'actionsMenu.options.delete', value: 'delete' }
+    { title: 'zones.table.actionsMenu.edit', value: 'edit' },
+    { title: 'zones.table.actionsMenu.delete', value: 'delete' }
   ]
 
   return (
@@ -58,9 +58,9 @@ export default function ZonesTableActionsMenu({ zone }: ZonesTableActionsMenuPro
       {selectedOption === 'edit' && (
         <FormDialog<NewZoneFormData>
           open={true}
-          title={translate('newZone.editZone.title')}
-          discardText={translate('newZone.editZone.labels.exit')}
-          confirmText={translate('newZone.editZone.labels.edit')}
+          title={translate('zones.table.actions.edit.title')}
+          discardText={translate('zones.table.actions.edit.labels.exit')}
+          confirmText={translate('zones.table.actions.edit.labels.edit')}
           onCloseDialog={handleClose}
           schema={newZoneSchema}
           onSubmit={handleSubmit}
@@ -80,10 +80,10 @@ export default function ZonesTableActionsMenu({ zone }: ZonesTableActionsMenuPro
       {selectedOption === 'delete' && (
         <WarningActionDialog
           open={true}
-          title={translate('deleteAction.zones.title')}
-          content={translate('deleteAction.zones.message', { name: zone.name })}
-          discardText={translate('deleteAction.zones.labels.discard')}
-          confirmText={translate('deleteAction.zones.labels.confirm')}
+          title={translate('zones.table.actions.delete.title')}
+          content={translate('zones.table.actions.delete.message', { name: zone.name })}
+          discardText={translate('zones.table.actions.delete.labels.discard')}
+          confirmText={translate('zones.table.actions.delete.labels.confirm')}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
           onConfirmClick={onConfirmClick}

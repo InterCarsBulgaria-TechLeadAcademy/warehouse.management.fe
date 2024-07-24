@@ -39,9 +39,9 @@ export default function Markers() {
 
       <FormDialog<NewMarkerFormData>
         open={openDialog}
-        title={translate('newMarker.title')}
-        discardText={translate('newMarker.labels.exit')}
-        confirmText={translate('newMarker.labels.create')}
+        title={translate('markers.newMarker.title')}
+        discardText={translate('markers.newMarker.labels.exit')}
+        confirmText={translate('markers.newMarker.labels.create')}
         onCloseDialog={onCloseDialog}
         schema={newMarkerSchema}
         onSubmit={handleSubmit}

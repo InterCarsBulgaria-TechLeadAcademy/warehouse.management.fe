@@ -72,7 +72,7 @@ export default function GoodDetailsForm({
               <TextField
                 {...params}
                 required
-                label={translate('newDelivery.labels.step3.goodType')}
+                label={translate('deliveries.newDelivery.labels.step3.goodType')}
                 error={!!errors?.goods?.[index]?.goodTypeStep3}
                 helperText={
                   errors?.goods?.[index]?.goodTypeStep3?.message
@@ -91,7 +91,7 @@ export default function GoodDetailsForm({
         render={({ field }) => (
           <TextField
             {...field}
-            label={translate('newDelivery.labels.step3.goodQuantity')}
+            label={translate('deliveries.newDelivery.labels.step3.goodQuantity')}
             id={`GoodDetailsForm.goodQuantity${index}`} //Unique id for TextField
             name={`GoodDetailsForm.goodQuantity-${index}`} //Use the index for unique a name field
             required

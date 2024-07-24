@@ -42,8 +42,8 @@ export default function MarkersTableActionsMenu({ marker }: MarkersTableActionsM
   }
 
   const options = [
-    { title: 'actionsMenu.options.edit', value: 'edit' },
-    { title: 'actionsMenu.options.delete', value: 'delete' }
+    { title: 'markers.table.actionsMenu.edit', value: 'edit' },
+    { title: 'markers.table.actionsMenu.delete', value: 'delete' }
   ]
 
   return (
@@ -53,9 +53,9 @@ export default function MarkersTableActionsMenu({ marker }: MarkersTableActionsM
       {selectedOption === 'edit' && (
         <FormDialog<NewMarkerFormData>
           open={true}
-          title={translate('editMarker.title')}
-          discardText={translate('editMarker.labels.exit')}
-          confirmText={translate('editMarker.labels.edit')}
+          title={translate('markers.table.actions.edit.title')}
+          discardText={translate('markers.table.actions.edit.labels.exit')}
+          confirmText={translate('markers.table.actions.edit.labels.edit')}
           onCloseDialog={handleClose}
           schema={newMarkerSchema}
           onSubmit={handleSubmit}
@@ -66,12 +66,12 @@ export default function MarkersTableActionsMenu({ marker }: MarkersTableActionsM
       {selectedOption === 'delete' && (
         <WarningActionDialog
           open={true}
-          title={translate('newMarker.deleteAction.title')}
-          content={translate('newMarker.deleteAction.message', {
-            marker: name
+          title={translate('markers.table.actions.delete.title')}
+          content={translate('markers.table.actions.delete.message', {
+            marker: marker.name
           })}
-          discardText={translate('newMarker.deleteAction.labels.discard')}
-          confirmText={translate('newMarker.deleteAction.labels.confirm')}
+          discardText={translate('markers.table.actions.delete.labels.discard')}
+          confirmText={translate('markers.table.actions.delete.labels.confirm')}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
           onConfirmClick={onConfirmClick}

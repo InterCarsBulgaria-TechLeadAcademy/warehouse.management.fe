@@ -40,7 +40,7 @@ export default function NewZoneForm({
         render={({ field }) => (
           <TextField
             {...field}
-            label={translate('newZone.labels.name')}
+            label={translate('zones.newZone.labels.name')}
             id="zoneName"
             name="zoneName"
             required
@@ -59,7 +59,7 @@ export default function NewZoneForm({
         render={({ field }) => (
           <FormControl fullWidth>
             <InputLabel id="demo-multiple-checkbox-label">
-              {translate('newZone.labels.markers')}
+              {translate('zones.newZone.labels.markers')}
             </InputLabel>
             <Select
               {...field}
@@ -99,7 +99,7 @@ export default function NewZoneForm({
         render={({ field }) => (
           <FormControlLabel
             control={<Checkbox {...field} checked={field.value} />}
-            label={translate('newZone.labels.isFinal')}
+            label={translate('zones.newZone.labels.isFinal')}
           />
         )}
       />
