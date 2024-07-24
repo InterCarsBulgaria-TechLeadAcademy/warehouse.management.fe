@@ -8,6 +8,9 @@ import type {
   DeliveryDto,
   DeliveryFormDto,
   DeliveryHistoryDto,
+  DifferenceAdminCommentDto,
+  DifferenceDto,
+  DifferenceFormDto,
   DifferenceTypeDto,
   DifferenceTypeFormDto,
   EntryDto,
@@ -15,6 +18,8 @@ import type {
   EntryRequest,
   GetApiDeliveryAllParams,
   GetApiDeliveryHistoryIdParams,
+  GetApiDifferenceAllParams,
+  GetApiDifferenceAllWithDeletedParams,
   GetApiEntryAllParams,
   GetApiMarkerAllWithParamsParams,
   GetApiVendorAllParams,
@@ -117,6 +122,120 @@ export const getWarehouseManagementApi = () => {
   ) => {
     return customInstance<VendorDto[]>(
       { url: `/api/Delivery/Approve/${id}`, method: 'PUT' },
+      options
+    )
+  }
+
+  const getApiDifferenceAll = (
+    params?: GetApiDifferenceAllParams,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<DifferenceDto[]>(
+      { url: `/api/Difference/all`, method: 'GET', params },
+      options
+    )
+  }
+
+  const getApiDifferenceAllWithDeleted = (
+    params?: GetApiDifferenceAllWithDeletedParams,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<DifferenceDto[]>(
+      { url: `/api/Difference/all-with-deleted`, method: 'GET', params },
+      options
+    )
+  }
+
+  const getApiDifferenceId = (id: number, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<DifferenceDto>({ url: `/api/Difference/${id}`, method: 'GET' }, options)
+  }
+
+  const postApiDifferenceAdd = (
+    differenceFormDto: BodyType<DifferenceFormDto>,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<void>(
+      {
+        url: `/api/Difference/add`,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        data: differenceFormDto
+      },
+      options
+    )
+  }
+
+  const putApiDifferenceEditId = (
+    id: number,
+    differenceFormDto: BodyType<DifferenceFormDto>,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<void>(
+      {
+        url: `/api/Difference/edit/${id}`,
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        data: differenceFormDto
+      },
+      options
+    )
+  }
+
+  const deleteApiDifferenceDeleteId = (
+    id: number,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<void>({ url: `/api/Difference/delete/${id}`, method: 'DELETE' }, options)
+  }
+
+  const patchApiDifferenceRestoreId = (
+    id: number,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<void>({ url: `/api/Difference/restore/${id}`, method: 'PATCH' }, options)
+  }
+
+  const postApiDifferenceStart = (
+    postApiDifferenceStartBody: BodyType<number>,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<void>(
+      {
+        url: `/api/Difference/start`,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        data: postApiDifferenceStartBody
+      },
+      options
+    )
+  }
+
+  const postApiDifferenceFinish = (
+    differenceAdminCommentDto: BodyType<DifferenceAdminCommentDto>,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<void>(
+      {
+        url: `/api/Difference/finish`,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        data: differenceAdminCommentDto
+      },
+      options
+    )
+  }
+
+  const postApiDifferenceNoDifferences = (
+    differenceAdminCommentDto: BodyType<DifferenceAdminCommentDto>,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<void>(
+      {
+        url: `/api/Difference/noDifferences`,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        data: differenceAdminCommentDto
+      },
       options
     )
   }
@@ -478,6 +597,16 @@ export const getWarehouseManagementApi = () => {
     getApiDeliveryAllDeleted,
     getApiDeliveryHistoryId,
     putApiDeliveryApproveId,
+    getApiDifferenceAll,
+    getApiDifferenceAllWithDeleted,
+    getApiDifferenceId,
+    postApiDifferenceAdd,
+    putApiDifferenceEditId,
+    deleteApiDifferenceDeleteId,
+    patchApiDifferenceRestoreId,
+    postApiDifferenceStart,
+    postApiDifferenceFinish,
+    postApiDifferenceNoDifferences,
     getApiDifferenceTypeAll,
     getApiDifferenceTypeAllWithDeleted,
     getApiDifferenceTypeId,
@@ -547,6 +676,40 @@ export type GetApiDeliveryHistoryIdResult = NonNullable<
 >
 export type PutApiDeliveryApproveIdResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['putApiDeliveryApproveId']>>
+>
+export type GetApiDifferenceAllResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiDifferenceAll']>>
+>
+export type GetApiDifferenceAllWithDeletedResult = NonNullable<
+  Awaited<
+    ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiDifferenceAllWithDeleted']>
+  >
+>
+export type GetApiDifferenceIdResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiDifferenceId']>>
+>
+export type PostApiDifferenceAddResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiDifferenceAdd']>>
+>
+export type PutApiDifferenceEditIdResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['putApiDifferenceEditId']>>
+>
+export type DeleteApiDifferenceDeleteIdResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['deleteApiDifferenceDeleteId']>>
+>
+export type PatchApiDifferenceRestoreIdResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['patchApiDifferenceRestoreId']>>
+>
+export type PostApiDifferenceStartResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiDifferenceStart']>>
+>
+export type PostApiDifferenceFinishResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiDifferenceFinish']>>
+>
+export type PostApiDifferenceNoDifferencesResult = NonNullable<
+  Awaited<
+    ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiDifferenceNoDifferences']>
+  >
 >
 export type GetApiDifferenceTypeAllResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiDifferenceTypeAll']>>
