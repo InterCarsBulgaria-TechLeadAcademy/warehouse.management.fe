@@ -119,7 +119,6 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
         vendorId: Number(data.vendorId),
         markers: data.markers
       })
-      onCloseDialog()
     } else {
       console.log(data)
       setFormsData(data)
