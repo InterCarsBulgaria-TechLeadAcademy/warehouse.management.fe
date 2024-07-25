@@ -65,6 +65,8 @@ export default function DeliveriesTable() {
   //   }
   // ]
 
+  console.log(deliveries)
+
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
   }

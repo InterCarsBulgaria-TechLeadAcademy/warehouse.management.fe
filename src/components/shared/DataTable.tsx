@@ -97,6 +97,7 @@ export default function DataTable<T>({
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
           count={rowData.length}
+          // count={count of useGetDelivery трябва да се подаде}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
