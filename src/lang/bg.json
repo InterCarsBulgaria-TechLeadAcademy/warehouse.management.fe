@@ -610,6 +610,11 @@
 
       }
     },
+    "newZonesContent": {
+      "snackBar": {
+        "error": "Възникна грешка"
+      }
+    }, 
     "moveEntryForm": {
       "quantity": "Количество",
       "zone": "Зона",
