@@ -320,6 +320,49 @@
         "delete": "Изтрий"
       },
       "actions": {
+        "details": {
+          "title": "Детайли за доставка №{{deliveryNumber}}",
+          "steps": {
+            "deliveryDetails": "Детайли за доставка",
+            "truckDetails": "Детайли за камион",
+            "goodDetails": "Детайли за стока",
+            "goodRelocate": "Местене на стока",
+            "reviewDelivery": "Преглед на доставката"
+          },
+          "step1": {
+            "title":"Детайли за доставка",
+            "receptionNumber":"Рецепция №",
+            "cmr": "ЧМР",
+            "markers":"Маркери"
+          },
+          "step2": {
+            "title": "Детайли за камион",
+            "vendorName":"Име на доставчик",
+            "vendorId":"Доставчик №",
+            "truckNumber":"Номер на камион",
+            "deliveryDate":"Дата на доставка"
+          },
+          "step3": {
+            "title": "Детайли за стока",
+            "pallets":"Палети",
+            "packages":"Пакети",
+            "pieces":"Бройки"
+          },
+          "step4": {
+            "title": "Местене на стока"
+          },
+          "step5": {
+            "title": "Извършени действия в доставка"
+          },
+          "goodDetails": {
+            "pallets": "Палети",
+            "packages": "Пакети",
+            "pieces": "Бройки"
+          },
+          "labels": {
+            "exit": "Изход"
+          }
+        },
         "delete": {
           "title": "Изтриване на доставка",
           "message": "Сигурни ли сте, че искате да изтриете тази доставка?",
@@ -328,7 +371,7 @@
             "confirm": "Потвърди"
           },
           "snackBar": {
-            "success": "Доставка {{name}} е изтрита успешно",
+            "success": "Доставката е изтрита успешно",
             "error": "Възникна грешка"
           }
         }

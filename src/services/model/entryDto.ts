@@ -4,6 +4,7 @@
  * WarehouseManagement.Api
  * OpenAPI spec version: 1.0
  */
+import type { ZoneDto } from './zoneDto'
 
 export interface EntryDto {
   deliveryId?: number
@@ -15,5 +16,5 @@ export interface EntryDto {
   pieces?: number
   /** @nullable */
   startedProccessing?: string | null
-  zoneId?: number
+  zone?: ZoneDto
 }

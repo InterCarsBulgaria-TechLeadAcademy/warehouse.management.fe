@@ -3,12 +3,21 @@ import { Box, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import ChipsList from '../../ChipsList'
 import dayjs from 'dayjs'
-import NewDeliveryStep5Table from './NewDeliveryStep5Table'
 import { Good } from '@/hooks/useSetGoodsType.ts'
+import useGetMarkers from '@/hooks/services/markers/useGetMarkers'
+import MoveGoodsTable from './MoveGoodsTable'
 
 export default function NewDeliveryStep5Form() {
   const { t: translate } = useTranslation()
   const { formsData } = useNewDeliveryContext()
+  const markers = useGetMarkers()
+
+  // console.log(markers)
+
+  // const markersNames = formsData.markers.map((markerId: number) => {
+  //   const marker = markers.find((marker) => marker.id === markerId)
+  //   return marker ? marker.name : ''
+  // })
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2em' }}>
@@ -36,11 +45,16 @@ export default function NewDeliveryStep5Form() {
           </Box>
           <Box>
             <Typography>{translate('deliveries.newDelivery.labels.step1.cmrNumber')}</Typography>
-            <Typography>{formsData.cmrNumber}</Typography>
+            <Typography>{formsData.cmr}</Typography>
           </Box>
           <Box>
             <Typography>{translate('deliveries.newDelivery.labels.step1.markers')}</Typography>
-            <ChipsList items={formsData.markers} />
+            <ChipsList
+              items={formsData.markers.map((markerId: number) => {
+                const marker = markers.find((marker) => marker.id === markerId)
+                return marker ? marker.name : ''
+              })}
+            />
           </Box>
         </Box>
       </Box>
@@ -104,7 +118,12 @@ export default function NewDeliveryStep5Form() {
         </Box>
 
         <Box>
-          <NewDeliveryStep5Table />
+          <MoveGoodsTable
+            array={formsData.goodsInZones}
+            goodType={'goodTypeStep4'}
+            goodQuantity={'goodQuantityStep4'}
+            currentZone={'zone'}
+          />
         </Box>
       </Box>
     </Box>

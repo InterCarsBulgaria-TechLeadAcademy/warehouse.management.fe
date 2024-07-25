@@ -6,21 +6,24 @@
  */
 import type {
   DeliveryDto,
+  DeliveryDtoPageDto,
   DeliveryFormDto,
   DeliveryHistoryDto,
   DifferenceAdminCommentDto,
   DifferenceDto,
+  DifferenceDtoPageDto,
   DifferenceFormDto,
   DifferenceTypeDto,
   DifferenceTypeFormDto,
   EntryDto,
+  EntryDtoPageDto,
   EntryFormDto,
-  EntryRequest,
+  EntrySplitDto,
   GetApiDeliveryAllParams,
-  GetApiDeliveryHistoryIdParams,
   GetApiDifferenceAllParams,
   GetApiDifferenceAllWithDeletedParams,
   GetApiEntryAllParams,
+  GetApiEntryAllWithDeletedParams,
   GetApiMarkerAllWithParamsParams,
   GetApiVendorAllParams,
   GetApiZoneAllWithParamsParams,
@@ -28,6 +31,8 @@ import type {
   MarkerDto,
   MarkerFormDto,
   PaginationParameters,
+  PostApiEntryMoveParams,
+  PostApiEntrySplitParams,
   VendorDto,
   VendorFormDto,
   ZoneDto,
@@ -47,7 +52,7 @@ export const getWarehouseManagementApi = () => {
     params?: GetApiDeliveryAllParams,
     options?: SecondParameter<typeof customInstance>
   ) => {
-    return customInstance<DeliveryDto[]>(
+    return customInstance<DeliveryDtoPageDto>(
       { url: `/api/Delivery/all`, method: 'GET', params },
       options
     )
@@ -106,12 +111,11 @@ export const getWarehouseManagementApi = () => {
   }
 
   const getApiDeliveryHistoryId = (
-    id: string,
-    params?: GetApiDeliveryHistoryIdParams,
+    id: number,
     options?: SecondParameter<typeof customInstance>
   ) => {
     return customInstance<DeliveryHistoryDto>(
-      { url: `/api/Delivery/history/${id}`, method: 'GET', params },
+      { url: `/api/Delivery/history/${id}`, method: 'GET' },
       options
     )
   }
@@ -130,7 +134,7 @@ export const getWarehouseManagementApi = () => {
     params?: GetApiDifferenceAllParams,
     options?: SecondParameter<typeof customInstance>
   ) => {
-    return customInstance<DifferenceDto[]>(
+    return customInstance<DifferenceDtoPageDto>(
       { url: `/api/Difference/all`, method: 'GET', params },
       options
     )
@@ -140,7 +144,7 @@ export const getWarehouseManagementApi = () => {
     params?: GetApiDifferenceAllWithDeletedParams,
     options?: SecondParameter<typeof customInstance>
   ) => {
-    return customInstance<DifferenceDto[]>(
+    return customInstance<DifferenceDtoPageDto>(
       { url: `/api/Difference/all-with-deleted`, method: 'GET', params },
       options
     )
@@ -316,7 +320,10 @@ export const getWarehouseManagementApi = () => {
     params?: GetApiEntryAllParams,
     options?: SecondParameter<typeof customInstance>
   ) => {
-    return customInstance<EntryDto[]>({ url: `/api/Entry/all`, method: 'GET', params }, options)
+    return customInstance<EntryDtoPageDto>(
+      { url: `/api/Entry/all`, method: 'GET', params },
+      options
+    )
   }
 
   const getApiEntryId = (id: number, options?: SecondParameter<typeof customInstance>) => {
@@ -324,15 +331,11 @@ export const getWarehouseManagementApi = () => {
   }
 
   const getApiEntryAllWithDeleted = (
-    entryRequest: BodyType<EntryRequest>,
+    params?: GetApiEntryAllWithDeletedParams,
     options?: SecondParameter<typeof customInstance>
   ) => {
     return customInstance<EntryDto[]>(
-      {
-        url: `/api/Entry/all-with-deleted`,
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
-      },
+      { url: `/api/Entry/all-with-deleted`, method: 'GET', params },
       options
     )
   }
@@ -382,6 +385,40 @@ export const getWarehouseManagementApi = () => {
 
   const getApiEntryFinishId = (id: number, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<void>({ url: `/api/Entry/finish/${id}`, method: 'GET' }, options)
+  }
+
+  const postApiEntryMove = (
+    postApiEntryMoveBody: BodyType<number>,
+    params?: PostApiEntryMoveParams,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<void>(
+      {
+        url: `/api/Entry/move`,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        data: postApiEntryMoveBody,
+        params
+      },
+      options
+    )
+  }
+
+  const postApiEntrySplit = (
+    entrySplitDto: BodyType<EntrySplitDto>,
+    params?: PostApiEntrySplitParams,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<void>(
+      {
+        url: `/api/Entry/split`,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        data: entrySplitDto,
+        params
+      },
+      options
+    )
   }
 
   const getApiMarkerId = (id: number, options?: SecondParameter<typeof customInstance>) => {
@@ -584,7 +621,10 @@ export const getWarehouseManagementApi = () => {
     params?: GetApiZoneEntriesParams,
     options?: SecondParameter<typeof customInstance>
   ) => {
-    return customInstance<EntryDto[]>({ url: `/api/Zone/entries`, method: 'GET', params }, options)
+    return customInstance<EntryDtoPageDto>(
+      { url: `/api/Zone/entries`, method: 'GET', params },
+      options
+    )
   }
 
   return {
@@ -623,6 +663,8 @@ export const getWarehouseManagementApi = () => {
     putApiEntryRestoreId,
     getApiEntryStartId,
     getApiEntryFinishId,
+    postApiEntryMove,
+    postApiEntrySplit,
     getApiMarkerId,
     getApiMarkerAll,
     getApiMarkerAllWithParams,
@@ -762,6 +804,12 @@ export type GetApiEntryStartIdResult = NonNullable<
 >
 export type GetApiEntryFinishIdResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiEntryFinishId']>>
+>
+export type PostApiEntryMoveResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiEntryMove']>>
+>
+export type PostApiEntrySplitResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiEntrySplit']>>
 >
 export type GetApiMarkerIdResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiMarkerId']>>

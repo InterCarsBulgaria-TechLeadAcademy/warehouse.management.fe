@@ -1,11 +1,13 @@
 import { Box, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import dayjs from 'dayjs'
-import { Good } from '@/hooks/useSetGoodsType.ts'
 import ChipsList from './ChipsList'
-import NewDeliveryStep5Table from './forms/newDeliveryForm/NewDeliveryStep5Table'
 import useGetDelivery from '@/hooks/services/deliveries/useGetDelivery'
 import { useEffect } from 'react'
+import { FullPageLoader } from '../common/FullPageLoader'
+import MoveGoodsTable from './forms/newDeliveryForm/MoveGoodsTable'
+import useGetDeliveryHistory from '@/hooks/services/deliveries/useGetDeliveryHistory'
+import editEntriesArray from '@/utils/editEntriesArray'
 
 interface DeliveryDetailsProps {
   deliveryId: number
@@ -13,44 +15,53 @@ interface DeliveryDetailsProps {
 
 export default function DeliveryDetails({ deliveryId }: DeliveryDetailsProps) {
   const { t: translate } = useTranslation()
-  const { mutate, data, isError } = useGetDelivery()
+  const { mutate: mutateGetDelivery, data: deliveryData } = useGetDelivery()
+  //Fot dot 5
+  const { mutate: mutateGetDeliveryHistory, data: deliveryHistoryData } = useGetDeliveryHistory()
 
-  //TODO: Check if it work. Dot 5 is not whiting. View design.
+  //TODO:  Dot 5 is not whiting. View design.
   useEffect(() => {
-    mutate({ id: deliveryId })
-  }, [deliveryId, mutate])
+    mutateGetDelivery({ id: deliveryId })
+    mutateGetDeliveryHistory({ id: deliveryId })
+  }, [deliveryId, mutateGetDelivery, mutateGetDeliveryHistory])
 
-  console.log(data)
-
-  if (isError) {
-    //TODO: to redirect to common error page
-    return <Typography>Error</Typography>
+  if (!deliveryData || !deliveryHistoryData) {
+    return <FullPageLoader />
   }
+
+  console.log(deliveryData)
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2em' }}>
+      <Typography variant="h5">
+        {translate('deliveries.table.actions.details.title', { deliveryNumber: deliveryId })}
+      </Typography>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '1em' }}>
           <ChipsList items={['1']} />
-          <Typography variant="h6">{translate('newDelivery.steps.deliveryDetails')} №</Typography>
+          <Typography variant="h6">
+            {translate('deliveries.table.actions.details.steps.deliveryDetails')}
+          </Typography>
         </Box>
 
         <Box sx={{ display: 'flex', gap: '2em' }}>
           <Box>
-            <Typography>{translate('newDelivery.labels.step1.systemNumber')}</Typography>
-            <Typography>{data.systemNumber}</Typography>
+            <Typography>{translate('deliveries.table.actions.details.step1.title')}</Typography>
+            <Typography>{deliveryData.systemNumber}</Typography>
           </Box>
           <Box>
-            <Typography>{translate('newDelivery.labels.step1.receptionNumber')}</Typography>
-            <Typography>{data.receptionNumber}</Typography>
+            <Typography>
+              {translate('deliveries.table.actions.details.step1.receptionNumber')}
+            </Typography>
+            <Typography>{deliveryData.receptionNumber}</Typography>
           </Box>
           <Box>
-            <Typography>{translate('newDelivery.labels.step1.cmr')}</Typography>
-            <Typography>{data.cmr}</Typography>
+            <Typography>{translate('deliveries.table.actions.details.step1.cmr')}</Typography>
+            <Typography>{deliveryData.cmr}</Typography>
           </Box>
           <Box>
-            <Typography>{translate('newDelivery.labels.step1.markers')}</Typography>
-            <ChipsList items={data.markers} />
+            <Typography>{translate('deliveries.table.actions.details.step1.markers')}</Typography>
+            <ChipsList items={deliveryData.markers!.map((marker) => marker.markerName!)} />
           </Box>
         </Box>
       </Box>
@@ -58,25 +69,33 @@ export default function DeliveryDetails({ deliveryId }: DeliveryDetailsProps) {
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '1em' }}>
           <ChipsList items={['2']} />
-          <Typography variant="h6">{translate('newDelivery.steps.truckDetails')}</Typography>
+          <Typography variant="h6">
+            {translate('deliveries.table.actions.details.step2.title')}
+          </Typography>
         </Box>
 
         <Box sx={{ display: 'flex', gap: '2em' }}>
           <Box>
-            <Typography>{translate('newDelivery.labels.step2.vendorName')}</Typography>
-            <Typography>{data.vendorName}</Typography>
+            <Typography>
+              {translate('deliveries.table.actions.details.step2.vendorName')}
+            </Typography>
+            <Typography>{deliveryData.vendorName}</Typography>
           </Box>
           <Box>
-            <Typography>{translate('newDelivery.labels.step2.vendorId')}</Typography>
-            <Typography>{data?.vendorId}</Typography>
+            <Typography>{translate('deliveries.table.actions.details.step2.vendorId')}</Typography>
+            <Typography>{deliveryData.vendorId}</Typography>
           </Box>
           <Box>
-            <Typography>{translate('newDelivery.labels.step2.truckNumber')}</Typography>
-            <Typography>{data.truckNumber}</Typography>
+            <Typography>
+              {translate('deliveries.table.actions.details.step2.truckNumber')}
+            </Typography>
+            <Typography>{deliveryData.truckNumber}</Typography>
           </Box>
           <Box>
-            <Typography>{translate('newDelivery.labels.step2.deliveryDate')}</Typography>
-            <Typography>{dayjs(data.deliveryDate).format('DD.MM.YYYY')}</Typography>
+            <Typography>
+              {translate('deliveries.table.actions.details.step2.deliveryDate')}
+            </Typography>
+            <Typography>{dayjs(deliveryData.deliveryTime).format('DD.MM.YYYY')}</Typography>
           </Box>
         </Box>
       </Box>
@@ -84,29 +103,57 @@ export default function DeliveryDetails({ deliveryId }: DeliveryDetailsProps) {
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '1em' }}>
           <ChipsList items={['3']} />
-          <Typography variant="h6">{translate('newDelivery.steps.goodDetails')}</Typography>
+          <Typography variant="h6">
+            {translate('deliveries.table.actions.details.step3.title')}
+          </Typography>
         </Box>
 
         <Box sx={{ display: 'flex', gap: '2em' }}>
-          {data.goods.map((good: Good, index: number) => {
-            return (
-              <Box key={index}>
-                <Typography>{translate(`newDelivery.goodType.${good.goodTypeStep3}`)}</Typography>
-                <Typography>{good.goodQuantityStep3}</Typography>
-              </Box>
-            )
-          })}
+          <Box>
+            <Typography>{translate('deliveries.table.actions.details.step3.pallets')}</Typography>
+            <Typography>{deliveryData.pallets}</Typography>
+          </Box>
+          <Box>
+            <Typography>{translate('deliveries.table.actions.details.step3.packages')}</Typography>
+            <Typography>{deliveryData.packages}</Typography>
+          </Box>
+          <Box>
+            <Typography>{translate('deliveries.table.actions.details.step3.pieces')}</Typography>
+            <Typography>{deliveryData.pieces}</Typography>
+          </Box>
         </Box>
       </Box>
 
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '1em' }}>
           <ChipsList items={['4']} />
-          <Typography variant="h6">{translate('newDelivery.steps.goodRelocate')}</Typography>
+          <Typography variant="h6">
+            {translate('deliveries.table.actions.details.step4.title')}
+          </Typography>
         </Box>
 
         <Box>
-          <NewDeliveryStep5Table />
+          <MoveGoodsTable
+            array={editEntriesArray(deliveryData!.entries!)}
+            goodType={'goodType'}
+            goodQuantity={'goodQuantity'}
+            currentZone={'zone'}
+          />
+        </Box>
+      </Box>
+
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: '1em' }}>
+          <ChipsList items={['5']} />
+          <Typography variant="h6">
+            {translate('deliveries.table.actions.details.step5.title')}
+          </Typography>
+        </Box>
+
+        <Box sx={{ display: 'flex', gap: '2em' }}>
+          <Box>
+            <Typography></Typography>
+          </Box>
         </Box>
       </Box>
     </Box>

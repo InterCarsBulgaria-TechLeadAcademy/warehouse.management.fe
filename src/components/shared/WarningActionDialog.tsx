@@ -7,8 +7,8 @@ import DialogTitle from '@mui/material/DialogTitle'
 
 interface WarningActionDialogProps {
   open: boolean
-  title: string
-  content?: string
+  title?: string
+  content?: string | React.ReactElement
   discardText: string
   confirmText?: string
   onCloseDialog: () => void

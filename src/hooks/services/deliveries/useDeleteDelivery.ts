@@ -13,13 +13,13 @@ export default function useDeleteDelivery() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['deliveries'] })
       showSnackbar({
-        message: translate('deleetee'),
+        message: translate('deliveries.table.actions.delete.snackBar.success'),
         type: 'success'
       })
     },
     onError: () => {
       showSnackbar({
-        message: translate('probaaa'),
+        message: translate('deliveries.table.actions.delete.snackBar.error'),
         type: 'error'
       })
     }
