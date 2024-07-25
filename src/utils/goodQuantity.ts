@@ -1,9 +1,14 @@
+interface GoodItem {
+  goodQuantityStep3: string
+  goodTypeStep3: string
+}
+
 export default function goodQuantity(
-  array: any,
-  goodTypeStep: string,
-  goodQuantityStep: string,
-  currentGood: string
+  array: GoodItem[],
+  goodType: keyof GoodItem,
+  currentGood: string,
+  goodQuantity: keyof GoodItem
 ): number {
-  const good = array.find((good: any) => good[goodTypeStep] === currentGood)
-  return good ? Number(good[goodQuantityStep]) : 0
+  const good = array.find((good: GoodItem) => good[goodType] === currentGood)
+  return good ? Number(good[goodQuantity]) : 0
 }
