@@ -12,7 +12,6 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     const accessToken = getAccessToken();
-    console.log('Token from interceptor', accessToken);
     
     if (accessToken) {
       config.headers['Authorization'] = `Bearer ${accessToken}`;
@@ -31,7 +30,6 @@ axiosInstance.interceptors.response.use(
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       const refreshToken = getRefreshToken();
-      console.log('interceptor error', refreshToken);
 
       if (refreshToken) {
         try {
