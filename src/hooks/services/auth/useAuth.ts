@@ -5,6 +5,8 @@ import Cookies from 'js-cookie';
 
 
 export const setTokenCookies = (accessToken: any, refreshToken: any) => {
+  // TODO: Talk on later stage (when BE is ready) where to store tokens, also i they are in cookie
+  // to look for functionality if the cookie is expired!
   Cookies.set('accessToken', accessToken, { expires: 15 / 1440, secure: true, sameSite: 'Strict' }); // 15 minutes
   Cookies.set('refreshToken', refreshToken, { expires: 7, secure: true, sameSite: 'Strict' }); // 7 days
 };
