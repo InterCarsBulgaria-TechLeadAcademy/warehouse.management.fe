@@ -1,17 +1,20 @@
 import { useContext } from 'react';
 import { AuthContext } from '@/contexts/Auth'
+import axiosInstance from './axiosInstance';
 import Cookies from 'js-cookie';
 
 
-const setTokenCookies = (accessToken: any, refreshToken: any) => {
+export const setTokenCookies = (accessToken: any, refreshToken: any) => {
+  // TODO: Talk on later stage (when BE is ready) where to store tokens, also i they are in cookie
+  // to look for functionality if the cookie is expired!
   Cookies.set('accessToken', accessToken, { expires: 15 / 1440, secure: true, sameSite: 'Strict' }); // 15 minutes
   Cookies.set('refreshToken', refreshToken, { expires: 7, secure: true, sameSite: 'Strict' }); // 7 days
 };
 
-const getAccessToken = () => Cookies.get('accessToken');
-const getRefreshToken = () => Cookies.get('refreshToken');
+export const getAccessToken = () => Cookies.get('accessToken');
+export const getRefreshToken = () => Cookies.get('refreshToken');
 
-const removeTokens = () => {
+export const removeTokens = () => {
   Cookies.remove('accessToken');
   Cookies.remove('refreshToken');
 };
@@ -21,17 +24,13 @@ export const useAuth = () => {
 
   const loginUser = async () => {
     try {
-      const response = await fetch('https://dummyjson.com/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          username: 'emilys',
-          password: 'emilyspass',
-          expiresInMins: 1, // optional, defaults to 60
-        })
-      })
+      const response = await axiosInstance.post('/auth/login', {
+        username: 'emilys',
+        password: 'emilyspass',
+        expiresInMins: 1, // optional, defaults to 60
+      });
 
-      const data = await response.json()
+      const data = await response.data
       setTokenCookies(data.token, data.refreshToken)
       const requestedUser = await getUserFromCookies()
       // requestedUser.role = 'regular' // Uncomment it to change role..
@@ -54,15 +53,8 @@ export const useAuth = () => {
     }
 
     try {
-      const response = await fetch('https://dummyjson.com/auth/me', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-        },
-      })
-
-      const requestedUser = await response.json()
-      return requestedUser;
+      const response = await axiosInstance.get('/auth/me');
+      return response.data;
 
     } catch (error: any) {
       if (error.response && error.response.status === 401) {
