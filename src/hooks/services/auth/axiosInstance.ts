@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { getAccessToken, getRefreshToken, setTokenCookies, removeTokens } from './useAuth';
 
-
+// TODO: replace this instance with our one!
 const axiosInstance = axios.create({
-  baseURL: 'https://dummyjson.com', // Base URL for your API
+  baseURL: 'https://dummyjson.com', 
   headers: {
     'Content-Type': 'application/json',
   },
