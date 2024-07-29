@@ -3727,6 +3727,10 @@
             "format": "date-time",
             "nullable": true
           },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
           "pallets": {
             "type": "integer",
             "format": "int32"
@@ -3955,6 +3959,10 @@
             "type": "string",
             "nullable": true
           },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
           "zone": {
             "type": "string",
             "nullable": true
@@ -4069,6 +4077,10 @@
           "name": {
             "type": "string",
             "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false
@@ -4113,6 +4125,10 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
           },
           "zone": {
             "$ref": "#/components/schemas/ZoneDto"
@@ -4240,6 +4256,10 @@
           "name": {
             "type": "string",
             "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
           },
           "deliveries": {
             "type": "array",
@@ -4371,6 +4391,10 @@
             "type": "string",
             "nullable": true
           },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
           "markers": {
             "type": "array",
             "items": {
@@ -4460,6 +4484,10 @@
           },
           "isFinal": {
             "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
           },
           "markers": {
             "type": "array",
