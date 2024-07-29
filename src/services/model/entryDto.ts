@@ -7,6 +7,7 @@
 import type { ZoneDto } from './zoneDto'
 
 export interface EntryDto {
+  createdAt?: string
   deliveryId?: number
   /** @nullable */
   finishedProccessing?: string | null

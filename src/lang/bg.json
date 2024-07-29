@@ -303,7 +303,7 @@
         "markers": "Маркери",
         "status": "Статус",
         "approvedOn": "Одобрена на",
-        "createdOn": "Създадена на",
+        "createdAt": "Създадена на",
          "actions": "Действия"
       },
       "rows": {

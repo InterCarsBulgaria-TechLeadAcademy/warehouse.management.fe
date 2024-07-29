@@ -14,6 +14,7 @@ export interface DifferenceDto {
   /** @nullable */
   comment?: string | null
   count?: number
+  createdAt?: string
   /** @nullable */
   deliverySystemNumber?: string | null
   id?: number

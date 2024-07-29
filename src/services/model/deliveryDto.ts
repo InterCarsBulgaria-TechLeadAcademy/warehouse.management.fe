@@ -12,6 +12,7 @@ export interface DeliveryDto {
   approvedOn?: string | null
   /** @nullable */
   cmr?: string | null
+  createdAt?: string
   deliveryTime?: string
   /** @nullable */
   entries?: EntryDto[] | null

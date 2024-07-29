@@ -9,6 +9,7 @@ import type { ZoneMarkerDto } from './zoneMarkerDto'
 import type { ZoneVendorDto } from './zoneVendorDto'
 
 export interface ZoneDto {
+  createdAt?: string
   /** @nullable */
   entries?: ZoneEntryDto[] | null
   id?: number

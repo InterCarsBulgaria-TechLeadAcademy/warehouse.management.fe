@@ -29,7 +29,7 @@ interface Row {
   markers: React.ReactNode
   status: React.ReactNode
   approvedOn: string
-  createdOn: string
+  createdAt: string
   actions: React.ReactNode
 }
 
@@ -64,8 +64,6 @@ export default function DeliveriesTable() {
   //     quantity: 3
   //   }
   // ]
-
-  console.log(deliveries)
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
@@ -102,7 +100,7 @@ export default function DeliveriesTable() {
     { key: 'markers', title: translate('deliveries.table.columns.markers') },
     { key: 'status', title: translate('deliveries.table.columns.status') },
     { key: 'approvedOn', title: translate('deliveries.table.columns.approvedOn') },
-    { key: 'createdOn', title: translate('deliveries.table.columns.createdOn') },
+    { key: 'createdAt', title: translate('deliveries.table.columns.createdAt') },
     {
       key: 'actions',
       title: translate('deliveries.table.columns.actions'),
@@ -143,9 +141,8 @@ export default function DeliveriesTable() {
           <ChipsList items={delivery.markers!.map((marker) => marker.markerName!)} />
         ),
       status: <ChipsList items={[delivery.status!]} />,
-      approvedOn: delivery.approvedOn!,
-      // да го оправя след като БЕ го оправят и да изтрия dateHelpers util
-      createdOn: dateHelpers('2024-07-04T10:06:12.594Z'),
+      approvedOn: dateHelpers(delivery.approvedOn!),
+      createdAt: dateHelpers(delivery.createdAt!),
       actions: <DeliveriesTableActionsMenu deliveryId={delivery.id!} />
     }))
   }
@@ -164,6 +161,7 @@ export default function DeliveriesTable() {
       rowData={filteredRows}
       page={page}
       rowsPerPage={rowsPerPage}
+      rowsCount={deliveries.count}
       onPageChange={onPageChange}
       onRowsPerPageChange={onRowsPerPageChange}>
       <SearchInput
