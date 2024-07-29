@@ -29,7 +29,7 @@ export default function DeliveryDetails({ deliveryId }: DeliveryDetailsProps) {
     return <FullPageLoader />
   }
 
-  console.log(deliveryData)
+  // console.log(deliveryData)
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2em' }}>

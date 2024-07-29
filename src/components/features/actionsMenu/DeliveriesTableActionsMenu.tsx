@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import TableActionsMenu from './TableActionsMenu'
 import DeliveryDetails from '../DeliveryDetails'
 import useDeleteDelivery from '@/hooks/services/deliveries/useDeleteDelivery'
+import { Typography } from '@mui/material'
 
 interface DeliveriesTableActionsMenuProps {
   deliveryId: number

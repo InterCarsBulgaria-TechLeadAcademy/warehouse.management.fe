@@ -1,4 +1,4 @@
-import { Button } from '@mui/material'
+import { Box, Button } from '@mui/material'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
@@ -34,7 +34,7 @@ export default function WarningActionDialog({
       aria-describedby="alert-dialog-description">
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogContent>
-        <DialogContentText id="alert-dialog-description">{content}</DialogContentText>
+        <Box id="alert-dialog-description">{content}</Box>
       </DialogContent>
       <DialogActions>
         <Button onClick={onDiscardClick}>{discardText}</Button>
