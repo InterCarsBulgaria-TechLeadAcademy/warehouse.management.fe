@@ -1,10 +1,9 @@
 import React from 'react'
-import WarningActionDialog from '../../shared/WarningActionDialog'
 import { useTranslation } from 'react-i18next'
 import TableActionsMenu from './TableActionsMenu'
 import DeliveryDetails from '../DeliveryDetails'
 import useDeleteDelivery from '@/hooks/services/deliveries/useDeleteDelivery'
-import { Typography } from '@mui/material'
+import InfoDialog from '../../shared/InfoDialog'
 
 interface DeliveriesTableActionsMenuProps {
   deliveryId: number
@@ -45,7 +44,7 @@ export default function DeliveriesTableActionsMenu({
       <TableActionsMenu specificOptionHandler={actionHandler} options={options} />
 
       {selectedOption === 'details' && (
-        <WarningActionDialog
+        <InfoDialog
           open={true}
           content={<DeliveryDetails deliveryId={deliveryId} />}
           discardText={translate('deliveries.table.actions.details.labels.exit')}
@@ -56,7 +55,7 @@ export default function DeliveriesTableActionsMenu({
 
       {/* TODO: Only admin action */}
       {selectedOption === 'delete' && (
-        <WarningActionDialog
+        <InfoDialog
           open={true}
           title={translate('deliveries.table.actions.delete.title')}
           content={translate('deliveries.table.actions.delete.message')}

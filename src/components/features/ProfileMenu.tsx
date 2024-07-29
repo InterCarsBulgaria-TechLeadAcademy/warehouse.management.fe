@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import { Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import WarningActionDialog from '../shared/WarningActionDialog'
+import InfoDialog from '../shared/InfoDialog'
 
 export default function ProfileMenu() {
   const { t: translate } = useTranslation()
@@ -65,7 +65,7 @@ export default function ProfileMenu() {
         </MenuItem>
       </Menu>
 
-      <WarningActionDialog
+      <InfoDialog
         open={dialogOpen}
         title={translate('menu.profileMenu.title')}
         content={translate('menu.profileMenu.message')}

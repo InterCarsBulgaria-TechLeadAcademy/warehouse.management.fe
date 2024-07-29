@@ -2,10 +2,9 @@ import { Box, Button } from '@mui/material'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 
-interface WarningActionDialogProps {
+interface InfoDialogProps {
   open: boolean
   title?: string
   content?: string | React.ReactElement
@@ -16,7 +15,7 @@ interface WarningActionDialogProps {
   onConfirmClick?: () => void
 }
 
-export default function WarningActionDialog({
+export default function InfoDialog({
   open,
   title,
   content,
@@ -25,7 +24,7 @@ export default function WarningActionDialog({
   onCloseDialog,
   onDiscardClick,
   onConfirmClick
-}: WarningActionDialogProps) {
+}: InfoDialogProps) {
   return (
     <Dialog
       open={open}
