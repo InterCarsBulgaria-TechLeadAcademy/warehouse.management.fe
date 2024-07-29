@@ -634,10 +634,10 @@
     },
     "table": {
       "columns": {
-        "entryNumber": "Запис №",
+        "number": "Запис №",
         "vendorName": "Доставчик",
-        "receptionNumbers": "Рецепция №",
-        "numberOfGoods": "Количество",
+        "receptionNumber": "Рецепция №",
+        "goodNumber": "Стока №",
         "status": "Статус",
         "actions": "Действия"
       },

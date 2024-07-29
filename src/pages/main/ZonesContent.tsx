@@ -6,12 +6,10 @@ export default function ZonesContent() {
   const { t: translate } = useTranslation()
 
   return (
-    <>
-      <SkeletonPage
-        header={translate('zonesContent.title')}
-        description={translate('zonesContent.description')}
-        table={<ZonesContentsTable />}
-      />
-    </>
+    <SkeletonPage
+      header={translate('zonesContent.title')}
+      description={translate('zonesContent.description')}
+      table={<ZonesContentsTable />}
+    />
   )
 }

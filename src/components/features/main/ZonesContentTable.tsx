@@ -12,14 +12,14 @@ import {
 import MoveEntryForm from '../forms/MoveEntryForm'
 import TableActionsMenu from '../actionsMenu/TableActionsMenu'
 import ZonesContentTableActionsMenu from '../actionsMenu/ZonesContentActionsMenu'
-import useGetEntries from '@/hooks/services/entry/useGetEntries'
 import { EntryDto } from '@/services/model'
+import useGetEntries from '@/hooks/services/entries/useGetEntries'
 
 interface Row {
-  entryNumber: number
+  number: number
   vendorName: string
-  receptionNumbers: number
-  quantity: number
+  receptionNumber: number
+  goodNumber: number
   status: string
   actions: React.ReactNode
 }
@@ -29,7 +29,7 @@ export default function ZonesContentTable() {
   const [searchTerm, setSearchTerm] = React.useState('')
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
-  const entries = useGetEntries()
+  const entries = useGetEntries(page, rowsPerPage, searchTerm)
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
@@ -45,9 +45,10 @@ export default function ZonesContentTable() {
   }
 
   const columnsData: Column<Row>[] = [
-    { key: 'entryNumber', title: translate('zonesContent.table.columns.entryNumber') },
-    { key: 'receptionNumbers', title: translate('zonesContent.table.columns.receptionNumbers') },
-    { key: 'quantity', title: translate('zonesContent.table.columns.numberOfGoods') },
+    { key: 'number', title: translate('zonesContent.table.columns.number') },
+    { key: 'vendorName', title: translate('zonesContent.table.columns.number') },
+    { key: 'receptionNumber', title: translate('zonesContent.table.columns.receptionNumber') },
+    { key: 'goodNumber', title: translate('zonesContent.table.columns.goodNumber') },
     { key: 'status', title: translate('zonesContent.table.columns.status') },
     {
       key: 'actions',
@@ -57,81 +58,26 @@ export default function ZonesContentTable() {
     }
   ]
 
+  console.log(entries)
+
   // function transformDataToRows(entries: EntryDto[]): Row[] {
   //   return entries.map((entry: EntryDto) => ({
   //     id: entry.id!,
-
-  //     actions: <MarkersTableActionsMenu key={marker.id} marker={marker} />
+  //     number: entry.id!,
+  //     vendorName: entry.vendorName,
+  //     receptionNumber: entry.receptionNumber,
+  //     goodNumber: entry.goodNumber
+  //     actions: <ZonesContentTableActionsMenu key={entry.id} zoneContent={entries} />
   //   }))
   // }
 
-  const rowData = transformDataToRows(entries || [])
+  // const rowData = transformDataToRows(entries.results! || [])
 
   const filteredRows = rowData.filter((row: Row) => {
     return columnsData.some((column: Column<Row>) => {
       return row[column.key]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
     })
   })
-
-  // const rowData: Row[] = [
-  //   {
-  //     entryNumber: 1,
-  //     vendorName: 'truck',
-  //     receptionNumbers: 12,
-  //     quantity: 33,
-  //     status: 'finished'
-  //     // actions:
-  //   },
-  //   {
-  //     entryNumber: 2,
-  //     vendorName: 'truck',
-  //     receptionNumbers: 11,
-  //     quantity: 52,
-  //     status: 'processing'
-  //     // actions:
-  //   }
-  // ]
-
-  // const tableRowDataWithActions = rowData.map((row) => {
-  //   return {
-  //     ...row,
-  //     actions: (
-  //       <TableActionsMenu
-  //         specificOptionHandler={(action: string) => onOpenMoveEntryDialog(action, row.quantity)}
-  //         options={[
-  //           {
-  //             title: `zonesContent.table.actionsMenu.${ZonesTableActions.MoveToNewZone}`,
-  //             value: ZonesTableActions.MoveToNewZone
-  //           },
-  //           {
-  //             title: `zonesContent.table.actionsMenu.${ZonesTableActions.StartProcessing}`,
-  //             value: ZonesTableActions.StartProcessing
-  //           },
-  //           {
-  //             title: `zonesContent.table.actionsMenu.${ZonesTableActions.FinishProcessing}`,
-  //             value: ZonesTableActions.FinishProcessing
-  //           },
-  //           {
-  //             title: `zonesContent.table.actionsMenu.${ZonesTableActions.DeliveryDetails}`,
-  //             value: ZonesTableActions.DeliveryDetails
-  //           }
-  //         ]}
-  //       />
-  //     )
-  //   }
-  // })
-
-  // const filteredRows = tableRowDataWithActions.filter((row: Row) => {
-  //   if (toggleOn) {
-  //     return columnsData.some((column: Column<Row>) => {
-  //       return row[column.key]?.toString().toLowerCase().includes('finished')
-  //     })
-  //   } else {
-  //     return columnsData.some((column) => {
-  //       return row[column.key]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
-  //     })
-  //   }
-  // })
 
   return (
     <DataTable
