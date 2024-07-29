@@ -16,6 +16,7 @@ interface DataTableProps<T> {
   rowData: T[]
   page: number
   rowsPerPage: number
+  rowsCount?: number
   onPageChange: (newPage: number) => void
   onRowsPerPageChange: (newRowsPerPage: number) => void
   children: React.ReactNode
@@ -26,6 +27,7 @@ export default function DataTable<T>({
   rowData,
   page,
   rowsPerPage,
+  rowsCount,
   onPageChange,
   onRowsPerPageChange,
   children
@@ -71,32 +73,33 @@ export default function DataTable<T>({
               </TableRow>
             </TableHead>
             <TableBody>
-              {rowData
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row: any) => {
-                  return (
-                    <TableRow key={row.id} hover role="checkbox" tabIndex={-1}>
-                      {columns.map((column) => {
-                        const value = row[column.key]
-                        return (
-                          <TableCell
-                            key={column.key}
-                            align={column.align}
-                            sx={column.key === 'actions' ? { width: 50, paddingRight: '2em' } : {}}>
-                            {value}
-                          </TableCell>
-                        )
-                      })}
-                    </TableRow>
-                  )
-                })}
+              {(rowsCount
+                ? rowData
+                : rowData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              ).map((row: any) => {
+                return (
+                  <TableRow key={row.id} hover role="checkbox" tabIndex={-1}>
+                    {columns.map((column) => {
+                      const value = row[column.key]
+                      return (
+                        <TableCell
+                          key={column.key}
+                          align={column.align}
+                          sx={column.key === 'actions' ? { width: 50, paddingRight: '2em' } : {}}>
+                          {value}
+                        </TableCell>
+                      )
+                    })}
+                  </TableRow>
+                )
+              })}
             </TableBody>
           </Table>
         </TableContainer>
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={rowData.length}
+          count={rowsCount ? rowsCount : rowData.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

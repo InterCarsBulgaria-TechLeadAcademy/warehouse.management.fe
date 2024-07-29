@@ -3,27 +3,24 @@ import { getWarehouseManagementApi } from '@/services/generated-api'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 
-export default function usePostDelivery() {
+export default function useGetDeliveryHistory() {
   const { t: translate } = useTranslation()
   const { showSnackbar } = useSnackbar()
   const queryClient = useQueryClient()
 
-  const mutationPost = useMutation({
-    mutationFn: getWarehouseManagementApi().postApiDeliveryAdd,
+  const mutation = useMutation({
+    mutationFn: ({ id }: { id: number }) => getWarehouseManagementApi().getApiDeliveryHistoryId(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['deliveries'] })
-      showSnackbar({
-        message: translate('deliveries.newDelivery.snackBar.success'),
-        type: 'success'
-      })
     },
     onError: () => {
+      // TODO: translate da opravq
       showSnackbar({
-        message: translate('deliveries.newDelivery.snackBar.error'),
+        message: translate('snackBar.messages.markers.updateMarker.error'),
         type: 'error'
       })
     }
   })
 
-  return mutationPost
+  return mutation
 }

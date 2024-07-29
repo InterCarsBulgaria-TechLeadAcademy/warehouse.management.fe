@@ -1,17 +1,21 @@
+import useChipLabel from '@/hooks/useChipLabel'
 import { useIsSmallScreen } from '@/hooks/useIsSmallScreen'
+import { StatusType } from '@/types/StatusType'
+import selectStatusColor from '@/utils/selectStatusColor'
 import { Box, Chip, ClickAwayListener, Grid, Typography } from '@mui/material'
 import Tooltip from '@mui/material/Tooltip'
 import * as React from 'react'
 
 interface MarkersProps {
   items: string[]
-  color?: 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning'
 }
 
-export default function ChipsList({ items, color }: MarkersProps) {
+export default function ChipsList({ items }: MarkersProps) {
   const isSmallScreen = useIsSmallScreen()
-
   const [open, setOpen] = React.useState(false)
+
+  const color = selectStatusColor(items[0] as StatusType)
+  const chipLabel = `+ ${items.slice(2).length}`
 
   const handleTooltipClose = () => {
     setOpen(false)
@@ -21,11 +25,10 @@ export default function ChipsList({ items, color }: MarkersProps) {
     setOpen(true)
   }
 
-  const chipLabel = `+ ${items.slice(2).length}`
   return (
     <Box sx={{ display: 'flex', gap: '0.5em' }}>
       {items.slice(0, 2).map((item, index) => (
-        <Chip key={index} label={item} color={color ? color : 'primary'} />
+        <Chip key={index} label={useChipLabel(item)} color={color} />
       ))}
 
       {items.length > 2 && !isSmallScreen && (
@@ -40,7 +43,7 @@ export default function ChipsList({ items, color }: MarkersProps) {
             </Box>
           }
           arrow>
-          <Chip label={chipLabel} color="primary" />
+          <Chip label={chipLabel} color={color} />
         </Tooltip>
       )}
 
@@ -66,7 +69,7 @@ export default function ChipsList({ items, color }: MarkersProps) {
                     ))}
                   </Box>
                 }>
-                <Chip label={chipLabel} color="primary" onClick={handleTooltipOpen} />
+                <Chip label={chipLabel} color={color} onClick={handleTooltipOpen} />
               </Tooltip>
             </div>
           </ClickAwayListener>

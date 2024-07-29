@@ -4,14 +4,14 @@ import { useTranslation } from 'react-i18next'
 import { Autocomplete, Box, TextField, Typography } from '@mui/material'
 import SearchInput from '../SearchInput'
 import ChipsList from '../ChipsList'
-import { GoodType } from '../forms/newDeliveryForm/NewDeliveryStep3Form'
+// import { GoodType } from '../forms/newDeliveryForm/NewDeliveryStep3Form'
 import DeliveriesTableActionsMenu from '../actionsMenu/DeliveriesTableActionsMenu'
 import { Dayjs } from 'dayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import InfoPopper from '../InfoPoper'
-import DeliveryGoodsInfo from '../DeliveryGoodsInfo'
+// import InfoPopper from '../InfoPoper'
+// import DeliveryGoodsInfo from '../DeliveryGoodsInfo'
 import dateHelpers from '@/utils/dateHelpers'
 import useGetDeliveries from '@/hooks/services/deliveries/useGetDeliveries'
 import { DeliveryDto } from '@/services/model'
@@ -22,14 +22,14 @@ import useGetVendors from '@/hooks/services/vendors/useGetVendors'
 interface Row {
   number: number
   vendorName: string
-  deliveryNumber: number
-  receptionNumber: number
+  systemNumber: string
+  receptionNumber: string
   waitingGoods: React.ReactNode
   completedGoods: React.ReactNode
   markers: React.ReactNode
   status: React.ReactNode
   approvedOn: string
-  createdOn: string
+  createdAt: string
   actions: React.ReactNode
 }
 
@@ -41,29 +41,29 @@ export default function DeliveriesTable() {
   const [deliveryStartTime, setDeliveryStartTime] = React.useState<Dayjs | null>(null)
   const [deliveryEndTime, setDeliveryEndTime] = React.useState<Dayjs | null>(null)
   const markers = useGetMarkers()
-  const deliveries = useGetDeliveries()
   const vendors = useGetVendors()
+  const deliveries = useGetDeliveries(page, rowsPerPage, searchTerm)
 
   const markersName = markers.map((marker) => marker.name!)
   const vendorsName = vendors.map((vendor) => vendor.name!)
 
-  const goodTypes = [
-    {
-      title: translate('deliveries.newDelivery.goodType.pallets'),
-      value: GoodType.pallets,
-      quantity: 1
-    },
-    {
-      title: translate('deliveries.newDelivery.goodType.packages'),
-      value: GoodType.packages,
-      quantity: 2
-    },
-    {
-      title: translate('deliveries.newDelivery.goodType.pieces'),
-      value: GoodType.pieces,
-      quantity: 3
-    }
-  ]
+  // const goodTypes = [
+  //   {
+  //     title: translate('deliveries.newDelivery.goodType.pallets'),
+  //     value: GoodType.pallets,
+  //     quantity: 1
+  //   },
+  //   {
+  //     title: translate('deliveries.newDelivery.goodType.packages'),
+  //     value: GoodType.packages,
+  //     quantity: 2
+  //   },
+  //   {
+  //     title: translate('deliveries.newDelivery.goodType.pieces'),
+  //     value: GoodType.pieces,
+  //     quantity: 3
+  //   }
+  // ]
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
@@ -82,7 +82,7 @@ export default function DeliveriesTable() {
     { key: 'number', title: translate('deliveries.table.columns.number') },
     { key: 'vendorName', title: translate('deliveries.table.columns.vendorName') },
     {
-      key: 'deliveryNumber',
+      key: 'systemNumber',
       title: translate('deliveries.table.columns.deliveryNumber')
     },
     {
@@ -100,7 +100,7 @@ export default function DeliveriesTable() {
     { key: 'markers', title: translate('deliveries.table.columns.markers') },
     { key: 'status', title: translate('deliveries.table.columns.status') },
     { key: 'approvedOn', title: translate('deliveries.table.columns.approvedOn') },
-    { key: 'createdOn', title: translate('deliveries.table.columns.createdOn') },
+    { key: 'createdAt', title: translate('deliveries.table.columns.createdAt') },
     {
       key: 'actions',
       title: translate('deliveries.table.columns.actions'),
@@ -109,150 +109,45 @@ export default function DeliveriesTable() {
     }
   ]
 
-  // function transformDataToRows(deliveries: DeliveryDto[]): Row[] {
-  //   return deliveries.map((delivery: DeliveryDto) => ({
-  //     id: delivery.id!,
-  //     vendorName: delivery.vendorName,
-  //     deliveryNumber: delivery.systemNumber,
-  //     receptionNumber: delivery.receptionNumber,
-  //     waitingGoods: (
-  //       <Box sx={{ display: 'flex', alignItems: 'center' }}>
-  //         <Typography>1</Typography>
-  //         <InfoPopper>
-  //           <DeliveryGoodsInfo goodTypes={goodTypes} />
-  //         </InfoPopper>
-  //       </Box>
-  //     ),
-  //     completedGoods: (
-  //       <Box sx={{ display: 'flex', alignItems: 'center' }}>
-  //         <Typography>1</Typography>
-  //         <InfoPopper>
-  //           <DeliveryGoodsInfo goodTypes={goodTypes} />
-  //         </InfoPopper>
-  //       </Box>
-  //     ),
-  //     markers: <ChipsList items={markersName} />,
-  //     // status: <ChipsList items={['Изчакване']} color="default" />,
-  //     status: <ChipsList items={[delivery.status!]} color="default" />,
-  //     approvedOn: dateHelpers('2024-07-04T10:06:12.594Z'),
-  //     createdOn: dateHelpers('2024-07-04T10:06:12.594Z'),
-  //     actions: <DeliveriesTableActionsMenu />
-  //   }))
-  // }
+  function transformDataToRows(deliveries: DeliveryDto[]): Row[] {
+    return deliveries.map((delivery: DeliveryDto) => ({
+      id: delivery.id!,
+      number: delivery.id!,
+      vendorName: delivery.vendorName!,
+      systemNumber: delivery.systemNumber!,
+      receptionNumber: delivery.receptionNumber!,
+      waitingGoods: (
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography>{delivery.entriesWaitingProcessing!}</Typography>
+          {/* TODO: БЕ трябва да го направят като функционалност 
+          <InfoPopper>
+            <DeliveryGoodsInfo goodTypes={goodTypes} /> 
+          </InfoPopper> */}
+        </Box>
+      ),
+      completedGoods: (
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography>{delivery.entriesFinishedProcessing}</Typography>
+          {/* TODO: БЕ трябва да го направят като функционалност
+          <InfoPopper>
+            <DeliveryGoodsInfo goodTypes={goodTypes} />
+          </InfoPopper> */}
+        </Box>
+      ),
+      markers:
+        delivery.markers!.length === 0 ? (
+          <Typography>-</Typography>
+        ) : (
+          <ChipsList items={delivery.markers!.map((marker) => marker.markerName!)} />
+        ),
+      status: <ChipsList items={[delivery.status!]} />,
+      approvedOn: dateHelpers(delivery.approvedOn!),
+      createdAt: dateHelpers(delivery.createdAt!),
+      actions: <DeliveriesTableActionsMenu deliveryId={delivery.id!} />
+    }))
+  }
 
-  // console.log(deliveries)
-  // const rowData = transformDataToRows(deliveries || [])
-
-  const rowData: Row[] = [
-    {
-      number: 1,
-      vendorName: 'Bosch',
-      deliveryNumber: 1,
-      receptionNumber: 1,
-      waitingGoods: (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography>1</Typography>
-          <InfoPopper>
-            <DeliveryGoodsInfo goodTypes={goodTypes} />
-          </InfoPopper>
-        </Box>
-      ),
-      completedGoods: (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography>1</Typography>
-          <InfoPopper>
-            <DeliveryGoodsInfo goodTypes={goodTypes} />
-          </InfoPopper>
-        </Box>
-      ),
-      markers: <ChipsList items={markersName} />,
-      status: <ChipsList items={['Изчакване']} color="default" />,
-      approvedOn: dateHelpers('2024-07-04T10:06:12.594Z'),
-      createdOn: dateHelpers('2024-07-04T10:06:12.594Z'),
-      actions: <DeliveriesTableActionsMenu />
-    },
-    {
-      number: 2,
-      vendorName: 'Valeo',
-      deliveryNumber: 2,
-      receptionNumber: 2,
-      waitingGoods: (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography>2</Typography>
-          <InfoPopper>
-            <DeliveryGoodsInfo goodTypes={goodTypes} />
-          </InfoPopper>
-        </Box>
-      ),
-      completedGoods: (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography>1</Typography>
-          <InfoPopper>
-            <DeliveryGoodsInfo goodTypes={goodTypes} />
-          </InfoPopper>
-        </Box>
-      ),
-      markers: <ChipsList items={markersName} />,
-      status: <ChipsList items={['Обработва се']} color="warning" />,
-      approvedOn: dateHelpers('2024-07-04T10:06:12.594Z'),
-      createdOn: dateHelpers('2024-07-04T10:06:12.594Z'),
-      actions: <DeliveriesTableActionsMenu />
-    },
-    {
-      number: 3,
-      vendorName: 'Dunlop',
-      deliveryNumber: 3,
-      receptionNumber: 3,
-      waitingGoods: (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography>3</Typography>
-          <InfoPopper>
-            <DeliveryGoodsInfo goodTypes={goodTypes} />
-          </InfoPopper>
-        </Box>
-      ),
-      completedGoods: (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography>1</Typography>
-          <InfoPopper>
-            <DeliveryGoodsInfo goodTypes={goodTypes} />
-          </InfoPopper>
-        </Box>
-      ),
-      markers: <ChipsList items={markersName} />,
-      status: <ChipsList items={['Одобрена']} color="success" />,
-      approvedOn: dateHelpers('2024-07-04T10:06:12.594Z'),
-      createdOn: dateHelpers('2024-07-04T10:06:12.594Z'),
-      actions: <DeliveriesTableActionsMenu />
-    },
-    {
-      number: 4,
-      vendorName: 'Michelin',
-      deliveryNumber: 4,
-      receptionNumber: 4,
-      waitingGoods: (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography>4</Typography>
-          <InfoPopper>
-            <DeliveryGoodsInfo goodTypes={goodTypes} />
-          </InfoPopper>
-        </Box>
-      ),
-      completedGoods: (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography>1</Typography>
-          <InfoPopper>
-            <DeliveryGoodsInfo goodTypes={goodTypes} />
-          </InfoPopper>
-        </Box>
-      ),
-      markers: <ChipsList items={markersName} />,
-      status: <ChipsList items={['Приключена']} color="info" />,
-      approvedOn: dateHelpers('2024-07-04T10:06:12.594Z'),
-      createdOn: dateHelpers('2024-07-04T10:06:12.594Z'),
-      actions: <DeliveriesTableActionsMenu />
-    }
-  ]
+  const rowData = transformDataToRows(deliveries.results! || [])
 
   const filteredRows = rowData.filter((row: any) => {
     return columnsData.some((column) => {
@@ -266,6 +161,7 @@ export default function DeliveriesTable() {
       rowData={filteredRows}
       page={page}
       rowsPerPage={rowsPerPage}
+      rowsCount={deliveries.count}
       onPageChange={onPageChange}
       onRowsPerPageChange={onRowsPerPageChange}>
       <SearchInput

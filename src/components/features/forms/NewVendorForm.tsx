@@ -80,7 +80,6 @@ export default function NewVendorForm({
             </InputLabel>
             <Select
               {...field}
-              label={translate('vendors.newVendor.labels.markers')}
               labelId="demo-multiple-markers-label"
               id="demo-multiple-markers"
               multiple
@@ -100,7 +99,7 @@ export default function NewVendorForm({
                 return selectedMarkerNames
               }}>
               {markers.map((marker: MarkerDto) => (
-                <MenuItem key={marker.id} value={marker.id?.toString()}>
+                <MenuItem key={marker.id} value={marker.id}>
                   <Checkbox checked={field.value?.includes(marker.id!.toString())} />
                   <ListItemText primary={marker.name} />
                 </MenuItem>

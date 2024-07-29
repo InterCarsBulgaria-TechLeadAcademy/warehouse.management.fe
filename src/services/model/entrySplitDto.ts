@@ -5,9 +5,7 @@
  * OpenAPI spec version: 1.0
  */
 
-export interface DifferenceTypeDto {
-  createdAt?: string
-  id?: number
-  /** @nullable */
-  name?: string | null
+export interface EntrySplitDto {
+  count?: number
+  newZoneId?: number
 }

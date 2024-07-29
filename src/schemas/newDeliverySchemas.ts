@@ -7,7 +7,7 @@ export const newDeliveryStep1Schema = yup.object({
   receptionNumber: yup
     .string()
     .required('deliveries.newDelivery.errors.step1.receptionNumber.required'),
-  cmrNumber: yup.string().required('deliveries.newDelivery.errors.step1.cmrNumber.required'),
+  cmr: yup.string().required('deliveries.newDelivery.errors.step1.cmrNumber.required'),
   markers: yup.array().of(yup.string())
 })
 
@@ -24,8 +24,8 @@ export const newDeliveryStep2Schema = yup
     truckNumber: yup.string().required('deliveries.newDelivery.errors.step2.truckNumber.required'),
     deliveryTime: yup
       .date()
-      .required('deliveries.newDelivery.errors.step2.deliveryDate.required')
-      .typeError('deliveries.newDelivery.errors.step2.deliveryDate.validDate')
+      .required('deliveries.newDelivery.errors.step2.deliveryTime.required')
+      .typeError('deliveries.newDelivery.errors.step2.deliveryTime.validDate')
   })
   .required()
 

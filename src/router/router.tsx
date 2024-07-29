@@ -25,6 +25,7 @@ const Markers = lazy(() => import('@/pages/admin/Markers.tsx'))
 const Deliveries = lazy(() => import('@/pages/main/Deliveries'))
 const ZonesContent = lazy(() => import('@/pages/main/ZonesContent'))
 const DifferenceType = lazy(() => import('@/pages/admin/DifferenceType'))
+const ErrorPage = lazy(() => import('@/pages/ErrorPage'))
 
 export default function Router() {
   return useRoutes([
@@ -83,6 +84,7 @@ export default function Router() {
           )
         }
       ]
-    }
+    },
+    { path: '*', element: <ErrorPage /> }
   ])
 }

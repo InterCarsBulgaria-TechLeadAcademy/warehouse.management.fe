@@ -5,9 +5,8 @@
  * OpenAPI spec version: 1.0
  */
 
-export interface DifferenceTypeDto {
-  createdAt?: string
-  id?: number
-  /** @nullable */
-  name?: string | null
+export type GetApiDifferenceAllWithDeletedParams = {
+  PageNumber?: number
+  PageSize?: number
+  SearchQuery?: string
 }

@@ -6,7 +6,7 @@
  */
 import type { EntryStatuses } from './entryStatuses'
 
-export type GetApiEntryAllParams = {
+export type GetApiEntryAllWithDeletedParams = {
   PageNumber?: number
   PageSize?: number
   SearchQuery?: string

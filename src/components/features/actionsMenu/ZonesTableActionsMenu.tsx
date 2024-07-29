@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import WarningActionDialog from '@/components/shared/WarningActionDialog'
+import WarningActionDialog from '@/components/shared/InfoDialog'
 import { ZoneDto } from '@/services/model'
 import { SubmitHandler } from 'react-hook-form'
 import { NewZoneFormData, newZoneSchema } from '@/schemas/newZoneSchema'

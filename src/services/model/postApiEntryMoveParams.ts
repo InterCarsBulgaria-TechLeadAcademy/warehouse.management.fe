@@ -5,9 +5,6 @@
  * OpenAPI spec version: 1.0
  */
 
-export interface DifferenceTypeDto {
-  createdAt?: string
+export type PostApiEntryMoveParams = {
   id?: number
-  /** @nullable */
-  name?: string | null
 }

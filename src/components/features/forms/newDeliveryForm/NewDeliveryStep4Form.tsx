@@ -92,7 +92,8 @@ export default function NewDeliveryStep4Form({
           control={control}
           errors={errors}
           goodTypes={goodTypes}
-          zones={zones.map((zone) => zone.name!)}
+          // zones={zones.map((zone) => zone.name!)}
+          zones={zones}
           index={index}
           formsCount={moveGoodsForms.length}
           onDeleteHandler={() => onDeleteHandler(index)}
