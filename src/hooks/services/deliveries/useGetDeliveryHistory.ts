@@ -1,26 +1,13 @@
-import { useSnackbar } from '@/hooks/useSnackbar'
 import { getWarehouseManagementApi } from '@/services/generated-api'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useTranslation } from 'react-i18next'
+import { useSuspenseQuery } from '@tanstack/react-query'
 
-export default function useGetDeliveryHistory() {
-  const { t: translate } = useTranslation()
-  const { showSnackbar } = useSnackbar()
-  const queryClient = useQueryClient()
-
-  const mutation = useMutation({
-    mutationFn: ({ id }: { id: number }) => getWarehouseManagementApi().getApiDeliveryHistoryId(id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['deliveries'] })
-    },
-    onError: () => {
-      // TODO: translate da opravq
-      showSnackbar({
-        message: translate('snackBar.messages.markers.updateMarker.error'),
-        type: 'error'
-      })
+export default function useGetDeliveryHistory(id: number) {
+  const { data } = useSuspenseQuery({
+    queryKey: ['deliveries', id], //add dependencies on deliveries
+    queryFn: () => {
+      return getWarehouseManagementApi().getApiDeliveryId(id)
     }
   })
 
-  return mutation
+  return data
 }

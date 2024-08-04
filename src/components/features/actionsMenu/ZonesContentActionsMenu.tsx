@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import WarningActionDialog from '@/components/shared/InfoDialog'
+import WarningActionDialog from '@/components/shared/WarningActionDialog'
 import { ZoneDto } from '@/services/model'
 import { SubmitHandler } from 'react-hook-form'
 import { NewZoneFormData, newZoneSchema } from '@/schemas/newZoneSchema'
@@ -11,14 +11,14 @@ import useDeleteZone from '@/hooks/services/zones/useDeleteZone'
 import useUpdateZone from '@/hooks/services/zones/useUpdateZone'
 
 interface ZonesTableActionsMenuProps {
-  zoneContent: ZoneDto
+  zone: ZoneDto
 }
 
-export default function ZonesTableActionsMenu({ zoneContent }: ZonesTableActionsMenuProps) {
+export default function ZonesContentTableActionsMenu({ zone }: ZonesTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
-  const mutationDelete = useDeleteZone(zoneContent.name!)
-  const mutationUpdate = useUpdateZone(zoneContent.name!)
+  const mutationDelete = useDeleteZone(zone.name!)
+  const mutationUpdate = useUpdateZone(zone.name!)
 
   const handleClose = () => {
     setSelectedOption(null)
@@ -33,7 +33,7 @@ export default function ZonesTableActionsMenu({ zoneContent }: ZonesTableActions
   }
 
   const onConfirmClick = () => {
-    mutationDelete.mutate(zoneContent.id!)
+    mutationDelete.mutate(zone.id!)
     handleClose()
   }
 
@@ -41,14 +41,14 @@ export default function ZonesTableActionsMenu({ zoneContent }: ZonesTableActions
   const handleSubmit: SubmitHandler<NewZoneFormData> = (data) => {
     const markerIds = data.markers!.map((marker) => Number(marker))
     mutationUpdate.mutate({
-      id: zoneContent.id!,
+      id: zone.id!,
       data: { name: data.zoneName, markerIds: markerIds, isFinal: data.isFinal }
     })
   }
 
   const options = [
-    { title: 'zones.table.actionsMenu.edit', value: 'edit' },
-    { title: 'zones.table.actionsMenu.delete', value: 'delete' }
+    { title: 'actionsMenu.options.edit', value: 'edit' },
+    { title: 'actionsMenu.options.delete', value: 'delete' }
   ]
 
   return (
@@ -58,9 +58,9 @@ export default function ZonesTableActionsMenu({ zoneContent }: ZonesTableActions
       {selectedOption === 'edit' && (
         <FormDialog<NewZoneFormData>
           open={true}
-          title={translate('zones.table.actions.edit.title')}
-          discardText={translate('zones.table.actions.edit.labels.exit')}
-          confirmText={translate('zones.table.actions.edit.labels.edit')}
+          title={translate('newZone.editZone.title')}
+          discardText={translate('newZone.editZone.labels.exit')}
+          confirmText={translate('newZone.editZone.labels.edit')}
           onCloseDialog={handleClose}
           schema={newZoneSchema}
           onSubmit={handleSubmit}
@@ -68,10 +68,9 @@ export default function ZonesTableActionsMenu({ zoneContent }: ZonesTableActions
             <NewZoneForm
               {...methods}
               defaultValues={{
-                name: zoneContent.name!,
-                markersIds:
-                  zoneContent.markers?.map((marker) => marker.markerId!) || ([] as number[]),
-                isFinal: zoneContent.isFinal
+                name: zone.name!,
+                markersIds: zone.markers?.map((marker) => marker.markerId!) || ([] as number[]),
+                isFinal: zone.isFinal
               }}
             />
           )}
@@ -81,10 +80,10 @@ export default function ZonesTableActionsMenu({ zoneContent }: ZonesTableActions
       {selectedOption === 'delete' && (
         <WarningActionDialog
           open={true}
-          title={translate('zones.table.actions.delete.title')}
-          content={translate('zones.table.actions.delete.message', { name: zoneContent.name })}
-          discardText={translate('zones.table.actions.delete.labels.discard')}
-          confirmText={translate('zones.table.actions.delete.labels.confirm')}
+          title={translate('deleteAction.zones.title')}
+          content={translate('deleteAction.zones.message', { name: zone.name })}
+          discardText={translate('deleteAction.zones.labels.discard')}
+          confirmText={translate('deleteAction.zones.labels.confirm')}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
           onConfirmClick={onConfirmClick}

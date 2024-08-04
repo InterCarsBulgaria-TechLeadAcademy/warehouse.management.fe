@@ -20,7 +20,7 @@ export interface NewDeliveryStep1FormData extends yup.InferType<typeof newDelive
 export const newDeliveryStep2Schema = yup
   .object({
     vendorName: yup.string().required('deliveries.newDelivery.errors.step2.vendorName.required'),
-    vendorId: yup.string().nullable(),
+    vendorId: yup.string().required('deliveries.newDelivery.errors.step2.vendorId.required'),
     truckNumber: yup.string().required('deliveries.newDelivery.errors.step2.truckNumber.required'),
     deliveryTime: yup
       .date()
@@ -31,7 +31,7 @@ export const newDeliveryStep2Schema = yup
 
 export interface NewDeliveryStep2FormData extends yup.InferType<typeof newDeliveryStep2Schema> {
   vendorName: string
-  vendorId: string | null
+  vendorId: string
   truckNumber: string
   deliveryTime: Date
 }
