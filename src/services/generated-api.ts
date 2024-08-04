@@ -31,6 +31,7 @@ import type {
   MarkerDto,
   MarkerFormDto,
   PaginationParameters,
+  PostApiDeliveryGenerateBarcodePdfParams,
   PostApiEntryMoveParams,
   PostApiEntrySplitParams,
   VendorDto,
@@ -126,6 +127,16 @@ export const getWarehouseManagementApi = () => {
   ) => {
     return customInstance<VendorDto[]>(
       { url: `/api/Delivery/Approve/${id}`, method: 'PUT' },
+      options
+    )
+  }
+
+  const postApiDeliveryGenerateBarcodePdf = (
+    params?: PostApiDeliveryGenerateBarcodePdfParams,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<void>(
+      { url: `/api/Delivery/GenerateBarcodePdf`, method: 'POST', params },
       options
     )
   }
@@ -637,6 +648,7 @@ export const getWarehouseManagementApi = () => {
     getApiDeliveryAllDeleted,
     getApiDeliveryHistoryId,
     putApiDeliveryApproveId,
+    postApiDeliveryGenerateBarcodePdf,
     getApiDifferenceAll,
     getApiDifferenceAllWithDeleted,
     getApiDifferenceId,
@@ -718,6 +730,11 @@ export type GetApiDeliveryHistoryIdResult = NonNullable<
 >
 export type PutApiDeliveryApproveIdResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['putApiDeliveryApproveId']>>
+>
+export type PostApiDeliveryGenerateBarcodePdfResult = NonNullable<
+  Awaited<
+    ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiDeliveryGenerateBarcodePdf']>
+  >
 >
 export type GetApiDifferenceAllResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiDifferenceAll']>>
