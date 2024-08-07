@@ -26,7 +26,7 @@ export default function Users() {
 
   return (
     <>
-    <h1>USERS</h1>
+      <h1>USERS</h1>
       <SkeletonPage
         // TODO: Add corect translation! Discuss it with Boyadzhiev.
         header={translate('Потребители')}
