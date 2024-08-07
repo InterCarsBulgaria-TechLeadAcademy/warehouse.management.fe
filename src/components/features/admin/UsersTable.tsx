@@ -5,7 +5,7 @@ import SearchInput from '../SearchInput'
 import { Autocomplete, TextField, Typography } from '@mui/material'
 import { Column } from '@/interfaces/Column.ts'
 import ChipsList from '../ChipsList'
-import useGetUsers from '@/hooks/services/vendors/useGetUsers'
+import useGetUsers from '@/hooks/services/users/useGetUsers'
 import UsersTableActionsMenu from '../actionsMenu/UsersTableActionsMenu'
 
 interface Row {
