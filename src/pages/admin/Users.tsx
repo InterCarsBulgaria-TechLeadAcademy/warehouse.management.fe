@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import FormDialog from '@/components/shared/FormDialog'
 import { SubmitHandler } from 'react-hook-form'
+import { NewUserFormData } from '@/schemas/newUserSchema'
 // import UsersTable from '@/components/features/main/UsersTable'
 // import { NewUserFormData, newUserSchema } from '@/schemas/newUserSchema'
 // import NewUserForm from '@/components/features/forms/NewUserForm'
@@ -19,15 +20,15 @@ export default function Users() {
     setOpenDialog(false)
   }
 
-//   const handleSubmit: SubmitHandler<NewUserFormData> = (data) => {
-//     console.log(data)
-//     onCloseDialog()
-//   }
+  const handleSubmit: SubmitHandler<NewUserFormData> = (data) => {
+    console.log(data)
+    onCloseDialog()
+  }
 
   return (
     <>
     <h1>USERS</h1>
-      {/* <SkeletonPage
+      <SkeletonPage
         // TODO: Add corect translation! Discuss it with Boyadzhiev.
         header={translate('Потребители')}
         description={translate('Управление на потребители')}
@@ -36,7 +37,7 @@ export default function Users() {
         table={<UsersTable />}
       />
 
-      <FormDialog<NewUserFormData>
+      {/* <FormDialog<NewUserFormData>
         open={openDialog}
         title={translate('Създаване на нов потребител')}
         discardText={translate('изход')}
