@@ -17,7 +17,8 @@ interface Row {
   dateCreated: string
   actions: React.ReactNode
 }
-
+// -------------------------------------------- ↓
+// TODO: Watch out for the code later..
 interface UserRightDto {
   rightId?: number
   /** @nullable */
@@ -36,7 +37,7 @@ interface UserDto {
   rights?: UserRightDto[] | null
   dateCreated?: string | null
 }
-
+// ---------------------------------------------- ↑
 export default function UsersTable() {
   const { t: translate } = useTranslation()
   const [searchTerm, setSearchTerm] = React.useState('')
