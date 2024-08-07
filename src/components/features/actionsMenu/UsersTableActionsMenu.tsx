@@ -9,6 +9,8 @@ import useDeleteVendor from '@/hooks/services/vendors/useDeleteVendor'
 import NewUserForm from '../forms/NewUserForm'
 import { NewUserFormData, newUserSchema } from '@/schemas/newUserSchema'
 
+// -------------------------------------------- ↓
+// TODO: Watch out for the code later..
 interface UserRightDto {
   rightId?: number
   /** @nullable */
@@ -27,6 +29,7 @@ interface UserDto {
   rights?: UserRightDto[] | null
   dateCreated?: string | null
 }
+// ---------------------------------------------- ↑
 
 interface UsersTableActionsMenuProps {
   user: UserDto
