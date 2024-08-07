@@ -3,10 +3,9 @@ import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import FormDialog from '@/components/shared/FormDialog'
 import { SubmitHandler } from 'react-hook-form'
-import { NewUserFormData } from '@/schemas/newUserSchema'
-// import UsersTable from '@/components/features/main/UsersTable'
-// import { NewUserFormData, newUserSchema } from '@/schemas/newUserSchema'
-// import NewUserForm from '@/components/features/forms/NewUserForm'
+import UsersTable from '@/components/features/admin/UsersTable'
+import { NewUserFormData, newUserSchema } from '@/schemas/newUserSchema'
+import NewUserForm from '@/components/features/forms/NewUserForm'
 
 export default function Users() {
   const { t: translate } = useTranslation()
@@ -37,7 +36,7 @@ export default function Users() {
         table={<UsersTable />}
       />
 
-      {/* <FormDialog<NewUserFormData>
+      <FormDialog<NewUserFormData>
         open={openDialog}
         title={translate('Създаване на нов потребител')}
         discardText={translate('изход')}
@@ -46,7 +45,7 @@ export default function Users() {
         schema={newUserSchema}
         onSubmit={handleSubmit}
         renderForm={(methods) => <NewUserForm {...methods} />}
-      /> */}
+      />
     </>
   )
 }
