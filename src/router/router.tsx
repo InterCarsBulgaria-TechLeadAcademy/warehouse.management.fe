@@ -59,6 +59,10 @@ export default function Router() {
       element: isAdmin ? <DefaultLayout /> : <Navigate to={LOGIN_PATH} />,
       children: [
         {
+          path: USERS_PATH,
+          element: <Users />
+        },
+        {
           path: VENDORS_PATH,
           element: <Vendors />
         },
@@ -73,10 +77,6 @@ export default function Router() {
         {
           path: DIFFERENCETYPE_PATH,
           element: <DifferenceType />
-        },
-        {
-          path: USERS_PATH,
-          element: <Users />
         },
       ]
     },
