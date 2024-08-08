@@ -25,6 +25,8 @@ export default function NewUserForm({
   const { t: translate } = useTranslation()
   // TODO: Add functionality to take rights from BE.
   const markers = useGetMarkers()
+  const roles = ['regular' , 'admin' ]
+  console.log(defaultValues?.role);
 
   return (
     <>
@@ -109,17 +111,25 @@ export default function NewUserForm({
         defaultValue={defaultValues?.role || ''}
         control={control}
         render={({ field }) => (
-          <TextField
-            {...field}
-            label={translate('Роля')}
-            id="role"
-            name="role"
-            required
-            fullWidth
-            autoFocus
-            error={!!errors.role}
-            helperText={errors.role?.message ? translate(errors.role.message) : ''}
-          />
+          <FormControl fullWidth>
+            <InputLabel id="demo-role-label">
+              {translate('Роля')}
+            </InputLabel>
+            <Select
+              {...field}
+              label={translate('Роля')}
+              labelId="demo-role-label"
+              id="demo-role"
+              value={field.value || ''}
+              onChange={(e) => field.onChange(e.target.value)}
+            >
+              {roles.map((role: string) => (
+                <MenuItem key={role} value={role}>
+                  <ListItemText primary={role} />
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         )}
       />
 
