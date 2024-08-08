@@ -133,6 +133,7 @@ export default function NewUserForm({
         )}
       />
 
+      {/* Following controller is only for testing purposes and will be removed later. */}
       <Controller
         name="rights"
         defaultValue={defaultValues.rights?.map(String)}
