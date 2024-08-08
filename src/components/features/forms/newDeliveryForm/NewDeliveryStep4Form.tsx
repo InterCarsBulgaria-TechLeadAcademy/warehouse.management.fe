@@ -10,12 +10,7 @@ import { useGenerateId } from '@/hooks/useGenerateId'
 import { GoodType } from './NewDeliveryStep3Form'
 import MoveGoodsForm from './MoveGoodsForm'
 import { Good } from '@/hooks/useSetGoodsType.ts'
-
-enum Zones {
-  zone1 = 'zone1',
-  zone2 = 'zone2',
-  zone3 = 'zone3'
-}
+import useGetZones from '@/hooks/services/zones/useGetZones'
 
 export default function NewDeliveryStep4Form({
   control,
@@ -25,6 +20,7 @@ export default function NewDeliveryStep4Form({
   const { formsData, alertMessage, deleteGoodsInZones, isCompletedMove, isExceedQuantity } =
     useNewDeliveryContext()
   const generateId = useGenerateId()
+  const zones = useGetZones()
 
   const goodTypes = formsData.goods.map((good: Good) => {
     const goodType = good.goodTypeStep3
@@ -33,12 +29,6 @@ export default function NewDeliveryStep4Form({
       value: GoodType[goodType as keyof typeof GoodType]
     }
   })
-
-  const zones = [
-    { title: translate('deliveries.newDelivery.zones.zone1'), value: Zones.zone1 },
-    { title: translate('deliveries.newDelivery.zones.zone2'), value: Zones.zone2 },
-    { title: translate('deliveries.newDelivery.zones.zone3'), value: Zones.zone3 }
-  ]
 
   const moveGoodsFormsInitialValue = formsData.goodsInZones
     ? formsData.goodsInZones.map(() => generateId())
@@ -52,7 +42,6 @@ export default function NewDeliveryStep4Form({
   })
 
   function addGoodHandler() {
-    console.log('wtf')
     append({ goodTypeStep4: '', goodQuantityStep4: 1, zone: '' })
     let newId
     do {
@@ -103,6 +92,7 @@ export default function NewDeliveryStep4Form({
           control={control}
           errors={errors}
           goodTypes={goodTypes}
+          // zones={zones.map((zone) => zone.name!)}
           zones={zones}
           index={index}
           formsCount={moveGoodsForms.length}

@@ -1,6 +1,5 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import WarningActionDialog from '@/components/shared/WarningActionDialog'
 import { SubmitHandler } from 'react-hook-form'
 import FormDialog from '@/components/shared/FormDialog'
 import { DifferenceTypeDto } from '@/services/model'
@@ -12,6 +11,7 @@ import {
   newDifferenceTypeSchema
 } from '@/schemas/newDifferenceTypeSchema'
 import NewDifferenceTypeForm from '../forms/NewDifferenceTypeForm'
+import ConfirmDialog from '@/components/shared/ConfirmDialog.tsx'
 
 interface DifferentTypeTableActionsMenuProps {
   differenceType: DifferenceTypeDto
@@ -71,7 +71,7 @@ export default function DifferentTypeTableActionsMenu({
       )}
 
       {selectedOption === 'delete' && (
-        <WarningActionDialog
+        <ConfirmDialog
           open={true}
           title={translate('differenceType.table.actions.delete.title')}
           content={translate('differenceType.table.actions.delete.message', {

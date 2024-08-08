@@ -1,6 +1,5 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import WarningActionDialog from '@/components/shared/WarningActionDialog'
 import { SubmitHandler } from 'react-hook-form'
 import { NewMarkerFormData, newMarkerSchema } from '@/schemas/newMarkerSchema'
 import FormDialog from '@/components/shared/FormDialog'
@@ -9,6 +8,7 @@ import { MarkerDto } from '@/services/model'
 import TableActionsMenu from './TableActionsMenu'
 import useDeleteMarker from '@/hooks/services/markers/useDeleteMarker'
 import useUpdateMarker from '@/hooks/services/markers/useUpdateMarker'
+import ConfirmDialog from '@/components/shared/ConfirmDialog.tsx'
 
 interface MarkersTableActionsMenuProps {
   marker: MarkerDto
@@ -64,7 +64,7 @@ export default function MarkersTableActionsMenu({ marker }: MarkersTableActionsM
       )}
 
       {selectedOption === 'delete' && (
-        <WarningActionDialog
+        <ConfirmDialog
           open={true}
           title={translate('markers.table.actions.delete.title')}
           content={translate('markers.table.actions.delete.message', {

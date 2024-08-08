@@ -39,7 +39,7 @@ export default function FormDialog<T extends FieldValues>({
   isCompletedMove
 }: FormDialogProps<T>) {
   const { t: translate } = useTranslation()
-  const { control, handleSubmit, formState, reset } = useForm<T>({
+  const { control, handleSubmit, formState, reset, setValue } = useForm<T>({
     resolver: schema ? yupResolver(schema) : undefined
   })
 
@@ -68,13 +68,19 @@ export default function FormDialog<T extends FieldValues>({
         {steps && currentStep && <HorizontalStepper currentStep={currentStep} steps={steps} />}
         <Box
           component="form"
-          onSubmit={currentStep ? handleSubmit(onSubmit) : handleSubmit(handleFormSubmit)}
+          onSubmit={
+            currentStep
+              ? currentStep === 5
+                ? handleSubmit(handleFormSubmit)
+                : handleSubmit(onSubmit)
+              : handleSubmit(handleFormSubmit)
+          }
           sx={{
             display: 'flex',
             flexDirection: 'column',
             gap: '2em'
           }}>
-          {renderForm({ control, handleSubmit, formState, reset } as UseFormReturn<T>)}
+          {renderForm({ control, handleSubmit, formState, reset, setValue } as UseFormReturn<T>)}
 
           <Box sx={{ display: 'flex', justifyContent: 'center', gap: '1em' }}>
             <Button

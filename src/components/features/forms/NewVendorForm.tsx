@@ -1,6 +1,15 @@
 import { NewVendorFormData } from '@/schemas/newVendorSchema'
 import { MarkerDto } from '@/services/model'
-import { FormControl, InputLabel, ListItemText, MenuItem, Select, TextField } from '@mui/material'
+import {
+  Checkbox,
+  FormControl,
+  InputLabel,
+  ListItemText,
+  MenuItem,
+  OutlinedInput,
+  Select,
+  TextField
+} from '@mui/material'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import useGetMarkers from '@/hooks/services/markers/useGetMarkers'
@@ -71,12 +80,12 @@ export default function NewVendorForm({
             </InputLabel>
             <Select
               {...field}
-              label={translate('vendors.newVendor.labels.markers')}
               labelId="demo-multiple-markers-label"
               id="demo-multiple-markers"
               multiple
               value={field.value || []}
               onChange={(e) => field.onChange(e.target.value)}
+              input={<OutlinedInput label={translate('newVendor.labels.markers')} />}
               renderValue={(selected) => {
                 const selectedMarkerNames = selected
                   .map((id) => {
@@ -90,7 +99,8 @@ export default function NewVendorForm({
                 return selectedMarkerNames
               }}>
               {markers.map((marker: MarkerDto) => (
-                <MenuItem key={marker.id} value={marker.id?.toString()}>
+                <MenuItem key={marker.id} value={marker.id}>
+                  <Checkbox checked={field.value?.includes(marker.id!.toString())} />
                   <ListItemText primary={marker.name} />
                 </MenuItem>
               ))}

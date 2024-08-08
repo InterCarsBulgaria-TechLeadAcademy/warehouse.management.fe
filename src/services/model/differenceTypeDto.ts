@@ -6,6 +6,7 @@
  */
 
 export interface DifferenceTypeDto {
+  createdAt?: string
   id?: number
   /** @nullable */
   name?: string | null

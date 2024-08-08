@@ -7,15 +7,21 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import dayjs from 'dayjs'
-
-const vendorName = ['Bosch', 'Valeo']
+import React from 'react'
+import { VendorDto } from '@/services/model'
+import useGetVendors from '@/hooks/services/vendors/useGetVendors'
 
 export default function NewDeliveryStep2Form({
   control,
+  setValue, //add setValue for dinamic control on values
   formState: { errors }
 }: UseFormReturn<NewDeliveryStep2FormData>) {
   const { t: translate } = useTranslation()
   const { formsData } = useNewDeliveryContext()
+  const vendors: VendorDto[] = useGetVendors()
+  const vendorsNames = vendors.map((vendor: VendorDto) => vendor.name!)
+
+  const [isVisibleVendorId, setIsVisibleVendorId] = React.useState(false)
 
   return (
     <>
@@ -27,9 +33,23 @@ export default function NewDeliveryStep2Form({
           <Autocomplete
             {...field}
             id="vendorName"
-            options={vendorName}
+            options={vendorsNames}
             value={field.value}
             onChange={(_, newValue) => {
+              if (newValue) {
+                setIsVisibleVendorId(true)
+                const selectedVendor = vendors.find(
+                  (vendor: VendorDto) => vendor.name! === newValue
+                )
+                if (selectedVendor) {
+                  setValue('vendorId', selectedVendor.id!.toString())
+                } else {
+                  setValue('vendorId', '')
+                }
+              } else {
+                setIsVisibleVendorId(false)
+                setValue('vendorId', '')
+              }
               field.onChange(newValue)
             }}
             renderInput={(params) => (
@@ -44,23 +64,28 @@ export default function NewDeliveryStep2Form({
           />
         )}
       />
-      <Controller
-        name="vendorId"
-        control={control}
-        defaultValue={formsData.vendorId || ''}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            label={translate('deliveries.newDelivery.labels.step2.vendorId')}
-            id="vendorId"
-            name="vendorId"
-            // readOnly
-            required
-            error={!!errors.vendorId}
-            helperText={errors.vendorId?.message ? translate(errors.vendorId.message) : ''}
-          />
-        )}
-      />
+
+      {(isVisibleVendorId || formsData.vendorId) && (
+        <Controller
+          name="vendorId"
+          control={control}
+          defaultValue={formsData.vendorId || ''}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              id="outlined-read-only-input"
+              label={translate('deliveries.newDelivery.labels.step2.vendorId')}
+              value={field.value}
+              InputProps={{
+                readOnly: true
+              }}
+              error={!!errors.vendorId}
+              helperText={errors.vendorId?.message ? translate(errors.vendorId.message) : ''}
+            />
+          )}
+        />
+      )}
+
       <Controller
         name="truckNumber"
         control={control}
@@ -78,9 +103,9 @@ export default function NewDeliveryStep2Form({
         )}
       />
       <Controller
-        name="deliveryDate"
+        name="deliveryTime"
         control={control}
-        defaultValue={formsData.deliveryDate || dayjs().toDate()}
+        defaultValue={formsData.deliveryTime || dayjs().toDate()}
         render={({ field }) => (
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
@@ -94,9 +119,9 @@ export default function NewDeliveryStep2Form({
               slotProps={{
                 textField: {
                   required: true,
-                  error: !!errors.deliveryDate,
-                  helperText: errors.deliveryDate?.message
-                    ? translate(errors.deliveryDate.message)
+                  error: !!errors.deliveryTime,
+                  helperText: errors.deliveryTime?.message
+                    ? translate(errors.deliveryTime.message)
                     : ''
                 }
               }}

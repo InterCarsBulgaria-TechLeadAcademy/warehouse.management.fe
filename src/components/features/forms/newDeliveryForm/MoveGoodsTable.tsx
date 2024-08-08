@@ -5,14 +5,24 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
-import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import { useTranslation } from 'react-i18next'
+import useGetZones from '@/hooks/services/zones/useGetZones'
 
-import { MoveGood } from '@/interfaces/NewDelivery.ts'
+interface NewDeliveryStep5TableProps {
+  array: any
+  goodType: string
+  goodQuantity: string
+  currentZone: string
+}
 
-export default function NewDeliveryStep5Table() {
+export default function MoveGoodsTable({
+  array,
+  goodType,
+  goodQuantity,
+  currentZone
+}: NewDeliveryStep5TableProps) {
   const { t: translate } = useTranslation()
-  const { formsData } = useNewDeliveryContext()
+  const zones = useGetZones()
 
   return (
     <TableContainer component={Paper}>
@@ -25,13 +35,15 @@ export default function NewDeliveryStep5Table() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {formsData.goodsInZones.map((good: MoveGood, index: number) => (
+          {array.map((good: any, index: number) => (
             <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">
-                {translate(`newDelivery.goodType.${good.goodTypeStep4}`)}
+                {translate(`newDelivery.goodType.${good[goodType]}`)}
               </TableCell>
-              <TableCell align="left">{good.goodQuantityStep4}</TableCell>
-              <TableCell align="left">{translate(`newDelivery.zones.${good.zone}`)}</TableCell>
+              <TableCell align="left">{good[goodQuantity]}</TableCell>
+              <TableCell align="left">
+                {zones.find((zone) => zone.id! === Number(good[currentZone]))?.name}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

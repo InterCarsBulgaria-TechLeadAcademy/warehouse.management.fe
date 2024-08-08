@@ -4,17 +4,21 @@
  * WarehouseManagement.Api
  * OpenAPI spec version: 1.0
  */
-import type { DeliveryEntryDto } from './deliveryEntryDto'
+import type { EntryDto } from './entryDto'
 import type { DeliveryMarkerDto } from './deliveryMarkerDto'
 
 export interface DeliveryDto {
   /** @nullable */
+  approvedOn?: string | null
+  /** @nullable */
   cmr?: string | null
+  createdAt?: string
   deliveryTime?: string
   /** @nullable */
-  entries?: DeliveryEntryDto[] | null
+  entries?: EntryDto[] | null
+  entriesFinishedProcessing?: number
+  entriesWaitingProcessing?: number
   id?: number
-  isApproved?: boolean
   /** @nullable */
   markers?: DeliveryMarkerDto[] | null
   packages?: number

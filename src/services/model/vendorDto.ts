@@ -8,6 +8,7 @@ import type { VendorMarkerDto } from './vendorMarkerDto'
 import type { VendorZoneDto } from './vendorZoneDto'
 
 export interface VendorDto {
+  createdAt?: string
   id?: number
   /** @nullable */
   markers?: VendorMarkerDto[] | null

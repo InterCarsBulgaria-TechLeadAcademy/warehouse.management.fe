@@ -11,6 +11,6 @@ export interface GoodQuantityStep3 {
 }
 
 export interface Good {
-  goodTypeStep3: string
+  goodTypeStep3: 'pallets' | 'packages' | 'pieces'
   goodQuantityStep3: string
 }

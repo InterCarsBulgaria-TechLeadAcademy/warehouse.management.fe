@@ -4,6 +4,10 @@ import useNewDeliverySteps from '@/hooks/useNewDeliverySteps'
 import useGenerateLeftItemsAlert from '@/hooks/useGenerateLeftItemsAlert'
 import useSetGoodsType from '@/hooks/useSetGoodsType.ts'
 import { MoveGood } from '@/interfaces/NewDelivery.ts'
+import usePostDelivery from '@/hooks/services/deliveries/usePostDelivery'
+import goodQuantity from '@/utils/goodQuantity'
+import usePostEntry from '@/hooks/services/entries/usePostEntry'
+import createEntryData from '@/utils/createEntryData'
 
 interface NewDeliveryProviderProps {
   children: ReactNode
@@ -60,6 +64,8 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   const [alertMessage, setAlertMessage] = useState<string[]>([])
   const [isCompletedMove, setIsCompletedMove] = useState(false)
   const [isExceedQuantity, setIsExceedQuantity] = useState(false)
+  const mutationDeliveryPost = usePostDelivery()
+  const mutationEntryPost = usePostEntry()
 
   useSetGoodsType(formsData, goodTypeStep3, setGoodTypeStep3)
   useGenerateLeftItemsAlert(
@@ -103,7 +109,27 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
   const handleSubmit: SubmitHandler<any> = (data) => {
     if (currentStep === steps.length) {
       console.log('Final submission:', data)
-      onCloseDialog()
+
+      mutationDeliveryPost.mutate(
+        {
+          systemNumber: data.systemNumber,
+          receptionNumber: data.receptionNumber,
+          truckNumber: data.truckNumber,
+          cmr: data.cmr,
+          deliveryTime: data.deliveryTime,
+          pallets: goodQuantity(data.goods, 'goodTypeStep3', 'pallets', 'goodQuantityStep3'),
+          packages: goodQuantity(data.goods, 'goodTypeStep3', 'packages', 'goodQuantityStep3'),
+          pieces: goodQuantity(data.goods, 'goodTypeStep3', 'pieces', 'goodQuantityStep3'),
+          vendorId: Number(data.vendorId),
+          markers: data.markers
+        },
+        {
+          onSuccess: (response) => {
+            const deliveryId = Number(response)
+            mutationEntryPost.mutate(createEntryData(data.goodsInZones, deliveryId))
+          }
+        }
+      )
     } else {
       console.log(data)
       setFormsData(data)

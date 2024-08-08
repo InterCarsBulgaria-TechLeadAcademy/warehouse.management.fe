@@ -1,5 +1,7 @@
+import useGetMarkers from '@/hooks/services/markers/useGetMarkers'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import { NewDeliveryStep1FormData } from '@/schemas/newDeliverySchemas'
+import { MarkerDto } from '@/services/model'
 import {
   Checkbox,
   FormControl,
@@ -13,31 +15,29 @@ import {
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
-const markers = ['Масло', 'Гуми', 'Чистачки']
-
 export default function NewDeliveryStep1Form({
   control,
   formState: { errors }
 }: UseFormReturn<NewDeliveryStep1FormData>) {
   const { t: translate } = useTranslation()
   const { formsData } = useNewDeliveryContext()
+  const markers = useGetMarkers()
+
   return (
     <>
       <Controller
-        name="deliveryNumber"
+        name="systemNumber"
         control={control}
-        defaultValue={formsData.deliveryNumber || ''}
+        defaultValue={formsData.systemNumber || ''}
         render={({ field }) => (
           <TextField
             {...field}
             label={translate('deliveries.newDelivery.labels.step1.deliveryNumber')}
-            id="deliveryNumber"
-            name="deliveryNumber"
+            id="systemNumber"
+            name="systemNumber"
             required
-            error={!!errors.deliveryNumber}
-            helperText={
-              errors.deliveryNumber?.message ? translate(errors.deliveryNumber.message) : ''
-            }
+            error={!!errors.systemNumber}
+            helperText={errors.systemNumber?.message ? translate(errors.systemNumber.message) : ''}
           />
         )}
       />
@@ -61,18 +61,18 @@ export default function NewDeliveryStep1Form({
       />
 
       <Controller
-        name="cmrNumber"
+        name="cmr"
         control={control}
-        defaultValue={formsData.cmrNumber || ''}
+        defaultValue={formsData.cmr || ''}
         render={({ field }) => (
           <TextField
             {...field}
             label={translate('deliveries.newDelivery.labels.step1.cmrNumber')}
-            id="cmrNumber"
-            name="cmrNumber"
+            id="cmr"
+            name="cmr"
             required
-            error={!!errors.cmrNumber}
-            helperText={errors.cmrNumber?.message ? translate(errors.cmrNumber.message) : ''}
+            error={!!errors.cmr}
+            helperText={errors.cmr?.message ? translate(errors.cmr.message) : ''}
           />
         )}
       />
@@ -88,19 +88,28 @@ export default function NewDeliveryStep1Form({
             </InputLabel>
             <Select
               {...field}
-              labelId="markers-label"
-              id="markers"
+              labelId="demo-multiple-checkbox-label"
+              id="demo-multiple-checkbox"
               multiple
               value={field.value || []}
               onChange={(e) => field.onChange(e.target.value)}
               input={
                 <OutlinedInput label={translate('deliveries.newDelivery.labels.step1.markers')} />
               }
-              renderValue={(selected) => (selected as string[]).join(', ')}>
-              {markers.map((marker) => (
-                <MenuItem key={marker} value={marker}>
-                  <Checkbox checked={field.value?.includes(marker)} />{' '}
-                  <ListItemText primary={marker} />
+              renderValue={(selected) => {
+                const selectedMarkerNames = selected
+                  .map((id) => {
+                    const marker = markers.find((marker) => marker.id === Number(id))
+                    return marker ? marker.name : ''
+                  })
+                  .join(', ')
+
+                return selectedMarkerNames
+              }}>
+              {markers.map((marker: MarkerDto) => (
+                <MenuItem key={marker.id} value={marker.id!}>
+                  <Checkbox checked={field.value?.includes(marker.id!.toString())} />
+                  <ListItemText primary={marker.name} />
                 </MenuItem>
               ))}
             </Select>

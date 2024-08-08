@@ -7,12 +7,14 @@ import { useEffect, useState } from 'react'
 import { NewDeliveryStep4FormData } from '@/schemas/newDeliverySchemas'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import DeleteIcon from '@mui/icons-material/Delete'
+import { ZoneDto } from '@/services/model'
 
 interface GoodDetailsFormProps {
   control: Control<NewDeliveryStep4FormData, any>
   errors: FieldErrors<NewDeliveryStep4FormData>
   goodTypes: { title: string; value: string }[]
-  zones: { title: string; value: string }[]
+  // zones: string[]
+  zones: ZoneDto[]
   index: number
   onDeleteHandler: () => void
   formsCount: number
@@ -155,6 +157,7 @@ export default function MoveGoodsForm({
           />
         )}
       />
+
       <Controller
         name={`goodsInZones.${index}.zone`}
         control={control}
@@ -162,14 +165,13 @@ export default function MoveGoodsForm({
         render={({ field }) => (
           <Autocomplete
             {...field}
-            options={zones.map((zone) => zone.title)}
-            value={zones.find((zone) => zone.value === field.value)?.title || null}
-            onChange={(_event: any, newValue: string | null) => {
-              newValue = newValue
-                ? zones.find((zone) => zone.title === newValue)?.value || null
-                : null
-              setZoneValue(newValue)
-              field.onChange(newValue)
+            options={zones}
+            getOptionLabel={(option) => option.name || ''}
+            value={zones.find((zone) => zone.id!.toString() === field.value) || null}
+            onChange={(_event: any, newValue) => {
+              const newZoneId = newValue ? newValue.id!.toString() : null
+              setZoneValue(newZoneId)
+              field.onChange(newZoneId)
             }}
             inputValue={zoneInputValue}
             onInputChange={(_event, newInputValue) => {
@@ -194,6 +196,7 @@ export default function MoveGoodsForm({
           />
         )}
       />
+
       {formsCount > 1 ? <DeleteIcon sx={{ cursor: 'pointer' }} onClick={onDeleteHandler} /> : null}
     </Box>
   )

@@ -9,4 +9,7 @@ import type { EntryStatuses } from './entryStatuses'
 export type GetApiZoneEntriesParams = {
   zoneId?: number
   statuses?: EntryStatuses[]
+  PageNumber?: number
+  PageSize?: number
+  SearchQuery?: string
 }

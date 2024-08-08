@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import WarningActionDialog from '@/components/shared/WarningActionDialog'
+import ConfirmDialog from '@/components/shared/ConfirmDialog.tsx'
 import { ZoneDto } from '@/services/model'
 import { SubmitHandler } from 'react-hook-form'
 import { NewZoneFormData, newZoneSchema } from '@/schemas/newZoneSchema'
@@ -11,14 +11,14 @@ import useDeleteZone from '@/hooks/services/zones/useDeleteZone'
 import useUpdateZone from '@/hooks/services/zones/useUpdateZone'
 
 interface ZonesTableActionsMenuProps {
-  zone: ZoneDto
+  zoneContent: ZoneDto
 }
 
-export default function ZonesTableActionsMenu({ zone }: ZonesTableActionsMenuProps) {
+export default function ZonesTableActionsMenu({ zoneContent }: ZonesTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
-  const mutationDelete = useDeleteZone(zone.name!)
-  const mutationUpdate = useUpdateZone(zone.name!)
+  const mutationDelete = useDeleteZone(zoneContent.name!)
+  const mutationUpdate = useUpdateZone(zoneContent.name!)
 
   const handleClose = () => {
     setSelectedOption(null)
@@ -33,7 +33,7 @@ export default function ZonesTableActionsMenu({ zone }: ZonesTableActionsMenuPro
   }
 
   const onConfirmClick = () => {
-    mutationDelete.mutate(zone.id!)
+    mutationDelete.mutate(zoneContent.id!)
     handleClose()
   }
 
@@ -41,7 +41,7 @@ export default function ZonesTableActionsMenu({ zone }: ZonesTableActionsMenuPro
   const handleSubmit: SubmitHandler<NewZoneFormData> = (data) => {
     const markerIds = data.markers!.map((marker) => Number(marker))
     mutationUpdate.mutate({
-      id: zone.id!,
+      id: zoneContent.id!,
       data: { name: data.zoneName, markerIds: markerIds, isFinal: data.isFinal }
     })
   }
@@ -68,9 +68,10 @@ export default function ZonesTableActionsMenu({ zone }: ZonesTableActionsMenuPro
             <NewZoneForm
               {...methods}
               defaultValues={{
-                name: zone.name!,
-                markersIds: zone.markers?.map((marker) => marker.markerId!) || ([] as number[]),
-                isFinal: zone.isFinal
+                name: zoneContent.name!,
+                markersIds:
+                  zoneContent.markers?.map((marker) => marker.markerId!) || ([] as number[]),
+                isFinal: zoneContent.isFinal
               }}
             />
           )}
@@ -78,10 +79,10 @@ export default function ZonesTableActionsMenu({ zone }: ZonesTableActionsMenuPro
       )}
 
       {selectedOption === 'delete' && (
-        <WarningActionDialog
+        <ConfirmDialog
           open={true}
           title={translate('zones.table.actions.delete.title')}
-          content={translate('zones.table.actions.delete.message', { name: zone.name })}
+          content={translate('zones.table.actions.delete.message', { name: zoneContent.name })}
           discardText={translate('zones.table.actions.delete.labels.discard')}
           confirmText={translate('zones.table.actions.delete.labels.confirm')}
           onCloseDialog={handleClose}
