@@ -26,7 +26,6 @@ export default function NewUserForm({
   // TODO: Add functionality to take rights from BE.
   const markers = useGetMarkers()
   const roles = ['regular' , 'admin' ]
-  console.log(defaultValues?.role);
 
   return (
     <>
