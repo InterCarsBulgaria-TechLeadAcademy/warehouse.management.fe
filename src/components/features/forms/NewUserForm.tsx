@@ -138,37 +138,6 @@ export default function NewUserForm({
         defaultValue={defaultValues.rights?.map(String)}
         control={control}
         render={({ field }) => (
-          // <FormControl fullWidth>
-          //   <InputLabel id="demo-multiple-rights-label">
-          //     {translate('Права')}
-          //   </InputLabel>
-          //   <Select
-          //     {...field}
-          //     label={translate('Права')}
-          //     labelId="demo-multiple-rights-label"
-          //     id="demo-multiple-rights"
-          //     multiple
-          //     value={field.value || []}
-          //     onChange={(e) => field.onChange(e.target.value)}
-          //     renderValue={(selected) => {
-          //       const selectedMarkerNames = selected
-          //         .map((id) => {
-          //           const isMarker = markers.find((marker) => marker.id === Number(id))
-          //           if (isMarker) {
-          //             return isMarker.name
-          //           }
-          //         })
-          //         .join(', ')
-
-          //       return selectedMarkerNames
-          //     }}>
-          //     {markers.map((marker: MarkerDto) => (
-          //       <MenuItem key={marker.id} value={marker.id?.toString()}>
-          //         <ListItemText primary={marker.name} />
-          //       </MenuItem>
-          //     ))}
-          //   </Select>
-          // </FormControl>
           <CheckboxRoles />
         )}
       />
