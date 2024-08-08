@@ -23,6 +23,7 @@
     "axios": "^1.7.0",
     "dayjs": "^1.11.11",
     "i18next": "^23.11.4",
+    "js-cookie": "^3.0.5",
     "nanoid": "^5.0.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.35.6",
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20.12.12",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",

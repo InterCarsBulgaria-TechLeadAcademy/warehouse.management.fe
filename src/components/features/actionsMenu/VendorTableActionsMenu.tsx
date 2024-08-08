@@ -8,7 +8,7 @@ import { SubmitHandler } from 'react-hook-form'
 import TableActionsMenu from './TableActionsMenu'
 import useUpdateVendor from '@/hooks/services/vendors/useUpdateVendor'
 import useDeleteVendor from '@/hooks/services/vendors/useDeleteVendor'
-import InfoDialog from '../../shared/InfoDialog'
+import ConfirmDialog from '../../shared/ConfirmDialog.tsx'
 
 interface VendorsTableActionsMenuProps {
   vendor: VendorDto
@@ -79,7 +79,7 @@ export default function VendorTableActionsMenu({ vendor }: VendorsTableActionsMe
       )}
 
       {selectedOption === 'delete' && (
-        <InfoDialog
+        <ConfirmDialog
           open={true}
           title={translate('vendors.table.actions.delete.title')}
           content={translate('vendors.table.actions.delete.message', { name: vendor.name })}

@@ -11,7 +11,7 @@ import {
   newDifferenceTypeSchema
 } from '@/schemas/newDifferenceTypeSchema'
 import NewDifferenceTypeForm from '../forms/NewDifferenceTypeForm'
-import InfoDialog from '@/components/shared/InfoDialog'
+import ConfirmDialog from '@/components/shared/ConfirmDialog.tsx'
 
 interface DifferentTypeTableActionsMenuProps {
   differenceType: DifferenceTypeDto
@@ -71,7 +71,7 @@ export default function DifferentTypeTableActionsMenu({
       )}
 
       {selectedOption === 'delete' && (
-        <InfoDialog
+        <ConfirmDialog
           open={true}
           title={translate('differenceType.table.actions.delete.title')}
           content={translate('differenceType.table.actions.delete.message', {

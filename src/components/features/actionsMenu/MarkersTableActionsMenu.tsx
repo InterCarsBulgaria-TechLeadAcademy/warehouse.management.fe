@@ -8,7 +8,7 @@ import { MarkerDto } from '@/services/model'
 import TableActionsMenu from './TableActionsMenu'
 import useDeleteMarker from '@/hooks/services/markers/useDeleteMarker'
 import useUpdateMarker from '@/hooks/services/markers/useUpdateMarker'
-import InfoDialog from '@/components/shared/InfoDialog'
+import ConfirmDialog from '@/components/shared/ConfirmDialog.tsx'
 
 interface MarkersTableActionsMenuProps {
   marker: MarkerDto
@@ -64,7 +64,7 @@ export default function MarkersTableActionsMenu({ marker }: MarkersTableActionsM
       )}
 
       {selectedOption === 'delete' && (
-        <InfoDialog
+        <ConfirmDialog
           open={true}
           title={translate('markers.table.actions.delete.title')}
           content={translate('markers.table.actions.delete.message', {

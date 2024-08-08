@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import TableActionsMenu from './TableActionsMenu'
 import DeliveryDetails from '../DeliveryDetails'
 import useDeleteDelivery from '@/hooks/services/deliveries/useDeleteDelivery'
-import InfoDialog from '../../shared/InfoDialog'
+import ConfirmDialog from '../../shared/ConfirmDialog.tsx'
 
 interface DeliveriesTableActionsMenuProps {
   deliveryId: number
@@ -44,7 +44,7 @@ export default function DeliveriesTableActionsMenu({
       <TableActionsMenu specificOptionHandler={actionHandler} options={options} />
 
       {selectedOption === 'details' && (
-        <InfoDialog
+        <ConfirmDialog
           open={true}
           content={<DeliveryDetails deliveryId={deliveryId} />}
           discardText={translate('deliveries.table.actions.details.labels.exit')}
@@ -55,7 +55,7 @@ export default function DeliveriesTableActionsMenu({
 
       {/* TODO: Only admin action */}
       {selectedOption === 'delete' && (
-        <InfoDialog
+        <ConfirmDialog
           open={true}
           title={translate('deliveries.table.actions.delete.title')}
           content={translate('deliveries.table.actions.delete.message')}

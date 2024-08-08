@@ -4,7 +4,7 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 
-interface InfoDialogProps {
+interface ConfirmDialogProps {
   open: boolean
   title?: string
   content?: string | React.ReactElement
@@ -15,7 +15,7 @@ interface InfoDialogProps {
   onConfirmClick?: () => void
 }
 
-export default function InfoDialog({
+export default function ConfirmDialog({
   open,
   title,
   content,
@@ -24,7 +24,7 @@ export default function InfoDialog({
   onCloseDialog,
   onDiscardClick,
   onConfirmClick
-}: InfoDialogProps) {
+}: ConfirmDialogProps) {
   return (
     <Dialog
       open={open}

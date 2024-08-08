@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import WarningActionDialog from '@/components/shared/InfoDialog'
+import ConfirmDialog from '@/components/shared/ConfirmDialog.tsx'
 import { ZoneDto } from '@/services/model'
 import { SubmitHandler } from 'react-hook-form'
 import { NewZoneFormData, newZoneSchema } from '@/schemas/newZoneSchema'
@@ -79,7 +79,7 @@ export default function ZonesTableActionsMenu({ zoneContent }: ZonesTableActions
       )}
 
       {selectedOption === 'delete' && (
-        <WarningActionDialog
+        <ConfirmDialog
           open={true}
           title={translate('zones.table.actions.delete.title')}
           content={translate('zones.table.actions.delete.message', { name: zoneContent.name })}
