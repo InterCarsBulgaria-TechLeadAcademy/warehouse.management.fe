@@ -3,7 +3,6 @@ import { Box, FormControl, FormControlLabel, Checkbox, Typography } from '@mui/m
 import { useTranslation } from 'react-i18next';
 
 export default function CheckboxRoles() {
-  // State to manage each checkbox
   const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>({
     createZones: false,
     readZones: false,
@@ -24,7 +23,6 @@ export default function CheckboxRoles() {
 
   const { t: translate } = useTranslation()
 
-  // Handler to update state when a checkbox is toggled
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCheckedItems({
       ...checkedItems,
@@ -32,7 +30,6 @@ export default function CheckboxRoles() {
     });
   };
 
-  // Create an array of selected checkboxes
   const selectedItems = Object.keys(checkedItems).filter(
     (key) => checkedItems[key]
   );
@@ -40,7 +37,6 @@ export default function CheckboxRoles() {
   return (
     <>
       <Box display="flex" justifyContent="space-between">
-        {/* Column 1 */}
         <Box flex="1">
           <FormControl component="fieldset">
             <Typography variant="h6">{translate('Зони')}</Typography>
@@ -87,7 +83,6 @@ export default function CheckboxRoles() {
           </FormControl>
         </Box>
 
-        {/* Column 2 */}
         <Box flex="1">
           <FormControl component="fieldset">
             <Typography variant="h6">{translate('Доставки')}</Typography>
@@ -134,7 +129,6 @@ export default function CheckboxRoles() {
           </FormControl>
         </Box>
 
-        {/* Column 3 */}
         <Box flex="1">
           <FormControl component="fieldset">
             <Typography variant="h6">{translate('Разлики')}</Typography>
