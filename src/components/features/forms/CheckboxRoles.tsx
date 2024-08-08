@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
 import { Box, FormControl, FormControlLabel, Checkbox, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 export default function CheckboxRoles() {
   // State to manage each checkbox
   const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>({
-    checkbox1: false,
-    checkbox2: false,
-    checkbox3: false,
-    checkbox4: false,
-    checkbox5: false,
-    checkbox6: false,
+    createZones: false,
+    readZones: false,
+    editZones: false,
+    deleteZones: false,
+
+    createDeliveries: false,
+    readDeliveries: false,
+    editDeliveries: false,
+    deleteDeliveries: false,
+
+    createDifferences: false,
+    readDifferences: false,
+    editDifferences: false,
+    deleteDifferences: false,
+    changeStatus: false,
   });
+
+  const { t: translate } = useTranslation()
 
   // Handler to update state when a checkbox is toggled
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,26 +43,46 @@ export default function CheckboxRoles() {
         {/* Column 1 */}
         <Box flex="1">
           <FormControl component="fieldset">
-            <Typography variant="h6">Column 1</Typography>
+            <Typography variant="h6">{translate('Зони')}</Typography>
             <FormControlLabel
               control={
                 <Checkbox
-                  name="checkbox1"
-                  checked={checkedItems.checkbox1}
+                  name="createZones"
+                  checked={checkedItems.createZones}
                   onChange={handleCheckboxChange}
                 />
               }
-              label="Checkbox 1"
+              label={translate('Създаване на зони')}
             />
             <FormControlLabel
               control={
                 <Checkbox
-                  name="checkbox2"
-                  checked={checkedItems.checkbox2}
+                  name="readZones"
+                  checked={checkedItems.readZones}
                   onChange={handleCheckboxChange}
                 />
               }
-              label="Checkbox 2"
+              label={translate('Четене на зони')}
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  name="editZones"
+                  checked={checkedItems.editZones}
+                  onChange={handleCheckboxChange}
+                />
+              }
+              label={translate('Редактиране на зони')}
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  name="deleteZones"
+                  checked={checkedItems.deleteZones}
+                  onChange={handleCheckboxChange}
+                />
+              }
+              label={translate('Триене на зони')}
             />
           </FormControl>
         </Box>
@@ -58,26 +90,46 @@ export default function CheckboxRoles() {
         {/* Column 2 */}
         <Box flex="1">
           <FormControl component="fieldset">
-            <Typography variant="h6">Column 2</Typography>
+            <Typography variant="h6">{translate('Доставки')}</Typography>
             <FormControlLabel
               control={
                 <Checkbox
-                  name="checkbox3"
-                  checked={checkedItems.checkbox3}
+                  name="createDeliveries"
+                  checked={checkedItems.createDeliveries}
                   onChange={handleCheckboxChange}
                 />
               }
-              label="Checkbox 3"
+              label={translate('Създаване на доставки')}
             />
             <FormControlLabel
               control={
                 <Checkbox
-                  name="checkbox4"
-                  checked={checkedItems.checkbox4}
+                  name="readDeliveries"
+                  checked={checkedItems.readDeliveries}
                   onChange={handleCheckboxChange}
                 />
               }
-              label="Checkbox 4"
+              label={translate('Четене на доставки')}
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  name="editDeliveries"
+                  checked={checkedItems.editDeliveries}
+                  onChange={handleCheckboxChange}
+                />
+              }
+              label={translate('Редактиране на доставки')}
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  name="deleteDeliveries"
+                  checked={checkedItems.deleteDeliveries}
+                  onChange={handleCheckboxChange}
+                />
+              }
+              label={translate('Триене на доставки')}
             />
           </FormControl>
         </Box>
@@ -85,26 +137,56 @@ export default function CheckboxRoles() {
         {/* Column 3 */}
         <Box flex="1">
           <FormControl component="fieldset">
-            <Typography variant="h6">Column 3</Typography>
+            <Typography variant="h6">{translate('Разлики')}</Typography>
             <FormControlLabel
               control={
                 <Checkbox
-                  name="checkbox5"
-                  checked={checkedItems.checkbox5}
+                  name="createDifferences"
+                  checked={checkedItems.createDifferences}
                   onChange={handleCheckboxChange}
                 />
               }
-              label="Checkbox 5"
+              label={translate('Създаване на разлики')}
             />
             <FormControlLabel
               control={
                 <Checkbox
-                  name="checkbox6"
-                  checked={checkedItems.checkbox6}
+                  name="readDifferences"
+                  checked={checkedItems.readDifferences}
                   onChange={handleCheckboxChange}
                 />
               }
-              label="Checkbox 6"
+              label={translate('Четене на разлики')}
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  name="editDifferences"
+                  checked={checkedItems.editDifferences}
+                  onChange={handleCheckboxChange}
+                />
+              }
+              label={translate('Редактиране на разлики')}
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  name="deleteDifferences"
+                  checked={checkedItems.deleteDifferences}
+                  onChange={handleCheckboxChange}
+                />
+              }
+              label={translate('Триене на разлики')}
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  name="changeStatus"
+                  checked={checkedItems.changeStatus}
+                  onChange={handleCheckboxChange}
+                />
+              }
+              label={translate('Смяна на статус')}
             />
           </FormControl>
         </Box>
