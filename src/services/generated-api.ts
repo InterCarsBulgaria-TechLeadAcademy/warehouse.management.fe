@@ -28,12 +28,15 @@ import type {
   GetApiVendorAllParams,
   GetApiZoneAllWithParamsParams,
   GetApiZoneEntriesParams,
+  LoginDto,
   MarkerDto,
   MarkerFormDto,
   PaginationParameters,
   PostApiDeliveryGenerateBarcodePdfParams,
   PostApiEntryMoveParams,
   PostApiEntrySplitParams,
+  RegisterDto,
+  TokenResponse,
   VendorDto,
   VendorFormDto,
   ZoneDto,
@@ -45,6 +48,55 @@ import type { BodyType } from './api'
 type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 
 export const getWarehouseManagementApi = () => {
+  const postApiAuthLogin = (
+    loginDto: BodyType<LoginDto>,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<TokenResponse>(
+      {
+        url: `/api/Auth/login`,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        data: loginDto
+      },
+      options
+    )
+  }
+
+  const postApiAuthRegister = (
+    registerDto: BodyType<RegisterDto>,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<string>(
+      {
+        url: `/api/Auth/register`,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        data: registerDto
+      },
+      options
+    )
+  }
+
+  const postApiAuthRefresh = (
+    postApiAuthRefreshBody: BodyType<string>,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<TokenResponse>(
+      {
+        url: `/api/Auth/refresh`,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        data: postApiAuthRefreshBody
+      },
+      options
+    )
+  }
+
+  const postLogout = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<void>({ url: `/logout`, method: 'POST' }, options)
+  }
+
   const getApiDeliveryId = (id: number, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<DeliveryDto>({ url: `/api/Delivery/${id}`, method: 'GET' }, options)
   }
@@ -390,12 +442,12 @@ export const getWarehouseManagementApi = () => {
     return customInstance<void>({ url: `/api/Entry/restore/${id}`, method: 'PUT' }, options)
   }
 
-  const getApiEntryStartId = (id: number, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<void>({ url: `/api/Entry/start/${id}`, method: 'GET' }, options)
+  const putApiEntryStartId = (id: number, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<void>({ url: `/api/Entry/start/${id}`, method: 'PUT' }, options)
   }
 
-  const getApiEntryFinishId = (id: number, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<void>({ url: `/api/Entry/finish/${id}`, method: 'GET' }, options)
+  const putApiEntryFinishId = (id: number, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<void>({ url: `/api/Entry/finish/${id}`, method: 'PUT' }, options)
   }
 
   const postApiEntryMove = (
@@ -639,6 +691,10 @@ export const getWarehouseManagementApi = () => {
   }
 
   return {
+    postApiAuthLogin,
+    postApiAuthRegister,
+    postApiAuthRefresh,
+    postLogout,
     getApiDeliveryId,
     getApiDeliveryAll,
     postApiDeliveryAdd,
@@ -673,8 +729,8 @@ export const getWarehouseManagementApi = () => {
     putApiEntryEditId,
     deleteApiEntryDeleteId,
     putApiEntryRestoreId,
-    getApiEntryStartId,
-    getApiEntryFinishId,
+    putApiEntryStartId,
+    putApiEntryFinishId,
     postApiEntryMove,
     postApiEntrySplit,
     getApiMarkerId,
@@ -704,6 +760,18 @@ export const getWarehouseManagementApi = () => {
     getApiZoneEntries
   }
 }
+export type PostApiAuthLoginResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiAuthLogin']>>
+>
+export type PostApiAuthRegisterResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiAuthRegister']>>
+>
+export type PostApiAuthRefreshResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiAuthRefresh']>>
+>
+export type PostLogoutResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postLogout']>>
+>
 export type GetApiDeliveryIdResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiDeliveryId']>>
 >
@@ -816,11 +884,11 @@ export type DeleteApiEntryDeleteIdResult = NonNullable<
 export type PutApiEntryRestoreIdResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['putApiEntryRestoreId']>>
 >
-export type GetApiEntryStartIdResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiEntryStartId']>>
+export type PutApiEntryStartIdResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['putApiEntryStartId']>>
 >
-export type GetApiEntryFinishIdResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiEntryFinishId']>>
+export type PutApiEntryFinishIdResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['putApiEntryFinishId']>>
 >
 export type PostApiEntryMoveResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiEntryMove']>>

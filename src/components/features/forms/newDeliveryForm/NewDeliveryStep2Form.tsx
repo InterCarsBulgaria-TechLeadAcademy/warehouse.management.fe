@@ -43,8 +43,10 @@ export default function NewDeliveryStep2Form({
                 )
                 if (selectedVendor) {
                   setValue('vendorId', selectedVendor.id!.toString())
+                  setValue('vendorSystemNumber', selectedVendor.systemNumber!.toString())
                 } else {
                   setValue('vendorId', '')
+                  setValue('vendorSystemNumber', '')
                 }
               } else {
                 setIsVisibleVendorId(false)
@@ -67,7 +69,7 @@ export default function NewDeliveryStep2Form({
 
       {(isVisibleVendorId || formsData.vendorId) && (
         <Controller
-          name="vendorId"
+          name="vendorSystemNumber"
           control={control}
           defaultValue={formsData.vendorId || ''}
           render={({ field }) => (
@@ -79,8 +81,12 @@ export default function NewDeliveryStep2Form({
               InputProps={{
                 readOnly: true
               }}
-              error={!!errors.vendorId}
-              helperText={errors.vendorId?.message ? translate(errors.vendorId.message) : ''}
+              error={!!errors.vendorSystemNumber}
+              helperText={
+                errors.vendorSystemNumber?.message
+                  ? translate(errors.vendorSystemNumber.message)
+                  : ''
+              }
             />
           )}
         />

@@ -12,6 +12,7 @@ interface MarkersProps {
 
 export default function ChipsList({ items }: MarkersProps) {
   const isSmallScreen = useIsSmallScreen()
+  const { getChipLabel } = useChipLabel()
   const [open, setOpen] = React.useState(false)
 
   const color = selectStatusColor(items[0] as StatusType)
@@ -28,7 +29,7 @@ export default function ChipsList({ items }: MarkersProps) {
   return (
     <Box sx={{ display: 'flex', gap: '0.5em' }}>
       {items.slice(0, 2).map((item, index) => (
-        <Chip key={index} label={useChipLabel(item)} color={color} />
+        <Chip key={index} label={getChipLabel(item)} color={color} />
       ))}
 
       {items.length > 2 && !isSmallScreen && (

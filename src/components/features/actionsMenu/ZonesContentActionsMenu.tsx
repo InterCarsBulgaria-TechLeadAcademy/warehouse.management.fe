@@ -1,24 +1,22 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import ConfirmDialog from '@/components/shared/ConfirmDialog'
-import { ZoneDto } from '@/services/model'
-import { SubmitHandler } from 'react-hook-form'
-import { NewZoneFormData, newZoneSchema } from '@/schemas/newZoneSchema'
+import { EntryDto } from '@/services/model'
 import TableActionsMenu from './TableActionsMenu'
-import FormDialog from '@/components/shared/FormDialog'
-import NewZoneForm from '../forms/NewZoneForm'
-import useDeleteZone from '@/hooks/services/zones/useDeleteZone'
-import useUpdateZone from '@/hooks/services/zones/useUpdateZone'
+import ConfirmDialog from '@/components/shared/ConfirmDialog.tsx'
+import { useStartProcessing } from '@/hooks/services/entries/useStartProcessing.ts'
+import { useFinishProcessing } from '@/hooks/services/entries/useFinishProcessing.ts'
+import { getEntryStatus } from '@/utils/getEntryStatus.ts'
+import { ChipStatus } from '@/hooks/useChipLabel.ts'
 
 interface ZonesTableActionsMenuProps {
-  zone: ZoneDto
+  entry: EntryDto
 }
 
-export default function ZonesContentTableActionsMenu({ zone }: ZonesTableActionsMenuProps) {
+export default function ZonesContentTableActionsMenu({ entry }: ZonesTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
-  const mutationDelete = useDeleteZone(zone.name!)
-  const mutationUpdate = useUpdateZone(zone.name!)
+  const entryStartProcessing = useStartProcessing()
+  const entryFinishProcessing = useFinishProcessing()
 
   const handleClose = () => {
     setSelectedOption(null)
@@ -32,61 +30,76 @@ export default function ZonesContentTableActionsMenu({ zone }: ZonesTableActions
     setSelectedOption(option)
   }
 
-  const onConfirmClick = () => {
-    mutationDelete.mutate(zone.id!)
+  function handleStartProcessing() {
+    entryStartProcessing.mutate(entry.id!)
     handleClose()
   }
 
-  //TODO: да тествам когато БЕ оправят дали се променят всички полета, не само name
-  const handleSubmit: SubmitHandler<NewZoneFormData> = (data) => {
-    const markerIds = data.markers!.map((marker) => Number(marker))
-    mutationUpdate.mutate({
-      id: zone.id!,
-      data: { name: data.zoneName, markerIds: markerIds, isFinal: data.isFinal }
-    })
+  function handleFinishProcessing() {
+    entryFinishProcessing.mutate(entry.id!)
+    handleClose()
   }
 
-  const options = [
-    { title: 'actionsMenu.options.edit', value: 'edit' },
-    { title: 'actionsMenu.options.delete', value: 'delete' }
-  ]
+  const options = (() => {
+    const options = []
+    const availableOptions = {
+      move: { title: 'zonesContent.table.actionsMenu.MoveToNewZone', value: 'move' },
+      startProcessing: {
+        title: 'zonesContent.table.actionsMenu.StartProcessing',
+        value: 'startProcessing'
+      },
+      finishProcessing: {
+        title: 'zonesContent.table.actionsMenu.FinishProcessing',
+        value: 'finishProcessing'
+      }
+    }
+
+    const entryStatus = getEntryStatus(entry)
+
+    if (entryStatus === ChipStatus.Waiting) {
+      options.push(availableOptions.move)
+      options.push(availableOptions.startProcessing)
+    } else if (entryStatus === ChipStatus.Processing) {
+      options.push(availableOptions.move)
+      options.push(availableOptions.finishProcessing)
+    }
+
+    return options.length > 0
+      ? options
+      : [{ title: 'zonesContent.table.actionsMenu.NoActions', value: '' }]
+  })()
 
   return (
     <div>
       <TableActionsMenu specificOptionHandler={actionHandler} options={options} />
 
-      {selectedOption === 'edit' && (
-        <FormDialog<NewZoneFormData>
+      {selectedOption === 'startProcessing' && (
+        <ConfirmDialog
           open={true}
-          title={translate('newZone.editZone.title')}
-          discardText={translate('newZone.editZone.labels.exit')}
-          confirmText={translate('newZone.editZone.labels.edit')}
+          discardText={translate('zonesContent.table.actions.startProcessing.labels.discard')}
+          confirmText={translate('zonesContent.table.actions.startProcessing.labels.confirm')}
+          title={translate('zonesContent.table.actions.startProcessing.title')}
+          content={translate('zonesContent.table.actions.startProcessing.message', {
+            goodNumber: entry.id!
+          })}
+          onConfirmClick={handleStartProcessing}
           onCloseDialog={handleClose}
-          schema={newZoneSchema}
-          onSubmit={handleSubmit}
-          renderForm={(methods) => (
-            <NewZoneForm
-              {...methods}
-              defaultValues={{
-                name: zone.name!,
-                markersIds: zone.markers?.map((marker) => marker.markerId!) || ([] as number[]),
-                isFinal: zone.isFinal
-              }}
-            />
-          )}
+          onDiscardClick={onDiscardClick}
         />
       )}
 
-      {selectedOption === 'delete' && (
+      {selectedOption === 'finishProcessing' && (
         <ConfirmDialog
           open={true}
-          title={translate('deleteAction.zones.title')}
-          content={translate('deleteAction.zones.message', { name: zone.name })}
-          discardText={translate('deleteAction.zones.labels.discard')}
-          confirmText={translate('deleteAction.zones.labels.confirm')}
+          discardText={translate('zonesContent.table.actions.finishProcessing.labels.discard')}
+          confirmText={translate('zonesContent.table.actions.finishProcessing.labels.confirm')}
+          title={translate('zonesContent.table.actions.finishProcessing.title')}
+          content={translate('zonesContent.table.actions.finishProcessing.message', {
+            goodNumber: entry.id!
+          })}
+          onConfirmClick={handleFinishProcessing}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
-          onConfirmClick={onConfirmClick}
         />
       )}
     </div>
