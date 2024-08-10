@@ -28,12 +28,15 @@ import type {
   GetApiVendorAllParams,
   GetApiZoneAllWithParamsParams,
   GetApiZoneEntriesParams,
+  LoginDto,
   MarkerDto,
   MarkerFormDto,
   PaginationParameters,
   PostApiDeliveryGenerateBarcodePdfParams,
   PostApiEntryMoveParams,
   PostApiEntrySplitParams,
+  RegisterDto,
+  TokenResponse,
   VendorDto,
   VendorFormDto,
   ZoneDto,
@@ -45,6 +48,55 @@ import type { BodyType } from './api'
 type SecondParameter<T extends (...args: any) => any> = Parameters<T>[1]
 
 export const getWarehouseManagementApi = () => {
+  const postApiAuthLogin = (
+    loginDto: BodyType<LoginDto>,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<TokenResponse>(
+      {
+        url: `/api/Auth/login`,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        data: loginDto
+      },
+      options
+    )
+  }
+
+  const postApiAuthRegister = (
+    registerDto: BodyType<RegisterDto>,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<string>(
+      {
+        url: `/api/Auth/register`,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        data: registerDto
+      },
+      options
+    )
+  }
+
+  const postApiAuthRefresh = (
+    postApiAuthRefreshBody: BodyType<string>,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<TokenResponse>(
+      {
+        url: `/api/Auth/refresh`,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        data: postApiAuthRefreshBody
+      },
+      options
+    )
+  }
+
+  const postLogout = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<void>({ url: `/logout`, method: 'POST' }, options)
+  }
+
   const getApiDeliveryId = (id: number, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<DeliveryDto>({ url: `/api/Delivery/${id}`, method: 'GET' }, options)
   }
@@ -639,6 +691,10 @@ export const getWarehouseManagementApi = () => {
   }
 
   return {
+    postApiAuthLogin,
+    postApiAuthRegister,
+    postApiAuthRefresh,
+    postLogout,
     getApiDeliveryId,
     getApiDeliveryAll,
     postApiDeliveryAdd,
@@ -704,6 +760,18 @@ export const getWarehouseManagementApi = () => {
     getApiZoneEntries
   }
 }
+export type PostApiAuthLoginResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiAuthLogin']>>
+>
+export type PostApiAuthRegisterResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiAuthRegister']>>
+>
+export type PostApiAuthRefreshResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiAuthRefresh']>>
+>
+export type PostLogoutResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postLogout']>>
+>
 export type GetApiDeliveryIdResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiDeliveryId']>>
 >

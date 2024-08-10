@@ -14,6 +14,8 @@ import TableActionsMenu from '../actionsMenu/TableActionsMenu'
 import ZonesContentTableActionsMenu from '../actionsMenu/ZonesContentActionsMenu'
 import { EntryDto } from '@/services/model'
 import useGetEntries from '@/hooks/services/entries/useGetEntries'
+import ChipsList from '@/components/features/ChipsList.tsx'
+import { getEntryStatus, useGetEntryStatus } from '@/utils/getEntryStatus.ts'
 
 interface Row {
   number: number
@@ -46,7 +48,7 @@ export default function ZonesContentTable() {
 
   const columnsData: Column<Row>[] = [
     { key: 'number', title: translate('zonesContent.table.columns.number') },
-    { key: 'vendorName', title: translate('zonesContent.table.columns.number') },
+    { key: 'vendorName', title: translate('zonesContent.table.columns.vendorName') },
     { key: 'receptionNumber', title: translate('zonesContent.table.columns.receptionNumber') },
     { key: 'goodNumber', title: translate('zonesContent.table.columns.goodNumber') },
     { key: 'status', title: translate('zonesContent.table.columns.status') },
@@ -60,18 +62,19 @@ export default function ZonesContentTable() {
 
   console.log(entries)
 
-  // function transformDataToRows(entries: EntryDto[]): Row[] {
-  //   return entries.map((entry: EntryDto) => ({
-  //     id: entry.id!,
-  //     number: entry.id!,
-  //     vendorName: entry.vendorName,
-  //     receptionNumber: entry.receptionNumber,
-  //     goodNumber: entry.goodNumber
-  //     actions: <ZonesContentTableActionsMenu key={entry.id} zoneContent={entries} />
-  //   }))
-  // }
+  function transformDataToRows(entries: EntryDto[]): Row[] {
+    return entries.map((entry: EntryDto) => ({
+      id: entry.id!,
+      number: entry.id!,
+      // vendorName: entry.vendorName,
+      // receptionNumber: entry.receptionNumber,
+      // goodNumber: entry.goodNumber
+      status: <ChipsList items={[getEntryStatus(entry)]} />,
+      actions: <ZonesContentTableActionsMenu key={entry.id} entry={entry.zone!} />
+    }))
+  }
 
-  // const rowData = transformDataToRows(entries.results! || [])
+  const rowData = transformDataToRows(entries.results! || [])
 
   const filteredRows = rowData.filter((row: Row) => {
     return columnsData.some((column: Column<Row>) => {
@@ -93,21 +96,21 @@ export default function ZonesContentTable() {
         placeholder={translate('zonesContent.filters.search')}
       />
 
-      <FormControlLabel
-        value="start"
-        control={<Switch color="primary" onChange={handleToggleChange} />}
-        label={translate('zonesContent.filters.toggle')}
-        labelPlacement="start"
-      />
+      {/*<FormControlLabel*/}
+      {/*  value="start"*/}
+      {/*  control={<Switch color="primary" onChange={handleToggleChange} />}*/}
+      {/*  label={translate('zonesContent.filters.toggle')}*/}
+      {/*  labelPlacement="start"*/}
+      {/*/>*/}
 
-      <BaseFormDialog
-        open={openMoveEntryDialog}
-        onCloseDialog={onCloseMoveEntryDialog}
-        title={translate('zonesContent.labels.moveEntry')}
-        renderForm={(handleCloseForm) => (
-          <MoveEntryForm handleCloseForm={handleCloseForm} quantity={quantity} />
-        )}
-      />
+      {/*<BaseFormDialog*/}
+      {/*  open={openMoveEntryDialog}*/}
+      {/*  onCloseDialog={onCloseMoveEntryDialog}*/}
+      {/*  title={translate('zonesContent.labels.moveEntry')}*/}
+      {/*  renderForm={(handleCloseForm) => (*/}
+      {/*    <MoveEntryForm handleCloseForm={handleCloseForm} quantity={quantity} />*/}
+      {/*  )}*/}
+      {/*/>*/}
     </DataTable>
   )
 }

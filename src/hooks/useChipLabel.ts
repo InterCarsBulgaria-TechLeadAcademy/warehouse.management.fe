@@ -1,17 +1,29 @@
 import { useTranslation } from 'react-i18next'
 
-export default function useChipLabel(item: any) {
+export enum ChipStatus {
+  Waiting = 'Waiting',
+  Processing = 'Processing',
+  Finished = 'Finished',
+  Approved = 'Approved'
+}
+
+export default function useChipLabel() {
   const { t: translate } = useTranslation()
-  switch (item) {
-    case 'Waiting':
-      return translate('deliveries.table.rows.status.waiting')
-    case 'Processing':
-      return translate('deliveries.table.rows.status.processing')
-    case 'Finished':
-      return translate('deliveries.table.rows.status.finished')
-    case 'Approved':
-      return translate('deliveries.table.rows.status.approved')
-    default:
-      return item
+
+  function getChipLabel(item: string) {
+    switch (item) {
+      case ChipStatus.Waiting:
+        return translate('deliveries.table.rows.status.waiting')
+      case ChipStatus.Processing:
+        return translate('deliveries.table.rows.status.processing')
+      case ChipStatus.Finished:
+        return translate('deliveries.table.rows.status.finished')
+      case ChipStatus.Approved:
+        return translate('deliveries.table.rows.status.approved')
+      default:
+        return item
+    }
   }
+
+  return { getChipLabel }
 }

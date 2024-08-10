@@ -49,12 +49,18 @@ export default function NewDeliveryStep5Form() {
           </Box>
           <Box>
             <Typography>{translate('deliveries.newDelivery.labels.step1.markers')}</Typography>
-            <ChipsList
-              items={formsData.markers.map((markerId: number) => {
-                const marker = markers.find((marker) => marker.id === markerId)
-                return marker ? marker.name : ''
-              })}
-            />
+            {formsData.markers.length > 0 ? (
+              <ChipsList
+                items={formsData.markers.map((markerId: number) => {
+                  const marker = markers.find(
+                    (marker) => marker.id?.toString() === markerId.toString()
+                  )
+                  return marker ? marker.name : ''
+                })}
+              />
+            ) : (
+              <Typography>-</Typography>
+            )}
           </Box>
         </Box>
       </Box>

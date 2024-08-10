@@ -38,7 +38,7 @@ export default function VendorTableActionsMenu({ vendor }: VendorsTableActionsMe
     })
   }
 
-  const onConfirmClick = () => {
+  const onConfirmClick = async () => {
     mutationDelete.mutate(vendor.id!)
     handleClose()
   }
