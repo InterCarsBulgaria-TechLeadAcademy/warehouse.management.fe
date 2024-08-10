@@ -70,7 +70,7 @@ export default function ZonesContentTable() {
       // receptionNumber: entry.receptionNumber,
       // goodNumber: entry.goodNumber
       status: <ChipsList items={[getEntryStatus(entry)]} />,
-      actions: <ZonesContentTableActionsMenu key={entry.id} entry={entry.zone!} />
+      actions: <ZonesContentTableActionsMenu key={entry.id} entry={entry} />
     }))
   }
 

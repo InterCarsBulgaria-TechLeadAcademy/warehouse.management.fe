@@ -2129,7 +2129,7 @@
       }
     },
     "/api/Entry/start/{id}": {
-      "get": {
+      "put": {
         "tags": [
           "Entry"
         ],
@@ -2192,7 +2192,7 @@
       }
     },
     "/api/Entry/finish/{id}": {
-      "get": {
+      "put": {
         "tags": [
           "Entry"
         ],

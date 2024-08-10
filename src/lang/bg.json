@@ -645,10 +645,34 @@
         "MoveToNewZone": "Премести в нова зона",
         "StartProcessing": "Започни обработка",
         "FinishProcessing": "Завърши обработка",
-        "DeliveryDetails": "Детайли"
+        "DeliveryDetails": "Детайли",
+        "NoActions": "Няма действия"
       },
       "actions": {
-
+        "startProcessing": {
+          "title": "Започване на обработка",
+          "message": "Сигурни ли сте, че искате да започнете обработка на стока №{{goodNumber}}?",
+          "labels": {
+            "discard": "Откажи",
+            "confirm": "Потвърди"
+          },
+          "snackBar": {
+            "success": "Обработката на стока №{{goodNumber}} е започната успешно",
+            "error": "Възникна грешка"
+          }
+        },
+        "finishProcessing": {
+          "title": "Завършване на обработка",
+          "message": "Сигурни ли сте, че искате да завършите обработка на стока №{{goodNumber}}?",
+          "labels": {
+            "discard": "Откажи",
+            "confirm": "Потвърди"
+          },
+          "snackBar": {
+            "success": "Обработката на стока №{{goodNumber}} е завършена успешно",
+            "error": "Възникна грешка"
+          }
+        }
       }
     },
     "newZonesContent": {
