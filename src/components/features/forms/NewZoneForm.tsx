@@ -14,6 +14,7 @@ import {
 } from '@mui/material'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import { markerIsSelected } from '@/utils/markerIsSelected.ts'
 
 interface NewZoneFormProps extends UseFormReturn<NewZoneFormData> {
   defaultValues?: {
@@ -80,8 +81,8 @@ export default function NewZoneForm({
                 return selectedMarkerNames
               }}>
               {markers.map((marker: MarkerDto) => (
-                <MenuItem key={marker.id} value={marker.id!}>
-                  <Checkbox checked={field.value?.includes(marker.id!.toString())} />
+                <MenuItem key={marker.id} value={marker.id?.toString()}>
+                  <Checkbox checked={markerIsSelected(field.value, marker.id!)} />
                   <ListItemText primary={marker.name} />
                 </MenuItem>
               ))}

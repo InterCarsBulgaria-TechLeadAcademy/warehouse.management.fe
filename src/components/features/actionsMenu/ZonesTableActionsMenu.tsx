@@ -11,14 +11,14 @@ import useDeleteZone from '@/hooks/services/zones/useDeleteZone'
 import useUpdateZone from '@/hooks/services/zones/useUpdateZone'
 
 interface ZonesTableActionsMenuProps {
-  zoneContent: ZoneDto
+  zone: ZoneDto
 }
 
-export default function ZonesTableActionsMenu({ zoneContent }: ZonesTableActionsMenuProps) {
+export default function ZonesTableActionsMenu({ zone }: ZonesTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
-  const mutationDelete = useDeleteZone(zoneContent.name!)
-  const mutationUpdate = useUpdateZone(zoneContent.name!)
+  const mutationDelete = useDeleteZone(zone.name!)
+  const mutationUpdate = useUpdateZone(zone.name!)
 
   const handleClose = () => {
     setSelectedOption(null)
@@ -33,15 +33,14 @@ export default function ZonesTableActionsMenu({ zoneContent }: ZonesTableActions
   }
 
   const onConfirmClick = () => {
-    mutationDelete.mutate(zoneContent.id!)
+    mutationDelete.mutate(zone.id!)
     handleClose()
   }
 
-  //TODO: да тествам когато БЕ оправят дали се променят всички полета, не само name
   const handleSubmit: SubmitHandler<NewZoneFormData> = (data) => {
     const markerIds = data.markers!.map((marker) => Number(marker))
     mutationUpdate.mutate({
-      id: zoneContent.id!,
+      id: zone.id!,
       data: { name: data.zoneName, markerIds: markerIds, isFinal: data.isFinal }
     })
   }
@@ -68,10 +67,9 @@ export default function ZonesTableActionsMenu({ zoneContent }: ZonesTableActions
             <NewZoneForm
               {...methods}
               defaultValues={{
-                name: zoneContent.name!,
-                markersIds:
-                  zoneContent.markers?.map((marker) => marker.markerId!) || ([] as number[]),
-                isFinal: zoneContent.isFinal
+                name: zone.name!,
+                markersIds: zone.markers?.map((marker) => marker.markerId!) || ([] as number[]),
+                isFinal: zone.isFinal
               }}
             />
           )}
@@ -82,7 +80,7 @@ export default function ZonesTableActionsMenu({ zoneContent }: ZonesTableActions
         <ConfirmDialog
           open={true}
           title={translate('zones.table.actions.delete.title')}
-          content={translate('zones.table.actions.delete.message', { name: zoneContent.name })}
+          content={translate('zones.table.actions.delete.message', { name: zone.name })}
           discardText={translate('zones.table.actions.delete.labels.discard')}
           confirmText={translate('zones.table.actions.delete.labels.confirm')}
           onCloseDialog={handleClose}
