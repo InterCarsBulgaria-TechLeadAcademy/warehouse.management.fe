@@ -1,5 +1,5 @@
 import React from 'react'
-import WarningActionDialog from '../../shared/WarningActionDialog'
+import ConfirmDialog from '../../shared/ConfirmDialog'
 import { useTranslation } from 'react-i18next'
 import FormDialog from '../../shared/FormDialog'
 import { SubmitHandler } from 'react-hook-form'
@@ -101,7 +101,7 @@ export default function UsersTableActionsMenu({ user }: UsersTableActionsMenuPro
       )}
 
       {selectedOption === 'delete' && (
-        <WarningActionDialog
+        <ConfirmDialog
           open={true}
           title={translate('vendors.table.actions.delete.title')}
           content={translate('vendors.table.actions.delete.message', { name: user.name })}
