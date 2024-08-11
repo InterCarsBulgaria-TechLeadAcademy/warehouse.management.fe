@@ -16,15 +16,20 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useTranslation } from 'react-i18next'
 import { MoveEntryFormData, createMoveEntrySchema } from '@/schemas/moveEntrySchema'
 import { useMoveEntryDialog } from '@/hooks/dialogs/zonesContent/useMoveEntryDialog'
+import { useMoveEntry } from '@/hooks/services/entries/useMoveEntry.ts'
+import useGetZones from '@/hooks/services/zones/useGetZones.ts'
 
 interface FormMoveEntryProps {
   quantity: number
+  entryId: number
   handleCloseForm: () => void
 }
 
-export default function MoveEntryForm({ quantity, handleCloseForm }: FormMoveEntryProps) {
+export default function MoveEntryForm({ quantity, handleCloseForm, entryId }: FormMoveEntryProps) {
   const [currentQuantity, setCurrentQuantity] = useState(quantity)
   const schema = createMoveEntrySchema(quantity)
+  const entryMove = useMoveEntry()
+  const zones = useGetZones()
 
   const {
     control,
@@ -36,12 +41,11 @@ export default function MoveEntryForm({ quantity, handleCloseForm }: FormMoveEnt
   })
 
   const { t: translate } = useTranslation()
-  const zones = ['Първа', 'Втора', 'Трета']
 
   const { onCloseMoveEntryDialog } = useMoveEntryDialog()
 
   const handleFormSubmit: SubmitHandler<MoveEntryFormData> = (data) => {
-    console.log('Form submitted:', data)
+    entryMove.mutate({ id: entryId, newZoneId: Number(data.zone) })
     handleCloseForm()
     onCloseMoveEntryDialog()
   }
@@ -55,7 +59,7 @@ export default function MoveEntryForm({ quantity, handleCloseForm }: FormMoveEnt
           render={({ field }) => (
             <TextField
               {...field}
-              label={translate('zonesContent.moveEntryForm.quantity')}
+              label={translate('zonesContent.table.actions.moveEntryForm.quantity')}
               id="quantity"
               type="number"
               value={currentQuantity}
@@ -63,6 +67,9 @@ export default function MoveEntryForm({ quantity, handleCloseForm }: FormMoveEnt
                 const value = Number(e.target.value)
                 setCurrentQuantity(value)
                 field.onChange(value)
+              }}
+              inputProps={{
+                readOnly: true
               }}
               required
               fullWidth
@@ -83,18 +90,18 @@ export default function MoveEntryForm({ quantity, handleCloseForm }: FormMoveEnt
           render={({ field }) => (
             <FormControl fullWidth error={!!errors.zone}>
               <InputLabel id="move-entry-select-label">
-                {translate('zonesContent.moveEntryForm.zone')}
+                {translate('zonesContent.table.actions.moveEntryForm.zone')}
               </InputLabel>
               <Select
                 {...field}
                 labelId="move-entry-select-label"
                 id="move-entry-select"
-                label={translate('zonesContent.moveEntryForm.zone')}
+                label={translate('zonesContent.table.actions.moveEntryForm.zone')}
                 value={field.value || ''}
                 onChange={(e) => field.onChange(e.target.value)}>
                 {zones.map((zone) => (
-                  <MenuItem key={zone} value={zone}>
-                    <ListItemText primary={zone} />
+                  <MenuItem key={zone.id!} value={zone.id!}>
+                    <ListItemText primary={zone.name!} />
                   </MenuItem>
                 ))}
               </Select>
@@ -107,7 +114,7 @@ export default function MoveEntryForm({ quantity, handleCloseForm }: FormMoveEnt
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'right', gap: '1em' }}>
         <Button type="submit" variant="contained" sx={{ mt: 5 }}>
-          {translate('zonesContent.moveEntryForm.confirm')}
+          {translate('zonesContent.table.actions.moveEntryForm.confirm')}
         </Button>
       </Box>
     </Box>
