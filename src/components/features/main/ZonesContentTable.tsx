@@ -1,21 +1,13 @@
 import React from 'react'
 import DataTable from '@/components/shared/DataTable'
 import { useTranslation } from 'react-i18next'
-import { FormControlLabel, Switch } from '@mui/material'
 import SearchInput from '../SearchInput'
 import { Column } from '@/interfaces/Column.ts'
-import BaseFormDialog from '@/components/shared/BaseFormDialog'
-import {
-  useMoveEntryDialog,
-  ZonesTableActions
-} from '@/hooks/dialogs/zonesContent/useMoveEntryDialog'
-import MoveEntryForm from '../forms/MoveEntryForm'
-import TableActionsMenu from '../actionsMenu/TableActionsMenu'
 import ZonesContentTableActionsMenu from '../actionsMenu/ZonesContentActionsMenu'
 import { EntryDto } from '@/services/model'
 import useGetEntries from '@/hooks/services/entries/useGetEntries'
 import ChipsList from '@/components/features/ChipsList.tsx'
-import { getEntryStatus, useGetEntryStatus } from '@/utils/getEntryStatus.ts'
+import { getEntryStatus } from '@/utils/getEntryStatus.ts'
 
 interface Row {
   number: number
@@ -51,6 +43,7 @@ export default function ZonesContentTable() {
     { key: 'vendorName', title: translate('zonesContent.table.columns.vendorName') },
     { key: 'receptionNumber', title: translate('zonesContent.table.columns.receptionNumber') },
     { key: 'goodNumber', title: translate('zonesContent.table.columns.goodNumber') },
+    { key: 'zoneName', title: translate('zonesContent.table.columns.zoneName') },
     { key: 'status', title: translate('zonesContent.table.columns.status') },
     {
       key: 'actions',
@@ -69,6 +62,7 @@ export default function ZonesContentTable() {
       // vendorName: entry.vendorName,
       // receptionNumber: entry.receptionNumber,
       // goodNumber: entry.goodNumber
+      zoneName: entry.zone.name!,
       status: <ChipsList items={[getEntryStatus(entry)]} />,
       actions: <ZonesContentTableActionsMenu key={entry.id} entry={entry} />
     }))

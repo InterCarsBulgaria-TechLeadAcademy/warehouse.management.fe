@@ -7,6 +7,8 @@ import { useStartProcessing } from '@/hooks/services/entries/useStartProcessing.
 import { useFinishProcessing } from '@/hooks/services/entries/useFinishProcessing.ts'
 import { getEntryStatus } from '@/utils/getEntryStatus.ts'
 import { ChipStatus } from '@/hooks/useChipLabel.ts'
+import BaseFormDialog from '@/components/shared/BaseFormDialog.tsx'
+import MoveEntryForm from '@/components/features/forms/MoveEntryForm.tsx'
 
 interface ZonesTableActionsMenuProps {
   entry: EntryDto
@@ -56,11 +58,13 @@ export default function ZonesContentTableActionsMenu({ entry }: ZonesTableAction
 
     const entryStatus = getEntryStatus(entry)
 
-    if (entryStatus === ChipStatus.Waiting) {
+    if (entryStatus !== ChipStatus.Finished) {
       options.push(availableOptions.move)
+    }
+
+    if (entryStatus === ChipStatus.Waiting && entry.zone!.isFinal!) {
       options.push(availableOptions.startProcessing)
-    } else if (entryStatus === ChipStatus.Processing) {
-      options.push(availableOptions.move)
+    } else if (entryStatus === ChipStatus.Processing && entry.zone!.isFinal!) {
       options.push(availableOptions.finishProcessing)
     }
 
@@ -69,9 +73,28 @@ export default function ZonesContentTableActionsMenu({ entry }: ZonesTableAction
       : [{ title: 'zonesContent.table.actionsMenu.NoActions', value: '' }]
   })()
 
+  function getQuantity() {
+    return (entry.packages || entry.pieces || entry.pallets) as number
+  }
+
   return (
     <div>
       <TableActionsMenu specificOptionHandler={actionHandler} options={options} />
+
+      {selectedOption === 'move' && (
+        <BaseFormDialog
+          open={true}
+          onCloseDialog={handleClose}
+          title={translate('zonesContent.labels.moveEntry')}
+          renderForm={(handleCloseForm) => (
+            <MoveEntryForm
+              handleCloseForm={handleCloseForm}
+              quantity={getQuantity()}
+              entryId={entry.id!}
+            />
+          )}
+        />
+      )}
 
       {selectedOption === 'startProcessing' && (
         <ConfirmDialog
