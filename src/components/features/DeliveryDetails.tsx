@@ -4,8 +4,8 @@ import dayjs from 'dayjs'
 import ChipsList from './ChipsList'
 import useGetDelivery from '@/hooks/services/deliveries/useGetDelivery'
 import MoveGoodsTable from './forms/newDeliveryForm/MoveGoodsTable'
-// import useGetDeliveryHistory from '@/hooks/services/deliveries/useGetDeliveryHistory'
 import editEntriesArray from '@/utils/editEntriesArray'
+import DeliveryHistoryTable from './DeliveryHistoryTable'
 
 interface DeliveryDetailsProps {
   deliveryId: number
@@ -14,9 +14,6 @@ interface DeliveryDetailsProps {
 export default function DeliveryDetails({ deliveryId }: DeliveryDetailsProps) {
   const { t: translate } = useTranslation()
   const delivery = useGetDelivery(deliveryId)
-
-  //For dot 5
-  // const deliveryHistory = useGetDeliveryHistory(deliveryId)
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2em' }}>
@@ -139,7 +136,7 @@ export default function DeliveryDetails({ deliveryId }: DeliveryDetailsProps) {
 
         <Box sx={{ display: 'flex', gap: '2em' }}>
           <Box>
-            <Typography></Typography>
+            <DeliveryHistoryTable deliveryId={deliveryId} />
           </Box>
         </Box>
       </Box>

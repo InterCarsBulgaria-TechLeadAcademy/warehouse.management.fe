@@ -5,7 +5,7 @@ export default function useGetDeliveryHistory(id: number) {
   const { data } = useSuspenseQuery({
     queryKey: ['deliveries', id], //add dependencies on deliveries
     queryFn: () => {
-      return getWarehouseManagementApi().getApiDeliveryId(id)
+      return getWarehouseManagementApi().getApiDeliveryHistoryId(id)
     }
   })
 
