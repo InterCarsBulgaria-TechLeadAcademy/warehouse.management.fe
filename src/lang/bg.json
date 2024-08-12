@@ -644,6 +644,7 @@
       },
       "actionsMenu": {
         "MoveToNewZone": "Премести в нова зона",
+        "SplitEntry": "Раздели",
         "StartProcessing": "Започни обработка",
         "FinishProcessing": "Завърши обработка",
         "DeliveryDetails": "Детайли",
@@ -691,6 +692,13 @@
           "snackBar": {
               "success": "Стоката е преместена успешно",
               "error": "Възникна грешка"
+          }
+        },
+        "splitEntry": {
+          "title": "Разделяне на стока",
+          "snackBar": {
+            "success": "Стоката е разделена успешно",
+            "error": "Възникна грешка"
           }
         }
       }
