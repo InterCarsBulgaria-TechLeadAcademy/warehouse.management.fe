@@ -91,7 +91,6 @@ export default function ZonesContentTableActionsMenu({ entry }: ZonesTableAction
             <MoveEntryForm
               handleCloseForm={handleCloseForm}
               action="move"
-              readOnlyQuantity={true}
               quantity={getQuantity()}
               entryId={entry.id!}
             />

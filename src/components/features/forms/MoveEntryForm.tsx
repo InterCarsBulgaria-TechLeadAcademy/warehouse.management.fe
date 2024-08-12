@@ -22,7 +22,6 @@ import { useSplitEntry } from '@/hooks/services/entries/useSplitEntry'
 
 interface FormMoveEntryProps {
   action: string
-  readOnlyQuantity?: boolean
   quantity: number
   entryId: number
   handleCloseForm: () => void
@@ -32,8 +31,7 @@ export default function MoveEntryForm({
   action,
   quantity,
   handleCloseForm,
-  entryId,
-  readOnlyQuantity
+  entryId
 }: FormMoveEntryProps) {
   const [currentQuantity, setCurrentQuantity] = useState(quantity)
   const schema = createMoveEntrySchema(quantity)
@@ -86,7 +84,7 @@ export default function MoveEntryForm({
                 field.onChange(value)
               }}
               inputProps={{
-                readOnly: readOnlyQuantity || false
+                readOnly: action === 'move' ? true : false
               }}
               required
               fullWidth
