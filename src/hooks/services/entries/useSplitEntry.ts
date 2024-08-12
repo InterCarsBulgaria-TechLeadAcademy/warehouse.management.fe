@@ -9,8 +9,15 @@ export function useSplitEntry() {
   const queryClient = useQueryClient()
 
   const mutationUpdate = useMutation({
-    mutationFn: ({ count, newZoneId }: { count: number; newZoneId: number }) =>
-      getWarehouseManagementApi().postApiEntrySplit({ count, newZoneId }),
+    mutationFn: ({
+      count,
+      newZoneId,
+      entryId
+    }: {
+      count: number
+      newZoneId: number
+      entryId: number
+    }) => getWarehouseManagementApi().postApiEntrySplit({ count, newZoneId }, { id: entryId }),
 
     onSuccess: (_, id) => {
       queryClient.invalidateQueries({ queryKey: ['entries'] })

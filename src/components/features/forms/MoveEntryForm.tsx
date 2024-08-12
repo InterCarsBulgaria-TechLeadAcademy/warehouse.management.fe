@@ -58,7 +58,7 @@ export default function MoveEntryForm({
         entryMove.mutate({ id: entryId, newZoneId: Number(data.zone) })
         break
       case 'split':
-        entrySplit.mutate({ count: data.quantity, newZoneId: Number(data.zone) })
+        entrySplit.mutate({ count: data.quantity, newZoneId: Number(data.zone), entryId: entryId })
         break
     }
     handleCloseForm()
