@@ -26,18 +26,16 @@ export default function Roles() {
 
   return (
     <>
-     <h1>Roles</h1>
-     
-      {/* <SkeletonPage
+      <SkeletonPage
         // TODO: Add corect translation! Discuss it with Boyadzhiev.
-        header={translate('Потребители')}
-        description={translate('Управление на потребители')}
-        buttonText={translate('нов потребител')}
+        header={translate('Роли')}
+        description={translate('Управление на роли')}
+        buttonText={translate('нова роля')}
         buttonClickHandler={handleClickOpen}
         table={<UsersTable />}
       />
 
-      <FormDialog<NewUserFormData>
+      {/* <FormDialog<NewUserFormData>
         open={openDialog}
         title={translate('Създаване на нов потребител')}
         discardText={translate('изход')}
