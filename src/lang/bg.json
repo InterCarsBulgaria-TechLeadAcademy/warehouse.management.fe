@@ -295,7 +295,7 @@
     },
     "table": {
       "columns": {
-        "number": "Номер",
+        "number": "№",
         "vendorName": "Доставчик",
         "deliveryNumber": "Номер(а) на доставка",
         "receptionNumber": "Номер(а) на рецепция",
@@ -635,7 +635,7 @@
     },
     "table": {
       "columns": {
-        "number": "Запис №",
+        "number": "№",
         "vendorName": "Доставчик",
         "receptionNumber": "Рецепция №",
         "goodNumber": "Стока №",
@@ -764,7 +764,7 @@
     },
     "table": {
       "columns": {
-        "number": "Номер",
+        "number": "№",
         "name": "Име",
         "actions": "Действия"
       },
@@ -835,7 +835,22 @@
   },
   "differences": {
     "title": "Разлики",
-    "description": "Управление на разлики"
+    "description": "Управление на разлики",
+    "filters": {
+      "search": "Търсене"
+    },
+    "table": {
+      "columns": {
+        "number": "№",
+        "internalNumber":"Вътрешен №",
+        "activeNumber":"Активен №",
+        "receptionNumber":"Рецепция №",
+        "count":"Брой",
+        "zone":"Зона",
+        "comment":"Коментар",
+        "admin-comment": "Коментар админ",
+        "actions":"Действия"
+      }
+    }
   }
 }
-
