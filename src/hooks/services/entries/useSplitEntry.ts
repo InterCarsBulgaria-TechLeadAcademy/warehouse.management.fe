@@ -17,7 +17,7 @@ export function useSplitEntry() {
       count: number
       newZoneId: number
       entryId: number
-    }) => getWarehouseManagementApi().postApiEntrySplit({ count, newZoneId }, { id: entryId }),
+    }) => getWarehouseManagementApi().postApiEntrySplitId(entryId, { count, newZoneId }),
 
     onSuccess: (_, id) => {
       queryClient.invalidateQueries({ queryKey: ['entries'] })

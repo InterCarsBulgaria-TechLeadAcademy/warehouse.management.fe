@@ -10,7 +10,7 @@ export function useMoveEntry() {
 
   const mutationUpdate = useMutation({
     mutationFn: ({ id, newZoneId }: { id: number; newZoneId: number }) =>
-      getWarehouseManagementApi().postApiEntryMove(newZoneId, { id }),
+      getWarehouseManagementApi().postApiEntryMoveId(id, newZoneId),
     onSuccess: (_, id) => {
       queryClient.invalidateQueries({ queryKey: ['entries'] })
       showSnackbar({
