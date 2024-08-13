@@ -849,7 +849,30 @@
         "zone":"Зона",
         "comment":"Коментар",
         "admin-comment": "Коментар админ",
+        "status": "Статус",
+        "type": "Тип",
+        "createdAt":"Създадена на",
+        "delivery-systemNumber": "Системен № на доставка",
         "actions":"Действия"
+      },
+      "actionsMenu": {
+        "startProcessing":"Започни обработка",
+        "finishProcessing":"Завърши обработка",
+        "no-differences": "Няма разлики"
+      },
+      "actions": {
+        "startProcessing": {
+          "title": "Започване на обработка",
+          "message": "Сигурни ли сте, че искате да започнете обработка на разлика?",
+          "labels": {
+            "discard": "Откажи",
+            "confirm": "Потвърди"
+          },
+          "snackBar": {
+            "success": "Обработката на разлика е започната успешно",
+            "error": "Възникна грешка"
+          }
+        }
       }
     }
   }

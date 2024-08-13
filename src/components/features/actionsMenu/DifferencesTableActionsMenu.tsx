@@ -9,6 +9,7 @@ import TableActionsMenu from './TableActionsMenu'
 import useUpdateVendor from '@/hooks/services/vendors/useUpdateVendor'
 import useDeleteVendor from '@/hooks/services/vendors/useDeleteVendor'
 import ConfirmDialog from '../../shared/ConfirmDialog.tsx'
+import { useDifferenceStartProcessing } from '@/hooks/services/differences/useDifferenceStartProcessing.ts'
 
 interface DifferencesTableActionsMenuProps {
   differences: any
@@ -19,8 +20,8 @@ export default function DifferencesTableActionsMenu({
 }: DifferencesTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
-  //   const mutationUpdate = useUpdateVendor(vendor.name!, vendorNumber)
-  //   const mutationDelete = useDeleteVendor(vendor.name!)
+  const differenceStartProcessing = useDifferenceStartProcessing()
+  // const differenceFinishProcessing = useDifferenceFinishProcessing()
 
   const handleClose = () => {
     setSelectedOption(null)
@@ -30,66 +31,43 @@ export default function DifferencesTableActionsMenu({
     handleClose()
   }
 
-  const handleSubmit: SubmitHandler<NewVendorFormData> = (data) => {
-    // const markerIds = data.markers!.map((marker) => Number(marker))
-    // mutationUpdate.mutate({
-    //   id: vendor.id!,
-    //   data: { name: data.vendorName, systemNumber: data.vendorNumber, markerIds: markerIds }
-    // })
-  }
-
-  const onConfirmClick = () => {
-    // mutationDelete.mutate(vendor.id!)
-    handleClose()
-  }
-
   const actionHandler = (option: string) => {
     setSelectedOption(option)
   }
 
+  function handleStartProcessing() {
+    // differenceStartProcessing.mutate()
+    handleClose()
+  }
+
+  function handleFinishProcessing() {
+    // entryFinishProcessing.mutate(entry.id!)
+    handleClose()
+  }
+
+  // TODO: в зависимост от статуса трябва да се показват различни options на отделните редове
   const options = [
-    { title: 'vendors.table.actionsMenu.edit', value: 'edit' },
-    { title: 'vendors.table.actionsMenu.delete', value: 'delete' }
+    { title: 'differences.table.actionsMenu.startProcessing', value: 'startProcessing' },
+    { title: 'differences.table.actionsMenu.finishProcessing', value: 'finishProcessing' },
+    { title: 'differences.table.actionsMenu.no-differences', value: 'noDifferences' }
   ]
 
   return (
     <div>
       <TableActionsMenu specificOptionHandler={actionHandler} options={options} />
 
-      {/* {selectedOption === 'edit' && (
-        <FormDialog<NewVendorFormData>
-          open={true}
-          title={translate('vendors.table.actions.edit.title')}
-          discardText={translate('vendors.table.actions.edit.labels.exit')}
-          confirmText={translate('vendors.table.actions.edit.labels.edit')}
-          onCloseDialog={handleClose}
-          schema={newVendorSchema}
-          onSubmit={handleSubmit}
-          renderForm={(methods) => (
-            <NewVendorForm
-              {...methods}
-              defaultValues={{
-                name: vendor.name!,
-                systemNumber: vendor.systemNumber!,
-                markerIds: vendor.markers?.map((marker) => marker.markerId!) || ([] as number[])
-              }}
-            />
-          )}
-        />
-      )} */}
-
-      {/* {selectedOption === 'delete' && (
+      {selectedOption === 'startProcessing' && (
         <ConfirmDialog
           open={true}
-          title={translate('vendors.table.actions.delete.title')}
-          content={translate('vendors.table.actions.delete.message', { name: vendor.name })}
-          discardText={translate('vendors.table.actions.delete.labels.discard')}
-          confirmText={translate('vendors.table.actions.delete.labels.confirm')}
+          discardText={translate('differences.table.actions.startProcessing.labels.discard')}
+          confirmText={translate('differences.table.actions.startProcessing.labels.confirm')}
+          title={translate('differences.table.actions.startProcessing.title')}
+          content={translate('differences.table.actions.startProcessing.message')}
+          onConfirmClick={handleStartProcessing}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
-          onConfirmClick={onConfirmClick}
         />
-      )} */}
+      )}
     </div>
   )
 }

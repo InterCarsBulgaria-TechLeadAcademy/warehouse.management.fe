@@ -7,6 +7,8 @@ import { DifferenceDto } from '@/services/model'
 import useGetDifferences from '@/hooks/services/differences/useGetDifferences'
 import DifferencesTableActionsMenu from '../actionsMenu/DifferencesTableActionsMenu'
 import { Typography } from '@mui/material'
+import dateHelpers from '@/utils/dateHelpers'
+import ChipsList from '../ChipsList'
 
 interface Row {
   number: number
@@ -17,6 +19,10 @@ interface Row {
   zone: string
   comment: string
   adminComment: React.ReactNode | string
+  // status: string
+  type: string
+  createdAt: string
+  deliverySystemNumber: string
   actions: React.ReactNode
 }
 
@@ -51,6 +57,13 @@ export default function DifferencesTable() {
     { key: 'zone', title: translate('differences.table.columns.zone') },
     { key: 'comment', title: translate('differences.table.columns.comment') },
     { key: 'adminComment', title: translate('differences.table.columns.admin-comment') },
+    // { key: 'status', title: translate('differences.table.columns.status') },
+    { key: 'type', title: translate('differences.table.columns.type') },
+    { key: 'createdAt', title: translate('differences.table.columns.createdAt') },
+    {
+      key: 'deliverySystemNumber',
+      title: translate('differences.table.columns.delivery-systemNumber')
+    },
     {
       key: 'actions',
       title: translate('differences.table.columns.actions'),
@@ -71,6 +84,11 @@ export default function DifferencesTable() {
       comment: difference.comment!,
       adminComment:
         difference.adminComment! === '' ? <Typography>-</Typography> : difference.adminComment,
+      //В момента status е число. Крис ще го направи string и тогава трябва да се оправят actions
+      // status: <ChipsList items={[difference.status!]} />,
+      type: difference.type!,
+      createdAt: dateHelpers(difference.createdAt!),
+      deliverySystemNumber: difference.deliverySystemNumber!,
       actions: <DifferencesTableActionsMenu key={difference.id} differences={differences} />
     }))
   }
