@@ -13,6 +13,7 @@ import {
   MAIN_PATH,
   DIFFERENCETYPE_PATH,
   USERS_PATH
+  // DIFFERENCES_PATH
 } from '@/router/routerPaths.ts'
 import NewDeliveryProvider from '@/contexts/NewDelivery'
 import { useAuth } from '@/hooks/services/auth/useAuth'
@@ -29,12 +30,13 @@ const ZonesContent = lazy(() => import('@/pages/main/ZonesContent'))
 const DifferenceType = lazy(() => import('@/pages/admin/DifferenceType'))
 const ErrorPage = lazy(() => import('@/pages/ErrorPage'))
 const Users = lazy(() => import('@/pages/admin/Users.tsx'))
+// const Differences = lazy(() => import('@/pages/main/Differences.tsx'))
 
 export default function Router() {
-  const { user } = useAuth();
+  const { user } = useAuth()
 
-  const isAuthenticated = !!user;
-  const isAdmin = user?.role === 'admin';
+  const isAuthenticated = !!user
+  const isAdmin = user?.role === 'admin'
 
   return useRoutes([
     {
@@ -77,7 +79,7 @@ export default function Router() {
         {
           path: DIFFERENCETYPE_PATH,
           element: <DifferenceType />
-        },
+        }
       ]
     },
     {

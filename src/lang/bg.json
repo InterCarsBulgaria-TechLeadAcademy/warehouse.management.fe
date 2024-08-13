@@ -645,6 +645,7 @@
       "actionsMenu": {
         "MoveToNewZone": "Премести в нова зона",
         "SplitEntry": "Раздели",
+        "CreateDifference": "Създай разлика",
         "StartProcessing": "Започни обработка",
         "FinishProcessing": "Завърши обработка",
         "DeliveryDetails": "Детайли",
@@ -698,6 +699,47 @@
           "title": "Разделяне на стока",
           "snackBar": {
             "success": "Стоката е разделена успешно",
+            "error": "Възникна грешка"
+          }
+        },
+        "createDifference": {
+          "title": "Създаване на разлика",
+          "confirm": "Потвърди",
+          "labels": {
+            "internalNumber": "Вътрешен №",
+            "activeNumber": "Активен №",
+            "receptionNumber": "Рецепция №",
+            "count": "Брой",
+            "differenceType": "Тип разлика",
+            "zone": "Зона",
+            "comment": "Коментар"
+          },
+          "errors": {
+            "internalNumber": {
+              "required":"Полето за вътрешен № e задължително"
+            },
+            "activeNumber": {
+              "required":"Полето за активен № e задължително"
+            },
+            "receptionNumber": {
+              "required":"Полето за рецепция № е задължително"
+            },
+            "count": {
+              "required":"Полето за брой е задължително",
+              "min": "Количеството трябва да минимум 1"
+            },
+            "differenceType": {
+              "required":"Полето за тип разлика е задължително"
+            },
+            "zone": {
+              "required":"Полето за зона е задължително"
+            },
+            "comment": {
+              "required":"Полето за коментар е задължително"
+            }
+          },
+          "snackBar": {
+            "success": "Разликата е създадена успешно",
             "error": "Възникна грешка"
           }
         }
