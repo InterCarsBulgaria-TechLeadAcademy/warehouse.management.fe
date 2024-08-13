@@ -15,6 +15,7 @@ interface DeliveryHistoryTableProps {
 
 export default function DeliveryHistoryTable({ deliveryId }: DeliveryHistoryTableProps) {
   const { t: translate } = useTranslation()
+
   const deliveriesHistory = useGetDeliveryHistory(deliveryId)
 
   console.log(deliveriesHistory)
