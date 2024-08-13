@@ -5,6 +5,7 @@ import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlin
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined'
 import DifferenceOutlinedIcon from '@mui/icons-material/DifferenceOutlined'
 import AlignHorizontalRightIcon from '@mui/icons-material/AlignHorizontalRight'
+import DifferenceIcon from '@mui/icons-material/Difference'
 import MenuListItem from './MenuListItem'
 import { useTranslation } from 'react-i18next'
 import {
@@ -16,7 +17,8 @@ import {
   MARKERS_PATH,
   DELIVERIES_PATH,
   ZONES_CONTENT_PATH,
-  DIFFERENCETYPE_PATH
+  DIFFERENCETYPE_PATH,
+  DIFFERENCES_PATH
 } from '@/router/routerPaths'
 
 interface MenuItem {
@@ -76,6 +78,11 @@ export default function MenuItems() {
       title: translate('menu.menuItems.deliveries'),
       icon: LocalShippingOutlinedIcon,
       link: DELIVERIES_PATH
+    },
+    {
+      title: translate('menu.menuItems.differences'),
+      icon: DifferenceIcon,
+      link: DIFFERENCES_PATH
     }
   ]
 

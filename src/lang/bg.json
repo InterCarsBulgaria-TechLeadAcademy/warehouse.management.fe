@@ -41,7 +41,8 @@
       "typesGoods": "Видове Стока",
       "typesDifference": "Типове Разлика",
       "markers": "Маркери",
-      "deliveries": "Доставки"
+      "deliveries": "Доставки",
+      "differences": "Разлики"
     },
     "profileMenu": {
       "name": "Христо Бояджиев",
@@ -831,6 +832,10 @@
     "labels": {
       "home": "Начална страница"
     }
+  },
+  "differences": {
+    "title": "Разлики",
+    "description": "Управление на разлики"
   }
 }
 
