@@ -10,6 +10,6 @@ export type DeliveryHistoryChangeType =
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const DeliveryHistoryChangeType = {
-  NUMBER_0: 0,
-  NUMBER_1: 1
+  Delivery: 'Delivery',
+  Entry: 'Entry'
 } as const

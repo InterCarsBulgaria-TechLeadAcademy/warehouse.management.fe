@@ -12,5 +12,4 @@ export interface DifferenceAdminCommentDto {
    * @nullable
    */
   adminComment?: string | null
-  differenceId: number
 }

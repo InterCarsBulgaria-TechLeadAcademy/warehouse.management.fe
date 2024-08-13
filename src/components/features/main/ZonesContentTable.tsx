@@ -15,6 +15,7 @@ interface Row {
   receptionNumber: number
   goodNumber: number
   status: string
+  zoneName: string
   actions: React.ReactNode
 }
 
@@ -62,7 +63,7 @@ export default function ZonesContentTable() {
       // vendorName: entry.vendorName,
       // receptionNumber: entry.receptionNumber,
       // goodNumber: entry.goodNumber
-      zoneName: entry.zone.name!,
+      zoneName: entry.zone?.name || '-',
       status: <ChipsList items={[getEntryStatus(entry)]} />,
       actions: <ZonesContentTableActionsMenu key={entry.id} entry={entry} />
     }))
