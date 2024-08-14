@@ -4162,8 +4162,8 @@
         "type": "object",
         "properties": {
           "adminComment": {
-            "maximum": 2000,
-            "minimum": 1,
+            "maxLength": 2000,
+            "minLength": 0,
             "type": "string",
             "nullable": true
           }
@@ -4339,6 +4339,28 @@
         },
         "additionalProperties": false
       },
+      "EntryDeliveryDetailsDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vendorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "systemNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "receptionNumber": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "EntryDto": {
         "type": "object",
         "properties": {
@@ -4373,11 +4395,10 @@
             "format": "date-time"
           },
           "zone": {
-            "$ref": "#/components/schemas/ZoneDto"
+            "$ref": "#/components/schemas/EntryZoneDto"
           },
-          "deliveryId": {
-            "type": "integer",
-            "format": "int32"
+          "deliveryDetails": {
+            "$ref": "#/components/schemas/EntryDeliveryDetailsDto"
           }
         },
         "additionalProperties": false
@@ -4462,6 +4483,19 @@
           "Finished"
         ],
         "type": "string"
+      },
+      "EntryZoneDto": {
+        "type": "object",
+        "properties": {
+          "zoneName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isFinal": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
       },
       "LogType": {
         "enum": [

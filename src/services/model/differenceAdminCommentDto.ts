@@ -7,8 +7,8 @@
 
 export interface DifferenceAdminCommentDto {
   /**
-   * @minimum 1
-   * @maximum 2000
+   * @minLength 0
+   * @maxLength 2000
    * @nullable
    */
   adminComment?: string | null
