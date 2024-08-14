@@ -6,7 +6,6 @@ import ConfirmDialog from '../../shared/ConfirmDialog.tsx'
 import BaseFormDialog from '@/components/shared/BaseFormDialog.tsx'
 import AdminCommentForm from '../forms/AdminCommentForm.tsx'
 import { useStartProcessingDifference } from '@/hooks/services/differences/useStartProcessingDifference.ts'
-import { useFinishProcessingDifference } from '@/hooks/services/differences/useFinishProcessingDifference.ts'
 
 interface DifferencesTableActionsMenuProps {
   difference: DifferenceDto

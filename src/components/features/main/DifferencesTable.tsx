@@ -110,7 +110,7 @@ export default function DifferencesTable() {
       <SearchInput
         value={searchTerm}
         onChange={handleSearchChange}
-        placeholder={translate('zonesContent.filters.search')}
+        placeholder={translate('differences.filters.search')}
       />
     </DataTable>
   )
