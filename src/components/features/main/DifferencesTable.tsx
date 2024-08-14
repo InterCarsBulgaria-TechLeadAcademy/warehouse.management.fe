@@ -19,7 +19,7 @@ interface Row {
   zone: string
   comment: string
   adminComment: React.ReactNode | string
-  // status: string
+  status: React.ReactNode
   type: string
   createdAt: string
   deliverySystemNumber: string
@@ -57,7 +57,7 @@ export default function DifferencesTable() {
     { key: 'zone', title: translate('differences.table.columns.zone') },
     { key: 'comment', title: translate('differences.table.columns.comment') },
     { key: 'adminComment', title: translate('differences.table.columns.admin-comment') },
-    // { key: 'status', title: translate('differences.table.columns.status') },
+    { key: 'status', title: translate('differences.table.columns.status') },
     { key: 'type', title: translate('differences.table.columns.type') },
     { key: 'createdAt', title: translate('differences.table.columns.createdAt') },
     {
@@ -84,8 +84,7 @@ export default function DifferencesTable() {
       comment: difference.comment!,
       adminComment:
         difference.adminComment! === '' ? <Typography>-</Typography> : difference.adminComment,
-      //В момента status е число. Крис ще го направи string и тогава трябва да се оправят actions
-      // status: <ChipsList items={[difference.status!]} />,
+      status: <ChipsList items={[difference.status!]} />,
       type: difference.type!,
       createdAt: dateHelpers(difference.createdAt!),
       deliverySystemNumber: difference.deliverySystemNumber!,
