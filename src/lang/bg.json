@@ -11,6 +11,7 @@
 
   "login": {
     "description": "Вътрешна система за менажиране на доставки",
+    "title": "Вход",
     "labels": {
       "email": "Имейл",
       "password": "Парола",
@@ -312,7 +313,8 @@
           "waiting": "Изчакване",
           "processing": "Обработва се",
           "finished": "Приключена",
-          "approved": "Одобрена"
+          "approved": "Одобрена",
+          "noDifferences": "Няма разлики"
         }
       },
       "actionsMenu": {
@@ -882,10 +884,17 @@
             "discard": "Откажи",
             "confirm": "Потвърди"
           },
-          "errors": {
-            "admin-comment": {
-              "required":"Полето за коментар админ е задължително"
-            }
+          "snackBar": {
+            "success": "Обработката на стока №{{differenceNumber}} е завършена успешно",
+            "error": "Възникна грешка"
+          }
+        },
+        "noDifferences": {
+          "title": "Няма разлики",
+          "labels": {
+            "admin-comment": "Коментар админ",
+            "discard": "Откажи",
+            "confirm": "Потвърди"
           },
           "snackBar": {
             "success": "Обработката на стока №{{differenceNumber}} е завършена успешно",

@@ -36,44 +36,37 @@ export default function DifferencesTableActionsMenu({
     handleClose()
   }
 
-  // TODO: Да използвам закоментираният код след като приключа
-  const options = [
-    { title: 'differences.table.actionsMenu.startProcessing', value: 'startProcessing' },
-    { title: 'differences.table.actionsMenu.finishProcessing', value: 'finishProcessing' },
-    { title: 'differences.table.actionsMenu.no-differences', value: 'noDifferences' }
-  ]
+  const options = (() => {
+    const options = []
+    const availableOptions = {
+      startProcessing: {
+        title: 'differences.table.actionsMenu.startProcessing',
+        value: 'startProcessing'
+      },
+      finishProcessing: {
+        title: 'differences.table.actionsMenu.finishProcessing',
+        value: 'finishProcessing'
+      },
+      noDifferences: {
+        title: 'differences.table.actionsMenu.no-differences',
+        value: 'noDifferences'
+      }
+    }
 
-  // const options = (() => {
-  //   const options = []
-  //   const availableOptions = {
-  //     startProcessing: {
-  //       title: 'differences.table.actionsMenu.startProcessing',
-  //       value: 'startProcessing'
-  //     },
-  //     finishProcessing: {
-  //       title: 'differences.table.actionsMenu.finishProcessing',
-  //       value: 'finishProcessing'
-  //     },
-  //     noDifferences: {
-  //       title: 'differences.table.actionsMenu.no-differences',
-  //       value: 'noDifferences'
-  //     }
-  //   }
+    switch (difference.status) {
+      case 'Waiting':
+        options.push(availableOptions.startProcessing)
+        break
 
-  //   switch (difference.status) {
-  //     case 'Waiting':
-  //       options.push(availableOptions.startProcessing)
-  //       break
+      case 'Processing':
+        options.push(availableOptions.finishProcessing, availableOptions.noDifferences)
+        break
+    }
 
-  //     case 'Processing':
-  //       options.push(availableOptions.finishProcessing, availableOptions.noDifferences)
-  //       break
-  //   }
-
-  //   return options.length > 0
-  //     ? options
-  //     : [{ title: 'differences.table.actionsMenu.noActions', value: '' }]
-  // })()
+    return options.length > 0
+      ? options
+      : [{ title: 'differences.table.actionsMenu.noActions', value: '' }]
+  })()
 
   return (
     <div>
@@ -100,7 +93,26 @@ export default function DifferencesTableActionsMenu({
           onCloseDialog={handleClose}
           title={translate('differences.table.actions.finishProcessing.title')}
           renderForm={(handleCloseForm) => (
-            <AdminCommentForm handleCloseForm={handleCloseForm} difference={difference} />
+            <AdminCommentForm
+              handleCloseForm={handleCloseForm}
+              difference={difference}
+              action="finishProcessing"
+            />
+          )}
+        />
+      )}
+
+      {selectedOption === 'noDifferences' && (
+        <BaseFormDialog
+          open={true}
+          onCloseDialog={handleClose}
+          title={translate('differences.table.actions.noDifferences.title')}
+          renderForm={(handleCloseForm) => (
+            <AdminCommentForm
+              handleCloseForm={handleCloseForm}
+              difference={difference}
+              action="noDifferences"
+            />
           )}
         />
       )}

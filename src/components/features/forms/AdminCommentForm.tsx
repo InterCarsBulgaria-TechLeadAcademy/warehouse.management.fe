@@ -1,4 +1,5 @@
 import { useFinishProcessingDifference } from '@/hooks/services/differences/useFinishProcessingDifference'
+import { useNoDifferences } from '@/hooks/services/differences/useNoDifferences'
 import { DifferenceDto } from '@/services/model'
 import { Box, Button, TextField } from '@mui/material'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
@@ -7,11 +8,13 @@ import { useTranslation } from 'react-i18next'
 interface CreateDifferenceFormProps {
   handleCloseForm: () => void
   difference: DifferenceDto
+  action: string
 }
 
 export default function AdminCommentForm({
   handleCloseForm,
-  difference
+  difference,
+  action
 }: CreateDifferenceFormProps) {
   const {
     control,
@@ -27,10 +30,17 @@ export default function AdminCommentForm({
 
   const { t: translate } = useTranslation()
   const differenceFinishProcessing = useFinishProcessingDifference()
+  const noDifferences = useNoDifferences()
 
   const handleFormSubmit: SubmitHandler<{ adminComment: string }> = (data) => {
-    console.log(data)
-    differenceFinishProcessing.mutate({ id: difference.id!, adminComment: data.adminComment })
+    switch (action) {
+      case 'finishProcessing':
+        differenceFinishProcessing.mutate({ id: difference.id!, adminComment: data.adminComment })
+        break
+      case 'noDifferences':
+        noDifferences.mutate({ id: difference.id!, adminComment: data.adminComment })
+        break
+    }
     handleCloseForm()
   }
 
