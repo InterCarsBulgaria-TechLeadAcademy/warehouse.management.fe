@@ -33,7 +33,7 @@ export default function DifferencesTable() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const differences = useGetDifferences()
 
-  console.log(differences)
+  // console.log(differences)
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
@@ -88,7 +88,7 @@ export default function DifferencesTable() {
       type: difference.type!,
       createdAt: dateHelpers(difference.createdAt!),
       deliverySystemNumber: difference.deliverySystemNumber!,
-      actions: <DifferencesTableActionsMenu key={difference.id} differences={differences} />
+      actions: <DifferencesTableActionsMenu key={difference.id} difference={difference} />
     }))
   }
 

@@ -858,7 +858,8 @@
       "actionsMenu": {
         "startProcessing":"Започни обработка",
         "finishProcessing":"Завърши обработка",
-        "no-differences": "Няма разлики"
+        "no-differences": "Няма разлики",
+        "noActions": "Няма действия"
       },
       "actions": {
         "startProcessing": {

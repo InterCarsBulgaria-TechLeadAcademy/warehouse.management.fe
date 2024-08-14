@@ -1,27 +1,23 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { DifferenceDto } from '@/services/model'
-import FormDialog from '../../shared/FormDialog'
-import { NewVendorFormData, newVendorSchema } from '@/schemas/newVendorSchema'
-import NewVendorForm from '../forms/NewVendorForm'
-import { SubmitHandler } from 'react-hook-form'
 import TableActionsMenu from './TableActionsMenu'
-import useUpdateVendor from '@/hooks/services/vendors/useUpdateVendor'
-import useDeleteVendor from '@/hooks/services/vendors/useDeleteVendor'
 import ConfirmDialog from '../../shared/ConfirmDialog.tsx'
 import { useDifferenceStartProcessing } from '@/hooks/services/differences/useDifferenceStartProcessing.ts'
 
 interface DifferencesTableActionsMenuProps {
-  differences: any
+  difference: DifferenceDto
 }
 
 export default function DifferencesTableActionsMenu({
-  differences
+  difference
 }: DifferencesTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
   const differenceStartProcessing = useDifferenceStartProcessing()
   // const differenceFinishProcessing = useDifferenceFinishProcessing()
+
+  console.log(difference)
 
   const handleClose = () => {
     setSelectedOption(null)
@@ -46,11 +42,43 @@ export default function DifferencesTableActionsMenu({
   }
 
   // TODO: в зависимост от статуса трябва да се показват различни options на отделните редове
-  const options = [
-    { title: 'differences.table.actionsMenu.startProcessing', value: 'startProcessing' },
-    { title: 'differences.table.actionsMenu.finishProcessing', value: 'finishProcessing' },
-    { title: 'differences.table.actionsMenu.no-differences', value: 'noDifferences' }
-  ]
+  // const options = [
+  //   { title: 'differences.table.actionsMenu.startProcessing', value: 'startProcessing' },
+  //   { title: 'differences.table.actionsMenu.finishProcessing', value: 'finishProcessing' },
+  //   { title: 'differences.table.actionsMenu.no-differences', value: 'noDifferences' }
+  // ]
+
+  const options = (() => {
+    const options = []
+    const availableOptions = {
+      startProcessing: {
+        title: 'differences.table.actionsMenu.startProcessing',
+        value: 'startProcessing'
+      },
+      finishProcessing: {
+        title: 'differences.table.actionsMenu.finishProcessing',
+        value: 'finishProcessing'
+      },
+      noDifferences: {
+        title: 'differences.table.actionsMenu.no-differences',
+        value: 'noDifferences'
+      }
+    }
+
+    switch (difference.status) {
+      case 'Waiting':
+        options.push(availableOptions.startProcessing)
+        break
+
+      case 'Processing':
+        options.push(availableOptions.finishProcessing, availableOptions.noDifferences)
+        break
+    }
+
+    return options.length > 0
+      ? options
+      : [{ title: 'differences.table.actionsMenu.noActions', value: '' }]
+  })()
 
   return (
     <div>
