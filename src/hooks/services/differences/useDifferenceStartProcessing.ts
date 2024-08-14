@@ -9,11 +9,13 @@ export function useDifferenceStartProcessing() {
   const queryClient = useQueryClient()
 
   const mutationPost = useMutation({
-    mutationFn: getWarehouseManagementApi().postApiDifferenceStart,
-    onSuccess: () => {
+    mutationFn: (id: number) => getWarehouseManagementApi().postApiDifferenceStartId(id),
+    onSuccess: (_, id) => {
       queryClient.invalidateQueries({ queryKey: ['differences'] })
       showSnackbar({
-        message: translate('differences.table.actions.createDifference.snackBar.success'),
+        message: translate('differences.table.actions.startProcessing.snackBar.success', {
+          differenceNumber: id
+        }),
         type: 'success'
       })
     },
@@ -35,7 +37,7 @@ export function useDifferenceStartProcessing() {
       //   }
       // } else {
       showSnackbar({
-        message: translate('differences.table.actions.createDifference.snackBar.error'),
+        message: translate('differences.table.actions.startProcessing.snackBar.error'),
         type: 'error'
       })
       // }

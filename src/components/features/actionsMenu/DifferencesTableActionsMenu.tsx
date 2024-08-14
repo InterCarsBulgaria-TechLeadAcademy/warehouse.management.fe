@@ -17,7 +17,7 @@ export default function DifferencesTableActionsMenu({
   const differenceStartProcessing = useDifferenceStartProcessing()
   // const differenceFinishProcessing = useDifferenceFinishProcessing()
 
-  console.log(difference)
+  // console.log(difference)
 
   const handleClose = () => {
     setSelectedOption(null)
@@ -32,7 +32,7 @@ export default function DifferencesTableActionsMenu({
   }
 
   function handleStartProcessing() {
-    // differenceStartProcessing.mutate()
+    differenceStartProcessing.mutate(difference.id!)
     handleClose()
   }
 
@@ -41,44 +41,44 @@ export default function DifferencesTableActionsMenu({
     handleClose()
   }
 
-  // TODO: в зависимост от статуса трябва да се показват различни options на отделните редове
-  // const options = [
-  //   { title: 'differences.table.actionsMenu.startProcessing', value: 'startProcessing' },
-  //   { title: 'differences.table.actionsMenu.finishProcessing', value: 'finishProcessing' },
-  //   { title: 'differences.table.actionsMenu.no-differences', value: 'noDifferences' }
-  // ]
+  // TODO: Да използвам закоментираният код след като приключа
+  const options = [
+    { title: 'differences.table.actionsMenu.startProcessing', value: 'startProcessing' },
+    { title: 'differences.table.actionsMenu.finishProcessing', value: 'finishProcessing' },
+    { title: 'differences.table.actionsMenu.no-differences', value: 'noDifferences' }
+  ]
 
-  const options = (() => {
-    const options = []
-    const availableOptions = {
-      startProcessing: {
-        title: 'differences.table.actionsMenu.startProcessing',
-        value: 'startProcessing'
-      },
-      finishProcessing: {
-        title: 'differences.table.actionsMenu.finishProcessing',
-        value: 'finishProcessing'
-      },
-      noDifferences: {
-        title: 'differences.table.actionsMenu.no-differences',
-        value: 'noDifferences'
-      }
-    }
+  // const options = (() => {
+  //   const options = []
+  //   const availableOptions = {
+  //     startProcessing: {
+  //       title: 'differences.table.actionsMenu.startProcessing',
+  //       value: 'startProcessing'
+  //     },
+  //     finishProcessing: {
+  //       title: 'differences.table.actionsMenu.finishProcessing',
+  //       value: 'finishProcessing'
+  //     },
+  //     noDifferences: {
+  //       title: 'differences.table.actionsMenu.no-differences',
+  //       value: 'noDifferences'
+  //     }
+  //   }
 
-    switch (difference.status) {
-      case 'Waiting':
-        options.push(availableOptions.startProcessing)
-        break
+  //   switch (difference.status) {
+  //     case 'Waiting':
+  //       options.push(availableOptions.startProcessing)
+  //       break
 
-      case 'Processing':
-        options.push(availableOptions.finishProcessing, availableOptions.noDifferences)
-        break
-    }
+  //     case 'Processing':
+  //       options.push(availableOptions.finishProcessing, availableOptions.noDifferences)
+  //       break
+  //   }
 
-    return options.length > 0
-      ? options
-      : [{ title: 'differences.table.actionsMenu.noActions', value: '' }]
-  })()
+  //   return options.length > 0
+  //     ? options
+  //     : [{ title: 'differences.table.actionsMenu.noActions', value: '' }]
+  // })()
 
   return (
     <div>
@@ -90,7 +90,9 @@ export default function DifferencesTableActionsMenu({
           discardText={translate('differences.table.actions.startProcessing.labels.discard')}
           confirmText={translate('differences.table.actions.startProcessing.labels.confirm')}
           title={translate('differences.table.actions.startProcessing.title')}
-          content={translate('differences.table.actions.startProcessing.message')}
+          content={translate('differences.table.actions.startProcessing.message', {
+            differenceNumber: difference.id!
+          })}
           onConfirmClick={handleStartProcessing}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
