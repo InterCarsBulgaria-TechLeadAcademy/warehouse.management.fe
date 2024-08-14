@@ -4,11 +4,12 @@
  * WarehouseManagement.Api
  * OpenAPI spec version: 1.0
  */
-import type { ZoneDto } from './zoneDto'
+import type { EntryDeliveryDetailsDto } from './entryDeliveryDetailsDto'
+import type { EntryZoneDto } from './entryZoneDto'
 
 export interface EntryDto {
   createdAt?: string
-  deliveryId?: number
+  deliveryDetails?: EntryDeliveryDetailsDto
   /** @nullable */
   finishedProccessing?: string | null
   id?: number
@@ -17,5 +18,5 @@ export interface EntryDto {
   pieces?: number
   /** @nullable */
   startedProccessing?: string | null
-  zone?: ZoneDto
+  zone?: EntryZoneDto
 }
