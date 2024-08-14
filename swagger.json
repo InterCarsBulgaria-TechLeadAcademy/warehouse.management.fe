@@ -1176,29 +1176,100 @@
         }
       }
     },
-    "/api/Difference/start": {
+    "/api/Difference/start/{id}": {
       "post": {
         "tags": [
           "Difference"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Difference/finish/{id}": {
+      "post": {
+        "tags": [
+          "Difference"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "type": "integer",
-                "format": "int32"
+                "$ref": "#/components/schemas/DifferenceAdminCommentDto"
               }
             },
             "text/json": {
               "schema": {
-                "type": "integer",
-                "format": "int32"
+                "$ref": "#/components/schemas/DifferenceAdminCommentDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "type": "integer",
-                "format": "int32"
+                "$ref": "#/components/schemas/DifferenceAdminCommentDto"
               }
             }
           }
@@ -1250,81 +1321,21 @@
         }
       }
     },
-    "/api/Difference/finish": {
+    "/api/Difference/noDifferences/{id}": {
       "post": {
         "tags": [
           "Difference"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DifferenceAdminCommentDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DifferenceAdminCommentDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/DifferenceAdminCommentDto"
-              }
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Difference/noDifferences": {
-      "post": {
-        "tags": [
-          "Difference"
         ],
         "requestBody": {
           "content": {
@@ -2254,7 +2265,7 @@
         }
       }
     },
-    "/api/Entry/move": {
+    "/api/Entry/move/{id}": {
       "post": {
         "tags": [
           "Entry"
@@ -2262,7 +2273,8 @@
         "parameters": [
           {
             "name": "id",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -2338,7 +2350,7 @@
         }
       }
     },
-    "/api/Entry/split": {
+    "/api/Entry/split/{id}": {
       "post": {
         "tags": [
           "Entry"
@@ -2346,7 +2358,8 @@
         "parameters": [
           {
             "name": "id",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -2670,8 +2683,8 @@
           "200": {
             "description": "Success"
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2690,8 +2703,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3008,8 +3021,8 @@
           "200": {
             "description": "Success"
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3028,8 +3041,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3090,8 +3103,8 @@
           "200": {
             "description": "Success"
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3110,8 +3123,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3548,8 +3561,8 @@
           "200": {
             "description": "Success"
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3568,8 +3581,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3611,8 +3624,8 @@
           "200": {
             "description": "Success"
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3631,8 +3644,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3674,8 +3687,8 @@
           "200": {
             "description": "Success"
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3694,8 +3707,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4109,11 +4122,10 @@
       },
       "DeliveryHistoryChangeType": {
         "enum": [
-          0,
-          1
+          "Delivery",
+          "Entry"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "DeliveryHistoryDto": {
         "type": "object",
@@ -4147,15 +4159,8 @@
         "additionalProperties": false
       },
       "DifferenceAdminCommentDto": {
-        "required": [
-          "differenceId"
-        ],
         "type": "object",
         "properties": {
-          "differenceId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "adminComment": {
             "maximum": 2000,
             "minimum": 1,
@@ -4244,7 +4249,6 @@
       "DifferenceFormDto": {
         "required": [
           "activeNumber",
-          "comment",
           "count",
           "deliveryId",
           "differenceTypeId",
@@ -4255,36 +4259,31 @@
         "type": "object",
         "properties": {
           "receptionNumber": {
-            "maximum": 350,
-            "minimum": 1,
+            "maxLength": 350,
             "minLength": 1,
             "type": "string"
           },
           "internalNumber": {
-            "maximum": 350,
-            "minimum": 1,
+            "maxLength": 350,
             "minLength": 1,
             "type": "string"
           },
           "activeNumber": {
-            "maximum": 350,
-            "minimum": 1,
+            "maxLength": 350,
             "minLength": 1,
             "type": "string"
           },
           "comment": {
             "maxLength": 2000,
-            "minLength": 1,
-            "type": "string"
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
           },
           "count": {
             "maximum": 2147483647,
             "minimum": -2147483648,
             "type": "integer",
             "format": "int32"
-          },
-          "status": {
-            "$ref": "#/components/schemas/DifferenceStatus"
           },
           "differenceTypeId": {
             "type": "integer",
@@ -4303,13 +4302,12 @@
       },
       "DifferenceStatus": {
         "enum": [
-          0,
-          1,
-          2,
-          3
+          "Waiting",
+          "Processing",
+          "Finished",
+          "NoDifferences"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "DifferenceTypeDto": {
         "type": "object",
@@ -4459,22 +4457,20 @@
       },
       "EntryStatuses": {
         "enum": [
-          0,
-          1,
-          2
+          "Waiting",
+          "Processing",
+          "Finished"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "LogType": {
         "enum": [
-          0,
-          1,
-          2,
-          3
+          "EntryStatusChange",
+          "DeliveryStatusChange",
+          "ZoneChange",
+          "Split"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "LoginDto": {
         "type": "object",
@@ -4636,7 +4632,7 @@
             "nullable": true
           }
         },
-        "additionalProperties": { }
+        "additionalProperties": {}
       },
       "RegisterDto": {
         "type": "object",

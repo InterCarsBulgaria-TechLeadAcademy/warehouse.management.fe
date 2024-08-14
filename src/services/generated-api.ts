@@ -33,8 +33,6 @@ import type {
   MarkerFormDto,
   PaginationParameters,
   PostApiDeliveryGenerateBarcodePdfParams,
-  PostApiEntryMoveParams,
-  PostApiEntrySplitParams,
   RegisterDto,
   TokenResponse,
   VendorDto,
@@ -262,28 +260,21 @@ export const getWarehouseManagementApi = () => {
     return customInstance<void>({ url: `/api/Difference/restore/${id}`, method: 'PATCH' }, options)
   }
 
-  const postApiDifferenceStart = (
-    postApiDifferenceStartBody: BodyType<number>,
+  const postApiDifferenceStartId = (
+    id: number,
     options?: SecondParameter<typeof customInstance>
   ) => {
-    return customInstance<void>(
-      {
-        url: `/api/Difference/start`,
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        data: postApiDifferenceStartBody
-      },
-      options
-    )
+    return customInstance<void>({ url: `/api/Difference/start/${id}`, method: 'POST' }, options)
   }
 
-  const postApiDifferenceFinish = (
+  const postApiDifferenceFinishId = (
+    id: number,
     differenceAdminCommentDto: BodyType<DifferenceAdminCommentDto>,
     options?: SecondParameter<typeof customInstance>
   ) => {
     return customInstance<void>(
       {
-        url: `/api/Difference/finish`,
+        url: `/api/Difference/finish/${id}`,
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         data: differenceAdminCommentDto
@@ -292,13 +283,14 @@ export const getWarehouseManagementApi = () => {
     )
   }
 
-  const postApiDifferenceNoDifferences = (
+  const postApiDifferenceNoDifferencesId = (
+    id: number,
     differenceAdminCommentDto: BodyType<DifferenceAdminCommentDto>,
     options?: SecondParameter<typeof customInstance>
   ) => {
     return customInstance<void>(
       {
-        url: `/api/Difference/noDifferences`,
+        url: `/api/Difference/noDifferences/${id}`,
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         data: differenceAdminCommentDto
@@ -450,35 +442,33 @@ export const getWarehouseManagementApi = () => {
     return customInstance<void>({ url: `/api/Entry/finish/${id}`, method: 'PUT' }, options)
   }
 
-  const postApiEntryMove = (
-    postApiEntryMoveBody: BodyType<number>,
-    params?: PostApiEntryMoveParams,
+  const postApiEntryMoveId = (
+    id: BodyType<number>,
+    postApiEntryMoveIdBody: number,
     options?: SecondParameter<typeof customInstance>
   ) => {
     return customInstance<void>(
       {
-        url: `/api/Entry/move`,
+        url: `/api/Entry/move/${id}`,
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        data: postApiEntryMoveBody,
-        params
+        data: postApiEntryMoveIdBody
       },
       options
     )
   }
 
-  const postApiEntrySplit = (
+  const postApiEntrySplitId = (
+    id: number,
     entrySplitDto: BodyType<EntrySplitDto>,
-    params?: PostApiEntrySplitParams,
     options?: SecondParameter<typeof customInstance>
   ) => {
     return customInstance<void>(
       {
-        url: `/api/Entry/split`,
+        url: `/api/Entry/split/${id}`,
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        data: entrySplitDto,
-        params
+        data: entrySplitDto
       },
       options
     )
@@ -712,9 +702,9 @@ export const getWarehouseManagementApi = () => {
     putApiDifferenceEditId,
     deleteApiDifferenceDeleteId,
     patchApiDifferenceRestoreId,
-    postApiDifferenceStart,
-    postApiDifferenceFinish,
-    postApiDifferenceNoDifferences,
+    postApiDifferenceStartId,
+    postApiDifferenceFinishId,
+    postApiDifferenceNoDifferencesId,
     getApiDifferenceTypeAll,
     getApiDifferenceTypeAllWithDeleted,
     getApiDifferenceTypeId,
@@ -731,8 +721,8 @@ export const getWarehouseManagementApi = () => {
     putApiEntryRestoreId,
     putApiEntryStartId,
     putApiEntryFinishId,
-    postApiEntryMove,
-    postApiEntrySplit,
+    postApiEntryMoveId,
+    postApiEntrySplitId,
     getApiMarkerId,
     getApiMarkerAll,
     getApiMarkerAllWithParams,
@@ -827,15 +817,15 @@ export type DeleteApiDifferenceDeleteIdResult = NonNullable<
 export type PatchApiDifferenceRestoreIdResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['patchApiDifferenceRestoreId']>>
 >
-export type PostApiDifferenceStartResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiDifferenceStart']>>
+export type PostApiDifferenceStartIdResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiDifferenceStartId']>>
 >
-export type PostApiDifferenceFinishResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiDifferenceFinish']>>
+export type PostApiDifferenceFinishIdResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiDifferenceFinishId']>>
 >
-export type PostApiDifferenceNoDifferencesResult = NonNullable<
+export type PostApiDifferenceNoDifferencesIdResult = NonNullable<
   Awaited<
-    ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiDifferenceNoDifferences']>
+    ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiDifferenceNoDifferencesId']>
   >
 >
 export type GetApiDifferenceTypeAllResult = NonNullable<
@@ -890,11 +880,11 @@ export type PutApiEntryStartIdResult = NonNullable<
 export type PutApiEntryFinishIdResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['putApiEntryFinishId']>>
 >
-export type PostApiEntryMoveResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiEntryMove']>>
+export type PostApiEntryMoveIdResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiEntryMoveId']>>
 >
-export type PostApiEntrySplitResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiEntrySplit']>>
+export type PostApiEntrySplitIdResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiEntrySplitId']>>
 >
 export type GetApiMarkerIdResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiMarkerId']>>

@@ -9,8 +9,8 @@ export type LogType = (typeof LogType)[keyof typeof LogType]
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const LogType = {
-  NUMBER_0: 0,
-  NUMBER_1: 1,
-  NUMBER_2: 2,
-  NUMBER_3: 3
+  EntryStatusChange: 'EntryStatusChange',
+  DeliveryStatusChange: 'DeliveryStatusChange',
+  ZoneChange: 'ZoneChange',
+  Split: 'Split'
 } as const
