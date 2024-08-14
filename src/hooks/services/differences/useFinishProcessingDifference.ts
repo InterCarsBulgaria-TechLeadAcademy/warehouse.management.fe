@@ -3,18 +3,19 @@ import { useSnackbar } from '@/hooks/useSnackbar.ts'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { getWarehouseManagementApi } from '@/services/generated-api.ts'
 
-export function useDifferenceStartProcessing() {
+export function useFinishProcessingDifference() {
   const { t: translate } = useTranslation()
   const { showSnackbar } = useSnackbar()
   const queryClient = useQueryClient()
 
   const mutationPost = useMutation({
-    mutationFn: (id: number) => getWarehouseManagementApi().postApiDifferenceStartId(id),
-    onSuccess: (_, id) => {
+    mutationFn: ({ id, adminComment }: { id: number; adminComment: string | null }) =>
+      getWarehouseManagementApi().postApiDifferenceFinishId(id, { adminComment }),
+    onSuccess: (_, data) => {
       queryClient.invalidateQueries({ queryKey: ['differences'] })
       showSnackbar({
-        message: translate('differences.table.actions.startProcessing.snackBar.success', {
-          differenceNumber: id
+        message: translate('differences.table.actions.finishProcessing.snackBar.success', {
+          differenceNumber: data.id
         }),
         type: 'success'
       })
@@ -37,7 +38,7 @@ export function useDifferenceStartProcessing() {
       //   }
       // } else {
       showSnackbar({
-        message: translate('differences.table.actions.startProcessing.snackBar.error'),
+        message: translate('differences.table.actions.finishProcessing.snackBar.error'),
         type: 'error'
       })
       // }

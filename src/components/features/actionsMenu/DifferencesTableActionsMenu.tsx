@@ -3,7 +3,10 @@ import { useTranslation } from 'react-i18next'
 import { DifferenceDto } from '@/services/model'
 import TableActionsMenu from './TableActionsMenu'
 import ConfirmDialog from '../../shared/ConfirmDialog.tsx'
-import { useDifferenceStartProcessing } from '@/hooks/services/differences/useDifferenceStartProcessing.ts'
+import BaseFormDialog from '@/components/shared/BaseFormDialog.tsx'
+import AdminCommentForm from '../forms/AdminCommentForm.tsx'
+import { useStartProcessingDifference } from '@/hooks/services/differences/useStartProcessingDifference.ts'
+import { useFinishProcessingDifference } from '@/hooks/services/differences/useFinishProcessingDifference.ts'
 
 interface DifferencesTableActionsMenuProps {
   difference: DifferenceDto
@@ -14,10 +17,7 @@ export default function DifferencesTableActionsMenu({
 }: DifferencesTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
-  const differenceStartProcessing = useDifferenceStartProcessing()
-  // const differenceFinishProcessing = useDifferenceFinishProcessing()
-
-  // console.log(difference)
+  const differenceStartProcessing = useStartProcessingDifference()
 
   const handleClose = () => {
     setSelectedOption(null)
@@ -33,11 +33,6 @@ export default function DifferencesTableActionsMenu({
 
   function handleStartProcessing() {
     differenceStartProcessing.mutate(difference.id!)
-    handleClose()
-  }
-
-  function handleFinishProcessing() {
-    // entryFinishProcessing.mutate(entry.id!)
     handleClose()
   }
 
@@ -96,6 +91,17 @@ export default function DifferencesTableActionsMenu({
           onConfirmClick={handleStartProcessing}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
+        />
+      )}
+
+      {selectedOption === 'finishProcessing' && (
+        <BaseFormDialog
+          open={true}
+          onCloseDialog={handleClose}
+          title={translate('differences.table.actions.finishProcessing.title')}
+          renderForm={(handleCloseForm) => (
+            <AdminCommentForm handleCloseForm={handleCloseForm} difference={difference} />
+          )}
         />
       )}
     </div>

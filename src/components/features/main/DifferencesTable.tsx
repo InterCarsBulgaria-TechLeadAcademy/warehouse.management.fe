@@ -31,9 +31,7 @@ export default function DifferencesTable() {
   const [searchTerm, setSearchTerm] = React.useState('')
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
-  const differences = useGetDifferences()
-
-  // console.log(differences)
+  const differences = useGetDifferences(page, rowsPerPage, searchTerm)
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
@@ -106,6 +104,7 @@ export default function DifferencesTable() {
       rowData={filteredRows}
       page={page}
       rowsPerPage={rowsPerPage}
+      rowsCount={differences.count}
       onPageChange={onPageChange}
       onRowsPerPageChange={onRowsPerPageChange}>
       <SearchInput

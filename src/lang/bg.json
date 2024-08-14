@@ -680,7 +680,10 @@
         "moveEntryForm": {
           "quantity": "Количество",
           "zone": "Зона",
-          "confirm": "Потвърди",
+          "labels": {
+            "confirm": "Потвърди",
+            "discard":"Откажи"
+          },
           "errors": {
             "quantity": {
               "message": "Добавете количество",
@@ -705,8 +708,9 @@
         },
         "createDifference": {
           "title": "Създаване на разлика",
-          "confirm": "Потвърди",
           "labels": {
+            "confirm": "Потвърди",
+            "discard": "Откажи",
             "internalNumber": "Вътрешен №",
             "activeNumber": "Активен №",
             "receptionNumber": "Рецепция №",
@@ -734,9 +738,6 @@
             },
             "zone": {
               "required":"Полето за зона е задължително"
-            },
-            "comment": {
-              "required":"Полето за коментар е задължително"
             }
           },
           "snackBar": {
@@ -871,6 +872,23 @@
           },
           "snackBar": {
             "success": "Обработката на разлика {{differenceNumber}} е започната успешно",
+            "error": "Възникна грешка"
+          }
+        },
+        "finishProcessing": {
+          "title": "Завършване на обработка",
+          "labels": {
+            "admin-comment": "Коментар админ",
+            "discard": "Откажи",
+            "confirm": "Потвърди"
+          },
+          "errors": {
+            "admin-comment": {
+              "required":"Полето за коментар админ е задължително"
+            }
+          },
+          "snackBar": {
+            "success": "Обработката на стока №{{differenceNumber}} е завършена успешно",
             "error": "Възникна грешка"
           }
         }

@@ -127,9 +127,14 @@ export default function MoveEntryForm({
           )}
         />
       </Box>
-      <Box sx={{ display: 'flex', justifyContent: 'right', gap: '1em' }}>
+
+      <Box sx={{ display: 'flex', justifyContent: 'center', gap: '1em' }}>
+        <Button variant="contained" sx={{ mt: 5 }} onClick={handleCloseForm}>
+          {translate('zonesContent.table.actions.moveEntryForm.labels.discard')}
+        </Button>
+
         <Button type="submit" variant="contained" sx={{ mt: 5 }}>
-          {translate('zonesContent.table.actions.moveEntryForm.confirm')}
+          {translate('zonesContent.table.actions.moveEntryForm.labels.confirm')}
         </Button>
       </Box>
     </Box>

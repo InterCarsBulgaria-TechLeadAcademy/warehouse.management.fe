@@ -19,9 +19,7 @@ export const createDifferenceSchema = yup.object({
     .string()
     .required('zonesContent.table.actions.createDifference.errors.differenceType.required'),
   zone: yup.string().required('zonesContent.table.actions.createDifference.errors.zone.required'),
-  comment: yup
-    .string()
-    .required('zonesContent.table.actions.createDifference.errors.comment.required')
+  comment: yup.string()
 })
 
 export interface CreateDifferenceFormData extends yup.InferType<typeof createDifferenceSchema> {
@@ -30,5 +28,4 @@ export interface CreateDifferenceFormData extends yup.InferType<typeof createDif
   count: number
   differenceType: string
   zone: string
-  comment: string
 }

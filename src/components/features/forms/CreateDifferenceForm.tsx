@@ -229,18 +229,19 @@ export default function CreateDifferenceForm({
               label={translate('zonesContent.table.actions.createDifference.labels.comment')}
               id="comment"
               name="comment"
-              required
               multiline
               rows={4}
-              error={!!errors.comment}
-              helperText={errors.comment?.message ? translate(errors.comment.message) : ''}
             />
           )}
         />
 
-        <Box sx={{ display: 'flex', justifyContent: 'right', gap: '1em' }}>
-          <Button type="submit" variant="contained" sx={{ mt: 5 }}>
-            {translate('zonesContent.table.actions.createDifference.confirm')}
+        <Box sx={{ display: 'flex', justifyContent: 'center', gap: '1em' }}>
+          <Button variant="contained" sx={{ mt: 3, mb: 2 }} onClick={handleCloseForm}>
+            {translate('zonesContent.table.actions.createDifference.labels.discard')}
+          </Button>
+
+          <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
+            {translate('zonesContent.table.actions.createDifference.labels.confirm')}
           </Button>
         </Box>
       </Box>
