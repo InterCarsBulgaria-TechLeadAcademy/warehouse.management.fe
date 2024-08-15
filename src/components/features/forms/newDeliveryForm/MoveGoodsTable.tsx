@@ -12,18 +12,19 @@ interface MoveGoodsTableProps {
   array: any
   goodType: string
   goodQuantity: string
-  currentZone: string
+  currentZoneId?: string
 }
 
 export default function MoveGoodsTable({
   array,
   goodType,
   goodQuantity,
-  currentZone
+  currentZoneId
 }: MoveGoodsTableProps) {
   const { t: translate } = useTranslation()
   const zones = useGetZones()
 
+  console.log(array)
   return (
     <TableContainer component={Paper}>
       <Table aria-label="simple table">
@@ -42,7 +43,9 @@ export default function MoveGoodsTable({
               </TableCell>
               <TableCell align="left">{good[goodQuantity]}</TableCell>
               <TableCell align="left">
-                {zones.find((zone) => zone.id! === Number(good[currentZone]))?.name}
+                {currentZoneId
+                  ? zones.find((zone) => zone.id === Number(good[currentZoneId]))?.name
+                  : good.zone}
               </TableCell>
             </TableRow>
           ))}

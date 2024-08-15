@@ -12,13 +12,6 @@ export default function NewDeliveryStep5Form() {
   const { formsData } = useNewDeliveryContext()
   const markers = useGetMarkers()
 
-  // console.log(markers)
-
-  // const markersNames = formsData.markers.map((markerId: number) => {
-  //   const marker = markers.find((marker) => marker.id === markerId)
-  //   return marker ? marker.name : ''
-  // })
-
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2em' }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
@@ -128,7 +121,7 @@ export default function NewDeliveryStep5Form() {
             array={formsData.goodsInZones}
             goodType={'goodTypeStep4'}
             goodQuantity={'goodQuantityStep4'}
-            currentZone={'zone'}
+            currentZoneId={'zone'}
           />
         </Box>
       </Box>

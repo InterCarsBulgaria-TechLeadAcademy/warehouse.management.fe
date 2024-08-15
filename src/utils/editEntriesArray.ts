@@ -21,7 +21,7 @@ export default function editEntriesArray(array: EntryDto[]) {
         objectForPush.goodType = 'pieces'
         objectForPush.goodQuantity = Number(value)
       } else if (key === 'zone') {
-        objectForPush.zone = value.id
+        objectForPush.zone = value.zoneName
       }
     }
     editedArray.push(objectForPush)
