@@ -11,11 +11,6 @@ import { NewUserFormData, newUserSchema } from '@/schemas/newUserSchema'
 
 // -------------------------------------------- ↓
 // TODO: Watch out for the code later..
-interface UserRightDto {
-  rightId?: number
-  /** @nullable */
-  rightName?: string | null
-}
 
 interface UserDto {
   id?: number
@@ -26,7 +21,6 @@ interface UserDto {
   /** @nullable */
   role?: string | null
   /** @nullable */
-  rights?: UserRightDto[] | null
   dateCreated?: string | null
 }
 // ---------------------------------------------- ↑
@@ -92,8 +86,7 @@ export default function UsersTableActionsMenu({ user }: UsersTableActionsMenuPro
               defaultValues={{
                 name: user.name!,
                 email: user.email!,
-                role: user.role!,
-                rights: user.rights?.map((right) => right.rightId!) || ([] as number[])
+                role: user.role!
               }}
             />
           )}
