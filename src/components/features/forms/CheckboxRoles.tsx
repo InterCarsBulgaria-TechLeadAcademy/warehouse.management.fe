@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, FormControl, FormControlLabel, Checkbox, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
-export default function CheckboxRoles() {
+interface CheckboxRolesProps {
+  rights: string[]
+}
+
+export default function CheckboxRoles({ rights }: CheckboxRolesProps) {
   const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>({
     createZones: false,
     readZones: false,
@@ -21,6 +25,13 @@ export default function CheckboxRoles() {
     changeStatus: false,
   });
 
+  useEffect(() => {
+    const updateCheckedItems = { ...checkedItems }
+    rights.forEach((right: string) => { updateCheckedItems[right] = true })
+    setCheckedItems(updateCheckedItems)
+  }, [rights])
+
+
   const { t: translate } = useTranslation()
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,10 +40,6 @@ export default function CheckboxRoles() {
       [event.target.name]: event.target.checked,
     });
   };
-
-  const selectedItems = Object.keys(checkedItems).filter(
-    (key) => checkedItems[key]
-  );
 
   return (
     <>
