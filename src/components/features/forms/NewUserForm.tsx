@@ -13,14 +13,13 @@ interface NewUserFormProps extends UseFormReturn<NewUserFormData> {
     name: string
     email: string
     role: string
-    rights: number[]
   }
 }
 
 export default function NewUserForm({
   control,
   formState: { errors },
-  defaultValues = { name: '', email: '', role: '', rights: [] }
+  defaultValues = { name: '', email: '', role: '' }
 }: NewUserFormProps) {
   const { t: translate } = useTranslation()
   // TODO: Add functionality to take rights from BE.
