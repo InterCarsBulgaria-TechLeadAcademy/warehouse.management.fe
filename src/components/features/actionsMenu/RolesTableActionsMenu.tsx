@@ -6,7 +6,6 @@ import { SubmitHandler } from 'react-hook-form'
 import TableActionsMenu from './TableActionsMenu'
 import useUpdateVendor from '@/hooks/services/vendors/useUpdateVendor'
 import useDeleteVendor from '@/hooks/services/vendors/useDeleteVendor'
-import NewUserForm from '../forms/NewUserForm'
 import { NewRoleFormData, newRoleSchema } from '@/schemas/newRoleSchema'
 import NewRoleForm from '../forms/NewRoleForm'
 
@@ -86,7 +85,7 @@ export default function RolesTableActionsMenu({ role }: RolesTableActionsMenuPro
               {...methods}
               defaultValues={{
                 name: role.name!,
-                rights: role.rights?.map((right) => right.rightId!) || ([] as number[])
+                rights: role.rights?.map((right) => right.rightName!) || ([] as string[])
               }}
             />
           )}
