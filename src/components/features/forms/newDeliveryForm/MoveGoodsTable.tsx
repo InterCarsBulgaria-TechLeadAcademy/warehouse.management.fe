@@ -24,7 +24,6 @@ export default function MoveGoodsTable({
   const { t: translate } = useTranslation()
   const zones = useGetZones()
 
-  console.log(array)
   return (
     <TableContainer component={Paper}>
       <Table aria-label="simple table">

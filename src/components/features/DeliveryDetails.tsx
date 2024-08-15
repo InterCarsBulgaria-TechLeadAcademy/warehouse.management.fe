@@ -15,8 +15,6 @@ export default function DeliveryDetails({ deliveryId }: DeliveryDetailsProps) {
   const { t: translate } = useTranslation()
   const delivery = useGetDelivery(deliveryId)
 
-  // console.log(delivery)
-
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2em' }}>
       <Typography variant="h5">
@@ -127,7 +125,7 @@ export default function DeliveryDetails({ deliveryId }: DeliveryDetailsProps) {
         </Box>
       </Box>
 
-      {/* <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '1em' }}>
           <ChipsList items={['5']} />
           <Typography variant="h6">
@@ -140,7 +138,7 @@ export default function DeliveryDetails({ deliveryId }: DeliveryDetailsProps) {
             <DeliveryHistoryTable deliveryId={deliveryId} />
           </Box>
         </Box>
-      </Box> */}
+      </Box>
     </Box>
   )
 }
