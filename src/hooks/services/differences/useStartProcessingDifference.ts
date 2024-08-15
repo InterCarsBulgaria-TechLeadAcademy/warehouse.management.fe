@@ -3,19 +3,18 @@ import { useSnackbar } from '@/hooks/useSnackbar.ts'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { getWarehouseManagementApi } from '@/services/generated-api.ts'
 
-export function useMoveEntry() {
+export function useStartProcessingDifference() {
   const { t: translate } = useTranslation()
   const { showSnackbar } = useSnackbar()
   const queryClient = useQueryClient()
 
-  const mutationUpdate = useMutation({
-    mutationFn: ({ id, newZoneId }: { id: number; newZoneId: number }) =>
-      getWarehouseManagementApi().postApiEntryMoveId(id, newZoneId),
+  const mutationPost = useMutation({
+    mutationFn: (id: number) => getWarehouseManagementApi().postApiDifferenceStartId(id),
     onSuccess: (_, id) => {
-      queryClient.invalidateQueries({ queryKey: ['entries'] })
+      queryClient.invalidateQueries({ queryKey: ['differences'] })
       showSnackbar({
-        message: translate('zonesContent.table.actions.moveEntryForm.snackBar.success', {
-          goodNumber: id
+        message: translate('differences.table.actions.startProcessing.snackBar.success', {
+          differenceNumber: id
         }),
         type: 'success'
       })
@@ -38,11 +37,11 @@ export function useMoveEntry() {
       //   }
       // } else {
       showSnackbar({
-        message: translate('zonesContent.table.actions.moveEntryForm.snackBar.error'),
+        message: translate('differences.table.actions.startProcessing.snackBar.error'),
         type: 'error'
       })
       // }
     }
   })
-  return mutationUpdate
+  return mutationPost
 }

@@ -18,17 +18,25 @@ import { MoveEntryFormData, createMoveEntrySchema } from '@/schemas/moveEntrySch
 import { useMoveEntryDialog } from '@/hooks/dialogs/zonesContent/useMoveEntryDialog'
 import { useMoveEntry } from '@/hooks/services/entries/useMoveEntry.ts'
 import useGetZones from '@/hooks/services/zones/useGetZones.ts'
+import { useSplitEntry } from '@/hooks/services/entries/useSplitEntry'
 
 interface FormMoveEntryProps {
+  action: string
   quantity: number
   entryId: number
   handleCloseForm: () => void
 }
 
-export default function MoveEntryForm({ quantity, handleCloseForm, entryId }: FormMoveEntryProps) {
+export default function MoveEntryForm({
+  action,
+  quantity,
+  handleCloseForm,
+  entryId
+}: FormMoveEntryProps) {
   const [currentQuantity, setCurrentQuantity] = useState(quantity)
   const schema = createMoveEntrySchema(quantity)
   const entryMove = useMoveEntry()
+  const entrySplit = useSplitEntry()
   const zones = useGetZones()
 
   const {
@@ -45,7 +53,14 @@ export default function MoveEntryForm({ quantity, handleCloseForm, entryId }: Fo
   const { onCloseMoveEntryDialog } = useMoveEntryDialog()
 
   const handleFormSubmit: SubmitHandler<MoveEntryFormData> = (data) => {
-    entryMove.mutate({ id: entryId, newZoneId: Number(data.zone) })
+    switch (action) {
+      case 'move':
+        entryMove.mutate({ id: entryId, newZoneId: Number(data.zone) })
+        break
+      case 'split':
+        entrySplit.mutate({ count: data.quantity, newZoneId: Number(data.zone), entryId: entryId })
+        break
+    }
     handleCloseForm()
     onCloseMoveEntryDialog()
   }
@@ -69,7 +84,7 @@ export default function MoveEntryForm({ quantity, handleCloseForm, entryId }: Fo
                 field.onChange(value)
               }}
               inputProps={{
-                readOnly: true
+                readOnly: action === 'move' ? true : false
               }}
               required
               fullWidth
@@ -112,9 +127,14 @@ export default function MoveEntryForm({ quantity, handleCloseForm, entryId }: Fo
           )}
         />
       </Box>
-      <Box sx={{ display: 'flex', justifyContent: 'right', gap: '1em' }}>
+
+      <Box sx={{ display: 'flex', justifyContent: 'center', gap: '1em' }}>
+        <Button variant="contained" sx={{ mt: 5 }} onClick={handleCloseForm}>
+          {translate('zonesContent.table.actions.moveEntryForm.labels.discard')}
+        </Button>
+
         <Button type="submit" variant="contained" sx={{ mt: 5 }}>
-          {translate('zonesContent.table.actions.moveEntryForm.confirm')}
+          {translate('zonesContent.table.actions.moveEntryForm.labels.confirm')}
         </Button>
       </Box>
     </Box>
