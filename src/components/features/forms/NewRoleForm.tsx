@@ -1,8 +1,6 @@
-import { MarkerDto } from '@/services/model'
-import {  TextField } from '@mui/material'
+import { TextField } from '@mui/material'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import useGetMarkers from '@/hooks/services/markers/useGetMarkers'
 import { NewRoleFormData } from '@/schemas/newRoleSchema'
 import CheckboxRoles from './CheckboxRoles'
 
@@ -19,11 +17,7 @@ export default function NewRoleForm({
   defaultValues = { name: '', rights: [] }
 }: NewRoleFormProps) {
   const { t: translate } = useTranslation()
-  // TODO: Add functionality to take rights from BE.
-  const markers = useGetMarkers()
-  const roles = ['regular' , 'admin' ]
-    console.log(defaultValues.rights);
-    
+
   return (
     <>
       <Controller
@@ -49,7 +43,7 @@ export default function NewRoleForm({
         name="rights"
         defaultValue={defaultValues.rights?.map(String)}
         control={control}
-        render={({ field }) => (
+        render={({ }) => (
           <CheckboxRoles rights={defaultValues.rights} />
         )}
       />
