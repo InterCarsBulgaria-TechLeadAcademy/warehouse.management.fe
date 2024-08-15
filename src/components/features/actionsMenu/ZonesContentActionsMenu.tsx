@@ -9,6 +9,7 @@ import { getEntryStatus } from '@/utils/getEntryStatus.ts'
 import { ChipStatus } from '@/hooks/useChipLabel.ts'
 import BaseFormDialog from '@/components/shared/BaseFormDialog.tsx'
 import MoveEntryForm from '@/components/features/forms/MoveEntryForm.tsx'
+import CreateDifferenceForm from '../forms/CreateDifferenceForm'
 
 interface ZonesTableActionsMenuProps {
   entry: EntryDto
@@ -47,6 +48,7 @@ export default function ZonesContentTableActionsMenu({ entry }: ZonesTableAction
     const availableOptions = {
       move: { title: 'zonesContent.table.actionsMenu.MoveToNewZone', value: 'move' },
       split: { title: 'zonesContent.table.actionsMenu.SplitEntry', value: 'split' },
+      difference: { title: 'zonesContent.table.actionsMenu.CreateDifference', value: 'difference' },
       startProcessing: {
         title: 'zonesContent.table.actionsMenu.StartProcessing',
         value: 'startProcessing'
@@ -61,6 +63,10 @@ export default function ZonesContentTableActionsMenu({ entry }: ZonesTableAction
 
     if (entryStatus !== ChipStatus.Finished) {
       options.push(availableOptions.move, availableOptions.split)
+    }
+
+    if (entryStatus === ChipStatus.Processing) {
+      options.push(availableOptions.difference)
     }
 
     if (entryStatus === ChipStatus.Waiting && entry.zone!.isFinal!) {
@@ -110,6 +116,17 @@ export default function ZonesContentTableActionsMenu({ entry }: ZonesTableAction
               quantity={getQuantity()}
               entryId={entry.id!}
             />
+          )}
+        />
+      )}
+
+      {selectedOption === 'difference' && (
+        <BaseFormDialog
+          open={true}
+          onCloseDialog={handleClose}
+          title={translate('zonesContent.table.actions.createDifference.title')}
+          renderForm={(handleCloseForm) => (
+            <CreateDifferenceForm handleCloseForm={handleCloseForm} entry={entry} />
           )}
         />
       )}

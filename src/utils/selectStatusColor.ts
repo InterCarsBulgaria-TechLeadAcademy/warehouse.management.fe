@@ -1,6 +1,14 @@
 import { StatusType } from '@/types/StatusType'
 
-type ColorType = 'default' | 'error' | 'success' | 'primary' | 'secondary' | 'info' | 'warning'
+type ColorType =
+  | 'default'
+  | 'error'
+  | 'success'
+  | 'primary'
+  | 'secondary'
+  | 'info'
+  | 'warning'
+  | 'secondary.light'
 
 export default function selectStatusColor(status: StatusType): ColorType {
   switch (status) {
@@ -12,6 +20,8 @@ export default function selectStatusColor(status: StatusType): ColorType {
       return 'info'
     case 'Approved':
       return 'success'
+    case 'NoDifferences':
+      return 'secondary.light'
     default:
       return 'primary'
   }

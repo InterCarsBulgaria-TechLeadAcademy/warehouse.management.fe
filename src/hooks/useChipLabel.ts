@@ -4,7 +4,8 @@ export enum ChipStatus {
   Waiting = 'Waiting',
   Processing = 'Processing',
   Finished = 'Finished',
-  Approved = 'Approved'
+  Approved = 'Approved',
+  NoDifferences = 'NoDifferences'
 }
 
 export default function useChipLabel() {
@@ -20,6 +21,8 @@ export default function useChipLabel() {
         return translate('deliveries.table.rows.status.finished')
       case ChipStatus.Approved:
         return translate('deliveries.table.rows.status.approved')
+      case ChipStatus.NoDifferences:
+        return translate('deliveries.table.rows.status.noDifferences')
       default:
         return item
     }
