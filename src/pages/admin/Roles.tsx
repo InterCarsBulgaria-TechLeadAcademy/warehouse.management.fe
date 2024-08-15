@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import FormDialog from '@/components/shared/FormDialog'
 import { SubmitHandler } from 'react-hook-form'
-import UsersTable from '@/components/features/admin/UsersTable'
 import { NewUserFormData, newUserSchema } from '@/schemas/newUserSchema'
 import NewUserForm from '@/components/features/forms/NewUserForm'
+import RolesTable from '@/components/features/admin/RolesTable'
 
 export default function Roles() {
   const { t: translate } = useTranslation()
@@ -32,7 +32,7 @@ export default function Roles() {
         description={translate('Управление на роли')}
         buttonText={translate('нова роля')}
         buttonClickHandler={handleClickOpen}
-        table={<UsersTable />}
+        table={<RolesTable />}
       />
 
       {/* <FormDialog<NewUserFormData>
