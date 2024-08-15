@@ -13,7 +13,6 @@ interface Row {
   name: string
   email: string
   role: string
-  rights: React.ReactNode
   dateCreated: string
   actions: React.ReactNode
 }
@@ -33,8 +32,6 @@ interface UserDto {
   email?: string | null
   /** @nullable */
   role?: string | null
-  /** @nullable */
-  rights?: UserRightDto[] | null
   dateCreated?: string | null
 }
 // ---------------------------------------------- ↑
@@ -65,7 +62,6 @@ export default function UsersTable() {
     { key: 'name', title: translate('Име') },
     { key: 'email', title: translate('Емайл') },
     { key: 'role', title: translate('Роля') },
-    { key: 'rights', title: translate('Права') },
     { key: 'dateCreated', title: translate('Създаден на') },
     {
       key: 'actions',
@@ -81,14 +77,6 @@ export default function UsersTable() {
       name: user.name!,
       email: user.email!,
       role: user.role!,
-      rights:
-        user.rights!.length > 0 ? (
-          <ChipsList
-            items={user.rights?.map((right) => right.rightName!) || ([] as string[])}
-          />
-        ) : (
-          <Typography>-</Typography>
-        ),
       dateCreated: user.dateCreated!,
       actions: <UsersTableActionsMenu key={user.id} user={user} />
     }))
