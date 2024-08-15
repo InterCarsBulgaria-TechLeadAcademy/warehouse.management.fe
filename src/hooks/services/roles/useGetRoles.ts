@@ -18,11 +18,11 @@ export default function useGetRoles() {
         id: 1, name: 'regular', rights: [
           {
             rightId: 1,
-            rightName: 'Създаване на зони'
+            rightName: 'createZones'
           },
           {
             rightId: 2,
-            rightName: 'Четене на зони'
+            rightName: 'readZones'
           },
         ]
       },
@@ -30,19 +30,19 @@ export default function useGetRoles() {
         id: 2, name: 'admin', rights: [
           {
             rightId: 1,
-            rightName: 'Триене на зони'
+            rightName: 'deleteZones'
           },
           {
             rightId: 2,
-            rightName: 'Редактиране на зони'
+            rightName: 'editZones'
           },
           {
             rightId: 3,
-            rightName: 'Четене на зони'
+            rightName: 'readZones'
           },
           {
             rightId: 4,
-            rightName: 'Създаване на зони'
+            rightName: 'createZones'
           },
         ]
       },
