@@ -56,7 +56,7 @@ export default function CreateDifferenceForm({
       differenceTypeId: Number(data.differenceType),
       zoneId: Number(data.zone),
       comment: data.comment,
-      deliveryId: entry.deliveryId!
+      deliveryId: entry.deliveryDetails!.id!
     })
     handleCloseForm()
   }
