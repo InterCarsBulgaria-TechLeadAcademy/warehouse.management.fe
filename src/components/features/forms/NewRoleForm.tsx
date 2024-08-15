@@ -6,10 +6,10 @@ import useGetMarkers from '@/hooks/services/markers/useGetMarkers'
 import { NewRoleFormData } from '@/schemas/newRoleSchema'
 import CheckboxRoles from './CheckboxRoles'
 
-interface NewUserFormProps extends UseFormReturn<NewRoleFormData> {
+interface NewRoleFormProps extends UseFormReturn<NewRoleFormData> {
   defaultValues?: {
     name: string
-    rights: number[]
+    rights: string[]
   }
 }
 
@@ -17,12 +17,13 @@ export default function NewRoleForm({
   control,
   formState: { errors },
   defaultValues = { name: '', rights: [] }
-}: NewUserFormProps) {
+}: NewRoleFormProps) {
   const { t: translate } = useTranslation()
   // TODO: Add functionality to take rights from BE.
   const markers = useGetMarkers()
   const roles = ['regular' , 'admin' ]
-
+    console.log(defaultValues.rights);
+    
   return (
     <>
       <Controller
@@ -49,7 +50,7 @@ export default function NewRoleForm({
         defaultValue={defaultValues.rights?.map(String)}
         control={control}
         render={({ field }) => (
-          <CheckboxRoles />
+          <CheckboxRoles rights={defaultValues.rights} />
         )}
       />
     </>
