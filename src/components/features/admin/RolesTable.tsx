@@ -5,8 +5,8 @@ import SearchInput from '../SearchInput'
 import { Autocomplete, TextField, Typography } from '@mui/material'
 import { Column } from '@/interfaces/Column.ts'
 import ChipsList from '../ChipsList'
-import UsersTableActionsMenu from '../actionsMenu/UsersTableActionsMenu'
 import useGetRoles from '@/hooks/services/roles/useGetRoles'
+import RolesTableActionsMenu from '../actionsMenu/RolesTableActionsMenu'
 
 interface Row {
   id: number
@@ -77,7 +77,7 @@ export default function RolesTable() {
         ) : (
           <Typography>-</Typography>
         ),
-      actions: <UsersTableActionsMenu key={role.id} role={role} />
+      actions: <RolesTableActionsMenu key={role.id} role={role} />
     }))
   }
 
