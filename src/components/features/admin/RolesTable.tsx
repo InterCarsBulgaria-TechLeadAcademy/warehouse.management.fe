@@ -5,45 +5,36 @@ import SearchInput from '../SearchInput'
 import { Autocomplete, TextField, Typography } from '@mui/material'
 import { Column } from '@/interfaces/Column.ts'
 import ChipsList from '../ChipsList'
-import useGetUsers from '@/hooks/services/users/useGetUsers'
 import UsersTableActionsMenu from '../actionsMenu/UsersTableActionsMenu'
+import useGetRoles from '@/hooks/services/roles/useGetRoles'
 
 interface Row {
   id: number
   name: string
-  email: string
-  role: string
   rights: React.ReactNode
-  dateCreated: string
   actions: React.ReactNode
 }
 // -------------------------------------------- ↓
 // TODO: Watch out for the code later..
-interface UserRightDto {
+interface RoleRightDto {
   rightId?: number
   /** @nullable */
   rightName?: string | null
 }
 
-interface UserDto {
+interface RoleDto {
   id?: number
   /** @nullable */
   name?: string | null
-  /** @nullable */
-  email?: string | null
-  /** @nullable */
-  role?: string | null
-  /** @nullable */
-  rights?: UserRightDto[] | null
-  dateCreated?: string | null
+  rights?: RoleRightDto[] | null
 }
 // ---------------------------------------------- ↑
-export default function UsersTable() {
+export default function RolesTable() {
   const { t: translate } = useTranslation()
   const [searchTerm, setSearchTerm] = React.useState('')
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
-  const users = useGetUsers()
+  const roles = useGetRoles()
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
@@ -63,10 +54,7 @@ export default function UsersTable() {
 
   const columnsData: Column<Row>[] = [
     { key: 'name', title: translate('Име') },
-    { key: 'email', title: translate('Емайл') },
-    { key: 'role', title: translate('Роля') },
     { key: 'rights', title: translate('Права') },
-    { key: 'dateCreated', title: translate('Създаден на') },
     {
       key: 'actions',
       title: translate('vendors.table.columns.actions'),
@@ -75,26 +63,23 @@ export default function UsersTable() {
     }
   ]
 
-  function transformDataToRows(users: UserDto[]): Row[] {
-    return users.map((user: UserDto) => ({
-      id: user.id!,
-      name: user.name!,
-      email: user.email!,
-      role: user.role!,
+  function transformDataToRows(roles: RoleDto[]): Row[] {
+    return roles.map((role: RoleDto) => ({
+      id: role.id!,
+      name: role.name!,
       rights:
-        user.rights!.length > 0 ? (
+        role.rights!.length > 0 ? (
           <ChipsList
-            items={user.rights?.map((right) => right.rightName!) || ([] as string[])}
+            items={role.rights?.map((right) => right.rightName!) || ([] as string[])}
           />
         ) : (
           <Typography>-</Typography>
         ),
-      dateCreated: user.dateCreated!,
-      actions: <UsersTableActionsMenu key={user.id} user={user} />
+      actions: <UsersTableActionsMenu key={role.id} role={role} />
     }))
   }
 
-  const rowData = transformDataToRows(users || [])
+  const rowData = transformDataToRows(roles || [])
 
   const filteredRows = rowData.filter((row: Row) => {
     return columnsData.some((column: Column<Row>) => {
