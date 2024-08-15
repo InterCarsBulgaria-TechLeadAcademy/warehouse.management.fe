@@ -8,6 +8,7 @@ import useUpdateVendor from '@/hooks/services/vendors/useUpdateVendor'
 import useDeleteVendor from '@/hooks/services/vendors/useDeleteVendor'
 import NewUserForm from '../forms/NewUserForm'
 import { NewRoleFormData, newRoleSchema } from '@/schemas/newRoleSchema'
+import NewRoleForm from '../forms/NewRoleForm'
 
 // -------------------------------------------- ↓
 // TODO: Watch out for the code later..
@@ -81,7 +82,7 @@ export default function RolesTableActionsMenu({ role }: RolesTableActionsMenuPro
           schema={newRoleSchema}
           onSubmit={handleSubmit}
           renderForm={(methods) => (
-            <NewUserForm
+            <NewRoleForm
               {...methods}
               defaultValues={{
                 name: role.name!,
