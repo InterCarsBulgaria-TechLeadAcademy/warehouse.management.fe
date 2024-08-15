@@ -11,28 +11,22 @@ import { NewUserFormData, newUserSchema } from '@/schemas/newUserSchema'
 
 // -------------------------------------------- ↓
 // TODO: Watch out for the code later..
-interface UserRightDto {
-  rightId?: number
-  /** @nullable */
-  rightName?: string | null
+interface RoleRightDto {
+    rightId?: number
+    /** @nullable */
+    rightName?: string | null
 }
-
-interface UserDto {
-  id?: number
-  /** @nullable */
-  name?: string | null
-  /** @nullable */
-  email?: string | null
-  /** @nullable */
-  role?: string | null
-  /** @nullable */
-  rights?: UserRightDto[] | null
-  dateCreated?: string | null
+  
+interface RoleDto {
+    id?: number
+    /** @nullable */
+    name?: string | null
+    rights?: RoleRightDto[] | null
 }
 // ---------------------------------------------- ↑
 
 interface UsersTableActionsMenuProps {
-  user: UserDto
+  role: RoleDto
 }
 
 export default function RolesTableActionsMenu({ user }: UsersTableActionsMenuProps) {
