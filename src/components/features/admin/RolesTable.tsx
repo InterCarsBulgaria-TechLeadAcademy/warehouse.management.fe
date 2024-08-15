@@ -14,6 +14,7 @@ interface Row {
   rights: React.ReactNode
   actions: React.ReactNode
 }
+
 // -------------------------------------------- ↓
 // TODO: Watch out for the code later..
 interface RoleRightDto {
@@ -29,6 +30,7 @@ interface RoleDto {
   rights?: RoleRightDto[] | null
 }
 // ---------------------------------------------- ↑
+
 export default function RolesTable() {
   const { t: translate } = useTranslation()
   const [searchTerm, setSearchTerm] = React.useState('')
