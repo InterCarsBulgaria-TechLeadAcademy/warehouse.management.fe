@@ -19,8 +19,7 @@ export const newUserSchema = yup.object({
     .oneOf([yup.ref('password')], 'Паролите не съвпадат'),
   role: yup
     .string()
-    .required('Ролята е задължителна'),
-  rights: yup.array().of(yup.string())
+    .required('Ролята е задължителна')
 })
 
 export interface NewUserFormData extends yup.InferType<typeof newUserSchema> {
@@ -29,5 +28,4 @@ export interface NewUserFormData extends yup.InferType<typeof newUserSchema> {
   password: string
   repass: string
   role: string
-  rights: string[]
 }
