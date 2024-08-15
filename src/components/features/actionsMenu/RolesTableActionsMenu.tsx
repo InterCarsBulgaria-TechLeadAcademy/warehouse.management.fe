@@ -7,7 +7,7 @@ import TableActionsMenu from './TableActionsMenu'
 import useUpdateVendor from '@/hooks/services/vendors/useUpdateVendor'
 import useDeleteVendor from '@/hooks/services/vendors/useDeleteVendor'
 import NewUserForm from '../forms/NewUserForm'
-import { NewUserFormData, newUserSchema } from '@/schemas/newUserSchema'
+import { NewRoleFormData, newRoleSchema } from '@/schemas/newRoleSchema'
 
 // -------------------------------------------- ↓
 // TODO: Watch out for the code later..
@@ -25,16 +25,16 @@ interface RoleDto {
 }
 // ---------------------------------------------- ↑
 
-interface UsersTableActionsMenuProps {
+interface RolesTableActionsMenuProps {
   role: RoleDto
 }
 
-export default function RolesTableActionsMenu({ user }: UsersTableActionsMenuProps) {
+export default function RolesTableActionsMenu({ role }: RolesTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
   const [vendorNumber, setVendorNumber] = React.useState('')
-  const mutationUpdate = useUpdateVendor(user.name!, vendorNumber)
-  const mutationDelete = useDeleteVendor(user.name!)
+  const mutationUpdate = useUpdateVendor(role.name!, vendorNumber)
+  const mutationDelete = useDeleteVendor(role.name!)
 
   const handleClose = () => {
     setSelectedOption(null)
@@ -44,7 +44,7 @@ export default function RolesTableActionsMenu({ user }: UsersTableActionsMenuPro
     handleClose()
   }
 
-  const handleSubmit: SubmitHandler<NewUserFormData> = (data) => {
+  const handleSubmit: SubmitHandler<NewRoleFormData> = (data) => {
     // setVendorNumber(data.vendorNumber)
     // const markerIds = data.markers!.map((marker) => Number(marker))
     // mutationUpdate.mutate({
@@ -54,7 +54,7 @@ export default function RolesTableActionsMenu({ user }: UsersTableActionsMenuPro
   }
 
   const onConfirmClick = () => {
-    mutationDelete.mutate(user.id!)
+    mutationDelete.mutate(role.id!)
     handleClose()
   }
 
@@ -72,22 +72,20 @@ export default function RolesTableActionsMenu({ user }: UsersTableActionsMenuPro
       <TableActionsMenu specificOptionHandler={actionHandler} options={options} />
 
       {selectedOption === 'edit' && (
-        <FormDialog<NewUserFormData>
+        <FormDialog<NewRoleFormData>
           open={true}
-          title={translate('Редактиране на потребител')}
+          title={translate('Редактиране на роля')}
           discardText={translate('изход')}
           confirmText={translate('промени')}
           onCloseDialog={handleClose}
-          schema={newUserSchema}
+          schema={newRoleSchema}
           onSubmit={handleSubmit}
           renderForm={(methods) => (
             <NewUserForm
               {...methods}
               defaultValues={{
-                name: user.name!,
-                email: user.email!,
-                role: user.role!,
-                rights: user.rights?.map((right) => right.rightId!) || ([] as number[])
+                name: role.name!,
+                rights: role.rights?.map((right) => right.rightId!) || ([] as number[])
               }}
             />
           )}
@@ -98,7 +96,7 @@ export default function RolesTableActionsMenu({ user }: UsersTableActionsMenuPro
         <ConfirmDialog
           open={true}
           title={translate('vendors.table.actions.delete.title')}
-          content={translate('vendors.table.actions.delete.message', { name: user.name })}
+          content={translate('vendors.table.actions.delete.message', { name: role.name })}
           discardText={translate('vendors.table.actions.delete.labels.discard')}
           confirmText={translate('vendors.table.actions.delete.labels.confirm')}
           onCloseDialog={handleClose}
