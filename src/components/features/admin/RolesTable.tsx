@@ -68,7 +68,7 @@ export default function RolesTable() {
   function transformDataToRows(roles: RoleDto[]): Row[] {
     return roles.map((role: RoleDto) => ({
       id: role.id!,
-      name: role.name!,
+      name: role.name!, // TODO: translate role..
       rights:
         role.rights!.length > 0 ? (
           <ChipsList
