@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import FormDialog from '@/components/shared/FormDialog'
 import { SubmitHandler } from 'react-hook-form'
-import { NewUserFormData, newUserSchema } from '@/schemas/newUserSchema'
-import NewUserForm from '@/components/features/forms/NewUserForm'
 import RolesTable from '@/components/features/admin/RolesTable'
+import { NewRoleFormData, newRoleSchema } from '@/schemas/newRoleSchema'
+import NewRoleForm from '@/components/features/forms/NewRoleForm'
 
 export default function Roles() {
   const { t: translate } = useTranslation()
@@ -19,7 +19,7 @@ export default function Roles() {
     setOpenDialog(false)
   }
 
-  const handleSubmit: SubmitHandler<NewUserFormData> = (data) => {
+  const handleSubmit: SubmitHandler<NewRoleFormData> = (data) => {
     console.log(data)
     onCloseDialog()
   }
@@ -35,16 +35,16 @@ export default function Roles() {
         table={<RolesTable />}
       />
 
-      {/* <FormDialog<NewUserFormData>
+      <FormDialog<NewRoleFormData>
         open={openDialog}
-        title={translate('Създаване на нов потребител')}
+        title={translate('Създаване на новa роля')}
         discardText={translate('изход')}
         confirmText={translate('създай')}
         onCloseDialog={onCloseDialog}
-        schema={newUserSchema}
+        schema={newRoleSchema}
         onSubmit={handleSubmit}
-        renderForm={(methods) => <NewUserForm {...methods} />}
-      /> */}
+        renderForm={(methods) => <NewRoleForm {...methods} />}
+      />
     </>
   )
 }
