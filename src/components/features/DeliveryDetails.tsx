@@ -45,7 +45,11 @@ export default function DeliveryDetails({ deliveryId }: DeliveryDetailsProps) {
           </Box>
           <Box>
             <Typography>{translate('deliveries.table.actions.details.step1.markers')}</Typography>
-            <ChipsList items={delivery.markers!.map((marker) => marker.markerName!)} />
+            {delivery.markers ? (
+              <ChipsList items={delivery.markers.map((marker) => marker.markerName!)} />
+            ) : (
+              '-'
+            )}
           </Box>
         </Box>
       </Box>

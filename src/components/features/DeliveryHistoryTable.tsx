@@ -43,8 +43,8 @@ export default function DeliveryHistoryTable({ deliveryId }: DeliveryHistoryTabl
             </TableCell>
           </TableRow>
         </TableHead>
-        {/* <TableBody>
-          {deliveryHistory.map((changes: Change, index: number) => (
+        <TableBody>
+          {deliveriesHistory.changes?.map((changes, index: number) => (
             <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">
                 {changes.changeDate}
@@ -52,7 +52,7 @@ export default function DeliveryHistoryTable({ deliveryId }: DeliveryHistoryTabl
               <TableCell align="left">proba</TableCell>
             </TableRow>
           ))}
-        </TableBody> */}
+        </TableBody>
       </Table>
     </TableContainer>
   )
