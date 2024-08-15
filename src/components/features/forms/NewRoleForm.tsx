@@ -1,27 +1,22 @@
 import { MarkerDto } from '@/services/model'
-import { FormControl, InputLabel, ListItemText, MenuItem, Select, TextField } from '@mui/material'
+import {  TextField } from '@mui/material'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import useGetMarkers from '@/hooks/services/markers/useGetMarkers'
-import { NewUserFormData } from '@/schemas/newUserSchema'
-import ShowHideFunctionality from '@/components/shared/ShowHideFunctionality'
-import Visibility from '@mui/icons-material/Visibility'
-import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import { NewRoleFormData } from '@/schemas/newRoleSchema'
 import CheckboxRoles from './CheckboxRoles'
 
-interface NewUserFormProps extends UseFormReturn<NewUserFormData> {
+interface NewUserFormProps extends UseFormReturn<NewRoleFormData> {
   defaultValues?: {
     name: string
-    email: string
-    role: string
     rights: number[]
   }
 }
 
-export default function NewUserForm({
+export default function NewRoleForm({
   control,
   formState: { errors },
-  defaultValues = { name: '', email: '', role: '', rights: [] }
+  defaultValues = { name: '', rights: [] }
 }: NewUserFormProps) {
   const { t: translate } = useTranslation()
   // TODO: Add functionality to take rights from BE.
