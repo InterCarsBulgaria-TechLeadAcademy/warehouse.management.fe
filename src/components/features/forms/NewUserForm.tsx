@@ -7,7 +7,6 @@ import { NewUserFormData } from '@/schemas/newUserSchema'
 import ShowHideFunctionality from '@/components/shared/ShowHideFunctionality'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import CheckboxRoles from './CheckboxRoles'
 
 interface NewUserFormProps extends UseFormReturn<NewUserFormData> {
   defaultValues?: {
@@ -106,6 +105,7 @@ export default function NewUserForm({
           />
         )}
       />
+
       <Controller
         name="role"
         defaultValue={defaultValues?.role || ''}
@@ -132,16 +132,7 @@ export default function NewUserForm({
           </FormControl>
         )}
       />
-
-      {/* Following controller is only for testing purposes and will be removed later. */}
-      <Controller
-        name="rights"
-        defaultValue={defaultValues.rights?.map(String)}
-        control={control}
-        render={({ field }) => (
-          <CheckboxRoles />
-        )}
-      />
+      
     </>
   )
 }
