@@ -112,8 +112,8 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
 
       mutationDeliveryPost.mutate(
         {
-          systemNumber: data.systemNumber,
-          receptionNumber: data.receptionNumber,
+          systemNumber: data.systemNumber.join(' | '),
+          receptionNumber: data.receptionNumber.join(' | '),
           truckNumber: data.truckNumber,
           cmr: data.cmr,
           deliveryTime: data.deliveryTime,
