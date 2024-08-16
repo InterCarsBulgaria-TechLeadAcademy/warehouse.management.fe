@@ -41,13 +41,8 @@ export default function CreateDifferenceForm({
   const mutationPostDifference = usePostDifference()
 
   const [count, setCount] = React.useState<string | undefined>('')
-  const [differenceTypeValue, setDifferenceTypeValue] = React.useState<string | null>(null)
-  const [differenceTypeInputValue, setDifferenceTypeInputValue] = React.useState('')
-  const [zoneValue, setZoneValue] = React.useState<string | null>(null)
-  const [zoneInputValue, setZoneInputValue] = React.useState('')
 
   const handleFormSubmit: SubmitHandler<CreateDifferenceFormData> = (data) => {
-    console.log(data)
     mutationPostDifference.mutate({
       internalNumber: data.internalNumber,
       activeNumber: data.activeNumber,
@@ -60,6 +55,12 @@ export default function CreateDifferenceForm({
     })
     handleCloseForm()
   }
+
+  const receptionNumberOptions = entry.deliveryDetails!.receptionNumber!.includes(' | ')
+    ? entry.deliveryDetails!.receptionNumber!.split(' | ')
+    : [entry.deliveryDetails!.receptionNumber!]
+
+  console.log(entry)
 
   return (
     <Box component="form" onSubmit={handleSubmit(handleFormSubmit)}>
@@ -103,21 +104,38 @@ export default function CreateDifferenceForm({
         <Controller
           name="receptionNumber"
           control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label={translate(
-                'zonesContent.table.actions.createDifference.labels.receptionNumber'
-              )}
-              id="receptionNumber"
-              name="receptionNumber"
-              required
-              error={!!errors.receptionNumber}
-              helperText={
-                errors.receptionNumber?.message ? translate(errors.receptionNumber.message) : ''
-              }
-            />
-          )}
+          render={({ field }) => {
+            return (
+              <Autocomplete
+                {...field}
+                options={receptionNumberOptions}
+                getOptionLabel={(option) => option || ''}
+                value={receptionNumberOptions.find((option) => option === field.value) || ''}
+                onChange={(_: any, newValue: string | null) => {
+                  field.onChange(newValue || '')
+                }}
+                inputValue={field.value || ''}
+                onInputChange={(_event, newInputValue) => {
+                  field.onChange(newInputValue)
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    required
+                    label={translate(
+                      'zonesContent.table.actions.createDifference.labels.receptionNumber'
+                    )}
+                    error={!!errors.receptionNumber}
+                    helperText={
+                      errors.receptionNumber?.message
+                        ? translate(errors.receptionNumber.message)
+                        : ''
+                    }
+                  />
+                )}
+              />
+            )
+          }}
         />
 
         <Controller
@@ -161,13 +179,9 @@ export default function CreateDifferenceForm({
               }
               onChange={(_event: any, newValue) => {
                 const newDifferenceTypeId = newValue ? newValue.id!.toString() : null
-                setDifferenceTypeValue(newDifferenceTypeId)
                 field.onChange(newDifferenceTypeId)
               }}
-              inputValue={differenceTypeInputValue}
-              onInputChange={(_event, newInputValue) => {
-                setDifferenceTypeInputValue(newInputValue)
-              }}
+              inputValue={field.value || ''}
               id="differenceType"
               sx={{ flex: 1 }}
               renderInput={(params) => (
@@ -198,13 +212,9 @@ export default function CreateDifferenceForm({
               value={zones.find((zone) => zone.id!.toString() === field.value) || null}
               onChange={(_event: any, newValue) => {
                 const newZoneId = newValue ? newValue.id!.toString() : null
-                setZoneValue(newZoneId)
                 field.onChange(newZoneId)
               }}
-              inputValue={zoneInputValue}
-              onInputChange={(_event, newInputValue) => {
-                setZoneInputValue(newInputValue)
-              }}
+              inputValue={field.value || ''}
               id="zone"
               sx={{ flex: 1 }}
               renderInput={(params) => (

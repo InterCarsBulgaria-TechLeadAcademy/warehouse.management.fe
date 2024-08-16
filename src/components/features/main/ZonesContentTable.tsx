@@ -83,6 +83,7 @@ export default function ZonesContentTable() {
       rowData={filteredRows}
       page={page}
       rowsPerPage={rowsPerPage}
+      rowsCount={entries.count}
       onPageChange={onPageChange}
       onRowsPerPageChange={onRowsPerPageChange}>
       <SearchInput
