@@ -56,11 +56,7 @@ export default function CreateDifferenceForm({
     handleCloseForm()
   }
 
-  const receptionNumberOptions = entry.deliveryDetails!.receptionNumber!.includes(' | ')
-    ? entry.deliveryDetails!.receptionNumber!.split(' | ')
-    : [entry.deliveryDetails!.receptionNumber!]
-
-  console.log(entry)
+  const receptionNumberOptions = entry.deliveryDetails!.receptionNumber!.split(' | ')
 
   return (
     <Box component="form" onSubmit={handleSubmit(handleFormSubmit)}>
