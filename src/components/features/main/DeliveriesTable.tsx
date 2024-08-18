@@ -114,8 +114,8 @@ export default function DeliveriesTable() {
       id: delivery.id!,
       number: delivery.id!,
       vendorName: delivery.vendorName!,
-      systemNumber: delivery.systemNumber!,
-      receptionNumber: delivery.receptionNumber!,
+      systemNumber: delivery.systemNumber!.split(' | ').join(', '),
+      receptionNumber: delivery.receptionNumber!.split(' | ').join(', '),
       waitingGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>{delivery.entriesWaitingProcessing!}</Typography>

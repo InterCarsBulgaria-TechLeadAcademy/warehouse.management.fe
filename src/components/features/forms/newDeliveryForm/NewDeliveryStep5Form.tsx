@@ -26,15 +26,15 @@ export default function NewDeliveryStep5Form() {
           <Box>
             <Typography>
               {' '}
-              {translate('deliveries.newDelivery.labels.step1.deliveryNumber')}
+              {translate('deliveries.newDelivery.labels.step1.systemNumber')}
             </Typography>
-            <Typography>{formsData.systemNumber}</Typography>
+            <Typography>{formsData.systemNumber.join(', ')}</Typography>
           </Box>
           <Box>
             <Typography>
               {translate('deliveries.newDelivery.labels.step1.receptionNumber')}
             </Typography>
-            <Typography>{formsData.receptionNumber}</Typography>
+            <Typography>{formsData.receptionNumber.join(', ')}</Typography>
           </Box>
           <Box>
             <Typography>{translate('deliveries.newDelivery.labels.step1.cmrNumber')}</Typography>

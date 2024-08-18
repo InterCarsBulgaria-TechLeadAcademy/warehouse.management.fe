@@ -400,10 +400,19 @@
         "back": "Назад",
         "exit": "Изход",
         "step1": {
-          "deliveryNumber": "Доставка №",
+          "systemNumber": "Доставка №",
           "receptionNumber": "Рецепция №",
           "cmrNumber": "ЧМР №",
-          "markers": "Маркери"
+          "markers": "Маркери",
+          "comboBox": {
+            "messages": {
+              "systemNumber": {
+                "pressEnter": "Натиснете 'Enter' за да добавите",
+                "emptySystemNumber": "Не може да добавите празно поле за доставка №",
+                "existSystemNumber": "Съществува доставка с този №"
+              }
+            }
+          }
         },
         "step2": {
           "vendorName": "Име на доставчик",
@@ -432,11 +441,11 @@
       },
       "errors": {
         "step1": {
-          "deliveryNumber": {
-            "required": "Полето за доставка № е задължително"
+          "systemNumber": {
+            "min": "Трябва да има минимум един № на доставка"
           },
           "receptionNumber": {
-            "required": "Полето за рецепция № е задължително"
+            "min": "Трябва да има минимум един № на рецепция №"
           },
           "cmrNumber": {
             "required": "Полето за ЧМР № е задължително"
