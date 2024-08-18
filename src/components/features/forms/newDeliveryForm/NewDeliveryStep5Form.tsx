@@ -12,13 +12,6 @@ export default function NewDeliveryStep5Form() {
   const { formsData } = useNewDeliveryContext()
   const markers = useGetMarkers()
 
-  // console.log(markers)
-
-  // const markersNames = formsData.markers.map((markerId: number) => {
-  //   const marker = markers.find((marker) => marker.id === markerId)
-  //   return marker ? marker.name : ''
-  // })
-
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2em' }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
@@ -33,15 +26,15 @@ export default function NewDeliveryStep5Form() {
           <Box>
             <Typography>
               {' '}
-              {translate('deliveries.newDelivery.labels.step1.deliveryNumber')}
+              {translate('deliveries.newDelivery.labels.step1.systemNumber')}
             </Typography>
-            <Typography>{formsData.systemNumber}</Typography>
+            <Typography>{formsData.systemNumber.join(', ')}</Typography>
           </Box>
           <Box>
             <Typography>
               {translate('deliveries.newDelivery.labels.step1.receptionNumber')}
             </Typography>
-            <Typography>{formsData.receptionNumber}</Typography>
+            <Typography>{formsData.receptionNumber.join(', ')}</Typography>
           </Box>
           <Box>
             <Typography>{translate('deliveries.newDelivery.labels.step1.cmrNumber')}</Typography>

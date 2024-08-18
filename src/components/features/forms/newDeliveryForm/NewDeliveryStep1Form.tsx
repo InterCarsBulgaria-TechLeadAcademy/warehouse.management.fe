@@ -15,6 +15,7 @@ import {
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { markerIsSelected } from '@/utils/markerIsSelected.ts'
+import ComboBox from '../ComboBox'
 
 export default function NewDeliveryStep1Form({
   control,
@@ -29,34 +30,27 @@ export default function NewDeliveryStep1Form({
       <Controller
         name="systemNumber"
         control={control}
-        defaultValue={formsData.systemNumber || ''}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            label={translate('deliveries.newDelivery.labels.step1.deliveryNumber')}
-            id="systemNumber"
-            name="systemNumber"
-            required
-            error={!!errors.systemNumber}
-            helperText={errors.systemNumber?.message ? translate(errors.systemNumber.message) : ''}
+        defaultValue={formsData.systemNumber || []}
+        render={({ field: { value, onChange } }) => (
+          <ComboBox
+            value={value}
+            onChange={onChange}
+            errors={errors.systemNumber}
+            label={translate('deliveries.newDelivery.labels.step1.systemNumber')}
           />
         )}
       />
+
       <Controller
         name="receptionNumber"
         control={control}
-        defaultValue={formsData.receptionNumber || ''}
-        render={({ field }) => (
-          <TextField
-            {...field}
+        defaultValue={formsData.receptionNumber || []}
+        render={({ field: { value, onChange } }) => (
+          <ComboBox
+            value={value}
+            onChange={onChange}
+            errors={errors.systemNumber}
             label={translate('deliveries.newDelivery.labels.step1.receptionNumber')}
-            id="receptionNumber"
-            name="receptionNumber"
-            required
-            error={!!errors.receptionNumber}
-            helperText={
-              errors.receptionNumber?.message ? translate(errors.receptionNumber.message) : ''
-            }
           />
         )}
       />
@@ -109,7 +103,7 @@ export default function NewDeliveryStep1Form({
               }}>
               {markers.map((marker: MarkerDto) => (
                 <MenuItem key={marker.id} value={marker.id?.toString()}>
-                  <Checkbox checked={markerIsSelected(field.value, marker.id!)} />
+                  <Checkbox checked={markerIsSelected(field.value!, marker.id!)} />
                   <ListItemText primary={marker.name} />
                 </MenuItem>
               ))}
