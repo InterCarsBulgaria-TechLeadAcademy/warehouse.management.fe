@@ -14,14 +14,14 @@ import NewRoleForm from '../forms/NewRoleForm'
 interface RoleRightDto {
     rightId?: number
     /** @nullable */
-    rightName?: string | null
+    permissionName?: string | null
 }
   
 interface RoleDto {
     id?: number
     /** @nullable */
     name?: string | null
-    rights?: RoleRightDto[] | null
+    permissions?: RoleRightDto[] | null
 }
 // ---------------------------------------------- ↑
 
@@ -85,7 +85,7 @@ export default function RolesTableActionsMenu({ role }: RolesTableActionsMenuPro
               {...methods}
               defaultValues={{
                 name: role.name!,
-                rights: role.rights?.map((right) => right.rightName!) || ([] as string[])
+                permissions: role.permissions?.map((permission) => permission.permissionName!) || ([] as string[])
               }}
             />
           )}
