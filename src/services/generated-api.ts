@@ -25,6 +25,12 @@ import type {
   GetApiEntryAllParams,
   GetApiEntryAllWithDeletedParams,
   GetApiMarkerAllWithParamsParams,
+  GetApiRoutePermissionAll200One,
+  GetApiRoutePermissionAll200Three,
+  GetApiRoutePermissionAll200Two,
+  GetApiRoutePermissionAllWithDeleted200One,
+  GetApiRoutePermissionAllWithDeleted200Three,
+  GetApiRoutePermissionAllWithDeleted200Two,
   GetApiVendorAllParams,
   GetApiZoneAllWithParamsParams,
   GetApiZoneEntriesParams,
@@ -34,6 +40,10 @@ import type {
   PaginationParameters,
   PostApiDeliveryGenerateBarcodePdfParams,
   RegisterDto,
+  RoleDto,
+  RoleFormDto,
+  RoleUserAssignDto,
+  RoutePermissionDto,
   TokenResponse,
   VendorDto,
   VendorFormDto,
@@ -91,8 +101,8 @@ export const getWarehouseManagementApi = () => {
     )
   }
 
-  const postLogout = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<void>({ url: `/logout`, method: 'POST' }, options)
+  const postApiAuthLogout = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<void>({ url: `/api/Auth/logout`, method: 'POST' }, options)
   }
 
   const getApiDeliveryId = (id: number, options?: SecondParameter<typeof customInstance>) => {
@@ -538,6 +548,102 @@ export const getWarehouseManagementApi = () => {
     return customInstance<MarkerDto[]>({ url: `/api/Marker/deleted`, method: 'GET' }, options)
   }
 
+  const postApiRoleAddToRole = (
+    roleUserAssignDto: BodyType<RoleUserAssignDto>,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<void>(
+      {
+        url: `/api/Role/add-to-role`,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        data: roleUserAssignDto
+      },
+      options
+    )
+  }
+
+  const postApiRoleCreate = (
+    roleFormDto: BodyType<RoleFormDto>,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<void>(
+      {
+        url: `/api/Role/create`,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        data: roleFormDto
+      },
+      options
+    )
+  }
+
+  const putApiRoleEditId = (
+    id: string,
+    roleFormDto: BodyType<RoleFormDto>,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<void>(
+      {
+        url: `/api/Role/edit/${id}`,
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        data: roleFormDto
+      },
+      options
+    )
+  }
+
+  const deleteApiRoleDeleteId = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<void>({ url: `/api/Role/delete/${id}`, method: 'DELETE' }, options)
+  }
+
+  const getApiRoleAll = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<RoleDto[]>({ url: `/api/Role/all`, method: 'GET' }, options)
+  }
+
+  const getApiRoleRoleId = (roleId: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<RoleDto>({ url: `/api/Role/${roleId}`, method: 'GET' }, options)
+  }
+
+  const getApiRoutePermissionAll = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<
+      | GetApiRoutePermissionAll200One
+      | GetApiRoutePermissionAll200Two
+      | GetApiRoutePermissionAll200Three
+    >({ url: `/api/RoutePermission/all`, method: 'GET' }, options)
+  }
+
+  const getApiRoutePermissionAllWithDeleted = (
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<
+      | GetApiRoutePermissionAllWithDeleted200One
+      | GetApiRoutePermissionAllWithDeleted200Two
+      | GetApiRoutePermissionAllWithDeleted200Three
+    >({ url: `/api/RoutePermission/all-with-deleted`, method: 'GET' }, options)
+  }
+
+  const getApiRoutePermissionId = (
+    id: string,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<RoutePermissionDto>(
+      { url: `/api/RoutePermission/${id}`, method: 'GET' },
+      options
+    )
+  }
+
+  const deleteApiRoutePermissionDeleteId = (
+    id: string,
+    options?: SecondParameter<typeof customInstance>
+  ) => {
+    return customInstance<void>(
+      { url: `/api/RoutePermission/delete/${id}`, method: 'DELETE' },
+      options
+    )
+  }
+
   const getApiVendorId = (id: number, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<VendorDto>({ url: `/api/Vendor/${id}`, method: 'GET' }, options)
   }
@@ -684,7 +790,7 @@ export const getWarehouseManagementApi = () => {
     postApiAuthLogin,
     postApiAuthRegister,
     postApiAuthRefresh,
-    postLogout,
+    postApiAuthLogout,
     getApiDeliveryId,
     getApiDeliveryAll,
     postApiDeliveryAdd,
@@ -731,6 +837,16 @@ export const getWarehouseManagementApi = () => {
     deleteApiMarkerDeleteId,
     putApiMarkerRestoreId,
     getApiMarkerDeleted,
+    postApiRoleAddToRole,
+    postApiRoleCreate,
+    putApiRoleEditId,
+    deleteApiRoleDeleteId,
+    getApiRoleAll,
+    getApiRoleRoleId,
+    getApiRoutePermissionAll,
+    getApiRoutePermissionAllWithDeleted,
+    getApiRoutePermissionId,
+    deleteApiRoutePermissionDeleteId,
     getApiVendorId,
     getApiVendorAll,
     postApiVendorAdd,
@@ -759,8 +875,8 @@ export type PostApiAuthRegisterResult = NonNullable<
 export type PostApiAuthRefreshResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiAuthRefresh']>>
 >
-export type PostLogoutResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postLogout']>>
+export type PostApiAuthLogoutResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiAuthLogout']>>
 >
 export type GetApiDeliveryIdResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiDeliveryId']>>
@@ -909,6 +1025,40 @@ export type PutApiMarkerRestoreIdResult = NonNullable<
 >
 export type GetApiMarkerDeletedResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiMarkerDeleted']>>
+>
+export type PostApiRoleAddToRoleResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiRoleAddToRole']>>
+>
+export type PostApiRoleCreateResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['postApiRoleCreate']>>
+>
+export type PutApiRoleEditIdResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['putApiRoleEditId']>>
+>
+export type DeleteApiRoleDeleteIdResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['deleteApiRoleDeleteId']>>
+>
+export type GetApiRoleAllResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiRoleAll']>>
+>
+export type GetApiRoleRoleIdResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiRoleRoleId']>>
+>
+export type GetApiRoutePermissionAllResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiRoutePermissionAll']>>
+>
+export type GetApiRoutePermissionAllWithDeletedResult = NonNullable<
+  Awaited<
+    ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiRoutePermissionAllWithDeleted']>
+  >
+>
+export type GetApiRoutePermissionIdResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiRoutePermissionId']>>
+>
+export type DeleteApiRoutePermissionDeleteIdResult = NonNullable<
+  Awaited<
+    ReturnType<ReturnType<typeof getWarehouseManagementApi>['deleteApiRoutePermissionDeleteId']>
+  >
 >
 export type GetApiVendorIdResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiVendorId']>>

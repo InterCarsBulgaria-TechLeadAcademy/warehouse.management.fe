@@ -134,12 +134,7 @@ export default function DeliveriesTable() {
           </InfoPopper> */}
         </Box>
       ),
-      markers:
-        delivery.markers!.length === 0 ? (
-          <Typography>-</Typography>
-        ) : (
-          <ChipsList items={delivery.markers!.map((marker) => marker.markerName!)} />
-        ),
+      markers: <ChipsList items={delivery.markers!.map((marker) => marker.markerName!)} />,
       status: <ChipsList items={[delivery.status!]} />,
       approvedOn: dateHelpers(delivery.approvedOn!),
       createdAt: dateHelpers(delivery.createdAt!),

@@ -9,6 +9,9 @@ import { useTranslation } from 'react-i18next'
 import { Change } from '@/services/model'
 import useGetDeliveryHistory from '@/hooks/services/deliveries/useGetDeliveryHistory'
 import dateHelpers from '@/utils/dateHelpers'
+import useTranslateDeliveryHistoryChanges from '@/hooks/useTranslateDeliveryHistoryChanges'
+import useTranslateDeliveryHistoryChangeType from '@/hooks/useTranslateDeliveryHistoryChangeType'
+import useDateHelpers from '@/hooks/useDateHelpers'
 
 interface DeliveryHistoryTableProps {
   deliveryId: number
@@ -18,8 +21,6 @@ export default function DeliveryHistoryTable({ deliveryId }: DeliveryHistoryTabl
   const { t: translate } = useTranslation()
 
   const deliveriesHistory = useGetDeliveryHistory(deliveryId)
-
-  console.log(deliveriesHistory)
 
   return (
     <TableContainer component={Paper}>
@@ -48,11 +49,15 @@ export default function DeliveryHistoryTable({ deliveryId }: DeliveryHistoryTabl
           {deliveriesHistory.changes?.map((changes: Change, index: number) => (
             <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">
-                {changes.propertyName!}
+                {useTranslateDeliveryHistoryChanges(changes.propertyName!)}
               </TableCell>
-              <TableCell align="left">{changes.type}</TableCell>
-              <TableCell align="left">{dateHelpers(changes.to!)}</TableCell>
-              <TableCell align="left">{dateHelpers(changes.from!)}</TableCell>
+              <TableCell align="left">
+                {useTranslateDeliveryHistoryChangeType(changes.type!)}
+              </TableCell>
+              {/* <TableCell align="left">{dateHelpers(changes.to!)}</TableCell> */}
+              <TableCell align="left">{useDateHelpers(changes.to!)}</TableCell>
+              {/* <TableCell align="left">{dateHelpers(changes.from!)}</TableCell> */}
+              <TableCell align="left">{useDateHelpers(changes.from!)}</TableCell>
               <TableCell align="left"> {dateHelpers(changes.changeDate!)}</TableCell>
             </TableRow>
           ))}
