@@ -7,8 +7,8 @@ import { DifferenceDto } from '@/services/model'
 import useGetDifferences from '@/hooks/services/differences/useGetDifferences'
 import DifferencesTableActionsMenu from '../actionsMenu/DifferencesTableActionsMenu'
 import { Typography } from '@mui/material'
-import dateHelpers from '@/utils/dateHelpers'
 import ChipsList from '../ChipsList'
+import useDateHelpers from '@/hooks/useDateHelpers'
 
 interface Row {
   number: number
@@ -21,7 +21,7 @@ interface Row {
   adminComment: React.ReactNode | string
   status: React.ReactNode
   type: string
-  createdAt: string
+  createdAt: string | React.ReactNode
   deliverySystemNumber: string
   actions: React.ReactNode
 }
@@ -84,7 +84,7 @@ export default function DifferencesTable() {
         difference.adminComment! === '' ? <Typography>-</Typography> : difference.adminComment,
       status: <ChipsList items={[difference.status!]} />,
       type: difference.type!,
-      createdAt: dateHelpers(difference.createdAt!),
+      createdAt: useDateHelpers(difference.createdAt!),
       deliverySystemNumber: difference.deliverySystemNumber!,
       actions: <DifferencesTableActionsMenu key={difference.id} difference={difference} />
     }))

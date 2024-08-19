@@ -12,12 +12,12 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 // import InfoPopper from '../InfoPoper'
 // import DeliveryGoodsInfo from '../DeliveryGoodsInfo'
-import dateHelpers from '@/utils/dateHelpers'
 import useGetDeliveries from '@/hooks/services/deliveries/useGetDeliveries'
 import { DeliveryDto } from '@/services/model'
 import useGetMarkers from '@/hooks/services/markers/useGetMarkers'
 import { Column } from '@/interfaces/Column'
 import useGetVendors from '@/hooks/services/vendors/useGetVendors'
+import useDateHelpers from '@/hooks/useDateHelpers'
 
 interface Row {
   number: number
@@ -28,8 +28,8 @@ interface Row {
   completedGoods: React.ReactNode
   markers: React.ReactNode
   status: React.ReactNode
-  approvedOn: string
-  createdAt: string
+  approvedOn: string | React.ReactNode
+  createdAt: string | React.ReactNode
   actions: React.ReactNode
 }
 
@@ -136,8 +136,8 @@ export default function DeliveriesTable() {
       ),
       markers: <ChipsList items={delivery.markers!.map((marker) => marker.markerName!)} />,
       status: <ChipsList items={[delivery.status!]} />,
-      approvedOn: dateHelpers(delivery.approvedOn!),
-      createdAt: dateHelpers(delivery.createdAt!),
+      approvedOn: useDateHelpers(delivery.approvedOn!),
+      createdAt: useDateHelpers(delivery.createdAt!),
       actions: <DeliveriesTableActionsMenu deliveryId={delivery.id!} />
     }))
   }
