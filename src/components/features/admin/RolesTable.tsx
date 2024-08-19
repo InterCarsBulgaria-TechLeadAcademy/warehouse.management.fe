@@ -11,7 +11,7 @@ import RolesTableActionsMenu from '../actionsMenu/RolesTableActionsMenu'
 interface Row {
   id: number
   name: string
-  rights: React.ReactNode
+  permissions: React.ReactNode
   actions: React.ReactNode
 }
 
@@ -20,14 +20,14 @@ interface Row {
 interface RoleRightDto {
   rightId?: number
   /** @nullable */
-  rightName?: string | null
+  permissionName?: string | null
 }
 
 interface RoleDto {
   id?: number
   /** @nullable */
   name?: string | null
-  rights?: RoleRightDto[] | null
+  permissions?: RoleRightDto[] | null
 }
 // ---------------------------------------------- ↑
 
@@ -56,7 +56,7 @@ export default function RolesTable() {
 
   const columnsData: Column<Row>[] = [
     { key: 'name', title: translate('Име') },
-    { key: 'rights', title: translate('Права') },
+    { key: 'permissions', title: translate('Права') },
     {
       key: 'actions',
       title: translate('vendors.table.columns.actions'),
@@ -66,13 +66,14 @@ export default function RolesTable() {
   ]
 
   function transformDataToRows(roles: RoleDto[]): Row[] {
+    
     return roles.map((role: RoleDto) => ({
       id: role.id!,
       name: role.name!, // TODO: translate role..
-      rights:
-        role.rights!.length > 0 ? (
+      permissions:
+        role.permissions!.length > 0 ? (
           <ChipsList
-            items={role.rights?.map((right) => right.rightName!) || ([] as string[])}
+            items={role.permissions?.map((permission) => permission.permissionName!) || ([] as string[])}
           />
         ) : (
           <Typography>-</Typography>
