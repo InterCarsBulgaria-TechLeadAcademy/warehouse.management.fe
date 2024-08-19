@@ -5,38 +5,23 @@ import SearchInput from '../SearchInput'
 import { Autocomplete, TextField, Typography } from '@mui/material'
 import { Column } from '@/interfaces/Column.ts'
 import ChipsList from '../ChipsList'
-import useGetRoles from '@/hooks/services/roles/useGetRoles'
 import RolesTableActionsMenu from '../actionsMenu/RolesTableActionsMenu'
+import useGetRoles from '@/hooks/services/roles/useGetRoles'
+import { RoleDto } from '@/services/model'
 
 interface Row {
-  id: number
+  id: string
   name: string
   permissions: React.ReactNode
   actions: React.ReactNode
 }
-
-// -------------------------------------------- ↓
-// TODO: Watch out for the code later..
-interface RoleRightDto {
-  rightId?: number
-  /** @nullable */
-  permissionName?: string | null
-}
-
-interface RoleDto {
-  id?: number
-  /** @nullable */
-  name?: string | null
-  permissions?: RoleRightDto[] | null
-}
-// ---------------------------------------------- ↑
 
 export default function RolesTable() {
   const { t: translate } = useTranslation()
   const [searchTerm, setSearchTerm] = React.useState('')
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
-  const roles = useGetRoles()
+  const roles = useGetRoles();
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
@@ -66,14 +51,15 @@ export default function RolesTable() {
   ]
 
   function transformDataToRows(roles: RoleDto[]): Row[] {
+    console.log(roles);
     
     return roles.map((role: RoleDto) => ({
       id: role.id!,
       name: role.name!, // TODO: translate role..
-      permissions:
-        role.permissions!.length > 0 ? (
+      permissions: // TODO: Check RoleDto later!!!!!!!!!!!!!
+        role.rolePermissions!.length > 0 ? (
           <ChipsList
-            items={role.permissions?.map((permission) => permission.permissionName!) || ([] as string[])}
+            items={role.routePermissions?.map((permission) => permission.name!) || ([] as string[])}
           />
         ) : (
           <Typography>-</Typography>
