@@ -15,34 +15,34 @@
 export default function useGetRoles() {
     const data: any[] = [
       {
-        id: 1, name: 'regular', rights: [
+        id: 1, name: 'regular', permissions: [
           {
             rightId: 1,
-            rightName: 'createZones'
+            permissionName: 'createZones'
           },
           {
             rightId: 2,
-            rightName: 'readZones'
+            permissionName: 'readZones'
           },
         ]
       },
       {
-        id: 2, name: 'admin', rights: [
+        id: 2, name: 'admin', permissions: [
           {
             rightId: 1,
-            rightName: 'deleteZones'
+            permissionName: 'deleteZones'
           },
           {
             rightId: 2,
-            rightName: 'editZones'
+            permissionName: 'editZones'
           },
           {
             rightId: 3,
-            rightName: 'readZones'
+            permissionName: 'readZones'
           },
           {
             rightId: 4,
-            rightName: 'createZones'
+            permissionName: 'createZones'
           },
         ]
       },
