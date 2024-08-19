@@ -355,7 +355,29 @@
             "title": "Местене на стока"
           },
           "step5": {
-            "title": "Извършени действия в доставка"
+            "title": "Извършени действия в доставка",
+            "table": {
+              "table-head": {
+                "changed": "Променена",
+                "typeChange": "Тип промяна",
+                "from": "От",
+                "to": "Към",
+                "dataChange": "Дата на промяна"
+              },
+              "table-body": {
+                "changed": {
+                  "startedProcessing": "Започната обработка",
+                  "finishedProcessing": "Завършена обработка",
+                  "zone": "Зона",
+                  "lastModifiedByUserId": "Потребител",
+                  "lastModifiedAt": "Промяна в"
+                },
+                "changeType": {
+                  "delivery": "Доставка",
+                  "entry": "Съдържание на зона"
+                }   
+              }
+            }
           },
           "goodDetails": {
             "pallets": "Палети",
@@ -642,7 +664,8 @@
     },
     "filters": {
       "search": "Търсене",
-      "toggle": "Покажи готовите записи"
+      "zones": "Зони",
+      "statuses": "Статуси"
     },
     "table": {
       "columns": {

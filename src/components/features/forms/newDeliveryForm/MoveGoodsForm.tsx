@@ -13,7 +13,6 @@ interface GoodDetailsFormProps {
   control: Control<NewDeliveryStep4FormData, any>
   errors: FieldErrors<NewDeliveryStep4FormData>
   goodTypes: { title: string; value: string }[]
-  // zones: string[]
   zones: ZoneDto[]
   index: number
   onDeleteHandler: () => void
