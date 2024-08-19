@@ -4,17 +4,18 @@ import TableActionsMenu from './TableActionsMenu'
 import DeliveryDetails from '../DeliveryDetails'
 import useDeleteDelivery from '@/hooks/services/deliveries/useDeleteDelivery'
 import ConfirmDialog from '../../shared/ConfirmDialog.tsx'
+import { useApproveDelivery } from '@/hooks/services/deliveries/useApproveDelivery.ts'
+import { DeliveryDto } from '@/services/model/deliveryDto.ts'
 
 interface DeliveriesTableActionsMenuProps {
-  deliveryId: number
+  delivery: DeliveryDto
 }
 
-export default function DeliveriesTableActionsMenu({
-  deliveryId
-}: DeliveriesTableActionsMenuProps) {
+export default function DeliveriesTableActionsMenu({ delivery }: DeliveriesTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
   const mutationDelete = useDeleteDelivery()
+  const approveDelivery = useApproveDelivery()
 
   const handleClose = () => {
     setSelectedOption(null)
@@ -28,16 +29,45 @@ export default function DeliveriesTableActionsMenu({
     setSelectedOption(option)
   }
 
-  const onConfirmClick = () => {
-    mutationDelete.mutate(deliveryId)
+  const onConfirmApprove = () => {
+    approveDelivery.mutate(delivery.id!)
     handleClose()
   }
 
-  const options = [
-    { title: 'deliveries.table.actionsMenu.details', value: 'details' },
-    { title: 'deliveries.table.actionsMenu.approve', value: 'approve' },
-    { title: 'deliveries.table.actionsMenu.delete', value: 'delete' }
-  ]
+  const onConfirmDelete = () => {
+    mutationDelete.mutate(delivery.id!)
+    handleClose()
+  }
+
+  const options = (() => {
+    const options = []
+    const availableOptions = {
+      details: {
+        title: 'deliveries.table.actionsMenu.details',
+        value: 'details'
+      },
+      approve: {
+        title: 'deliveries.table.actionsMenu.approve',
+        value: 'approve'
+      },
+      delete: {
+        title: 'deliveries.table.actionsMenu.delete',
+        value: 'delete'
+      }
+    }
+
+    switch (delivery.status) {
+      case 'Finished':
+        options.push(availableOptions.details, availableOptions.approve, availableOptions.delete)
+        break
+
+      default:
+        options.push(availableOptions.details, availableOptions.delete)
+        break
+    }
+
+    return options
+  })()
 
   return (
     <div>
@@ -46,10 +76,25 @@ export default function DeliveriesTableActionsMenu({
       {selectedOption === 'details' && (
         <ConfirmDialog
           open={true}
-          content={<DeliveryDetails deliveryId={deliveryId} />}
+          content={<DeliveryDetails deliveryId={delivery.id!} />}
           discardText={translate('deliveries.table.actions.details.labels.exit')}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
+        />
+      )}
+
+      {selectedOption === 'approve' && (
+        <ConfirmDialog
+          open={true}
+          title={translate('deliveries.table.actions.approve.title')}
+          content={translate('deliveries.table.actions.approve.message', {
+            deliveryNumber: delivery.id!
+          })}
+          discardText={translate('deliveries.table.actions.approve.labels.discard')}
+          confirmText={translate('deliveries.table.actions.approve.labels.confirm')}
+          onCloseDialog={handleClose}
+          onDiscardClick={onDiscardClick}
+          onConfirmClick={onConfirmApprove}
         />
       )}
 
@@ -58,12 +103,14 @@ export default function DeliveriesTableActionsMenu({
         <ConfirmDialog
           open={true}
           title={translate('deliveries.table.actions.delete.title')}
-          content={translate('deliveries.table.actions.delete.message')}
+          content={translate('deliveries.table.actions.delete.message', {
+            deliveryNumber: delivery.id!
+          })}
           discardText={translate('deliveries.table.actions.delete.labels.discard')}
           confirmText={translate('deliveries.table.actions.delete.labels.confirm')}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
-          onConfirmClick={onConfirmClick}
+          onConfirmClick={onConfirmDelete}
         />
       )}
     </div>

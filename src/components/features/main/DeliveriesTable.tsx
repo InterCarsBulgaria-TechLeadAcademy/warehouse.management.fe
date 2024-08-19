@@ -138,7 +138,7 @@ export default function DeliveriesTable() {
       status: <ChipsList items={[delivery.status!]} />,
       approvedOn: useDateHelpers(delivery.approvedOn!),
       createdAt: useDateHelpers(delivery.createdAt!),
-      actions: <DeliveriesTableActionsMenu deliveryId={delivery.id!} />
+      actions: <DeliveriesTableActionsMenu delivery={delivery} />
     }))
   }
 
