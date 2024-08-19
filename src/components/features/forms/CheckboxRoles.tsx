@@ -3,10 +3,10 @@ import { Box, FormControl, FormControlLabel, Checkbox, Typography } from '@mui/m
 import { useTranslation } from 'react-i18next';
 
 interface CheckboxRolesProps {
-  rights: string[]
+  permissions: string[]
 }
 
-export default function CheckboxRoles({ rights }: CheckboxRolesProps) {
+export default function CheckboxRoles({ permissions }: CheckboxRolesProps) {
   const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>({
     createZones: false,
     readZones: false,
@@ -27,9 +27,9 @@ export default function CheckboxRoles({ rights }: CheckboxRolesProps) {
 
   useEffect(() => {
     const updateCheckedItems = { ...checkedItems }
-    rights.forEach((right: string) => { updateCheckedItems[right] = true })
+    permissions.forEach((permission: string) => { updateCheckedItems[permission] = true })
     setCheckedItems(updateCheckedItems)
-  }, [rights])
+  }, [permissions])
 
 
   const { t: translate } = useTranslation()
