@@ -7,8 +7,8 @@ import { DifferenceDto } from '@/services/model'
 import useGetDifferences from '@/hooks/services/differences/useGetDifferences'
 import DifferencesTableActionsMenu from '../actionsMenu/DifferencesTableActionsMenu'
 import { Typography } from '@mui/material'
-import ChipsList from '../ChipsList'
 import useDateHelpers from '@/hooks/useDateHelpers'
+import ChipsList from '../ChipsList'
 
 interface Row {
   number: number

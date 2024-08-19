@@ -1,134 +1,82 @@
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import Paper from '@mui/material/Paper'
+import React from 'react'
+import DataTable from '@/components/shared/DataTable'
 import { useTranslation } from 'react-i18next'
-import { Change } from '@/services/model'
-import useGetDeliveryHistory from '@/hooks/services/deliveries/useGetDeliveryHistory'
+import { Column } from '@/interfaces/Column.ts'
+import useDateHelpers from '@/hooks/useDateHelpers'
 import useTranslateDeliveryHistoryChanges from '@/hooks/useTranslateDeliveryHistoryChanges'
 import useTranslateDeliveryHistoryChangeType from '@/hooks/useTranslateDeliveryHistoryChangeType'
-import useDateHelpers from '@/hooks/useDateHelpers'
+import useGetDeliveryHistory from '@/hooks/services/deliveries/useGetDeliveryHistory'
+import { Change } from '@/services/model'
 
 interface DeliveryHistoryTableProps {
   deliveryId: number
 }
 
-export default function DeliveryHistoryTable({ deliveryId }: DeliveryHistoryTableProps) {
-  const { t: translate } = useTranslation()
-
-  const deliveriesHistory = useGetDeliveryHistory(deliveryId)
-
-  return (
-    <TableContainer component={Paper}>
-      <Table aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>
-              {translate('deliveries.table.actions.details.step5.table.table-head.changed')}
-            </TableCell>
-            <TableCell align="left">
-              {' '}
-              {translate('deliveries.table.actions.details.step5.table.table-head.typeChange')}
-            </TableCell>
-            <TableCell align="left">
-              {translate('deliveries.table.actions.details.step5.table.table-head.from')}
-            </TableCell>
-            <TableCell align="left">
-              {translate('deliveries.table.actions.details.step5.table.table-head.to')}
-            </TableCell>
-            <TableCell align="left">
-              {translate('deliveries.table.actions.details.step5.table.table-head.dataChange')}
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {deliveriesHistory.changes?.map((changes: Change, index: number) => (
-            <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              <TableCell component="th" scope="row">
-                {useTranslateDeliveryHistoryChanges(changes.propertyName!)}
-              </TableCell>
-              <TableCell align="left">
-                {useTranslateDeliveryHistoryChangeType(changes.type!)}
-              </TableCell>
-
-              <TableCell align="left">{useDateHelpers(changes.to!)}</TableCell>
-
-              <TableCell align="left">{useDateHelpers(changes.from!)}</TableCell>
-              <TableCell align="left"> {useDateHelpers(changes.changeDate!)}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  )
+interface Row {
+  id: number
+  changed: string
+  typeChange: string
+  from: string | React.ReactNode
+  to: string | React.ReactNode
+  dataChange: string | React.ReactNode
 }
 
-// import Table from '@mui/material/Table'
-// import TableBody from '@mui/material/TableBody'
-// import TableCell from '@mui/material/TableCell'
-// import TableContainer from '@mui/material/TableContainer'
-// import TableHead from '@mui/material/TableHead'
-// import TableRow from '@mui/material/TableRow'
-// import Paper from '@mui/material/Paper'
-// import { useTranslation } from 'react-i18next'
-// import { Change } from '@/services/model'
-// import useGetDeliveryHistory from '@/hooks/services/deliveries/useGetDeliveryHistory'
-// import dateHelpers from '@/utils/dateHelpers'
-// import useTranslateDeliveryHistoryChanges from '@/hooks/useTranslateDeliveryHistoryChanges'
-// import useTranslateDeliveryHistoryChangeType from '@/hooks/useTranslateDeliveryHistoryChangeType'
-// import useDateHelpers from '@/hooks/useDateHelpers'
+export default function DeliveryHistoryTable({ deliveryId }: DeliveryHistoryTableProps) {
+  const { t: translate } = useTranslation()
+  const [page, setPage] = React.useState(0)
+  const [rowsPerPage, setRowsPerPage] = React.useState(10)
+  const deliveriesHistory = useGetDeliveryHistory(deliveryId)
 
-// interface DeliveryHistoryTableProps {
-//   deliveryId: number
-// }
+  const onPageChange = (newPage: number) => {
+    setPage(newPage)
+  }
 
-// export default function DeliveryHistoryTable({ deliveryId }: DeliveryHistoryTableProps) {
-//   const { t: translate } = useTranslation()
+  const onRowsPerPageChange = (newRowsPerPage: number) => {
+    setRowsPerPage(newRowsPerPage)
+    setPage(0)
+  }
 
-//   const deliveriesHistory = useGetDeliveryHistory(deliveryId)
+  const columnsData: Column<Row>[] = [
+    {
+      key: 'changed',
+      title: translate('deliveries.table.actions.details.step5.table.table-head.changed')
+    },
+    {
+      key: 'typeChange',
+      title: translate('deliveries.table.actions.details.step5.table.table-head.typeChange')
+    },
+    {
+      key: 'from',
+      title: translate('deliveries.table.actions.details.step5.table.table-head.from')
+    },
+    { key: 'to', title: translate('deliveries.table.actions.details.step5.table.table-head.to') },
+    {
+      key: 'dataChange',
+      title: translate('deliveries.table.actions.details.step5.table.table-head.dataChange')
+    }
+  ]
 
-//   return (
-//     <TableContainer component={Paper}>
-//       <Table aria-label="simple table">
-//         <TableHead>
-//           <TableRow>
-//             <TableCell>
-//               {translate('deliveries.table.actions.details.step5.table.table-head.changed')}
-//             </TableCell>
-//             <TableCell align="left">
-//               {' '}
-//               {translate('deliveries.table.actions.details.step5.table.table-head.typeChange')}
-//             </TableCell>
-//             <TableCell align="left">
-//               {translate('deliveries.table.actions.details.step5.table.table-head.from')}
-//             </TableCell>
-//             <TableCell align="left">
-//               {translate('deliveries.table.actions.details.step5.table.table-head.to')}
-//             </TableCell>
-//             <TableCell align="left">
-//               {translate('deliveries.table.actions.details.step5.table.table-head.dataChange')}
-//             </TableCell>
-//           </TableRow>
-//         </TableHead>
-//         <TableBody>
-//           {deliveriesHistory.changes?.map((changes: Change, index: number) => (
-//             <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-//               <TableCell component="th" scope="row">
-//                 {useTranslateDeliveryHistoryChanges(changes.propertyName!)}
-//               </TableCell>
-//               <TableCell align="left">
-//                 {useTranslateDeliveryHistoryChangeType(changes.type!)}
-//               </TableCell>
-//               <TableCell align="left">{useDateHelpers(changes.to!)}</TableCell>
-//               <TableCell align="left">{useDateHelpers(changes.from!)}</TableCell>
-//               <TableCell align="left"> {useDateHelpers(changes.changeDate!)}</TableCell>
-//             </TableRow>
-//           ))}
-//         </TableBody>
-//       </Table>
-//     </TableContainer>
-//   )
-// }
+  function transformDataToRows(deliveriesHistory: Change[]): Row[] {
+    return deliveriesHistory.map((deliveryHistory: Change, index: number) => ({
+      id: index,
+      changed: useTranslateDeliveryHistoryChanges(deliveryHistory.propertyName!),
+      typeChange: useTranslateDeliveryHistoryChangeType(deliveryHistory.type!),
+      from: useDateHelpers(deliveryHistory.from!),
+      to: useDateHelpers(deliveryHistory.to!),
+      dataChange: useDateHelpers(deliveryHistory.from!)
+    }))
+  }
+
+  const rowData = transformDataToRows(deliveriesHistory.changes! || [])
+
+  return (
+    <DataTable
+      columnsData={columnsData}
+      rowData={rowData}
+      page={page}
+      rowsPerPage={rowsPerPage}
+      onPageChange={onPageChange}
+      onRowsPerPageChange={onRowsPerPageChange}
+    />
+  )
+}
