@@ -7,9 +7,7 @@
   "paths": {
     "/api/Auth/login": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -58,9 +56,7 @@
     },
     "/api/Auth/register": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -109,9 +105,7 @@
     },
     "/api/Auth/refresh": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -197,9 +191,7 @@
     },
     "/logout": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "responses": {
           "200": {
             "description": "Success"
@@ -209,9 +201,7 @@
     },
     "/api/Delivery/{id}": {
       "get": {
-        "tags": [
-          "Delivery"
-        ],
+        "tags": ["Delivery"],
         "parameters": [
           {
             "name": "id",
@@ -269,9 +259,7 @@
     },
     "/api/Delivery/all": {
       "get": {
-        "tags": [
-          "Delivery"
-        ],
+        "tags": ["Delivery"],
         "parameters": [
           {
             "name": "PageNumber",
@@ -343,9 +331,7 @@
     },
     "/api/Delivery/add": {
       "post": {
-        "tags": [
-          "Delivery"
-        ],
+        "tags": ["Delivery"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -394,9 +380,7 @@
     },
     "/api/Delivery/edit/{id}": {
       "put": {
-        "tags": [
-          "Delivery"
-        ],
+        "tags": ["Delivery"],
         "parameters": [
           {
             "name": "id",
@@ -476,9 +460,7 @@
     },
     "/api/Delivery/delete/{id}": {
       "delete": {
-        "tags": [
-          "Delivery"
-        ],
+        "tags": ["Delivery"],
         "parameters": [
           {
             "name": "id",
@@ -539,9 +521,7 @@
     },
     "/api/Delivery/restore/{id}": {
       "put": {
-        "tags": [
-          "Delivery"
-        ],
+        "tags": ["Delivery"],
         "parameters": [
           {
             "name": "id",
@@ -602,9 +582,7 @@
     },
     "/api/Delivery/all-deleted": {
       "get": {
-        "tags": [
-          "Delivery"
-        ],
+        "tags": ["Delivery"],
         "responses": {
           "200": {
             "description": "Success",
@@ -640,9 +618,7 @@
     },
     "/api/Delivery/history/{id}": {
       "get": {
-        "tags": [
-          "Delivery"
-        ],
+        "tags": ["Delivery"],
         "parameters": [
           {
             "name": "id",
@@ -700,9 +676,7 @@
     },
     "/api/Delivery/Approve/{id}": {
       "put": {
-        "tags": [
-          "Delivery"
-        ],
+        "tags": ["Delivery"],
         "parameters": [
           {
             "name": "id",
@@ -789,9 +763,7 @@
     },
     "/api/Delivery/GenerateBarcodePdf": {
       "post": {
-        "tags": [
-          "Delivery"
-        ],
+        "tags": ["Delivery"],
         "parameters": [
           {
             "name": "id",
@@ -811,9 +783,7 @@
     },
     "/api/Difference/all": {
       "get": {
-        "tags": [
-          "Difference"
-        ],
+        "tags": ["Difference"],
         "parameters": [
           {
             "name": "PageNumber",
@@ -865,9 +835,7 @@
     },
     "/api/Difference/all-with-deleted": {
       "get": {
-        "tags": [
-          "Difference"
-        ],
+        "tags": ["Difference"],
         "parameters": [
           {
             "name": "PageNumber",
@@ -919,9 +887,7 @@
     },
     "/api/Difference/{id}": {
       "get": {
-        "tags": [
-          "Difference"
-        ],
+        "tags": ["Difference"],
         "parameters": [
           {
             "name": "id",
@@ -979,9 +945,7 @@
     },
     "/api/Difference/add": {
       "post": {
-        "tags": [
-          "Difference"
-        ],
+        "tags": ["Difference"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1030,9 +994,7 @@
     },
     "/api/Difference/edit/{id}": {
       "put": {
-        "tags": [
-          "Difference"
-        ],
+        "tags": ["Difference"],
         "parameters": [
           {
             "name": "id",
@@ -1092,9 +1054,7 @@
     },
     "/api/Difference/delete/{id}": {
       "delete": {
-        "tags": [
-          "Difference"
-        ],
+        "tags": ["Difference"],
         "parameters": [
           {
             "name": "id",
@@ -1115,9 +1075,7 @@
     },
     "/api/Difference/restore/{id}": {
       "patch": {
-        "tags": [
-          "Difference"
-        ],
+        "tags": ["Difference"],
         "parameters": [
           {
             "name": "id",
@@ -1176,33 +1134,20 @@
         }
       }
     },
-    "/api/Difference/start": {
+    "/api/Difference/start/{id}": {
       "post": {
-        "tags": [
-          "Difference"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
+        "tags": ["Difference"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Success"
@@ -1250,10 +1195,19 @@
         }
       }
     },
-    "/api/Difference/finish": {
+    "/api/Difference/finish/{id}": {
       "post": {
-        "tags": [
-          "Difference"
+        "tags": ["Difference"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         ],
         "requestBody": {
           "content": {
@@ -1321,10 +1275,19 @@
         }
       }
     },
-    "/api/Difference/noDifferences": {
+    "/api/Difference/noDifferences/{id}": {
       "post": {
-        "tags": [
-          "Difference"
+        "tags": ["Difference"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         ],
         "requestBody": {
           "content": {
@@ -1394,9 +1357,7 @@
     },
     "/api/DifferenceType/all": {
       "get": {
-        "tags": [
-          "DifferenceType"
-        ],
+        "tags": ["DifferenceType"],
         "responses": {
           "200": {
             "description": "Success",
@@ -1432,9 +1393,7 @@
     },
     "/api/DifferenceType/all-with-deleted": {
       "get": {
-        "tags": [
-          "DifferenceType"
-        ],
+        "tags": ["DifferenceType"],
         "responses": {
           "200": {
             "description": "Success",
@@ -1470,9 +1429,7 @@
     },
     "/api/DifferenceType/{id}": {
       "get": {
-        "tags": [
-          "DifferenceType"
-        ],
+        "tags": ["DifferenceType"],
         "parameters": [
           {
             "name": "id",
@@ -1530,9 +1487,7 @@
     },
     "/api/DifferenceType/add": {
       "post": {
-        "tags": [
-          "DifferenceType"
-        ],
+        "tags": ["DifferenceType"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1581,9 +1536,7 @@
     },
     "/api/DifferenceType/edit/{id}": {
       "put": {
-        "tags": [
-          "DifferenceType"
-        ],
+        "tags": ["DifferenceType"],
         "parameters": [
           {
             "name": "id",
@@ -1643,9 +1596,7 @@
     },
     "/api/DifferenceType/delete/{id}": {
       "delete": {
-        "tags": [
-          "DifferenceType"
-        ],
+        "tags": ["DifferenceType"],
         "parameters": [
           {
             "name": "id",
@@ -1686,9 +1637,7 @@
     },
     "/api/DifferenceType/restore/{id}": {
       "put": {
-        "tags": [
-          "DifferenceType"
-        ],
+        "tags": ["DifferenceType"],
         "parameters": [
           {
             "name": "id",
@@ -1729,9 +1678,7 @@
     },
     "/api/Entry/all": {
       "get": {
-        "tags": [
-          "Entry"
-        ],
+        "tags": ["Entry"],
         "parameters": [
           {
             "name": "PageNumber",
@@ -1801,9 +1748,7 @@
     },
     "/api/Entry/{id}": {
       "get": {
-        "tags": [
-          "Entry"
-        ],
+        "tags": ["Entry"],
         "parameters": [
           {
             "name": "id",
@@ -1861,9 +1806,7 @@
     },
     "/api/Entry/all-with-deleted": {
       "get": {
-        "tags": [
-          "Entry"
-        ],
+        "tags": ["Entry"],
         "parameters": [
           {
             "name": "PageNumber",
@@ -1942,9 +1885,7 @@
     },
     "/api/Entry/add": {
       "post": {
-        "tags": [
-          "Entry"
-        ],
+        "tags": ["Entry"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1982,9 +1923,7 @@
     },
     "/api/Entry/edit/{id}": {
       "put": {
-        "tags": [
-          "Entry"
-        ],
+        "tags": ["Entry"],
         "parameters": [
           {
             "name": "id",
@@ -2044,9 +1983,7 @@
     },
     "/api/Entry/delete/{id}": {
       "delete": {
-        "tags": [
-          "Entry"
-        ],
+        "tags": ["Entry"],
         "parameters": [
           {
             "name": "id",
@@ -2087,9 +2024,7 @@
     },
     "/api/Entry/restore/{id}": {
       "put": {
-        "tags": [
-          "Entry"
-        ],
+        "tags": ["Entry"],
         "parameters": [
           {
             "name": "id",
@@ -2130,9 +2065,7 @@
     },
     "/api/Entry/start/{id}": {
       "put": {
-        "tags": [
-          "Entry"
-        ],
+        "tags": ["Entry"],
         "parameters": [
           {
             "name": "id",
@@ -2193,9 +2126,7 @@
     },
     "/api/Entry/finish/{id}": {
       "put": {
-        "tags": [
-          "Entry"
-        ],
+        "tags": ["Entry"],
         "parameters": [
           {
             "name": "id",
@@ -2254,15 +2185,14 @@
         }
       }
     },
-    "/api/Entry/move": {
+    "/api/Entry/move/{id}": {
       "post": {
-        "tags": [
-          "Entry"
-        ],
+        "tags": ["Entry"],
         "parameters": [
           {
             "name": "id",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -2338,15 +2268,14 @@
         }
       }
     },
-    "/api/Entry/split": {
+    "/api/Entry/split/{id}": {
       "post": {
-        "tags": [
-          "Entry"
-        ],
+        "tags": ["Entry"],
         "parameters": [
           {
             "name": "id",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -2421,9 +2350,7 @@
     },
     "/api/Marker/{id}": {
       "get": {
-        "tags": [
-          "Marker"
-        ],
+        "tags": ["Marker"],
         "parameters": [
           {
             "name": "id",
@@ -2481,9 +2408,7 @@
     },
     "/api/Marker/all": {
       "get": {
-        "tags": [
-          "Marker"
-        ],
+        "tags": ["Marker"],
         "responses": {
           "200": {
             "description": "Success",
@@ -2519,9 +2444,7 @@
     },
     "/api/Marker/all-with-params": {
       "get": {
-        "tags": [
-          "Marker"
-        ],
+        "tags": ["Marker"],
         "parameters": [
           {
             "name": "PageNumber",
@@ -2582,9 +2505,7 @@
     },
     "/api/Marker/add": {
       "post": {
-        "tags": [
-          "Marker"
-        ],
+        "tags": ["Marker"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -2633,9 +2554,7 @@
     },
     "/api/Marker/edit/{id}": {
       "put": {
-        "tags": [
-          "Marker"
-        ],
+        "tags": ["Marker"],
         "parameters": [
           {
             "name": "id",
@@ -2670,8 +2589,8 @@
           "200": {
             "description": "Success"
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2690,8 +2609,8 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2715,9 +2634,7 @@
     },
     "/api/Marker/delete/{id}": {
       "delete": {
-        "tags": [
-          "Marker"
-        ],
+        "tags": ["Marker"],
         "parameters": [
           {
             "name": "id",
@@ -2778,9 +2695,7 @@
     },
     "/api/Marker/restore/{id}": {
       "put": {
-        "tags": [
-          "Marker"
-        ],
+        "tags": ["Marker"],
         "parameters": [
           {
             "name": "id",
@@ -2821,9 +2736,7 @@
     },
     "/api/Marker/deleted": {
       "get": {
-        "tags": [
-          "Marker"
-        ],
+        "tags": ["Marker"],
         "responses": {
           "200": {
             "description": "Success",
@@ -2859,9 +2772,7 @@
     },
     "/api/Vendor/{id}": {
       "get": {
-        "tags": [
-          "Vendor"
-        ],
+        "tags": ["Vendor"],
         "parameters": [
           {
             "name": "id",
@@ -2919,9 +2830,7 @@
     },
     "/api/Vendor/all": {
       "get": {
-        "tags": [
-          "Vendor"
-        ],
+        "tags": ["Vendor"],
         "parameters": [
           {
             "name": "PageNumber",
@@ -2982,9 +2891,7 @@
     },
     "/api/Vendor/add": {
       "post": {
-        "tags": [
-          "Vendor"
-        ],
+        "tags": ["Vendor"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -3008,8 +2915,8 @@
           "200": {
             "description": "Success"
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3028,8 +2935,8 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3053,9 +2960,7 @@
     },
     "/api/Vendor/edit/{id}": {
       "put": {
-        "tags": [
-          "Vendor"
-        ],
+        "tags": ["Vendor"],
         "parameters": [
           {
             "name": "id",
@@ -3090,8 +2995,8 @@
           "200": {
             "description": "Success"
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3110,8 +3015,8 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3135,9 +3040,7 @@
     },
     "/api/Vendor/delete/{id}": {
       "delete": {
-        "tags": [
-          "Vendor"
-        ],
+        "tags": ["Vendor"],
         "parameters": [
           {
             "name": "id",
@@ -3198,9 +3101,7 @@
     },
     "/api/Vendor/restore/{id}": {
       "put": {
-        "tags": [
-          "Vendor"
-        ],
+        "tags": ["Vendor"],
         "parameters": [
           {
             "name": "id",
@@ -3261,9 +3162,7 @@
     },
     "/api/Vendor/all-deleted": {
       "get": {
-        "tags": [
-          "Vendor"
-        ],
+        "tags": ["Vendor"],
         "responses": {
           "200": {
             "description": "Success",
@@ -3299,9 +3198,7 @@
     },
     "/api/Zone/{id}": {
       "get": {
-        "tags": [
-          "Zone"
-        ],
+        "tags": ["Zone"],
         "parameters": [
           {
             "name": "id",
@@ -3359,9 +3256,7 @@
     },
     "/api/Zone/all": {
       "get": {
-        "tags": [
-          "Zone"
-        ],
+        "tags": ["Zone"],
         "responses": {
           "200": {
             "description": "Success",
@@ -3397,9 +3292,7 @@
     },
     "/api/Zone/all-with-params": {
       "get": {
-        "tags": [
-          "Zone"
-        ],
+        "tags": ["Zone"],
         "parameters": [
           {
             "name": "PageNumber",
@@ -3460,9 +3353,7 @@
     },
     "/api/Zone/add": {
       "post": {
-        "tags": [
-          "Zone"
-        ],
+        "tags": ["Zone"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -3511,9 +3402,7 @@
     },
     "/api/Zone/edit/{id}": {
       "put": {
-        "tags": [
-          "Zone"
-        ],
+        "tags": ["Zone"],
         "parameters": [
           {
             "name": "id",
@@ -3548,8 +3437,8 @@
           "200": {
             "description": "Success"
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3568,8 +3457,8 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3593,9 +3482,7 @@
     },
     "/api/Zone/delete/{id}": {
       "delete": {
-        "tags": [
-          "Zone"
-        ],
+        "tags": ["Zone"],
         "parameters": [
           {
             "name": "id",
@@ -3611,8 +3498,8 @@
           "200": {
             "description": "Success"
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3631,8 +3518,8 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3656,9 +3543,7 @@
     },
     "/api/Zone/restore/{id}": {
       "put": {
-        "tags": [
-          "Zone"
-        ],
+        "tags": ["Zone"],
         "parameters": [
           {
             "name": "id",
@@ -3674,8 +3559,8 @@
           "200": {
             "description": "Success"
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3694,8 +3579,8 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3719,9 +3604,7 @@
     },
     "/api/Zone/all-with-deleted": {
       "get": {
-        "tags": [
-          "Zone"
-        ],
+        "tags": ["Zone"],
         "responses": {
           "200": {
             "description": "Success",
@@ -3757,9 +3640,7 @@
     },
     "/api/Zone/all-with-deleted-with-params": {
       "get": {
-        "tags": [
-          "Zone"
-        ],
+        "tags": ["Zone"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -3814,9 +3695,7 @@
     },
     "/api/Zone/entries": {
       "get": {
-        "tags": [
-          "Zone"
-        ],
+        "tags": ["Zone"],
         "parameters": [
           {
             "name": "zoneId",
@@ -4048,12 +3927,7 @@
         "additionalProperties": false
       },
       "DeliveryFormDto": {
-        "required": [
-          "cmr",
-          "receptionNumber",
-          "systemNumber",
-          "truckNumber"
-        ],
+        "required": ["cmr", "receptionNumber", "systemNumber", "truckNumber"],
         "type": "object",
         "properties": {
           "systemNumber": {
@@ -4108,12 +3982,8 @@
         "additionalProperties": false
       },
       "DeliveryHistoryChangeType": {
-        "enum": [
-          0,
-          1
-        ],
-        "type": "integer",
-        "format": "int32"
+        "enum": ["Delivery", "Entry"],
+        "type": "string"
       },
       "DeliveryHistoryDto": {
         "type": "object",
@@ -4147,18 +4017,11 @@
         "additionalProperties": false
       },
       "DifferenceAdminCommentDto": {
-        "required": [
-          "differenceId"
-        ],
         "type": "object",
         "properties": {
-          "differenceId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "adminComment": {
-            "maximum": 2000,
-            "minimum": 1,
+            "maxLength": 2000,
+            "minLength": 0,
             "type": "string",
             "nullable": true
           }
@@ -4244,7 +4107,6 @@
       "DifferenceFormDto": {
         "required": [
           "activeNumber",
-          "comment",
           "count",
           "deliveryId",
           "differenceTypeId",
@@ -4255,36 +4117,31 @@
         "type": "object",
         "properties": {
           "receptionNumber": {
-            "maximum": 350,
-            "minimum": 1,
+            "maxLength": 350,
             "minLength": 1,
             "type": "string"
           },
           "internalNumber": {
-            "maximum": 350,
-            "minimum": 1,
+            "maxLength": 350,
             "minLength": 1,
             "type": "string"
           },
           "activeNumber": {
-            "maximum": 350,
-            "minimum": 1,
+            "maxLength": 350,
             "minLength": 1,
             "type": "string"
           },
           "comment": {
             "maxLength": 2000,
-            "minLength": 1,
-            "type": "string"
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
           },
           "count": {
             "maximum": 2147483647,
             "minimum": -2147483648,
             "type": "integer",
             "format": "int32"
-          },
-          "status": {
-            "$ref": "#/components/schemas/DifferenceStatus"
           },
           "differenceTypeId": {
             "type": "integer",
@@ -4302,14 +4159,8 @@
         "additionalProperties": false
       },
       "DifferenceStatus": {
-        "enum": [
-          0,
-          1,
-          2,
-          3
-        ],
-        "type": "integer",
-        "format": "int32"
+        "enum": ["Waiting", "Processing", "Finished", "NoDifferences"],
+        "type": "string"
       },
       "DifferenceTypeDto": {
         "type": "object",
@@ -4335,6 +4186,28 @@
           "name": {
             "maxLength": 250,
             "minLength": 1,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EntryDeliveryDetailsDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vendorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "systemNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "receptionNumber": {
             "type": "string",
             "nullable": true
           }
@@ -4375,11 +4248,10 @@
             "format": "date-time"
           },
           "zone": {
-            "$ref": "#/components/schemas/ZoneDto"
+            "$ref": "#/components/schemas/EntryZoneDto"
           },
-          "deliveryId": {
-            "type": "integer",
-            "format": "int32"
+          "deliveryDetails": {
+            "$ref": "#/components/schemas/EntryDeliveryDetailsDto"
           }
         },
         "additionalProperties": false
@@ -4408,10 +4280,7 @@
         "additionalProperties": false
       },
       "EntryFormDto": {
-        "required": [
-          "deliveryId",
-          "zoneId"
-        ],
+        "required": ["deliveryId", "zoneId"],
         "type": "object",
         "properties": {
           "pallets": {
@@ -4458,23 +4327,25 @@
         "additionalProperties": false
       },
       "EntryStatuses": {
-        "enum": [
-          0,
-          1,
-          2
-        ],
-        "type": "integer",
-        "format": "int32"
+        "enum": ["Waiting", "Processing", "Finished"],
+        "type": "string"
+      },
+      "EntryZoneDto": {
+        "type": "object",
+        "properties": {
+          "zoneName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isFinal": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
       },
       "LogType": {
-        "enum": [
-          0,
-          1,
-          2,
-          3
-        ],
-        "type": "integer",
-        "format": "int32"
+        "enum": ["EntryStatusChange", "DeliveryStatusChange", "ZoneChange", "Split"],
+        "type": "string"
       },
       "LoginDto": {
         "type": "object",
@@ -4548,9 +4419,7 @@
         "additionalProperties": false
       },
       "MarkerFormDto": {
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "type": "object",
         "properties": {
           "name": {
@@ -4713,10 +4582,7 @@
         "additionalProperties": false
       },
       "VendorFormDto": {
-        "required": [
-          "name",
-          "systemNumber"
-        ],
+        "required": ["name", "systemNumber"],
         "type": "object",
         "properties": {
           "name": {
@@ -4850,9 +4716,7 @@
         "additionalProperties": false
       },
       "ZoneFormDto": {
-        "required": [
-          "name"
-        ],
+        "required": ["name"],
         "type": "object",
         "properties": {
           "name": {

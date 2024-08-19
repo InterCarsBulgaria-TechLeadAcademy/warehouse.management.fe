@@ -11,6 +11,7 @@
 
   "login": {
     "description": "Вътрешна система за менажиране на доставки",
+    "title": "Вход",
     "labels": {
       "email": "Имейл",
       "password": "Парола",
@@ -41,7 +42,8 @@
       "typesGoods": "Видове Стока",
       "typesDifference": "Типове Разлика",
       "markers": "Маркери",
-      "deliveries": "Доставки"
+      "deliveries": "Доставки",
+      "differences": "Разлики"
     },
     "profileMenu": {
       "name": "Христо Бояджиев",
@@ -294,7 +296,7 @@
     },
     "table": {
       "columns": {
-        "number": "Номер",
+        "number": "№",
         "vendorName": "Доставчик",
         "deliveryNumber": "Номер(а) на доставка",
         "receptionNumber": "Номер(а) на рецепция",
@@ -311,7 +313,8 @@
           "waiting": "Изчакване",
           "processing": "Обработва се",
           "finished": "Приключена",
-          "approved": "Одобрена"
+          "approved": "Одобрена",
+          "noDifferences": "Няма разлики"
         }
       },
       "actionsMenu": {
@@ -388,10 +391,19 @@
         "back": "Назад",
         "exit": "Изход",
         "step1": {
-          "deliveryNumber": "Доставка №",
+          "systemNumber": "Доставка №",
           "receptionNumber": "Рецепция №",
           "cmrNumber": "ЧМР №",
-          "markers": "Маркери"
+          "markers": "Маркери",
+          "comboBox": {
+            "messages": {
+              "systemNumber": {
+                "pressEnter": "Натиснете 'Enter' за да добавите",
+                "emptySystemNumber": "Не може да добавите празно поле за доставка №",
+                "existSystemNumber": "Съществува доставка с този №"
+              }
+            }
+          }
         },
         "step2": {
           "vendorName": "Име на доставчик",
@@ -420,11 +432,11 @@
       },
       "errors": {
         "step1": {
-          "deliveryNumber": {
-            "required": "Полето за доставка № е задължително"
+          "systemNumber": {
+            "min": "Трябва да има минимум един № на доставка"
           },
           "receptionNumber": {
-            "required": "Полето за рецепция № е задължително"
+            "min": "Трябва да има минимум един № на рецепция №"
           },
           "cmrNumber": {
             "required": "Полето за ЧМР № е задължително"
@@ -634,7 +646,7 @@
     },
     "table": {
       "columns": {
-        "number": "Запис №",
+        "number": "№",
         "vendorName": "Доставчик",
         "receptionNumber": "Рецепция №",
         "goodNumber": "Стока №",
@@ -644,6 +656,8 @@
       },
       "actionsMenu": {
         "MoveToNewZone": "Премести в нова зона",
+        "SplitEntry": "Раздели",
+        "CreateDifference": "Създай разлика",
         "StartProcessing": "Започни обработка",
         "FinishProcessing": "Завърши обработка",
         "DeliveryDetails": "Детайли",
@@ -677,7 +691,10 @@
         "moveEntryForm": {
           "quantity": "Количество",
           "zone": "Зона",
-          "confirm": "Потвърди",
+          "labels": {
+            "confirm": "Потвърди",
+            "discard":"Откажи"
+          },
           "errors": {
             "quantity": {
               "message": "Добавете количество",
@@ -691,6 +708,52 @@
           "snackBar": {
               "success": "Стоката е преместена успешно",
               "error": "Възникна грешка"
+          }
+        },
+        "splitEntry": {
+          "title": "Разделяне на стока",
+          "snackBar": {
+            "success": "Стоката е разделена успешно",
+            "error": "Възникна грешка"
+          }
+        },
+        "createDifference": {
+          "title": "Създаване на разлика",
+          "labels": {
+            "confirm": "Потвърди",
+            "discard": "Откажи",
+            "internalNumber": "Вътрешен №",
+            "activeNumber": "Активен №",
+            "receptionNumber": "Рецепция №",
+            "count": "Брой",
+            "differenceType": "Тип разлика",
+            "zone": "Зона",
+            "comment": "Коментар"
+          },
+          "errors": {
+            "internalNumber": {
+              "required":"Полето за вътрешен № e задължително"
+            },
+            "activeNumber": {
+              "required":"Полето за активен № e задължително"
+            },
+            "receptionNumber": {
+              "required":"Полето за рецепция № е задължително"
+            },
+            "count": {
+              "required":"Полето за брой е задължително",
+              "min": "Количеството трябва да минимум 1"
+            },
+            "differenceType": {
+              "required":"Полето за тип разлика е задължително"
+            },
+            "zone": {
+              "required":"Полето за зона е задължително"
+            }
+          },
+          "snackBar": {
+            "success": "Разликата е създадена успешно",
+            "error": "Възникна грешка"
           }
         }
       }
@@ -713,7 +776,7 @@
     },
     "table": {
       "columns": {
-        "number": "Номер",
+        "number": "№",
         "name": "Име",
         "actions": "Действия"
       },
@@ -781,6 +844,73 @@
     "labels": {
       "home": "Начална страница"
     }
+  },
+  "differences": {
+    "title": "Разлики",
+    "description": "Управление на разлики",
+    "filters": {
+      "search": "Търсене"
+    },
+    "table": {
+      "columns": {
+        "number": "№",
+        "internalNumber":"Вътрешен №",
+        "activeNumber":"Активен №",
+        "receptionNumber":"Рецепция №",
+        "count":"Брой",
+        "zone":"Зона",
+        "comment":"Коментар",
+        "admin-comment": "Коментар админ",
+        "status": "Статус",
+        "type": "Тип",
+        "createdAt":"Създадена на",
+        "delivery-systemNumber": "Системен № на доставка",
+        "actions":"Действия"
+      },
+      "actionsMenu": {
+        "startProcessing":"Започни обработка",
+        "finishProcessing":"Завърши обработка",
+        "no-differences": "Няма разлики",
+        "noActions": "Няма действия"
+      },
+      "actions": {
+        "startProcessing": {
+          "title": "Започване на обработка",
+          "message": "Сигурни ли сте, че искате да започнете обработка на разлика {{differenceNumber}}?",
+          "labels": {
+            "discard": "Откажи",
+            "confirm": "Потвърди"
+          },
+          "snackBar": {
+            "success": "Обработката на разлика {{differenceNumber}} е започната успешно",
+            "error": "Възникна грешка"
+          }
+        },
+        "finishProcessing": {
+          "title": "Завършване на обработка",
+          "labels": {
+            "admin-comment": "Коментар админ",
+            "discard": "Откажи",
+            "confirm": "Потвърди"
+          },
+          "snackBar": {
+            "success": "Обработката на стока №{{differenceNumber}} е завършена успешно",
+            "error": "Възникна грешка"
+          }
+        },
+        "noDifferences": {
+          "title": "Няма разлики",
+          "labels": {
+            "admin-comment": "Коментар админ",
+            "discard": "Откажи",
+            "confirm": "Потвърди"
+          },
+          "snackBar": {
+            "success": "Обработката на стока №{{differenceNumber}} е завършена успешно",
+            "error": "Възникна грешка"
+          }
+        }
+      }
+    }
   }
 }
-

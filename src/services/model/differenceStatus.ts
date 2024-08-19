@@ -9,8 +9,8 @@ export type DifferenceStatus = (typeof DifferenceStatus)[keyof typeof Difference
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const DifferenceStatus = {
-  NUMBER_0: 0,
-  NUMBER_1: 1,
-  NUMBER_2: 2,
-  NUMBER_3: 3
+  Waiting: 'Waiting',
+  Processing: 'Processing',
+  Finished: 'Finished',
+  NoDifferences: 'NoDifferences'
 } as const

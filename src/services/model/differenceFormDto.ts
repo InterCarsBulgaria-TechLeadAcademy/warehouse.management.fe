@@ -4,20 +4,19 @@
  * WarehouseManagement.Api
  * OpenAPI spec version: 1.0
  */
-import type { DifferenceStatus } from './differenceStatus'
 
 export interface DifferenceFormDto {
   /**
    * @minLength 1
-   * @minimum 1
-   * @maximum 350
+   * @maxLength 350
    */
   activeNumber: string
   /**
-   * @minLength 1
+   * @minLength 0
    * @maxLength 2000
+   * @nullable
    */
-  comment: string
+  comment?: string | null
   /**
    * @minimum -2147483648
    * @maximum 2147483647
@@ -27,16 +26,13 @@ export interface DifferenceFormDto {
   differenceTypeId: number
   /**
    * @minLength 1
-   * @minimum 1
-   * @maximum 350
+   * @maxLength 350
    */
   internalNumber: string
   /**
    * @minLength 1
-   * @minimum 1
-   * @maximum 350
+   * @maxLength 350
    */
   receptionNumber: string
-  status?: DifferenceStatus
   zoneId: number
 }

@@ -15,6 +15,7 @@ interface Row {
   receptionNumber: number
   goodNumber: number
   status: string
+  zoneName: string
   actions: React.ReactNode
 }
 
@@ -59,10 +60,10 @@ export default function ZonesContentTable() {
     return entries.map((entry: EntryDto) => ({
       id: entry.id!,
       number: entry.id!,
-      // vendorName: entry.vendorName,
-      // receptionNumber: entry.receptionNumber,
-      // goodNumber: entry.goodNumber
-      zoneName: entry.zone.name!,
+      vendorName: entry.deliveryDetails?.vendorName,
+      receptionNumber: entry.deliveryDetails?.receptionNumber,
+      goodNumber: entry.deliveryDetails?.systemNumber,
+      zoneName: entry.zone?.zoneName || '-',
       status: <ChipsList items={[getEntryStatus(entry)]} />,
       actions: <ZonesContentTableActionsMenu key={entry.id} entry={entry} />
     }))
@@ -82,6 +83,7 @@ export default function ZonesContentTable() {
       rowData={filteredRows}
       page={page}
       rowsPerPage={rowsPerPage}
+      rowsCount={entries.count}
       onPageChange={onPageChange}
       onRowsPerPageChange={onRowsPerPageChange}>
       <SearchInput

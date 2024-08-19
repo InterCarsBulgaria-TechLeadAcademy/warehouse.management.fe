@@ -9,7 +9,7 @@ export type EntryStatuses = (typeof EntryStatuses)[keyof typeof EntryStatuses]
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const EntryStatuses = {
-  NUMBER_0: 0,
-  NUMBER_1: 1,
-  NUMBER_2: 2
+  Waiting: 'Waiting',
+  Processing: 'Processing',
+  Finished: 'Finished'
 } as const

@@ -2,18 +2,20 @@ import * as yup from 'yup'
 
 export const newDeliveryStep1Schema = yup.object({
   systemNumber: yup
-    .string()
-    .required('deliveries.newDelivery.errors.step1.deliveryNumber.required'),
+    .array()
+    .of(yup.string())
+    .min(1, 'deliveries.newDelivery.errors.step1.systemNumber.min'),
   receptionNumber: yup
-    .string()
-    .required('deliveries.newDelivery.errors.step1.receptionNumber.required'),
+    .array()
+    .of(yup.string())
+    .min(1, 'deliveries.newDelivery.errors.step1.receptionNumber.min'),
   cmr: yup.string().required('deliveries.newDelivery.errors.step1.cmrNumber.required'),
   markers: yup.array().of(yup.string())
 })
 
 export interface NewDeliveryStep1FormData extends yup.InferType<typeof newDeliveryStep1Schema> {
-  systemNumber: string
-  receptionNumber: string
+  systemNumber: string[]
+  receptionNumber: string[]
   cmr: string
 }
 
