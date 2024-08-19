@@ -40,7 +40,6 @@ export default function DeliveriesTableActionsMenu({ delivery }: DeliveriesTable
   }
 
   const options = (() => {
-    const options = []
     const availableOptions = {
       details: {
         title: 'deliveries.table.actionsMenu.details',
@@ -56,13 +55,11 @@ export default function DeliveriesTableActionsMenu({ delivery }: DeliveriesTable
       }
     }
 
+    const options = [availableOptions.details, availableOptions.delete]
+
     switch (delivery.status) {
       case 'Finished':
-        options.push(availableOptions.details, availableOptions.approve, availableOptions.delete)
-        break
-
-      default:
-        options.push(availableOptions.details, availableOptions.delete)
+        options.push(availableOptions.approve)
         break
     }
 
