@@ -7,14 +7,14 @@ import CheckboxRoles from './CheckboxRoles'
 interface NewRoleFormProps extends UseFormReturn<NewRoleFormData> {
   defaultValues?: {
     name: string
-    rights: string[]
+    permissions: string[]
   }
 }
 
 export default function NewRoleForm({
   control,
   formState: { errors },
-  defaultValues = { name: '', rights: [] }
+  defaultValues = { name: '', permissions: [] }
 }: NewRoleFormProps) {
   const { t: translate } = useTranslation()
 
@@ -40,11 +40,11 @@ export default function NewRoleForm({
       />
 
       <Controller
-        name="rights"
-        defaultValue={defaultValues.rights?.map(String)}
+        name="permissions"
+        defaultValue={defaultValues.permissions?.map(String)}
         control={control}
         render={({ }) => (
-          <CheckboxRoles rights={defaultValues.rights} />
+          <CheckboxRoles permissions={defaultValues.permissions} />
         )}
       />
     </>
