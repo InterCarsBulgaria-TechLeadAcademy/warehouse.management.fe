@@ -44,6 +44,8 @@ export default function DeliveriesTable() {
   const vendors = useGetVendors()
   const deliveries = useGetDeliveries(page, rowsPerPage, searchTerm)
 
+  console.log(deliveries)
+
   const markersName = markers.map((marker) => marker.name!)
   const vendorsName = vendors.map((vendor) => vendor.name!)
 

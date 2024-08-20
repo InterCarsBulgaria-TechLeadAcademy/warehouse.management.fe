@@ -343,7 +343,7 @@
             "vendorName":"Име на доставчик",
             "vendorId":"Доставчик №",
             "truckNumber":"Номер на камион",
-            "deliveryDate":"Дата на доставка"
+            "deliveryTime":"Дата на доставка"
           },
           "step3": {
             "title": "Детайли за стока",
@@ -409,7 +409,7 @@
           "vendorName": "Име на доставчик",
           "vendorId": "Доставчик №",
           "truckNumber": "Номер на камион",
-          "deliveryDate": "Дата на доставка"
+          "deliveryTime": "Дата на доставка"
         },
         "step3": {
           "goodType": "Вид стока",
@@ -452,7 +452,7 @@
           "truckNumber": {
             "required": "Полето за номер на камион е задължително"
           },
-          "deliveryDate": {
+          "deliveryTime": {
             "required": "Полето за дата на доставка e задължително",
             "validDate": "Въведете валидна дата"
           }
