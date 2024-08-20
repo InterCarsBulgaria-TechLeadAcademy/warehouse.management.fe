@@ -4460,11 +4460,10 @@
           },
           "deliveryTime": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
           "approvedOn": {
             "type": "string",
-            "format": "date-time",
             "nullable": true
           },
           "createdAt": {

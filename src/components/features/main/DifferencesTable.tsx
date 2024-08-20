@@ -7,7 +7,7 @@ import { DifferenceDto } from '@/services/model'
 import useGetDifferences from '@/hooks/services/differences/useGetDifferences'
 import DifferencesTableActionsMenu from '../actionsMenu/DifferencesTableActionsMenu'
 import { Typography } from '@mui/material'
-import dateHelpers from '@/utils/dateHelpers'
+import { formatDate } from '@/utils/dateHelpers'
 import ChipsList from '../ChipsList'
 
 interface Row {
@@ -84,7 +84,7 @@ export default function DifferencesTable() {
         difference.adminComment! === '' ? <Typography>-</Typography> : difference.adminComment,
       status: <ChipsList items={[difference.status!]} />,
       type: difference.type!,
-      createdAt: dateHelpers(difference.createdAt!),
+      createdAt: formatDate(difference.createdAt!),
       deliverySystemNumber: difference.deliverySystemNumber!,
       actions: <DifferencesTableActionsMenu key={difference.id} difference={difference} />
     }))
