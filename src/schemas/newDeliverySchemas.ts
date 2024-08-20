@@ -30,7 +30,7 @@ export const newDeliveryStep2Schema = yup
     deliveryTime: yup
       .date()
       .required('deliveries.newDelivery.errors.step2.deliveryTime.required')
-      .typeError('deliveries.newDelivery.errors.step2.deliveryTime.validDate')
+      .typeError('deliveries.newDelivery.errors.step2.deliveryDate.validDate')
   })
   .required()
 

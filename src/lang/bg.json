@@ -544,7 +544,7 @@
         "truckNumber": {
           "required": "Полето за номер на камион е задължително"
         },
-        "deliveryTime": {
+        "deliveryDate": {
           "required": "Полето за дата на доставка e задължително",
           "validDate": "Въведете валидна дата"
         }
