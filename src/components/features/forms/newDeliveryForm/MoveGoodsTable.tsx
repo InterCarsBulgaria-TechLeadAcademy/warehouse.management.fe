@@ -8,19 +8,19 @@ import Paper from '@mui/material/Paper'
 import { useTranslation } from 'react-i18next'
 import useGetZones from '@/hooks/services/zones/useGetZones'
 
-interface NewDeliveryStep5TableProps {
+interface MoveGoodsTableProps {
   array: any
   goodType: string
   goodQuantity: string
-  currentZone: string
+  currentZoneId?: string
 }
 
 export default function MoveGoodsTable({
   array,
   goodType,
   goodQuantity,
-  currentZone
-}: NewDeliveryStep5TableProps) {
+  currentZoneId
+}: MoveGoodsTableProps) {
   const { t: translate } = useTranslation()
   const zones = useGetZones()
 
@@ -46,7 +46,9 @@ export default function MoveGoodsTable({
               </TableCell>
               <TableCell align="left">{good[goodQuantity]}</TableCell>
               <TableCell align="left">
-                {zones.find((zone) => zone.id! === Number(good[currentZone]))?.name}
+                {currentZoneId
+                  ? zones.find((zone) => zone.id === Number(good[currentZoneId]))?.name
+                  : good.zone}
               </TableCell>
             </TableRow>
           ))}

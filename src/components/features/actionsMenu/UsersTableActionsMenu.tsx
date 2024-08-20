@@ -59,7 +59,7 @@ export default function UsersTableActionsMenu({ user }: UsersTableActionsMenuPro
     // })
   }
 
-  const onConfirmClick = () => {
+  const onConfirmDelete = () => {
     mutationDelete.mutate(user.id!)
     handleClose()
   }
@@ -109,7 +109,7 @@ export default function UsersTableActionsMenu({ user }: UsersTableActionsMenuPro
           confirmText={translate('vendors.table.actions.delete.labels.confirm')}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
-          onConfirmClick={onConfirmClick}
+          onConfirmClick={onConfirmDelete}
         />
       )}
     </div>

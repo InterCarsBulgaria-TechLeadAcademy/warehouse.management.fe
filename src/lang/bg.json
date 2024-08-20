@@ -355,7 +355,29 @@
             "title": "Местене на стока"
           },
           "step5": {
-            "title": "Извършени действия в доставка"
+            "title": "Извършени действия в доставка",
+            "table": {
+              "table-head": {
+                "changed": "Променена",
+                "typeChange": "Тип промяна",
+                "from": "От",
+                "to": "Към",
+                "dataChange": "Дата на промяна"
+              },
+              "table-body": {
+                "changed": {
+                  "startedProcessing": "Започната обработка",
+                  "finishedProcessing": "Завършена обработка",
+                  "zone": "Зона",
+                  "lastModifiedByUserId": "Потребител",
+                  "lastModifiedAt": "Промяна в"
+                },
+                "changeType": {
+                  "delivery": "Доставка",
+                  "entry": "Съдържание на зона"
+                }   
+              }
+            }
           },
           "goodDetails": {
             "pallets": "Палети",
@@ -366,9 +388,21 @@
             "exit": "Изход"
           }
         },
+        "approve": {
+          "title": "Одобряване на доставка",
+          "message": "Сигурни ли сте, че искате да одобрите доставка №{{deliveryNumber}}?",
+          "labels": {
+            "discard": "Откажи",
+            "confirm": "Потвърди"
+          },
+          "snackBar": {
+            "success": "Доставката №{{deliveryNumber}} е одобрена успешно",
+            "error": "Възникна грешка"
+          }
+        },
         "delete": {
           "title": "Изтриване на доставка",
-          "message": "Сигурни ли сте, че искате да изтриете тази доставка?",
+          "message": "Сигурни ли сте, че искате да изтриете доставка №{{deliveryNumber}}?",
           "labels": {
             "discard": "Откажи",
             "confirm": "Потвърди"

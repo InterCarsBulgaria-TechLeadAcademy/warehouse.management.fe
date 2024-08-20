@@ -11,7 +11,7 @@ export function useStartProcessing() {
   const mutationUpdate = useMutation({
     mutationFn: (id: number) => getWarehouseManagementApi().putApiEntryStartId(id),
     onSuccess: (_, id) => {
-      queryClient.invalidateQueries({ queryKey: ['entries'] })
+      queryClient.invalidateQueries({ queryKey: ['entries', id] })
       showSnackbar({
         message: translate('zonesContent.table.actions.startProcessing.snackBar.success', {
           goodNumber: id
