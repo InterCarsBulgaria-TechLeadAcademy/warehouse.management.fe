@@ -8,18 +8,19 @@ import useGetPermissionsAll from '@/hooks/services/roles/useGetPermissionsAll'
 interface NewRoleFormProps extends UseFormReturn<NewRoleFormData> {
   defaultValues?: {
     name: string
-    permissions: string[]
+    permissionIds: string[]
   }
 }
 
 export default function NewRoleForm({
   control,
   formState: { errors },
-  defaultValues = { name: '', permissions: [] }
+  defaultValues = { name: '', permissionIds: [] }
 }: NewRoleFormProps) {
   const { t: translate } = useTranslation()
   const permissions = useGetPermissionsAll();
-  
+  defaultValues.permissionIds.push("9f60c085-dcf9-4241-a1d2-2debc6b0ade3")
+
   return (
     <>
       <Controller
@@ -42,11 +43,10 @@ export default function NewRoleForm({
       />
 
       <Controller
-        name="permissions"
-        defaultValue={defaultValues.permissions?.map(String)}
+        name="permissionIds"
         control={control}
         render={({ }) => (
-          <CheckboxRoles permissions={permissions} />
+          <CheckboxRoles permissions={permissions} permissionIds={defaultValues.permissionIds} />
         )}
       />
     </>
