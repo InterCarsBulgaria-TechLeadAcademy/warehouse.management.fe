@@ -3094,7 +3094,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/RoleDto"
+                    "$ref": "#/components/schemas/RoleDetailsDto"
                   }
                 }
               },
@@ -3102,7 +3102,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/RoleDto"
+                    "$ref": "#/components/schemas/RoleDetailsDto"
                   }
                 }
               },
@@ -3110,7 +3110,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/RoleDto"
+                    "$ref": "#/components/schemas/RoleDetailsDto"
                   }
                 }
               }
@@ -5174,6 +5174,27 @@
           },
           "roleName": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoleDetailsDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "rolePermissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "nullable": true
           }
         },
