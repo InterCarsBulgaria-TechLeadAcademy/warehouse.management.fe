@@ -6,10 +6,10 @@ export const newRoleSchema = yup.object({
     .required('Името е задължително')
     .min(5, 'Името трябва да е минимум 5 символа')
     .max(50, 'Името трябва да е максимум 50 символа'),
-  permissions: yup.array().of(yup.string())
+  permissionIds: yup.array().of(yup.string())
 })
 
 export interface NewRoleFormData extends yup.InferType<typeof newRoleSchema> {
   name: string
-  permissions: string[]
+  permissionIds: string[]
 }
