@@ -56,7 +56,7 @@ export default function RolesTable() {
     return roles.map((role: RoleDto) => ({
       id: role.id!,
       name: role.name!, // TODO: translate role..
-      permissions: // TODO: Check RoleDto later!!!!!!!!!!!!!
+      permissions:
         role.rolePermissions!.length > 0 ? (
           <ChipsList
             items={role.routePermissions?.map((permission) => permission.name!) || ([] as string[])}
