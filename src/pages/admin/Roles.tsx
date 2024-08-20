@@ -6,10 +6,13 @@ import { SubmitHandler } from 'react-hook-form'
 import RolesTable from '@/components/features/admin/RolesTable'
 import { NewRoleFormData, newRoleSchema } from '@/schemas/newRoleSchema'
 import NewRoleForm from '@/components/features/forms/NewRoleForm'
+import usePostRole from '@/hooks/services/roles/usePostRole'
 
 export default function Roles() {
   const { t: translate } = useTranslation()
   const [openDialog, setOpenDialog] = useState(false)
+  const [roleName, setRoleName] = useState('')
+  const mutationPost = usePostRole(roleName)
 
   const handleClickOpen = () => {
     setOpenDialog(true)
