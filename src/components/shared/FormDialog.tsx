@@ -54,12 +54,16 @@ export default function FormDialog<T extends FieldValues>({
     onCloseDialog()
   }
 
+  const dialogWidth = title === 'Създаване на новa роля' ? 'lg' : 'sm'; // Example condition
+
   return (
     <Dialog
       open={open}
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description">
+      aria-describedby="alert-dialog-description"
+      maxWidth={dialogWidth}
+    >
       <DialogTitle id="alert-dialog-title" sx={{ textAlign: 'center' }}>
         {title}
       </DialogTitle>
