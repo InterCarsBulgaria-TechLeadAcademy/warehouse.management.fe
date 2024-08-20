@@ -29,16 +29,20 @@ export default function MoveGoodsTable({
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>{translate('newDelivery.labels.step4.goodType')}</TableCell>
-            <TableCell align="left">{translate('newDelivery.labels.step4.goodQuantity')}</TableCell>
-            <TableCell align="left">{translate('newDelivery.labels.step4.zone')}</TableCell>
+            <TableCell>{translate('deliveries.newDelivery.labels.step4.goodType')}</TableCell>
+            <TableCell align="left">
+              {translate('deliveries.newDelivery.labels.step4.goodQuantity')}
+            </TableCell>
+            <TableCell align="left">
+              {translate('deliveries.newDelivery.labels.step4.zone')}
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {array.map((good: any, index: number) => (
             <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">
-                {translate(`newDelivery.goodType.${good[goodType]}`)}
+                {translate(`deliveries.newDelivery.goodType.${good[goodType]}`)}
               </TableCell>
               <TableCell align="left">{good[goodQuantity]}</TableCell>
               <TableCell align="left">
