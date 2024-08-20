@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, FormControl, FormControlLabel, Checkbox, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { RoutePermissionDto } from '@/services/model';
 
 interface CheckboxRolesProps {
   permissions: object
@@ -28,16 +29,18 @@ export default function CheckboxRoles({ permissions }: CheckboxRolesProps) {
             <Box >
               <FormControl component="fieldset">
                 <Typography variant="h6">{translate(col)}</Typography>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      name="createZones"
-                      checked={false}
-                      onChange={handleCheckboxChange}
-                    />
-                  }
-                  label={translate('Създаване на зони')}
-                />
+                {permissions[col].map((permission: RoutePermissionDto) => (
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        name={permission.name!}
+                        checked={false}
+                        onChange={handleCheckboxChange}
+                      />
+                    }
+                    label={translate(permission.name!)}
+                  />
+                ))}
               </FormControl>
             </Box>
           )}
@@ -48,16 +51,18 @@ export default function CheckboxRoles({ permissions }: CheckboxRolesProps) {
             <Box flex="1">
               <FormControl component="fieldset">
                 <Typography variant="h6">{translate(col)}</Typography>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      name="createZones"
-                      checked={false}
-                      onChange={handleCheckboxChange}
-                    />
-                  }
-                  label={translate('Създаване на зони')}
-                />
+                {permissions[col].map((permission: RoutePermissionDto) => (
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        name={permission.name!}
+                        checked={false}
+                        onChange={handleCheckboxChange}
+                      />
+                    }
+                    label={translate(permission.name!)}
+                  />
+                ))}
               </FormControl>
             </Box>
           )}
