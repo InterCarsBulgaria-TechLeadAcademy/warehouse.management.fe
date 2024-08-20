@@ -122,7 +122,6 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
           receptionNumber: data.receptionNumber.join(' | '),
           truckNumber: data.truckNumber,
           cmr: data.cmr,
-          // deliveryTime: data.deliveryTime,
           deliveryTime: utcDeliveryTime,
           pallets: goodQuantity(data.goods, 'goodTypeStep3', 'pallets', 'goodQuantityStep3'),
           packages: goodQuantity(data.goods, 'goodTypeStep3', 'packages', 'goodQuantityStep3'),
