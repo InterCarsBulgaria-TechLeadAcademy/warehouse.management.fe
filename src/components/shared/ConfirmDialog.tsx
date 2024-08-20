@@ -7,6 +7,7 @@ import DialogTitle from '@mui/material/DialogTitle'
 interface ConfirmDialogProps {
   open: boolean
   title?: string
+  maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false
   content?: string | React.ReactElement
   discardText: string
   confirmText?: string
@@ -18,6 +19,7 @@ interface ConfirmDialogProps {
 export default function ConfirmDialog({
   open,
   title,
+  maxWidth,
   content,
   discardText,
   confirmText,
@@ -30,6 +32,7 @@ export default function ConfirmDialog({
       open={open}
       onClose={onCloseDialog}
       aria-labelledby="alert-dialog-title"
+      maxWidth={maxWidth || 'sm'}
       aria-describedby="alert-dialog-description">
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogContent>

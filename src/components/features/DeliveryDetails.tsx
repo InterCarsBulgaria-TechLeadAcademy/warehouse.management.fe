@@ -81,7 +81,7 @@ export default function DeliveryDetails({ deliveryId }: DeliveryDetailsProps) {
           </Box>
           <Box>
             <Typography>
-              {translate('deliveries.table.actions.details.step2.deliveryDate')}
+              {translate('deliveries.table.actions.details.step2.deliveryTime')}
             </Typography>
             <Typography>{dayjs(delivery.deliveryTime).format('DD.MM.YYYY')}</Typography>
           </Box>

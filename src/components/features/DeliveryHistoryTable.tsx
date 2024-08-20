@@ -2,11 +2,11 @@ import React from 'react'
 import DataTable from '@/components/shared/DataTable'
 import { useTranslation } from 'react-i18next'
 import { Column } from '@/interfaces/Column.ts'
-import useDateHelpers from '@/hooks/useDateHelpers'
 import useTranslateDeliveryHistoryChanges from '@/hooks/useTranslateDeliveryHistoryChanges'
 import useTranslateDeliveryHistoryChangeType from '@/hooks/useTranslateDeliveryHistoryChangeType'
 import useGetDeliveryHistory from '@/hooks/services/deliveries/useGetDeliveryHistory'
 import { Change } from '@/services/model'
+import { formatDate } from '@/utils/dateHelpers.ts'
 
 interface DeliveryHistoryTableProps {
   deliveryId: number
@@ -61,9 +61,9 @@ export default function DeliveryHistoryTable({ deliveryId }: DeliveryHistoryTabl
       id: index,
       changed: useTranslateDeliveryHistoryChanges(deliveryHistory.propertyName!),
       typeChange: useTranslateDeliveryHistoryChangeType(deliveryHistory.type!),
-      from: useDateHelpers(deliveryHistory.from!),
-      to: useDateHelpers(deliveryHistory.to!),
-      dataChange: useDateHelpers(deliveryHistory.from!)
+      from: formatDate(deliveryHistory.from!),
+      to: formatDate(deliveryHistory.to!),
+      dataChange: formatDate(deliveryHistory.from!)
     }))
   }
 

@@ -305,7 +305,7 @@
         "markers": "Маркери",
         "status": "Статус",
         "approvedOn": "Одобрена на",
-        "createdAt": "Създадена на",
+        "deliveryDate": "Дата на доставка",
          "actions": "Действия"
       },
       "rows": {
@@ -343,7 +343,7 @@
             "vendorName":"Име на доставчик",
             "vendorId":"Доставчик №",
             "truckNumber":"Номер на камион",
-            "deliveryDate":"Дата на доставка"
+            "deliveryTime":"Дата на доставка"
           },
           "step3": {
             "title": "Детайли за стока",
@@ -443,7 +443,7 @@
           "vendorName": "Име на доставчик",
           "vendorId": "Доставчик №",
           "truckNumber": "Номер на камион",
-          "deliveryDate": "Дата на доставка"
+          "deliveryTime": "Дата на доставка"
         },
         "step3": {
           "goodType": "Вид стока",
@@ -472,7 +472,7 @@
           "receptionNumber": {
             "min": "Трябва да има минимум един № на рецепция №"
           },
-          "cmrNumber": {
+          "cmr": {
             "required": "Полето за ЧМР № е задължително"
           }
         },
@@ -486,7 +486,7 @@
           "truckNumber": {
             "required": "Полето за номер на камион е задължително"
           },
-          "deliveryDate": {
+          "deliveryTime": {
             "required": "Полето за дата на доставка e задължително",
             "validDate": "Въведете валидна дата"
           }
@@ -543,7 +543,7 @@
         "completedMoveTitle": "Завършено местене на стока",
         "exceedTitle": "Предупреждение",
         "leftItemsTitle": "Оставащо местене на стока"
-      }
+        }
       }
     },
     "filters": {
@@ -554,121 +554,7 @@
       "deliveryEnd": "Край на доставка",
       "vendorName": "Име на доставчик"
     },
-  "newDelivery": {
-    "title": "Създаване на нова доставка",
-    "errors": {
-      "step1": {
-        "systemNumber": {
-          "required": "Полето за доставка № е задължително"
-        },
-        "receptionNumber": {
-          "required": "Полето за рецепция № е задължително"
-        },
-        "cmr": {
-          "required": "Полето за ЧМР е задължително"
-        }
-      },
-      "step2": {
-        "vendorName": {
-          "required": "Полето за име на доставчик e задължително"
-        },
-        "vendorId": {
-          "required": "Полето за доставчик №e задължително"
-        },
-        "truckNumber": {
-          "required": "Полето за номер на камион е задължително"
-        },
-        "deliveryTime": {
-          "required": "Полето за дата на доставка e задължително",
-          "validDate": "Въведете валидна дата"
-        }
-      },
-      "step3": {
-        "goodType": {
-          "required": "Полето за вид стока e задължително"
-        },
-        "goodQuantity": {
-          "required": "Количеството e задължително",
-          "typeError": "Количеството трябва да е число",
-          "min": "Количеството трябва да минимум 1"
-        }
-      },
-      "step4": {
-        "goodType": {
-          "required": "Полето за вид стока e задължително"
-        },
-        "goodQuantity": {
-          "required": "Количеството e задължително",
-          "typeError": "Количеството трябва да е число",
-          "min": "Количеството трябва да минимум 1"
-        },
-        "zone": {
-          "required": "Полето за зона e задължително"
-        }
-      }
-    },
-    "labels": {
-      "forward": "Напред",
-      "back": "Назад",
-      "exit": "Изход",
-      "step1": {
-        "systemNumber": "Доставка №",
-        "receptionNumber": "Рецепция №",
-        "cmr": "ЧМР",
-        "markers": "Маркери"
-      },
-      "step2": {
-        "vendorName": "Име на доставчик",
-        "vendorId": "Доставчик №",
-        "truckNumber": "Номер на камион",
-        "deliveryDate": "Дата на доставка"
-      },
-      "step3": {
-        "goodType": "Вид стока",
-        "goodQuantity": "Количество",
-        "addGood": "Добави нов вид"
-      },
-      "step4": {
-        "goodType": "Вид стока",
-        "goodQuantity": "Количество",
-        "zone": "Зона",
-        "addNewMove": "Добави ново местене"
-      },
-      "step5": {
-        "createNewDelivery": "Създай"
-      }
-    },
-    "steps": {
-      "deliveryDetails": "Детайли за доставка",
-      "truckDetails": "Детайли за камион",
-      "goodDetails": "Детайли за стока",
-      "goodRelocate": "Местене на стока",
-      "reviewDelivery": "Преглед на доставката"
-    },
-    "goodType": {
-      "pallets": "Палети",
-      "packages": "Пакети",
-      "pieces": "Бройки"
-    },
-    "zones": {
-      "zone1": "Зона 1",
-      "zone2": "Зона 2",
-      "zone3": "Зона 3"
-    },
-    "alertMessages": {
-      "exceedPallets": "Количеството на палетите е надвишено с {{quantity}}",
-      "exceedPackages": "Количеството на пакетите е надвишено с {{quantity}}",
-      "exceedPieces": "Количеството на бройките е надвишено с {{quantity}}",
-      "leftPallets": "Остава да преместите {{quantity}} палети",
-      "leftPackages": "Остава да преместите {{quantity}} пакети",
-      "leftPieces": "Остава да преместите {{quantity}} бройки",
-      "completedMove": "Всички стоки са разпределени по зони",
-      "completedMoveTitle": "Завършено местене на стока",
-      "exceedTitle": "Предупреждение",
-      "leftItemsTitle": "Оставащо местене на стока"
-    }
-  },
- "zonesContent": {
+  "zonesContent": {
     "title": "Зони ",
     "description": "Съдържание на зони",
     "labels": {

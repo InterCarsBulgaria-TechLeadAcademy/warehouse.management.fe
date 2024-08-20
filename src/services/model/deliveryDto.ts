@@ -13,7 +13,8 @@ export interface DeliveryDto {
   /** @nullable */
   cmr?: string | null
   createdAt?: string
-  deliveryTime?: string
+  /** @nullable */
+  deliveryTime?: string | null
   /** @nullable */
   entries?: EntryDto[] | null
   entriesFinishedProcessing?: number

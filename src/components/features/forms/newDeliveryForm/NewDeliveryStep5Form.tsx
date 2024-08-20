@@ -76,8 +76,8 @@ export default function NewDeliveryStep5Form() {
             <Typography>{formsData.truckNumber}</Typography>
           </Box>
           <Box>
-            <Typography>{translate('deliveries.newDelivery.labels.step2.deliveryDate')}</Typography>
-            <Typography>{dayjs(formsData.deliveryDate).format('DD.MM.YYYY')}</Typography>
+            <Typography>{translate('deliveries.newDelivery.labels.step2.deliveryTime')}</Typography>
+            <Typography>{dayjs(formsData.deliveryTime).format('DD.MM.YYYY')}</Typography>
           </Box>
         </Box>
       </Box>

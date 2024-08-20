@@ -12,12 +12,12 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 // import InfoPopper from '../InfoPoper'
 // import DeliveryGoodsInfo from '../DeliveryGoodsInfo'
+import { formatDate } from '@/utils/dateHelpers'
 import useGetDeliveries from '@/hooks/services/deliveries/useGetDeliveries'
 import { DeliveryDto } from '@/services/model'
 import useGetMarkers from '@/hooks/services/markers/useGetMarkers'
 import { Column } from '@/interfaces/Column'
 import useGetVendors from '@/hooks/services/vendors/useGetVendors'
-import useDateHelpers from '@/hooks/useDateHelpers'
 
 interface Row {
   number: number
@@ -28,8 +28,8 @@ interface Row {
   completedGoods: React.ReactNode
   markers: React.ReactNode
   status: React.ReactNode
-  approvedOn: string | React.ReactNode
-  createdAt: string | React.ReactNode
+  approvedOn: string
+  deliveryDate: string
   actions: React.ReactNode
 }
 
@@ -100,7 +100,7 @@ export default function DeliveriesTable() {
     { key: 'markers', title: translate('deliveries.table.columns.markers') },
     { key: 'status', title: translate('deliveries.table.columns.status') },
     { key: 'approvedOn', title: translate('deliveries.table.columns.approvedOn') },
-    { key: 'createdAt', title: translate('deliveries.table.columns.createdAt') },
+    { key: 'deliveryDate', title: translate('deliveries.table.columns.deliveryDate') },
     {
       key: 'actions',
       title: translate('deliveries.table.columns.actions'),
@@ -119,9 +119,9 @@ export default function DeliveriesTable() {
       waitingGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>{delivery.entriesWaitingProcessing!}</Typography>
-          {/* TODO: БЕ трябва да го направят като функционалност 
+          {/* TODO: БЕ трябва да го направят като функционалност
           <InfoPopper>
-            <DeliveryGoodsInfo goodTypes={goodTypes} /> 
+            <DeliveryGoodsInfo goodTypes={goodTypes} />
           </InfoPopper> */}
         </Box>
       ),
@@ -134,11 +134,16 @@ export default function DeliveriesTable() {
           </InfoPopper> */}
         </Box>
       ),
-      markers: <ChipsList items={delivery.markers!.map((marker) => marker.markerName!)} />,
+      markers:
+        delivery.markers!.length === 0 ? (
+          <Typography>-</Typography>
+        ) : (
+          <ChipsList items={delivery.markers!.map((marker) => marker.markerName!)} />
+        ),
       status: <ChipsList items={[delivery.status!]} />,
-      approvedOn: useDateHelpers(delivery.approvedOn!),
-      createdAt: useDateHelpers(delivery.createdAt!),
-      actions: <DeliveriesTableActionsMenu delivery={delivery} />
+      approvedOn: formatDate(delivery.approvedOn!),
+      deliveryDate: formatDate(delivery.deliveryTime!),
+      actions: <DeliveriesTableActionsMenu delivery={delivery!} />
     }))
   }
 

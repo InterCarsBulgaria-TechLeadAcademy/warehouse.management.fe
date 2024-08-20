@@ -73,6 +73,7 @@ export default function DeliveriesTableActionsMenu({ delivery }: DeliveriesTable
       {selectedOption === 'details' && (
         <ConfirmDialog
           open={true}
+          maxWidth="md"
           content={<DeliveryDetails deliveryId={delivery.id!} />}
           discardText={translate('deliveries.table.actions.details.labels.exit')}
           onCloseDialog={handleClose}
