@@ -40,6 +40,7 @@ import type {
   PaginationParameters,
   PostApiDeliveryGenerateBarcodePdfParams,
   RegisterDto,
+  RoleDetailsDto,
   RoleDto,
   RoleFormDto,
   RoleUserAssignDto,
@@ -599,7 +600,7 @@ export const getWarehouseManagementApi = () => {
   }
 
   const getApiRoleAll = (options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<RoleDto[]>({ url: `/api/Role/all`, method: 'GET' }, options)
+    return customInstance<RoleDetailsDto[]>({ url: `/api/Role/all`, method: 'GET' }, options)
   }
 
   const getApiRoleRoleId = (roleId: string, options?: SecondParameter<typeof customInstance>) => {
