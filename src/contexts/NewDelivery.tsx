@@ -8,6 +8,8 @@ import usePostDelivery from '@/hooks/services/deliveries/usePostDelivery'
 import goodQuantity from '@/utils/goodQuantity'
 import usePostEntry from '@/hooks/services/entries/usePostEntry'
 import createEntryData from '@/utils/createEntryData'
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
 
 interface NewDeliveryProviderProps {
   children: ReactNode
@@ -110,13 +112,18 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
     if (currentStep === steps.length) {
       console.log('Final submission:', data)
 
+      dayjs.extend(utc)
+
+      const utcDeliveryTime = dayjs(data.deliveryTime).utc().format() // UTC transform
+
       mutationDeliveryPost.mutate(
         {
           systemNumber: data.systemNumber.join(' | '),
           receptionNumber: data.receptionNumber.join(' | '),
           truckNumber: data.truckNumber,
           cmr: data.cmr,
-          deliveryTime: data.deliveryDate,
+          // deliveryTime: data.deliveryTime,
+          deliveryTime: utcDeliveryTime,
           pallets: goodQuantity(data.goods, 'goodTypeStep3', 'pallets', 'goodQuantityStep3'),
           packages: goodQuantity(data.goods, 'goodTypeStep3', 'packages', 'goodQuantityStep3'),
           pieces: goodQuantity(data.goods, 'goodTypeStep3', 'pieces', 'goodQuantityStep3'),

@@ -29,7 +29,7 @@ interface Row {
   markers: React.ReactNode
   status: React.ReactNode
   approvedOn: string
-  createdAt: string
+  deliveryDate: string
   actions: React.ReactNode
 }
 
@@ -102,7 +102,7 @@ export default function DeliveriesTable() {
     { key: 'markers', title: translate('deliveries.table.columns.markers') },
     { key: 'status', title: translate('deliveries.table.columns.status') },
     { key: 'approvedOn', title: translate('deliveries.table.columns.approvedOn') },
-    { key: 'createdAt', title: translate('deliveries.table.columns.createdAt') },
+    { key: 'deliveryDate', title: translate('deliveries.table.columns.deliveryDate') },
     {
       key: 'actions',
       title: translate('deliveries.table.columns.actions'),
@@ -144,7 +144,7 @@ export default function DeliveriesTable() {
         ),
       status: <ChipsList items={[delivery.status!]} />,
       approvedOn: dateHelpers(delivery.approvedOn!),
-      createdAt: dateHelpers(delivery.createdAt!),
+      deliveryDate: dateHelpers(delivery.deliveryTime!),
       actions: <DeliveriesTableActionsMenu deliveryId={delivery.id!} />
     }))
   }

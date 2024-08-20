@@ -305,7 +305,7 @@
         "markers": "Маркери",
         "status": "Статус",
         "approvedOn": "Одобрена на",
-        "createdAt": "Създадена на",
+        "deliveryDate": "Дата на доставка",
          "actions": "Действия"
       },
       "rows": {

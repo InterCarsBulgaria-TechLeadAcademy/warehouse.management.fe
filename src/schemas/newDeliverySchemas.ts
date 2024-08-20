@@ -27,10 +27,10 @@ export const newDeliveryStep2Schema = yup
       .string()
       .required('deliveries.newDelivery.errors.step2.vendorId.required'),
     truckNumber: yup.string().required('deliveries.newDelivery.errors.step2.truckNumber.required'),
-    deliveryDate: yup
+    deliveryTime: yup
       .date()
       .required('deliveries.newDelivery.errors.step2.deliveryTime.required')
-      .typeError('deliveries.newDelivery.errors.step2.deliveryDate.validDate')
+      .typeError('deliveries.newDelivery.errors.step2.deliveryTime.validDate')
   })
   .required()
 
@@ -39,7 +39,7 @@ export interface NewDeliveryStep2FormData extends yup.InferType<typeof newDelive
   vendorId: string
   vendorSystemNumber: string
   truckNumber: string
-  deliveryDate: Date
+  deliveryTime: Date
 }
 
 export const newDeliveryStep3Schema = yup
