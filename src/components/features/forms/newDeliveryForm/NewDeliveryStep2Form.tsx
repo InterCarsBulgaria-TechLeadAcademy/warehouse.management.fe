@@ -111,7 +111,7 @@ export default function NewDeliveryStep2Form({
       />
 
       <Controller
-        name="deliveryTime"
+        name="deliveryDate"
         control={control}
         defaultValue={formsData.deliveryTime || dayjs().toDate()}
         render={({ field }) => (
@@ -129,9 +129,9 @@ export default function NewDeliveryStep2Form({
               slotProps={{
                 textField: {
                   required: true,
-                  error: !!errors.deliveryTime,
-                  helperText: errors.deliveryTime?.message
-                    ? translate(errors.deliveryTime.message)
+                  error: !!errors.deliveryDate,
+                  helperText: errors.deliveryDate?.message
+                    ? translate(errors.deliveryDate.message)
                     : ''
                 }
               }}
