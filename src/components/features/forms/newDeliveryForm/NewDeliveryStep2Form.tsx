@@ -9,7 +9,6 @@ import dayjs from 'dayjs'
 import React from 'react'
 import { VendorDto } from '@/services/model'
 import useGetVendors from '@/hooks/services/vendors/useGetVendors'
-
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 
 export default function NewDeliveryStep2Form({
@@ -123,6 +122,7 @@ export default function NewDeliveryStep2Form({
               onChange={(newValue) => {
                 field.onChange(newValue ? newValue.toDate() : null)
               }}
+              ampm={false} // remove AM/PM and show 24h form
               slots={{
                 textField: TextField
               }}
