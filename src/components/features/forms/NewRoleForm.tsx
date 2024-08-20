@@ -3,6 +3,7 @@ import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { NewRoleFormData } from '@/schemas/newRoleSchema'
 import CheckboxRoles from './CheckboxRoles'
+import useGetPermissionsAll from '@/hooks/services/roles/useGetPermissionsAll'
 
 interface NewRoleFormProps extends UseFormReturn<NewRoleFormData> {
   defaultValues?: {
@@ -17,7 +18,8 @@ export default function NewRoleForm({
   defaultValues = { name: '', permissions: [] }
 }: NewRoleFormProps) {
   const { t: translate } = useTranslation()
-
+  const permissions = useGetPermissionsAll();
+  
   return (
     <>
       <Controller
@@ -44,7 +46,7 @@ export default function NewRoleForm({
         defaultValue={defaultValues.permissions?.map(String)}
         control={control}
         render={({ }) => (
-          <CheckboxRoles permissions={defaultValues.permissions} />
+          <CheckboxRoles permissions={permissions} />
         )}
       />
     </>
