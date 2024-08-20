@@ -7,7 +7,7 @@ dayjs.extend(timezone)
 
 type TDate = string | Date
 
-export default function formatDate(date: TDate, format = 'DD.MM.YYYY HH:mm') {
+export function formatDate(date: TDate, format = 'DD.MM.YYYY HH:mm') {
   // Set the user's time zone
   const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
@@ -15,10 +15,6 @@ export default function formatDate(date: TDate, format = 'DD.MM.YYYY HH:mm') {
   return dayjs(date).utc().tz(userTimezone).format(format)
 }
 
-// import dayjs from 'dayjs'
-
-// type TDate = string | Date
-
-// export default function formatDate(date: TDate, format = 'DD.MM.YYYY HH:mm') {
-//   return dayjs(date).format(format)
-// }
+export function dateToUtc(date: TDate) {
+  return dayjs(date).utc().format()
+}
