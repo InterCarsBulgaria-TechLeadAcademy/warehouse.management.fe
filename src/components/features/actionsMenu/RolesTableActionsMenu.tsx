@@ -70,7 +70,7 @@ export default function RolesTableActionsMenu({ role }: RolesTableActionsMenuPro
               {...methods}
               defaultValues={{
                 name: role.name!,
-                permissions: role.routePermissions?.map((permission) => permission.name!) || ([] as string[])
+                permissionIds: role.routePermissions?.map((permission) => permission.name!) || ([] as string[])
               }}
             />
           )}
