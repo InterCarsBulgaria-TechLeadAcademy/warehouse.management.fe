@@ -2,23 +2,40 @@ import React, { useEffect, useState } from 'react';
 import { Box, FormControl, FormControlLabel, Checkbox, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { RoutePermissionDto } from '@/services/model';
+import { init } from 'node_modules/i18next';
 
 interface CheckboxRolesProps {
-  permissions: object
+  permissions: Record<string, RoutePermissionDto[]>; // Adjusted for better type checking
+  permissionIds: string[];
 }
 
-export default function CheckboxRoles({ permissions }: CheckboxRolesProps) {
+export default function CheckboxRoles({ permissions, permissionIds }: CheckboxRolesProps) {
+  const [permissionsState, setPermissionsState] = useState<Record<string, boolean>>({});
+  console.log(permissionIds, 'DefaultValues');
   const permissionGroups = Object.keys(permissions)
   const firstColumns = permissionGroups.slice(0, 5)
   const secondColumns = permissionGroups.slice(5)
-  console.log(firstColumns);
-  console.log(secondColumns);
-
 
   const { t: translate } = useTranslation()
 
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    const initialState: Record<string, boolean> = {};
+    console.log('initial state', initialState);
+    
+    permissionGroups.forEach(group => {
+      permissions[group].forEach(permission => {
+        initialState[permission.id!] = permissionIds.includes(permission.id!);
+      });
+    });
+    setPermissionsState(initialState);
+  }, [permissions, permissionIds]);
 
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = event.target;
+    setPermissionsState(prevState => ({
+      ...prevState,
+      [name]: checked,
+    }));
   };
 
   return (
@@ -26,7 +43,7 @@ export default function CheckboxRoles({ permissions }: CheckboxRolesProps) {
       <Box display="flex" justifyContent="space-between" flexDirection={'column'}>
         <Box display={'flex'}>
           {firstColumns.map((col) =>
-            <Box >
+            <Box>
               <FormControl component="fieldset">
                 <Typography variant="h6">{translate(col)}</Typography>
                 {permissions[col].map((permission: RoutePermissionDto) => (
@@ -34,7 +51,7 @@ export default function CheckboxRoles({ permissions }: CheckboxRolesProps) {
                     control={
                       <Checkbox
                         name={permission.name!}
-                        checked={false}
+                        checked={permissionsState[permission.name!] || false}
                         onChange={handleCheckboxChange}
                       />
                     }
@@ -56,7 +73,7 @@ export default function CheckboxRoles({ permissions }: CheckboxRolesProps) {
                     control={
                       <Checkbox
                         name={permission.name!}
-                        checked={false}
+                        checked={permissionsState[permission.name!] || false}
                         onChange={handleCheckboxChange}
                       />
                     }
