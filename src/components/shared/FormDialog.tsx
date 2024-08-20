@@ -54,7 +54,7 @@ export default function FormDialog<T extends FieldValues>({
     onCloseDialog()
   }
 
-  const dialogWidth = title === 'Създаване на новa роля' ? 'lg' : 'sm'; // Example condition
+  const dialogWidth = title === 'Създаване на новa роля' || 'Редактиране на роля' ? 'xl' : 'sm';
 
   return (
     <Dialog
