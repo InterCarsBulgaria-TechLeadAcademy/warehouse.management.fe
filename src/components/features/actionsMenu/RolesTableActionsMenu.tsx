@@ -8,22 +8,7 @@ import useUpdateVendor from '@/hooks/services/vendors/useUpdateVendor'
 import useDeleteVendor from '@/hooks/services/vendors/useDeleteVendor'
 import { NewRoleFormData, newRoleSchema } from '@/schemas/newRoleSchema'
 import NewRoleForm from '../forms/NewRoleForm'
-
-// -------------------------------------------- ↓
-// TODO: Watch out for the code later..
-interface RoleRightDto {
-    rightId?: number
-    /** @nullable */
-    permissionName?: string | null
-}
-  
-interface RoleDto {
-    id?: number
-    /** @nullable */
-    name?: string | null
-    permissions?: RoleRightDto[] | null
-}
-// ---------------------------------------------- ↑
+import { RoleDto } from '@/services/model'
 
 interface RolesTableActionsMenuProps {
   role: RoleDto
@@ -85,7 +70,7 @@ export default function RolesTableActionsMenu({ role }: RolesTableActionsMenuPro
               {...methods}
               defaultValues={{
                 name: role.name!,
-                permissions: role.permissions?.map((permission) => permission.permissionName!) || ([] as string[])
+                permissions: role.routePermissions?.map((permission) => permission.name!) || ([] as string[])
               }}
             />
           )}
