@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Box, FormControl, FormControlLabel, Checkbox, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { RoutePermissionDto } from '@/services/model';
-import { init } from 'node_modules/i18next';
 
 interface CheckboxRolesProps {
   permissions: Record<string, RoutePermissionDto[]>; // Adjusted for better type checking
@@ -11,7 +10,7 @@ interface CheckboxRolesProps {
 
 export default function CheckboxRoles({ permissions, permissionIds }: CheckboxRolesProps) {
   const [permissionsState, setPermissionsState] = useState<Record<string, boolean>>({});
-  console.log(permissionIds, 'DefaultValues');
+
   const permissionGroups = Object.keys(permissions)
   const firstColumns = permissionGroups.slice(0, 5)
   const secondColumns = permissionGroups.slice(5)
@@ -20,11 +19,9 @@ export default function CheckboxRoles({ permissions, permissionIds }: CheckboxRo
 
   useEffect(() => {
     const initialState: Record<string, boolean> = {};
-    console.log('initial state', initialState);
-    
     permissionGroups.forEach(group => {
       permissions[group].forEach(permission => {
-        initialState[permission.id!] = permissionIds.includes(permission.id!);
+        initialState[permission.name!] = permissionIds.includes(permission.name!);
       });
     });
     setPermissionsState(initialState);
