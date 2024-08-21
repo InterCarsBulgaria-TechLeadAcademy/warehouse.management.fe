@@ -4,24 +4,24 @@ import { useTranslation } from 'react-i18next';
 import { RoutePermissionDto } from '@/services/model';
 
 interface CheckboxRolesProps {
-  permissions: Record<string, RoutePermissionDto[]>; // Adjusted for better type checking
+  permissions: Record<string, RoutePermissionDto[]>;
   permissionIds: string[];
+  onChange: (selectedIds: string[]) => void
 }
 
-export default function CheckboxRoles({ permissions, permissionIds }: CheckboxRolesProps) {
+export default function CheckboxRoles({ permissions, permissionIds, onChange }: CheckboxRolesProps) {
   const [permissionsState, setPermissionsState] = useState<Record<string, boolean>>({});
 
   const permissionGroups = Object.keys(permissions)
   const firstColumns = permissionGroups.slice(0, 5)
   const secondColumns = permissionGroups.slice(5)
-
   const { t: translate } = useTranslation()
 
   useEffect(() => {
     const initialState: Record<string, boolean> = {};
     permissionGroups.forEach(group => {
       permissions[group].forEach(permission => {
-        initialState[permission.name!] = permissionIds.includes(permission.name!);
+        initialState[permission.id!] = permissionIds.includes(permission.id!);
       });
     });
     setPermissionsState(initialState);
@@ -29,10 +29,14 @@ export default function CheckboxRoles({ permissions, permissionIds }: CheckboxRo
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target;
-    setPermissionsState(prevState => ({
-      ...prevState,
+    const updatedPermissionsState = {
+      ...permissionsState,
       [name]: checked,
-    }));
+    };
+    setPermissionsState(updatedPermissionsState);
+    
+    const selectedIds = Object.keys(updatedPermissionsState).filter(key => updatedPermissionsState[key]);
+    onChange(selectedIds);
   };
 
   return (
@@ -47,8 +51,8 @@ export default function CheckboxRoles({ permissions, permissionIds }: CheckboxRo
                   <FormControlLabel
                     control={
                       <Checkbox
-                        name={permission.name!}
-                        checked={permissionsState[permission.name!] || false}
+                        name={permission.id!}
+                        checked={permissionsState[permission.id!] || false}
                         onChange={handleCheckboxChange}
                       />
                     }
@@ -69,8 +73,8 @@ export default function CheckboxRoles({ permissions, permissionIds }: CheckboxRo
                   <FormControlLabel
                     control={
                       <Checkbox
-                        name={permission.name!}
-                        checked={permissionsState[permission.name!] || false}
+                        name={permission.id!}
+                        checked={permissionsState[permission.id!] || false}
                         onChange={handleCheckboxChange}
                       />
                     }
