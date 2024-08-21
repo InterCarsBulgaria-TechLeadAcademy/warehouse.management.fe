@@ -370,7 +370,11 @@
                   "finishedProcessing": "Завършена обработка",
                   "zone": "Зона",
                   "lastModifiedByUserId": "Потребител",
-                  "lastModifiedAt": "Промяна в"
+                  "lastModifiedAt": "Промяна в",
+                  "adminComment": "Коментарт админ",
+                  "isApproved": "Одобрена",
+                  "approvedOn": "Одобрена на",
+                  "status": "Статус"
                 },
                 "changeType": {
                   "delivery": "Доставка",
@@ -562,7 +566,8 @@
     },
     "filters": {
       "search": "Търсене",
-      "toggle": "Покажи готовите записи"
+      "zones": "Зони",
+      "statuses": "Статуси"
     },
     "table": {
       "columns": {
