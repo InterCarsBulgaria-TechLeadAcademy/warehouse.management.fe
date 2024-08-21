@@ -4,28 +4,28 @@ import { useTranslation } from 'react-i18next'
 import { NewRoleFormData } from '@/schemas/newRoleSchema'
 import CheckboxRoles from './CheckboxRoles'
 import useGetPermissionsAll from '@/hooks/services/roles/useGetPermissionsAll'
+import useGetSingleRole from '@/hooks/services/roles/useGetSingleRoles'
 
 interface NewRoleFormProps extends UseFormReturn<NewRoleFormData> {
-  defaultValues?: {
-    name: string
-    permissionIds: string[]
-  }
+  roleId: string
 }
 
 export default function NewRoleForm({
   control,
   formState: { errors },
-  defaultValues = { name: '', permissionIds: [] }
+  roleId
 }: NewRoleFormProps) {
   const { t: translate } = useTranslation()
   const permissions = useGetPermissionsAll();
+  const currentRole = useGetSingleRole(roleId)
+
+  console.log(currentRole);
   
 
   return (
     <>
       <Controller
         name="name"
-        defaultValue={defaultValues?.name || ''}
         control={control}
         render={({ field }) => (
           <TextField
@@ -42,18 +42,17 @@ export default function NewRoleForm({
         )}
       />
 
-      <Controller
+      {/* <Controller
         name="permissionIds"
-        defaultValue={defaultValues?.permissionIds || []}
         control={control}
         render={({ field: { onChange } }) => (
           <CheckboxRoles
             permissions={permissions}
-            permissionIds={defaultValues.permissionIds}
+            currentPermissions={currentRole.rolePermissions}
             onChange={onChange}
           />
         )}
-      />
+      /> */}
     </>
   )
 }
