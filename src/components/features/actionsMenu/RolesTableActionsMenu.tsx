@@ -4,11 +4,10 @@ import { useTranslation } from 'react-i18next'
 import FormDialog from '../../shared/FormDialog'
 import { SubmitHandler } from 'react-hook-form'
 import TableActionsMenu from './TableActionsMenu'
-import useUpdateVendor from '@/hooks/services/vendors/useUpdateVendor'
-import useDeleteVendor from '@/hooks/services/vendors/useDeleteVendor'
 import { NewRoleFormData, newRoleSchema } from '@/schemas/newRoleSchema'
 import NewRoleForm from '../forms/NewRoleForm'
 import { RoleDto } from '@/services/model'
+import useUpdateRole from '@/hooks/services/roles/useUpdateRole'
 
 interface RolesTableActionsMenuProps {
   role: RoleDto
@@ -17,10 +16,9 @@ interface RolesTableActionsMenuProps {
 export default function RolesTableActionsMenu({ role }: RolesTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
-  const [vendorNumber, setVendorNumber] = React.useState('')
-  const mutationUpdate = useUpdateVendor(role.name!, vendorNumber)
-  const mutationDelete = useDeleteVendor(role.name!)
-
+  const mutationUpdate = useUpdateRole(role.name!)
+  // const mutationDelete = useDeleteVendor(role.name!)
+  
   const handleClose = () => {
     setSelectedOption(null)
   }
@@ -30,16 +28,14 @@ export default function RolesTableActionsMenu({ role }: RolesTableActionsMenuPro
   }
 
   const handleSubmit: SubmitHandler<NewRoleFormData> = (data) => {
-    // setVendorNumber(data.vendorNumber)
-    // const markerIds = data.markers!.map((marker) => Number(marker))
-    // mutationUpdate.mutate({
-    //   id: user.id!,
-    //   data: { name: data.vendorName, systemNumber: data.vendorNumber, markerIds: markerIds }
-    // })
+    mutationUpdate.mutate({
+      id: role.id!,
+      data: { name: data.name, permissionIds: data.permissionIds }
+    })
   }
 
   const onConfirmClick = () => {
-    mutationDelete.mutate(role.id!)
+    // mutationDelete.mutate(role.id!)
     handleClose()
   }
 
