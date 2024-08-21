@@ -59,7 +59,7 @@ export default function RolesTable() {
       permissions:
         role.rolePermissions!.length > 0 ? (
           <ChipsList
-            items={role.rolePermissions?.map((permission) => permission.name!) || ([] as string[])}
+            items={role.rolePermissions?.map((permission) => permission!) || ([] as string[])}
           />
         ) : (
           <Typography>-</Typography>
