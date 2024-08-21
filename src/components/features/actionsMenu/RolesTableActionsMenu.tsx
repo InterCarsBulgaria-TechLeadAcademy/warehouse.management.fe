@@ -28,7 +28,6 @@ export default function RolesTableActionsMenu({ role }: RolesTableActionsMenuPro
   }
 
   const handleSubmit: SubmitHandler<NewRoleFormData> = (data) => {
-    console.log(data, 'submit data');
     
     mutationUpdate.mutate({
       id: role.id!,
