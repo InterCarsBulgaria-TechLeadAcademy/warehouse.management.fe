@@ -19,7 +19,7 @@ export default function NewRoleForm({
 }: NewRoleFormProps) {
   const { t: translate } = useTranslation()
   const permissions = useGetPermissionsAll();
-  defaultValues.permissionIds.push("9f60c085-dcf9-4241-a1d2-2debc6b0ade3")
+  
 
   return (
     <>
@@ -44,9 +44,14 @@ export default function NewRoleForm({
 
       <Controller
         name="permissionIds"
+        defaultValue={defaultValues?.permissionIds || []}
         control={control}
-        render={({ }) => (
-          <CheckboxRoles permissions={permissions} permissionIds={defaultValues.permissionIds} />
+        render={({ field: { onChange } }) => (
+          <CheckboxRoles
+            permissions={permissions}
+            permissionIds={defaultValues.permissionIds}
+            onChange={onChange}
+          />
         )}
       />
     </>
