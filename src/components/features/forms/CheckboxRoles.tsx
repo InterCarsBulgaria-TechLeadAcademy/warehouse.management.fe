@@ -5,11 +5,11 @@ import { RoutePermissionDto } from '@/services/model';
 
 interface CheckboxRolesProps {
   permissions: Record<string, RoutePermissionDto[]>;
-  permissionIds: string[];
+  currentPermissions: object[];
   onChange: (selectedIds: string[]) => void
 }
 
-export default function CheckboxRoles({ permissions, permissionIds, onChange }: CheckboxRolesProps) {
+export default function CheckboxRoles({ permissions, currentPermissions, onChange }: CheckboxRolesProps) {
   const [permissionsState, setPermissionsState] = useState<Record<string, boolean>>({});
 
   const permissionGroups = Object.keys(permissions)
