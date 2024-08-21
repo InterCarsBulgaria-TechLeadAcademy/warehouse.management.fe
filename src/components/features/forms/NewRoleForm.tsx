@@ -7,7 +7,7 @@ import useGetPermissionsAll from '@/hooks/services/roles/useGetPermissionsAll'
 import useGetSingleRole from '@/hooks/services/roles/useGetSingleRoles'
 
 interface NewRoleFormProps extends UseFormReturn<NewRoleFormData> {
-  roleId: string
+  roleId: number
 }
 
 export default function NewRoleForm({
@@ -17,9 +17,7 @@ export default function NewRoleForm({
 }: NewRoleFormProps) {
   const { t: translate } = useTranslation()
   const permissions = useGetPermissionsAll();
-  const currentRole = useGetSingleRole(roleId)
-
-  console.log(currentRole);
+  const currentRole = roleId ? useGetSingleRole(roleId) : null;
   
 
   return (
@@ -32,6 +30,7 @@ export default function NewRoleForm({
             {...field}
             label={translate('vendors.newVendor.labels.name')}
             id="name"
+            defaultValue={currentRole?.name || ''}
             name="name"
             required
             fullWidth
@@ -42,17 +41,17 @@ export default function NewRoleForm({
         )}
       />
 
-      {/* <Controller
+      <Controller
         name="permissionIds"
         control={control}
         render={({ field: { onChange } }) => (
           <CheckboxRoles
             permissions={permissions}
-            currentPermissions={currentRole.rolePermissions}
+            currentPermissions={currentRole?.routePermissions || []}
             onChange={onChange}
           />
         )}
-      /> */}
+      />
     </>
   )
 }
