@@ -603,7 +603,7 @@ export const getWarehouseManagementApi = () => {
     return customInstance<RoleDetailsDto[]>({ url: `/api/Role/all`, method: 'GET' }, options)
   }
 
-  const getApiRoleRoleId = (roleId: string, options?: SecondParameter<typeof customInstance>) => {
+  const getApiRoleRoleId = (roleId: number, options?: SecondParameter<typeof customInstance>) => {
     return customInstance<RoleDto>({ url: `/api/Role/${roleId}`, method: 'GET' }, options)
   }
 
