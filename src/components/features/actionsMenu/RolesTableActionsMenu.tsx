@@ -28,6 +28,8 @@ export default function RolesTableActionsMenu({ role }: RolesTableActionsMenuPro
   }
 
   const handleSubmit: SubmitHandler<NewRoleFormData> = (data) => {
+    console.log(data, 'submit data');
+    
     mutationUpdate.mutate({
       id: role.id!,
       data: { name: data.name, permissionIds: data.permissionIds }
@@ -66,7 +68,7 @@ export default function RolesTableActionsMenu({ role }: RolesTableActionsMenuPro
               {...methods}
               defaultValues={{
                 name: role.name!,
-                permissionIds: role.routePermissions?.map((permission) => permission.name!) || ([] as string[])
+                permissionIds: role.rolePermissions!
               }}
             />
           )}
