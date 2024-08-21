@@ -51,6 +51,7 @@ export default function RolesTable() {
   ]
 
   function transformDataToRows(roles: RoleDto[]): Row[] {
+    console.log(roles);
     
     return roles.map((role: RoleDto) => ({
       id: role.id!,
