@@ -688,7 +688,7 @@ export const getWarehouseManagementApi = () => {
   }
 
   const deleteApiVendorDeleteId = (
-    id: number,
+    id: string,
     options?: SecondParameter<typeof customInstance>
   ) => {
     return customInstance<void>({ url: `/api/Vendor/delete/${id}`, method: 'DELETE' }, options)
