@@ -66,7 +66,7 @@ export default function RolesTableActionsMenu({ role }: RolesTableActionsMenuPro
           renderForm={(methods) => (
             <NewRoleForm
               {...methods}
-              roleId={role.id!}
+              roleId={role.id || null}
             />
           )}
         />
