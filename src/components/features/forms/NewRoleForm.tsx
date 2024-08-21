@@ -7,7 +7,7 @@ import useGetPermissionsAll from '@/hooks/services/roles/useGetPermissionsAll'
 import useGetSingleRole from '@/hooks/services/roles/useGetSingleRoles'
 
 interface NewRoleFormProps extends UseFormReturn<NewRoleFormData> {
-  roleId: number
+  roleId?: number
 }
 
 export default function NewRoleForm({
