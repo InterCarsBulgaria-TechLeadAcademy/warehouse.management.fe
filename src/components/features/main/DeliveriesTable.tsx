@@ -143,7 +143,7 @@ export default function DeliveriesTable() {
       status: <ChipsList items={[delivery.status!]} />,
       approvedOn: formatDate(delivery.approvedOn!),
       deliveryDate: formatDate(delivery.deliveryTime!),
-      actions: <DeliveriesTableActionsMenu deliveryId={delivery.id!} />
+      actions: <DeliveriesTableActionsMenu delivery={delivery!} />
     }))
   }
 

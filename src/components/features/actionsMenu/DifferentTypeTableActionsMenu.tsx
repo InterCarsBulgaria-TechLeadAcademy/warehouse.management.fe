@@ -37,7 +37,7 @@ export default function DifferentTypeTableActionsMenu({
     setSelectedOption(option)
   }
 
-  const onConfirmClick = () => {
+  const onConfirmDelete = () => {
     mutationDelete.mutate(differenceType.id!)
     handleClose()
   }
@@ -81,7 +81,7 @@ export default function DifferentTypeTableActionsMenu({
           confirmText={translate('differenceType.table.actions.delete.labels.confirm')}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
-          onConfirmClick={onConfirmClick}
+          onConfirmClick={onConfirmDelete}
         />
       )}
     </div>

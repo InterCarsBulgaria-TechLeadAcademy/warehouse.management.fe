@@ -1,28 +1,24 @@
 import { useTranslation } from 'react-i18next'
 import { useSnackbar } from '@/hooks/useSnackbar.ts'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-// import { BodyType } from '@/services/api.ts'
-// import { VendorFormDto } from '@/services/model'
 import { getWarehouseManagementApi } from '@/services/generated-api.ts'
-// import axios from 'axios'
 
-export function useFinishProcessing() {
+export function useApproveDelivery() {
   const { t: translate } = useTranslation()
   const { showSnackbar } = useSnackbar()
   const queryClient = useQueryClient()
 
   const mutationUpdate = useMutation({
-    mutationFn: (id: number) => getWarehouseManagementApi().putApiEntryFinishId(id),
+    mutationFn: (id: number) => getWarehouseManagementApi().putApiDeliveryApproveId(id),
     onSuccess: (_, id) => {
-      queryClient.invalidateQueries({ queryKey: ['entries', id] })
+      queryClient.invalidateQueries({ queryKey: ['deliveries', id] })
       showSnackbar({
-        message: translate('zonesContent.table.actions.finishProcessing.snackBar.success', {
-          goodNumber: id
+        message: translate('deliveries.table.actions.approve.snackBar.success', {
+          deliveryNumber: id
         }),
         type: 'success'
       })
     },
-
     onError: (error: unknown) => {
       // TODO: Handle errors better
       // if (axios.isAxiosError(error)) {
@@ -41,12 +37,11 @@ export function useFinishProcessing() {
       //   }
       // } else {
       showSnackbar({
-        message: translate('zonesContent.table.actions.finishProcessing.snackBar.error'),
+        message: translate('deliveries.table.actions.approve.snackBar.error'),
         type: 'error'
       })
       // }
     }
   })
-
   return mutationUpdate
 }

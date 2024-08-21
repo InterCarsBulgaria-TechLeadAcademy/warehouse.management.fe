@@ -8,6 +8,8 @@ dayjs.extend(timezone)
 type TDate = string | Date
 
 export function formatDate(date: TDate, format = 'DD.MM.YYYY HH:mm') {
+  if (!date) return '-'
+
   // Set the user's time zone
   const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
