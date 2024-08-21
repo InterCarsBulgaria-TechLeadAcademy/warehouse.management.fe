@@ -7,12 +7,14 @@ import useGetPermissionsAll from '@/hooks/services/roles/useGetPermissionsAll'
 import useGetSingleRole from '@/hooks/services/roles/useGetSingleRoles'
 
 interface NewRoleFormProps extends UseFormReturn<NewRoleFormData> {
-  roleId?: number
+  roleId?: number | undefined
+  roleName?: string | undefined
 }
 
 export default function NewRoleForm({
   control,
   formState: { errors },
+  roleName,
   roleId
 }: NewRoleFormProps) {
   const { t: translate } = useTranslation()
@@ -30,7 +32,7 @@ export default function NewRoleForm({
             {...field}
             label={translate('vendors.newVendor.labels.name')}
             id="name"
-            defaultValue={currentRole?.name || ''}
+            defaultValue={roleName || ''}
             name="name"
             required
             fullWidth
