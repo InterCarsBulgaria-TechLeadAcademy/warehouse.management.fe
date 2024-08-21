@@ -27,6 +27,9 @@ export default function DeliveryHistoryTable({ deliveryId }: DeliveryHistoryTabl
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const deliveriesHistory = useGetDeliveryHistory(deliveryId)
 
+  const { getTranslateDeliveryHistoryChanges } = useTranslateDeliveryHistoryChanges()
+  const { getTranslateDeliveryHistoryChangeType } = useTranslateDeliveryHistoryChangeType()
+
   const onPageChange = (newPage: number) => {
     setPage(newPage)
   }
@@ -59,11 +62,11 @@ export default function DeliveryHistoryTable({ deliveryId }: DeliveryHistoryTabl
   function transformDataToRows(deliveriesHistory: Change[]): Row[] {
     return deliveriesHistory.map((deliveryHistory: Change, index: number) => ({
       id: index,
-      changed: useTranslateDeliveryHistoryChanges(deliveryHistory.propertyName!),
-      typeChange: useTranslateDeliveryHistoryChangeType(deliveryHistory.type!),
+      changed: getTranslateDeliveryHistoryChanges(deliveryHistory.propertyName!),
+      typeChange: getTranslateDeliveryHistoryChangeType(deliveryHistory.type!),
       from: formatDate(deliveryHistory.from!),
       to: formatDate(deliveryHistory.to!),
-      dataChange: formatDate(deliveryHistory.from!)
+      dataChange: formatDate(deliveryHistory.changeDate!)
     }))
   }
 

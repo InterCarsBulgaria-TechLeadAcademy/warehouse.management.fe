@@ -5,16 +5,21 @@ enum ChangeTypes {
   Entry = 'Entry'
 }
 
-export default function useTranslateDeliveryHistoryChangeType(changeType: string) {
+export default function useTranslateDeliveryHistoryChangeType() {
   const { t: translate } = useTranslation()
-  switch (changeType) {
-    case ChangeTypes.Delivery:
-      return translate(
-        'deliveries.table.actions.details.step5.table.table-body.changeType.delivery'
-      )
-    case ChangeTypes.Entry:
-      return translate('deliveries.table.actions.details.step5.table.table-body.changeType.entry')
-    default:
-      return changeType
+
+  function getTranslateDeliveryHistoryChangeType(changeType: string) {
+    switch (changeType) {
+      case ChangeTypes.Delivery:
+        return translate(
+          'deliveries.table.actions.details.step5.table.table-body.changeType.delivery'
+        )
+      case ChangeTypes.Entry:
+        return translate('deliveries.table.actions.details.step5.table.table-body.changeType.entry')
+      default:
+        return changeType
+    }
   }
+
+  return { getTranslateDeliveryHistoryChangeType }
 }
