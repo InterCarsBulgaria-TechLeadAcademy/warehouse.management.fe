@@ -66,10 +66,7 @@ export default function RolesTableActionsMenu({ role }: RolesTableActionsMenuPro
           renderForm={(methods) => (
             <NewRoleForm
               {...methods}
-              defaultValues={{
-                name: role.name!,
-                permissionIds: role.rolePermissions!
-              }}
+              roleId={role.id!}
             />
           )}
         />
