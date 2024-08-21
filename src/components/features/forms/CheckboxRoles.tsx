@@ -14,7 +14,7 @@ interface CheckboxRolesProps {
 
 export default function CheckboxRoles({ permissions, currentPermissions,onChange }: CheckboxRolesProps) {
   const [permissionsState, setPermissionsState] = useState<Record<string, boolean>>({})
-  const [currentPermissionIds, seCurrentPermissionIds] = useState(currentPermissions.map((current) => current.id))
+  console.log(currentPermissions);
   
   const permissionGroups = Object.keys(permissions)
   const firstColumns = permissionGroups.slice(0, 5)
@@ -22,6 +22,7 @@ export default function CheckboxRoles({ permissions, currentPermissions,onChange
   const { t: translate } = useTranslation()
 
   useEffect(() => {
+    const currentPermissionIds = currentPermissions.map((current) => current.id)
     const initialState: Record<string, boolean> = {};
     permissionGroups.forEach(group => {
       permissions[group].forEach(permission => {
