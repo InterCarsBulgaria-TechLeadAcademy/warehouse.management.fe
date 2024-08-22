@@ -2,6 +2,7 @@ import * as React from 'react'
 import Popover from '@mui/material/Popover'
 import InfoIcon from '@mui/icons-material/Info'
 import { Box } from '@mui/material'
+import { useIsSmallScreen } from '@/hooks/useIsSmallScreen'
 
 interface InfoPopperProps {
   children: React.ReactNode
@@ -9,32 +10,54 @@ interface InfoPopperProps {
 
 export default function InfoPopper({ children }: InfoPopperProps) {
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null)
+  const [open, setOpen] = React.useState(false)
+  const isSmallScreen = useIsSmallScreen()
 
   const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
+    setOpen(true)
   }
 
   const handlePopoverClose = () => {
     setAnchorEl(null)
+    setOpen(false)
   }
 
-  const open = Boolean(anchorEl)
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    if (isSmallScreen) {
+      setOpen((prev) => !prev)
+      setAnchorEl(event.currentTarget)
+    } else {
+      handlePopoverOpen(event)
+    }
+  }
+
+  const handleMouseEnter = (event: React.MouseEvent<HTMLElement>) => {
+    if (!isSmallScreen) {
+      handlePopoverOpen(event)
+    }
+  }
+
+  const handleMouseLeave = () => {
+    if (!isSmallScreen) {
+      handlePopoverClose()
+    }
+  }
 
   return (
     <Box>
       <Box
         aria-owns={open ? 'mouse-over-popover' : undefined}
         aria-haspopup="true"
-        onMouseEnter={handlePopoverOpen}
-        onMouseLeave={handlePopoverClose}
+        onClick={handleClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         sx={{ display: 'flex', cursor: 'pointer', justifyContent: 'center' }}>
         <InfoIcon />
       </Box>
       <Popover
         id="mouse-over-popover"
-        sx={{
-          pointerEvents: 'none'
-        }}
+        sx={{ pointerEvents: 'none' }}
         open={open}
         anchorEl={anchorEl}
         anchorOrigin={{

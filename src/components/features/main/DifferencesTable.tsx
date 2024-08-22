@@ -70,8 +70,6 @@ export default function DifferencesTable() {
     }
   ]
 
-  console.log(differences)
-
   function transformDataToRows(differences: DifferenceDto[]): Row[] {
     return differences.map((difference: DifferenceDto) => ({
       id: difference.id!,

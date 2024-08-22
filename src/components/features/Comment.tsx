@@ -1,13 +1,19 @@
 import { Box, TextField, Typography } from '@mui/material'
 import InfoPopper from './InfoPoper'
+import { useIsSmallScreen } from '@/hooks/useIsSmallScreen'
 
 interface CommentProps {
   comment: string
 }
 
 export default function Comment({ comment }: CommentProps) {
+  const isSmallScreen = useIsSmallScreen()
   return comment === '' ? (
     <Typography>-</Typography>
+  ) : isSmallScreen ? (
+    <InfoPopper>
+      <TextField id="outlined-multiline-static" multiline disabled={true} value={comment} />
+    </InfoPopper>
   ) : comment.length > 10 ? (
     <Box sx={{ display: 'flex' }}>
       <Typography variant="body2" noWrap>
