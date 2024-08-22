@@ -569,10 +569,20 @@
         "number": "№",
         "vendorName": "Доставчик",
         "receptionNumber": "Рецепция №",
+        "quantity": "Количество",
         "goodNumber": "Стока №",
         "zoneName": "Зона",
         "status": "Статус",
         "actions": "Действия"
+      },
+      "rows": {
+        "quantity-column": {
+          "goodTypes": {
+            "pallets":"Палети",
+            "packages":"Пакети",
+            "pieces":"Бройки"
+          }
+        }
       },
       "actionsMenu": {
         "MoveToNewZone": "Премести в нова зона",
