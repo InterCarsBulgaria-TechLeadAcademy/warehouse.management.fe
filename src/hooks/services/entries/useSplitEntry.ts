@@ -20,7 +20,7 @@ export function useSplitEntry() {
     }) => getWarehouseManagementApi().postApiEntrySplitId(entryId, { count, newZoneId }),
 
     onSuccess: (_, id) => {
-      queryClient.invalidateQueries({ queryKey: ['entries', id] })
+      queryClient.invalidateQueries({ queryKey: ['entries'] })
       showSnackbar({
         message: translate('zonesContent.table.actions.splitEntry.snackBar.success', {
           goodNumber: id

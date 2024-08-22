@@ -11,7 +11,7 @@ export function useApproveDelivery() {
   const mutationUpdate = useMutation({
     mutationFn: (id: number) => getWarehouseManagementApi().putApiDeliveryApproveId(id),
     onSuccess: (_, id) => {
-      queryClient.invalidateQueries({ queryKey: ['deliveries', id] })
+      queryClient.invalidateQueries({ queryKey: ['deliveries'] })
       showSnackbar({
         message: translate('deliveries.table.actions.approve.snackBar.success', {
           deliveryNumber: id

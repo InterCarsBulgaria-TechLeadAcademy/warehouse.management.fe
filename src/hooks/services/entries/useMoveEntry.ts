@@ -12,7 +12,7 @@ export function useMoveEntry() {
     mutationFn: ({ id, newZoneId }: { id: number; newZoneId: number }) =>
       getWarehouseManagementApi().postApiEntryMoveId(id, newZoneId),
     onSuccess: (_, id) => {
-      queryClient.invalidateQueries({ queryKey: ['entries', id] })
+      queryClient.invalidateQueries({ queryKey: ['entries'] })
       showSnackbar({
         message: translate('zonesContent.table.actions.moveEntryForm.snackBar.success', {
           goodNumber: id
