@@ -174,10 +174,16 @@ export default function CreateDifferenceForm({
                 ) || null
               }
               onChange={(_event: any, newValue) => {
+                // save id of the selected option
                 const newDifferenceTypeId = newValue ? newValue.id!.toString() : null
                 field.onChange(newDifferenceTypeId)
               }}
-              inputValue={field.value || ''}
+              inputValue={
+                // Show name of the selected option in textField
+                differenceTypes.find(
+                  (differenceType) => differenceType.id!.toString() === field.value
+                )?.name || ''
+              }
               id="differenceType"
               sx={{ flex: 1 }}
               renderInput={(params) => (
@@ -207,10 +213,14 @@ export default function CreateDifferenceForm({
               getOptionLabel={(option) => option.name || ''}
               value={zones.find((zone) => zone.id!.toString() === field.value) || null}
               onChange={(_event: any, newValue) => {
+                // save id of the selected option
                 const newZoneId = newValue ? newValue.id!.toString() : null
                 field.onChange(newZoneId)
               }}
-              inputValue={field.value || ''}
+              inputValue={
+                // Show name of the selected option in textField
+                zones.find((zone) => zone.id!.toString() === field.value)?.name || ''
+              }
               id="zone"
               sx={{ flex: 1 }}
               renderInput={(params) => (

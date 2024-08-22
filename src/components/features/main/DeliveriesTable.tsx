@@ -10,8 +10,8 @@ import { Dayjs } from 'dayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-// import InfoPopper from '../InfoPoper'
-// import DeliveryGoodsInfo from '../DeliveryGoodsInfo'
+import InfoPopper from '../InfoPoper'
+import DeliveryGoodsInfo from '../DeliveryGoodsInfo'
 import { formatDate } from '@/utils/dateHelpers'
 import useGetDeliveries from '@/hooks/services/deliveries/useGetDeliveries'
 import { DeliveryDto } from '@/services/model'
@@ -43,6 +43,8 @@ export default function DeliveriesTable() {
   const markers = useGetMarkers()
   const vendors = useGetVendors()
   const deliveries = useGetDeliveries(page, rowsPerPage, searchTerm)
+
+  console.log(deliveries)
 
   const markersName = markers.map((marker) => marker.name!)
   const vendorsName = vendors.map((vendor) => vendor.name!)
@@ -121,17 +123,18 @@ export default function DeliveriesTable() {
           <Typography>{delivery.entriesWaitingProcessing!}</Typography>
           {/* TODO: БЕ трябва да го направят като функционалност
           <InfoPopper>
-            <DeliveryGoodsInfo goodTypes={goodTypes} />
+            // <DeliveryGoodsInfo goodTypes={goodTypes} />
           </InfoPopper> */}
         </Box>
       ),
       completedGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>{delivery.entriesFinishedProcessing}</Typography>
-          {/* TODO: БЕ трябва да го направят като функционалност
-          <InfoPopper>
-            <DeliveryGoodsInfo goodTypes={goodTypes} />
-          </InfoPopper> */}
+          {/* TODO: БЕ трябва да го направят като функционалност*/}
+          {/* <InfoPopper> */}
+          {/* <DeliveryGoodsInfo goodTypes={goodTypes} /> */}
+          {/* <DeliveryGoodsInfo entriesDetails={deliveries.}/> */}
+          {/* </InfoPopper> */}
         </Box>
       ),
       markers:
