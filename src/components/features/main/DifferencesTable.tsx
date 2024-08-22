@@ -6,10 +6,9 @@ import { Column } from '@/interfaces/Column.ts'
 import { DifferenceDto } from '@/services/model'
 import useGetDifferences from '@/hooks/services/differences/useGetDifferences'
 import DifferencesTableActionsMenu from '../actionsMenu/DifferencesTableActionsMenu'
-import { TextField, Typography } from '@mui/material'
 import { formatDate } from '@/utils/dateHelpers'
 import ChipsList from '../ChipsList'
-import InfoPopper from '../InfoPoper'
+import Comment from '../Comment'
 
 interface Row {
   number: number
@@ -18,8 +17,8 @@ interface Row {
   receptionNumber: string
   count: number
   zone: string
-  comment: React.ReactNode | string
-  adminComment: React.ReactNode | string
+  comment: React.ReactNode
+  adminComment: React.ReactNode
   status: React.ReactNode
   type: string
   createdAt: string
@@ -71,6 +70,8 @@ export default function DifferencesTable() {
     }
   ]
 
+  console.log(differences)
+
   function transformDataToRows(differences: DifferenceDto[]): Row[] {
     return differences.map((difference: DifferenceDto) => ({
       id: difference.id!,
@@ -80,25 +81,8 @@ export default function DifferencesTable() {
       receptionNumber: difference.receptionNumber!,
       count: difference.count!,
       zone: difference.zone!,
-      comment:
-        difference.comment!.length > 1 ? (
-          <InfoPopper>
-            <TextField
-              id="outlined-multiline-static"
-              multiline
-              rows={4}
-              disabled={true}
-              value={difference.comment!}
-            />
-          </InfoPopper>
-        ) : (
-          difference.comment!
-        ),
-      adminComment:
-        difference.adminComment! === '' ? <Typography>-</Typography> : difference.adminComment,
-      // comment: difference.comment!,
-      // adminComment:
-      //   difference.adminComment! === '' ? <Typography>-</Typography> : difference.adminComment,
+      comment: <Comment comment={difference.comment!} />,
+      adminComment: <Comment comment={difference.adminComment!} />,
       status: <ChipsList items={[difference.status!]} />,
       type: difference.type!,
       createdAt: formatDate(difference.createdAt!),
