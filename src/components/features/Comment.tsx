@@ -17,7 +17,13 @@ export default function Comment({ comment }: CommentProps) {
         ...
       </Typography>
       <InfoPopper>
-        <TextField id="outlined-multiline-static" multiline disabled={true} value={comment} />
+        <TextField
+          id="outlined-multiline-static"
+          multiline
+          disabled={true}
+          value={comment}
+          sx={{ width: comment.length > 100 ? '300px' : 'auto' }}
+        />
       </InfoPopper>
     </Box>
   ) : (
