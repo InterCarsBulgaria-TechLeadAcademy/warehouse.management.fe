@@ -8,7 +8,7 @@ interface MenuItemProps {
   title: string
   Icon: React.ElementType
   link: string
-  onClose: () => void
+  onClose?: () => void
 }
 
 export default function MenuListItem({ title, Icon, link, onClose }: MenuItemProps) {

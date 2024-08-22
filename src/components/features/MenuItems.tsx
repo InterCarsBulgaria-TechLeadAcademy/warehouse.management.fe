@@ -26,7 +26,7 @@ interface MenuItem {
 }
 
 interface MenuItemsProps {
-  onClose: () => void
+  onClose?: () => void
 }
 
 export default function MenuItems({ onClose }: MenuItemsProps) {
