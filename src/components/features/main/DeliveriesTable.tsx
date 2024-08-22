@@ -133,7 +133,6 @@ export default function DeliveriesTable() {
           {/* TODO: БЕ трябва да го направят като функционалност*/}
           {/* <InfoPopper> */}
           {/* <DeliveryGoodsInfo goodTypes={goodTypes} /> */}
-          {/* <DeliveryGoodsInfo entriesDetails={deliveries.}/> */}
           {/* </InfoPopper> */}
         </Box>
       ),
