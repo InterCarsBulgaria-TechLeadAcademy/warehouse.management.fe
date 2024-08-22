@@ -8,13 +8,15 @@ interface MenuItemProps {
   title: string
   Icon: React.ElementType
   link: string
+  onClose: () => void
 }
 
-export default function MenuListItem({ title, Icon, link }: MenuItemProps) {
+export default function MenuListItem({ title, Icon, link, onClose }: MenuItemProps) {
   const isSmallScreen: boolean = useIsSmallScreen()
   const theme: ExtendedTheme = useTheme()
   return (
     <MenuItem
+      onClick={onClose}
       sx={{
         padding: 0,
         '&:hover': {
