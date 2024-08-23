@@ -8,6 +8,7 @@ import { NewRoleFormData, newRoleSchema } from '@/schemas/newRoleSchema'
 import NewRoleForm from '../forms/NewRoleForm'
 import { RoleDto } from '@/services/model'
 import useUpdateRole from '@/hooks/services/roles/useUpdateRole'
+import useDeleteRole from '@/hooks/services/roles/useDeleteRole'
 
 interface RolesTableActionsMenuProps {
   role: RoleDto
@@ -17,7 +18,7 @@ export default function RolesTableActionsMenu({ role }: RolesTableActionsMenuPro
   const { t: translate } = useTranslation()
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
   const mutationUpdate = useUpdateRole(role.name!)
-  // const mutationDelete = useDeleteVendor(role.name!)
+  const mutationDelete = useDeleteRole(role.name!)
   
   const handleClose = () => {
     setSelectedOption(null)
@@ -36,7 +37,7 @@ export default function RolesTableActionsMenu({ role }: RolesTableActionsMenuPro
   }
 
   const onConfirmClick = () => {
-    // mutationDelete.mutate(role.id!)
+    mutationDelete.mutate(role.id!)
     handleClose()
   }
 
