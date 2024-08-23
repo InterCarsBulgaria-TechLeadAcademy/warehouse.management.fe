@@ -14,10 +14,11 @@ interface CheckboxRolesProps {
 
 export default function CheckboxRoles({ permissions, currentPermissions, onChange }: CheckboxRolesProps) {
   const [permissionsState, setPermissionsState] = useState<Record<string, boolean>>({})
+  console.log(currentPermissions);
   
   const permissionGroups = Object.keys(permissions)
   const { t: translate } = useTranslation()
-
+  
   useEffect(() => {
     const currentPermissionIds = currentPermissions.map((current) => current.id)
     const initialState: Record<string, boolean> = {};
@@ -28,7 +29,7 @@ export default function CheckboxRoles({ permissions, currentPermissions, onChang
     });
     
     setPermissionsState(initialState);
-  }, [permissions, currentPermissions]);
+  }, []);
   
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target
@@ -36,7 +37,7 @@ export default function CheckboxRoles({ permissions, currentPermissions, onChang
       ...permissionsState,
       [name]: checked
     }
-    console.log(name, checked);
+  
     setPermissionsState(updatedPermissionsState)
 
     const selectedIds = Object.keys(updatedPermissionsState).filter(
