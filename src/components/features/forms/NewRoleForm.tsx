@@ -20,7 +20,6 @@ export default function NewRoleForm({
   const { t: translate } = useTranslation()
   const permissions = useGetPermissionsAll();
   const currentRole = roleId ? useGetSingleRole(roleId) : null;
-  
 
   return (
     <>
@@ -49,7 +48,7 @@ export default function NewRoleForm({
         render={({ field: { onChange } }) => (
           <CheckboxRoles
             permissions={permissions}
-            currentPermissions={currentRole?.routePermissions || []}
+            initialPermissions={currentRole?.routePermissions}
             onChange={onChange}
           />
         )}
