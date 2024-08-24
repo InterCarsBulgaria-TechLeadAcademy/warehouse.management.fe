@@ -5,41 +5,43 @@ import { RoutePermissionDto } from '@/services/model'
 
 interface CheckboxRolesProps {
   permissions: Record<string, RoutePermissionDto[]>
-  initialPermissions: {
-    id: string
-    name: string
-  }[] | null
+  rolePermissions: RoutePermissionDto[] | undefined
   onChange: (selectedIds: string[]) => void
 }
 
-export default function CheckboxRoles({ permissions, initialPermissions, onChange }: CheckboxRolesProps) {
+export default function CheckboxRoles({ permissions, rolePermissions, onChange }: CheckboxRolesProps) {
   const [permissionsState, setPermissionsState] = useState<Record<string, boolean>>({})
-  console.log(initialPermissions);
-  
+
+  console.log("ПРЕМИСИИ----",rolePermissions);
   const permissionGroups = Object.keys(permissions)
   const { t: translate } = useTranslation()
-  
+
   useEffect(() => {
-    if (initialPermissions) {
-      const currentPermissionIds = initialPermissions.map((current) => current.id)
+    if (rolePermissions) {
+      const currentPermissionIds = rolePermissions.map((current:RoutePermissionDto) => current.id)
       const initialState: Record<string, boolean> = {};
       permissionGroups.forEach(group => {
         permissions[group].forEach(permission => {
           initialState[permission.id!] = currentPermissionIds.includes(permission.id!);
         });
       });
-      
+
       setPermissionsState(initialState);
+
+      const selectedIds = Object.keys(initialState).filter(
+        (key) => initialState[key]
+      )
+      onChange(selectedIds)
     }
-  }, [initialPermissions]);
-  
+  }, [rolePermissions]);
+
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = event.target
     const updatedPermissionsState = {
       ...permissionsState,
       [name]: checked
     }
-  
+
     setPermissionsState(updatedPermissionsState)
 
     const selectedIds = Object.keys(updatedPermissionsState).filter(
