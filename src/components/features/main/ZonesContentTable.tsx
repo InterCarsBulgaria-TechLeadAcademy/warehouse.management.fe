@@ -95,21 +95,6 @@ export default function ZonesContentTable() {
         onChange={handleSearchChange}
         placeholder={translate('zonesContent.filters.search')}
       />
-      {/*TODO: Is it for delete?*/}
-      {/*<FormControlLabel*/}
-      {/*  value="start"*/}
-      {/*  control={<Switch color="primary" onChange={handleToggleChange} />}*/}
-      {/*  label={translate('zonesContent.filters.toggle')}*/}
-      {/*  labelPlacement="start"*/}
-      {/*/>*/}
-      {/*<BaseFormDialog*/}
-      {/*  open={openMoveEntryDialog}*/}
-      {/*  onCloseDialog={onCloseMoveEntryDialog}*/}
-      {/*  title={translate('zonesContent.labels.moveEntry')}*/}
-      {/*  renderForm={(handleCloseForm) => (*/}
-      {/*    <MoveEntryForm handleCloseForm={handleCloseForm} quantity={quantity} />*/}
-      {/*  )}*/}
-      {/*/>*/}
     </DataTable>
   )
 }
