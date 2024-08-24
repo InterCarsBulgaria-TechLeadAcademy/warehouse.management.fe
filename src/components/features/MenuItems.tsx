@@ -25,7 +25,11 @@ interface MenuItem {
   link: string
 }
 
-export default function MenuItems() {
+interface MenuItemsProps {
+  onClose?: () => void
+}
+
+export default function MenuItems({ onClose }: MenuItemsProps) {
   const { t: translate } = useTranslation()
 
   const adminMenuItems: MenuItem[] = [
@@ -80,6 +84,12 @@ export default function MenuItems() {
   ]
 
   return [...adminMenuItems, ...mainMenuItems].map((menuItem, index) => (
-    <MenuListItem key={index} title={menuItem.title} Icon={menuItem.icon} link={menuItem.link} />
+    <MenuListItem
+      key={index}
+      title={menuItem.title}
+      Icon={menuItem.icon}
+      link={menuItem.link}
+      onClose={onClose}
+    />
   ))
 }
