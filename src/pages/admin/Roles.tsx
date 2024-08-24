@@ -24,7 +24,7 @@ export default function Roles() {
 
   const handleSubmit: SubmitHandler<NewRoleFormData> = (data) => {
     console.log(data)
-    
+    setRoleName(data.name)
     mutationPost.mutate({ name: data.name, permissionIds: data.permissionIds })
     onCloseDialog()
   }
