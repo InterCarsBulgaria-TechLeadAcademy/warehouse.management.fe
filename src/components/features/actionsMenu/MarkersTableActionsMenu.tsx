@@ -59,7 +59,7 @@ export default function MarkersTableActionsMenu({ marker }: MarkersTableActionsM
           onCloseDialog={handleClose}
           schema={newMarkerSchema}
           onSubmit={handleSubmit}
-          renderForm={(methods) => <NewMarkerForm {...methods} defaultValue={marker.name!} />}
+          renderForm={(methods) => <NewMarkerForm {...methods} markerId={marker.id!} />}
         />
       )}
 

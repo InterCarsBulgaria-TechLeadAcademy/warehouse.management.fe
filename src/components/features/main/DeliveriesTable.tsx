@@ -100,17 +100,21 @@ export default function DeliveriesTable() {
       waitingGoods: (
         <Box sx={{ display: 'flex', gap: '0.5em' }}>
           <Typography>{delivery.entriesWaitingProcessing!}</Typography>
-          <InfoPopper>
-            <DeliveryGoodsInfo goods={delivery.entriesWaitingProcessingDetails!} />
-          </InfoPopper>
+          {delivery.entriesWaitingProcessing! === 0 ? null : (
+            <InfoPopper>
+              <DeliveryGoodsInfo goods={delivery.entriesWaitingProcessingDetails!} />
+            </InfoPopper>
+          )}
         </Box>
       ),
       completedGoods: (
         <Box sx={{ display: 'flex', gap: '0.5em' }}>
           <Typography>{delivery.entriesFinishedProcessing!}</Typography>
-          <InfoPopper>
-            <DeliveryGoodsInfo goods={delivery.entriesFinishedProcessingDetails!} />
-          </InfoPopper>
+          {delivery.entriesFinishedProcessing! === 0 ? null : (
+            <InfoPopper>
+              <DeliveryGoodsInfo goods={delivery.entriesFinishedProcessingDetails!} />
+            </InfoPopper>
+          )}
         </Box>
       ),
       markers:

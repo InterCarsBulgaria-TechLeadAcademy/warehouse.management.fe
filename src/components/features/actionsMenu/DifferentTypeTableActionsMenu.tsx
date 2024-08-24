@@ -65,7 +65,7 @@ export default function DifferentTypeTableActionsMenu({
           schema={newDifferenceTypeSchema}
           onSubmit={handleSubmit}
           renderForm={(methods) => (
-            <NewDifferenceTypeForm {...methods} defaultValue={differenceType.name!} />
+            <NewDifferenceTypeForm {...methods} differenceTypeId={differenceType.id!} />
           )}
         />
       )}
