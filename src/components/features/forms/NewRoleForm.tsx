@@ -48,7 +48,7 @@ export default function NewRoleForm({
         render={({ field: { onChange } }) => (
           <CheckboxRoles
             permissions={permissions}
-            initialPermissions={currentRole?.routePermissions}
+            rolePermissions={currentRole?.routePermissions || undefined}
             onChange={onChange}
           />
         )}
