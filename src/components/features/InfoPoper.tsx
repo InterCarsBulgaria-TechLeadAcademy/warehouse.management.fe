@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Popover from '@mui/material/Popover'
 import InfoIcon from '@mui/icons-material/Info'
-import { Box } from '@mui/material'
+import { Box, ClickAwayListener } from '@mui/material'
 import { useIsSmallScreen } from '@/hooks/useIsSmallScreen'
 
 interface InfoPopperProps {
@@ -44,34 +44,42 @@ export default function InfoPopper({ children }: InfoPopperProps) {
     }
   }
 
+  const handleClickAway = () => {
+    if (open) {
+      handlePopoverClose()
+    }
+  }
+
   return (
-    <Box>
-      <Box
-        aria-owns={open ? 'mouse-over-popover' : undefined}
-        aria-haspopup="true"
-        onClick={handleClick}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        sx={{ display: 'flex', cursor: 'pointer', justifyContent: 'center' }}>
-        <InfoIcon />
+    <ClickAwayListener onClickAway={handleClickAway}>
+      <Box>
+        <Box
+          aria-owns={open ? 'mouse-over-popover' : undefined}
+          aria-haspopup="true"
+          onClick={handleClick}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          sx={{ display: 'flex', cursor: 'pointer' }}>
+          <InfoIcon />
+        </Box>
+        <Popover
+          id="mouse-over-popover"
+          sx={{ pointerEvents: 'none' }}
+          open={open}
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left'
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'left'
+          }}
+          onClose={handlePopoverClose}
+          disableRestoreFocus>
+          {children}
+        </Popover>
       </Box>
-      <Popover
-        id="mouse-over-popover"
-        sx={{ pointerEvents: 'none' }}
-        open={open}
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left'
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left'
-        }}
-        onClose={handlePopoverClose}
-        disableRestoreFocus>
-        {children}
-      </Popover>
-    </Box>
+    </ClickAwayListener>
   )
 }

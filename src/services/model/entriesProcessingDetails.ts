@@ -5,9 +5,8 @@
  * OpenAPI spec version: 1.0
  */
 
-export interface MarkerDto {
-  createdAt?: string
-  id?: number
-  /** @nullable */
-  name?: string | null
+export interface EntriesProcessingDetails {
+  packages?: number
+  pallets?: number
+  pieces?: number
 }
