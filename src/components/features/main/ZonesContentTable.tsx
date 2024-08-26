@@ -54,8 +54,6 @@ export default function ZonesContentTable() {
     }
   ]
 
-  console.log(entries)
-  // TODO: Check commented codes below!
   function transformDataToRows(entries: EntryDto[]): Row[] {
     return entries.map((entry: EntryDto) => ({
       id: entry.id!,
