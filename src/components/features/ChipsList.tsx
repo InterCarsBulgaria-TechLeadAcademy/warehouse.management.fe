@@ -28,7 +28,9 @@ export default function ChipsList({ items }: MarkersProps) {
     setOpen(true)
   }
 
-  return (
+  return items.length === 0 ? (
+    <Typography>-</Typography>
+  ) : (
     <Box sx={{ display: 'flex', gap: '0.5em' }}>
       {items.slice(0, 2).map((item, index) =>
         color === 'secondary.light' ? (

@@ -19,7 +19,7 @@ interface DataTableProps<T> {
   rowsCount?: number
   onPageChange: (newPage: number) => void
   onRowsPerPageChange: (newRowsPerPage: number) => void
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 export default function DataTable<T>({

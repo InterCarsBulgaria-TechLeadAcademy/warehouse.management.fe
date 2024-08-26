@@ -8,7 +8,7 @@ interface EditedEntry {
 
 export default function editEntriesArray(array: EntryDto[]) {
   const editedArray: EditedEntry[] = []
-  array.map((entry: EntryDto) => {
+  array?.map((entry: EntryDto) => {
     const objectForPush: EditedEntry = { goodType: '', goodQuantity: 0, zone: 0 }
     for (const [key, value] of Object.entries(entry)) {
       if (key === 'pallets' && value !== 0) {
@@ -21,7 +21,7 @@ export default function editEntriesArray(array: EntryDto[]) {
         objectForPush.goodType = 'pieces'
         objectForPush.goodQuantity = Number(value)
       } else if (key === 'zone') {
-        objectForPush.zone = value.id
+        objectForPush.zone = value.zoneName
       }
     }
     editedArray.push(objectForPush)

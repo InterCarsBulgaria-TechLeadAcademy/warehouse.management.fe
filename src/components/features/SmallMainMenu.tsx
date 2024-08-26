@@ -32,7 +32,7 @@ export default function SmallMainMenu() {
         MenuListProps={{
           'aria-labelledby': 'basic-button'
         }}>
-        <MenuItems />
+        <MenuItems onClose={handleClose} />
       </Menu>
     </div>
   )

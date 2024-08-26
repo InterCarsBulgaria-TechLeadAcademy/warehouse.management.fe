@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import ZonesTableActionsMenu from '../actionsMenu/ZonesTableActionsMenu'
 import ChipsList from '../ChipsList'
 import SearchInput from '../SearchInput'
-import { Autocomplete, TextField, Typography } from '@mui/material'
+import { Autocomplete, TextField } from '@mui/material'
 import { Column } from '@/interfaces/Column.ts'
 import { ZoneDto } from '@/services/model'
 import useGetZones from '@/hooks/services/zones/useGetZones'
@@ -53,14 +53,9 @@ export default function ZonesTable() {
     return zones.map((zone: ZoneDto) => ({
       id: zone.id!,
       name: zone.name!,
-      markers:
-        zone.markers!.length > 0 ? (
-          <ChipsList
-            items={zone.markers?.map((marker) => marker.markerName!) || ([] as string[])}
-          />
-        ) : (
-          <Typography>-</Typography>
-        ),
+      markers: (
+        <ChipsList items={zone.markers?.map((marker) => marker.markerName!) || ([] as string[])} />
+      ),
       isFinal: zone.isFinal
         ? translate('zones.table.rows.isFinal.options.yes')
         : translate('zones.table.rows.isFinal.options.no'),

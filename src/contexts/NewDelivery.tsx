@@ -8,6 +8,7 @@ import usePostDelivery from '@/hooks/services/deliveries/usePostDelivery'
 import goodQuantity from '@/utils/goodQuantity'
 import usePostEntry from '@/hooks/services/entries/usePostEntry'
 import createEntryData from '@/utils/createEntryData'
+import { dateToUtc } from '@/utils/dateHelpers.ts'
 
 interface NewDeliveryProviderProps {
   children: ReactNode
@@ -116,7 +117,7 @@ export default function NewDeliveryProvider({ children }: NewDeliveryProviderPro
           receptionNumber: data.receptionNumber.join(' | '),
           truckNumber: data.truckNumber,
           cmr: data.cmr,
-          deliveryTime: data.deliveryTime,
+          deliveryTime: dateToUtc(data.deliveryTime),
           pallets: goodQuantity(data.goods, 'goodTypeStep3', 'pallets', 'goodQuantityStep3'),
           packages: goodQuantity(data.goods, 'goodTypeStep3', 'packages', 'goodQuantityStep3'),
           pieces: goodQuantity(data.goods, 'goodTypeStep3', 'pieces', 'goodQuantityStep3'),

@@ -32,7 +32,7 @@ export default function MarkersTableActionsMenu({ marker }: MarkersTableActionsM
     setSelectedOption(option)
   }
 
-  const onConfirmClick = () => {
+  const onConfirmDelete = () => {
     mutationDelete.mutate(marker.id!)
     handleClose()
   }
@@ -74,7 +74,7 @@ export default function MarkersTableActionsMenu({ marker }: MarkersTableActionsM
           confirmText={translate('markers.table.actions.delete.labels.confirm')}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
-          onConfirmClick={onConfirmClick}
+          onConfirmClick={onConfirmDelete}
         />
       )}
     </div>
