@@ -17,7 +17,7 @@ interface RolesTableActionsMenuProps {
 export default function RolesTableActionsMenu({ role }: RolesTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
-  const mutationUpdate = useUpdateRole(role.name!)
+  const mutationUpdate = useUpdateRole()
   const mutationDelete = useDeleteRole(role.name!)
   
   const handleClose = () => {
