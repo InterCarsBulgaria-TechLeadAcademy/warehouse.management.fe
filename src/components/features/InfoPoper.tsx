@@ -1,45 +1,77 @@
 import * as React from 'react'
-import Box from '@mui/material/Box'
-import Popper, { PopperPlacementType } from '@mui/material/Popper'
-import Grid from '@mui/material/Grid'
-import Button from '@mui/material/Button'
-import Fade from '@mui/material/Fade'
-import Paper from '@mui/material/Paper'
+import Popover from '@mui/material/Popover'
 import InfoIcon from '@mui/icons-material/Info'
+import { Box } from '@mui/material'
+import { useIsSmallScreen } from '@/hooks/useIsSmallScreen'
 
 interface InfoPopperProps {
   children: React.ReactNode
 }
 
 export default function InfoPopper({ children }: InfoPopperProps) {
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null)
+  const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null)
   const [open, setOpen] = React.useState(false)
-  const [placement, setPlacement] = React.useState<PopperPlacementType>()
+  const isSmallScreen = useIsSmallScreen()
 
-  const handleClick =
-    (newPlacement: PopperPlacementType) => (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget)
+    setOpen(true)
+  }
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null)
+    setOpen(false)
+  }
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    if (isSmallScreen) {
+      setOpen((prev) => !prev)
       setAnchorEl(event.currentTarget)
-      setOpen((prev) => placement !== newPlacement || !prev)
-      setPlacement(newPlacement)
+    } else {
+      handlePopoverOpen(event)
     }
+  }
+
+  const handleMouseEnter = (event: React.MouseEvent<HTMLElement>) => {
+    if (!isSmallScreen) {
+      handlePopoverOpen(event)
+    }
+  }
+
+  const handleMouseLeave = () => {
+    if (!isSmallScreen) {
+      handlePopoverClose()
+    }
+  }
 
   return (
     <Box>
-      <Popper open={open} anchorEl={anchorEl} placement={placement} transition>
-        {({ TransitionProps }) => (
-          <Fade {...TransitionProps} timeout={350}>
-            <Paper sx={{ width: '200px' }}>{children}</Paper>
-          </Fade>
-        )}
-      </Popper>
-
-      <Grid container justifyContent="center">
-        <Grid item>
-          <Button onClick={handleClick('bottom-start')}>
-            <InfoIcon />
-          </Button>
-        </Grid>
-      </Grid>
+      <Box
+        aria-owns={open ? 'mouse-over-popover' : undefined}
+        aria-haspopup="true"
+        onClick={handleClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        sx={{ display: 'flex', cursor: 'pointer', justifyContent: 'center' }}>
+        <InfoIcon />
+      </Box>
+      <Popover
+        id="mouse-over-popover"
+        sx={{ pointerEvents: 'none' }}
+        open={open}
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left'
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left'
+        }}
+        onClose={handlePopoverClose}
+        disableRestoreFocus>
+        {children}
+      </Popover>
     </Box>
   )
 }

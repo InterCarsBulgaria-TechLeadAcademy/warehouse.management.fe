@@ -38,7 +38,7 @@ export default function VendorTableActionsMenu({ vendor }: VendorsTableActionsMe
     })
   }
 
-  const onConfirmClick = () => {
+  const onConfirmDelete = () => {
     mutationDelete.mutate(vendor.id!)
     handleClose()
   }
@@ -87,7 +87,7 @@ export default function VendorTableActionsMenu({ vendor }: VendorsTableActionsMe
           confirmText={translate('vendors.table.actions.delete.labels.confirm')}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
-          onConfirmClick={onConfirmClick}
+          onConfirmClick={onConfirmDelete}
         />
       )}
     </div>

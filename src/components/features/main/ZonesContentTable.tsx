@@ -8,13 +8,15 @@ import { EntryDto } from '@/services/model'
 import useGetEntries from '@/hooks/services/entries/useGetEntries'
 import ChipsList from '@/components/features/ChipsList.tsx'
 import { getEntryStatus } from '@/utils/getEntryStatus.ts'
+import ZonesContentQuantityDisplay from '../ZonesContentQuantityDisplay'
 
 interface Row {
   number: number
   vendorName: string
-  receptionNumber: number
-  goodNumber: number
-  status: string
+  receptionNumber: string
+  quantity: React.ReactNode
+  goodNumber: string
+  status: React.ReactNode
   zoneName: string
   actions: React.ReactNode
 }
@@ -43,6 +45,7 @@ export default function ZonesContentTable() {
     { key: 'number', title: translate('zonesContent.table.columns.number') },
     { key: 'vendorName', title: translate('zonesContent.table.columns.vendorName') },
     { key: 'receptionNumber', title: translate('zonesContent.table.columns.receptionNumber') },
+    { key: 'quantity', title: translate('zonesContent.table.columns.quantity') },
     { key: 'goodNumber', title: translate('zonesContent.table.columns.goodNumber') },
     { key: 'zoneName', title: translate('zonesContent.table.columns.zoneName') },
     { key: 'status', title: translate('zonesContent.table.columns.status') },
@@ -53,20 +56,24 @@ export default function ZonesContentTable() {
       align: 'right'
     }
   ]
-
+  
   console.log(entries)
   // TODO: Check commented codes below!
+
   function transformDataToRows(entries: EntryDto[]): Row[] {
-    return entries.map((entry: EntryDto) => ({
-      id: entry.id!,
-      number: entry.id!,
-      vendorName: entry.deliveryDetails?.vendorName,
-      receptionNumber: entry.deliveryDetails?.receptionNumber,
-      goodNumber: entry.deliveryDetails?.systemNumber,
-      zoneName: entry.zone?.zoneName || '-',
-      status: <ChipsList items={[getEntryStatus(entry)]} />,
-      actions: <ZonesContentTableActionsMenu key={entry.id} entry={entry} />
-    }))
+    return entries.map((entry: EntryDto) => {
+      return {
+        id: entry.id!,
+        number: entry.id!,
+        vendorName: entry.deliveryDetails?.vendorName!,
+        receptionNumber: entry.deliveryDetails?.receptionNumber!,
+        quantity: <ZonesContentQuantityDisplay entry={entry} />,
+        goodNumber: entry.deliveryDetails?.systemNumber!,
+        zoneName: entry.zone?.zoneName! || '-',
+        status: <ChipsList items={[getEntryStatus(entry)]} />,
+        actions: <ZonesContentTableActionsMenu key={entry.id} entry={entry} />
+      }
+    })
   }
 
   const rowData = transformDataToRows(entries.results! || [])
@@ -91,22 +98,6 @@ export default function ZonesContentTable() {
         onChange={handleSearchChange}
         placeholder={translate('zonesContent.filters.search')}
       />
-
-      {/*<FormControlLabel*/}
-      {/*  value="start"*/}
-      {/*  control={<Switch color="primary" onChange={handleToggleChange} />}*/}
-      {/*  label={translate('zonesContent.filters.toggle')}*/}
-      {/*  labelPlacement="start"*/}
-      {/*/>*/}
-
-      {/*<BaseFormDialog*/}
-      {/*  open={openMoveEntryDialog}*/}
-      {/*  onCloseDialog={onCloseMoveEntryDialog}*/}
-      {/*  title={translate('zonesContent.labels.moveEntry')}*/}
-      {/*  renderForm={(handleCloseForm) => (*/}
-      {/*    <MoveEntryForm handleCloseForm={handleCloseForm} quantity={quantity} />*/}
-      {/*  )}*/}
-      {/*/>*/}
     </DataTable>
   )
 }

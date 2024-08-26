@@ -10,9 +10,9 @@ import { Dayjs } from 'dayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-// import InfoPopper from '../InfoPoper'
-// import DeliveryGoodsInfo from '../DeliveryGoodsInfo'
-import dateHelpers from '@/utils/dateHelpers'
+import InfoPopper from '../InfoPoper'
+import DeliveryGoodsInfo from '../DeliveryGoodsInfo'
+import { formatDate } from '@/utils/dateHelpers'
 import useGetDeliveries from '@/hooks/services/deliveries/useGetDeliveries'
 import { DeliveryDto } from '@/services/model'
 import useGetMarkers from '@/hooks/services/markers/useGetMarkers'
@@ -29,7 +29,7 @@ interface Row {
   markers: React.ReactNode
   status: React.ReactNode
   approvedOn: string
-  createdAt: string
+  deliveryDate: string
   actions: React.ReactNode
 }
 
@@ -43,6 +43,8 @@ export default function DeliveriesTable() {
   const markers = useGetMarkers()
   const vendors = useGetVendors()
   const deliveries = useGetDeliveries(page, rowsPerPage, searchTerm)
+
+  console.log(deliveries)
 
   const markersName = markers.map((marker) => marker.name!)
   const vendorsName = vendors.map((vendor) => vendor.name!)
@@ -100,7 +102,7 @@ export default function DeliveriesTable() {
     { key: 'markers', title: translate('deliveries.table.columns.markers') },
     { key: 'status', title: translate('deliveries.table.columns.status') },
     { key: 'approvedOn', title: translate('deliveries.table.columns.approvedOn') },
-    { key: 'createdAt', title: translate('deliveries.table.columns.createdAt') },
+    { key: 'deliveryDate', title: translate('deliveries.table.columns.deliveryDate') },
     {
       key: 'actions',
       title: translate('deliveries.table.columns.actions'),
@@ -119,19 +121,19 @@ export default function DeliveriesTable() {
       waitingGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>{delivery.entriesWaitingProcessing!}</Typography>
-          {/* TODO: БЕ трябва да го направят като функционалност 
+          {/* TODO: БЕ трябва да го направят като функционалност
           <InfoPopper>
-            <DeliveryGoodsInfo goodTypes={goodTypes} /> 
+            // <DeliveryGoodsInfo goodTypes={goodTypes} />
           </InfoPopper> */}
         </Box>
       ),
       completedGoods: (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Typography>{delivery.entriesFinishedProcessing}</Typography>
-          {/* TODO: БЕ трябва да го направят като функционалност
-          <InfoPopper>
-            <DeliveryGoodsInfo goodTypes={goodTypes} />
-          </InfoPopper> */}
+          {/* TODO: БЕ трябва да го направят като функционалност*/}
+          {/* <InfoPopper> */}
+          {/* <DeliveryGoodsInfo goodTypes={goodTypes} /> */}
+          {/* </InfoPopper> */}
         </Box>
       ),
       markers:
@@ -141,9 +143,9 @@ export default function DeliveriesTable() {
           <ChipsList items={delivery.markers!.map((marker) => marker.markerName!)} />
         ),
       status: <ChipsList items={[delivery.status!]} />,
-      approvedOn: dateHelpers(delivery.approvedOn!),
-      createdAt: dateHelpers(delivery.createdAt!),
-      actions: <DeliveriesTableActionsMenu deliveryId={delivery.id!} />
+      approvedOn: formatDate(delivery.approvedOn!),
+      deliveryDate: formatDate(delivery.deliveryTime!),
+      actions: <DeliveriesTableActionsMenu delivery={delivery!} />
     }))
   }
 

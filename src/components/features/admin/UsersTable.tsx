@@ -2,7 +2,7 @@ import DataTable from '@/components/shared/DataTable'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import SearchInput from '../SearchInput'
-import { Autocomplete, TextField, Typography } from '@mui/material'
+import { Autocomplete, TextField } from '@mui/material'
 import { Column } from '@/interfaces/Column.ts'
 import ChipsList from '../ChipsList'
 import useGetUsers from '@/hooks/services/users/useGetUsers'
@@ -97,9 +97,7 @@ export default function UsersTable() {
       page={page}
       rowsPerPage={rowsPerPage}
       onPageChange={onPageChange}
-      onRowsPerPageChange={onRowsPerPageChange}
-    >
-
+      onRowsPerPageChange={onRowsPerPageChange}>
       <SearchInput
         value={searchTerm}
         onChange={handleSearchChange}

@@ -4,12 +4,12 @@ import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { useNewDeliveryContext } from '@/hooks/useNewDeliveryContext'
 import dayjs from 'dayjs'
 import React from 'react'
 import { VendorDto } from '@/services/model'
 import useGetVendors from '@/hooks/services/vendors/useGetVendors'
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 
 export default function NewDeliveryStep2Form({
   control,
@@ -108,20 +108,24 @@ export default function NewDeliveryStep2Form({
           />
         )}
       />
+
       <Controller
         name="deliveryTime"
         control={control}
         defaultValue={formsData.deliveryTime || dayjs().toDate()}
         render={({ field }) => (
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
+            <DateTimePicker
               {...field}
-              label={translate('deliveries.newDelivery.labels.step2.deliveryDate')}
+              label={translate('deliveries.newDelivery.labels.step2.deliveryTime')}
               value={dayjs(field.value)}
               onChange={(newValue) => {
-                field.onChange(newValue?.toDate())
+                field.onChange(newValue ? newValue.toDate() : null)
               }}
-              format="DD/MM/YYYY"
+              ampm={false} // remove AM/PM and show 24h form
+              slots={{
+                textField: TextField
+              }}
               slotProps={{
                 textField: {
                   required: true,

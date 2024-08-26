@@ -8,19 +8,19 @@ import Paper from '@mui/material/Paper'
 import { useTranslation } from 'react-i18next'
 import useGetZones from '@/hooks/services/zones/useGetZones'
 
-interface NewDeliveryStep5TableProps {
+interface MoveGoodsTableProps {
   array: any
   goodType: string
   goodQuantity: string
-  currentZone: string
+  currentZoneId?: string
 }
 
 export default function MoveGoodsTable({
   array,
   goodType,
   goodQuantity,
-  currentZone
-}: NewDeliveryStep5TableProps) {
+  currentZoneId
+}: MoveGoodsTableProps) {
   const { t: translate } = useTranslation()
   const zones = useGetZones()
 
@@ -29,20 +29,26 @@ export default function MoveGoodsTable({
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>{translate('newDelivery.labels.step4.goodType')}</TableCell>
-            <TableCell align="left">{translate('newDelivery.labels.step4.goodQuantity')}</TableCell>
-            <TableCell align="left">{translate('newDelivery.labels.step4.zone')}</TableCell>
+            <TableCell>{translate('deliveries.newDelivery.labels.step4.goodType')}</TableCell>
+            <TableCell align="left">
+              {translate('deliveries.newDelivery.labels.step4.goodQuantity')}
+            </TableCell>
+            <TableCell align="left">
+              {translate('deliveries.newDelivery.labels.step4.zone')}
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {array.map((good: any, index: number) => (
             <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">
-                {translate(`newDelivery.goodType.${good[goodType]}`)}
+                {translate(`deliveries.newDelivery.goodType.${good[goodType]}`)}
               </TableCell>
               <TableCell align="left">{good[goodQuantity]}</TableCell>
               <TableCell align="left">
-                {zones.find((zone) => zone.id! === Number(good[currentZone]))?.name}
+                {currentZoneId
+                  ? zones.find((zone) => zone.id === Number(good[currentZoneId]))?.name
+                  : good.zone}
               </TableCell>
             </TableRow>
           ))}

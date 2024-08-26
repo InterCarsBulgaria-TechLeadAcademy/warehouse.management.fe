@@ -42,18 +42,14 @@ export default function NewDeliveryStep5Form() {
           </Box>
           <Box>
             <Typography>{translate('deliveries.newDelivery.labels.step1.markers')}</Typography>
-            {formsData.markers.length > 0 ? (
-              <ChipsList
-                items={formsData.markers.map((markerId: number) => {
-                  const marker = markers.find(
-                    (marker) => marker.id?.toString() === markerId.toString()
-                  )
-                  return marker ? marker.name : ''
-                })}
-              />
-            ) : (
-              <Typography>-</Typography>
-            )}
+            <ChipsList
+              items={formsData.markers.map((markerId: number) => {
+                const marker = markers.find(
+                  (marker) => marker.id?.toString() === markerId.toString()
+                )
+                return marker ? marker.name : ''
+              })}
+            />
           </Box>
         </Box>
       </Box>
@@ -80,8 +76,8 @@ export default function NewDeliveryStep5Form() {
             <Typography>{formsData.truckNumber}</Typography>
           </Box>
           <Box>
-            <Typography>{translate('deliveries.newDelivery.labels.step2.deliveryDate')}</Typography>
-            <Typography>{dayjs(formsData.deliveryDate).format('DD.MM.YYYY')}</Typography>
+            <Typography>{translate('deliveries.newDelivery.labels.step2.deliveryTime')}</Typography>
+            <Typography>{dayjs(formsData.deliveryTime).format('DD.MM.YYYY')}</Typography>
           </Box>
         </Box>
       </Box>
@@ -121,7 +117,7 @@ export default function NewDeliveryStep5Form() {
             array={formsData.goodsInZones}
             goodType={'goodTypeStep4'}
             goodQuantity={'goodQuantityStep4'}
-            currentZone={'zone'}
+            currentZoneId={'zone'}
           />
         </Box>
       </Box>

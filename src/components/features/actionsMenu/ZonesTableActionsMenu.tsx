@@ -32,7 +32,7 @@ export default function ZonesTableActionsMenu({ zone }: ZonesTableActionsMenuPro
     setSelectedOption(option)
   }
 
-  const onConfirmClick = () => {
+  const onConfirmDelete = () => {
     mutationDelete.mutate(zone.id!)
     handleClose()
   }
@@ -85,7 +85,7 @@ export default function ZonesTableActionsMenu({ zone }: ZonesTableActionsMenuPro
           confirmText={translate('zones.table.actions.delete.labels.confirm')}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
-          onConfirmClick={onConfirmClick}
+          onConfirmClick={onConfirmDelete}
         />
       )}
     </div>
