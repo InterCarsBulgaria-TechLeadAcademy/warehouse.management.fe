@@ -11,8 +11,7 @@ import usePostRole from '@/hooks/services/roles/usePostRole'
 export default function Roles() {
   const { t: translate } = useTranslation()
   const [openDialog, setOpenDialog] = useState(false)
-  const [roleName, setRoleName] = useState('')
-  const mutationPost = usePostRole(roleName)
+  const mutationPost = usePostRole()
 
   const handleClickOpen = () => {
     setOpenDialog(true)
@@ -24,7 +23,6 @@ export default function Roles() {
 
   const handleSubmit: SubmitHandler<NewRoleFormData> = (data) => {
     console.log(data)
-    setRoleName(data.name)
     mutationPost.mutate({ name: data.name, permissionIds: data.permissionIds })
     onCloseDialog()
   }
