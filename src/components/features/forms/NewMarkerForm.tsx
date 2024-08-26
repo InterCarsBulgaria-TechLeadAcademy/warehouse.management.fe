@@ -5,7 +5,7 @@ import { NewMarkerFormData } from '@/schemas/newMarkerSchema'
 import useGetMarker from '@/hooks/services/markers/useGetMarker'
 
 interface NewMarkerFormProps extends UseFormReturn<NewMarkerFormData> {
-  markerId: number
+  markerId?: number
 }
 
 export default function NewMarkerForm({
@@ -16,13 +16,12 @@ export default function NewMarkerForm({
   const { t: translate } = useTranslation()
 
   const marker = useGetMarker(markerId)
-  console.log(marker)
 
   return (
     <Controller
       name="markerName"
       control={control}
-      defaultValue={marker.name!}
+      defaultValue={marker?.name || ''}
       render={({ field }) => (
         <TextField
           {...field}

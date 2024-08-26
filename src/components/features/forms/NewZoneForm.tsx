@@ -18,7 +18,7 @@ import { markerIsSelected } from '@/utils/markerIsSelected.ts'
 import useGetZone from '@/hooks/services/zones/useGetZone'
 
 interface NewZoneFormProps extends UseFormReturn<NewZoneFormData> {
-  zoneId: number
+  zoneId?: number
 }
 
 export default function NewZoneForm({ control, formState: { errors }, zoneId }: NewZoneFormProps) {
@@ -31,7 +31,7 @@ export default function NewZoneForm({ control, formState: { errors }, zoneId }: 
       <Controller
         name="zoneName"
         control={control}
-        defaultValue={zone.name!}
+        defaultValue={zone?.name || ''}
         render={({ field }) => (
           <TextField
             {...field}
@@ -50,7 +50,7 @@ export default function NewZoneForm({ control, formState: { errors }, zoneId }: 
       <Controller
         name="markers"
         control={control}
-        defaultValue={zone.markers?.map((marker) => marker.markerId!.toString())}
+        defaultValue={zone ? zone.markers?.map((marker) => marker.markerId!.toString()) : []}
         render={({ field }) => (
           <FormControl fullWidth>
             <InputLabel id="demo-multiple-checkbox-label">
@@ -88,7 +88,7 @@ export default function NewZoneForm({ control, formState: { errors }, zoneId }: 
       <Controller
         name="isFinal"
         control={control}
-        defaultValue={zone.isFinal!}
+        defaultValue={zone?.isFinal || false}
         render={({ field }) => (
           <FormControlLabel
             control={<Checkbox {...field} checked={field.value} />}

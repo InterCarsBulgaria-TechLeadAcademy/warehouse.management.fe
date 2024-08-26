@@ -17,26 +17,23 @@ import { markerIsSelected } from '@/utils/markerIsSelected.ts'
 import useGetVendor from '@/hooks/services/vendors/useGetVendor'
 
 interface NewVendorFormProps extends UseFormReturn<NewVendorFormData> {
-  vendorId: number
+  vendorId?: number
 }
 
 export default function NewVendorForm({
   control,
   formState: { errors },
-  // defaultValues = { name: '', systemNumber: '', markerIds: [] }
   vendorId
 }: NewVendorFormProps) {
   const { t: translate } = useTranslation()
   const markers = useGetMarkers()
   const vendor = useGetVendor(vendorId)
 
-  console.log(vendor)
-
   return (
     <>
       <Controller
         name="vendorName"
-        defaultValue={vendor.name!}
+        defaultValue={vendor?.name || ''}
         control={control}
         render={({ field }) => (
           <TextField
@@ -54,7 +51,7 @@ export default function NewVendorForm({
       />
       <Controller
         name="vendorNumber"
-        defaultValue={vendor.systemNumber!} //TODO: add systemNumber in vendor
+        defaultValue={vendor?.systemNumber || ''} //TODO: add systemNumber in vendor
         control={control}
         render={({ field }) => (
           <TextField
@@ -73,7 +70,7 @@ export default function NewVendorForm({
 
       <Controller
         name="markers"
-        defaultValue={vendor.markers?.map((marker) => marker.markerId!.toString())}
+        defaultValue={vendor ? vendor?.markers?.map((marker) => marker.markerId!.toString()) : []}
         control={control}
         render={({ field }) => (
           <FormControl fullWidth>

@@ -39,6 +39,7 @@ export default function MarkersTableActionsMenu({ marker }: MarkersTableActionsM
 
   const handleSubmit: SubmitHandler<NewMarkerFormData> = (data) => {
     mutationUpdate.mutate({ id: marker.id!, data: { name: data.markerName } })
+    handleClose()
   }
 
   const options = [
@@ -52,6 +53,7 @@ export default function MarkersTableActionsMenu({ marker }: MarkersTableActionsM
 
       {selectedOption === 'edit' && (
         <FormDialog<NewMarkerFormData>
+          key={marker.id}
           open={true}
           title={translate('markers.table.actions.edit.title')}
           discardText={translate('markers.table.actions.edit.labels.exit')}

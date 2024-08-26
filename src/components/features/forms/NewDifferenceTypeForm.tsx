@@ -5,7 +5,7 @@ import { NewDifferenceTypeFormData } from '@/schemas/newDifferenceTypeSchema'
 import useGetDifferenceType from '@/hooks/services/differenceType/useGetDifferenceType'
 
 interface NewMarkerFormProps extends UseFormReturn<NewDifferenceTypeFormData> {
-  differenceTypeId: number
+  differenceTypeId?: number
 }
 
 export default function NewDifferenceTypeForm({
@@ -20,7 +20,7 @@ export default function NewDifferenceTypeForm({
     <Controller
       name="differenceTypeName"
       control={control}
-      defaultValue={differenceType.name!}
+      defaultValue={differenceType?.name || ''}
       render={({ field }) => (
         <TextField
           {...field}

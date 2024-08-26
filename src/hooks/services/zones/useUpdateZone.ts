@@ -13,7 +13,8 @@ export default function useUpdateZone(zoneName: string) {
   const mutationUpdate = useMutation({
     mutationFn: ({ id, data }: { id: number; data: BodyType<ZoneFormDto> }) =>
       getWarehouseManagementApi().putApiZoneEditId(id, data),
-    onSuccess: () => {
+    onSuccess: (_, { id }) => {
+      queryClient.refetchQueries({ queryKey: ['zone', id] })
       queryClient.invalidateQueries({ queryKey: ['zones'] })
       showSnackbar({
         message: translate('zones.table.actions.edit.snackBar.success', { name: zoneName }),
