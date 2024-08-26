@@ -51,7 +51,7 @@ export default function NewVendorForm({
       />
       <Controller
         name="vendorNumber"
-        defaultValue={vendor?.systemNumber || ''} //TODO: add systemNumber in vendor
+        defaultValue={vendor?.systemNumber || ''}
         control={control}
         render={({ field }) => (
           <TextField
