@@ -14,7 +14,8 @@ export default function useUpdateVendor(vendorName: string, vendorNumber: string
   const mutationUpdate = useMutation({
     mutationFn: ({ id, data }: { id: number; data: BodyType<VendorFormDto> }) =>
       getWarehouseManagementApi().putApiVendorEditId(id, data),
-    onSuccess: () => {
+    onSuccess: (_, { id }) => {
+      queryClient.refetchQueries({ queryKey: ['vendor', id] })
       queryClient.invalidateQueries({ queryKey: ['vendors'] })
       showSnackbar({
         message: translate('vendors.table.actions.edit.snackBar.success', {

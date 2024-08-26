@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0
  */
 import type { EntryDto } from './entryDto'
+import type { EntriesProcessingDetails } from './entriesProcessingDetails'
 import type { DeliveryMarkerDto } from './deliveryMarkerDto'
 
 export interface DeliveryDto {
@@ -18,7 +19,9 @@ export interface DeliveryDto {
   /** @nullable */
   entries?: EntryDto[] | null
   entriesFinishedProcessing?: number
+  entriesFinishedProcessingDetails?: EntriesProcessingDetails
   entriesWaitingProcessing?: number
+  entriesWaitingProcessingDetails?: EntriesProcessingDetails
   id?: number
   /** @nullable */
   markers?: DeliveryMarkerDto[] | null

@@ -63,16 +63,7 @@ export default function ZonesTableActionsMenu({ zone }: ZonesTableActionsMenuPro
           onCloseDialog={handleClose}
           schema={newZoneSchema}
           onSubmit={handleSubmit}
-          renderForm={(methods) => (
-            <NewZoneForm
-              {...methods}
-              defaultValues={{
-                name: zone.name!,
-                markersIds: zone.markers?.map((marker) => marker.markerId!) || ([] as number[]),
-                isFinal: zone.isFinal
-              }}
-            />
-          )}
+          renderForm={(methods) => <NewZoneForm {...methods} zoneId={zone.id!} />}
         />
       )}
 

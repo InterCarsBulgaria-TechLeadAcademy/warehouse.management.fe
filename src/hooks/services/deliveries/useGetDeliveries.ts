@@ -7,7 +7,7 @@ export default function useGetDeliveries(
   searchQuery: string
 ) {
   const { data } = useSuspenseQuery({
-    queryKey: ['deliveries', pageNumber, pageSize, searchQuery], //add dependencies on deliveries
+    queryKey: ['deliveries', pageNumber, pageSize, searchQuery],
     queryFn: () => {
       return getWarehouseManagementApi().getApiDeliveryAll({
         PageNumber: pageNumber + 1,

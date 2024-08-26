@@ -3,7 +3,7 @@ import { useSuspenseQuery } from '@tanstack/react-query'
 
 export default function useGetDifferenceTypes() {
   const { data } = useSuspenseQuery({
-    queryKey: ['differenceType'],
+    queryKey: ['differenceTypes'],
     queryFn: () => {
       return getWarehouseManagementApi().getApiDifferenceTypeAll()
     }

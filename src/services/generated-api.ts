@@ -46,8 +46,10 @@ import type {
   RoleUserAssignDto,
   RoutePermissionDto,
   TokenResponse,
+  VendorDetailsDto,
   VendorDto,
   VendorFormDto,
+  ZoneDetailsDto,
   ZoneDto,
   ZoneFormDto
 } from './model'
@@ -646,7 +648,7 @@ export const getWarehouseManagementApi = () => {
   }
 
   const getApiVendorId = (id: number, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<VendorDto>({ url: `/api/Vendor/${id}`, method: 'GET' }, options)
+    return customInstance<VendorDetailsDto>({ url: `/api/Vendor/${id}`, method: 'GET' }, options)
   }
 
   const getApiVendorAll = (
@@ -703,7 +705,7 @@ export const getWarehouseManagementApi = () => {
   }
 
   const getApiZoneId = (id: number, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<ZoneDto>({ url: `/api/Zone/${id}`, method: 'GET' }, options)
+    return customInstance<ZoneDetailsDto>({ url: `/api/Zone/${id}`, method: 'GET' }, options)
   }
 
   const getApiZoneAll = (options?: SecondParameter<typeof customInstance>) => {

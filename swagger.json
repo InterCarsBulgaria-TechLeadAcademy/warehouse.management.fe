@@ -2683,8 +2683,8 @@
           "200": {
             "description": "Success"
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2703,8 +2703,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3375,17 +3375,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/VendorDto"
+                  "$ref": "#/components/schemas/VendorDetailsDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/VendorDto"
+                  "$ref": "#/components/schemas/VendorDetailsDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/VendorDto"
+                  "$ref": "#/components/schemas/VendorDetailsDto"
                 }
               }
             }
@@ -3504,8 +3504,8 @@
           "200": {
             "description": "Success"
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3524,8 +3524,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3586,8 +3586,8 @@
           "200": {
             "description": "Success"
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3606,8 +3606,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3815,17 +3815,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ZoneDto"
+                  "$ref": "#/components/schemas/ZoneDetailsDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ZoneDto"
+                  "$ref": "#/components/schemas/ZoneDetailsDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ZoneDto"
+                  "$ref": "#/components/schemas/ZoneDetailsDto"
                 }
               }
             }
@@ -4044,8 +4044,8 @@
           "200": {
             "description": "Success"
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4064,8 +4064,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4107,8 +4107,8 @@
           "200": {
             "description": "Success"
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4127,8 +4127,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4170,8 +4170,8 @@
           "200": {
             "description": "Success"
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4190,8 +4190,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4489,6 +4489,12 @@
           "entriesFinishedProcessing": {
             "type": "integer",
             "format": "int32"
+          },
+          "entriesWaitingProcessingDetails": {
+            "$ref": "#/components/schemas/EntriesProcessingDetails"
+          },
+          "entriesFinishedProcessingDetails": {
+            "$ref": "#/components/schemas/EntriesProcessingDetails"
           },
           "vendorId": {
             "type": "integer",
@@ -4821,6 +4827,24 @@
         },
         "additionalProperties": false
       },
+      "EntriesProcessingDetails": {
+        "type": "object",
+        "properties": {
+          "pallets": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "packages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pieces": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "EntryDeliveryDetailsDto": {
         "type": "object",
         "properties": {
@@ -5006,20 +5030,6 @@
         },
         "additionalProperties": false
       },
-      "MarkerDeliveryDto": {
-        "type": "object",
-        "properties": {
-          "deliveryId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "deliverySystemNumber": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "MarkerDto": {
         "type": "object",
         "properties": {
@@ -5034,27 +5044,6 @@
           "createdAt": {
             "type": "string",
             "format": "date-time"
-          },
-          "deliveries": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MarkerDeliveryDto"
-            },
-            "nullable": true
-          },
-          "zones": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MarkerZoneDto"
-            },
-            "nullable": true
-          },
-          "vendors": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MarkerVendorDto"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -5069,38 +5058,6 @@
             "maxLength": 100,
             "minLength": 2,
             "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "MarkerVendorDto": {
-        "type": "object",
-        "properties": {
-          "vendorId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "vendorName": {
-            "type": "string",
-            "nullable": true
-          },
-          "vendorSystemNumber": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "MarkerZoneDto": {
-        "type": "object",
-        "properties": {
-          "zoneId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "zoneName": {
-            "type": "string",
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -5148,7 +5105,7 @@
             "nullable": true
           }
         },
-        "additionalProperties": { }
+        "additionalProperties": {}
       },
       "RegisterDto": {
         "type": "object",
@@ -5279,7 +5236,7 @@
         },
         "additionalProperties": false
       },
-      "VendorDto": {
+      "VendorDetailsDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -5304,11 +5261,33 @@
               "$ref": "#/components/schemas/VendorMarkerDto"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VendorDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
           },
-          "zones": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "systemNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "markers": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/VendorZoneDto"
+              "$ref": "#/components/schemas/VendorMarkerDto"
             },
             "nullable": true
           }
@@ -5357,19 +5336,30 @@
         },
         "additionalProperties": false
       },
-      "VendorZoneDto": {
+      "ZoneDetailsDto": {
         "type": "object",
         "properties": {
-          "zoneId": {
+          "id": {
             "type": "integer",
             "format": "int32"
           },
-          "zoneName": {
+          "name": {
             "type": "string",
             "nullable": true
           },
           "isFinal": {
             "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "markers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ZoneMarkerDto"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -5398,56 +5388,6 @@
               "$ref": "#/components/schemas/ZoneMarkerDto"
             },
             "nullable": true
-          },
-          "vendors": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ZoneVendorDto"
-            },
-            "nullable": true
-          },
-          "entries": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ZoneEntryDto"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ZoneEntryDto": {
-        "type": "object",
-        "properties": {
-          "entryId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pallets": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "packages": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pieces": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "startedProccessing": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "finishedProccessing": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "deliveryId": {
-            "type": "integer",
-            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -5486,24 +5426,6 @@
             "format": "int32"
           },
           "markerName": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ZoneVendorDto": {
-        "type": "object",
-        "properties": {
-          "vendorId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "vendorName": {
-            "type": "string",
-            "nullable": true
-          },
-          "vendorSystemNumber": {
             "type": "string",
             "nullable": true
           }

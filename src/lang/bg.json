@@ -415,7 +415,12 @@
       },
       "poper": {
         "type": "Тип",
-        "quantity": "Количество"
+        "quantity": "Количество",
+        "types": {
+          "pallets":"Палети",
+          "packages":"Пакети",
+          "pieces":"Бройки"
+        }
       }
     },
     "newDelivery": {
