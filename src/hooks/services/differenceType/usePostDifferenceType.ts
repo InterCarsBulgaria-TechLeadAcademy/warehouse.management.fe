@@ -11,7 +11,7 @@ export default function usePostDifferenceType(differenceTypeName: string) {
   const mutationCreate = useMutation({
     mutationFn: getWarehouseManagementApi().postApiDifferenceTypeAdd,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['differenceType'] })
+      queryClient.invalidateQueries({ queryKey: ['differenceTypes'] })
       showSnackbar({
         message: translate('differenceType.newDifferenceType.snackBar.success', {
           name: differenceTypeName

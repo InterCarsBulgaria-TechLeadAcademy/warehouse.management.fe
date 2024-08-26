@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next'
 import { Autocomplete, Box, TextField, Typography } from '@mui/material'
 import SearchInput from '../SearchInput'
 import ChipsList from '../ChipsList'
-// import { GoodType } from '../forms/newDeliveryForm/NewDeliveryStep3Form'
 import DeliveriesTableActionsMenu from '../actionsMenu/DeliveriesTableActionsMenu'
 import { Dayjs } from 'dayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
@@ -44,28 +43,8 @@ export default function DeliveriesTable() {
   const vendors = useGetVendors()
   const deliveries = useGetDeliveries(page, rowsPerPage, searchTerm)
 
-  console.log(deliveries)
-
   const markersName = markers.map((marker) => marker.name!)
   const vendorsName = vendors.map((vendor) => vendor.name!)
-
-  // const goodTypes = [
-  //   {
-  //     title: translate('deliveries.newDelivery.goodType.pallets'),
-  //     value: GoodType.pallets,
-  //     quantity: 1
-  //   },
-  //   {
-  //     title: translate('deliveries.newDelivery.goodType.packages'),
-  //     value: GoodType.packages,
-  //     quantity: 2
-  //   },
-  //   {
-  //     title: translate('deliveries.newDelivery.goodType.pieces'),
-  //     value: GoodType.pieces,
-  //     quantity: 3
-  //   }
-  // ]
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
@@ -119,21 +98,23 @@ export default function DeliveriesTable() {
       systemNumber: delivery.systemNumber!.split(' | ').join(', '),
       receptionNumber: delivery.receptionNumber!.split(' | ').join(', '),
       waitingGoods: (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ display: 'flex', gap: '0.5em' }}>
           <Typography>{delivery.entriesWaitingProcessing!}</Typography>
-          {/* TODO: БЕ трябва да го направят като функционалност
-          <InfoPopper>
-            // <DeliveryGoodsInfo goodTypes={goodTypes} />
-          </InfoPopper> */}
+          {delivery.entriesWaitingProcessing! === 0 ? null : (
+            <InfoPopper>
+              <DeliveryGoodsInfo goods={delivery.entriesWaitingProcessingDetails!} />
+            </InfoPopper>
+          )}
         </Box>
       ),
       completedGoods: (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography>{delivery.entriesFinishedProcessing}</Typography>
-          {/* TODO: БЕ трябва да го направят като функционалност*/}
-          {/* <InfoPopper> */}
-          {/* <DeliveryGoodsInfo goodTypes={goodTypes} /> */}
-          {/* </InfoPopper> */}
+        <Box sx={{ display: 'flex', gap: '0.5em' }}>
+          <Typography>{delivery.entriesFinishedProcessing!}</Typography>
+          {delivery.entriesFinishedProcessing! === 0 ? null : (
+            <InfoPopper>
+              <DeliveryGoodsInfo goods={delivery.entriesFinishedProcessingDetails!} />
+            </InfoPopper>
+          )}
         </Box>
       ),
       markers:

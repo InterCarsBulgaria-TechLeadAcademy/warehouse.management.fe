@@ -11,7 +11,7 @@ export default function useDeleteDifferenceType(differenceTypeName: string) {
   const mutationDelete = useMutation({
     mutationFn: (id: number) => getWarehouseManagementApi().deleteApiDifferenceTypeDeleteId(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['differenceType'] })
+      queryClient.invalidateQueries({ queryKey: ['differenceTypes'] })
       showSnackbar({
         message: translate('differenceType.table.actions.delete.snackBar.success', {
           name: differenceTypeName

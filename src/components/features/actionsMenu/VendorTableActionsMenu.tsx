@@ -65,16 +65,7 @@ export default function VendorTableActionsMenu({ vendor }: VendorsTableActionsMe
           onCloseDialog={handleClose}
           schema={newVendorSchema}
           onSubmit={handleSubmit}
-          renderForm={(methods) => (
-            <NewVendorForm
-              {...methods}
-              defaultValues={{
-                name: vendor.name!,
-                systemNumber: vendor.systemNumber!,
-                markerIds: vendor.markers?.map((marker) => marker.markerId!) || ([] as number[])
-              }}
-            />
-          )}
+          renderForm={(methods) => <NewVendorForm {...methods} vendorId={vendor.id!} />}
         />
       )}
 

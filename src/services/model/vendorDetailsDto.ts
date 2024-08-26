@@ -6,7 +6,7 @@
  */
 import type { VendorMarkerDto } from './vendorMarkerDto'
 
-export interface VendorDto {
+export interface VendorDetailsDto {
   createdAt?: string
   id?: number
   /** @nullable */

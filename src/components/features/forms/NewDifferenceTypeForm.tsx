@@ -2,23 +2,25 @@ import { Controller, UseFormReturn } from 'react-hook-form'
 import { TextField } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { NewDifferenceTypeFormData } from '@/schemas/newDifferenceTypeSchema'
+import useGetDifferenceType from '@/hooks/services/differenceType/useGetDifferenceType'
 
 interface NewMarkerFormProps extends UseFormReturn<NewDifferenceTypeFormData> {
-  defaultValue?: string
+  differenceTypeId?: number
 }
 
 export default function NewDifferenceTypeForm({
   control,
   formState: { errors },
-  defaultValue
+  differenceTypeId
 }: NewMarkerFormProps) {
   const { t: translate } = useTranslation()
+  const differenceType = useGetDifferenceType(differenceTypeId)
 
   return (
     <Controller
       name="differenceTypeName"
       control={control}
-      defaultValue={defaultValue || ''}
+      defaultValue={differenceType?.name || ''}
       render={({ field }) => (
         <TextField
           {...field}

@@ -13,8 +13,9 @@ export default function useUpdateDifferenceType(differenceTypeName: string) {
   const mutationUpdate = useMutation({
     mutationFn: ({ id, data }: { id: number; data: BodyType<DifferenceTypeFormDto> }) =>
       getWarehouseManagementApi().putApiDifferenceTypeEditId(id, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['differenceType'] })
+    onSuccess: (_, { id }) => {
+      queryClient.refetchQueries({ queryKey: ['differenceType', id] })
+      queryClient.invalidateQueries({ queryKey: ['differenceTypes'] })
       showSnackbar({
         message: translate('differenceType.table.actions.edit.snackBar.success', {
           name: differenceTypeName

@@ -13,7 +13,8 @@ export default function useUpdateMarker(markerName: string) {
   const mutationUpdate = useMutation({
     mutationFn: ({ id, data }: { id: number; data: BodyType<MarkerFormDto> }) =>
       getWarehouseManagementApi().putApiMarkerEditId(id, data),
-    onSuccess: () => {
+    onSuccess: (_, { id }) => {
+      queryClient.refetchQueries({ queryKey: ['marker', id] })
       queryClient.invalidateQueries({ queryKey: ['markers'] })
       showSnackbar({
         message: translate('markers.table.actions.edit.snackBar.success', {
