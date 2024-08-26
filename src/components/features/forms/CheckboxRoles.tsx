@@ -12,7 +12,6 @@ interface CheckboxRolesProps {
 export default function CheckboxRoles({ permissions, rolePermissions, onChange }: CheckboxRolesProps) {
   const [permissionsState, setPermissionsState] = useState<Record<string, boolean>>({})
 
-  console.log("ПРЕМИСИИ----",rolePermissions);
   const permissionGroups = Object.keys(permissions)
   const { t: translate } = useTranslation()
 
