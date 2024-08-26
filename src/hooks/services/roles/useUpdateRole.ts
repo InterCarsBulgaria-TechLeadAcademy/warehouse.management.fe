@@ -14,7 +14,7 @@ export default function useUpdateRole() {
   const mutationUpdate = useMutation({
     mutationFn: ({ id, data }: { id: string; data: BodyType<RoleFormDto> }) =>
       getWarehouseManagementApi().putApiRoleEditId(id, data),
-    onSuccess: (_, {data}) => {
+    onSuccess: (_, { data }) => {
       queryClient.invalidateQueries({ queryKey: ['roles'] })
       showSnackbar({
         message: translate(`Ролята ${data.name} беше успешно променена`, {
