@@ -6,7 +6,7 @@ import { RoleFormDto } from '@/services/model'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
 
-export default function useUpdateRole(roleName: string) {
+export default function useUpdateRole() {
   const { t: translate } = useTranslation()
   const { showSnackbar } = useSnackbar()
   const queryClient = useQueryClient()
@@ -14,22 +14,22 @@ export default function useUpdateRole(roleName: string) {
   const mutationUpdate = useMutation({
     mutationFn: ({ id, data }: { id: string; data: BodyType<RoleFormDto> }) =>
       getWarehouseManagementApi().putApiRoleEditId(id, data),
-    onSuccess: () => {
+    onSuccess: (_, {data}) => {
       queryClient.invalidateQueries({ queryKey: ['roles'] })
       showSnackbar({
-        message: translate(`Ролята ${roleName} беше успешно променена`, {
-          name: roleName
+        message: translate(`Ролята ${data.name} беше успешно променена`, {
+          name: data.name
         }),
         type: 'success'
       })
     },
 
-    onError: (error: unknown) => {
+    onError: (error: unknown, {data}) => {
       if (axios.isAxiosError(error)) {
         if (error.response && error.response.status === 400) {
           showSnackbar({
             message: translate('vendors.table.actions.edit.errors.existVendor', {
-              roleName: roleName
+              roleName: data.name
             }),
             type: 'error'
           })
