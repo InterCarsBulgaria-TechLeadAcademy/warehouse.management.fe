@@ -30,19 +30,18 @@ export default function Roles() {
   return (
     <>
       <SkeletonPage
-        // TODO: Add corect translation! Discuss it with Boyadzhiev.
-        header={translate('Роли')}
-        description={translate('Управление на роли')}
-        buttonText={translate('нова роля')}
+        header={translate('roles.title')}
+        description={translate('roles.description')}
+        buttonText={translate('roles.newRole.title')}
         buttonClickHandler={handleClickOpen}
         table={<RolesTable />}
       />
 
       <FormDialog<NewRoleFormData>
         open={openDialog}
-        title={translate('Създаване на новa роля')}
-        discardText={translate('изход')}
-        confirmText={translate('създай')}
+        title={translate('roles.newRole.title')}
+        discardText={translate('roles.newRole.labels.exit')}
+        confirmText={translate('roles.newRole.labels.create')}
         onCloseDialog={onCloseDialog}
         schema={newRoleSchema}
         onSubmit={handleSubmit}

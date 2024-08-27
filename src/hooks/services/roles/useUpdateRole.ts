@@ -4,7 +4,6 @@ import { getWarehouseManagementApi } from '@/services/generated-api'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { RoleFormDto } from '@/services/model'
 import { useTranslation } from 'react-i18next'
-import axios from 'axios'
 
 export default function useUpdateRole() {
   const { t: translate } = useTranslation()
@@ -16,36 +15,20 @@ export default function useUpdateRole() {
       getWarehouseManagementApi().putApiRoleEditId(id, data),
     onSuccess: (_, { id, data }) => {
       queryClient.invalidateQueries({ queryKey: ['roles'] })
-      queryClient.invalidateQueries({ queryKey: ['role', id] })
+      queryClient.refetchQueries({ queryKey: ['role', id] })
       showSnackbar({
-        message: translate(`Ролята ${data.name} беше успешно променена`, {
+        message: translate('roles.table.actions.edit.snackBar.success', {
           name: data.name
         }),
         type: 'success'
       })
     },
 
-    onError: (error: unknown, { data }) => {
-      if (axios.isAxiosError(error)) {
-        if (error.response && error.response.status === 400) {
-          showSnackbar({
-            message: translate('vendors.table.actions.edit.errors.existVendor', {
-              roleName: data.name
-            }),
-            type: 'error'
-          })
-        } else {
-          showSnackbar({
-            message: translate('vendors.table.actions.edit.snackBar.error'),
-            type: 'error'
-          })
-        }
-      } else {
-        showSnackbar({
-          message: translate('vendors.table.actions.edit.snackBar.error'),
-          type: 'error'
-        })
-      }
+    onError: () => {
+      showSnackbar({
+        message: translate('roles.table.actions.edit.snackBar.error'),
+        type: 'error'
+      })
     }
   })
   return mutationUpdate

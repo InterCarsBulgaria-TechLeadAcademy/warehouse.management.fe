@@ -24,7 +24,7 @@ export default function NewRoleForm({ control, formState: { errors }, roleId }: 
         render={({ field }) => (
           <TextField
             {...field}
-            label={translate('vendors.newVendor.labels.name')}
+            label={translate('roles.newRole.labels.name')}
             id="name"
             name="name"
             required

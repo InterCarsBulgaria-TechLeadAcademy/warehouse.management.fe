@@ -2,7 +2,7 @@ import DataTable from '@/components/shared/DataTable'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import SearchInput from '../SearchInput'
-import { Autocomplete, TextField, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 import { Column } from '@/interfaces/Column.ts'
 import ChipsList from '../ChipsList'
 import RolesTableActionsMenu from '../actionsMenu/RolesTableActionsMenu'
@@ -21,7 +21,7 @@ export default function RolesTable() {
   const [searchTerm, setSearchTerm] = React.useState('')
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
-  const roles = useGetRoles();
+  const roles = useGetRoles()
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
@@ -36,15 +36,12 @@ export default function RolesTable() {
     setPage(0)
   }
 
-  const sortOptions = ['regular', 'admin']
-  const options = sortOptions.map((option) => ({ label: option }))
-
   const columnsData: Column<Row>[] = [
-    { key: 'name', title: translate('Име') },
-    { key: 'permissions', title: translate('Права') },
+    { key: 'name', title: translate('roles.table.columns.name') },
+    { key: 'permissions', title: translate('roles.table.columns.permissions') },
     {
       key: 'actions',
-      title: translate('vendors.table.columns.actions'),
+      title: translate('roles.table.columns.actions'),
       minWidth: 50,
       align: 'right'
     }
@@ -57,7 +54,9 @@ export default function RolesTable() {
       permissions:
         role.rolePermissions!.length > 0 ? (
           <ChipsList
-            items={role.rolePermissions?.map((permission: string) => permission!) || ([] as string[])}
+            items={
+              role.rolePermissions?.map((permission: string) => permission!) || ([] as string[])
+            }
           />
         ) : (
           <Typography>-</Typography>
@@ -81,24 +80,11 @@ export default function RolesTable() {
       page={page}
       rowsPerPage={rowsPerPage}
       onPageChange={onPageChange}
-      onRowsPerPageChange={onRowsPerPageChange}
-    >
-
+      onRowsPerPageChange={onRowsPerPageChange}>
       <SearchInput
         value={searchTerm}
         onChange={handleSearchChange}
-        placeholder={translate('vendors.filters.search')}
-      />
-
-      <Autocomplete
-        disablePortal
-        id="combo-box-demo"
-        options={options}
-        size="small"
-        sx={{ width: '235px' }}
-        renderInput={(params) => (
-          <TextField {...params} label={translate('vendors.filters.role')} />
-        )}
+        placeholder={translate('roles.filters.search')}
       />
     </DataTable>
   )

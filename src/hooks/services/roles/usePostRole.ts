@@ -13,8 +13,7 @@ export default function usePostRole() {
     onSuccess: (_, { name }) => {
       queryClient.invalidateQueries({ queryKey: ['roles'] })
       showSnackbar({
-        // TODO: Add correct translate..
-        message: translate(`Ролята ${name} е успешно добавена`, {
+        message: translate('roles.newRole.snackBar.success', {
           name: name
         }),
         type: 'success'
@@ -22,7 +21,7 @@ export default function usePostRole() {
     },
     onError: () => {
       showSnackbar({
-        message: translate('markers.newMarker.snackBar.error'),
+        message: translate('roles.newRole.snackBar.error'),
         type: 'error'
       })
     }

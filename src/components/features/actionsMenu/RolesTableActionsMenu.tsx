@@ -45,8 +45,8 @@ export default function RolesTableActionsMenu({ role }: RolesTableActionsMenuPro
   }
 
   const options = [
-    { title: 'vendors.table.actionsMenu.edit', value: 'edit' },
-    { title: 'vendors.table.actionsMenu.delete', value: 'delete' }
+    { title: 'roles.table.actionsMenu.edit', value: 'edit' },
+    { title: 'roles.table.actionsMenu.delete', value: 'delete' }
   ]
 
   return (
@@ -56,9 +56,9 @@ export default function RolesTableActionsMenu({ role }: RolesTableActionsMenuPro
       {selectedOption === 'edit' && (
         <FormDialog<NewRoleFormData>
           open={true}
-          title={translate('Редактиране на роля')}
-          discardText={translate('изход')}
-          confirmText={translate('промени')}
+          title={translate('roles.table.actions.edit.title')}
+          discardText={translate('roles.table.actions.edit.labels.exit')}
+          confirmText={translate('roles.table.actions.edit.labels.edit')}
           onCloseDialog={handleClose}
           schema={newRoleSchema}
           onSubmit={handleSubmit}
@@ -70,10 +70,10 @@ export default function RolesTableActionsMenu({ role }: RolesTableActionsMenuPro
       {selectedOption === 'delete' && (
         <ConfirmDialog
           open={true}
-          title={translate('vendors.table.actions.delete.title')}
-          content={translate('vendors.table.actions.delete.message', { name: role.name })}
-          discardText={translate('vendors.table.actions.delete.labels.discard')}
-          confirmText={translate('vendors.table.actions.delete.labels.confirm')}
+          title={translate('roles.table.actions.delete.title')}
+          content={translate('roles.table.actions.delete.message', { role: role.name })}
+          discardText={translate('roles.table.actions.delete.labels.discard')}
+          confirmText={translate('roles.table.actions.delete.labels.confirm')}
           onCloseDialog={handleClose}
           onDiscardClick={onDiscardClick}
           onConfirmClick={onConfirmClick}

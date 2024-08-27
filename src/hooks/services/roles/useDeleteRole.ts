@@ -13,13 +13,13 @@ export default function useDeleteRole(roleName: string) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['roles'] })
       showSnackbar({
-        message: translate(`Ролята ${roleName} беше успешно изтрита`, { name: roleName }),
+        message: translate('roles.table.actions.delete.snackBar.success', { name: roleName }),
         type: 'success'
       })
     },
     onError: () => {
       showSnackbar({
-        message: translate('zones.table.actions.delete.snackBar.error'),
+        message: translate('roles.table.actions.delete.snackBar.error'),
         type: 'error'
       })
     }
