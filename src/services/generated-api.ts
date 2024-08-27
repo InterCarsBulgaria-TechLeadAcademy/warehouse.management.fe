@@ -45,7 +45,6 @@ import type {
   RoleFormDto,
   RoleUserAssignDto,
   RoutePermissionDto,
-  TokenResponse,
   VendorDetailsDto,
   VendorDto,
   VendorFormDto,
@@ -63,7 +62,7 @@ export const getWarehouseManagementApi = () => {
     loginDto: BodyType<LoginDto>,
     options?: SecondParameter<typeof customInstance>
   ) => {
-    return customInstance<TokenResponse>(
+    return customInstance<void>(
       {
         url: `/api/Auth/login`,
         method: 'POST',
@@ -89,19 +88,8 @@ export const getWarehouseManagementApi = () => {
     )
   }
 
-  const postApiAuthRefresh = (
-    postApiAuthRefreshBody: BodyType<string>,
-    options?: SecondParameter<typeof customInstance>
-  ) => {
-    return customInstance<TokenResponse>(
-      {
-        url: `/api/Auth/refresh`,
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        data: postApiAuthRefreshBody
-      },
-      options
-    )
+  const postApiAuthRefresh = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<void>({ url: `/api/Auth/refresh`, method: 'POST' }, options)
   }
 
   const postApiAuthLogout = (options?: SecondParameter<typeof customInstance>) => {
@@ -605,8 +593,8 @@ export const getWarehouseManagementApi = () => {
     return customInstance<RoleDetailsDto[]>({ url: `/api/Role/all`, method: 'GET' }, options)
   }
 
-  const getApiRoleRoleId = (roleId: string, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<RoleDto>({ url: `/api/Role/${roleId}`, method: 'GET' }, options)
+  const getApiRoleId = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<RoleDto>({ url: `/api/Role/${id}`, method: 'GET' }, options)
   }
 
   const getApiRoutePermissionAll = (options?: SecondParameter<typeof customInstance>) => {
@@ -645,6 +633,10 @@ export const getWarehouseManagementApi = () => {
       { url: `/api/RoutePermission/delete/${id}`, method: 'DELETE' },
       options
     )
+  }
+
+  const getApiUserMe = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<void>({ url: `/api/User/me`, method: 'GET' }, options)
   }
 
   const getApiVendorId = (id: number, options?: SecondParameter<typeof customInstance>) => {
@@ -845,11 +837,12 @@ export const getWarehouseManagementApi = () => {
     putApiRoleEditId,
     deleteApiRoleDeleteId,
     getApiRoleAll,
-    getApiRoleRoleId,
+    getApiRoleId,
     getApiRoutePermissionAll,
     getApiRoutePermissionAllWithDeleted,
     getApiRoutePermissionId,
     deleteApiRoutePermissionDeleteId,
+    getApiUserMe,
     getApiVendorId,
     getApiVendorAll,
     postApiVendorAdd,
@@ -1044,8 +1037,8 @@ export type DeleteApiRoleDeleteIdResult = NonNullable<
 export type GetApiRoleAllResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiRoleAll']>>
 >
-export type GetApiRoleRoleIdResult = NonNullable<
-  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiRoleRoleId']>>
+export type GetApiRoleIdResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiRoleId']>>
 >
 export type GetApiRoutePermissionAllResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiRoutePermissionAll']>>
@@ -1062,6 +1055,9 @@ export type DeleteApiRoutePermissionDeleteIdResult = NonNullable<
   Awaited<
     ReturnType<ReturnType<typeof getWarehouseManagementApi>['deleteApiRoutePermissionDeleteId']>
   >
+>
+export type GetApiUserMeResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiUserMe']>>
 >
 export type GetApiVendorIdResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiVendorId']>>

@@ -31,24 +31,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/TokenResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TokenResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TokenResponse"
-                }
-              }
-            }
+            "description": "Success"
           },
           "500": {
             "description": "Server Error"
@@ -112,45 +95,9 @@
         "tags": [
           "Auth"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "string"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "type": "string"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "type": "string"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/TokenResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TokenResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TokenResponse"
-                }
-              }
-            }
+            "description": "Success"
           },
           "400": {
             "description": "Bad Request",
@@ -3119,14 +3066,14 @@
         }
       }
     },
-    "/api/Role/{roleId}": {
+    "/api/Role/{id}": {
       "get": {
         "tags": [
           "Role"
         ],
         "parameters": [
           {
-            "name": "roleId",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -3349,6 +3296,18 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/User/me": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
       }
@@ -5128,7 +5087,7 @@
             "type": "string",
             "nullable": true
           },
-          "roleName": {
+          "roleId": {
             "type": "string",
             "nullable": true
           }
@@ -5216,20 +5175,6 @@
             "nullable": true
           },
           "name": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "TokenResponse": {
-        "type": "object",
-        "properties": {
-          "accessToken": {
-            "type": "string",
-            "nullable": true
-          },
-          "refreshToken": {
             "type": "string",
             "nullable": true
           }

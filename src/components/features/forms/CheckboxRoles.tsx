@@ -1,190 +1,81 @@
-import React, { useState } from 'react';
-import { Box, FormControl, FormControlLabel, Checkbox, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import React, { useEffect, useState } from 'react'
+import { Box, FormControl, FormControlLabel, Checkbox, Typography, Grid } from '@mui/material'
+import { useTranslation } from 'react-i18next'
+import { RoutePermissionDto } from '@/services/model'
 
-export default function CheckboxRoles() {
-  const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>({
-    createZones: false,
-    readZones: false,
-    editZones: false,
-    deleteZones: false,
+interface CheckboxRolesProps {
+  permissions: Record<string, RoutePermissionDto[]>
+  rolePermissions: RoutePermissionDto[] | undefined
+  onChange: (selectedIds: string[]) => void
+}
 
-    createDeliveries: false,
-    readDeliveries: false,
-    editDeliveries: false,
-    deleteDeliveries: false,
+export default function CheckboxRoles({
+  permissions,
+  rolePermissions,
+  onChange
+}: CheckboxRolesProps) {
+  const [permissionsState, setPermissionsState] = useState<Record<string, boolean>>({})
 
-    createDifferences: false,
-    readDifferences: false,
-    editDifferences: false,
-    deleteDifferences: false,
-    changeStatus: false,
-  });
-
+  const permissionGroups = Object.keys(permissions)
   const { t: translate } = useTranslation()
 
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCheckedItems({
-      ...checkedItems,
-      [event.target.name]: event.target.checked,
-    });
-  };
+  useEffect(() => {
+    if (rolePermissions) {
+      const currentPermissionIds = rolePermissions.map((current) => current.id)
+      const initialState: Record<string, boolean> = {}
+      permissionGroups.forEach((group) => {
+        permissions[group].forEach((permission) => {
+          initialState[permission.id!] = currentPermissionIds.includes(permission.id!)
+        })
+      })
 
-  const selectedItems = Object.keys(checkedItems).filter(
-    (key) => checkedItems[key]
-  );
+      setPermissionsState(initialState)
+
+      const selectedIds = Object.keys(initialState).filter((key) => initialState[key])
+      onChange(selectedIds)
+    }
+  }, [rolePermissions])
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = event.target
+    const updatedPermissionsState = {
+      ...permissionsState,
+      [name]: checked
+    }
+
+    setPermissionsState(updatedPermissionsState)
+
+    const selectedIds = Object.keys(updatedPermissionsState).filter(
+      (key) => updatedPermissionsState[key]
+    )
+    onChange(selectedIds)
+  }
 
   return (
     <>
-      <Box display="flex" justifyContent="space-between">
-        <Box flex="1">
-          <FormControl component="fieldset">
-            <Typography variant="h6">{translate('Зони')}</Typography>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name="createZones"
-                  checked={checkedItems.createZones}
-                  onChange={handleCheckboxChange}
-                />
-              }
-              label={translate('Създаване на зони')}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name="readZones"
-                  checked={checkedItems.readZones}
-                  onChange={handleCheckboxChange}
-                />
-              }
-              label={translate('Четене на зони')}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name="editZones"
-                  checked={checkedItems.editZones}
-                  onChange={handleCheckboxChange}
-                />
-              }
-              label={translate('Редактиране на зони')}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name="deleteZones"
-                  checked={checkedItems.deleteZones}
-                  onChange={handleCheckboxChange}
-                />
-              }
-              label={translate('Триене на зони')}
-            />
-          </FormControl>
-        </Box>
-
-        <Box flex="1">
-          <FormControl component="fieldset">
-            <Typography variant="h6">{translate('Доставки')}</Typography>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name="createDeliveries"
-                  checked={checkedItems.createDeliveries}
-                  onChange={handleCheckboxChange}
-                />
-              }
-              label={translate('Създаване на доставки')}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name="readDeliveries"
-                  checked={checkedItems.readDeliveries}
-                  onChange={handleCheckboxChange}
-                />
-              }
-              label={translate('Четене на доставки')}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name="editDeliveries"
-                  checked={checkedItems.editDeliveries}
-                  onChange={handleCheckboxChange}
-                />
-              }
-              label={translate('Редактиране на доставки')}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name="deleteDeliveries"
-                  checked={checkedItems.deleteDeliveries}
-                  onChange={handleCheckboxChange}
-                />
-              }
-              label={translate('Триене на доставки')}
-            />
-          </FormControl>
-        </Box>
-
-        <Box flex="1">
-          <FormControl component="fieldset">
-            <Typography variant="h6">{translate('Разлики')}</Typography>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name="createDifferences"
-                  checked={checkedItems.createDifferences}
-                  onChange={handleCheckboxChange}
-                />
-              }
-              label={translate('Създаване на разлики')}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name="readDifferences"
-                  checked={checkedItems.readDifferences}
-                  onChange={handleCheckboxChange}
-                />
-              }
-              label={translate('Четене на разлики')}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name="editDifferences"
-                  checked={checkedItems.editDifferences}
-                  onChange={handleCheckboxChange}
-                />
-              }
-              label={translate('Редактиране на разлики')}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name="deleteDifferences"
-                  checked={checkedItems.deleteDifferences}
-                  onChange={handleCheckboxChange}
-                />
-              }
-              label={translate('Триене на разлики')}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  name="changeStatus"
-                  checked={checkedItems.changeStatus}
-                  onChange={handleCheckboxChange}
-                />
-              }
-              label={translate('Смяна на статус')}
-            />
-          </FormControl>
-        </Box>
+      <Box display="flex" justifyContent="space-between" flexDirection={'column'}>
+        <Grid container spacing={2}>
+          {permissionGroups.map((col) => (
+            <Grid item xs={3}>
+              <FormControl component="fieldset">
+                <Typography variant="h6">{translate(col)}</Typography>
+                {permissions[col].map((permission: RoutePermissionDto) => (
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        name={permission.id!}
+                        checked={permissionsState[permission.id!] || false}
+                        onChange={handleCheckboxChange}
+                      />
+                    }
+                    label={translate(permission.name!)}
+                  />
+                ))}
+              </FormControl>
+            </Grid>
+          ))}
+        </Grid>
       </Box>
     </>
-  );
+  )
 }

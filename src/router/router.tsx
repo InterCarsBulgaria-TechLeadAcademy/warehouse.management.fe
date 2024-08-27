@@ -13,6 +13,7 @@ import {
   MAIN_PATH,
   DIFFERENCETYPE_PATH,
   USERS_PATH,
+  ROLES_PATH,
   DIFFERENCES_PATH
 } from '@/router/routerPaths.ts'
 import NewDeliveryProvider from '@/contexts/NewDelivery'
@@ -30,6 +31,7 @@ const ZonesContent = lazy(() => import('@/pages/main/ZonesContent'))
 const DifferenceType = lazy(() => import('@/pages/admin/DifferenceType'))
 const ErrorPage = lazy(() => import('@/pages/ErrorPage'))
 const Users = lazy(() => import('@/pages/admin/Users.tsx'))
+const Roles = lazy(() => import('@/pages/admin/Roles.tsx'))
 const Differences = lazy(() => import('@/pages/main/Differences.tsx'))
 
 export default function Router() {
@@ -63,6 +65,10 @@ export default function Router() {
         {
           path: USERS_PATH,
           element: <Users />
+        },
+        {
+          path: ROLES_PATH,
+          element: <Roles />
         },
         {
           path: VENDORS_PATH,
