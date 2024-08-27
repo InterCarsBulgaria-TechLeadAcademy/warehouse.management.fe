@@ -3,9 +3,9 @@ import * as yup from 'yup'
 export const newRoleSchema = yup.object({
   name: yup
     .string()
-    .required('Името е задължително')
-    .min(5, 'Името трябва да е минимум 5 символа')
-    .max(50, 'Името трябва да е максимум 50 символа'),
+    .required('roles.newRole.errors.required')
+    .min(5, 'roles.newRole.errors.min')
+    .max(50, 'roles.newRole.errors.max'),
   permissionIds: yup.array().of(yup.string())
 })
 
