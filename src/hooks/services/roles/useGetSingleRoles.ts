@@ -1,11 +1,13 @@
 import { getWarehouseManagementApi } from '@/services/generated-api'
 import { useSuspenseQuery } from '@tanstack/react-query'
 
-export default function useGetSingleRole(roleId: number) {
+export default function useGetSingleRole(roleId?: string | null) {
   const { data } = useSuspenseQuery({
     queryKey: ['role', roleId],
     queryFn: () => {
-      return getWarehouseManagementApi().getApiRoleRoleId(roleId)
+      if (roleId == null) return null
+
+      return getWarehouseManagementApi().getApiRoleId(roleId)
     }
   })
 

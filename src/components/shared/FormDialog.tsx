@@ -22,6 +22,7 @@ interface FormDialogProps<T extends FieldValues> {
   steps?: string[]
   currentStep?: number
   isCompletedMove?: boolean
+  maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false
 }
 
 export default function FormDialog<T extends FieldValues>({
@@ -36,7 +37,8 @@ export default function FormDialog<T extends FieldValues>({
   renderForm,
   steps,
   currentStep,
-  isCompletedMove
+  isCompletedMove,
+  maxWidth = 'sm'
 }: FormDialogProps<T>) {
   const { t: translate } = useTranslation()
   const { control, handleSubmit, formState, reset, setValue } = useForm<T>({
@@ -54,16 +56,13 @@ export default function FormDialog<T extends FieldValues>({
     onCloseDialog()
   }
 
-  const dialogWidth = title === 'Създаване на новa роля' || 'Редактиране на роля' ? 'xl' : 'sm';
-
   return (
     <Dialog
       open={open}
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
-      maxWidth={dialogWidth}
-    >
+      maxWidth={maxWidth}>
       <DialogTitle id="alert-dialog-title" sx={{ textAlign: 'center' }}>
         {title}
       </DialogTitle>

@@ -46,6 +46,7 @@ export default function Roles() {
         onCloseDialog={onCloseDialog}
         schema={newRoleSchema}
         onSubmit={handleSubmit}
+        maxWidth="xl"
         renderForm={(methods) => <NewRoleForm {...methods} />}
       />
     </>

@@ -2,7 +2,7 @@ import { getAccessToken, getRefreshToken } from '@/hooks/services/auth/useAuth'
 import axios, { AxiosError, AxiosRequestConfig } from 'axios'
 
 export const AXIOS_INSTANCE = axios.create({
-  baseURL: 'http://leads-academy-intercars.com'
+  baseURL: 'https://leads-academy-intercars.com'
 })
 
 export const customInstance = <T>(

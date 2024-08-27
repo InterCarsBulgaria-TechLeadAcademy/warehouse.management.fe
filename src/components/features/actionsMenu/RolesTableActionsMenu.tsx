@@ -19,7 +19,7 @@ export default function RolesTableActionsMenu({ role }: RolesTableActionsMenuPro
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
   const mutationUpdate = useUpdateRole()
   const mutationDelete = useDeleteRole(role.name!)
-  
+
   const handleClose = () => {
     setSelectedOption(null)
   }
@@ -29,7 +29,6 @@ export default function RolesTableActionsMenu({ role }: RolesTableActionsMenuPro
   }
 
   const handleSubmit: SubmitHandler<NewRoleFormData> = (data) => {
-    
     mutationUpdate.mutate({
       id: role.id!,
       data: { name: data.name, permissionIds: data.permissionIds }
@@ -63,13 +62,8 @@ export default function RolesTableActionsMenu({ role }: RolesTableActionsMenuPro
           onCloseDialog={handleClose}
           schema={newRoleSchema}
           onSubmit={handleSubmit}
-          renderForm={(methods) => (
-            <NewRoleForm
-              {...methods}
-              roleId={role.id}
-              roleName={role.name}
-            />
-          )}
+          maxWidth="xl"
+          renderForm={(methods) => <NewRoleForm {...methods} roleId={role.id} />}
         />
       )}
 

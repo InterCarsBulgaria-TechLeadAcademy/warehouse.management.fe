@@ -7,31 +7,25 @@ import useGetPermissionsAll from '@/hooks/services/roles/useGetPermissionsAll'
 import useGetSingleRole from '@/hooks/services/roles/useGetSingleRoles'
 
 interface NewRoleFormProps extends UseFormReturn<NewRoleFormData> {
-  roleId?: number | undefined
-  roleName?: string | undefined
+  roleId?: string | null
 }
 
-export default function NewRoleForm({
-  control,
-  formState: { errors },
-  roleName,
-  roleId
-}: NewRoleFormProps) {
+export default function NewRoleForm({ control, formState: { errors }, roleId }: NewRoleFormProps) {
   const { t: translate } = useTranslation()
-  const permissions = useGetPermissionsAll();
-  const currentRole = roleId ? useGetSingleRole(roleId) : null;
+  const permissions = useGetPermissionsAll()
+  const currentRole = useGetSingleRole(roleId)
 
   return (
     <>
       <Controller
         name="name"
         control={control}
+        defaultValue={currentRole?.name || ''}
         render={({ field }) => (
           <TextField
             {...field}
             label={translate('vendors.newVendor.labels.name')}
             id="name"
-            defaultValue={roleName || ''}
             name="name"
             required
             fullWidth

@@ -19,7 +19,7 @@ export interface RegisterDto {
    */
   password?: string | null
   /** @nullable */
-  roleName?: string | null
+  roleId?: string | null
   /**
    * @minLength 1
    * @maxLength 100
