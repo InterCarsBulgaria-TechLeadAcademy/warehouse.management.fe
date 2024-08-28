@@ -132,7 +132,7 @@ export default function DeliveriesTable() {
 
   const rowData = transformDataToRows(deliveries.results! || [])
 
-  const filteredRows = rowData.filter((row: any) => {
+  const filteredRows = rowData.filter((row) => {
     return columnsData.some((column) => {
       return row[column.key]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
     })
