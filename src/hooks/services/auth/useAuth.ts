@@ -33,7 +33,7 @@ export const useAuth = () => {
       
       if (status === 200) {
         console.log(response.headers['set-cookie']);
-        // const requestedUser = await getCurrentLoggedUser()
+        const requestedUser = await getCurrentLoggedUser()
         
         // requestedUser.role = 'regular' // Uncomment it to change role..
         
