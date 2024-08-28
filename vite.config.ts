@@ -19,12 +19,3 @@ export default defineConfig({
     }
   }
 })
-
-// export default defineConfig({
-//   resolve: { alias: { '@': '/src' } },
-//   plugins: [vue()],
-//   https: {
-//     key: fs.readFileSync('RootCA-key.pem'),
-//     cert: fs.readFileSync('RootCA.pem')
-//   }
-// })
