@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next'
 import SearchInput from '../SearchInput'
 import { Autocomplete, TextField } from '@mui/material'
 import { Column } from '@/interfaces/Column.ts'
-import ChipsList from '../ChipsList'
 import useGetUsers from '@/hooks/services/users/useGetUsers'
 import UsersTableActionsMenu from '../actionsMenu/UsersTableActionsMenu'
 
@@ -18,11 +17,6 @@ interface Row {
 }
 // -------------------------------------------- ↓
 // TODO: Watch out for the code later..
-interface UserRightDto {
-  rightId?: number
-  /** @nullable */
-  rightName?: string | null
-}
 
 interface UserDto {
   id?: number
