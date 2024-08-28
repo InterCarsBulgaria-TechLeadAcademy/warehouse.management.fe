@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
+import fs from 'fs';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,6 +12,19 @@ export default defineConfig({
     }
   },
   server: {
-    port: 8000
+    port: 8000,
+    https: {
+      key: fs.readFileSync(path.resolve(__dirname, 'path/to/your/key.pem')),
+      cert: fs.readFileSync(path.resolve(__dirname, 'path/to/your/cert.pem')),
+    }
   }
 })
+
+// export default defineConfig({
+//   resolve: { alias: { '@': '/src' } },
+//   plugins: [vue()],
+//   https: {
+//     key: fs.readFileSync('RootCA-key.pem'),
+//     cert: fs.readFileSync('RootCA.pem')
+//   }
+// })
