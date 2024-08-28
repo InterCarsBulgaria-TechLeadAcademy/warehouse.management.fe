@@ -24,42 +24,40 @@ export const useAuth = () => {
 
   const loginUser = async () => {
     try {
-      const response = await axiosInstance.post('/auth/login', {
-        username: 'emilys',
-        password: 'emilyspass',
-        expiresInMins: 1, // optional, defaults to 60
+      const response = await axiosInstance.post('/api/Auth/login', {
+        username: "Ico",
+        password: "Asd1!"
       });
-
-      const data = await response.data
-      setTokenCookies(data.token, data.refreshToken)
-      const requestedUser = await getUserFromCookies()
-      // requestedUser.role = 'regular' // Uncomment it to change role..
-      setUser({ username: requestedUser.username, role: requestedUser.role });
-      return { username: requestedUser.username, role: requestedUser.role };
+      
+      const status = response.status
+      
+      if (status === 200) {
+        console.log(response.headers['set-cookie']);
+        // const requestedUser = await getCurrentLoggedUser()
+        
+        // requestedUser.role = 'regular' // Uncomment it to change role..
+        
+        // setUser({ username: requestedUser.userName, role: requestedUser.roles[0]});
+        // return { username: requestedUser.userName, role: requestedUser.roles[0] };
+      }
+      
     } catch (error) {
       console.error('Error during login:', error);
     }
   }
-
+  
   // Тази функция е допълнителна която служи за взимане на юзер данните и работи с логин-а заедно..
-  const getUserFromCookies = async () => {
-    const accessToken = getAccessToken()
-    const refreshToken = getRefreshToken()
-
-    if (!accessToken) {
-      // Redirect to login..
-      // After that try to handle refresh token..
-      return null;
-    }
-
+  const getCurrentLoggedUser = async () => {
+    
     try {
-      const response = await axiosInstance.get('/auth/me');
-      return response.data;
-
+      const response = await axiosInstance.get('/api/User/me');
+      console.log(response);
+      
+      return response;
+      
     } catch (error: any) {
       if (error.response && error.response.status === 401) {
         // Token might be expired, handle token refresh or re-login
-        removeTokens();
         // Redirect to login or refresh tokens
       } else {
         console.error('Error fetching protected data', error);
@@ -84,7 +82,7 @@ export const useAuth = () => {
     user,
     setUser,
     loginUser,
-    getUserFromCookies,
+    getCurrentLoggedUser,
     logoutUser,
   };
 }
