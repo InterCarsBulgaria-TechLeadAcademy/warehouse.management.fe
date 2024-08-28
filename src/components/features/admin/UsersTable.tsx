@@ -33,6 +33,7 @@ interface UserDto {
 export default function UsersTable() {
   const { t: translate } = useTranslation()
   const [searchTerm, setSearchTerm] = React.useState('')
+  const [selectedRole, setSelectedRole] = React.useState<{ label: string | null | undefined } | null>(null);
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const users = useGetUsers()
@@ -40,6 +41,11 @@ export default function UsersTable() {
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
   }
+  const handleRoleChange = (_event: React.SyntheticEvent<Element, Event>, value: { label: string | null | undefined; } | null) => {
+    console.log(value);
+
+    setSelectedRole(value);
+  };
 
   const onPageChange = (newPage: number) => {
     setPage(newPage)
@@ -50,7 +56,7 @@ export default function UsersTable() {
     setPage(0)
   }
   const roles = useGetRoles()
-  
+
   const sortOptions = roles.map(role => role.name)
   const options = sortOptions.map((option) => ({ label: option }))
 
@@ -81,9 +87,12 @@ export default function UsersTable() {
   const rowData = transformDataToRows(users || [])
 
   const filteredRows = rowData.filter((row: Row) => {
-    return columnsData.some((column: Column<Row>) => {
+    const matchesSearchTerm = columnsData.some((column: Column<Row>) => {
       return row[column.key]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
     })
+
+    const matchesSelectedRole = selectedRole ? row.role === selectedRole.label : true;
+    return matchesSearchTerm && matchesSelectedRole;
   })
 
   return (
@@ -104,6 +113,9 @@ export default function UsersTable() {
         disablePortal
         id="combo-box-demo"
         options={options}
+        value={selectedRole}
+        onChange={handleRoleChange}
+        isOptionEqualToValue={(option, value) => option.label === value?.label}
         size="small"
         sx={{ width: '235px' }}
         renderInput={(params) => (
