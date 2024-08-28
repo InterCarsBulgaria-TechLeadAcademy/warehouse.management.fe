@@ -6,6 +6,7 @@ import { Autocomplete, TextField } from '@mui/material'
 import { Column } from '@/interfaces/Column.ts'
 import useGetUsers from '@/hooks/services/users/useGetUsers'
 import UsersTableActionsMenu from '../actionsMenu/UsersTableActionsMenu'
+import useGetRoles from '@/hooks/services/roles/useGetRoles'
 
 interface Row {
   id: number
@@ -48,8 +49,9 @@ export default function UsersTable() {
     setRowsPerPage(newRowsPerPage)
     setPage(0)
   }
-
-  const sortOptions = ['regular', 'admin']
+  const roles = useGetRoles()
+  
+  const sortOptions = roles.map(role => role.name)
   const options = sortOptions.map((option) => ({ label: option }))
 
   const columnsData: Column<Row>[] = [
