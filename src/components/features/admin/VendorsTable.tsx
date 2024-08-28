@@ -57,11 +57,7 @@ export default function VendorsTable() {
       id: vendor.id!,
       name: vendor.name!,
       vendorNumber: vendor.systemNumber!,
-      markers: (
-        <ChipsList
-          items={vendor.markers?.map((marker) => marker.markerName!) || ([] as string[])}
-        />
-      ),
+      markers: <ChipsList items={vendor.markers || ([] as string[])} />,
       actions: <VendorTableActionsMenu key={vendor.id} vendor={vendor} />
     }))
   }

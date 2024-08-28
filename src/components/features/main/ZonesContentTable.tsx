@@ -62,11 +62,15 @@ export default function ZonesContentTable() {
       return {
         id: entry.id!,
         number: entry.id!,
-        vendorName: entry.deliveryDetails?.vendorName!,
-        receptionNumber: entry.deliveryDetails?.receptionNumber!,
+        vendorName: entry.deliveryDetails!.vendorName!,
+        receptionNumber: entry.deliveryDetails!.receptionNumber!,
+        goodNumber: entry.deliveryDetails!.systemNumber!,
         quantity: <ZonesContentQuantityDisplay entry={entry} />,
-        goodNumber: entry.deliveryDetails?.systemNumber!,
-        zoneName: entry.zone?.zoneName! || '-',
+        zoneName:
+          entry.zone!.zoneName! +
+            (entry.zone!.isFinal
+              ? ` (${translate('zonesContent.table.rows.zone.isFinal')})`
+              : '') || '-',
         status: <ChipsList items={[getEntryStatus(entry)]} />,
         actions: <ZonesContentTableActionsMenu key={entry.id} entry={entry} />
       }

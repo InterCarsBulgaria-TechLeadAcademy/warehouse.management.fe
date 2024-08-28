@@ -5,6 +5,7 @@
  * OpenAPI spec version: 1.0
  */
 import type {
+  DeliveryDetailsDto,
   DeliveryDto,
   DeliveryDtoPageDto,
   DeliveryFormDto,
@@ -97,7 +98,10 @@ export const getWarehouseManagementApi = () => {
   }
 
   const getApiDeliveryId = (id: number, options?: SecondParameter<typeof customInstance>) => {
-    return customInstance<DeliveryDto>({ url: `/api/Delivery/${id}`, method: 'GET' }, options)
+    return customInstance<DeliveryDetailsDto>(
+      { url: `/api/Delivery/${id}`, method: 'GET' },
+      options
+    )
   }
 
   const getApiDeliveryAll = (
@@ -176,10 +180,7 @@ export const getWarehouseManagementApi = () => {
     id: number,
     options?: SecondParameter<typeof customInstance>
   ) => {
-    return customInstance<VendorDto[]>(
-      { url: `/api/Delivery/Approve/${id}`, method: 'PUT' },
-      options
-    )
+    return customInstance<void>({ url: `/api/Delivery/Approve/${id}`, method: 'PUT' }, options)
   }
 
   const postApiDeliveryGenerateBarcodePdf = (

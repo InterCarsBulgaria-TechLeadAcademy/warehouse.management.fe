@@ -6,8 +6,10 @@
  */
 
 export * from './change'
+export * from './deliveryDetailsDto'
 export * from './deliveryDto'
 export * from './deliveryDtoPageDto'
+export * from './deliveryEntryDetailsDto'
 export * from './deliveryEntryDto'
 export * from './deliveryFormDto'
 export * from './deliveryHistoryChangeType'

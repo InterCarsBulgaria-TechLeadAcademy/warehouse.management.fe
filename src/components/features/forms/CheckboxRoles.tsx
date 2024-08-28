@@ -56,11 +56,12 @@ export default function CheckboxRoles({
       <Box display="flex" justifyContent="space-between" flexDirection={'column'}>
         <Grid container spacing={2}>
           {permissionGroups.map((col) => (
-            <Grid item xs={3}>
-              <FormControl component="fieldset">
+            <Grid item xs={3} key={col}>
+              <FormControl component="fieldset" key={col}>
                 <Typography variant="h6">{translate(col)}</Typography>
                 {permissions[col].map((permission: RoutePermissionDto) => (
                   <FormControlLabel
+                    key={permission.id}
                     control={
                       <Checkbox
                         name={permission.id!}
