@@ -53,9 +53,7 @@ export default function ZonesTable() {
     return zones.map((zone: ZoneDto) => ({
       id: zone.id!,
       name: zone.name!,
-      markers: (
-        <ChipsList items={zone.markers?.map((marker) => marker.markerName!) || ([] as string[])} />
-      ),
+      markers: <ChipsList items={zone.markers || ([] as string[])} />,
       isFinal: zone.isFinal
         ? translate('zones.table.rows.isFinal.options.yes')
         : translate('zones.table.rows.isFinal.options.no'),

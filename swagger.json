@@ -176,17 +176,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/DeliveryDto"
+                  "$ref": "#/components/schemas/DeliveryDetailsDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DeliveryDto"
+                  "$ref": "#/components/schemas/DeliveryDetailsDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/DeliveryDto"
+                  "$ref": "#/components/schemas/DeliveryDetailsDto"
                 }
               }
             }
@@ -663,33 +663,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/VendorDto"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/VendorDto"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/VendorDto"
-                  }
-                }
-              }
-            }
+            "description": "Success"
           },
           "400": {
             "description": "Bad Request",
@@ -3307,7 +3281,44 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -4394,7 +4405,7 @@
         },
         "additionalProperties": false
       },
-      "DeliveryDto": {
+      "DeliveryDetailsDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -4470,8 +4481,67 @@
           "entries": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/EntryDto"
+              "$ref": "#/components/schemas/DeliveryEntryDetailsDto"
             },
+            "nullable": true
+          },
+          "markers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeliveryMarkerDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeliveryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "systemNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "receptionNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "deliveryTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "approvedOn": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "entriesWaitingProcessing": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "entriesFinishedProcessing": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "entriesWaitingProcessingDetails": {
+            "$ref": "#/components/schemas/EntriesProcessingDetails"
+          },
+          "entriesFinishedProcessingDetails": {
+            "$ref": "#/components/schemas/EntriesProcessingDetails"
+          },
+          "vendorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
             "nullable": true
           },
           "markers": {
@@ -4503,6 +4573,42 @@
           },
           "hasNext": {
             "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeliveryEntryDetailsDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pallets": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "packages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pieces": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "startedProccessing": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "finishedProccessing": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "zoneName": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -5181,6 +5287,42 @@
         },
         "additionalProperties": false
       },
+      "UserDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "nullable": true
+          },
+          "routePermissionNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "VendorDetailsDto": {
         "type": "object",
         "properties": {
@@ -5232,7 +5374,7 @@
           "markers": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/VendorMarkerDto"
+              "type": "string"
             },
             "nullable": true
           }
@@ -5330,7 +5472,7 @@
           "markers": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ZoneMarkerDto"
+              "type": "string"
             },
             "nullable": true
           }

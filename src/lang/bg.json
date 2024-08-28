@@ -650,6 +650,9 @@
         "actions": "Действия"
       },
       "rows": {
+        "zone": {
+          "isFinal": "Финална зона"
+        },
         "quantity-column": {
           "goodTypes": {
             "pallets":"Палети",
