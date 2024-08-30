@@ -1,4 +1,4 @@
-import { Box, ListItemIcon, ListItemText, MenuItem } from '@mui/material'
+import { ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 import { useTheme } from '@mui/material/styles'
 import { ExtendedTheme } from '@/plugins/muiTheme'
@@ -23,30 +23,23 @@ export default function MenuListItem({ title, Icon, link, handleClose }: MenuIte
           color: 'primary.main'
         }
       }}>
-      <Box
-        component={NavLink}
+      <NavLink
         to={link}
-        style={({ isActive }) => {
-          return {
-            backgroundColor: isActive ? theme.palette.primary['100'] : 'inherit',
-            color: isActive ? theme.palette.primary.main : 'inherit'
-          }
-        }}
-        sx={{
+        style={({ isActive }) => ({
           flex: 1,
           display: 'flex',
           width: '100%',
           padding: '0.7em 1.5em 0.7em 1.5em',
-
           gap: '1em',
-          color: 'secondary.main',
-          textDecoration: 'none'
-        }}>
+          textDecoration: 'none',
+          backgroundColor: isActive ? theme.palette.primary['100'] : 'inherit',
+          color: isActive ? theme.palette.primary.main : 'inherit'
+        })}>
         <ListItemIcon sx={{ color: 'inherit' }}>
           <Icon />
         </ListItemIcon>
         <ListItemText>{title}</ListItemText>
-      </Box>
+      </NavLink>
     </MenuItem>
   )
 }
