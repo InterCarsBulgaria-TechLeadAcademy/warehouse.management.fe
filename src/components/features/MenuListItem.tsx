@@ -1,4 +1,3 @@
-import { useIsSmallScreen } from '@/hooks/useIsSmallScreen'
 import { Box, ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 import { useTheme } from '@mui/material/styles'
@@ -12,13 +11,13 @@ interface MenuItemProps {
 }
 
 export default function MenuListItem({ title, Icon, link, onClose }: MenuItemProps) {
-  const isSmallScreen: boolean = useIsSmallScreen()
   const theme: ExtendedTheme = useTheme()
   return (
     <MenuItem
       onClick={onClose}
       sx={{
-        padding: 0,
+        display: 'flex',
+        padding: '0',
         '&:hover': {
           backgroundColor: 'primary.100',
           color: 'primary.main'
@@ -34,9 +33,11 @@ export default function MenuListItem({ title, Icon, link, onClose }: MenuItemPro
           }
         }}
         sx={{
+          flex: 1,
           display: 'flex',
           width: '100%',
-          padding: isSmallScreen ? '0em 0.7em' : '0.7em 0 0.7em 1.5em',
+          padding: '0.7em 1.5em 0.7em 1.5em',
+
           gap: '1em',
           color: 'secondary.main',
           textDecoration: 'none'

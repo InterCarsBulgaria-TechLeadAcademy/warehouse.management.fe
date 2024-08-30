@@ -25,8 +25,11 @@ export default function InfoPopper({ children }: InfoPopperProps) {
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     if (isSmallScreen) {
-      setOpen((prev) => !prev)
-      setAnchorEl(event.currentTarget)
+      setOpen((prevOpen) => {
+        const newOpen = !prevOpen
+        setAnchorEl(newOpen ? event.currentTarget : null)
+        return newOpen
+      })
     } else {
       handlePopoverOpen(event)
     }
