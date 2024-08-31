@@ -1,4 +1,3 @@
-import { getAccessToken, getRefreshToken } from '@/hooks/services/auth/useAuth'
 import axios, { AxiosError, AxiosRequestConfig } from 'axios'
 
 export const AXIOS_INSTANCE = axios.create({
@@ -11,12 +10,8 @@ export const customInstance = <T>(
 ): Promise<T> => {
   const source = axios.CancelToken.source()
 
-  const accessToken = getAccessToken()
-  const refreshToken = getRefreshToken()
-
   const headers = {
     ...config.headers,
-    ...(accessToken ? { Authorization: `Bearer ${accessToken}, Refresh ${refreshToken}` } : {})
   }
 
   const promise = AXIOS_INSTANCE({
