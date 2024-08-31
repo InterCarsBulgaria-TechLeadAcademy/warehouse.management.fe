@@ -1,41 +1,39 @@
 import { useContext } from 'react';
 import { AuthContext } from '@/contexts/Auth'
-import axiosInstance from './axiosInstance';
+import { getWarehouseManagementApi } from '@/services/generated-api';
+import { UserDto } from '@/services/model';
 
 export const useAuth = () => {
   const { user, setUser } = useContext(AuthContext);
 
   const loginUser = async () => {
     try {
-      const response = await axiosInstance.post('/api/Auth/login', {
+      const response = await getWarehouseManagementApi().postApiAuthLogin({
         username: "Ico",
         password: "Asd1!"
       });
-      
-      const status = response.status
-      
-      if (status === 200) {
-        const response = await getCurrentLoggedUser()
-        const requestedUser = response?.data
-        
-        requestedUser.roles[0] = 'regular' // Uncomment it to change role..
-        
-        setUser({ username: requestedUser.userName, role: requestedUser.roles[0]});
-        return { username: requestedUser.userName, role: requestedUser.roles[0] };
-      }
-      
+      console.log("Logged user:", response);
+
+      const requestedUser = await getCurrentLoggedUser()
+
+      requestedUser.roles[0] = 'regular' // Uncomment it to change role..
+
+      setUser({ username: requestedUser.userName, role: requestedUser.roles[0] });
+      return { username: requestedUser.userName, role: requestedUser.roles[0] };
+
+
     } catch (error) {
       console.error('Error during login:', error);
     }
   }
-  
+
   // Тази функция е допълнителна която служи за взимане на юзер данните и работи с логин-а заедно..
   const getCurrentLoggedUser = async () => {
-    
+
     try {
-      const response = await axiosInstance.get('/api/User/me');
+      const response = await getWarehouseManagementApi().getApiUserMe()
       return response;
-      
+
     } catch (error: any) {
       console.error('Error fetching protected data', error);
     }
@@ -44,7 +42,9 @@ export const useAuth = () => {
 
   const logoutUser = async () => {
     try {
-      await axiosInstance.post('/api/Auth/logout');
+      const response = await axiosInstance.post('/api/Auth/logout');
+      console.log(response);
+
       setUser(null);
 
       return;
