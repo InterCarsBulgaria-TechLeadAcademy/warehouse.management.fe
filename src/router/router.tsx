@@ -36,7 +36,7 @@ const Differences = lazy(() => import('@/pages/main/Differences.tsx'))
 
 export default function Router() {
   const { user } = useAuth()
-
+  
   const isAuthenticated = !!user
   const isAdmin = user?.role === 'admin'
 
