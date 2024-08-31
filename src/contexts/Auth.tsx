@@ -1,4 +1,4 @@
-import axiosInstance from "@/hooks/services/auth/axiosInstance";
+import { getWarehouseManagementApi } from "@/services/generated-api";
 import React, { createContext, ReactNode, useEffect, useState } from "react";
 
 interface AuthContextProps {
@@ -26,8 +26,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axiosInstance.get('/api/User/me');
-        setUserState({username: response.data.userName, role: response.data.roles[0]});
+        const response = await getWarehouseManagementApi().getApiUserMe()
+        console.log(response);
+
+        setUserState({ username: response.userName, role: response.roles[0] });
       } catch (error) {
         console.error('Error fetching user on initial load:', error);
         return
@@ -37,7 +39,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     fetchUser();
   }, []);
 
-  const setUser = (user: { username: string; role: string } | null) => {    
+  const setUser = (user: { username: string; role: string } | null) => {
     setUserState(user);
   };
 
