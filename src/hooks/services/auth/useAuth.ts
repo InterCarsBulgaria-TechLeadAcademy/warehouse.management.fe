@@ -32,8 +32,8 @@ export const useAuth = () => {
       const status = response.status
       
       if (status === 200) {
-        console.log(response.headers['set-cookie']);
         const requestedUser = await getCurrentLoggedUser()
+        console.log(requestedUser);
         
         // requestedUser.role = 'regular' // Uncomment it to change role..
         
@@ -51,7 +51,6 @@ export const useAuth = () => {
     
     try {
       const response = await axiosInstance.get('/api/User/me');
-      console.log(response);
       
       return response;
       
