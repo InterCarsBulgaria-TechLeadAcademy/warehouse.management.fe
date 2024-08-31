@@ -30,9 +30,9 @@ axiosInstance.interceptors.response.use(
 
       
         try {
-          const response = await axiosInstance.post('/api/User/me');
 
           return axiosInstance(originalRequest);
+          
         } catch (refreshError) {
           // Clear application state if refresh fails
           // Optionally, you can trigger a redirect to login page here
