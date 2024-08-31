@@ -1,23 +1,6 @@
 import { useContext } from 'react';
 import { AuthContext } from '@/contexts/Auth'
 import axiosInstance from './axiosInstance';
-import Cookies from 'js-cookie';
-
-
-export const setTokenCookies = (accessToken: any, refreshToken: any) => {
-  // TODO: Talk on later stage (when BE is ready) where to store tokens, also i they are in cookie
-  // to look for functionality if the cookie is expired!
-  Cookies.set('accessToken', accessToken, { expires: 15 / 1440, secure: true, sameSite: 'Strict' }); // 15 minutes
-  Cookies.set('refreshToken', refreshToken, { expires: 7, secure: true, sameSite: 'Strict' }); // 7 days
-};
-
-export const getAccessToken = () => Cookies.get('accessToken');
-export const getRefreshToken = () => Cookies.get('refreshToken');
-
-export const removeTokens = () => {
-  Cookies.remove('accessToken');
-  Cookies.remove('refreshToken');
-};
 
 export const useAuth = () => {
   const { user, setUser } = useContext(AuthContext);
@@ -32,13 +15,15 @@ export const useAuth = () => {
       const status = response.status
       
       if (status === 200) {
-        const requestedUser = await getCurrentLoggedUser()
+        const response = await getCurrentLoggedUser()
+        const requestedUser = response?.data
         console.log(requestedUser);
         
-        // requestedUser.role = 'regular' // Uncomment it to change role..
         
-        // setUser({ username: requestedUser.userName, role: requestedUser.roles[0]});
-        // return { username: requestedUser.userName, role: requestedUser.roles[0] };
+        requestedUser.roles[0] = 'regular' // Uncomment it to change role..
+        
+        setUser({ username: requestedUser.userName, role: requestedUser.roles[0]});
+        return { username: requestedUser.userName, role: requestedUser.roles[0] };
       }
       
     } catch (error) {
@@ -68,7 +53,6 @@ export const useAuth = () => {
   const logoutUser = async () => {
     try {
       // logout from BE
-      removeTokens();
       setUser(null);
       return;
 
