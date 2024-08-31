@@ -17,8 +17,6 @@ export const useAuth = () => {
       if (status === 200) {
         const response = await getCurrentLoggedUser()
         const requestedUser = response?.data
-        console.log(requestedUser);
-        
         
         requestedUser.roles[0] = 'regular' // Uncomment it to change role..
         
@@ -36,27 +34,22 @@ export const useAuth = () => {
     
     try {
       const response = await axiosInstance.get('/api/User/me');
-      
       return response;
       
     } catch (error: any) {
-      if (error.response && error.response.status === 401) {
-        // Token might be expired, handle token refresh or re-login
-        // Redirect to login or refresh tokens
-      } else {
-        console.error('Error fetching protected data', error);
-      }
+      console.error('Error fetching protected data', error);
     }
     return null;
   }
 
   const logoutUser = async () => {
     try {
-      // logout from BE
+      await axiosInstance.post('/api/Auth/logout');
       setUser(null);
-      return;
 
+      return;
     } catch (error) {
+      setUser(null);
       console.error('Error during logout:', error);
     }
   }
