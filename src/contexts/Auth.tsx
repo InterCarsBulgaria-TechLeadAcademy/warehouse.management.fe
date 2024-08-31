@@ -27,9 +27,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const fetchUser = async () => {
       try {
         const response = await getWarehouseManagementApi().getApiUserMe()
-        console.log(response);
+        
+        const username = response.userName ?? null;
+        const role = (response.roles && response.roles.length > 0) ? response.roles[0] : null;
 
-        setUserState({ username: response.userName, role: response.roles[0] });
+        if (username && role) {
+          setUserState({ username, role });
+        } else {
+          console.error("Invalid user data received:", { username, role });
+        }
       } catch (error) {
         console.error('Error fetching user on initial load:', error);
         return
