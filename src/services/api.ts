@@ -1,7 +1,8 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios'
 
 export const AXIOS_INSTANCE = axios.create({
-  baseURL: 'https://leads-academy-intercars.com'
+  baseURL: 'https://leads-academy-intercars.com',
+  withCredentials: true
 })
 
 export const customInstance = <T>(
