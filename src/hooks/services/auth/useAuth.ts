@@ -1,25 +1,27 @@
 import { useContext } from 'react';
 import { AuthContext } from '@/contexts/Auth'
 import { getWarehouseManagementApi } from '@/services/generated-api';
-import { UserDto } from '@/services/model';
+import { LoginFormData } from '@/schemas/loginSchema';
 
 export const useAuth = () => {
   const { user, setUser } = useContext(AuthContext);
 
-  const loginUser = async () => {
+  const loginUser = async (data: LoginFormData) => {
     try {
-      const response = await getWarehouseManagementApi().postApiAuthLogin({
-        username: "Ico",
-        password: "Asd1!"
+      await getWarehouseManagementApi().postApiAuthLogin({
+        username: data.username,
+        password: data.password
       });
-      console.log("Logged user:", response);
 
       const requestedUser = await getCurrentLoggedUser()
 
-      requestedUser.roles[0] = 'regular' // Uncomment it to change role..
+      const username = requestedUser?.userName ?? null;
+      const role = requestedUser?.roles?.[0] ?? null;
 
-      setUser({ username: requestedUser.userName, role: requestedUser.roles[0] });
-      return { username: requestedUser.userName, role: requestedUser.roles[0] };
+      const user = username && role ? { username, role } : null;
+
+      setUser(user);
+      return user;
 
 
     } catch (error) {
@@ -42,8 +44,8 @@ export const useAuth = () => {
 
   const logoutUser = async () => {
     try {
-      const response = await axiosInstance.post('/api/Auth/logout');
-      console.log(response);
+      // const response = await axiosInstance.post('/api/Auth/logout');
+      // console.log(response);
 
       setUser(null);
 
