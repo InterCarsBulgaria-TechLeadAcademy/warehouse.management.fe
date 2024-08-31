@@ -25,7 +25,7 @@ export default function Login() {
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
     console.log(data);
     try {
-      const user = await loginUser();
+      const user = await loginUser(data);
       if (!user) return;
       navigate(`${DELIVERIES_PATH}`);
 
