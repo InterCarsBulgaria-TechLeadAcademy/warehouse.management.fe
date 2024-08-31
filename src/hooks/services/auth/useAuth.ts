@@ -44,8 +44,8 @@ export const useAuth = () => {
 
   const logoutUser = async () => {
     try {
-      // const response = await axiosInstance.post('/api/Auth/logout');
-      // console.log(response);
+      // TODO: check the logout..
+      // const response = await getWarehouseManagementApi().postApiAuthLogout()
 
       setUser(null);
 
