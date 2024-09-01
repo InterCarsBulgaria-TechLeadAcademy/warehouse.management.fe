@@ -1,9 +1,44 @@
-import axios, { AxiosError, AxiosRequestConfig } from 'axios'
+import axios, { AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios'
+
+interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
+  _retry?: boolean;
+}
 
 export const AXIOS_INSTANCE = axios.create({
   baseURL: 'https://leads-academy-intercars.com',
   withCredentials: true
 })
+
+const refreshToken = async (): Promise<void> => {
+  try {
+    await axios.post('https://leads-academy-intercars.com/api/Auth/refresh', {}, {
+      withCredentials: true,  // Ensure cookies are sent with the request
+    });
+  } catch (error) {
+    console.error('Failed to refresh token:', error);
+    throw error; // Re-throw the error so it can be handled by the caller
+  }
+};
+
+AXIOS_INSTANCE.interceptors.response.use(
+  response => response,
+  async (error: AxiosError) => {
+    const originalRequest = error.config as CustomAxiosRequestConfig;
+
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      try {
+        await refreshToken();
+
+        return AXIOS_INSTANCE(originalRequest);
+      } catch (refreshError) {
+        return Promise.reject(refreshError);
+      }
+    }
+
+    return Promise.reject(error);
+  }
+);
 
 export const customInstance = <T>(
   config: AxiosRequestConfig,
