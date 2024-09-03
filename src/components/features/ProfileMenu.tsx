@@ -44,10 +44,10 @@ export default function ProfileMenu() {
 
   return (
     <>
-      {user?.username && (
+      {user?.userName && (
         <>
           <Typography component="p" variant="body1">
-            {user?.username}
+            {user?.userName}
           </Typography>
 
           <Button
