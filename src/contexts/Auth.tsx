@@ -29,7 +29,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         const response = await getWarehouseManagementApi().getApiUserMe()
         
         const username = response.userName ?? null;
-        const role = (response.roles && response.roles.length > 0) ? response.roles[0] : null;
+        const role = response.role ?? null;
 
         if (username && role) {
           setUserState({ username, role });
