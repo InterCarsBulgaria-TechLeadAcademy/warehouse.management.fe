@@ -23,9 +23,6 @@ export default function Login() {
   })
 
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
-    console.log(data);
-    // username: Ico
-    // password: Asd1!
     try {
       const user = await loginUser(data);
       if (!user) return;
