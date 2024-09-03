@@ -1,53 +1,49 @@
-import { getWarehouseManagementApi } from "@/services/generated-api";
-import { UserDto } from "@/services/model";
-import React, { createContext, ReactNode, useEffect, useState } from "react";
+import { getWarehouseManagementApi } from '@/services/generated-api'
+import { UserDto } from '@/services/model'
+import React, { createContext, ReactNode, useEffect, useState } from 'react'
 
 interface AuthContextProps {
-  user: UserDto | null;
-  setUser: (user: UserDto | null) => void;
+  user: UserDto | null
+  setUser: (user: UserDto | null) => void
 }
 
 const initialAuthContext: AuthContextProps = {
   user: null,
-  setUser: () => { },
-};
+  setUser: () => {}
+}
 
-export const AuthContext = createContext<AuthContextProps>(initialAuthContext);
+export const AuthContext = createContext<AuthContextProps>(initialAuthContext)
 
 interface AuthProviderProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUserState] = useState<UserDto | null>(null);
+  const [user, setUserState] = useState<UserDto | null>(null)
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const response = await getWarehouseManagementApi().getApiUserMe()
-        console.log(response);
-        
+        console.log(response)
+
         if (response.userName) {
-          setUserState(response);
+          setUserState(response)
         } else {
-          console.error("Invalid user data received:", response);
+          console.error('Invalid user data received:', response)
         }
       } catch (error) {
-        console.error('Error fetching user on initial load:', error);
+        console.error('Error fetching user on initial load:', error)
         return
       }
-    };
+    }
 
-    fetchUser();
-  }, []);
+    fetchUser()
+  }, [])
 
   const setUser = (user: UserDto | null) => {
-    setUserState(user);
-  };
+    setUserState(user)
+  }
 
-  return (
-    <AuthContext.Provider value={{ user, setUser }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ user, setUser }}>{children}</AuthContext.Provider>
 }

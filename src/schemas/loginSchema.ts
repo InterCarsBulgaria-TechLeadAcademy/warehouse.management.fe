@@ -1,7 +1,7 @@
 import * as yup from 'yup'
 
 export const loginSchema = yup
-// TODO: check validation data
+  // TODO: check validation data
   .object({
     username: yup.string().required('login.errors.email.required'),
     password: yup

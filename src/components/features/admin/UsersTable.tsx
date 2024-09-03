@@ -33,7 +33,9 @@ interface UserDto {
 export default function UsersTable() {
   const { t: translate } = useTranslation()
   const [searchTerm, setSearchTerm] = React.useState('')
-  const [selectedRole, setSelectedRole] = React.useState<{ label: string | null | undefined } | null>(null);
+  const [selectedRole, setSelectedRole] = React.useState<{
+    label: string | null | undefined
+  } | null>(null)
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const users = useGetUsers()
@@ -41,11 +43,14 @@ export default function UsersTable() {
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
   }
-  const handleRoleChange = (_event: React.SyntheticEvent<Element, Event>, value: { label: string | null | undefined; } | null) => {
-    console.log(value);
+  const handleRoleChange = (
+    _event: React.SyntheticEvent<Element, Event>,
+    value: { label: string | null | undefined } | null
+  ) => {
+    console.log(value)
 
-    setSelectedRole(value);
-  };
+    setSelectedRole(value)
+  }
 
   const onPageChange = (newPage: number) => {
     setPage(newPage)
@@ -57,7 +62,7 @@ export default function UsersTable() {
   }
   const roles = useGetRoles()
 
-  const sortOptions = roles.map(role => role.name)
+  const sortOptions = roles.map((role) => role.name)
   const options = sortOptions.map((option) => ({ label: option }))
 
   const columnsData: Column<Row>[] = [
@@ -91,8 +96,8 @@ export default function UsersTable() {
       return row[column.key]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
     })
 
-    const matchesSelectedRole = selectedRole ? row.role === selectedRole.label : true;
-    return matchesSearchTerm && matchesSelectedRole;
+    const matchesSelectedRole = selectedRole ? row.role === selectedRole.label : true
+    return matchesSearchTerm && matchesSelectedRole
   })
 
   return (

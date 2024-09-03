@@ -1,8 +1,8 @@
 import axios, { AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios'
-import { getWarehouseManagementApi } from './generated-api';
+import { getWarehouseManagementApi } from './generated-api'
 
 interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
-  _retry?: boolean;
+  _retry?: boolean
 }
 
 export const AXIOS_INSTANCE = axios.create({
@@ -14,30 +14,30 @@ const refreshToken = async (): Promise<void> => {
   try {
     await getWarehouseManagementApi().postApiAuthRefresh()
   } catch (error) {
-    console.error('Failed to refresh token:', error);
-    throw error; // Re-throw the error so it can be handled by the caller
+    console.error('Failed to refresh token:', error)
+    throw error // Re-throw the error so it can be handled by the caller
   }
-};
+}
 
 AXIOS_INSTANCE.interceptors.response.use(
-  response => response,
+  (response) => response,
   async (error: AxiosError) => {
-    const originalRequest = error.config as CustomAxiosRequestConfig;
+    const originalRequest = error.config as CustomAxiosRequestConfig
 
     if (error.response?.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
+      originalRequest._retry = true
       try {
-        await refreshToken();
+        await refreshToken()
 
-        return AXIOS_INSTANCE(originalRequest);
+        return AXIOS_INSTANCE(originalRequest)
       } catch (refreshError) {
-        return Promise.reject(refreshError);
+        return Promise.reject(refreshError)
       }
     }
 
-    return Promise.reject(error);
+    return Promise.reject(error)
   }
-);
+)
 
 export const customInstance = <T>(
   config: AxiosRequestConfig,
@@ -46,7 +46,7 @@ export const customInstance = <T>(
   const source = axios.CancelToken.source()
 
   const headers = {
-    ...config.headers,
+    ...config.headers
   }
 
   const promise = AXIOS_INSTANCE({

@@ -1,49 +1,45 @@
-import { useContext } from 'react';
+import { useContext } from 'react'
 import { AuthContext } from '@/contexts/Auth'
-import { getWarehouseManagementApi } from '@/services/generated-api';
-import { LoginFormData } from '@/schemas/loginSchema';
+import { getWarehouseManagementApi } from '@/services/generated-api'
+import { LoginFormData } from '@/schemas/loginSchema'
 
 export const useAuth = () => {
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext)
 
   const loginUser = async (data: LoginFormData) => {
     try {
       await getWarehouseManagementApi().postApiAuthLogin({
         username: data.username,
         password: data.password
-      });
+      })
 
       const requestedUser = await getCurrentLoggedUser()
-      setUser(requestedUser);
+      setUser(requestedUser)
 
-      return user;
-
+      return user
     } catch (error) {
-      console.error('Error during login:', error);
+      console.error('Error during login:', error)
     }
   }
 
   // Тази функция е допълнителна която служи за взимане на юзер данните и работи с логин-а заедно..
   const getCurrentLoggedUser = async () => {
-
     try {
       const response = await getWarehouseManagementApi().getApiUserMe()
-      return response;
-
+      return response
     } catch (error: any) {
-      console.error('Error fetching protected data', error);
+      console.error('Error fetching protected data', error)
     }
-    return null;
+    return null
   }
 
   const logoutUser = async () => {
     try {
       await getWarehouseManagementApi().postApiAuthLogout()
-      setUser(null);
-
+      setUser(null)
     } catch (error) {
-      setUser(null);
-      console.error('Error during logout:', error);
+      setUser(null)
+      console.error('Error during logout:', error)
     }
   }
 
@@ -52,8 +48,8 @@ export const useAuth = () => {
     setUser,
     loginUser,
     getCurrentLoggedUser,
-    logoutUser,
-  };
+    logoutUser
+  }
 }
 
-export default useAuth;
+export default useAuth

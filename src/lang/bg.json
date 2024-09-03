@@ -73,7 +73,7 @@
       },
       "actionsMenu": {
         "delete": "Изтрий",
-        "edit":"Редактирай"
+        "edit": "Редактирай"
       },
       "actions": {
         "delete": {
@@ -142,7 +142,7 @@
       },
       "actionsMenu": {
         "delete": "Изтрий",
-        "edit":"Редактирай"
+        "edit": "Редактирай"
       },
       "actions": {
         "delete": {
@@ -213,7 +213,7 @@
       },
       "actionsMenu": {
         "delete": "Изтрий",
-        "edit":"Редактирай"
+        "edit": "Редактирай"
       },
       "actions": {
         "delete": {
@@ -298,20 +298,20 @@
       },
       "actionsMenu": {
         "delete": "Изтрий",
-        "edit":"Редактирай"
+        "edit": "Редактирай"
       },
       "actions": {
         "delete": {
-            "title": "Изтриване на зона",
-            "message": "Сигурни ли сте, че искате да изтриете {{name}} зона?",
-            "labels": {
-              "discard": "Откажи",
-              "confirm": "Потвърди"
-            },
-            "snackBar": {
-              "success": "Зона {{name}} е изтрита успешно",
-              "error": "Възникна грешка"
-            }
+          "title": "Изтриване на зона",
+          "message": "Сигурни ли сте, че искате да изтриете {{name}} зона?",
+          "labels": {
+            "discard": "Откажи",
+            "confirm": "Потвърди"
+          },
+          "snackBar": {
+            "success": "Зона {{name}} е изтрита успешно",
+            "error": "Възникна грешка"
+          }
         },
         "edit": {
           "title": "Редактиране на зона",
@@ -375,7 +375,7 @@
         "status": "Статус",
         "approvedOn": "Одобрена на",
         "deliveryDate": "Дата на доставка",
-         "actions": "Действия"
+        "actions": "Действия"
       },
       "rows": {
         "status": {
@@ -402,23 +402,23 @@
             "reviewDelivery": "Преглед на доставката"
           },
           "step1": {
-            "title":"Детайли за доставка",
-            "receptionNumber":"Рецепция №",
+            "title": "Детайли за доставка",
+            "receptionNumber": "Рецепция №",
             "cmr": "ЧМР",
-            "markers":"Маркери"
+            "markers": "Маркери"
           },
           "step2": {
             "title": "Детайли за камион",
-            "vendorName":"Име на доставчик",
-            "vendorId":"Доставчик №",
-            "truckNumber":"Номер на камион",
-            "deliveryTime":"Дата на доставка"
+            "vendorName": "Име на доставчик",
+            "vendorId": "Доставчик №",
+            "truckNumber": "Номер на камион",
+            "deliveryTime": "Дата на доставка"
           },
           "step3": {
             "title": "Детайли за стока",
-            "pallets":"Палети",
-            "packages":"Пакети",
-            "pieces":"Бройки"
+            "pallets": "Палети",
+            "packages": "Пакети",
+            "pieces": "Бройки"
           },
           "step4": {
             "title": "Местене на стока"
@@ -486,9 +486,9 @@
         "type": "Тип",
         "quantity": "Количество",
         "types": {
-          "pallets":"Палети",
-          "packages":"Пакети",
-          "pieces":"Бройки"
+          "pallets": "Палети",
+          "packages": "Пакети",
+          "pieces": "Бройки"
         }
       }
     },
@@ -617,17 +617,17 @@
         "completedMoveTitle": "Завършено местене на стока",
         "exceedTitle": "Предупреждение",
         "leftItemsTitle": "Оставащо местене на стока"
-        }
       }
-    },
-    "filters": {
-      "search": "Търсене",
-      "markers": "Маркери",
-      "deliveryTime": "Време за доставка",
-      "deliveryStart": "Начало на доставка",
-      "deliveryEnd": "Край на доставка",
-      "vendorName": "Име на доставчик"
-    },
+    }
+  },
+  "filters": {
+    "search": "Търсене",
+    "markers": "Маркери",
+    "deliveryTime": "Време за доставка",
+    "deliveryStart": "Начало на доставка",
+    "deliveryEnd": "Край на доставка",
+    "vendorName": "Име на доставчик"
+  },
   "zonesContent": {
     "title": "Зони ",
     "description": "Съдържание на зони",
@@ -655,9 +655,9 @@
         },
         "quantity-column": {
           "goodTypes": {
-            "pallets":"Палети",
-            "packages":"Пакети",
-            "pieces":"Бройки"
+            "pallets": "Палети",
+            "packages": "Пакети",
+            "pieces": "Бройки"
           }
         }
       },
@@ -700,7 +700,7 @@
           "zone": "Зона",
           "labels": {
             "confirm": "Потвърди",
-            "discard":"Откажи"
+            "discard": "Откажи"
           },
           "errors": {
             "quantity": {
@@ -713,8 +713,8 @@
             }
           },
           "snackBar": {
-              "success": "Стоката е преместена успешно",
-              "error": "Възникна грешка"
+            "success": "Стоката е преместена успешно",
+            "error": "Възникна грешка"
           }
         },
         "splitEntry": {
@@ -739,23 +739,23 @@
           },
           "errors": {
             "internalNumber": {
-              "required":"Полето за вътрешен № e задължително"
+              "required": "Полето за вътрешен № e задължително"
             },
             "activeNumber": {
-              "required":"Полето за активен № e задължително"
+              "required": "Полето за активен № e задължително"
             },
             "receptionNumber": {
-              "required":"Полето за рецепция № е задължително"
+              "required": "Полето за рецепция № е задължително"
             },
             "count": {
-              "required":"Полето за брой е задължително",
+              "required": "Полето за брой е задължително",
               "min": "Количеството трябва да минимум 1"
             },
             "differenceType": {
-              "required":"Полето за тип разлика е задължително"
+              "required": "Полето за тип разлика е задължително"
             },
             "zone": {
-              "required":"Полето за зона е задължително"
+              "required": "Полето за зона е задължително"
             }
           },
           "snackBar": {
@@ -789,7 +789,7 @@
       },
       "actionsMenu": {
         "delete": "Изтрий",
-        "edit":"Редактирай"
+        "edit": "Редактирай"
       },
       "actions": {
         "delete": {
@@ -861,22 +861,22 @@
     "table": {
       "columns": {
         "number": "№",
-        "internalNumber":"Вътрешен №",
-        "activeNumber":"Активен №",
-        "receptionNumber":"Рецепция №",
-        "count":"Брой",
-        "zone":"Зона",
-        "comment":"Коментар",
+        "internalNumber": "Вътрешен №",
+        "activeNumber": "Активен №",
+        "receptionNumber": "Рецепция №",
+        "count": "Брой",
+        "zone": "Зона",
+        "comment": "Коментар",
         "admin-comment": "Коментар админ",
         "status": "Статус",
         "type": "Тип",
-        "createdAt":"Създадена на",
+        "createdAt": "Създадена на",
         "delivery-systemNumber": "Системен № на доставка",
-        "actions":"Действия"
+        "actions": "Действия"
       },
       "actionsMenu": {
-        "startProcessing":"Започни обработка",
-        "finishProcessing":"Завърши обработка",
+        "startProcessing": "Започни обработка",
+        "finishProcessing": "Завърши обработка",
         "no-differences": "Няма разлики",
         "noActions": "Няма действия"
       },
