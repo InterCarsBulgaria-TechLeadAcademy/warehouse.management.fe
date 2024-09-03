@@ -1,54 +1,49 @@
-import axiosInstance from "@/hooks/services/auth/axiosInstance";
-import { getAccessToken, removeTokens } from "@/hooks/services/auth/useAuth";
-import React, { createContext, ReactNode, useEffect, useState } from "react";
+import { getWarehouseManagementApi } from '@/services/generated-api'
+import { UserDto } from '@/services/model'
+import React, { createContext, ReactNode, useEffect, useState } from 'react'
 
 interface AuthContextProps {
-  user: {
-    username: string
-    role: string
-  } | null;
-  setUser: (user: { username: string, role: string } | null) => void;
+  user: UserDto | null
+  setUser: (user: UserDto | null) => void
 }
 
 const initialAuthContext: AuthContextProps = {
   user: null,
-  setUser: () => { },
-};
+  setUser: () => {}
+}
 
-export const AuthContext = createContext<AuthContextProps>(initialAuthContext);
+export const AuthContext = createContext<AuthContextProps>(initialAuthContext)
 
 interface AuthProviderProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUserState] = useState<{ username: string, role: string } | null>(null);
+  const [user, setUserState] = useState<UserDto | null>(null)
 
   useEffect(() => {
     const fetchUser = async () => {
-      const accessToken = getAccessToken();
-      if (!accessToken) {
-        return;
-      }
       try {
-        const response = await axiosInstance.get('/auth/me');
-        setUserState({username: response.data.username, role: response.data.role});
+        const response = await getWarehouseManagementApi().getApiUserMe()
+        console.log(response)
+
+        if (response.userName) {
+          setUserState(response)
+        } else {
+          console.error('Invalid user data received:', response)
+        }
       } catch (error) {
-        console.error('Error fetching user on initial load:', error);
-        removeTokens();
+        console.error('Error fetching user on initial load:', error)
+        return
       }
-    };
+    }
 
-    fetchUser();
-  }, []);
+    fetchUser()
+  }, [])
 
-  const setUser = (user: { username: string; role: string } | null) => {
-    setUserState(user);
-  };
+  const setUser = (user: UserDto | null) => {
+    setUserState(user)
+  }
 
-  return (
-    <AuthContext.Provider value={{ user, setUser }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ user, setUser }}>{children}</AuthContext.Provider>
 }

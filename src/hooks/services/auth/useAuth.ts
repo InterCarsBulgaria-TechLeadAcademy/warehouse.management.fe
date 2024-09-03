@@ -1,82 +1,45 @@
-import { useContext } from 'react';
+import { useContext } from 'react'
 import { AuthContext } from '@/contexts/Auth'
-import axiosInstance from './axiosInstance';
-import Cookies from 'js-cookie';
-
-
-export const setTokenCookies = (accessToken: any, refreshToken: any) => {
-  // TODO: Talk on later stage (when BE is ready) where to store tokens, also i they are in cookie
-  // to look for functionality if the cookie is expired!
-  Cookies.set('accessToken', accessToken, { expires: 15 / 1440, secure: true, sameSite: 'Strict' }); // 15 minutes
-  Cookies.set('refreshToken', refreshToken, { expires: 7, secure: true, sameSite: 'Strict' }); // 7 days
-};
-
-export const getAccessToken = () => Cookies.get('accessToken');
-export const getRefreshToken = () => Cookies.get('refreshToken');
-
-export const removeTokens = () => {
-  Cookies.remove('accessToken');
-  Cookies.remove('refreshToken');
-};
+import { getWarehouseManagementApi } from '@/services/generated-api'
+import { LoginFormData } from '@/schemas/loginSchema'
 
 export const useAuth = () => {
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext)
 
-  const loginUser = async () => {
+  const loginUser = async (data: LoginFormData) => {
     try {
-      const response = await axiosInstance.post('/auth/login', {
-        username: 'emilys',
-        password: 'emilyspass',
-        expiresInMins: 1, // optional, defaults to 60
-      });
+      await getWarehouseManagementApi().postApiAuthLogin({
+        username: data.username,
+        password: data.password
+      })
 
-      const data = await response.data
-      setTokenCookies(data.token, data.refreshToken)
-      const requestedUser = await getUserFromCookies()
-      // requestedUser.role = 'regular' // Uncomment it to change role..
-      setUser({ username: requestedUser.username, role: requestedUser.role });
-      return { username: requestedUser.username, role: requestedUser.role };
+      const requestedUser = await getCurrentLoggedUser()
+      setUser(requestedUser)
+
+      return user
     } catch (error) {
-      console.error('Error during login:', error);
+      console.error('Error during login:', error)
     }
   }
 
   // Тази функция е допълнителна която служи за взимане на юзер данните и работи с логин-а заедно..
-  const getUserFromCookies = async () => {
-    const accessToken = getAccessToken()
-    const refreshToken = getRefreshToken()
-
-    if (!accessToken) {
-      // Redirect to login..
-      // After that try to handle refresh token..
-      return null;
-    }
-
+  const getCurrentLoggedUser = async () => {
     try {
-      const response = await axiosInstance.get('/auth/me');
-      return response.data;
-
+      const response = await getWarehouseManagementApi().getApiUserMe()
+      return response
     } catch (error: any) {
-      if (error.response && error.response.status === 401) {
-        // Token might be expired, handle token refresh or re-login
-        removeTokens();
-        // Redirect to login or refresh tokens
-      } else {
-        console.error('Error fetching protected data', error);
-      }
+      console.error('Error fetching protected data', error)
     }
-    return null;
+    return null
   }
 
   const logoutUser = async () => {
     try {
-      // logout from BE
-      removeTokens();
-      setUser(null);
-      return;
-
+      await getWarehouseManagementApi().postApiAuthLogout()
+      setUser(null)
     } catch (error) {
-      console.error('Error during logout:', error);
+      setUser(null)
+      console.error('Error during logout:', error)
     }
   }
 
@@ -84,9 +47,9 @@ export const useAuth = () => {
     user,
     setUser,
     loginUser,
-    getUserFromCookies,
-    logoutUser,
-  };
+    getCurrentLoggedUser,
+    logoutUser
+  }
 }
 
-export default useAuth;
+export default useAuth

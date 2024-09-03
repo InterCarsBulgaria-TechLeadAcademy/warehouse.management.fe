@@ -1,8 +1,9 @@
 import * as yup from 'yup'
 
 export const loginSchema = yup
+  // TODO: check validation data
   .object({
-    email: yup.string().required('login.errors.email.required').email('login.errors.email.invalid'),
+    username: yup.string().required('login.errors.email.required'),
     password: yup
       .string()
       .required('login.errors.password.required')
@@ -14,6 +15,6 @@ export const loginSchema = yup
   .required()
 
 export interface LoginFormData extends yup.InferType<typeof loginSchema> {
-  email: string
+  username: string
   password: string
 }

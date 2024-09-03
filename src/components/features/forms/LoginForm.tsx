@@ -16,24 +16,24 @@ export default function LoginForm({
   return (
     <>
       <Controller
-        name="email"
+        name="username"
         control={control}
         defaultValue=""
         render={({ field }) => (
           <TextField
             {...field}
-            label={translate('login.labels.email')}
-            id="email"
-            name="email"
+            label={translate('Име')}
+            id="username"
+            name="username"
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            autoComplete="email"
+            autoComplete="username"
             autoFocus
             color="secondary"
-            error={!!errors.email}
-            helperText={errors.email?.message ? translate(errors.email.message) : ''}
+            error={!!errors.username}
+            helperText={errors.username?.message ? translate(errors.username.message) : ''}
           />
         )}
       />

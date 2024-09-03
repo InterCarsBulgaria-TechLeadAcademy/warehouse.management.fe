@@ -10,7 +10,12 @@ interface DialogFormProps {
   renderForm: (handleCloseForm: () => void) => React.ReactNode
 }
 
-export default function BaseFormDialog({ open, onCloseDialog, title, renderForm }: DialogFormProps) {
+export default function BaseFormDialog({
+  open,
+  onCloseDialog,
+  title,
+  renderForm
+}: DialogFormProps) {
   const handleClose = () => {
     onCloseDialog()
   }

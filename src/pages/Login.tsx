@@ -10,29 +10,27 @@ import { useTranslation } from 'react-i18next'
 import { LoginFormData, loginSchema } from '@/schemas/loginSchema'
 import LoginForm from '@/components/features/forms/LoginForm'
 import { useNavigate } from 'react-router-dom'
-import { DELIVERIES_PATH } from '@/router/routerPaths';
+import { DELIVERIES_PATH } from '@/router/routerPaths'
 import { useAuth } from '@/hooks/services/auth/useAuth'
 
 export default function Login() {
-  const { loginUser } = useAuth();
+  const { loginUser } = useAuth()
   const { t: translate } = useTranslation()
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const methods = useForm<LoginFormData>({
     resolver: yupResolver(loginSchema)
   })
 
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
-    console.log(data);
     try {
-      const user = await loginUser();
-      if (!user) return;
-      navigate(`${DELIVERIES_PATH}`);
-
+      const user = await loginUser(data)
+      if (!user) return
+      navigate(DELIVERIES_PATH)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>

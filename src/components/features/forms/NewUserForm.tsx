@@ -22,9 +22,9 @@ export default function NewUserForm({
   defaultValues = { name: '', email: '', role: '' }
 }: NewUserFormProps) {
   const { t: translate } = useTranslation()
-  // TODO: Add functionality to take rights from BE.
-  const markers = useGetMarkers()
-  const roles = ['regular' , 'admin' ]
+  // TODO: Add functionality to take roles from BE.
+  // const markers = useGetMarkers()
+  const roles = ['regular', 'admin']
 
   return (
     <>
@@ -111,17 +111,14 @@ export default function NewUserForm({
         control={control}
         render={({ field }) => (
           <FormControl fullWidth>
-            <InputLabel id="demo-role-label">
-              {translate('Роля')}
-            </InputLabel>
+            <InputLabel id="demo-role-label">{translate('Роля')}</InputLabel>
             <Select
               {...field}
               label={translate('Роля')}
               labelId="demo-role-label"
               id="demo-role"
               value={field.value || ''}
-              onChange={(e) => field.onChange(e.target.value)}
-            >
+              onChange={(e) => field.onChange(e.target.value)}>
               {roles.map((role: string) => (
                 <MenuItem key={role} value={role}>
                   <ListItemText primary={role} />
@@ -131,7 +128,6 @@ export default function NewUserForm({
           </FormControl>
         )}
       />
-      
     </>
   )
 }
