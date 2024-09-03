@@ -41,8 +41,6 @@ export const useAuth = () => {
       await getWarehouseManagementApi().postApiAuthLogout()
       setUser(null);
 
-      return;
-      
     } catch (error) {
       setUser(null);
       console.error('Error during logout:', error);
