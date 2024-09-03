@@ -15,12 +15,7 @@ export const useAuth = () => {
 
       const requestedUser = await getCurrentLoggedUser()
 
-      const username = requestedUser?.userName ?? null;
-      const role = requestedUser?.roles?.[0] ?? null;
-
-      const user = username && role ? { username, role } : null;
-
-      setUser(user);
+      setUser(requestedUser);
       return user;
 
 
