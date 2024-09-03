@@ -17,7 +17,7 @@ export const useAuth = () => {
       setUser(requestedUser);
 
       return user;
-      
+
     } catch (error) {
       console.error('Error during login:', error);
     }
@@ -38,13 +38,11 @@ export const useAuth = () => {
 
   const logoutUser = async () => {
     try {
-      // TODO: check the logout..
-      const response = await getWarehouseManagementApi().postApiAuthLogout()
-      console.log(response);
-      
+      await getWarehouseManagementApi().postApiAuthLogout()
       setUser(null);
 
       return;
+      
     } catch (error) {
       setUser(null);
       console.error('Error during logout:', error);
