@@ -38,7 +38,6 @@ export default function Router() {
   const { user } = useAuth()
 
   const isAuthenticated = !!user
-  const isAdmin = user?.role === 'admin'
 
   return useRoutes([
     {
@@ -60,7 +59,7 @@ export default function Router() {
     },
     {
       path: ADMIN_PATH,
-      element: isAdmin ? <DefaultLayout /> : <Navigate to={LOGIN_PATH} />,
+      element: <DefaultLayout />,
       children: [
         {
           path: USERS_PATH,

@@ -26,7 +26,7 @@ export default function Login() {
     try {
       const user = await loginUser(data)
       if (!user) return
-      navigate(`${DELIVERIES_PATH}`)
+      navigate(DELIVERIES_PATH)
     } catch (error) {
       console.log(error)
     }
