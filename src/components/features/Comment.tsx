@@ -8,6 +8,7 @@ interface CommentProps {
 
 export default function Comment({ comment }: CommentProps) {
   const isSmallScreen = useIsSmallScreen()
+
   return comment === '' ? (
     <Typography>-</Typography>
   ) : isSmallScreen ? (

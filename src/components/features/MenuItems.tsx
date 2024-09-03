@@ -26,10 +26,10 @@ interface MenuItem {
 }
 
 interface MenuItemsProps {
-  onClose?: () => void
+  handleClose?: () => void
 }
 
-export default function MenuItems({ onClose }: MenuItemsProps) {
+export default function MenuItems({ handleClose }: MenuItemsProps) {
   const { t: translate } = useTranslation()
 
   const adminMenuItems: MenuItem[] = [
@@ -89,7 +89,7 @@ export default function MenuItems({ onClose }: MenuItemsProps) {
       title={menuItem.title}
       Icon={menuItem.icon}
       link={menuItem.link}
-      onClose={onClose}
+      handleClose={handleClose}
     />
   ))
 }

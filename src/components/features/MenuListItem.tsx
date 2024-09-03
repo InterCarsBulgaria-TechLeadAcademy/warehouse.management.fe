@@ -1,5 +1,4 @@
-import { useIsSmallScreen } from '@/hooks/useIsSmallScreen'
-import { Box, ListItemIcon, ListItemText, MenuItem } from '@mui/material'
+import { ListItemIcon, ListItemText, MenuItem } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 import { useTheme } from '@mui/material/styles'
 import { ExtendedTheme } from '@/plugins/muiTheme'
@@ -8,44 +7,39 @@ interface MenuItemProps {
   title: string
   Icon: React.ElementType
   link: string
-  onClose?: () => void
+  handleClose?: () => void
 }
 
-export default function MenuListItem({ title, Icon, link, onClose }: MenuItemProps) {
-  const isSmallScreen: boolean = useIsSmallScreen()
+export default function MenuListItem({ title, Icon, link, handleClose }: MenuItemProps) {
   const theme: ExtendedTheme = useTheme()
   return (
     <MenuItem
-      onClick={onClose}
+      onClick={handleClose}
       sx={{
-        padding: 0,
+        display: 'flex',
+        padding: '0',
         '&:hover': {
           backgroundColor: 'primary.100',
           color: 'primary.main'
         }
       }}>
-      <Box
-        component={NavLink}
+      <NavLink
         to={link}
-        style={({ isActive }) => {
-          return {
-            backgroundColor: isActive ? theme.palette.primary['100'] : 'inherit',
-            color: isActive ? theme.palette.primary.main : 'inherit'
-          }
-        }}
-        sx={{
+        style={({ isActive }) => ({
+          flex: 1,
           display: 'flex',
           width: '100%',
-          padding: isSmallScreen ? '0em 0.7em' : '0.7em 0 0.7em 1.5em',
+          padding: '0.7em 1.5em 0.7em 1.5em',
           gap: '1em',
-          color: 'secondary.main',
-          textDecoration: 'none'
-        }}>
+          textDecoration: 'none',
+          backgroundColor: isActive ? theme.palette.primary['100'] : 'inherit',
+          color: isActive ? theme.palette.primary.main : 'inherit'
+        })}>
         <ListItemIcon sx={{ color: 'inherit' }}>
           <Icon />
         </ListItemIcon>
         <ListItemText>{title}</ListItemText>
-      </Box>
+      </NavLink>
     </MenuItem>
   )
 }

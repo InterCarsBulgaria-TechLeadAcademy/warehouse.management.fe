@@ -10,6 +10,7 @@ export default function SmallMainMenu() {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
   }
+
   const handleClose = () => {
     setAnchorEl(null)
   }
@@ -32,7 +33,7 @@ export default function SmallMainMenu() {
         MenuListProps={{
           'aria-labelledby': 'basic-button'
         }}>
-        <MenuItems onClose={handleClose} />
+        <MenuItems handleClose={handleClose} />
       </Menu>
     </div>
   )
