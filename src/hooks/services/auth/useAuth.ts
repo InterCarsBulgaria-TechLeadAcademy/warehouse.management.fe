@@ -45,8 +45,7 @@ export const useAuth = () => {
   const logoutUser = async () => {
     try {
       // TODO: check the logout..
-      // const response = await getWarehouseManagementApi().postApiAuthLogout()
-
+      await getWarehouseManagementApi().postApiAuthLogout()
       setUser(null);
 
       return;
