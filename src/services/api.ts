@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios'
+import { getWarehouseManagementApi } from './generated-api';
 
 interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
   _retry?: boolean;
@@ -11,9 +12,7 @@ export const AXIOS_INSTANCE = axios.create({
 
 const refreshToken = async (): Promise<void> => {
   try {
-    await axios.post('https://leads-academy-intercars.com/api/Auth/refresh', {}, {
-      withCredentials: true,  // Ensure cookies are sent with the request
-    });
+    await getWarehouseManagementApi().postApiAuthRefresh()
   } catch (error) {
     console.error('Failed to refresh token:', error);
     throw error; // Re-throw the error so it can be handled by the caller
