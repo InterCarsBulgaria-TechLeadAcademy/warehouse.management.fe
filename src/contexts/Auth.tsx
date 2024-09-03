@@ -1,12 +1,10 @@
 import { getWarehouseManagementApi } from "@/services/generated-api";
+import { UserDto } from "@/services/model";
 import React, { createContext, ReactNode, useEffect, useState } from "react";
 
 interface AuthContextProps {
-  user: {
-    username: string
-    role: string
-  } | null;
-  setUser: (user: { username: string, role: string } | null) => void;
+  user: UserDto | null;
+  setUser: (user: UserDto | null) => void;
 }
 
 const initialAuthContext: AuthContextProps = {
@@ -21,20 +19,18 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUserState] = useState<{ username: string, role: string } | null>(null);
+  const [user, setUserState] = useState<UserDto | null>(null);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const response = await getWarehouseManagementApi().getApiUserMe()
+        console.log(response);
         
-        const username = response.userName ?? null;
-        const role = response.role ?? null;
-
-        if (username && role) {
-          setUserState({ username, role });
+        if (response.userName) {
+          setUserState(response);
         } else {
-          console.error("Invalid user data received:", { username, role });
+          console.error("Invalid user data received:", response);
         }
       } catch (error) {
         console.error('Error fetching user on initial load:', error);
@@ -45,7 +41,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     fetchUser();
   }, []);
 
-  const setUser = (user: { username: string; role: string } | null) => {
+  const setUser = (user: UserDto | null) => {
     setUserState(user);
   };
 
