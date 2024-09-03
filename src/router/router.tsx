@@ -59,7 +59,7 @@ export default function Router() {
     },
     {
       path: ADMIN_PATH,
-      element: <DefaultLayout />,
+      element: isAuthenticated ? <DefaultLayout /> : <Navigate to={LOGIN_PATH} />,
       children: [
         {
           path: USERS_PATH,
