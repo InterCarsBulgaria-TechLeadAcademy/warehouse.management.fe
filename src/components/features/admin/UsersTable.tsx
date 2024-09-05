@@ -28,7 +28,7 @@ export default function UsersTable() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const users = useGetUsers()
   const roles = useGetRoles()
-  
+
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
   }
