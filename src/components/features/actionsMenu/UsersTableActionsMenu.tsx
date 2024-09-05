@@ -4,11 +4,10 @@ import { useTranslation } from 'react-i18next'
 import FormDialog from '../../shared/FormDialog'
 import { SubmitHandler } from 'react-hook-form'
 import TableActionsMenu from './TableActionsMenu'
-import useUpdateVendor from '@/hooks/services/vendors/useUpdateVendor'
-import useDeleteVendor from '@/hooks/services/vendors/useDeleteVendor'
 import NewUserForm from '../forms/NewUserForm'
 import { NewUserFormData, newUserSchema } from '@/schemas/newUserSchema'
 import { UserAllDto } from '@/services/model'
+import useDeleteUser from '@/hooks/services/users/useDeleteUser'
 
 
 interface UsersTableActionsMenuProps {
@@ -18,9 +17,8 @@ interface UsersTableActionsMenuProps {
 export default function UsersTableActionsMenu({ user }: UsersTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
-  const [vendorNumber, setVendorNumber] = React.useState('')
-  // const mutationUpdate = useUpdateVendor(user.userName!, vendorNumber)
-  // const mutationDelete = useDeleteVendor(user.userName!)
+  const mutationDelete = useDeleteUser(user.userName!)
+  // TODO: Create update user functionality
 
   const handleClose = () => {
     setSelectedOption(null)
@@ -31,16 +29,11 @@ export default function UsersTableActionsMenu({ user }: UsersTableActionsMenuPro
   }
 
   const handleSubmit: SubmitHandler<NewUserFormData> = (data) => {
-    // setVendorNumber(data.vendorNumber)
-    // const markerIds = data.markers!.map((marker) => Number(marker))
-    // mutationUpdate.mutate({
-    //   id: user.id!,
-    //   data: { name: data.vendorName, systemNumber: data.vendorNumber, markerIds: markerIds }
-    // })
+    // TODO: Create update user functionality
   }
 
   const onConfirmDelete = () => {
-    // mutationDelete.mutate(user.id!)
+    mutationDelete.mutate(user.id!)
     handleClose()
   }
 
