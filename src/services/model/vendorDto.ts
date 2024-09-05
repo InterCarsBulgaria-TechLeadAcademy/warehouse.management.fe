@@ -6,7 +6,8 @@
  */
 
 export interface VendorDto {
-  createdAt?: string
+  /** @nullable */
+  createdAt?: string | null
   id?: number
   /** @nullable */
   markers?: string[] | null

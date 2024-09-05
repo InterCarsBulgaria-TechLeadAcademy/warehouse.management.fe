@@ -5,13 +5,17 @@
  * OpenAPI spec version: 1.0
  */
 
-export interface ZoneDto {
+export interface UserAllDto {
   /** @nullable */
   createdAt?: string | null
-  id?: number
-  isFinal?: boolean
   /** @nullable */
-  markers?: string[] | null
+  createdBy?: string | null
   /** @nullable */
-  name?: string | null
+  email?: string | null
+  /** @nullable */
+  id?: string | null
+  /** @nullable */
+  role?: string | null
+  /** @nullable */
+  userName?: string | null
 }

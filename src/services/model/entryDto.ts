@@ -8,7 +8,8 @@ import type { EntryDeliveryDetailsDto } from './entryDeliveryDetailsDto'
 import type { EntryZoneDto } from './entryZoneDto'
 
 export interface EntryDto {
-  createdAt?: string
+  /** @nullable */
+  createdAt?: string | null
   deliveryDetails?: EntryDeliveryDetailsDto
   /** @nullable */
   finishedProccessing?: string | null

@@ -46,6 +46,7 @@ import type {
   RoleFormDto,
   RoleUserAssignDto,
   RoutePermissionDto,
+  UserAllDto,
   UserDto,
   VendorDetailsDto,
   VendorDto,
@@ -637,8 +638,16 @@ export const getWarehouseManagementApi = () => {
     )
   }
 
+  const getApiUserAll = (options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<UserAllDto>({ url: `/api/User/all`, method: 'GET' }, options)
+  }
+
   const getApiUserMe = (options?: SecondParameter<typeof customInstance>) => {
     return customInstance<UserDto>({ url: `/api/User/me`, method: 'GET' }, options)
+  }
+
+  const deleteApiUserDeleteId = (id: string, options?: SecondParameter<typeof customInstance>) => {
+    return customInstance<void>({ url: `/api/User/delete/${id}`, method: 'DELETE' }, options)
   }
 
   const getApiVendorId = (id: number, options?: SecondParameter<typeof customInstance>) => {
@@ -844,7 +853,9 @@ export const getWarehouseManagementApi = () => {
     getApiRoutePermissionAllWithDeleted,
     getApiRoutePermissionId,
     deleteApiRoutePermissionDeleteId,
+    getApiUserAll,
     getApiUserMe,
+    deleteApiUserDeleteId,
     getApiVendorId,
     getApiVendorAll,
     postApiVendorAdd,
@@ -1058,8 +1069,14 @@ export type DeleteApiRoutePermissionDeleteIdResult = NonNullable<
     ReturnType<ReturnType<typeof getWarehouseManagementApi>['deleteApiRoutePermissionDeleteId']>
   >
 >
+export type GetApiUserAllResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiUserAll']>>
+>
 export type GetApiUserMeResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiUserMe']>>
+>
+export type DeleteApiUserDeleteIdResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['deleteApiUserDeleteId']>>
 >
 export type GetApiVendorIdResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getWarehouseManagementApi>['getApiVendorId']>>

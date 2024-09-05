@@ -7,7 +7,9 @@
   "paths": {
     "/api/Auth/login": {
       "post": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -39,7 +41,9 @@
     },
     "/api/Auth/register": {
       "post": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -88,7 +92,9 @@
     },
     "/api/Auth/refresh": {
       "post": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "responses": {
           "200": {
             "description": "Success"
@@ -138,7 +144,9 @@
     },
     "/api/Auth/logout": {
       "post": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "responses": {
           "200": {
             "description": "Success"
@@ -148,7 +156,9 @@
     },
     "/api/Delivery/{id}": {
       "get": {
-        "tags": ["Delivery"],
+        "tags": [
+          "Delivery"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -206,7 +216,9 @@
     },
     "/api/Delivery/all": {
       "get": {
-        "tags": ["Delivery"],
+        "tags": [
+          "Delivery"
+        ],
         "parameters": [
           {
             "name": "PageNumber",
@@ -278,7 +290,9 @@
     },
     "/api/Delivery/add": {
       "post": {
-        "tags": ["Delivery"],
+        "tags": [
+          "Delivery"
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -327,7 +341,9 @@
     },
     "/api/Delivery/edit/{id}": {
       "put": {
-        "tags": ["Delivery"],
+        "tags": [
+          "Delivery"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -407,7 +423,9 @@
     },
     "/api/Delivery/delete/{id}": {
       "delete": {
-        "tags": ["Delivery"],
+        "tags": [
+          "Delivery"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -468,7 +486,9 @@
     },
     "/api/Delivery/restore/{id}": {
       "put": {
-        "tags": ["Delivery"],
+        "tags": [
+          "Delivery"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -529,7 +549,9 @@
     },
     "/api/Delivery/all-deleted": {
       "get": {
-        "tags": ["Delivery"],
+        "tags": [
+          "Delivery"
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -565,7 +587,9 @@
     },
     "/api/Delivery/history/{id}": {
       "get": {
-        "tags": ["Delivery"],
+        "tags": [
+          "Delivery"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -623,7 +647,9 @@
     },
     "/api/Delivery/Approve/{id}": {
       "put": {
-        "tags": ["Delivery"],
+        "tags": [
+          "Delivery"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -684,7 +710,9 @@
     },
     "/api/Delivery/GenerateBarcodePdf": {
       "post": {
-        "tags": ["Delivery"],
+        "tags": [
+          "Delivery"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -704,7 +732,9 @@
     },
     "/api/Difference/all": {
       "get": {
-        "tags": ["Difference"],
+        "tags": [
+          "Difference"
+        ],
         "parameters": [
           {
             "name": "PageNumber",
@@ -756,7 +786,9 @@
     },
     "/api/Difference/all-with-deleted": {
       "get": {
-        "tags": ["Difference"],
+        "tags": [
+          "Difference"
+        ],
         "parameters": [
           {
             "name": "PageNumber",
@@ -808,7 +840,9 @@
     },
     "/api/Difference/{id}": {
       "get": {
-        "tags": ["Difference"],
+        "tags": [
+          "Difference"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -866,7 +900,9 @@
     },
     "/api/Difference/add": {
       "post": {
-        "tags": ["Difference"],
+        "tags": [
+          "Difference"
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -915,7 +951,9 @@
     },
     "/api/Difference/edit/{id}": {
       "put": {
-        "tags": ["Difference"],
+        "tags": [
+          "Difference"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -975,7 +1013,9 @@
     },
     "/api/Difference/delete/{id}": {
       "delete": {
-        "tags": ["Difference"],
+        "tags": [
+          "Difference"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -996,7 +1036,9 @@
     },
     "/api/Difference/restore/{id}": {
       "patch": {
-        "tags": ["Difference"],
+        "tags": [
+          "Difference"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1057,7 +1099,9 @@
     },
     "/api/Difference/start/{id}": {
       "post": {
-        "tags": ["Difference"],
+        "tags": [
+          "Difference"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1118,7 +1162,9 @@
     },
     "/api/Difference/finish/{id}": {
       "post": {
-        "tags": ["Difference"],
+        "tags": [
+          "Difference"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1198,7 +1244,9 @@
     },
     "/api/Difference/noDifferences/{id}": {
       "post": {
-        "tags": ["Difference"],
+        "tags": [
+          "Difference"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1278,7 +1326,9 @@
     },
     "/api/DifferenceType/all": {
       "get": {
-        "tags": ["DifferenceType"],
+        "tags": [
+          "DifferenceType"
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -1314,7 +1364,9 @@
     },
     "/api/DifferenceType/all-with-deleted": {
       "get": {
-        "tags": ["DifferenceType"],
+        "tags": [
+          "DifferenceType"
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -1350,7 +1402,9 @@
     },
     "/api/DifferenceType/{id}": {
       "get": {
-        "tags": ["DifferenceType"],
+        "tags": [
+          "DifferenceType"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1408,7 +1462,9 @@
     },
     "/api/DifferenceType/add": {
       "post": {
-        "tags": ["DifferenceType"],
+        "tags": [
+          "DifferenceType"
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1457,7 +1513,9 @@
     },
     "/api/DifferenceType/edit/{id}": {
       "put": {
-        "tags": ["DifferenceType"],
+        "tags": [
+          "DifferenceType"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1517,7 +1575,9 @@
     },
     "/api/DifferenceType/delete/{id}": {
       "delete": {
-        "tags": ["DifferenceType"],
+        "tags": [
+          "DifferenceType"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1558,7 +1618,9 @@
     },
     "/api/DifferenceType/restore/{id}": {
       "put": {
-        "tags": ["DifferenceType"],
+        "tags": [
+          "DifferenceType"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1599,7 +1661,9 @@
     },
     "/api/Entry/all": {
       "get": {
-        "tags": ["Entry"],
+        "tags": [
+          "Entry"
+        ],
         "parameters": [
           {
             "name": "PageNumber",
@@ -1669,7 +1733,9 @@
     },
     "/api/Entry/{id}": {
       "get": {
-        "tags": ["Entry"],
+        "tags": [
+          "Entry"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1727,7 +1793,9 @@
     },
     "/api/Entry/all-with-deleted": {
       "get": {
-        "tags": ["Entry"],
+        "tags": [
+          "Entry"
+        ],
         "parameters": [
           {
             "name": "PageNumber",
@@ -1806,7 +1874,9 @@
     },
     "/api/Entry/add": {
       "post": {
-        "tags": ["Entry"],
+        "tags": [
+          "Entry"
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1844,7 +1914,9 @@
     },
     "/api/Entry/edit/{id}": {
       "put": {
-        "tags": ["Entry"],
+        "tags": [
+          "Entry"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1904,7 +1976,9 @@
     },
     "/api/Entry/delete/{id}": {
       "delete": {
-        "tags": ["Entry"],
+        "tags": [
+          "Entry"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1945,7 +2019,9 @@
     },
     "/api/Entry/restore/{id}": {
       "put": {
-        "tags": ["Entry"],
+        "tags": [
+          "Entry"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1986,7 +2062,9 @@
     },
     "/api/Entry/start/{id}": {
       "put": {
-        "tags": ["Entry"],
+        "tags": [
+          "Entry"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2047,7 +2125,9 @@
     },
     "/api/Entry/finish/{id}": {
       "put": {
-        "tags": ["Entry"],
+        "tags": [
+          "Entry"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2108,7 +2188,9 @@
     },
     "/api/Entry/move/{id}": {
       "post": {
-        "tags": ["Entry"],
+        "tags": [
+          "Entry"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2191,7 +2273,9 @@
     },
     "/api/Entry/split/{id}": {
       "post": {
-        "tags": ["Entry"],
+        "tags": [
+          "Entry"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2271,7 +2355,9 @@
     },
     "/api/Marker/{id}": {
       "get": {
-        "tags": ["Marker"],
+        "tags": [
+          "Marker"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2329,7 +2415,9 @@
     },
     "/api/Marker/all": {
       "get": {
-        "tags": ["Marker"],
+        "tags": [
+          "Marker"
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -2365,7 +2453,9 @@
     },
     "/api/Marker/all-with-params": {
       "get": {
-        "tags": ["Marker"],
+        "tags": [
+          "Marker"
+        ],
         "parameters": [
           {
             "name": "PageNumber",
@@ -2426,7 +2516,9 @@
     },
     "/api/Marker/add": {
       "post": {
-        "tags": ["Marker"],
+        "tags": [
+          "Marker"
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -2475,7 +2567,9 @@
     },
     "/api/Marker/edit/{id}": {
       "put": {
-        "tags": ["Marker"],
+        "tags": [
+          "Marker"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2555,7 +2649,9 @@
     },
     "/api/Marker/delete/{id}": {
       "delete": {
-        "tags": ["Marker"],
+        "tags": [
+          "Marker"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2616,7 +2712,9 @@
     },
     "/api/Marker/restore/{id}": {
       "put": {
-        "tags": ["Marker"],
+        "tags": [
+          "Marker"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2657,7 +2755,9 @@
     },
     "/api/Marker/deleted": {
       "get": {
-        "tags": ["Marker"],
+        "tags": [
+          "Marker"
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -2693,7 +2793,9 @@
     },
     "/api/Role/add-to-role": {
       "post": {
-        "tags": ["Role"],
+        "tags": [
+          "Role"
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -2745,7 +2847,9 @@
     },
     "/api/Role/create": {
       "post": {
-        "tags": ["Role"],
+        "tags": [
+          "Role"
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -2797,7 +2901,9 @@
     },
     "/api/Role/edit/{id}": {
       "put": {
-        "tags": ["Role"],
+        "tags": [
+          "Role"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2856,7 +2962,9 @@
     },
     "/api/Role/delete/{id}": {
       "delete": {
-        "tags": ["Role"],
+        "tags": [
+          "Role"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2896,7 +3004,9 @@
     },
     "/api/Role/all": {
       "get": {
-        "tags": ["Role"],
+        "tags": [
+          "Role"
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -2932,7 +3042,9 @@
     },
     "/api/Role/{id}": {
       "get": {
-        "tags": ["Role"],
+        "tags": [
+          "Role"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2969,7 +3081,9 @@
     },
     "/api/RoutePermission/all": {
       "get": {
-        "tags": ["RoutePermission"],
+        "tags": [
+          "RoutePermission"
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -3014,7 +3128,9 @@
     },
     "/api/RoutePermission/all-with-deleted": {
       "get": {
-        "tags": ["RoutePermission"],
+        "tags": [
+          "RoutePermission"
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -3059,7 +3175,9 @@
     },
     "/api/RoutePermission/{id}": {
       "get": {
-        "tags": ["RoutePermission"],
+        "tags": [
+          "RoutePermission"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -3116,7 +3234,9 @@
     },
     "/api/RoutePermission/delete/{id}": {
       "delete": {
-        "tags": ["RoutePermission"],
+        "tags": [
+          "RoutePermission"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -3154,9 +3274,40 @@
         }
       }
     },
+    "/api/User/all": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserAllDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserAllDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserAllDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/User/me": {
       "get": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -3201,9 +3352,33 @@
         }
       }
     },
+    "/api/User/delete/{id}": {
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Vendor/{id}": {
       "get": {
-        "tags": ["Vendor"],
+        "tags": [
+          "Vendor"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -3261,7 +3436,9 @@
     },
     "/api/Vendor/all": {
       "get": {
-        "tags": ["Vendor"],
+        "tags": [
+          "Vendor"
+        ],
         "parameters": [
           {
             "name": "PageNumber",
@@ -3322,7 +3499,9 @@
     },
     "/api/Vendor/add": {
       "post": {
-        "tags": ["Vendor"],
+        "tags": [
+          "Vendor"
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -3391,7 +3570,9 @@
     },
     "/api/Vendor/edit/{id}": {
       "put": {
-        "tags": ["Vendor"],
+        "tags": [
+          "Vendor"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -3471,7 +3652,9 @@
     },
     "/api/Vendor/delete/{id}": {
       "delete": {
-        "tags": ["Vendor"],
+        "tags": [
+          "Vendor"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -3532,7 +3715,9 @@
     },
     "/api/Vendor/restore/{id}": {
       "put": {
-        "tags": ["Vendor"],
+        "tags": [
+          "Vendor"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -3593,7 +3778,9 @@
     },
     "/api/Vendor/all-deleted": {
       "get": {
-        "tags": ["Vendor"],
+        "tags": [
+          "Vendor"
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -3629,7 +3816,9 @@
     },
     "/api/Zone/{id}": {
       "get": {
-        "tags": ["Zone"],
+        "tags": [
+          "Zone"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -3687,7 +3876,9 @@
     },
     "/api/Zone/all": {
       "get": {
-        "tags": ["Zone"],
+        "tags": [
+          "Zone"
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -3723,7 +3914,9 @@
     },
     "/api/Zone/all-with-params": {
       "get": {
-        "tags": ["Zone"],
+        "tags": [
+          "Zone"
+        ],
         "parameters": [
           {
             "name": "PageNumber",
@@ -3784,7 +3977,9 @@
     },
     "/api/Zone/add": {
       "post": {
-        "tags": ["Zone"],
+        "tags": [
+          "Zone"
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -3833,7 +4028,9 @@
     },
     "/api/Zone/edit/{id}": {
       "put": {
-        "tags": ["Zone"],
+        "tags": [
+          "Zone"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -3913,7 +4110,9 @@
     },
     "/api/Zone/delete/{id}": {
       "delete": {
-        "tags": ["Zone"],
+        "tags": [
+          "Zone"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -3974,7 +4173,9 @@
     },
     "/api/Zone/restore/{id}": {
       "put": {
-        "tags": ["Zone"],
+        "tags": [
+          "Zone"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -4035,7 +4236,9 @@
     },
     "/api/Zone/all-with-deleted": {
       "get": {
-        "tags": ["Zone"],
+        "tags": [
+          "Zone"
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -4071,7 +4274,9 @@
     },
     "/api/Zone/all-with-deleted-with-params": {
       "get": {
-        "tags": ["Zone"],
+        "tags": [
+          "Zone"
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -4126,7 +4331,9 @@
     },
     "/api/Zone/entries": {
       "get": {
-        "tags": ["Zone"],
+        "tags": [
+          "Zone"
+        ],
         "parameters": [
           {
             "name": "zoneId",
@@ -4282,7 +4489,7 @@
           },
           "createdAt": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
           "pallets": {
             "type": "integer",
@@ -4303,12 +4510,6 @@
           "entriesFinishedProcessing": {
             "type": "integer",
             "format": "int32"
-          },
-          "entriesWaitingProcessingDetails": {
-            "$ref": "#/components/schemas/EntriesProcessingDetails"
-          },
-          "entriesFinishedProcessingDetails": {
-            "$ref": "#/components/schemas/EntriesProcessingDetails"
           },
           "vendorId": {
             "type": "integer",
@@ -4364,7 +4565,7 @@
           },
           "createdAt": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
           "entriesWaitingProcessing": {
             "type": "integer",
@@ -4442,12 +4643,10 @@
           },
           "startedProccessing": {
             "type": "string",
-            "format": "date-time",
             "nullable": true
           },
           "finishedProccessing": {
             "type": "string",
-            "format": "date-time",
             "nullable": true
           },
           "zoneName": {
@@ -4458,7 +4657,12 @@
         "additionalProperties": false
       },
       "DeliveryFormDto": {
-        "required": ["cmr", "receptionNumber", "systemNumber", "truckNumber"],
+        "required": [
+          "cmr",
+          "receptionNumber",
+          "systemNumber",
+          "truckNumber"
+        ],
         "type": "object",
         "properties": {
           "systemNumber": {
@@ -4513,7 +4717,10 @@
         "additionalProperties": false
       },
       "DeliveryHistoryChangeType": {
-        "enum": ["Delivery", "Entry"],
+        "enum": [
+          "Delivery",
+          "Entry"
+        ],
         "type": "string"
       },
       "DeliveryHistoryDto": {
@@ -4599,7 +4806,7 @@
           },
           "createdAt": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
           "zone": {
             "type": "string",
@@ -4690,7 +4897,12 @@
         "additionalProperties": false
       },
       "DifferenceStatus": {
-        "enum": ["Waiting", "Processing", "Finished", "NoDifferences"],
+        "enum": [
+          "Waiting",
+          "Processing",
+          "Finished",
+          "NoDifferences"
+        ],
         "type": "string"
       },
       "DifferenceTypeDto": {
@@ -4706,7 +4918,7 @@
           },
           "createdAt": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -4784,17 +4996,15 @@
           },
           "startedProccessing": {
             "type": "string",
-            "format": "date-time",
             "nullable": true
           },
           "finishedProccessing": {
             "type": "string",
-            "format": "date-time",
             "nullable": true
           },
           "createdAt": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
           "zone": {
             "$ref": "#/components/schemas/EntryZoneDto"
@@ -4829,7 +5039,10 @@
         "additionalProperties": false
       },
       "EntryFormDto": {
-        "required": ["deliveryId", "zoneId"],
+        "required": [
+          "deliveryId",
+          "zoneId"
+        ],
         "type": "object",
         "properties": {
           "pallets": {
@@ -4876,7 +5089,11 @@
         "additionalProperties": false
       },
       "EntryStatuses": {
-        "enum": ["Waiting", "Processing", "Finished"],
+        "enum": [
+          "Waiting",
+          "Processing",
+          "Finished"
+        ],
         "type": "string"
       },
       "EntryZoneDto": {
@@ -4893,7 +5110,12 @@
         "additionalProperties": false
       },
       "LogType": {
-        "enum": ["EntryStatusChange", "DeliveryStatusChange", "ZoneChange", "Split"],
+        "enum": [
+          "EntryStatusChange",
+          "DeliveryStatusChange",
+          "ZoneChange",
+          "Split"
+        ],
         "type": "string"
       },
       "LoginDto": {
@@ -4927,13 +5149,15 @@
           },
           "createdAt": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
       "MarkerFormDto": {
-        "required": ["name"],
+        "required": [
+          "name"
+        ],
         "type": "object",
         "properties": {
           "name": {
@@ -4987,7 +5211,7 @@
             "nullable": true
           }
         },
-        "additionalProperties": {}
+        "additionalProperties": { }
       },
       "RegisterDto": {
         "type": "object",
@@ -5104,6 +5328,36 @@
         },
         "additionalProperties": false
       },
+      "UserAllDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "UserDto": {
         "type": "object",
         "properties": {
@@ -5157,7 +5411,7 @@
           },
           "createdAt": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
           "markers": {
             "type": "array",
@@ -5186,7 +5440,7 @@
           },
           "createdAt": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
           "markers": {
             "type": "array",
@@ -5199,7 +5453,10 @@
         "additionalProperties": false
       },
       "VendorFormDto": {
-        "required": ["name", "systemNumber"],
+        "required": [
+          "name",
+          "systemNumber"
+        ],
         "type": "object",
         "properties": {
           "name": {
@@ -5253,7 +5510,7 @@
           },
           "createdAt": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
           "markers": {
             "type": "array",
@@ -5281,7 +5538,7 @@
           },
           "createdAt": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
           "markers": {
             "type": "array",
@@ -5294,7 +5551,9 @@
         "additionalProperties": false
       },
       "ZoneFormDto": {
-        "required": ["name"],
+        "required": [
+          "name"
+        ],
         "type": "object",
         "properties": {
           "name": {
