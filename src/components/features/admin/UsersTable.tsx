@@ -7,29 +7,17 @@ import { Column } from '@/interfaces/Column.ts'
 import useGetUsers from '@/hooks/services/users/useGetUsers'
 import UsersTableActionsMenu from '../actionsMenu/UsersTableActionsMenu'
 import useGetRoles from '@/hooks/services/roles/useGetRoles'
+import { UserAllDto } from '@/services/model'
 
 interface Row {
-  id: number
+  id: string
   name: string
   email: string
   role: string
   dateCreated: string
   actions: React.ReactNode
 }
-// -------------------------------------------- ↓
-// TODO: Watch out for the code later..
 
-interface UserDto {
-  id?: number
-  /** @nullable */
-  name?: string | null
-  /** @nullable */
-  email?: string | null
-  /** @nullable */
-  role?: string | null
-  dateCreated?: string | null
-}
-// ---------------------------------------------- ↑
 export default function UsersTable() {
   const { t: translate } = useTranslation()
   const [searchTerm, setSearchTerm] = React.useState('')
@@ -39,7 +27,9 @@ export default function UsersTable() {
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const users = useGetUsers()
-
+  const roles = useGetRoles()
+  console.log(users);
+  
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
   }
@@ -60,7 +50,6 @@ export default function UsersTable() {
     setRowsPerPage(newRowsPerPage)
     setPage(0)
   }
-  const roles = useGetRoles()
 
   const sortOptions = roles.map((role) => role.name)
   const options = sortOptions.map((option) => ({ label: option }))
@@ -78,18 +67,18 @@ export default function UsersTable() {
     }
   ]
 
-  function transformDataToRows(users: UserDto[]): Row[] {
-    return users.map((user: UserDto) => ({
+  function transformDataToRows(users: UserAllDto[]): Row[] {
+    return users.map((user: UserAllDto) => ({
       id: user.id!,
-      name: user.name!,
+      name: user.userName!,
       email: user.email!,
       role: user.role!,
-      dateCreated: user.dateCreated!,
+      dateCreated: user.createdAt!,
       actions: <UsersTableActionsMenu key={user.id} user={user} />
     }))
   }
 
-  const rowData = transformDataToRows(users || [])
+  const rowData = Array.isArray(users) ? transformDataToRows(users) : []
 
   const filteredRows = rowData.filter((row: Row) => {
     const matchesSearchTerm = columnsData.some((column: Column<Row>) => {
