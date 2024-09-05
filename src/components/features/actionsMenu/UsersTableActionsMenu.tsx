@@ -8,33 +8,19 @@ import useUpdateVendor from '@/hooks/services/vendors/useUpdateVendor'
 import useDeleteVendor from '@/hooks/services/vendors/useDeleteVendor'
 import NewUserForm from '../forms/NewUserForm'
 import { NewUserFormData, newUserSchema } from '@/schemas/newUserSchema'
+import { UserAllDto } from '@/services/model'
 
-// -------------------------------------------- ↓
-// TODO: Watch out for the code later..
-
-interface UserDto {
-  id?: number
-  /** @nullable */
-  name?: string | null
-  /** @nullable */
-  email?: string | null
-  /** @nullable */
-  role?: string | null
-  /** @nullable */
-  dateCreated?: string | null
-}
-// ---------------------------------------------- ↑
 
 interface UsersTableActionsMenuProps {
-  user: UserDto
+  user: UserAllDto
 }
 
 export default function UsersTableActionsMenu({ user }: UsersTableActionsMenuProps) {
   const { t: translate } = useTranslation()
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
   const [vendorNumber, setVendorNumber] = React.useState('')
-  const mutationUpdate = useUpdateVendor(user.name!, vendorNumber)
-  const mutationDelete = useDeleteVendor(user.name!)
+  // const mutationUpdate = useUpdateVendor(user.userName!, vendorNumber)
+  // const mutationDelete = useDeleteVendor(user.userName!)
 
   const handleClose = () => {
     setSelectedOption(null)
@@ -54,7 +40,7 @@ export default function UsersTableActionsMenu({ user }: UsersTableActionsMenuPro
   }
 
   const onConfirmDelete = () => {
-    mutationDelete.mutate(user.id!)
+    // mutationDelete.mutate(user.id!)
     handleClose()
   }
 
@@ -84,7 +70,7 @@ export default function UsersTableActionsMenu({ user }: UsersTableActionsMenuPro
             <NewUserForm
               {...methods}
               defaultValues={{
-                name: user.name!,
+                name: user.userName!,
                 email: user.email!,
                 role: user.role!
               }}
@@ -97,7 +83,7 @@ export default function UsersTableActionsMenu({ user }: UsersTableActionsMenuPro
         <ConfirmDialog
           open={true}
           title={translate('vendors.table.actions.delete.title')}
-          content={translate('vendors.table.actions.delete.message', { name: user.name })}
+          content={translate('vendors.table.actions.delete.message', { name: user.userName })}
           discardText={translate('vendors.table.actions.delete.labels.discard')}
           confirmText={translate('vendors.table.actions.delete.labels.confirm')}
           onCloseDialog={handleClose}
