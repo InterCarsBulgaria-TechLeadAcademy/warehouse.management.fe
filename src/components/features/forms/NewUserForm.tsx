@@ -1,12 +1,12 @@
-import { MarkerDto } from '@/services/model'
+import { RoleDetailsDto } from '@/services/model'
 import { FormControl, InputLabel, ListItemText, MenuItem, Select, TextField } from '@mui/material'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import useGetMarkers from '@/hooks/services/markers/useGetMarkers'
 import { NewUserFormData } from '@/schemas/newUserSchema'
 import ShowHideFunctionality from '@/components/shared/ShowHideFunctionality'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import useGetRoles from '@/hooks/services/roles/useGetRoles'
 
 interface NewUserFormProps extends UseFormReturn<NewUserFormData> {
   defaultValues?: {
@@ -22,10 +22,9 @@ export default function NewUserForm({
   defaultValues = { name: '', email: '', role: '' }
 }: NewUserFormProps) {
   const { t: translate } = useTranslation()
-  // TODO: Add functionality to take roles from BE.
-  // const markers = useGetMarkers()
-  const roles = ['regular', 'admin']
-
+  const roles = useGetRoles()
+  console.log(roles);
+  
   return (
     <>
       <Controller
@@ -119,9 +118,9 @@ export default function NewUserForm({
               id="demo-role"
               value={field.value || ''}
               onChange={(e) => field.onChange(e.target.value)}>
-              {roles.map((role: string) => (
-                <MenuItem key={role} value={role}>
-                  <ListItemText primary={role} />
+              {roles.map((role: RoleDetailsDto) => (
+                <MenuItem key={role.id} value={role.id as string}>
+                  <ListItemText primary={role.name} />
                 </MenuItem>
               ))}
             </Select>

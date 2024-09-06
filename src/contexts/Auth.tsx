@@ -25,7 +25,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const fetchUser = async () => {
       try {
         const response = await getWarehouseManagementApi().getApiUserMe()
-        console.log(response)
 
         if (response.userName) {
           setUserState(response)

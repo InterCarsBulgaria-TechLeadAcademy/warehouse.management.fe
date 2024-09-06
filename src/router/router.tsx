@@ -36,6 +36,7 @@ const Differences = lazy(() => import('@/pages/main/Differences.tsx'))
 
 export default function Router() {
   const { user } = useAuth()
+  // TODO: Add logic for users with roles that are not admins..
 
   const isAuthenticated = !!user
 

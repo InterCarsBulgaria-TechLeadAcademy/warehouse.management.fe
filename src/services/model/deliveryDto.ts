@@ -10,7 +10,8 @@ import type { DeliveryMarkerDto } from './deliveryMarkerDto'
 export interface DeliveryDto {
   /** @nullable */
   approvedOn?: string | null
-  createdAt?: string
+  /** @nullable */
+  createdAt?: string | null
   /** @nullable */
   deliveryTime?: string | null
   entriesFinishedProcessing?: number

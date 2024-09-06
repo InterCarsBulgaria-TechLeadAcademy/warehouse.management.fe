@@ -5,7 +5,6 @@
  * OpenAPI spec version: 1.0
  */
 import type { DeliveryEntryDetailsDto } from './deliveryEntryDetailsDto'
-import type { EntriesProcessingDetails } from './entriesProcessingDetails'
 import type { DeliveryMarkerDto } from './deliveryMarkerDto'
 
 export interface DeliveryDetailsDto {
@@ -13,15 +12,14 @@ export interface DeliveryDetailsDto {
   approvedOn?: string | null
   /** @nullable */
   cmr?: string | null
-  createdAt?: string
+  /** @nullable */
+  createdAt?: string | null
   /** @nullable */
   deliveryTime?: string | null
   /** @nullable */
   entries?: DeliveryEntryDetailsDto[] | null
   entriesFinishedProcessing?: number
-  entriesFinishedProcessingDetails?: EntriesProcessingDetails
   entriesWaitingProcessing?: number
-  entriesWaitingProcessingDetails?: EntriesProcessingDetails
   id?: number
   /** @nullable */
   markers?: DeliveryMarkerDto[] | null

@@ -6,7 +6,8 @@
  */
 
 export interface MarkerDto {
-  createdAt?: string
+  /** @nullable */
+  createdAt?: string | null
   id?: number
   /** @nullable */
   name?: string | null

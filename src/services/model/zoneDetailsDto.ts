@@ -7,7 +7,8 @@
 import type { ZoneMarkerDto } from './zoneMarkerDto'
 
 export interface ZoneDetailsDto {
-  createdAt?: string
+  /** @nullable */
+  createdAt?: string | null
   id?: number
   isFinal?: boolean
   /** @nullable */

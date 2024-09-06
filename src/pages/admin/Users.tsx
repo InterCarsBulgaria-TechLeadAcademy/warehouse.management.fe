@@ -6,11 +6,12 @@ import { SubmitHandler } from 'react-hook-form'
 import UsersTable from '@/components/features/admin/UsersTable'
 import { NewUserFormData, newUserSchema } from '@/schemas/newUserSchema'
 import NewUserForm from '@/components/features/forms/NewUserForm'
+import usePostUser from '@/hooks/services/users/usePostUser'
 
 export default function Users() {
   const { t: translate } = useTranslation()
   const [openDialog, setOpenDialog] = useState(false)
-
+  const mutationPost = usePostUser()
   const handleClickOpen = () => {
     setOpenDialog(true)
   }
@@ -20,7 +21,7 @@ export default function Users() {
   }
 
   const handleSubmit: SubmitHandler<NewUserFormData> = (data) => {
-    console.log(data)
+    mutationPost.mutate({username: data.name, email: data.email, password: data.password, roleId: data.role})
     onCloseDialog()
   }
 
