@@ -6,8 +6,8 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 interface TableActionsMenuProps {
-  specificOptionHandler: Function
-  options: { title: string; value: string }[]
+  specificOptionHandler: (option: any) => void
+  options: { title: string; value: any }[]
 }
 
 export default function TableActionsMenu({

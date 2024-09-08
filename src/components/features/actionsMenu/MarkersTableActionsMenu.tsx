@@ -5,10 +5,11 @@ import { NewMarkerFormData, newMarkerSchema } from '@/schemas/newMarkerSchema'
 import FormDialog from '@/components/shared/FormDialog'
 import NewMarkerForm from '@/components/features/forms/NewMarkerForm'
 import { MarkerDto } from '@/services/model'
-import TableActionsMenu from './TableActionsMenu'
 import useDeleteMarker from '@/hooks/services/markers/useDeleteMarker'
 import useUpdateMarker from '@/hooks/services/markers/useUpdateMarker'
 import ConfirmDialog from '@/components/shared/ConfirmDialog.tsx'
+import { Marker } from '@/types/Permissions.ts'
+import { TableActionsMenuWithPermissions } from '@/wrappers/TableActionsMenuWithPermissions.tsx'
 
 interface MarkersTableActionsMenuProps {
   marker: MarkerDto
@@ -16,7 +17,7 @@ interface MarkersTableActionsMenuProps {
 
 export default function MarkersTableActionsMenu({ marker }: MarkersTableActionsMenuProps) {
   const { t: translate } = useTranslation()
-  const [selectedOption, setSelectedOption] = React.useState<string | null>(null)
+  const [selectedOption, setSelectedOption] = React.useState<Marker | null>(null)
   const mutationDelete = useDeleteMarker(marker.name!)
   const mutationUpdate = useUpdateMarker(marker.name!)
 
@@ -28,7 +29,7 @@ export default function MarkersTableActionsMenu({ marker }: MarkersTableActionsM
     handleClose()
   }
 
-  const actionHandler = (option: string) => {
+  const actionHandler = (option: Marker) => {
     setSelectedOption(option)
   }
 
@@ -43,15 +44,15 @@ export default function MarkersTableActionsMenu({ marker }: MarkersTableActionsM
   }
 
   const options = [
-    { title: 'markers.table.actionsMenu.edit', value: 'edit' },
-    { title: 'markers.table.actionsMenu.delete', value: 'delete' }
+    { title: 'markers.table.actionsMenu.edit', value: Marker.Edit },
+    { title: 'markers.table.actionsMenu.delete', value: Marker.Delete }
   ]
 
   return (
     <div>
-      <TableActionsMenu specificOptionHandler={actionHandler} options={options} />
+      <TableActionsMenuWithPermissions options={options} onSelectOption={actionHandler} />
 
-      {selectedOption === 'edit' && (
+      {selectedOption === Marker.Edit && (
         <FormDialog<NewMarkerFormData>
           open={true}
           title={translate('markers.table.actions.edit.title')}
@@ -64,7 +65,7 @@ export default function MarkersTableActionsMenu({ marker }: MarkersTableActionsM
         />
       )}
 
-      {selectedOption === 'delete' && (
+      {selectedOption === Marker.Delete && (
         <ConfirmDialog
           open={true}
           title={translate('markers.table.actions.delete.title')}
