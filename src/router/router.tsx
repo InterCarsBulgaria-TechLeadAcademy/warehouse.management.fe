@@ -2,8 +2,6 @@ import { Navigate, useRoutes } from 'react-router-dom'
 import { lazy } from 'react'
 import {
   LOGIN_PATH,
-  DEFAULTLAYOUT_PATH,
-  PROJECTS_PATH_EXAMPLE,
   VENDORS_PATH,
   ZONES_PATH,
   MARKERS_PATH,
@@ -14,13 +12,24 @@ import {
   DIFFERENCETYPE_PATH,
   USERS_PATH,
   ROLES_PATH,
-  DIFFERENCES_PATH
+  DIFFERENCES_PATH,
+  HOME_PATH
 } from '@/router/routerPaths.ts'
 import NewDeliveryProvider from '@/contexts/NewDelivery'
 import { useAuth } from '@/hooks/services/auth/useAuth'
+import { RouterPagePermissionsWrapper } from '@/wrappers/RouterPagePermissionsWrapper.tsx'
+import {
+  Difference,
+  Entry,
+  Marker,
+  Role,
+  User,
+  Vendor,
+  Zone,
+  DifferenceType as DifferenceTypePermissions,
+  Delivery
+} from '@/types/Permissions.ts'
 
-const Home = lazy(() => import('@/pages/main/Home.tsx'))
-const Projects = lazy(() => import('@/pages/main/Projects.tsx'))
 const Login = lazy(() => import('@/pages/Login.tsx'))
 const DefaultLayout = lazy(() => import('@/layouts/DefaultLayout.tsx'))
 const Vendors = lazy(() => import('@/pages/admin/Vendors.tsx'))
@@ -36,27 +45,20 @@ const Differences = lazy(() => import('@/pages/main/Differences.tsx'))
 
 export default function Router() {
   const { user } = useAuth()
-  // TODO: Add logic for users with roles that are not admins..
-
   const isAuthenticated = !!user
+
+  const getNavigateTo = (path: string) => {
+    return isAuthenticated ? path : LOGIN_PATH
+  }
 
   return useRoutes([
     {
-      path: '/',
-      element: <Home />
-    },
-    {
-      path: PROJECTS_PATH_EXAMPLE,
-      element: <Projects />
+      path: HOME_PATH,
+      element: isAuthenticated ? <DefaultLayout /> : <Navigate to={LOGIN_PATH} />
     },
     {
       path: LOGIN_PATH,
-      element: isAuthenticated ? <Navigate to={DELIVERIES_PATH} /> : <Login />
-    },
-    {
-      path: DEFAULTLAYOUT_PATH,
-      // TODO: Later to discuss this path to include it in some cases or not
-      element: isAuthenticated ? <DefaultLayout /> : <Navigate to={LOGIN_PATH} />
+      element: isAuthenticated ? <Navigate to={HOME_PATH} /> : <Login />
     },
     {
       path: ADMIN_PATH,
@@ -64,27 +66,63 @@ export default function Router() {
       children: [
         {
           path: USERS_PATH,
-          element: <Users />
+          element: (
+            <RouterPagePermissionsWrapper
+              permissions={User.All}
+              navigateTo={getNavigateTo(HOME_PATH)}>
+              <Users />
+            </RouterPagePermissionsWrapper>
+          )
         },
         {
           path: ROLES_PATH,
-          element: <Roles />
+          element: (
+            <RouterPagePermissionsWrapper
+              permissions={Role.All}
+              navigateTo={getNavigateTo(HOME_PATH)}>
+              <Roles />
+            </RouterPagePermissionsWrapper>
+          )
         },
         {
           path: VENDORS_PATH,
-          element: <Vendors />
+          element: (
+            <RouterPagePermissionsWrapper
+              permissions={Vendor.All}
+              navigateTo={getNavigateTo(HOME_PATH)}>
+              <Vendors />
+            </RouterPagePermissionsWrapper>
+          )
         },
         {
           path: ZONES_PATH,
-          element: <Zones />
+          element: (
+            <RouterPagePermissionsWrapper
+              permissions={Zone.GetAll}
+              navigateTo={getNavigateTo(HOME_PATH)}>
+              <Zones />
+            </RouterPagePermissionsWrapper>
+          )
         },
         {
           path: MARKERS_PATH,
-          element: <Markers />
+          element: (
+            <RouterPagePermissionsWrapper
+              permissions={Marker.GetAll}
+              navigateTo={getNavigateTo(HOME_PATH)}>
+              <Markers />
+            </RouterPagePermissionsWrapper>
+          )
         },
         {
           path: DIFFERENCETYPE_PATH,
-          element: <DifferenceType />
+          element: (
+            <RouterPagePermissionsWrapper
+              permissions={DifferenceTypePermissions.All}
+              navigateTo={getNavigateTo(HOME_PATH)}>
+              <DifferenceType />
+            </RouterPagePermissionsWrapper>
+          )
         }
       ]
     },
@@ -94,18 +132,34 @@ export default function Router() {
       children: [
         {
           path: ZONES_CONTENT_PATH,
-          element: <ZonesContent />
+          element: (
+            <RouterPagePermissionsWrapper
+              permissions={Entry.All}
+              navigateTo={getNavigateTo(HOME_PATH)}>
+              <ZonesContent />
+            </RouterPagePermissionsWrapper>
+          )
         },
         {
           path: DIFFERENCES_PATH,
-          element: <Differences />
+          element: (
+            <RouterPagePermissionsWrapper
+              permissions={Difference.All}
+              navigateTo={getNavigateTo(HOME_PATH)}>
+              <Differences />
+            </RouterPagePermissionsWrapper>
+          )
         },
         {
           path: DELIVERIES_PATH,
           element: (
-            <NewDeliveryProvider>
-              <Deliveries />
-            </NewDeliveryProvider>
+            <RouterPagePermissionsWrapper
+              permissions={Delivery.GetDeliveries}
+              navigateTo={getNavigateTo(HOME_PATH)}>
+              <NewDeliveryProvider>
+                <Deliveries />
+              </NewDeliveryProvider>
+            </RouterPagePermissionsWrapper>
           )
         }
       ]

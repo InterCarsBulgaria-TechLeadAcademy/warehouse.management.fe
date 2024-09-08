@@ -7,7 +7,7 @@ type Props<T> = {
   onSelectOption: (option: T) => void
 }
 
-export function TableActionsMenuPermissionOptionsWrapper<T>({ options, onSelectOption }: Props<T>) {
+export function TableActionsMenuWithPermissions<T>({ options, onSelectOption }: Props<T>) {
   const { user } = useAuth()
   const { checkPermissions } = createCheckPermissionsHook(() => user?.routePermissionNames || [])()
 
@@ -15,7 +15,10 @@ export function TableActionsMenuPermissionOptionsWrapper<T>({ options, onSelectO
     return checkPermissions(option.value as string)
   })
 
-  return (
-    <TableActionsMenu specificOptionHandler={onSelectOption} options={optionsWithPermissions} />
-  )
+  const finalOptions =
+    optionsWithPermissions.length > 0
+      ? optionsWithPermissions
+      : [{ title: 'zonesContent.table.actionsMenu.NoActions', value: '' }]
+
+  return <TableActionsMenu specificOptionHandler={onSelectOption} options={finalOptions} />
 }

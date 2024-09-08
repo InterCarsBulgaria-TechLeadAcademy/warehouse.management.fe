@@ -10,7 +10,7 @@ type Props = {
 
 export function UserPermissionsWrapper({ permissions, children }: Props) {
   const { user } = useAuth()
-  const useCheckUserPermissions = createCheckPermissionsHook(() => user!.routePermissionNames || [])
+  const useCheckUserPermissions = createCheckPermissionsHook(() => user?.routePermissionNames || [])
   const WithUserPermissions = WithPermissions({ useCheckPermissions: useCheckUserPermissions })
 
   return WithUserPermissions({ permissions, children })

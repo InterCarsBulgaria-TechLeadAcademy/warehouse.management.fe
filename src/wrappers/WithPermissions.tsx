@@ -1,16 +1,20 @@
 import { createCheckPermissionsHook } from '@/hooks/createCheckPermissionsHook.ts'
+import React from 'react'
 
 type Props = {
-  permissions: string[];
-  required: string[];
-  children: React.ReactNode;
+  permissions: string[] | string | null
+  children: React.ReactNode
 }
 
-export function WithPermissions(checkPermissions: typeof createCheckPermissionsHook) {
-  return function WithPermissionsComponent({ permissions, required, children }: Props) {
-    const { checkPermissions } = checkPermissions(() => permissions)
-    const hasPermission = checkPermissions(required)
+export function WithPermissions({
+  useCheckPermissions
+}: {
+  useCheckPermissions: ReturnType<typeof createCheckPermissionsHook>
+}) {
+  return function WithPermissionsComponent({ permissions, children }: Props) {
+    const { checkPermissions } = useCheckPermissions()
+    const hasPermission = checkPermissions(permissions)
 
-    return hasPermission ? <>{children}</> : null
+    return hasPermission ? children : null
   }
 }
