@@ -6,7 +6,7 @@ interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
 }
 
 export const AXIOS_INSTANCE = axios.create({
-  baseURL: 'https://leads-academy-intercars.com',
+  baseURL: 'https://localhost:7226',
   withCredentials: true
 })
 

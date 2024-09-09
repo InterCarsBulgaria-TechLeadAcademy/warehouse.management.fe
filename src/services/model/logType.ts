@@ -12,5 +12,8 @@ export const LogType = {
   EntryStatusChange: 'EntryStatusChange',
   DeliveryStatusChange: 'DeliveryStatusChange',
   ZoneChange: 'ZoneChange',
-  Split: 'Split'
+  Split: 'Split',
+  DifferenceStatusChange: 'DifferenceStatusChange',
+  DifferenceAdminComment: 'DifferenceAdminComment',
+  Empty: 'Empty'
 } as const

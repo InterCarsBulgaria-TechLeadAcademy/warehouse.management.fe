@@ -2604,8 +2604,8 @@
           "200": {
             "description": "Success"
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2624,8 +2624,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3525,8 +3525,8 @@
           "200": {
             "description": "Success"
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3545,8 +3545,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3607,8 +3607,8 @@
           "200": {
             "description": "Success"
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3627,8 +3627,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4065,8 +4065,8 @@
           "200": {
             "description": "Success"
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4085,8 +4085,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4128,8 +4128,8 @@
           "200": {
             "description": "Success"
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4148,8 +4148,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4191,8 +4191,8 @@
           "200": {
             "description": "Success"
           },
-          "404": {
-            "description": "Not Found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4211,8 +4211,8 @@
               }
             }
           },
-          "400": {
-            "description": "Bad Request",
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4424,7 +4424,7 @@
   },
   "components": {
     "schemas": {
-      "Change": {
+      "DeliveryChangeDto": {
         "type": "object",
         "properties": {
           "entityId": {
@@ -4432,8 +4432,7 @@
             "format": "int32"
           },
           "propertyName": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/DeliveryHistoryEntityPropertyChange"
           },
           "from": {
             "type": "string",
@@ -4451,7 +4450,7 @@
           },
           "changeDate": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -4719,7 +4718,8 @@
       "DeliveryHistoryChangeType": {
         "enum": [
           "Delivery",
-          "Entry"
+          "Entry",
+          "Difference"
         ],
         "type": "string"
       },
@@ -4733,12 +4733,22 @@
           "changes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Change"
+              "$ref": "#/components/schemas/DeliveryChangeDto"
             },
             "nullable": true
           }
         },
         "additionalProperties": false
+      },
+      "DeliveryHistoryEntityPropertyChange": {
+        "enum": [
+          "StartedProcessing",
+          "FinishedProcessing",
+          "Status",
+          "ZoneId",
+          "AdminComment"
+        ],
+        "type": "string"
       },
       "DeliveryMarkerDto": {
         "type": "object",
@@ -5114,7 +5124,10 @@
           "EntryStatusChange",
           "DeliveryStatusChange",
           "ZoneChange",
-          "Split"
+          "Split",
+          "DifferenceStatusChange",
+          "DifferenceAdminComment",
+          "Empty"
         ],
         "type": "string"
       },
@@ -5211,7 +5224,7 @@
             "nullable": true
           }
         },
-        "additionalProperties": { }
+        "additionalProperties": {}
       },
       "RegisterDto": {
         "type": "object",
@@ -5413,6 +5426,11 @@
             "type": "string",
             "nullable": true
           },
+          "defaultZoneId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "markers": {
             "type": "array",
             "items": {
@@ -5442,6 +5460,10 @@
             "type": "string",
             "nullable": true
           },
+          "defaultZoneName": {
+            "type": "string",
+            "nullable": true
+          },
           "markers": {
             "type": "array",
             "items": {
@@ -5468,6 +5490,11 @@
             "maxLength": 100,
             "minLength": 1,
             "type": "string"
+          },
+          "defaultZoneId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           },
           "markerIds": {
             "type": "array",

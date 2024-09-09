@@ -8,6 +8,8 @@
 export interface VendorDto {
   /** @nullable */
   createdAt?: string | null
+  /** @nullable */
+  defaultZoneName?: string | null
   id?: number
   /** @nullable */
   markers?: string[] | null
