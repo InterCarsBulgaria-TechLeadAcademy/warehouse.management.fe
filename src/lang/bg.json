@@ -427,23 +427,33 @@
             "title": "Извършени действия в доставка",
             "table": {
               "table-head": {
-                "changed": "Променена",
+                "changed": "Промяна",
                 "typeChange": "Тип промяна",
+                "entityId": "№ на тип",
                 "from": "От",
                 "to": "Към",
                 "dataChange": "Дата на промяна"
               },
               "table-body": {
                 "changed": {
-                  "startedProcessing": "Започната обработка",
-                  "finishedProcessing": "Завършена обработка",
-                  "zone": "Зона",
-                  "lastModifiedByUserId": "Потребител",
-                  "lastModifiedAt": "Промяна в"
+                  "deliveryStatusChange": "Статус на доставка",
+                  "entryStatusChange": "Статус на стока",
+                  "entryStartedProcessing": "Стока започна обработка",
+                  "entryFinishedProcessing": "Стока приключи обработка",
+                  "differenceStatusChange": "Статус на разлика",
+                  "adminComment": "Коментар на администратор",
+                  "zoneChange": "Промяна на зона",
+                  "splitEntry": "Разделяне на стока",
+                  "Approved": "Одобрена доставка",
+                  "Finished": "Приключена доставка",
+                  "Processing": "Обработва се доставка",
+                  "Waiting": "Изчакваща доставка",
+                  "NoDifferences": "Няма разлики"
                 },
                 "changeType": {
                   "delivery": "Доставка",
-                  "entry": "Съдържание на зона"
+                  "entry": "Съдържание на зона",
+                  "difference": "Разлика"
                 }
               }
             }

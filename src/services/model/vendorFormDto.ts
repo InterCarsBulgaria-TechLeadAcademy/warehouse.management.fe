@@ -7,6 +7,8 @@
 
 export interface VendorFormDto {
   /** @nullable */
+  defaultZoneId?: number | null
+  /** @nullable */
   markerIds?: number[] | null
   /**
    * @minLength 1

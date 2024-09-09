@@ -6,6 +6,7 @@
  */
 
 export * from './change'
+export * from './deliveryChangeDto'
 export * from './deliveryDetailsDto'
 export * from './deliveryDto'
 export * from './deliveryDtoPageDto'
@@ -14,6 +15,7 @@ export * from './deliveryEntryDto'
 export * from './deliveryFormDto'
 export * from './deliveryHistoryChangeType'
 export * from './deliveryHistoryDto'
+export * from './deliveryHistoryEntityPropertyChange'
 export * from './deliveryMarkerDto'
 export * from './differenceAdminCommentDto'
 export * from './differenceDto'

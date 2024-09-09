@@ -4,10 +4,10 @@
  * WarehouseManagement.Api
  * OpenAPI spec version: 1.0
  */
-import type { Change } from './change'
+import type { DeliveryChangeDto } from './deliveryChangeDto'
 
 export interface DeliveryHistoryDto {
   /** @nullable */
-  changes?: Change[] | null
+  changes?: DeliveryChangeDto[] | null
   id?: number
 }
